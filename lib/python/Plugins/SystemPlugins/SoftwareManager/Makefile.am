@@ -7,6 +7,8 @@ install_PYTHON =	\
 	plugin.py \
 	BackupRestore.py \
 	ImageWizard.py \
+	Flash_online.py \
+	ImageBackup.py \
 	SoftwareTools.py
 
 dist_install_DATA = \
