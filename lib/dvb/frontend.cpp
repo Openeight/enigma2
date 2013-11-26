@@ -1867,6 +1867,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 #else
 				p[cmdseq.num].cmd = DTV_DVBT2_PLP_ID, p[cmdseq.num].u.data = parm.plpid, cmdseq.num++;
 #endif
+#endif
 			}
 		}
 		else if (type == iDVBFrontend::feATSC)
