@@ -21,17 +21,17 @@ import shutil
 distro = getDistro()
 
 #############################################################################################################
-image = 0 # 0=openATV / 1=openMips / 2=XTA
+image = 0 # 0=openATV / 1=openMips / 2=OpenXTA
 if distro.lower() == "openmips":
 	image = 1
 elif distro.lower() == "openatv":
 	from enigma import getMachineBrand, getMachineName
 	image = 0
-elif distro.lower() == "xtrendalliance":
+elif distro.lower() == "openxta":
 	image = 2
 feedurl_atv = 'http://images.mynonpublic.com/openatv/nightly'
 feedurl_om = 'http://image.openmips.com/2.0'
-feedurl_xta = 'http://image.xtrend-support-source.com/image-alliance'
+feedurl_openxta = 'http://image.openxta.com/image-xta'
 imagePath = '/hdd/images'
 flashPath = '/hdd/images/flash'
 flashTmp = '/hdd/images/tmp'
@@ -150,7 +150,7 @@ class doFlashImage(Screen):
 		elif image == 1:
 			self.feed = "om"
 		elif image == 2:
-			self.feed = "xta"
+			self.feed = "openxta"
 		self["imageList"] = MenuList(self.imagelist)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
 		{
@@ -175,7 +175,7 @@ class doFlashImage(Screen):
 					self.feed = "atv"
 			if image == 2:
 				if self.feed == "atv":
-					self.feed = "xta"
+					self.feed = "openxta"
 				else:
 					self.feed = "atv"
 			self.layoutFinished()
@@ -220,7 +220,7 @@ class doFlashImage(Screen):
 		box = self.box()
 		self.hide()
 		if self.Online:
-			if self.feed == "xta":
+			if self.feed == "openxta":
 				url = self.feedurl + "/" + sel
 			else:
 				url = self.feedurl + "/" + box + "/" + sel
@@ -349,16 +349,16 @@ class doFlashImage(Screen):
 					self.feedurl = feedurl_om
 					self["key_blue"].setText("openATV")
 			elif image == 2:
-				if self.feed == "xta":
-					self.feedurl = feedurl_xta
+				if self.feed == "openxta":
+					self.feedurl = feedurl_openxta
 					self["key_blue"].setText("openATV")
 				else:
 					self.feedurl = feedurl_atv
-					self["key_blue"].setText("XTA")
+					self["key_blue"].setText("OpenXTA")
 			else:
 				self.feedurl = feedurl_atv
 				self["key_blue"].setText("")
-			if self.feed == "xta":
+			if self.feed == "openxta":
 				url = '%s/index.php?et=%s' % (self.feedurl,box[2])
 			else:
 				url = '%s/index.php?open=%s' % (self.feedurl,box)
@@ -379,7 +379,7 @@ class doFlashImage(Screen):
 			lines = the_page.split('\n')
 			tt = len(box)
 			for line in lines:
-				if self.feed == "xta":
+				if self.feed == "openxta":
 					if line.find("<a href='xtrendalliance-1.0-%s" % box) > -1:
 						t = line.find("<a href='xtrendalliance-1.0-%s" % box)
 						self.imagelist.append(line[t+9:t+51])
