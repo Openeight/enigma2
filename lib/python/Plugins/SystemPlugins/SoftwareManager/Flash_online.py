@@ -31,7 +31,7 @@ elif distro.lower() == "openxta":
 	image = 2
 feedurl_atv = 'http://images.mynonpublic.com/openatv/nightly'
 feedurl_om = 'http://image.openmips.com/2.0'
-feedurl_openxta = 'http://image.openxta.com/image-xta'
+feedurl_openxta = 'http://image.openxta.com'
 imagePath = '/hdd/images'
 flashPath = '/hdd/images/flash'
 flashTmp = '/hdd/images/tmp'
@@ -358,10 +358,7 @@ class doFlashImage(Screen):
 			else:
 				self.feedurl = feedurl_atv
 				self["key_blue"].setText("")
-			if self.feed == "openxta":
-				url = '%s/index.php?et=%s' % (self.feedurl,box[2])
-			else:
-				url = '%s/index.php?open=%s' % (self.feedurl,box)
+			url = '%s/index.php?open=%s' % (self.feedurl,box)
 			req = urllib2.Request(url)
 			try:
 				response = urllib2.urlopen(req)
@@ -379,17 +376,12 @@ class doFlashImage(Screen):
 			lines = the_page.split('\n')
 			tt = len(box)
 			for line in lines:
-				if self.feed == "openxta":
-					if line.find("<a href='xtrendalliance-1.0-%s" % box) > -1:
-						t = line.find("<a href='xtrendalliance-1.0-%s" % box)
-						self.imagelist.append(line[t+9:t+51])
-				else:
-					if line.find("<a href='%s/" % box) > -1:
-						t = line.find("<a href='%s/" % box)
-						if self.feed == "atv":
-							self.imagelist.append(line[t+tt+10:t+tt+tt+39])
-						else:
-							self.imagelist.append(line[t+tt+10:t+tt+tt+40])
+				if line.find("<a href='%s/" % box) > -1:
+					t = line.find("<a href='%s/" % box)
+					if self.feed == "atv" or self.feed == "openxta":
+						self.imagelist.append(line[t+tt+10:t+tt+tt+39])
+					else:
+						self.imagelist.append(line[t+tt+10:t+tt+tt+40])
 		else:
 			self["key_blue"].setText(_("Delete"))
 			self["key_yellow"].setText(_("Devices"))
