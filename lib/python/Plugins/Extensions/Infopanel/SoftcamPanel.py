@@ -13,8 +13,8 @@ from Screens.MessageBox import MessageBox
 from Screens.Console import Console
 from enigma import *
 import os
-from Screens.CCcamInfo import CCcamInfoMain
-from Screens.OScamInfo import OscamInfoMenu
+#from Screens.CCcamInfo import CCcamInfoMain
+#from Screens.OScamInfo import OscamInfoMenu
 
 def Check_Softcam():
 	found = False
