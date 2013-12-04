@@ -169,7 +169,7 @@ def main(session, **kwargs):
 
 def Apanel(menuid, **kwargs):
 	if menuid == "mainmenu":
-		return [("Info Panel", main, "Infopanel", 11)]
+		return [("eXTrAs panel", main, "Infopanel", 11)]
 	else:
 		return []
 
