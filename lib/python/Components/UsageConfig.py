@@ -1,5 +1,5 @@
 from Components.Harddisk import harddiskmanager
-from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigClock
+from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock
 from Tools.Directories import resolveFilename, SCOPE_HDD, defaultRecordingLocation
 from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff;
 from enigma import Misc_Options, eEnv;
@@ -74,6 +74,34 @@ def InitUsageConfig():
 	config.usage.instantrec_path = ConfigText(default = "<default>")
 	config.usage.timeshift_path = ConfigText(default = "/media/hdd/")
 	config.usage.allowed_timeshift_paths = ConfigLocations(default = ["/media/hdd/"])
+
+	config.cccaminfo = ConfigSubsection()
+	config.cccaminfo.showInExtensions = ConfigYesNo(default=False)
+	config.cccaminfo.serverNameLength = ConfigSelectionNumber(min = 10, max = 100, stepwidth = 1, default = 22, wraparound = True)
+	config.cccaminfo.name = ConfigText(default="Profile", fixed_size=False)
+	config.cccaminfo.ip = ConfigText(default="192.168.2.12", fixed_size=False)
+	config.cccaminfo.username = ConfigText(default="", fixed_size=False)
+	config.cccaminfo.password = ConfigText(default="", fixed_size=False)
+	config.cccaminfo.port = ConfigInteger(default=16001, limits=(1, 65535))
+	config.cccaminfo.profile = ConfigText(default="", fixed_size=False)
+	config.cccaminfo.ecmInfoEnabled = ConfigYesNo(default=True)
+	config.cccaminfo.ecmInfoTime = ConfigSelectionNumber(min = 1, max = 10, stepwidth = 1, default = 5, wraparound = True)
+	config.cccaminfo.ecmInfoForceHide = ConfigYesNo(default=True)
+	config.cccaminfo.ecmInfoPositionX = ConfigInteger(default=50)
+	config.cccaminfo.ecmInfoPositionY = ConfigInteger(default=50)
+	config.cccaminfo.blacklist = ConfigText(default="/media/cf/CCcamInfo.blacklisted", fixed_size=False)
+	config.cccaminfo.profiles = ConfigText(default="/media/cf/CCcamInfo.profiles", fixed_size=False)
+
+	config.oscaminfo = ConfigSubsection()
+	config.oscaminfo.showInExtensions = ConfigYesNo(default=False)
+	config.oscaminfo.userdatafromconf = ConfigYesNo(default = False)
+	config.oscaminfo.autoupdate = ConfigYesNo(default = False)
+	config.oscaminfo.username = ConfigText(default = "username", fixed_size = False, visible_width=12)
+	config.oscaminfo.password = ConfigPassword(default = "password", fixed_size = False)
+	config.oscaminfo.ip = ConfigIP( default = [ 127,0,0,1 ], auto_jump=True)
+	config.oscaminfo.port = ConfigInteger(default = 16002, limits=(0,65536) )
+	config.oscaminfo.intervall = ConfigSelectionNumber(min = 1, max = 600, stepwidth = 1, default = 10, wraparound = True)
+	SystemInfo["OScamInstalled"] = False
 
 	config.usage.movielist_trashcan = ConfigYesNo(default=True)
 	config.usage.movielist_trashcan_days = ConfigNumber(default=8)
@@ -215,8 +243,8 @@ def InitUsageConfig():
 		setPreferredTuner(int(configElement.value))
 	config.usage.frontend_priority.addNotifier(PreferredTunerChanged)
 
-	config.usage.hide_zap_errors = ConfigYesNo(default = False)
-	config.usage.hide_ci_messages = ConfigYesNo(default = False)
+	config.usage.hide_zap_errors = ConfigYesNo(default = True)
+	config.usage.hide_ci_messages = ConfigYesNo(default = True)
 	config.usage.show_cryptoinfo = ConfigYesNo(default = True)
 	config.usage.show_eit_nownext = ConfigYesNo(default = True)
 	config.usage.show_vcr_scart = ConfigYesNo(default = False)
