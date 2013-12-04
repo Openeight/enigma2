@@ -67,7 +67,7 @@ from Plugins.Extensions.Infopanel.SoftwarePanel import SoftwarePanel
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getBackupFilename
 
 def Check_Softcam():
-	found = False
+	found = True
 	for x in os.listdir('/etc'):
 		if x.find('.emu') > -1:
 			found = True
