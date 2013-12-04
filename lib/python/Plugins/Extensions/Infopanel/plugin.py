@@ -304,7 +304,7 @@ class Infopanel(Screen, InfoBarPiP):
 		self.Mlist = []
 		if Check_Softcam():
 			#self.Mlist.append(MenuEntryItem((InfoEntryComponent('SoftcamPanel'), _("SoftcamPanel"), 'SoftcamPanel')))
-			#self.Mlist.append(MenuEntryItem((InfoEntryComponent('Softcam-Panel Setup'), _("Softcam-Panel Setup"), 'Softcam-Panel Setup')))
+			self.Mlist.append(MenuEntryItem((InfoEntryComponent('Softcam-Panel Setup'), _("Frozen cam check"), 'Softcam-Panel Setup')))
 		#self.Mlist.append(MenuEntryItem((InfoEntryComponent ("SoftwareManager" ), _("Software update"), ("software-update"))))
 		#self.Mlist.append(MenuEntryItem((InfoEntryComponent ("SoftwareManager" ), _("Software Manager"), ("software-manager"))))
 		#self.Mlist.append(MenuEntryItem((InfoEntryComponent('RedPanel'), _("RedPanel"), 'RedPanel')))
@@ -903,16 +903,9 @@ class ShowSoftcamPanelExtensions(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show Softcam-Panel in Extensions Menu"), config.plugins.showinfopanelextensions))
-		self.list.append(getConfigListEntry(_("Start Mode"), config.softcam.camstartMode))
-		if config.softcam.camstartMode.getValue() == "0":
-			self.list.append(getConfigListEntry(_("Start attempts"), config.softcam.restartAttempts))
-			self.list.append(getConfigListEntry(_("Time between start attempts (sec.)"), config.softcam.restartTime))
-			self.list.append(getConfigListEntry(_("Stop check when cam is running"), config.softcam.restartRunning))
 		self.list.append(getConfigListEntry(_("Show CCcamInfo in Extensions Menu"), config.cccaminfo.showInExtensions))
 		self.list.append(getConfigListEntry(_("Show OscamInfo in Extensions Menu"), config.oscaminfo.showInExtensions))
 		self.list.append(getConfigListEntry(_("Frozen Cam Check"), config.plugins.infopanel_frozencheck.list))
-		self.list.append(getConfigListEntry(_("Wait time before start Cam 2"), config.softcam.waittime))
 		
 		self["config"].list = self.list
 		self["config"].setList(self.list)

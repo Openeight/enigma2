@@ -5,7 +5,7 @@ from os import system, listdir, path
 from datetime import datetime
 
 isBusy = None
-CFG = "/usr/keys/CCcam.cfg"
+CFG = "/etc/CCcam.cfg"
 
 def CamCheck():
     global campoller, POLLTIME
