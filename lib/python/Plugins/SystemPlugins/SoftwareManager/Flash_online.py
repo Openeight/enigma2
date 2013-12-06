@@ -220,10 +220,7 @@ class doFlashImage(Screen):
 		box = self.box()
 		self.hide()
 		if self.Online:
-			if self.feed == "openxta":
-				url = self.feedurl + "/" + sel
-			else:
-				url = self.feedurl + "/" + box + "/" + sel
+			url = self.feedurl + "/" + box + "/" + sel
 			u = urllib2.urlopen(url)
 			f = open(file_name, 'wb')
 			meta = u.info()
