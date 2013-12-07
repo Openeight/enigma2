@@ -1,3 +1,3 @@
-installdir = $(pkglibdir)/python/Plugins/Extensions/Infopanel/locale/de/LC_MESSAGES
+installdir = $(pkglibdir)/python/Plugins/Extensions/ExtrasPanel/locale/de/LC_MESSAGES
 
-install_PYTHON = Infopanel.mo
+install_PYTHON = ExtrasPanel.mo

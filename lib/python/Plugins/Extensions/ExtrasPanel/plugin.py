@@ -34,7 +34,7 @@ font = "Regular;16"
 import ServiceReference
 import time
 import datetime
-inINFOPanel = None
+inEXTRASPanel = None
 
 config.softcam = ConfigSubsection()
 config.softcam.actCam = ConfigText(visible_width = 200)
@@ -55,15 +55,15 @@ if os.path.isfile("/usr/lib/enigma2/python/Plugins/Extensions/MultiQuickButton/p
 	except:
 		pass
 
-from Plugins.Extensions.Infopanel.CronManager import *
-from Plugins.Extensions.Infopanel.ScriptRunner import *
-from Plugins.Extensions.Infopanel.MountManager import *
-from Plugins.Extensions.Infopanel.SoftcamPanel import *
-from Plugins.Extensions.Infopanel.CamStart import *
-from Plugins.Extensions.Infopanel.CamCheck import *
-from Plugins.Extensions.Infopanel.sundtek import *
-from Plugins.Extensions.Infopanel.SwapManager import Swap, SwapAutostart
-from Plugins.Extensions.Infopanel.SoftwarePanel import SoftwarePanel
+from Plugins.Extensions.ExtrasPanel.CronManager import *
+from Plugins.Extensions.ExtrasPanel.ScriptRunner import *
+from Plugins.Extensions.ExtrasPanel.MountManager import *
+from Plugins.Extensions.ExtrasPanel.SoftcamPanel import *
+from Plugins.Extensions.ExtrasPanel.CamStart import *
+from Plugins.Extensions.ExtrasPanel.CamCheck import *
+from Plugins.Extensions.ExtrasPanel.sundtek import *
+from Plugins.Extensions.ExtrasPanel.SwapManager import Swap, SwapAutostart
+from Plugins.Extensions.ExtrasPanel.SoftwarePanel import SoftwarePanel
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getBackupFilename
 
 def Check_Softcam():
@@ -255,11 +255,11 @@ from Screens.InfoBarGenerics import InfoBarPiP
 def InfoEntryComponent(file):
 	png = LoadPixmap(cached = True, path = resolveFilename(SCOPE_CURRENT_SKIN, "pics/" + file + ".png"));
 	if png == None:
-		png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/Infopanel/pics/" + file + ".png")
+		png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/pics/" + file + ".png")
 		if png == None:
 			png = LoadPixmap(cached = True, path = resolveFilename(SCOPE_CURRENT_SKIN, "pics/default.png"));
 			if png == None:
-				png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/Infopanel/pics/default.png")
+				png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/pics/default.png")
 	res = (png)
 	return res
 
@@ -280,8 +280,8 @@ class Infopanel(Screen, InfoBarPiP):
 		pluginlist="False"
 		try:
 			print '[INFO-Panel] SHOW'
-			global inINFOPanel
-			inINFOPanel = self
+			global inEXTRASPanel
+			inEXTRASPanel = self
 		except:
 			print '[INFO-Panel] Error Hide'
 #		global servicelist
@@ -372,8 +372,8 @@ class Infopanel(Screen, InfoBarPiP):
 				service = self.service.toCompareString()
 				servicename = ServiceReference.ServiceReference(service).getServiceName().replace('\xc2\x87', '').replace('\xc2\x86', '').ljust(16)
 				print '[INFO-Panel] HIDE'
-				global inINFOPanel
-				inINFOPanel = None
+				global inEXTRASPanel
+				inEXTRASPanel = None
 			except:
 				print '[INFO-Panel] Error Hide'
 			self.close()

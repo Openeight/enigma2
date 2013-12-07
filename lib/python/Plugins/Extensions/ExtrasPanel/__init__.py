@@ -6,7 +6,7 @@ lang = language.getLanguage()
 os.environ["LANGUAGE"] = lang[:2]
 gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain("enigma2")
-gettext.bindtextdomain("Infopanel", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/Infopanel/locale/"))
+gettext.bindtextdomain("Infopanel", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/ExtrasPanel/locale/"))
 
 def _(txt):
 	t = gettext.dgettext("Infopanel", txt)

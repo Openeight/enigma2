@@ -1,4 +1,4 @@
-installdir = $(pkglibdir)/python/Plugins/Extensions/Infopanel/pics
+installdir = $(pkglibdir)/python/Plugins/Extensions/ExtrasPanel/pics
 
 install_PYTHON = *.png
 
