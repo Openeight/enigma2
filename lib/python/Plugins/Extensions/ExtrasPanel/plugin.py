@@ -25,6 +25,8 @@ from Components.Button import Button
 from Components.ActionMap import ActionMap
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
+from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
 from __init__ import _
 
 import os
@@ -40,18 +42,24 @@ config.softcam = ConfigSubsection()
 config.softcam.actCam = ConfigText(visible_width = 200)
 config.softcam.actCam2 = ConfigText(visible_width = 200)
 config.softcam.waittime = ConfigSelection([('0',_("dont wait")),('1',_("1 second")), ('5',_("5 seconds")),('10',_("10 seconds")),('15',_("15 seconds")),('20',_("20 seconds")),('30',_("30 seconds"))], default='15')
-config.plugins.infopanel_redpanel = ConfigSubsection()
-config.plugins.infopanel_redpanel.enabled = ConfigYesNo(default=True)
-config.plugins.infopanel_redpanel.enabledlong = ConfigYesNo(default=False)
-config.plugins.infopanel_yellowkey = ConfigSubsection()
-config.plugins.infopanel_yellowkey.list = ConfigSelection([('0',_("Audio Selection")),('1',_("Default (Timeshift)")), ('2',_("Toggle Pillarbox <> Pan&Scan"))])
-config.plugins.showinfopanelextensions = ConfigYesNo(default=False)
-config.plugins.infopanel_frozencheck = ConfigSubsection()
-config.plugins.infopanel_frozencheck.list = ConfigSelection([('0',_("Off")),('1',_("1 min.")), ('5',_("5 min.")),('10',_("10 min.")),('15',_("15 min.")),('30',_("30 min."))])
+config.plugins.extraspanel_redpanel = ConfigSubsection()
+config.plugins.extraspanel_redpanel.enabled = ConfigYesNo(default=True)
+config.plugins.extraspanel_redpanel.enabledlong = ConfigYesNo(default=False)
+config.plugins.extraspanel_yellowkey = ConfigSubsection()
+config.plugins.extraspanel_yellowkey.list = ConfigSelection([('0',_("Audio Selection")),('1',_("Default (Timeshift)")), ('2',_("Toggle Pillarbox <> Pan&Scan"))])
+config.plugins.showextraspanelextensions = ConfigYesNo(default=False)
+config.plugins.extraspanel_frozencheck = ConfigSubsection()
+config.plugins.extraspanel_frozencheck.list = ConfigSelection([('0',_("Off")),('1',_("1 min.")), ('5',_("5 min.")),('10',_("10 min.")),('15',_("15 min.")),('30',_("30 min."))])
 	
 if os.path.isfile("/usr/lib/enigma2/python/Plugins/Extensions/MultiQuickButton/plugin.pyo") is True:
 	try:
 		from Plugins.Extensions.MultiQuickButton.plugin import *
+	except:
+		pass
+		
+if os.path.isfile("/usr/lib/enigma2/python/Plugins/PLi/SoftcamSetup/plugin.pyo") is True:
+	try:
+		from Plugins.PLi.SoftcamSetup import Sc
 	except:
 		pass
 
@@ -75,11 +83,11 @@ def Check_Softcam():
 	return found
 
 # Hide Softcam-Panel Setup when no softcams installed
-if not Check_Softcam() and (config.plugins.showinfopanelextensions.getValue() or config.plugins.infopanel_redpanel.enabledlong.getValue()):
-	config.plugins.showinfopanelextensions.setValue(False)
-	config.plugins.infopanel_redpanel.enabledlong.setValue(False)
-	config.plugins.showinfopanelextensions.save()
-	config.plugins.infopanel_redpanel.save()
+if not Check_Softcam() and (config.plugins.showextraspanelextensions.getValue() or config.plugins.extraspanel_redpanel.enabledlong.getValue()):
+	config.plugins.showextraspanelextensions.setValue(False)
+	config.plugins.extraspanel_redpanel.enabledlong.setValue(False)
+	config.plugins.showextraspanelextensions.save()
+	config.plugins.extraspanel_redpanel.save()
 
 # Hide Keymap selection when no other keymaps installed.
 if config.usage.keymap.getValue() != eEnv.resolve("${datadir}/enigma2/keymap.xml"):
@@ -91,7 +99,7 @@ if config.usage.keymap.getValue() != eEnv.resolve("${datadir}/enigma2/keymap.xml
 		setDefaultKeymap()
 		
 def setDefaultKeymap():
-	print "[Info-Panel] Set Keymap to Default"
+	print "[Extras-Panel] Set Keymap to Default"
 	config.usage.keymap.setValue(eEnv.resolve("${datadir}/enigma2/keymap.xml"))
 	config.save()
 
@@ -120,12 +128,12 @@ boxversion = getBoxType()
 machinename = getMachineName()
 machinebrand = getMachineBrand()
 
-INFO_Panel_Version = 'Info-Panel V1.1'
-print "[Info-Panel] machinebrand: %s"  % (machinebrand)
-print "[Info-Panel] machinename: %s"  % (machinename)
-print "[Info-Panel] boxversion: %s"  % (boxversion)
-panel = open("/tmp/infopanel.ver", "w")
-panel.write(INFO_Panel_Version + '\n')
+EXTRAS_Panel_Version = 'eXTrAs-Panel V1.0'
+print "[eXTrAs-Panel] machinebrand: %s"  % (machinebrand)
+print "[eXTrAs-Panel] machinename: %s"  % (machinename)
+print "[eXTrAs-Panel] boxversion: %s"  % (boxversion)
+panel = open("/tmp/extraspanel.ver", "w")
+panel.write(EXTRAS_Panel_Version + '\n')
 panel.write("Machinebrand: %s " % (machinebrand)+ '\n')
 panel.write("Machinename: %s " % (machinename)+ '\n')
 panel.write("Boxversion: %s " % (boxversion)+ '\n')
@@ -165,23 +173,23 @@ class ConfigPORT(ConfigSequence):
 		ConfigSequence.__init__(self, seperator = ".", limits = [(1,65535)], default = default)
 
 def main(session, **kwargs):
-		session.open(Infopanel)
+		session.open(Extraspanel)
 
 def Apanel(menuid, **kwargs):
 	if menuid == "mainmenu":
-		return [("eXTrAs panel", main, "Infopanel", 11)]
+		return [("eXTrAs panel", main, "Extraspanel", 11)]
 	else:
 		return []
 
 def camstart(reason, **kwargs):
-	if not config.plugins.infopanel_frozencheck.list.getValue() == '0':
+	if not config.plugins.extraspanel_frozencheck.list.getValue() == '0':
 		CamCheck()
 	try:
 		f = open("/proc/stb/video/alpha", "w")
 		f.write(str(config.osd.alpha.getValue()))
 		f.close()
 	except:
-		print "[Info-Panel] failed to write /proc/stb/video/alpha"
+		print "[Extras-Panel] failed to write /proc/stb/video/alpha"
 
 	try:
 		if config.softcam.camstartMode.getValue() == "0":
@@ -190,25 +198,25 @@ def camstart(reason, **kwargs):
 				timerInstance = CamStart(None)
 			timerInstance.startTimer()
 	except:
-		print "[Info-Panel] failed to run CamStart"
+		print "[Extras-Panel] failed to run CamStart"
 
 def Plugins(**kwargs):
 	return [
 
-	#// show Infopanel in Main Menu
-	PluginDescriptor(name="Info Panel", description="Info panel GUI 12/11/2012", where = PluginDescriptor.WHERE_MENU, fnc = Apanel),
+	#// show Extraspanel in Main Menu
+	PluginDescriptor(name="eXTrAs Panel", description="eXTrAs panel GUI 12/11/2012", where = PluginDescriptor.WHERE_MENU, fnc = Apanel),
 	#// autostart
 	PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART],fnc = camstart),
 	#// SwapAutostart
 	PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART],fnc = SwapAutostart),
-	#// show Infopanel in EXTENSIONS Menu
-	PluginDescriptor(name="Info Panel", description="Info panel GUI 12/11/2012", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main) ]
+	#// show Extraspanel in EXTENSIONS Menu
+	PluginDescriptor(name="eXTrAs Panel", description="eXTrAs panel GUI 12/11/2012", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main) ]
 
 
 
 #############------- SKINS --------############################
 
-MENU_SKIN = """<screen position="center,center" size="500,370" title="INFO Panel" >
+MENU_SKIN = """<screen position="center,center" size="500,370" title="EXTRAS Panel" >
 	<widget source="global.CurrentTime" render="Label" position="0, 340" size="500,24" font="Regular;20" foregroundColor="#FFFFFF" halign="right" transparent="1" zPosition="5">
 		<convert type="ClockToText">>Format%H:%M:%S</convert>
 	</widget>
@@ -263,7 +271,7 @@ def InfoEntryComponent(file):
 	res = (png)
 	return res
 
-class Infopanel(Screen, InfoBarPiP):
+class Extraspanel(Screen, InfoBarPiP):
 	servicelist = None
 	def __init__(self, session, services = None):
 		Screen.__init__(self, session)
@@ -279,11 +287,11 @@ class Infopanel(Screen, InfoBarPiP):
 		INFOCONF = 0
 		pluginlist="False"
 		try:
-			print '[INFO-Panel] SHOW'
+			print '[Extras-Panel] SHOW'
 			global inEXTRASPanel
 			inEXTRASPanel = self
 		except:
-			print '[INFO-Panel] Error Hide'
+			print '[Extras-Panel] Error Hide'
 #		global servicelist
 		if services is not None:
 			self.servicelist = services
@@ -299,16 +307,13 @@ class Infopanel(Screen, InfoBarPiP):
 				"ok": self.ok,
 			}, 1)
 		
-		self["label1"] = Label(INFO_Panel_Version)
+		self["label1"] = Label(EXTRAS_Panel_Version)
 
 		self.Mlist = []
+		self.Mlist.append(MenuEntryItem((InfoEntryComponent('BackupFlashManager'), _("Backup/Flash"), ('BackupFlashManager'))))
 		if Check_Softcam():
-			#self.Mlist.append(MenuEntryItem((InfoEntryComponent('SoftcamPanel'), _("SoftcamPanel"), 'SoftcamPanel')))
-			self.Mlist.append(MenuEntryItem((InfoEntryComponent('Softcam-Panel Setup'), _("Frozen cam check"), 'Softcam-Panel Setup')))
-		#self.Mlist.append(MenuEntryItem((InfoEntryComponent ("SoftwareManager" ), _("Software update"), ("software-update"))))
-		#self.Mlist.append(MenuEntryItem((InfoEntryComponent ("SoftwareManager" ), _("Software Manager"), ("software-manager"))))
-		#self.Mlist.append(MenuEntryItem((InfoEntryComponent('RedPanel'), _("RedPanel"), 'RedPanel')))
-		#self.Mlist.append(MenuEntryItem((InfoEntryComponent('Yellow-Key-Action'), _("Yellow-Key-Action"), 'Yellow-Key-Action')))
+			self.Mlist.append(MenuEntryItem((InfoEntryComponent('CamSetup'), _("CamSetup"), ('CamSetup'))))
+		self.Mlist.append(MenuEntryItem((InfoEntryComponent('SoftwareManager'), _("Image update"), ('SoftwareManager'))))
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('KeymapSel'), _("Keymap Selection"), 'KeymapSel')))	
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('Plugins'), _("Plugins"), 'Plugins')))
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('Infos'), _("Infos"), 'Infos')))
@@ -331,7 +336,7 @@ class Infopanel(Screen, InfoBarPiP):
 		item = self.getCurrentEntry()
 
 	def setWindowTitle(self):
-		self.setTitle(_("Info Panel"))
+		self.setTitle(_("eXTrAs Panel"))
 
 	def up(self):
 		#self["Mlist"].up()
@@ -364,24 +369,24 @@ class Infopanel(Screen, InfoBarPiP):
 		pass
 
 	def Exit(self):
-		#// Exit Infopanel when pressing the EXIT button or go back to the MainMenu
+		#// Exit Extraspanel when pressing the EXIT button or go back to the MainMenu
 		global menu
 		if menu == 0:
 			try:
 				self.service = self.session.nav.getCurrentlyPlayingServiceReference()
 				service = self.service.toCompareString()
 				servicename = ServiceReference.ServiceReference(service).getServiceName().replace('\xc2\x87', '').replace('\xc2\x86', '').ljust(16)
-				print '[INFO-Panel] HIDE'
+				print '[Extras-Panel] HIDE'
 				global inEXTRASPanel
 				inEXTRASPanel = None
 			except:
-				print '[INFO-Panel] Error Hide'
+				print '[Extras-Panel] Error Hide'
 			self.close()
 		elif menu == 1:
 			self["Mlist"].moveToIndex(0)
 			self["Mlist"].l.setList(self.oldmlist)
 			menu = 0
-			self["label1"].setText(INFO_Panel_Version)
+			self["label1"].setText(EXTRAS_Panel_Version)
 		elif menu == 2:
 			self["Mlist"].moveToIndex(0)
 			self["Mlist"].l.setList(self.oldmlist1)
@@ -395,11 +400,34 @@ class Infopanel(Screen, InfoBarPiP):
 #		menu = self["Mlist"].getCurrent()
 		global INFOCONF
 		menu = self['Mlist'].l.getCurrentSelection()[0][2]
-		print '[INFO-Panel] MenuItem: ' + menu
-		if menu == "Plugins":
+		print '[Extras-Panel] MenuItem: ' + menu
+		if menu == "BackupFlashManager":
+			self.BackupFlashManager()
+		elif menu == "backup-image":
+			self.session.open(ImageBackup)
+		elif menu == "flash-image":
+			self.session.open(FlashOnline)
+		elif menu == "backup-settings":
+			self.session.openWithCallback(self.backupDone,BackupScreen, runBackup = True)
+		elif menu == "restore-settings":
+			self.backuppath = getBackupPath()
+			self.backupfile = getBackupFilename()
+			self.fullbackupfilename = self.backuppath + "/" + self.backupfile
+			if os_path.exists(self.fullbackupfilename):
+				self.session.openWithCallback(self.startRestore, MessageBox, _("Are you sure you want to restore your STB backup?\nSTB will restart after the restore"))
+			else:
+				self.session.open(MessageBox, _("Sorry no backups found!"), MessageBox.TYPE_INFO, timeout = 10)
+		elif menu == "backup-files":
+			self.session.openWithCallback(self.backupfiles_choosen,BackupSelection)
+
+		elif menu == "CamSetup":
+			self.session.open(Sc.ScNewSelection)
+
+		elif menu == "Plugins":
 			self.Plugins()
 		elif menu == "Pluginbrowser":
 			self.session.open(PluginBrowser)
+
 		elif menu == "Infos":
 			self.Infos()
 		elif menu == "InfoPanel":
@@ -440,22 +468,10 @@ class Infopanel(Screen, InfoBarPiP):
 			self.session.open(ScriptRunner)
 		elif menu == "SoftcamPanel":
 			self.session.open(SoftcamPanel)
-		elif menu == "software-manager":
+		elif menu == "SoftwareManager":
 			self.Software_Manager()
 		elif menu == "software-update":
 			self.session.open(SoftwarePanel)
-		elif menu == "backup-settings":
-			self.session.openWithCallback(self.backupDone,BackupScreen, runBackup = True)
-		elif menu == "restore-settings":
-			self.backuppath = getBackupPath()
-			self.backupfile = getBackupFilename()
-			self.fullbackupfilename = self.backuppath + "/" + self.backupfile
-			if os_path.exists(self.fullbackupfilename):
-				self.session.openWithCallback(self.startRestore, MessageBox, _("Are you sure you want to restore your STB backup?\nSTB will restart after the restore"))
-			else:
-				self.session.open(MessageBox, _("Sorry no backups found!"), MessageBox.TYPE_INFO, timeout = 10)
-		elif menu == "backup-files":
-			self.session.openWithCallback(self.backupfiles_choosen,BackupSelection)
 		elif menu == "MultiQuickButton":
 			self.session.open(MultiQuickButton)
 		elif menu == "MountManager":
@@ -551,6 +567,22 @@ class Infopanel(Screen, InfoBarPiP):
 		self.oldmlist = []
 		self.oldmlist = self.Mlist
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("SoftwareManager" ), _("Software update"), ("software-update"))))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupSettings" ), _("Backup Settings"), ("backup-settings"))))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent ("RestoreSettings" ), _("Restore Settings"), ("restore-settings"))))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupFiles" ), _("Choose backup files"), ("backup-files"))))
+		self["Mlist"].moveToIndex(0)
+		self["Mlist"].l.setList(self.tlist)
+
+	def BackupFlashManager(self):
+		#// Create BackupFlash Manager Menu
+		global menu
+		menu = 1
+		self["label1"].setText(_("Backup/Flash Manager"))
+		self.tlist = []
+		self.oldmlist = []
+		self.oldmlist = self.Mlist
+		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupImage" ), _("Backup Image"), ("backup-image"))))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent ("FlashOnline" ), _("Flash Image"), ("flash-image"))))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupSettings" ), _("Backup Settings"), ("backup-settings"))))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("RestoreSettings" ), _("Restore Settings"), ("restore-settings"))))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupFiles" ), _("Choose backup files"), ("backup-files"))))
@@ -731,8 +763,8 @@ class RedPanel(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show INFO-Panel Red-key"), config.plugins.infopanel_redpanel.enabled))
-		self.list.append(getConfigListEntry(_("Show Softcam-Panel Red-key long"), config.plugins.infopanel_redpanel.enabledlong))
+		self.list.append(getConfigListEntry(_("Show eXTrAs-Panel Red-key"), config.plugins.extraspanel_redpanel.enabled))
+		self.list.append(getConfigListEntry(_("Show Softcam-Panel Red-key long"), config.plugins.extraspanel_redpanel.enabledlong))
 		
 		self["config"].list = self.list
 		self["config"].setList(self.list)
@@ -817,7 +849,7 @@ class YellowPanel(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("Yellow Key Action"), config.plugins.infopanel_yellowkey.list))
+		self.list.append(getConfigListEntry(_("Yellow Key Action"), config.plugins.extraspanel_yellowkey.list))
 		
 		self["config"].list = self.list
 		self["config"].setList(self.list)
@@ -905,7 +937,7 @@ class ShowSoftcamPanelExtensions(ConfigListScreen, Screen):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Show CCcamInfo in Extensions Menu"), config.cccaminfo.showInExtensions))
 		self.list.append(getConfigListEntry(_("Show OscamInfo in Extensions Menu"), config.oscaminfo.showInExtensions))
-		self.list.append(getConfigListEntry(_("Frozen Cam Check"), config.plugins.infopanel_frozencheck.list))
+		self.list.append(getConfigListEntry(_("Frozen Cam Check"), config.plugins.extraspanel_frozencheck.list))
 		
 		self["config"].list = self.list
 		self["config"].setList(self.list)
@@ -972,7 +1004,7 @@ class ShowSoftcamPanelExtensions(ConfigListScreen, Screen):
 			self.doClose()
 
 	def doClose(self):
-		if not config.plugins.infopanel_frozencheck.list.getValue() == '0':
+		if not config.plugins.extraspanel_frozencheck.list.getValue() == '0':
 			CamCheck()
 		self.close()
 
