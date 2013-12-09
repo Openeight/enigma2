@@ -184,7 +184,7 @@ class SoftwarePanel(Screen):
 	def buildPacketList(self):
 		self.list = []
 		fetchedList = self.ipkg.getFetchedList()
-		excludeList = self.ipkg.getExcludeList()
+#		excludeList = self.ipkg.getExcludeList()
 
 		if len(fetchedList) > 0:
 			for x in fetchedList:
