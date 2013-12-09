@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<skin>
+	<!-- Extended Info Bar panel	 -->
+	<screen name="teamredEI" flags="wfNoBorder" position="0,0" size="0,0" title="teamred" backgroundColor="transparent">
+		<widget name="xres" position="0,0" size="0,0" halign="left" font="Regular;17" zPosition="4" transparent="1" foregroundColor="black" backgroundColor="black" noWrap="1"/>
+		<widget name="yres" position="0,0" size="0,0" halign="left" font="Regular;17" zPosition="4" transparent="1" foregroundColor="black" backgroundColor="black" noWrap="1"/>
+		<widget name="ecmtime" position="0,0" size="0,0" halign="left" font="Regular;17" zPosition="4" transparent="1" foregroundColor="black" backgroundColor="black" noWrap="1"/>
+		<widget name="EmuInfo" position="0,0" size="0,0" halign="right" font="Regular;17" zPosition="4" transparent="1" foregroundColor="black" backgroundColor="black" noWrap="1"/>
+		<widget name="TunerInfo" position="0,0" size="0,0" halign="left" font="Regular;17" zPosition="4" transparent="1" foregroundColor="black" backgroundColor="black"/>
+		<widget name="netcard" position="0,0" size="0,0" halign="left" font="Regular;17" zPosition="4" transparent="1" foregroundColor="black" backgroundColor="black"/>
+		<widget name="emuname" zPosition="4" position="0,0" size="175,22" halign="center" font="Regular;17" transparent="1" foregroundColor="black" backgroundColor="black"/>
+		<widget position="0,0" size="0,0" halign="center" text="B" font="Regular;17" foregroundColor="white" backgroundColor="black" name="beta_no" zPosition="3" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="B" font="Regular;17" backgroundColor="black" foregroundColor="white" name="beta_emm" zPosition="4" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="B" font="Regular;17" backgroundColor="black" foregroundColor="white" name="beta_ecm" zPosition="5" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="I" font="Regular;17" foregroundColor="white" backgroundColor="black" name="irdeto_no" zPosition="3" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="I" font="Regular;17" backgroundColor="black" foregroundColor="white" name="irdeto_emm" zPosition="4" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="I" font="Regular;17" backgroundColor="black" foregroundColor="white" name="irdeto_ecm" zPosition="5" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="S" font="Regular;17" foregroundColor="white" backgroundColor="black" name="seca_no"  zPosition="3" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="S" font="Regular;17" backgroundColor="black" foregroundColor="white" name="seca_emm" zPosition="4" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="S" font="Regular;17" backgroundColor="black" foregroundColor="white" name="seca_ecm" zPosition="5" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="V" font="Regular;17" foregroundColor="white" backgroundColor="black" name="via_no"  zPosition="3" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="V" font="Regular;17" backgroundColor="black" foregroundColor="white" name="via_emm" zPosition="4" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="V" font="Regular;17" backgroundColor="black" foregroundColor="white" name="via_ecm" zPosition="5" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="N" font="Regular;17" foregroundColor="white" backgroundColor="black" name="nagra_no" zPosition="3" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="N" font="Regular;17" backgroundColor="black" foregroundColor="white" name="nagra_emm" zPosition="4" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="N" font="Regular;17" backgroundColor="black" foregroundColor="white" name="nagra_ecm" zPosition="5" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="CW" font="Regular;17" foregroundColor="white" backgroundColor="black" name="cw_no"  zPosition="3" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="CW" font="Regular;17" backgroundColor="black" foregroundColor="white" name="cw_emm" zPosition="4" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="CW" font="Regular;17" backgroundColor="black" foregroundColor="white" name="cw_ecm" zPosition="5" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="ND" font="Regular;17" foregroundColor="white" backgroundColor="black" name="nds_no"  zPosition="3" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="ND" font="Regular;17" backgroundColor="black" foregroundColor="white" name="nds_emm" zPosition="4" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="ND" font="Regular;17" backgroundColor="black" foregroundColor="white" name="nds_ecm" zPosition="5" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="CO" font="Regular;17" foregroundColor="white" backgroundColor="black" name="conax_no"  zPosition="3" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="CO" font="Regular;17" backgroundColor="black" foregroundColor="white" name="conax_emm" zPosition="4" transparent="1"/>
+		<widget position="0,0" size="0,0" halign="center" text="CO" font="Regular;17" backgroundColor="black" foregroundColor="white" name="conax_ecm" valign="center" zPosition="5" transparent="1"/>
+		<widget name="b_fta" text="FTA" foregroundColor="white" backgroundColor="black" transparent="1" position="0,0" size="0,0" halign="center" font="Regular;17" zPosition="3"/>
+		<widget name="b_card" text="CRD" backgroundColor="black" transparent="1" position="0,0" size="0,0" halign="center" font="Regular;17" foregroundColor="white" zPosition="4"/>
+		<widget name="b_emu" text="EMU" backgroundColor="black" transparent="1" position="0,0" size="0,0" halign="center" font="Regular;17" foregroundColor="white" zPosition="5"/>
+		<widget name="b_spider" text="NET" backgroundColor="black" transparent="1" position="0,0" size="0,0" halign="center" font="Regular;17" foregroundColor="white" zPosition="6"/>
+	</screen>
+
+	<!-- (OK) Blue panels -->
+	<screen name="teamredBluePanel" position="0,0" size="1280,720" title="Blue Panel" flags="wfNoBorder" >
+		<panel name="GenericLayoutMidTemplate" />
+		<panel name="SmallPigTemplate" />
+		<panel name="4Buttons" />
+		<widget name="info_use" position="60,90" zPosition="2" size="400,30" font="Regular;28" foregroundColor="#ff3d3d" backgroundColor="black" transparent="1"/>
+		<widget name="config" position="60,150" size="520,50" zPosition="2" backgroundColor="black" transparent="1"/>
+		<ePixmap name="1" position="60,250" zPosition="5" size="35,30" pixmap="magnum32/buttons/key_1.png" transparent="1" alphatest="blend"/>
+		<widget name="key_1" position="110,247" zPosition="2" size="400,30" valign="center" halign="left" font="Regular;21" backgroundColor="black" transparent="1"/>
+		<ePixmap name="1" position="60,280" zPosition="5" size="35,30" pixmap="magnum32/buttons/key_2.png" transparent="1" alphatest="blend"/>
+		<widget name="key_2" position="110,277" zPosition="2" size="400,30" valign="center" halign="left" font="Regular;21" backgroundColor="black" transparent="1"/>
+		<ePixmap name="1" position="60,310" zPosition="5" size="35,30" pixmap="magnum32/buttons/key_3.png" transparent="1" alphatest="blend"/>
+		<widget name="key_3" position="110,307" zPosition="2" size="400,30" valign="center" halign="left" font="Regular;21" backgroundColor="black" transparent="1"/>
+		<widget name="ecmtext" position="60,420" size="520,300" font="Regular;20" zPosition="2" backgroundColor="black" transparent="1"/>
+                <!-- Watch Analog - Analogic Clock -->
+	        <widget source="global.CurrentTime" render="Analogic" position="874,490" zPosition="4" size="80,80" transparent="1" alphatest="on" linewidth="4">
+		        <convert type="ClockToText">AnalogHours</convert>
+	        </widget>
+
+	        <widget source="global.CurrentTime" render="Analogic" position="860,474" zPosition="5" size="110,110" transparent="1" alphatest="on" linewidth="3">
+		        <convert type="ClockToText">AnalogMinutes</convert>
+	        </widget>
+
+	        <widget source="global.CurrentTime" render="Analogic" position="850,465" foregroundColor="#da3636" zPosition="6" size="130,130" transparent="1" alphatest="on" linewidth="2">
+		        <convert type="ClockToText">AnalogSeconds</convert>
+	        </widget>
+                <ePixmap position="790,415" zPosition="1" size="380,256" pixmap="magnum32/menu/ico_red_watch.png" backgroundColor="transparent" alphatest="blend" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Teamred Console -->
+	<screen name="teamredConsole" position="0,0" size="1280,720" title="Blue Panel TeamRed Info" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget name="text" position="10,90" size="820,440" font="Console;23" halign="center" transparent="1" backgroundColor="black" scrollbarMode="showAlways"/>
+		<panel name="2Buttons" />
+		<widget name="canceltext" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="oktext"     position="340,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Show panel -->
+	<screen  name="teamredShowPanel" position="0,0" size="1280,720" title="Blue Panel TeamRed Info" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,520" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,610" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget source="list" render="Listbox" position="60,90" size="763,520" scrollbarMode="showAlways" enableWrapAround="1" transparent="1">
+			<convert type="StringList"/>
+		</widget>
+	</screen>
+
+	<!-- (OK) Utility panels -->
+	<screen name="NUtility" position="0,0" size="1280,720" title="Blue Panel System Utility" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>	
+
+	<!-- (OK) Manage Services -->
+	<screen name="NServices" position="0,0" size="1280,720" title="Manage Services" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<panel name="3Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="key_green" position="340,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="key_yellow" position="580,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Manage Modules -->
+	<screen name="NModule" position="0,0" size="1280,720" title="Manage Modules" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Manage Startup Services -->
+	<screen name="NServicesSetup" position="0,0" size="1280,720" title="Manage Startup Services" flags="wfNoBorder" backgroundColor="transparent">
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,400" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,490" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="config" position="60,90" size="763,400" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget name="conn" position="60,580" size="760,45" font="Regular;20" halign="left" foregroundColor="#dedede" backgroundColor="black" transparent="1" />
+		<panel name="2Buttons" />
+		<widget name="canceltext" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="oktext"     position="340,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Services Logs -->
+	<screen name="NServicesLog" position="0,0" size="1280,720" title="Service Logs" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<panel name="2Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="key_yellow" position="340,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>		
+
+	<!-- (OK) Execute Commands -->
+	<screen name="NCommand" position="0,0" size="1280,720" title="Execute Commands" flags="wfNoBorder" backgroundColor="transparent" >
+		<panel name="GenericLayoutMidTemplate" />
+		<panel name="SmallPigTemplate" />
+		<ePixmap pixmap="magnum32/menu/ico_setup.png" position="790,455" size="256,256" zPosition="2" alphatest="blend" />
+		<ePixmap position="560,90" zPosition="4" size="15,500" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="560,590" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="513,500" scrollbarMode="showAlways" enableWrapAround="1" transparent="1" itemHeight="25" />
+		<panel name="3Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="key_green" position="340,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="key_yellow" position="580,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>	
+
+	<!-- (OK) Execute Users Scripts -->
+	<screen name="NUserScript" position="0,0" size="1280,720" title="Execute Commands" flags="wfNoBorder" backgroundColor="transparent" >
+		<panel name="GenericLayoutMidTemplate" />
+		<panel name="SmallPigTemplate" />
+		<ePixmap pixmap="magnum32/menu/ico_setup.png" position="790,455" size="256,256" zPosition="2" alphatest="blend" />
+		<ePixmap position="560,90" zPosition="4" size="15,500" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="560,590" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="513,500" scrollbarMode="showAlways" enableWrapAround="1" transparent="1" itemHeight="25" />
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Manage Swap -->
+	<screen name="NSwap" position="0,0" size="1280,720" title="Manage Swap" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,400" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,490" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="config" position="60,90" size="763,400" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget name="conn" position="60,580" size="760,45" font="Regular;20" halign="left" foregroundColor="#dedede" backgroundColor="black" transparent="1" />
+		<panel name="2Buttons" />
+		<widget name="canceltext" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="oktext"     position="340,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Manage Device Panels -->
+		<screen name="manageDevice" position="0,0" size="1280,720" title="Manage Devices" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>	
+
+	<!-- (OK) USB Setup Panel -->
+	<screen name="USBSetup" position="0,0" size="1280,720" title="Manage Devices" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget name="model" position="60,580" size="720,45" font="Regular;20" foregroundColor="#dedede" backgroundColor="black" transparent="1"/>
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>		
+
+	<!-- (OK) System Info panels	 -->
+	<screen name="NInfo" position="0,0" size="1280,720" title="System Info Panels" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Device Status	 -->
+	<screen name="showDevSpaceInfo" position="0,0" size="1280,720" title="Usage Device Status" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panelw.png" />
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/syspanel.png" alphatest="blend" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="1160,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<!-- Total Space -->
+		<widget name="totp" position="170,115" size="100,15" borderWidth="2" borderColor="grey" transparent="1"/>
+		<widget name="t1"   position="280,110" size="500,50" font="Regular;22" halign="left" backgroundColor="black" foregroundColor="#ff5656" transparent="1" />
+		<widget name="t2"   position="170,140" size="500,50" font="Regular;22" valign="center" backgroundColor="black" transparent="1" zPosition="5"/>
+		<!-- Memory Flash -->
+		<widget name="flsp" position="170,250" size="100,15" borderWidth="1" borderColor="grey" transparent="1"/>
+		<widget name="f2"   position="280,232" size="500,50" font="Regular;22" valign="center" foregroundColor="#ff5656" backgroundColor="black" transparent="1" zPosition="5"/>
+		<widget name="f1"   position="170,280" size="500,50" font="Regular;22" valign="center" backgroundColor="black" transparent="1" zPosition="5"/>
+		<!-- Total Ram -->
+		<widget name="rtpr" position="170,250" size="100,15" borderWidth="1" borderColor="grey" transparent="1"/>
+		<widget name="rt1"  position="280,232" size="500,50" font="Regular;22" valign="center" backgroundColor="black" transparent="1" foregroundColor="#ff5656"/>
+		<widget name="rt2"  position="170,280" size="500,50" font="Regular;22" valign="center" backgroundColor="black" transparent="1" zPosition="5"/>
+		<!-- ram -->
+		<widget name="rrpr" position="710,250" size="100,15" borderWidth="2" borderColor="grey" transparent="1"/>
+		<widget name="rr1"  position="820,232" size="420,50" font="Regular;22" valign="center" transparent="1" backgroundColor="black" foregroundColor="#ff5656"/>
+		<widget name="rr2"  position="710,280" size="500,50" font="Regular;22" valign="center" backgroundColor="black" transparent="1" zPosition="5"/>
+		<!-- usb -->
+		<widget name="usbp" position="170,390" size="100,15" borderWidth="1" borderColor="grey" transparent="1"/>
+		<widget name="u1" position="280,372"   size="370,50" font="Regular;22" valign="center" transparent="1" backgroundColor="black" foregroundColor="#ff5656"/>
+		<widget name="u2" position="170,422"   size="370,50" font="Regular;22" valign="center" backgroundColor="black" transparent="1" zPosition="5"/>
+		<!-- swap -->
+		<widget name="rspr" position="710,390" size="100,15" borderWidth="1" borderColor="grey" transparent="1"/>
+		<widget name="rs1"  position="820,372" size="420,50" font="Regular;22" valign="center" transparent="1" backgroundColor="black" foregroundColor="#ff5656"/>
+		<widget name="rs2"  position="710,422" size="500,50" font="Regular;22" valign="center" backgroundColor="black" transparent="1" zPosition="5"/>
+		<!-- hdd -->
+		<widget name="hddp" position="170,538" size="100,15" borderWidth="1" borderColor="grey" transparent="1"/>
+		<widget name="h1"   position="280,520" size="500,50" font="Regular;22" valign="center" transparent="1" backgroundColor="black" foregroundColor="#ff5656"/>
+		<widget name="h2"   position="170,560" size="500,50" font="Regular;22" valign="center" backgroundColor="black" transparent="1" zPosition="5"/>
+		<!-- Compact Flash -->
+		<widget name="cfp" position="710,538" size="100,15" borderWidth="1" borderColor="grey" transparent="1"/>
+		<widget name="c1"  position="820,520" size="420,50" font="Regular;22" valign="center" transparent="1" backgroundColor="black" foregroundColor="#ff5656"/>
+		<widget name="c2"  position="710,560" size="420,50" font="Regular;22" valign="center" backgroundColor="black" transparent="1" zPosition="5"/>
+	</screen>
+
+	<!-- (OK) Show Run Process -->
+	<screen name="showRunProcessInfo" position="0,0" size="1280,720" title="Show Run Process" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,500" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,590" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="psinfo" position="60,90" size="763,500" font="Console;21" halign="left" transparent="1" backgroundColor="black" scrollbarWidth="10"/>
+	</screen>
+
+	<!-- (OK) Show Enigma Setting Info -->
+	<screen name="showEnigmaInfo" position="0,0" size="1280,720" title="Show Enigma Setting Info" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="815,90" zPosition="4" size="15,475" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="815,565" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="infotext" position="60,90" size="768,475" font="Console;20" halign="center" transparent="1" backgroundColor="black" scrollbarWidth="10"/>
+	</screen>
+
+	<!-- (OK) Setup panel -->
+	<screen name="NSetupSum" position="0,0" size="1280,720" title="System Settings" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget name="conn" position="60,580" size="720,45" font="Regular;20" halign="left" valign="center" foregroundColor="#dedede" backgroundColor="black" transparent="1" />
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Addons panels -->
+	<screen name="NAddons" position="0,0" size="1280,720" title="System Settings" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget name="conn" position="60,580" size="720,45" font="Regular;20" halign="left" valign="center" foregroundColor="#dedede" backgroundColor="black" transparent="1" />
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Download Addons -->
+	<screen name="RAddons" position="0,0" size="1280,720" title="Download Addons" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>	
+
+	<!-- (OK) Manual Installation -->
+	<screen name="RManual" position="0,0" size="1280,720" title="Manual Installation" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget name="conn" position="60,580" size="720,45" font="Regular;20" halign="left" valign="center" foregroundColor="#dedede" backgroundColor="black" transparent="1" />
+		<panel name="2Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="key_yellow" position="340,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>		
+
+	<!-- (OK) Remove Addons -->
+	<screen name="RRemove" position="0,0" size="1280,720" title="Manual Installation" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget name="conn" position="60,580" size="720,45" font="Regular;20" halign="left" valign="center" foregroundColor="#dedede" backgroundColor="black" transparent="1" />
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>	
+
+	<!-- (OK) Initialize Devices -->
+	<screen name="NSetup" size="1280,720" title="Manual Installation" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="config" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<panel name="2Buttons" />
+		<widget name="canceltext" position="100,665" size="210,21" font="Regular;21" halign="left" valign="center" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="oktext"     position="340,665" size="210,21" font="Regular;21" halign="left" valign="center" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Download Red Special -->
+	<screen name="RAddonsDown" position="0,0" size="1280,720" title="Manual Installation" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget name="conn" position="60,580" size="720,45" font="Regular;20" halign="left" valign="center" foregroundColor="#dedede" backgroundColor="black" transparent="1" />
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>
+
+	<!-- (OK) Downloader -->
+	<screen name="teamredDownloader" title="teamRED Downloader" position="center,center" size="612,247" flags="wfNoBorder" >
+		<ePixmap position="0,0" zPosition="-1" size="612,247" pixmap="magnum32/menu/fr_download.png" />
+		<widget source="status" render="Label" position="10,10" size="590,100" font="Regular;20" halign="center" valign="center" foregroundColor="#ff5656" backgroundColor="black" transparent="1" zPosition="3"/>
+		<widget source="progressbar" render="Progress" position="20,132" size="570,21" zPosition="3" pixmap="magnum32/bars/br_scancl.png" transparent="1" />
+                <ePixmap position="20,132" zPosition="1" size="570,21" pixmap="magnum32/bars/br_scanbw.png" alphatest="blend" transparent="1" />
+		<widget source="fname" render="Label" position="10,180" size="590,40" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="3"/>
+	</screen>
+
+	<!-- (OK) Manage DTT Devices -->
+	<screen name="manageDttDevice" title="Dtt Devices Manager" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<panel name="1Buttons" />
+		<widget name="key_red" position="100,665" size="210,21" font="Regular;21" halign="left" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+	</screen>	
+
+	<!-- (OK) TeamRed Backup -->
+	<screen name="TeamREDBackup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent" title="Giga FULL backup">
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<widget name="config" position="60,90" size="763,90" scrollbarMode="showOnDemand" itemHeight="30" transparent="1" /> 
+		<widget name="description" render="Label" position="60,622" size="763,20" font="Regular;20" halign="left" valign="center" foregroundColor="#dedede" backgroundColor="black" transparent="1"/>
+		<panel name="1Buttons" />
+		<widget name="go" pixmap="skin_default/buttons/button_green.png" position="72,669" size="15,16" alphatest="on" zPosition="5" /> 
+		<widget name="gotext" render="Label" position="100,667" size="210,20" backgroundColor="black" transparent="1" font="Regular; 20"/>
+	</screen>
+
+	<!-- (OK) NetTV Manage -->
+	<screen name="TeamREDNETTV" position="0,0" size="1280,720" title="Manage NETTV iptv" flags="wfNoBorder" backgroundColor="transparent" >
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<widget name="config" position="60,90" size="763,150" scrollbarMode="showOnDemand" itemHeight="30" transparent="1" /> 
+		<widget name="activityslider" position="60,622" size="763,5" transparent="1"/>		
+		<panel name="1Buttons" />
+		<widget name="go" pixmap="skin_default/buttons/button_green.png" position="72,669" size="15,16" alphatest="on" zPosition="5" /> 
+		<widget name="gotext" render="Label" position="100,667" size="210,20" backgroundColor="black" transparent="1" font="Regular; 20"/>
+	</screen>	
+
+	<!-- (OK) MacChange -->
+	<screen name="redTeamMac" position="0,0" size="1280,720" title="MacAdress Changer" flags="wfNoBorder" backgroundColor="transparent">
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" shadowColor="black" shadowOffset="-1,-1" backgroundColor="black" />
+		<widget name="config" position="60,90" size="763,150" scrollbarMode="showOnDemand" itemHeight="30" transparent="1" /> 
+	</screen>
+
+	<!-- (OK) TeamRed Bouquets -->
+	<screen name="teamREDbouquets" title="teamRED bouquets" position="0,0" size="1280,720" flags="wfNoBorder">
+		<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+		<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" backgroundColor="black" />
+		<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+		<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+		<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget source="info" render="Label" position="60,622" size="763,30" font="Regular;20" halign="left" backgroundColor="black" foregroundColor="#dedede" transparent="1"/>
+		<panel name="2Buttons" />
+		<widget source="key_red" render="Label" position="100,665" size="210,22" font="Regular;21" halign="left" foregroundColor="white" zPosition="1" backgroundColor="black" transparent="1"/>
+		<widget source="key_green" render="Label" position="340,665" size="210,22" font="Regular;21" halign="left" foregroundColor="white" zPosition="1" backgroundColor="black" transparent="1"/>
+	</screen>
+
+        <!-- TeamRed Player -->
+        <screen name="Mainx" position="0,0" size="1280,720" title="temRED movie" backgroundColor="#333333" flags="wfNoBorder" >
+			<panel name="4Buttons" />
+			<ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/red_player.png" />
+			<widget source="Title" render="Label" zPosition="2" position="60,43" size="750,40" halign="center" font="Regular; 22" foregroundColor="white" transparent="1" backgroundColor="#333333" />
+			<ePixmap position="810,90" zPosition="4" size="15,480" pixmap="magnum32/bars/maxbar.png" alphatest="blend" transparent="1" />
+			<ePixmap position="810,570" zPosition="4" size="15,40" pixmap="magnum32/bars/endbar.png" alphatest="blend" transparent="1" />
+			<widget name="list" position="60,90" size="763,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+			<widget name="teamRED" position="60,46" size="765,510" font="Regular2;20" scrollbarMode="showOnDemand" itemHeight="30" foregroundColor="#ff5656" backgroundColor="#333333" transparent="1"/>
+			<widget name="load" position="60,600" size="565,54" font="Regular;21" halign="left" backgroundColor="black" transparent="1" zPosition="1" />
+			<widget name="naziv" position="60,231" size="530,40" font="Regular;25" halign="left" backgroundColor="transparent" transparent="1" />
+			<widget name="opis" position="60,667" size="530,260" font="Regular;21" scrollbarMode="showNever" backgroundColor="transparent" transparent="1" />
+			<widget name="uplo" position="60,939" size="530,30" font="Regular;23" halign="right" backgroundColor="transparent" transparent="1" />
+			<widget name="myMenu" position="60,90" size="765,510" scrollbarMode="showOnDemand" itemHeight="30" transparent="1"/>
+			<widget name="text" position="60,220" size="765,400" font="Regular;20" backgroundColor="black" transparent="1" />    
+			<ePixmap position="935,305" size="250,450" pixmap="magnum32/teamred_player.png" zPosition="2" alphatest="blend" />
+			<widget name="picture" position="935,305" size="250,350" zPosition="7" alphatest="blend" />
+        </screen>
+ 
+
+        <!-- TeamRed PiP Panel -->
+        <screen name="TeamREDPiPMain" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder" title="">
+                <ePixmap position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/panel1.png" />
+                <ePixmap pixmap="magnum32/menu/ico_pip.png" position="320,200" size="250,350" zPosition="-1" alphatest="blend" />
+                <widget name="go" pixmap="magnum32/buttons/key_blue.png" position="60,102" size="35,25" alphatest="blend"/>
+                <widget name="gotext" render="Label" position="102,102" size="400,35" backgroundColor="#333333" transparent="1" font="Regular;21"/>
+        </screen>
+
+        <!-- (OK) teamRED Chat -->
+	<screen name="teamREDCH" position="0,0" size="1280,720" title="teamRED Chat" flags="wfNoBorder" backgroundColor="transparent" >
+        <ePixmap  position="0,0" zPosition="-1" size="1280,720" pixmap="magnum32/menu/teamREDchat.png" />
+		<widget name="msgtext" position="372,531" size="773,472" itemHeight="25" backgroundColor="#333333" transparent="1"/>
+		<widget name="chat" position="372,51" size="770,472" transparent="1" backgroundColor="#333333" font="Regular;17" />
+		<widget name="onlu" position="72,51" size="254,504" scrollbarMode="showOnDemand" backgroundColor="background" selectionPixmap="/usr/share/enigma2/magnum32/bars/slider25x775.png" transparent="1" /> 
+		<widget name="key_red" position="100,662" size="210,22" font="Regular;21" halign="left" foregroundColor="white" zPosition="1" backgroundColor="#333333" transparent="1"/>
+		<widget name="key_green" position="340,662" size="210,22" font="Regular;21" halign="left" foregroundColor="white" zPosition="1" backgroundColor="#333333" transparent="1"/>
+        <widget name="key_yellow" position="580,662" size="210,22" font="Regular;21" halign="left" foregroundColor="white" zPosition="1" backgroundColor="#333333" transparent="1" />
+		<widget name="key_blue" position="820,662" size="210,22" font="Regular;21" halign="left" foregroundColor="white" zPosition="1" backgroundColor="#333333" transparent="1" />
+		<widget name="vk" position="1070,662" size="210,22" font="Regular;21" halign="left" foregroundColor="white" zPosition="1" backgroundColor="#333333" transparent="1"/> 		
+	</screen>
+
+	<screen name="teamredConsoleL" position="center,center" size="800,490" backgroundColor="transparent">
+		<widget name="text" position="10,5" size="780,480" font="Console;23" halign="center" transparent="1" backgroundColor="#11404040" scrollbarMode="showAlways"/>
+
+		<eLabel text="Panel 3" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="#11404040" transparent="1" />
+ 
+        </screen>
+        
+
+	<!-- 	EPG Control Center-->
+	<screen name="teamredEpgPanel" position="center,center" size="800,490">
+		<widget name="list" position="10,5" size="780,440" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<ePixmap position="294,459" size="15,15" pixmap="skin_default/buttons/button_red.png" alphatest="blend"/>
+		<widget name="key_red" position="318,457" size="214,22" font="Regular;21" halign="center" valign="center" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+
+		<eLabel text="Panel 6" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>	
+
+	<screen name="HDDInfo" position="center,center" size="800,490">
+		<widget name="list" position="10,5" size="780,440" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<ePixmap position="294,459" size="15,15" pixmap="skin_default/buttons/button_red.png" alphatest="blend"/>
+		<widget name="key_red" position="318,457" size="214,22" font="Regular;21" halign="center" valign="center" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+
+
+		<eLabel text="Panel 13" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>		
+
+	<screen name="HDDSetup" position="center,center" size="800,490">
+		<widget name="config" position="10,5" size="780,400" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget name="conn" position="10,407" size="780,45" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="blue"/>
+		<ePixmap position="150,459" size="15,15" pixmap="skin_default/buttons/button_red.png" alphatest="blend"/>
+		<ePixmap position="428,459" size="15,15" pixmap="skin_default/buttons/button_green.png" alphatest="blend"/>
+		<widget name="canceltext" position="175,457" size="214,22" font="Regular;21" halign="center" valign="center" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="oktext" position="451,457" size="214,22" font="Regular;21" halign="center" valign="center" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+
+		<eLabel text="Panel 16" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+
+	</screen>
+
+	<screen name="CFSetup" position="center,center" size="800,490">
+		<widget name="list" position="10,5" size="780,440" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<ePixmap position="294,459" size="15,15" pixmap="skin_default/buttons/button_red.png" alphatest="blend"/>
+		<widget name="key_red" position="318,457" size="214,22" font="Regular;21" halign="center" valign="center" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+
+
+		<eLabel text="Panel 15" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>		
+
+
+	<screen name="deleteLog" position="center,center" size="800,490">
+		<widget name="config" position="10,5" size="780,400" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<widget name="conn" position="10,407" size="780,45" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="blue"/>
+		<ePixmap position="150,459" size="15,15" pixmap="skin_default/buttons/button_red.png" alphatest="blend"/>
+		<ePixmap position="428,459" size="15,15" pixmap="skin_default/buttons/button_green.png" alphatest="blend"/>
+		<widget name="canceltext" position="175,457" size="214,22" font="Regular;21" halign="center" valign="center" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+		<widget name="oktext" position="451,457" size="214,22" font="Regular;21" halign="center" valign="center" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+
+		<eLabel text="Panel 25" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>
+
+	<!-- EpgSearch -->
+	<screen name="NEpgSearch" position="center,center" size="800,490">
+		<widget name="list" position="10,5" size="780,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+
+		<eLabel text="Panel 31" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>
+
+	<!-- EpgSearchLast -->
+	<screen name="NEpgSearchLast" position="center,center" size="800,490">
+		<widget name="list" position="10,5" size="780,440" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/>
+		<ePixmap position="294,459" size="15,15" pixmap="skin_default/buttons/button_red.png" alphatest="blend"/>
+		<widget name="key_red" position="318,457" size="214,22" font="Regular;21" halign="center" valign="center" backgroundColor="black" foregroundColor="white" zPosition="1" transparent="1"/>
+
+		<eLabel text="Panel 32" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>
+
+	<!-- InputBox -->	
+	<screen name="InputBox" position="center,center" size="800,100">
+		<widget name="text" position="10,5" size="780,30" font="Regular;23"/>
+		<widget name="input" position="10,55" size="780,25" font="Regular;20"/>
+
+		<eLabel text="Panel 33" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>
+
+
+	<!-- GRTutil -->	
+	<screen name="TeamREDutil" position="center,center" size="800,490">
+		<widget name="menulist" position="10,5" size="780,480" scrollbarMode="showAlways" enableWrapAround="1" transparent="1"/> 
+
+		<eLabel text="Panel 35" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>
+
+	<screen name="readTeamgo" position="80,40" size="620,40" title="Backup in progress" flags="wfNoBorder" backgroundColor="transparent" transparent="0">
+		<widget name="activityslider" position="0,0" size="550,5" transparent="1"/>
+		<widget name="description" render="Label" position="10,10" size="580,20" font="Regular;18" halign="left" valign="center" backgroundColor="transparent" shadowColor="black" shadowOffset="-2,-2"/>
+
+		<eLabel text="Panel 38" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>
+
+	<screen name="TeamREDSwap" position="center,center" size="620,120" title="Manage Swap File">
+		<widget name="config" position="20,20" size="580,80" scrollbarMode="showOnDemand"/> 
+		<widget name="go" pixmap="skin_default/buttons/button_green.png" position="20,100" size="15,16" alphatest="on"/> 
+		<widget name="gotext" render="Label" position="40,98" size="97,20" backgroundColor="#25062748" transparent="1" font="Regular; 18"/>
+		<widget name="activityslider" position="100,105" size="500,5" transparent="1"/>		
+
+		<eLabel text="Panel 39" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>
+
+	<!-- menus-->
+	<screen name="GRTMenuSummary" position="fill">
+		<widget source="SetupTitle" render="Label" position="top" size="*,36" font="FdLcD;34" halign="center" valign="top" noWrap="1"/>
+		<widget source="menulcd" render="Label" position="top" size="*,100" font="FdLcD;26" halign="left" valign="center"/>
+
+		<eLabel text="Panel 41" position="60,100" size="800,50" font="Regular;40" foregroundColor="red" backgroundColor="black" transparent="1" />
+
+	</screen>
+</skin>
