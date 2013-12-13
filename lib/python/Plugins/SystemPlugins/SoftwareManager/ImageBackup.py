@@ -731,7 +731,7 @@ class ImageBackup(Screen):
 	def imageInfo(self):
 		AboutText = _("Full Image Backup ")
 		AboutText += _("By openATV Image Team") + "\n"
-		AboutText += _("Support at") + " www.et-view-support.com\n\n"
+		AboutText += _("Support at") + " www.xtrend-alliance.com\n\n"
 		AboutText += _("[Image Info]\n")
 		AboutText += _("Model: %s %s\n") % (getMachineBrand(), getMachineName())
 		AboutText += _("Backup Date: %s\n") % strftime("%Y-%m-%d", localtime(self.START))
