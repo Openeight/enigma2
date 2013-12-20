@@ -128,7 +128,7 @@ boxversion = getBoxType()
 machinename = getMachineName()
 machinebrand = getMachineBrand()
 
-EXTRAS_Panel_Version = 'eXTrAs-Panel V1.0'
+EXTRAS_Panel_Version = 'XTA Panel V1.0'
 print "[eXTrAs-Panel] machinebrand: %s"  % (machinebrand)
 print "[eXTrAs-Panel] machinename: %s"  % (machinename)
 print "[eXTrAs-Panel] boxversion: %s"  % (boxversion)
@@ -204,13 +204,13 @@ def Plugins(**kwargs):
 	return [
 
 	#// show Extraspanel in Main Menu
-	PluginDescriptor(name="eXTrAs Panel", description="eXTrAs panel GUI 12/11/2012", where = PluginDescriptor.WHERE_MENU, fnc = Apanel),
+#	PluginDescriptor(name="eXTrAs Panel", description="eXTrAs panel GUI 12/11/2012", where = PluginDescriptor.WHERE_MENU, fnc = Apanel),
 	#// autostart
 	PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART],fnc = camstart),
 	#// SwapAutostart
 	PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART],fnc = SwapAutostart),
 	#// show Extraspanel in EXTENSIONS Menu
-	PluginDescriptor(name="eXTrAs Panel", description="eXTrAs panel GUI 12/11/2012", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main) ]
+	PluginDescriptor(name="XTA Panel", description="XTA panel GUI 12/11/2012", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main) ]
 
 
 
@@ -311,11 +311,11 @@ class Extraspanel(Screen, InfoBarPiP):
 
 		self.Mlist = []
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('BackupFlashManager'), _("Backup/Flash"), ('BackupFlashManager'))))
-		if Check_Softcam():
-			self.Mlist.append(MenuEntryItem((InfoEntryComponent('CamSetup'), _("CamSetup"), ('CamSetup'))))
+#		if Check_Softcam():
+#			self.Mlist.append(MenuEntryItem((InfoEntryComponent('CamSetup'), _("CamSetup"), ('CamSetup'))))
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('SoftwareManager'), _("Image update"), ('software-update'))))
-		self.Mlist.append(MenuEntryItem((InfoEntryComponent('KeymapSel'), _("Keymap Selection"), 'KeymapSel')))	
-		self.Mlist.append(MenuEntryItem((InfoEntryComponent('Plugins'), _("Plugins"), 'Plugins')))
+#		self.Mlist.append(MenuEntryItem((InfoEntryComponent('KeymapSel'), _("Keymap Selection"), 'KeymapSel')))	
+		self.Mlist.append(MenuEntryItem((InfoEntryComponent('ImageTools'), _("Image Tools"), 'ImageTools')))
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('Infos'), _("Infos"), 'Infos')))
 		self.onChangedEntry = []
 		if (getDesktop(0).size().width() == 1280):
@@ -336,7 +336,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		item = self.getCurrentEntry()
 
 	def setWindowTitle(self):
-		self.setTitle(_("eXTrAs Panel"))
+		self.setTitle(_("XTA Panel"))
 
 	def up(self):
 		#self["Mlist"].up()
@@ -423,7 +423,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		elif menu == "CamSetup":
 			self.session.open(Sc.ScNewSelection)
 
-		elif menu == "Plugins":
+		elif menu == "ImageTools":
 			self.Plugins()
 		elif menu == "Pluginbrowser":
 			self.session.open(PluginBrowser)
@@ -495,10 +495,11 @@ class Extraspanel(Screen, InfoBarPiP):
 		#// Create Plugin Menu
 		global menu
 		menu = 1
-		self["label1"].setText(_("Plugins"))
+		self["label1"].setText(_("Image Tools"))
 		self.tlist = []
 		self.oldmlist = []
 		self.oldmlist = self.Mlist
+                self.tlist.append(MenuEntryItem((InfoEntryComponent('KeymapSel'), _("Keymap Selection"), 'KeymapSel')))	
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('MountManager'), _("MountManager"), 'MountManager')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('CronManager'), _("CronManager"), 'CronManager')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('JobManager'), _("JobManager"), 'JobManager')))
@@ -1270,4 +1271,8 @@ class Info(Screen):
 		except:
 			o = ''
 			return o
+
+
+
+
 

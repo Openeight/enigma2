@@ -13,6 +13,7 @@ import time
 
 def InitUsageConfig():
 	config.usage = ConfigSubsection();
+	config.usage.mainmenu_mode = ConfigSelection(default = "horz", choices = [("horz", _("Horizontal")), ("vert", _("Vertical"))])  
 	config.usage.showdish = ConfigYesNo(default = True)
 	config.usage.multibouquet = ConfigYesNo(default = True)
 
@@ -519,3 +520,4 @@ def preferredInstantRecordPath():
 
 def defaultMoviePath():
 	return defaultRecordingLocation(config.usage.default_path.value)
+
