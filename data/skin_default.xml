@@ -58,7 +58,42 @@
 	<!-- Screwed Stone II skin (skin_default.xml) /Nemesis -->
 
 	<include filename="xta/skin_listchannel.xml" />
+	<!-- Iconmain screen -->
+  <screen name="Iconmain" position="center,center" size="1280,720" title="Mainmenu" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="title" position="423,520" size="400,50" zPosition="3" halign="center" foregroundColor="white" backgroundColor="white" font="Regular;40" transparent="1" />
+    <ePixmap position="center,605" zPosition="1" size="1280,125" pixmap="skin_default/menu/main.png" alphatest="blend" transparent="1" />
+    <widget name="pointer" position="610,610" size="100,150" zPosition="2" alphatest="on" />
+    <widget source="label1" render="Label" position="100,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="white" backgroundColor="white" transparent="1" />
+    <widget source="label1s" render="Label" position="100,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#00bab329" backgroundColor="#00bab329" transparent="1" />
+    <widget name="pixmap1" position="100,570" size="170,85" zPosition="1" transparent="1" alphatest="on" />
+    <widget source="label2" render="Label" position="280,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="white" backgroundColor="white" transparent="1" />
+    <widget source="label2s" render="Label" position="280,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#00bab329" backgroundColor="#00bab329" transparent="1" />
+    <widget name="pixmap2" position="280,570" size="170,85" zPosition="1" transparent="1" alphatest="on" />
+    <widget source="label3" render="Label" position="460,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="white" backgroundColor="white" transparent="1" />
+    <widget source="label3s" render="Label" position="460,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#00bab329" backgroundColor="#00bab329" transparent="1" />
+    <widget name="pixmap3" position="460,570" size="170,85" zPosition="1" transparent="1" alphatest="on" />
+    <widget source="label4" render="Label" position="640,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="white" backgroundColor="white" transparent="1" />
+    <widget source="label4s" render="Label" position="640,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#00bab329" backgroundColor="#00bab329" transparent="1" />
+    <widget name="pixmap4" position="640,570" size="170,85" zPosition="1" transparent="1" alphatest="on" />
+    <widget source="label5" render="Label" position="820,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="white" backgroundColor="white" transparent="1" />
+    <widget source="label5s" render="Label" position="820,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#00bab329" backgroundColor="#00bab329" transparent="1" />
+    <widget name="pixmap5" position="820,570" size="170,85" zPosition="1" transparent="1" alphatest="on" />
+    <widget source="label6" render="Label" position="1000,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="white" backgroundColor="white" transparent="1" />
+    <widget source="label6s" render="Label" position="1000,625" size="170,85" font="Regular;22" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#00bab329" backgroundColor="#00bab329" transparent="1" />
+    <widget name="pixmap6" position="1000,570" size="170,85" zPosition="1" transparent="1" alphatest="on" />
+    </screen>
+  <!--end of iconmain-->
+	<!-- Settings screen -->
+		<screen name="Settings" position="center,center" size="800,500" title=" " >
+			<!--widget name="text" position="0,0" size="550,25" font="Regular;20" /-->
+			<widget name="list" position="50,300" size="500,100" scrollbarMode="showOnDemand" />
+			<!--widget name="pixmap" position="200,0" size="190,250" /-->
+			<!--eLabel position="70,100" zPosition="-1" size="100,69" backgroundColor="#222222" /-->
+			<widget name="info" position="50,50" zPosition="4" size="500,250" font="Regular;22" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
+                        <!--widget name="KEY_HELP" position="75,350" size="80,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /-->
 
+		</screen>"""
+		
 	<!-- About screen -->
 	<screen name="About" position="center,center" size="420,350" title="About">
 		<widget source="EnigmaVersion" render="Label" position="10,10" size="380,20" font="Regular;20" />
@@ -1257,3 +1292,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		<widget name="filelist" position="5,50" size="510,370" scrollbarMode="showOnDemand" />
 	</screen>
 </skin>
+
+
+
+
