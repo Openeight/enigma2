@@ -1741,8 +1741,20 @@ class InfoBarExtensions:
 
 		self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions",
 			{
-				"extensions": (self.showExtensionSelection, _("Show extensions...")),
+				"extensions": (self.showExtensionSelection, _("view extensions...")),
+                "Extraspanel": (self.ct, _("open Extraspanel...")),
+
 			}, 1) # lower priority
+        def ct(self):
+                try:
+                        pluginlist = []
+                        pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSMENU)
+                        for plugin in pluginlist:
+                                if "XTA Panel" in str(plugin.name):
+                                        plugin(session=self.session)
+                except:
+                        return
+
 
 	def addExtension(self, extension, key = None, type = EXTENSION_SINGLE):
 		self.list.append((type, extension, key))
@@ -2980,3 +2992,6 @@ class InfoBarPowersaver:
 		elif not Screens.Standby.inStandby:
 			print "[InfoBarPowersaver] goto standby"
 			self.session.open(Screens.Standby.Standby)
+
+
+
