@@ -58,7 +58,9 @@ def CreateFeedConfig():
 	f = open(fileconf, "w")
 	f.write(feedurl)
 	f.close()
-	os.system("ipkg update")
+	container = eConsoleAppContainer()
+	container.execute('ipkg update')
+	del container
 
 class PluginBrowserSummary(Screen):
 	def __init__(self, session, parent):
