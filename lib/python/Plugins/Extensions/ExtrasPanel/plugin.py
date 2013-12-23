@@ -250,8 +250,8 @@ class PanelList(MenuList):
 
 def MenuEntryItem(entry):
 	res = [entry]
-	res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 5), size=(100, 40), png=entry[0]))  # png vorn
-	res.append(MultiContentEntryText(pos=(110, 10), size=(440, 40), font=0, text=entry[1]))  # menupunkt
+	#res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 5), size=(100, 40), png=entry[0]))  # png vorn
+	res.append(MultiContentEntryText(pos=(68, 10), size=(440, 40), font=0, text=entry[1]))  # menupunkt
 	return res
 ###################  Max Test ###################
 
@@ -310,9 +310,9 @@ class Extraspanel(Screen, InfoBarPiP):
 		self["label1"] = Label(EXTRAS_Panel_Version)
 
 		self.Mlist = []
-		self.Mlist.append(MenuEntryItem((InfoEntryComponent('CamSetup'), _("CamSetup"), ('CamSetup'))))
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('BackupFlashManager'), _("Backup/Flash"), ('BackupFlashManager'))))
 #		if Check_Softcam():
+		self.Mlist.append(MenuEntryItem((InfoEntryComponent('CamSetup'), _("CamSetup"), ('CamSetup'))))
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('SoftwareManager'), _("Image update"), ('software-update'))))
 #		self.Mlist.append(MenuEntryItem((InfoEntryComponent('KeymapSel'), _("Keymap Selection"), 'KeymapSel')))	
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('ImageTools'), _("Image Tools"), 'ImageTools')))
