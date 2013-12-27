@@ -499,14 +499,14 @@ class IconMain(Screen):
 
                         if "AutoBouquetsMaker" in name:
                                 name = "AutoBouquets\nMakerProvider" 
-                        if len(name) > 11:
+                        if len(name) > 14:
                             if ("-" in name) or ("/" in name) or (" " in name):
                                 name = name.replace("-", "\n-")
                                 name = name.replace(" /", "/")
                                 name = name.replace("/ ", "/")
                                 name = name.replace(" ", "\n")
                             else:
-                                name = name[:12] + "\n-" + name[12:]    
+                                name = name[:14] + "\n-" + name[12:]    
                         if "A/V" not in name:
                                 name = name.replace("/", "\n")
                  	if j == (self.index + 1):
@@ -660,33 +660,6 @@ class MainMenu(Menu):
 #		self.skinName = "Menu"
 #                self.skinName = "Iconmain"
 		Menu.__init__(self, *x)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
