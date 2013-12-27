@@ -181,13 +181,12 @@ class OpenXtaThread(Screen):
 
 			bereich = sub('<a itemprop="url" id=".*?" href="(.*?)"', '<link>\g<1></link>', bereich)
 
-			bereich = bereich.decode('latin1').encode('utf-8')
 			bereich = transHTML(bereich)
 			if search('<a href=\'\#\'>Page 1 of [0-9]+ <!--<img', output) is not None:
 				page = search('Page 1 of ([0-9]+) <!--<img', output)
 				self.maxcount = int(page.group(1))
 			title = search('<title>(.*?)</title>', output)
-			title = title.group(1).decode('latin1').encode('utf-8')
+			title = title.group(1)
 			title = transHTML(title)
 			title = title + ' | Seite ' + str(self.count) + ' von ' + str(self.maxcount)
 			self.threadtitle = title
@@ -196,7 +195,6 @@ class OpenXtaThread(Screen):
 			startpos = find(output, '<!-- ::: CONTENT ::: -->')
 			endpos = find(output, '</table>')
 			bereich = output[startpos:endpos]
-			bereich = bereich.decode('latin1').encode('utf-8')
 			bereich = transHTML(bereich)
 
 			bereich = sub('<td class=\'col_f_icon short altrow\'>', '<logo>thread_old-30</logo>', bereich)
@@ -308,10 +306,9 @@ class OpenXtaThread(Screen):
 		startpos = find(output, '<div class="tcatBar clear clearfix">')
 		endpos = find(output, '<!-- Close topic -->')
 		bereich = output[startpos:endpos]
-		bereich = bereich.decode('latin1').encode('utf-8')
 		bereich = transHTML(bereich)
 		title = search('<title>(.*?)</title>', output)
-		title = title.group(1).decode('latin1').encode('utf-8')
+		title = title.group(1)
 		title = transHTML(title)
 		if self.xd == True:
 			title = title[0:40] + '... | Seite ' + str(self.postcount) + ' von ' + str(self.maxpostcount)
@@ -854,10 +851,9 @@ class OpenXtaMain(Screen):
 		else:
 			endpos1 = find(output, '<div class=\'ipsSideBlock')
 			bereich = output[startpos1:endpos1]
-			bereich = bereich.decode('latin1').encode('utf-8')
 			bereich = transHTML(bereich)
-			titel = re.findall('<td class=\'col_c_forum\'>\s*?<h4>\s*?<a href=".*?" title=\'(.*?)\'', bereich)
-			post = re.findall('<ul class=\'last_post ipsType_small\'>\s*?<li>\s*?<a href=\'.*?\' title=\'(.*?)\'', bereich)
+			titel = re.findall('<td class=\'col_c_forum\'>\s*?<h4>\s*?<a href=".*?" title=\'.*?\'>(.*?)</a>', bereich)
+			post = re.findall('<ul class=\'last_post ipsType_small\'>\s*?<li>\s*?<a href=\'.*?\' title=\'.*?\'>(.*?)</a>', bereich)
 			date = re.findall('title=\'View last post\'>(.*?)</a>', bereich)
 			user = re.findall('<li>By \n\t(.*?)\s*?</li>', bereich)
 			link = re.findall('<td class=\'col_c_forum\'>\s*?<h4>\s*?<a href="(.*?)" title=', bereich)
