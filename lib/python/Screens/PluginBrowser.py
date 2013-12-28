@@ -294,6 +294,7 @@ class PluginDownloadBrowser(Screen):
 			plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 		if self.reload_settings:
 			self["text"].setText(_("Reloading bouquets and services..."))
+			self["text"].show()
 			eDVBDB.getInstance().reloadBouquets()
 			eDVBDB.getInstance().reloadServicelist()
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
@@ -457,9 +458,11 @@ class PluginDownloadBrowser(Screen):
 			if len(self.pluginlist) > 0:
 				self.updateList()
 				self["list"].instance.show()
+				self["text"].hide()
 			else:
 				if self.type == self.DOWNLOAD:
 					self["text"].setText(_("Sorry feeds are down for maintenance"))
+					self["text"].show()
 
 	def dataAvail(self, str):
 		if self.type == self.DOWNLOAD and str.find('404 Not Found') >= 0:
