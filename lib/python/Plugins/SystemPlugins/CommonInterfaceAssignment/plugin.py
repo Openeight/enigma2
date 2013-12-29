@@ -12,7 +12,7 @@ from ServiceReference import ServiceReference
 from Plugins.Plugin import PluginDescriptor
 from xml.etree.cElementTree import parse as ci_parse
 from Tools.XMLTools import elementsWithTag, mergeText, stringToXML
-from enigma import eDVBCI_UI, eDVBCIInterfaces, eEnv
+from enigma import eDVBCI_UI, eDVBCIInterfaces, eEnv, getMachineBrand, getMachineName
 
 from os import system, path as os_path
 
@@ -51,13 +51,16 @@ class CIselectMainMenu(Screen):
 		if NUM_CI > 0:
 			for slot in range(NUM_CI):
 				state = eDVBCI_UI.getInstance().getState(slot)
-				if state == 0:
-					appname = _("Slot %d") %(slot+1) + " - " + _("no module found")
-				elif state == 1:	
-					appname = _("Slot %d") %(slot+1) + " - " + _("init modules")
-				elif state == 2:
-					appname = _("Slot %d") %(slot+1) + " - " + eDVBCI_UI.getInstance().getAppName(slot)
-				self.list.append( (appname, ConfigNothing(), 0, slot) )
+				if state != -1:
+					if state == 0:
+						appname = _("Slot %d") %(slot+1) + " - " + _("no module found")
+					elif state == 1:
+						appname = _("Slot %d") %(slot+1) + " - " + _("init modules")
+					elif state == 2:
+						appname = _("Slot %d") %(slot+1) + " - " + eDVBCI_UI.getInstance().getAppName(slot)
+					self.list.append( (appname, ConfigNothing(), 0, slot) )
+				else:
+					self.list.append( (_("Slot %d") %(slot+1) + " - " + _("no module found") , ConfigNothing(), 1, -1) )
 		else:
 			self.list.append( (_("no CI slots found") , ConfigNothing(), 1, -1) )
 
@@ -76,7 +79,7 @@ class CIselectMainMenu(Screen):
 			action = cur[2]
 			slot = cur[3]
 			if action == 1:
-				print "[CI_Wizzard] there is no CI Slot in your receiver"
+				print "[CI_Wizzard] there is no CI Slot in your %s %s" % (getMachineBrand(), getMachineName())
 			else:
 				print "[CI_Wizzard] selected CI Slot : %d" % slot
 				if config.usage.setup_level.index > 1: # advanced
@@ -236,7 +239,7 @@ class CIconfigMenu(Screen):
 
 	def saveXML(self):
 		try:
-			fp = file(self.filename, 'w')
+			fp = open(self.filename, 'w')
 			fp.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n")
 			fp.write("<ci>\n")
 			fp.write("\t<slot>\n")
@@ -266,12 +269,15 @@ class CIconfigMenu(Screen):
 			Len = len(definitions)
 			return Len > 0 and definitions[Len-1].text or default
 
+		self.read_services=[]
+		self.read_providers=[]
+		self.usingcaid=[]
+		self.ci_config=[]
+
 		try:
-			tree = ci_parse(self.filename).getroot()
-			self.read_services=[]
-			self.read_providers=[]
-			self.usingcaid=[]
-			self.ci_config=[]
+			fp = open(self.filename, 'r')
+			tree = ci_parse(fp).getroot()
+			fp.close()
 			for slot in tree.findall("slot"):
 				read_slot = getValue(slot.findall("id"), False).encode("UTF-8")
 				print "ci " + read_slot
@@ -326,6 +332,7 @@ class easyCIconfigMenu(CIconfigMenu):
 		</screen>"""
 
 	def __init__(self, session, ci_slot="9"):
+		Screen.setTitle(self, _("CI assignment"))
 
 		ci=ci_slot
 		CIconfigMenu.__init__(self, session, ci_slot)
@@ -370,8 +377,8 @@ class CAidSelect(Screen):
 
 		self["actions"] = ActionMap(["ColorActions","SetupActions"],
 		{
-			"ok": self.list.toggleSelection, 
-			"cancel": self.cancel, 
+			"ok": self.list.toggleSelection,
+			"cancel": self.cancel,
 			"green": self.greenPressed,
 			"red": self.cancel
 		}, -1)
@@ -564,7 +571,7 @@ def activate_all(session):
 			ret = ""
 			# How many definitions are present
 			Len = len(definitions)
-			return Len > 0 and definitions[Len-1].text or default	
+			return Len > 0 and definitions[Len-1].text or default
 
 		for ci in range(NUM_CI):
 			filename = eEnv.resolve("${sysconfdir}/enigma2/ci") + str(ci) + ".xml"
@@ -573,7 +580,12 @@ def activate_all(session):
 				print "[CI_Activate_Config_CI%d] no config file found" %ci
 
 			try:
-				tree = ci_parse(filename).getroot()
+				if not os_path.exists(self.filename):
+					return
+
+				fp = open(filename, 'r')
+				tree = ci_parse(fp).getroot()
+				fp.close()
 				read_services=[]
 				read_providers=[]
 				usingcaid=[]
@@ -614,6 +626,16 @@ def find_in_list(list, search, listpos=0):
 
 global_session = None
 
+def isModule():
+	if eDVBCIInterfaces.getInstance().getNumOfSlots():
+		NUM_CI=eDVBCIInterfaces.getInstance().getNumOfSlots()
+		if NUM_CI > 0:
+			for slot in range(NUM_CI):
+				state = eDVBCI_UI.getInstance().getState(slot)
+				if state > 0:
+					return True
+	return False
+
 def sessionstart(reason, session):
 	global global_session
 	global_session = session
@@ -630,8 +652,8 @@ def main(session, **kwargs):
 	session.open(CIselectMainMenu)
 
 def menu(menuid, **kwargs):
-	if menuid == "setup" and eDVBCIInterfaces.getInstance().getNumOfSlots():
-		return [(_("Common Interface assignment"), main, "ci_assign", 11)]
+	if menuid == "setup" and isModule():
+		return [(_("Common Interface Assignment"), main, "ci_assign", 11)]
 	return [ ]
 
 def Plugins(**kwargs):
