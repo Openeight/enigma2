@@ -117,18 +117,18 @@ class SoftwarePanel(Screen):
 		currentTimeoutDefault = socket.getdefaulttimeout()
 		socket.setdefaulttimeout(3)
 		try:
-			urlopenATV = "http://ampel.mynonpublic.com/Ampel/index.php"
-			d = urlopen(urlopenATV)
+			urlOpenXta = "http://feed.openxta.com/status"
+			d = urlopen(urlOpenXta)
 			tmpStatus = d.read()
-			if 'rot.png' in tmpStatus:
+			if '2' in tmpStatus:
 				self['a_off'].hide()
 				self['a_red'].show()
 				self['feedstatusRED'].show()
-			elif 'gelb.png' in tmpStatus:
+			elif '1' in tmpStatus:
 				self['a_off'].hide()
 				self['a_yellow'].show()
 				self['feedstatusYELLOW'].show()
-			elif 'gruen.png' in tmpStatus:
+			elif '0' in tmpStatus:
 				self['a_off'].hide()
 				self['a_green'].show()
 				self['feedstatusGREEN'].show()
