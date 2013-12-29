@@ -6,6 +6,7 @@ from Components.NimManager import nimmanager
 from Components.About import about
 from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
+import re
 
 from Tools.StbHardware import getFPVersion
 from enigma import eTimer
@@ -139,19 +140,20 @@ class CommitInfo(Screen):
 		self.Timer.start(50, True)
 
 	def readCommitLogs(self):
-		url = 'http://sourceforge.net/p/openpli/mailman/openpli-git-commits/'
+		url = 'http://github.com/XTAv2/Enigma2/commits/master'
 		commitlog = ""
 		try:
 			import urllib2
-			for x in  "".join(urllib2.urlopen(url, timeout=5).read().split('<td class="email-body">')[1:]).split('<pre>'):
-				for y in x.split('Commit diffs:')[0].replace('New commits:','').strip().split('\n'):
-					y = y.strip()
-					if y or commitlog:
-						if y.startswith('Author:') or y.startswith('Signed-off-by:'):
-							commitlog += y.split('&lt;')[0]
-						else:
-							commitlog += y
-						commitlog += "\n"
+			for x in  "".join(urllib2.urlopen(url, timeout=5).read().split('<li class="commit commit-group-item js-navigation-item js-details-container">')[1:]).split('<p class="commit-title  js-pjax-commit-title">'):
+				title = re.findall('class="message" data-pjax="true" title="(.*?)"', x, re.DOTALL)
+				author = re.findall('rel="author">(.*?)</', x)
+				date   = re.findall('<time class="js-relative-date" datetime=".*?" title="(.*?)">', x)
+				for t in title:
+					commitlog += t.strip().replace('&amp;', '&').replace('&quot;', '"').replace('&lt;', '\xc2\xab').replace('&gt;', '\xc2\xbb') + "\n"
+				for a in author:
+					commitlog += "Author: " + a.strip().replace('&lt;', '\xc2\xab').replace('&gt;', '\xc2\xbb') + "\n"
+				for d in date:
+					commitlog += d.strip() + "\n"
 				commitlog += 140*'-' + "\n"
 		except:
 			commitlog = _("Currently the commit log cannot be retreived - please try later again")
