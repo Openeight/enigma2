@@ -1,5 +1,7 @@
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
+from Screens.About import CommitInfo
+from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
@@ -67,6 +69,7 @@ class SoftwarePanel(Screen):
 		self['key_green_pic'].hide()
 		self.update = False
 		self.packages = 0
+		self.trafficLight = 0
 		self.ipkg = IpkgComponent()
 		self.ipkg.addCallback(self.ipkgCallback)
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions", "SetupActions"],
@@ -74,6 +77,7 @@ class SoftwarePanel(Screen):
 			"cancel": self.Exit,
 			"green": self.Green,
 			"red": self.Exit,
+			"yellow": self.showCommitLog,
 		}, -2)
 
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -83,13 +87,34 @@ class SoftwarePanel(Screen):
 		self.close()
 
 	def Green(self):
-		if self.packages > 0:
+		if self.packages > 0 and self.trafficLight > 0:
+			if self.trafficLight == 1: # yellow
+				message = _("The current image might not be stable.\nFor more information see %s.") % ("www.xtrend-alliance.com")
+				picon = MessageBox.TYPE_WARNING
+			elif self.trafficLight == 2: # red
+				message = _("The current image is not stable.\nFor more information see %s.") % ("www.xtrend-alliance.com")
+				picon = MessageBox.TYPE_ERROR
+				self.session.open(MessageBox, message, type=MessageBox.TYPE_ERROR, picon=picon, timeout = 15, close_on_any_key=True)
+				return
+			elif self.trafficLight == 3: # unknown
+				message = _("The status of the current image could not be checked because %s can not be reached.") % ("www.xtrend-alliance.com")
+				picon = MessageBox.TYPE_ERROR
+			message += "\n" + _("Do you want to update your receiver?")
+			self.session.openWithCallback(self.startActualUpdate, MessageBox, message, default = False, picon = picon)
+		elif self.packages > 0:
+				self.startActualUpdate(True)
+
+	def showCommitLog(self):
+		self.session.open(CommitInfo)
+
+	def startActualUpdate(self, answer):
+		if answer:
 			from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin
 			self.session.open(UpdatePlugin)
 			self.close()
 
 	def layoutFinished(self):
-		self.checkTraficLight()
+		self.checkTrafficLight()
 		self.rebuildList()
 
 	def UpdatePackageNr(self):
@@ -104,8 +129,8 @@ class SoftwarePanel(Screen):
 			self['key_green'].show()
 			self['key_green_pic'].show()
 
-	def checkTraficLight(self):
-		print"checkTraficLight"
+	def checkTrafficLight(self):
+		print"checkTrafficLight"
 		from urllib import urlopen
 		import socket
 		self['a_red'].hide()
@@ -119,20 +144,21 @@ class SoftwarePanel(Screen):
 		try:
 			urlOpenXta = "http://feed.openxta.com/status"
 			d = urlopen(urlOpenXta)
-			tmpStatus = d.read()
-			if '2' in tmpStatus:
+			self.trafficLight = int(d.read())
+			if self.trafficLight == 2:
 				self['a_off'].hide()
 				self['a_red'].show()
 				self['feedstatusRED'].show()
-			elif '1' in tmpStatus:
+			elif self.trafficLight == 1:
 				self['a_off'].hide()
 				self['a_yellow'].show()
 				self['feedstatusYELLOW'].show()
-			elif '0' in tmpStatus:
+			elif self.trafficLight == 0:
 				self['a_off'].hide()
 				self['a_green'].show()
 				self['feedstatusGREEN'].show()
 		except:
+			self.trafficLight = 3
 			self['a_off'].show()
 		socket.setdefaulttimeout(currentTimeoutDefault)
 
@@ -184,7 +210,6 @@ class SoftwarePanel(Screen):
 	def buildPacketList(self):
 		self.list = []
 		fetchedList = self.ipkg.getFetchedList()
-#		excludeList = self.ipkg.getExcludeList()
 
 		if len(fetchedList) > 0:
 			for x in fetchedList:
@@ -192,13 +217,6 @@ class SoftwarePanel(Screen):
 					self.list.append(self.buildEntryComponent(x[0], x[1], x[2], "upgradeable"))
 				except:
 					print "[SOFTWAREPANEL] " + x[0] + " no valid architecture, ignoring !!"
-#					self.list.append(self.buildEntryComponent(x[0], '', 'no valid architecture, ignoring !!', "installable"))
-#			if len(excludeList) > 0:
-#				for x in excludeList:
-#					try:
-#						self.list.append(self.buildEntryComponent(x[0], x[1], x[2], "installable"))
-#					except:
-#						self.list.append(self.buildEntryComponent(x[0], '', 'no valid architecture, ignoring !!', "installable"))
 
 			self['list'].setList(self.list)
 
