@@ -6,6 +6,7 @@ from Components.NimManager import nimmanager
 from Components.About import about
 from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
+from Tools.Downloader import downloadWithProgress
 import re
 
 from Tools.StbHardware import getFPVersion
@@ -136,15 +137,21 @@ class CommitInfo(Screen):
 			})
 
 		self.Timer = eTimer()
-		self.Timer.callback.append(self.readCommitLogs)
+		self.Timer.callback.append(self.downloadWebSite)
 		self.Timer.start(50, True)
 
-	def readCommitLogs(self):
+	def downloadWebSite(self):
 		url = 'http://github.com/XTAv2/Enigma2/commits/master'
+		download = downloadWithProgress(url, '/tmp/.commits')
+		download.start().addCallback(self.download_finished).addErrback(self.download_failed)
+
+	def download_failed(self, failure_instance=None, error_message=""):
+		self["AboutScrollLabel"].setText(_("Currently the commit log cannot be retreived - please try later again"))
+
+	def download_finished(self, string=""):
 		commitlog = ""
 		try:
-			import urllib2
-			for x in  "".join(urllib2.urlopen(url, timeout=5).read().split('<li class="commit commit-group-item js-navigation-item js-details-container">')[1:]).split('<p class="commit-title  js-pjax-commit-title">'):
+			for x in  "".join(open('/tmp/.commits', 'r').read().split('<li class="commit commit-group-item js-navigation-item js-details-container">')[1:]).split('<p class="commit-title  js-pjax-commit-title">'):
 				title = re.findall('class="message" data-pjax="true" title="(.*?)"', x, re.DOTALL)
 				author = re.findall('rel="author">(.*?)</', x)
 				date   = re.findall('<time class="js-relative-date" datetime=".*?" title="(.*?)">', x)
