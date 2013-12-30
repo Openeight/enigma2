@@ -26,7 +26,9 @@ from Components.ActionMap import ActionMap
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
+from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
+from os import system, listdir, symlink, unlink, readlink, path as os_path, stat, mkdir, popen, makedirs, access, rename, remove, W_OK, R_OK, F_OK, chmod, walk, getcwd, chdir, statvfs
 from __init__ import _
 
 import os
@@ -50,7 +52,6 @@ config.plugins.extraspanel_yellowkey.list = ConfigSelection([('0',_("Audio Selec
 config.plugins.showextraspanelextensions = ConfigYesNo(default=False)
 config.plugins.extraspanel_frozencheck = ConfigSubsection()
 config.plugins.extraspanel_frozencheck.list = ConfigSelection([('0',_("Off")),('1',_("1 min.")), ('5',_("5 min.")),('10',_("10 min.")),('15',_("15 min.")),('30',_("30 min."))])
-	
 if os.path.isfile("/usr/lib/enigma2/python/Plugins/Extensions/MultiQuickButton/plugin.pyo") is True:
 	try:
 		from Plugins.Extensions.MultiQuickButton.plugin import *
@@ -419,9 +420,18 @@ class Extraspanel(Screen, InfoBarPiP):
 				self.session.open(MessageBox, _("Sorry no backups found!"), MessageBox.TYPE_INFO, timeout = 10)
 		elif menu == "backup-files":
 			self.session.openWithCallback(self.backupfiles_choosen,BackupSelection)
-
+		elif menu == "backuplocation":
+					parts = [ (r.description, r.mountpoint, self.session) for r in harddiskmanager.getMountedPartitions(onlyhotplug = False)]
+					for x in parts:
+						if not access(x[1], F_OK|R_OK|W_OK) or x[1] == '/':
+							parts.remove(x)
+					if len(parts):
+						self.session.openWithCallback(self.backuplocation_choosen, ChoiceBox, title = _("Please select medium to use as backup location"), list = parts)
+								
 		elif menu == "CamSetup":
 			self.session.open(Sc.ScNewSelection)
+		elif menu == "advancedrestore":
+					self.session.open(RestoreMenu, self.skin)	
 
 		elif menu == "ImageTools":
 			self.Plugins()
@@ -570,7 +580,9 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("SoftwareManager" ), _("Software update"), ("software-update"))))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupSettings" ), _("Backup Settings"), ("backup-settings"))))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("RestoreSettings" ), _("Restore Settings"), ("restore-settings"))))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent ("advancedrestore" ), _("Advanced Restore"), ("advancedrestore"))))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupFiles" ), _("Choose backup files"), ("backup-files"))))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent ("Backuplocation" ), _("Choose backup Location"), ("backuplocation"))))
 		self["Mlist"].moveToIndex(0)
 		self["Mlist"].l.setList(self.tlist)
 
@@ -586,7 +598,9 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("FlashOnline" ), _("Flash Image"), ("flash-image"))))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupSettings" ), _("Backup Settings"), ("backup-settings"))))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("RestoreSettings" ), _("Restore Settings"), ("restore-settings"))))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent ("advancedrestore" ), _("Advanced Restore"), ("advancedrestore"))))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupFiles" ), _("Choose backup files"), ("backup-files"))))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent ("Backuplocation" ), _("Choose backup Location"), ("backuplocation"))))
 		self["Mlist"].moveToIndex(0)
 		self["Mlist"].l.setList(self.tlist)
 
@@ -595,7 +609,28 @@ class Extraspanel(Screen, InfoBarPiP):
 		config.plugins.configurationbackup.backupdirs.save()
 		config.plugins.configurationbackup.save()
 		config.save()
-
+    
+	def backuplocation_choosen(self, option):
+		oldpath = config.plugins.configurationbackup.backuplocation.getValue()
+		if option is not None:
+			config.plugins.configurationbackup.backuplocation.value = str(option[1])
+		config.plugins.configurationbackup.backuplocation.save()
+		config.plugins.configurationbackup.save()
+		config.save()
+		newpath = config.plugins.configurationbackup.backuplocation.getValue()
+		if newpath != oldpath:
+			self.createBackupfolders()
+			
+	def createBackupfolders(self):
+		print "Creating backup folder if not already there..."
+		self.backuppath = getBackupPath()
+		try:
+			if (os_path.exists(self.backuppath) == False):
+				makedirs(self.backuppath)
+		except OSError:
+			self.session.open(MessageBox, _("Sorry, your backup destination is not writeable.\nPlease select a different one."), MessageBox.TYPE_INFO, timeout = 10)
+		
+			
 	def backupDone(self,retval = None):
 		if retval is True:
 			self.session.open(MessageBox, _("Backup done."), MessageBox.TYPE_INFO, timeout = 10)
