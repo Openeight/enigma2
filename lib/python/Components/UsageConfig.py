@@ -13,7 +13,7 @@ import time
 
 def InitUsageConfig():
 	config.usage = ConfigSubsection();
-	config.usage.mainmenu_mode = ConfigSelection(default = "horz", choices = [("horz", _("Horizontal")), ("vert", _("Vertical"))])  
+	config.usage.mainmenu_mode = ConfigSelection(default = "vert", choices = [("horz", _("Horizontal")), ("vert", _("Vertical"))])  
 	config.usage.showdish = ConfigYesNo(default = True)
 	config.usage.multibouquet = ConfigYesNo(default = True)
 
