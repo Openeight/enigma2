@@ -127,7 +127,7 @@ def SkinSelMain(session, **kwargs):
 	session.open(SkinSelector)
 
 def SkinSelSetup(menuid, **kwargs):
-	if menuid == "system":
+	if menuid == "none":
 		return [(_("Skin"), SkinSelMain, "skin_selector", None)]
 	else:
 		return []

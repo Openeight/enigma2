@@ -14,7 +14,6 @@
 		"exec"s code
 -->
 		<!--item level="0" text="Restore Settings" entryID="restore_settings"><screen module="Settings" screen="Settings" /></item-->
-		<item level="0" text="Skin Setup" entryID="skin_setup"><screen module="SkinSetup" screen="SkinSetup" /></item>
 		<item level="0" text="Timer" entryID="timer_edit"><screen module="TimerEdit" screen="TimerEditList" /></item>
 		<item level="1" text="VCR scart" entryID="scart_switch" configcondition="config.usage.show_vcr_scart" requires="ScartSwitch"><code>self.session.scart.VCRSbChanged(3)</code></item>
 
@@ -51,6 +50,7 @@
 					<item level="0" text="Convert ext3 filesystem to ext4" entryID="harddisk_convert" requires="ext4"><screen module="HarddiskSetup" screen="HarddiskConvertExt4Selection"/></item>
 				</menu>
 				<item level="0" text="Network" entryID="network_setup"><screen module="NetworkSetup" screen="NetworkAdapterSelection" /></item>
+                <item level="0" text="Skin Setup" entryID="skin_setup"><screen module="SkinSetup" screen="SkinSetup" /></item>
 				<item level="1" text="Input devices" entryID="input_device_setup"><screen module="InputDeviceSetup" screen="InputDeviceSelection" /></item>
 				<item requires="Display"><setup level="1" id="lcd" /></item>
 				<item text="Keyboard"><setup id="keyboard" /></item>
