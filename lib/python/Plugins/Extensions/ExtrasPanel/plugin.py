@@ -26,6 +26,7 @@ from Components.ActionMap import ActionMap
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
+from Addons import AddonsFileBrowser
 from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
 from os import system, listdir, symlink, unlink, readlink, path as os_path, stat, mkdir, popen, makedirs, access, rename, remove, W_OK, R_OK, F_OK, chmod, walk, getcwd, chdir, statvfs
@@ -63,6 +64,12 @@ if os.path.isfile("/usr/lib/enigma2/python/Plugins/PLi/SoftcamSetup/plugin.pyo")
 		from Plugins.PLi.SoftcamSetup import Sc
 	except:
 		pass
+		
+if os.path.isfile("/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager/plugin.pyo") is True:
+	try:
+		from Plugins.SystemPlugins.SoftwareManager.plugin import PacketManager
+	except:
+		pass		
 
 from Plugins.Extensions.ExtrasPanel.CronManager import *
 from Plugins.Extensions.ExtrasPanel.ScriptRunner import *
@@ -484,6 +491,10 @@ class Extraspanel(Screen, InfoBarPiP):
 			self.session.open(SoftwarePanel)
 		elif menu == "MultiQuickButton":
 			self.session.open(MultiQuickButton)
+		elif menu == "PacketManager":
+			self.session.open(PacketManager, self.skin)
+		elif menu == 'IPK-installManager':	
+			self.session.open(AddonsFileBrowser)
 		elif menu == "MountManager":
 			self.session.open(HddMount)
 		elif menu == "SundtekControlCenter":
@@ -509,12 +520,14 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.tlist = []
 		self.oldmlist = []
 		self.oldmlist = self.Mlist
-                self.tlist.append(MenuEntryItem((InfoEntryComponent('KeymapSel'), _("Keymap Selection"), 'KeymapSel')))	
+                self.tlist.append(MenuEntryItem((InfoEntryComponent('KeymapSel'), _("Keymap Selection"), 'KeymapSel')))			
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('MountManager'), _("MountManager"), 'MountManager')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('CronManager'), _("CronManager"), 'CronManager')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('JobManager'), _("JobManager"), 'JobManager')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('SwapManager'), _("SwapManager"), 'SwapManager')))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent('IPK-installManager'), _("IPK-installManager"), 'IPK-installManager')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('SundtekControlCenter'), _("SundtekControlCenter"), 'SundtekControlCenter')))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent('PacketManager'), _("PacketManager"), 'PacketManager')))		
 		if os.path.isfile("/usr/lib/enigma2/python/Plugins/Extensions/MultiQuickButton/plugin.pyo") is True:
 			self.tlist.append(MenuEntryItem((InfoEntryComponent('MultiQuickButton'), _("MultiQuickButton"), 'MultiQuickButton')))
 		self["Mlist"].moveToIndex(0)
@@ -540,7 +553,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		self["Mlist"].moveToIndex(0)
 		self["Mlist"].l.setList(self.tlist)
 		self.oldmlist1 = self.tlist
-
+	
 	def System(self):
 		#// Create System Menu
 		global menu
