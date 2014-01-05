@@ -40,7 +40,7 @@ from twisted.internet import reactor
 
 from ImageBackup import ImageBackup
 from RestoreWizard import backupAvailable, RestoreWizard
-from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
+from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, getBackupPath, getBackupFilename
 from SoftwareTools import iSoftwareTools
 from Flash_online import FlashOnline
 
@@ -146,7 +146,6 @@ class UpdatePluginMenu(Screen):
 			print "building menu entries"
 			self.list.append(("install-extensions", _("Manage extensions"), _("\nManage extensions or plugins for your receiver" ) + self.oktext, None))
 			self.list.append(("software-update", _("Software update"), _("\nOnline update of your receiver software." ) + self.oktext, None))
-			self.list.append(("software-restore", _("Software restore"), _("\nRestore your receiver with a new firmware." ) + self.oktext, None))
 			self.list.append(("flash-online", _("Flash Online"), _("\nFlash on the fly your receiver." ) + self.oktext, None))
 			self.list.append(("backup-image", _("Backup Image"), _("\nBackup your running %s %s image to HDD or USB.") % (getMachineBrand(), getMachineName()) + self.oktext, None))
 			self.list.append(("system-backup", _("Backup system settings"), _("\nBackup your receiver settings." ) + self.oktext + "\n\n" + self.infotext, None))
@@ -276,8 +275,6 @@ class UpdatePluginMenu(Screen):
 			if self.menu == 0:
 				if (currentEntry == "software-update"):
 					self.session.open(SoftwarePanel, self.skin_path)
-				elif (currentEntry == "software-restore"):
-					self.session.open(RestoreWizard)
 				elif (currentEntry == "install-extensions"):
 					self.session.open(PluginManager, self.skin_path)
 				elif (currentEntry == "flash-online"):
@@ -287,10 +284,10 @@ class UpdatePluginMenu(Screen):
 				elif (currentEntry == "system-backup"):
 					self.session.openWithCallback(self.backupDone,BackupScreen, runBackup = True)
 				elif (currentEntry == "system-restore"):
-					if os_path.exists(self.fullbackupfilename):
-						self.session.openWithCallback(self.startRestore, MessageBox, _("Are you sure you want to restore the backup?\nYour receiver will restart after the backup has been restored!"))
+					if backupAvailable == 1:
+						self.session.open(RestoreWizard)
 					else:
-						self.session.open(MessageBox, _("Sorry, no backups found!"), MessageBox.TYPE_INFO, timeout = 10)
+						self.session.open(MessageBox, _("Sorry, no settings backups found!"), MessageBox.TYPE_INFO, timeout = 10)
 				elif (currentEntry == "ipkg-install"):
 					try:
 						from Plugins.Extensions.MediaScanner.plugin import main
@@ -353,11 +350,6 @@ class UpdatePluginMenu(Screen):
 			self.session.open(MessageBox, _("Backup completed."), MessageBox.TYPE_INFO, timeout = 10)
 		else:
 			self.session.open(MessageBox, _("Backup failed."), MessageBox.TYPE_INFO, timeout = 10)
-
-	def startRestore(self, ret = False):
-		if (ret == True):
-			self.exe = True
-			self.session.open(RestoreScreen, runRestore = True)
 
 class SoftwareManagerSetup(Screen, ConfigListScreen):
 

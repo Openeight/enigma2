@@ -145,12 +145,8 @@ class RestoreWizard(WizardLanguage, Rc):
 		self.ActionSelect(self.selection)
 
 	def buildList(self, action):
-		print 'self.NextStep ',self.NextStep
-		if self.NextStep is 'reboot':
-			self.Console.ePopen("init 4 && reboot")
-		elif self.NextStep is 'restartGui':
-			self.Console.ePopen("init 4 && sleep 3 && init 3")
-		elif self.NextStep is 'settingsquestion' or self.NextStep is 'settingsrestore' or self.NextStep is 'pluginsquestion' or self.NextStep is 'pluginsrestoredevice' or self.NextStep is 'end' or self.NextStep is 'noplugins':
+		# print 'self.NextStep ',self.NextStep
+		if self.NextStep is 'settingsquestion' or self.NextStep is 'settingsrestore' or self.NextStep is 'pluginsquestion' or self.NextStep is 'pluginsrestoredevice' or self.NextStep is 'end' or self.NextStep is 'noplugins' or self.NextStep is 'reboot' or self.NextStep is 'restartGui':
 			self.buildListfinishedCB(False)
 		elif self.NextStep is 'settingrestorestarted':
 			self.buildListRef = self.session.openWithCallback(self.buildListfinishedCB, MessageBox, _("Please wait while gathers information..."), type = MessageBox.TYPE_INFO, enable_input = False)

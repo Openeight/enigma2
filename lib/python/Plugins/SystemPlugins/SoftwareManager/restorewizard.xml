@@ -89,15 +89,17 @@ self.buildList(None)
 		<text value="The wizard is finished now, and will reboot" />
 		<displaytext value="The wizard is finished now, and will reboot" />
 		<code>
-self.buildList(None)
+from enigma import quitMainloop
+quitMainloop(2)
 		</code>
 	</step>
 	<step id="restartGui">
 		<text value="The wizard is finished now, and will restart the GUI" />
 		<displaytext value="The wizard is finished now, and will restart the GUI" />
 		<code>
-self.buildList(None)
-		</code>
+from enigma import quitMainloop
+quitMainloop(3)
+		</code> 
 	</step>
 	<step id="noplugins">
 		<text value="No plugins where needed to be installed" />
