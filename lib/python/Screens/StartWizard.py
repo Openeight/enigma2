@@ -34,5 +34,5 @@ class StartWizard(WizardLanguage, Rc):
 		config.misc.firstrun.save()
 		configfile.save()
 
-wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority = 5)
+wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority = 2)
 wizardManager.registerWizard(StartWizard, config.misc.firstrun.value, priority = 20)

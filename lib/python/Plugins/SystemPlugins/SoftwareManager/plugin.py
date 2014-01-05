@@ -39,7 +39,7 @@ from twisted.web import client
 from twisted.internet import reactor
 
 from ImageBackup import ImageBackup
-from ImageWizard import ImageWizard
+from RestoreWizard import backupAvailable, RestoreWizard
 from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from SoftwareTools import iSoftwareTools
 from Flash_online import FlashOnline
@@ -277,7 +277,7 @@ class UpdatePluginMenu(Screen):
 				if (currentEntry == "software-update"):
 					self.session.open(SoftwarePanel, self.skin_path)
 				elif (currentEntry == "software-restore"):
-					self.session.open(ImageWizard)
+					self.session.open(RestoreWizard)
 				elif (currentEntry == "install-extensions"):
 					self.session.open(PluginManager, self.skin_path)
 				elif (currentEntry == "flash-online"):
@@ -2138,4 +2138,6 @@ def Plugins(path, **kwargs):
 		list.append(PluginDescriptor(name=_("Software management"), description=_("Manage your receiver's software"), where = PluginDescriptor.WHERE_PLUGINMENU, needsRestart = False, fnc=UpgradeMain))
 	if config.plugins.softwaremanager.onBlueButton.value:
 		list.append(PluginDescriptor(name=_("Software management"), description=_("Manage your receiver's software"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart = False, fnc=UpgradeMain))
+	if config.misc.firstrun.value and backupAvailable == 1:
+		list.append(PluginDescriptor(name=_("Restore Wizard"), where = PluginDescriptor.WHERE_WIZARD, needsRestart = False, fnc=(3, RestoreWizard)))
 	return list
