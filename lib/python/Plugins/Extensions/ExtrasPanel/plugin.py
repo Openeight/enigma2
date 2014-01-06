@@ -27,7 +27,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
 from Addons import AddonsFileBrowser
-from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
+from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getBackupFilename, RestoreMenu
 from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
 from Screens.SkinSetup import SkinSetup
 from os import system, listdir, symlink, unlink, readlink, path as os_path, stat, mkdir, popen, makedirs, access, rename, remove, W_OK, R_OK, F_OK, chmod, walk, getcwd, chdir, statvfs
@@ -82,7 +82,6 @@ from Plugins.Extensions.ExtrasPanel.CamCheck import *
 from Plugins.Extensions.ExtrasPanel.sundtek import *
 from Plugins.Extensions.ExtrasPanel.SwapManager import Swap, SwapAutostart
 from Plugins.Extensions.ExtrasPanel.SoftwarePanel import SoftwarePanel
-from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getBackupFilename
 
 def Check_Softcam():
 	found = True
