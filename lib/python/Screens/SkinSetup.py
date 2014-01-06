@@ -32,6 +32,7 @@ class SkinSetup(Screen):
                 self.res.append(_("Install Skin"))
                 self.res.append(_("Configure mainmenu"))
                 self.res.append(_("Configure second-infobar"))
+		self.res.append(_("Show Picons in Channel List"))
                 self.res.append(_("XTAskin Setup"))
                 self.res.append(_("Exit"))
                 self["list"].setList(self.res)
@@ -43,9 +44,12 @@ class SkinSetup(Screen):
 		elif ires == 1:
 		        self.session.open(SettingsB)  
                 elif ires == 2:
-		        self.session.open(SettingsC)      
-                elif ires == 3:
-		        self.xtaskin()                        
+		        self.session.open(SettingsC) 
+		elif ires == 3:
+		        self.session.open(SettingsD)
+                elif ires == 4:
+		        self.xtaskin()  
+               				
 		else:
                         self.close()
                         
@@ -148,6 +152,48 @@ class SettingsC(Screen):
     def RemSI(self):
                 config.usage.show_second_infobar.value = None
     	        config.usage.show_second_infobar.save()
+#    	        self.session.open(TryQuitMainloop, 3)
+
+class SettingsD(Screen):
+    def __init__(self, session):
+		Screen.__init__(self, session)
+                self.skinName = "Settings"
+                title = "Show Picons in Channel List"
+                self.setTitle(title)
+        	self["list"] = MenuList([])
+		self["info"] = Label()
+#		self["KEY_HELP"] = Button(_("HELP"))
+#                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
+                self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
+                txt = "Show Picons in Channel Lis."
+                self["info"].setText(txt)
+                self.onLayoutFinish.append(self.startSession)
+
+    def startSession(self):
+                self.res = []
+                self.res.append("Show Picons in Channel List")
+                self.res.append("Remove Picons in Channel List")
+                self.res.append("Exit")
+                self["list"].setList(self.res)
+    
+    def okClicked(self):
+                ires = self["list"].getSelectionIndex()
+		if ires == 0:
+		        self.ShowSp()
+		elif ires == 1:
+		        self.RemSp()        
+		else:
+                        self.close()
+                        
+    def ShowSp(self):
+                config.usage.service_icon_enable.value = True
+    	        config.usage.service_icon_enable.save()
+
+#    	        self.session.open(TryQuitMainloop, 3)
+
+    def RemSp(self):
+                config.usage.service_icon_enable.value = False
+    	        config.usage.service_icon_enable.save()
 #    	        self.session.open(TryQuitMainloop, 3)
     
 
