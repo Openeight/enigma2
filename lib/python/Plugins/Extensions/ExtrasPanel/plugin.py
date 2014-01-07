@@ -29,6 +29,7 @@ from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
 from Addons import AddonsFileBrowser
 from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
+from Screens.SkinSetup import SkinSetup
 from os import system, listdir, symlink, unlink, readlink, path as os_path, stat, mkdir, popen, makedirs, access, rename, remove, W_OK, R_OK, F_OK, chmod, walk, getcwd, chdir, statvfs
 from __init__ import _
 
@@ -69,7 +70,8 @@ if os.path.isfile("/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager
 	try:
 		from Plugins.SystemPlugins.SoftwareManager.plugin import PacketManager
 	except:
-		pass		
+		pass
+
 
 from Plugins.Extensions.ExtrasPanel.CronManager import *
 from Plugins.Extensions.ExtrasPanel.ScriptRunner import *
@@ -325,6 +327,7 @@ class Extraspanel(Screen, InfoBarPiP):
 #		self.Mlist.append(MenuEntryItem((InfoEntryComponent('KeymapSel'), _("Keymap Selection"), 'KeymapSel')))	
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('ImageTools'), _("Image Tools"), 'ImageTools')))
 		self.Mlist.append(MenuEntryItem((InfoEntryComponent('Infos'), _("Infos"), 'Infos')))
+		self.Mlist.append(MenuEntryItem((InfoEntryComponent('SkinSetup'), _("Skin Setup"), ('Skin-Setup'))))
 		self.onChangedEntry = []
 		if (getDesktop(0).size().width() == 1280):
 			self["Mlist"] = PanelList([])
@@ -439,7 +442,8 @@ class Extraspanel(Screen, InfoBarPiP):
 			self.session.open(Sc.ScNewSelection)
 		elif menu == "advancedrestore":
 					self.session.open(RestoreMenu, self.skin)	
-
+                elif menu == "Skin-Setup":
+			self.session.open(SkinSetup)
 		elif menu == "ImageTools":
 			self.Plugins()
 		elif menu == "Pluginbrowser":
@@ -553,7 +557,11 @@ class Extraspanel(Screen, InfoBarPiP):
 		self["Mlist"].moveToIndex(0)
 		self["Mlist"].l.setList(self.tlist)
 		self.oldmlist1 = self.tlist
-	
+		
+	def SkinSetup(self):
+		from Screens.SkinSetup import SkinSetup
+		return SkinSetup
+
 	def System(self):
 		#// Create System Menu
 		global menu
