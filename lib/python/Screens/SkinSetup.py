@@ -82,7 +82,11 @@ class SettingsB(Screen):
 #		self["KEY_HELP"] = Button(_("HELP"))
 #                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
-                txt = "Here you can configure Menu list.\nAfter select enigma will restart."
+                self.cur = config.usage.mainmenu_mode.value
+                if self.cur == "horz":
+                        txt = "Current Mainmenu list setting is Horizontal.\nHere you can change it.\nAfter select enigma will restart."
+                elif self.cur == "vert":
+                        txt = "Current Mainmenu list setting is Vertical.\nHere you can change it.\nAfter select enigma will restart."
                 self["info"].setText(txt)
                 self.onLayoutFinish.append(self.startSession)
 
@@ -103,11 +107,17 @@ class SettingsB(Screen):
                         self.close()
                         
     def Horz(self):
+          if self.cur == "horz":
+                self.session.open(MessageBox, _("Current mainmenu setting is Horizontal !"), type = MessageBox.TYPE_INFO,timeout = 10 )
+          else:
                 config.usage.mainmenu_mode.value = "horz"
     	        config.usage.mainmenu_mode.save()
     	        self.session.open(TryQuitMainloop, 3) 
 
     def Vert(self):
+          if self.cur == "vert":
+                self.session.open(MessageBox, _("Current mainmenu setting is Vertical !"), type = MessageBox.TYPE_INFO,timeout = 10 )
+          else:
                 config.usage.mainmenu_mode.value = "vert"
     	        config.usage.mainmenu_mode.save()
     	        self.session.open(TryQuitMainloop, 3) 
@@ -123,7 +133,12 @@ class SettingsC(Screen):
 #		self["KEY_HELP"] = Button(_("HELP"))
 #                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
-                txt = "Here you can configure second-infobar."
+                self.cur = config.usage.show_second_infobar.value
+                txt = " " 
+                if self.cur is None:
+                        txt = "Current Second-infobar setting is None.\nHere you can change it."
+                else:
+                        txt = "Current Second-infobar setting is Show.\nHere you can change it."
                 self["info"].setText(txt)
                 self.onLayoutFinish.append(self.startSession)
 
@@ -144,12 +159,18 @@ class SettingsC(Screen):
                         self.close()
                         
     def ShowSI(self):
+          if self.cur is not None:
+                self.session.open(MessageBox, _("Current Second-infobar setting is Show !"), type = MessageBox.TYPE_INFO,timeout = 10 )
+          else:
                 config.usage.show_second_infobar.value = int(0)
     	        config.usage.show_second_infobar.save()
 
 #    	        self.session.open(TryQuitMainloop, 3)
 
     def RemSI(self):
+          if self.cur is None:
+                self.session.open(MessageBox, _("Current Second-infobar setting is None !"), type = MessageBox.TYPE_INFO,timeout = 10 )
+          else:
                 config.usage.show_second_infobar.value = None
     	        config.usage.show_second_infobar.save()
 #    	        self.session.open(TryQuitMainloop, 3)
@@ -165,7 +186,12 @@ class SettingsD(Screen):
 #		self["KEY_HELP"] = Button(_("HELP"))
 #                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
-                txt = "Show Picons in Channel Lis."
+                self.cur = config.usage.service_icon_enable.value
+                txt = " " 
+                if self.cur is True:
+                        txt = "Current picon setting is True.\nHere you can change it."
+                else:
+                        txt = "Current picon setting is False.\nHere you can change it."
                 self["info"].setText(txt)
                 self.onLayoutFinish.append(self.startSession)
 
@@ -186,16 +212,32 @@ class SettingsD(Screen):
                         self.close()
                         
     def ShowSp(self):
+          if self.cur is True:
+                self.session.open(MessageBox, _("Current picon setting is True !"), type = MessageBox.TYPE_INFO,timeout = 10 )
+          else:
                 config.usage.service_icon_enable.value = True
     	        config.usage.service_icon_enable.save()
 
 #    	        self.session.open(TryQuitMainloop, 3)
 
     def RemSp(self):
+          if self.cur is False:
+                self.session.open(MessageBox, _("Current picon setting is False !"), type = MessageBox.TYPE_INFO,timeout = 10 )
+          else:
                 config.usage.service_icon_enable.value = False
     	        config.usage.service_icon_enable.save()
 #    	        self.session.open(TryQuitMainloop, 3)
     
+
+
+
+
+
+
+
+
+
+
 
 
 
