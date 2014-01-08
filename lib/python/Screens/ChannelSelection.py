@@ -1209,18 +1209,18 @@ class ChannelSelectionBase(Screen):
 
 	def keyNumberGlobal(self, number):
 		if self.isBasePathEqual(self.bouquet_root):
-			self.BouqetNumberActions(number)
+			self.BouquetNumberActions(number)
 		else:
 			current_root = self.getRoot()
 			if  current_root and 'FROM BOUQUET "bouquets.' in current_root.getPath():
-				self.BouqetNumberActions(number)
+				self.BouquetNumberActions(number)
 			else:
 				unichar = self.numericalTextInput.getKey(number)
 				charstr = unichar.encode("utf-8")
 				if len(charstr) == 1:
 					self.servicelist.moveToChar(charstr[0])
 
-	def BouqetNumberActions(self, number):
+	def BouquetNumberActions(self, number):
 		if number == 1: #Set focus on current playing service when available in current userbouquet
 			currentSelectedService = self.servicelist.getCurrent()
 			currentPlayingService = self.session.nav.getCurrentlyPlayingServiceOrGroup()
@@ -1550,6 +1550,8 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 					if not self.session.pip.playService(nref):
 						# XXX: Make sure we set an invalid ref
 						self.session.pip.playService(None)
+					else:
+						self.servicelist.setPlayableIgnoreService(self.session.pip.getCurrentService())
 				else:
 					self.setStartRoot(self.curRoot)
 					self.setCurrentSelection(ref)
@@ -1626,7 +1628,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			self.history_pos += 1
 			self.setHistoryPath()
 
-	def setHistoryPath(self):
+	def setHistoryPath(self, doZap=True):
 		path = self.history[self.history_pos][:]
 		ref = path.pop()
 		del self.servicePath[:]
@@ -1636,7 +1638,8 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		cur_root = self.getRoot()
 		if cur_root and cur_root != root:
 			self.setRoot(root)
-		self.session.nav.playService(ref)
+		if doZap:
+			self.session.nav.playService(ref)
 		if self.dopipzap:
 			self.setCurrentSelection(self.session.pip.getCurrentService())
 		else:
@@ -1689,12 +1692,12 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			self.lastservice.value = refstr
 			self.lastservice.save()
 
-	def setCurrentServicePath(self, path):
+	def setCurrentServicePath(self, path, doZap=True):
 		if self.history:
 			self.history[self.history_pos] = path
 		else:
 			self.history.append(path)
-		self.setHistoryPath()
+		self.setHistoryPath(doZap)
 
 	def getCurrentServicePath(self):
 		if self.history:
@@ -1958,6 +1961,9 @@ class SimpleChannelSelection(ChannelSelectionBase):
 
 	def layoutFinished(self):
 		self.setModeTv()
+
+	def BouquetNumberActions(self, number):
+		pass
 
 	def channelSelected(self): # just return selected service
 		ref = self.getCurrentSelection()

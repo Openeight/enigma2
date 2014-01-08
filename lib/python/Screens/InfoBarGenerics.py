@@ -1907,16 +1907,21 @@ class InfoBarPiP:
 		if not self.session.pipshown:
 			self.showPiP()
 		slist = self.servicelist
-		if slist:
+		if slist and self.session.pipshown:
 			slist.togglePipzap()
+			if slist.dopipzap:
+				currentServicePath = self.servicelist.getCurrentServicePath()
+				self.servicelist.setCurrentServicePath(self.session.pip.servicePath, doZap=False)
+				self.session.pip.servicePath = currentServicePath
 
 	def showPiP(self):
 		if self.session.pipshown:
 			slist = self.servicelist
 			if slist and slist.dopipzap:
-				slist.togglePipzap()
-			del self.session.pip
-			self.session.pipshown = False
+				self.togglePipzap()
+			if self.session.pipshown:
+				del self.session.pip
+				self.session.pipshown = False
 		else:
 			self.session.pip = self.session.instantiateDialog(PictureInPicture)
 			self.session.pip.show()
@@ -1933,9 +1938,9 @@ class InfoBarPiP:
 		pipref = self.session.pip.getCurrentService()
 		if swapservice and pipref and pipref.toString() != swapservice.toString():
 			currentServicePath = self.servicelist.getCurrentServicePath()
-			self.servicelist.setCurrentServicePath(self.session.pip.servicePath)	
+			self.servicelist.setCurrentServicePath(self.session.pip.servicePath, doZap=False)
 			self.session.pip.playService(swapservice)
-			self.session.nav.playService(pipref) # start subservice
+			self.session.nav.playService(pipref, checkParentalControl=False, adjust=False)
 			self.session.pip.servicePath = currentServicePath
 			if self.servicelist.dopipzap:
 				# This unfortunately won't work with subservices
@@ -2779,7 +2784,7 @@ class InfoBarTeletextPlugin:
 			print "no teletext plugin found!"
 
 	def startTeletext(self):
-		self.teletext_plugin(session=self.session, infobar=self, service=self.session.nav.getCurrentService())
+		self.teletext_plugin(session=self.session, service=self.session.nav.getCurrentService())
 
 class InfoBarSubtitleSupport(object):
 	def __init__(self):
@@ -2887,7 +2892,7 @@ class InfoBarServiceErrorPopupSupport:
 
 			if error:
 				self.closeNotificationInstantiateDialog()
-				if not self.dishDialog.dishState():
+				if hasattr(self, "dishDialog") and not self.dishDialog.dishState():
 					Notifications.AddPopup(text = error, type = MessageBox.TYPE_ERROR, timeout = 5, id = "ZapError")
 
 class InfoBarPowersaver:
