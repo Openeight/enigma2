@@ -219,10 +219,15 @@ class Menu(Screen):
 		# for the skin: first try a menu_<menuID>, then Menu
 		self.skinName = [ ]
 		self.menuID = menuID
+		skfile = "/usr/share/enigma2/" + config.skin.primary_skin.value 
+                f1 = file(skfile, "r")
+                self.sktxt = f1.read()
+                f1.close()    
                 if menuID is not None:	
-			self.skinName.append("menu_" + menuID)
-		if config.usage.mainmenu_mode.value == "horz":	
+		    if (config.usage.mainmenu_mode.value == "horz") and ('<screen name="Iconmain" ' in self.sktxt):	
                         self.skinName.append("Iconmain")
+                    else:    
+                        self.skinName.append("menu_" + menuID)
                 else:
                         self.skinName.append("Menu")
 
@@ -304,7 +309,7 @@ class Menu(Screen):
                 self["pixmap5"] = Pixmap()
                 self["pixmap6"] = Pixmap()
                 
-                if config.usage.mainmenu_mode.value == "horz":
+                if (config.usage.mainmenu_mode.value == "horz") and ('<screen name="Iconmain" ' in self.sktxt):
                         self.onShown.append(self.openTest)
                 self.index = 0
                 self.maxentry = len(list)-1
@@ -660,6 +665,9 @@ class MainMenu(Menu):
 #		self.skinName = "Menu"
 #                self.skinName = "Iconmain"
 		Menu.__init__(self, *x)
+
+
+
 
 
 
