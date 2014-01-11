@@ -15,9 +15,6 @@ dist_pkgdata_DATA = \
 	startwizard.xml \
 	freesat.t1 \
 	freesat.t2 \
-	blank.png \
-    pointer.png \	
-	scan.png \
 	unicable.xml
 
 if HAVE_TEXTLCD
