@@ -23,7 +23,7 @@ class SkinSetup(Screen):
 #		self["KEY_HELP"] = Button(_("HELP"))
 #                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
-                txt = _("Here you can change skin, configure mainmenu or configure second-infobar, or configure skin XTA.")
+                txt = _("Here you can change skin, configure mainmenu, configure second-infobar or configure skin XTA.")
                 self["info"].setText(txt)
                 self.onShown.append(self.startSession)
 
@@ -83,42 +83,46 @@ class SettingsB(Screen):
 #                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
                 self.cur = config.usage.mainmenu_mode.value
-                if self.cur == "horz":
-                        txt = "Current Mainmenu list setting is Horizontal.\nHere you can change it.\nAfter select enigma will restart."
+                if self.cur == "horzicon":
+                        txt = "Current Mainmenu list setting is Horizontal-icon.\nHere you can change it.\nAfter select enigma will restart."
                 elif self.cur == "vert":
                         txt = "Current Mainmenu list setting is Vertical.\nHere you can change it.\nAfter select enigma will restart."
+                elif self.cur == "horzanim":
+                        txt = "Current Mainmenu list setting is Horizontal-Animated.\nHere you can change it.\nAfter select enigma will restart."
                 self["info"].setText(txt)
                 self.onLayoutFinish.append(self.startSession)
 
     def startSession(self):
                 self.res = []
-                self.res.append("Horizontal list")
+                self.res.append("Horizontal icon list")
                 self.res.append("Vertical list")
+                self.res.append("Horizontal animated list")
                 self.res.append("Exit")
                 self["list"].setList(self.res)
     
     def okClicked(self):
                 ires = self["list"].getSelectionIndex()
 		if ires == 0:
-		        self.Horz()
+		        self.Icon()
 		elif ires == 1:
-		        self.Vert()        
+		        self.Vert()
+                elif ires == 2:
+		        self.Anim()         
 		else:
                         self.close()
                         
-    def Horz(self):
-          if self.cur == "horz":
-                self.session.open(MessageBox, _("Current mainmenu setting is Horizontal !"), type = MessageBox.TYPE_INFO,timeout = 10 )
-          else:
-                config.usage.mainmenu_mode.value = "horz"
+    def Icon(self):
+                config.usage.mainmenu_mode.value = "horzicon"
     	        config.usage.mainmenu_mode.save()
     	        self.session.open(TryQuitMainloop, 3) 
 
     def Vert(self):
-          if self.cur == "vert":
-                self.session.open(MessageBox, _("Current mainmenu setting is Vertical !"), type = MessageBox.TYPE_INFO,timeout = 10 )
-          else:
                 config.usage.mainmenu_mode.value = "vert"
+    	        config.usage.mainmenu_mode.save()
+    	        self.session.open(TryQuitMainloop, 3)
+
+    def Anim(self):
+                config.usage.mainmenu_mode.value = "horzanim"
     	        config.usage.mainmenu_mode.save()
     	        self.session.open(TryQuitMainloop, 3) 
     
@@ -228,6 +232,12 @@ class SettingsD(Screen):
     	        config.usage.service_icon_enable.save()
 #    	        self.session.open(TryQuitMainloop, 3)
     
+
+
+
+
+
+
 
 
 
