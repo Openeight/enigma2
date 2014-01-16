@@ -3,7 +3,7 @@ import os
 import time
 
 def getVersionString():
-	return getImageVersionString()
+	return getEnigmaVersionString()
 
 def getImageVersionString():
 	try:
