@@ -1,7 +1,5 @@
-installdir = $(pkgdatadir)/skin_default/spinner
+installdir = $(datadir)/enigma2/skin_default/spinner
 
-dist_install_DATA = \
-	wait1.png \
-	wait2.png \
-	wait3.png \
-	wait4.png
+
+dist_install_DATA = *.png
+
