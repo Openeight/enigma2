@@ -1,12 +1,10 @@
-SUBDIRS = countries fonts extensions keymaps skin_default rc_models buttons
+SUBDIRS = countries fonts extensions keymaps skin_default rc_models
 
 dist_pkgdata_DATA = \
 	encoding.conf \
 	keymap.xml \
 	menu.xml \
 	prev.png \
-	blank.png \
-	pointer \
 	radio.mvi \
 	black.mvi \
 	rcpositions.xml \
