@@ -1,16 +1,22 @@
-SUBDIRS = menu icons buttons spinner
+SUBDIRS = menu icons buttons spinner fonts pictures skin_default
 
 installdir = $(pkgdatadir)/skin_default
 
 dist_install_DATA = \
+	1.png \
 	arrowdown.png \
 	arrowup.png \
+	bar_agc.png \
 	bar_ber.png \
+	bar_big.png \
+	bar_snr2.png \
 	bar_snr.png \
 	b_bl.png \
 	b_b.png \
 	b_br.png \
-	b_l.png \
+	blank.png \
+	b_lr.png \
+	blue.png \
 	border_epg.png \
 	border_eventinfo.png \
 	border_info.png \
@@ -18,8 +24,6 @@ dist_install_DATA = \
 	border_menu_350.png \
 	border_menu.png \
 	border_multiepg.png \
-	bottombar.png \
-	b_r.png \
 	b_tl.png \
 	b_t.png \
 	b_tr.png \
@@ -31,33 +35,40 @@ dist_install_DATA = \
 	epg_now.png \
 	expandable-plugins.png \
 	expanded-plugins.png \
-	info-bg_mp.png \
-	info-bg.png \
-	mediaplayer_bg.png \
+	extra.png \
+	green.png \
+	infobar.png \
+	mainbg.png \
+	mp_buttons.png \
 	mute.png \
 	nim_active.png \
 	no_coverArt.png \
 	picon_default.png \
+	pointer.png \
 	position_arrow.png \
 	position_pointer.png \
+	prev.png \
 	progress_bg.png \
 	progress_big.png \
 	progress_medium.png \
+	progressmp.png \
+	progress.png \
 	progress_small.png \
-	rcold.png \
-	rc.png \
-	rc0.png \
-	rc1.png \
-	rc2.png \
+	red.png \
+	repeat_off.png \
+	repeat_on.png \
 	screws_mp.png \
 	screws.png \
-	sleeptimer.png \
-	testscreen.png \
+	starbg.png \
+	star.png \
+	strip.png \
+	tech9.png \
 	timeline-now.png \
 	timeline.png \
+	tsbg.png \
 	unhandled-key.png \
+	unhand.png \
 	verticalline-plugins.png \
-	vkey_all.png \
 	vkey_backspace.png \
 	vkey_bg.png \
 	vkey_clr.png \
@@ -71,5 +82,7 @@ dist_install_DATA = \
 	vkey_shift_sel.png \
 	vkey_space.png \
 	vkey_text.png \
-	volume.png \
-	wizard.png
+	vol_back.png \
+	vol.png \
+	wizard.png \
+	yellow.png

@@ -1,13 +1,51 @@
 installdir = $(pkgdatadir)/skin_default/menu
 
 dist_install_DATA = \
-	dvd_player.png \
-	information.png \
-	media_player.png \
-	plugins.png \
+	dvd.png \
+	extra_setup.png \
+	hdd.png \
+	info.png \
+	lan-sel300.png \
+	lan-seloff.png \
+	lan-sel.png \
+	media.png \
+	menusel.png \
+	net.png \
+	plugin.png \
+	power.png \
+	scan.png \
 	scart.png \
+	sel1040x30.png \
+	sel1040x35.png \
+	sel1040x60.png \
+	sel1040x63.png \
+	sel1040x75.png \
+	sel360x30.png \
+	sel420x25.png \
+	sel500x30.png \
+	sel520x38.png \
+	sel700x25.png \
+	sel700x30.png \
+	sel700x75.png \
+	sel700x85.png \
+	sel780x100.png \
+	sel780x110.png \
+	sel780x120.png \
+	sel780x30.png \
+	sel780x32.png \
+	sel780x35.png \
+	sel780x60.png \
+	sel780x70.png \
+	sel780x75.png \
+	sel780x90.png \
+	sel800x50.png \
+	sel900x28.png \
+	sel900x30.png \
+	sel900x32.png \
+	seph.png \
 	setup.png \
-	shutdown.png \
-	subtitles.png \
+	skin_setup.png \
+	sub.png \
 	timer.png \
-    main.png
+	weather.png \
+	xta.png
