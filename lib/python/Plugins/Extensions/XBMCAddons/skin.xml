@@ -1,0 +1,101 @@
+<skin>
+
+                <screen name="Splash" position="center,center" size="1280,720" title="XBMC Addons" >
+                        <widget name="pixmap" position="0,0" size="1280,720" zPosition="-1" />
+	        </screen>
+	
+		<screen name="xbmc1" position="center,center" size="1280,720" title="XBMC Addons" >
+			<ePixmap position="0,0" zPosition="-2" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/panel1.png" />
+			<widget source="label1" render="Label" position="300,315" size="200,80" font="Regular;35" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#b3b3b9" backgroundColor="black" transparent="1" />
+                        <widget source="label1s" render="Label" position="300,315" size="200,80" font="Regular;35" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#ffffff" backgroundColor="red" transparent="1" />
+                        <widget source="label2" render="Label" position="550,315" size="200,80" font="Regular;35" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#b3b3b9" backgroundColor="black" transparent="1" />
+                        <widget source="label2s" render="Label" position="550,315" size="200,80" font="Regular;35" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#ffffff" backgroundColor="red" transparent="1" />
+                        <widget source="label3" render="Label" position="800,315" size="200,80" font="Regular;35" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#b3b3b9" backgroundColor="black" transparent="1" />
+                        <widget source="label3s" render="Label" position="800,315" size="200,80" font="Regular;35" halign="center" valign="center" zPosition="2" noWrap="1" foregroundColor="#ffffff" backgroundColor="red" transparent="1" />
+                        <widget name="frame0" position="1280,620" size="1280,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/float.png" zPosition="1" alphatest="on" />   
+                        <widget name="frame1" position="0,620" size="1280,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/float1.png" zPosition="1" alphatest="on" />   
+                        <ePixmap position="100,650" zPosition="1" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/Exit2.png" />
+		</screen>	
+		<screen name="xbmc2" position="center,center" size="1280,720" title="XBMC Addons" >
+                        <ePixmap position="0,0" zPosition="-2" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/panel2.png" />
+			<widget source="label1" render="Label" position="900,50" size="260,30" font="Regular;25" halign="center" backgroundColor="#000000" transparent="1"  />
+        		<widget source="label20" render="Label" position="850,360" size="300,25" font="Regular;22" foregroundColor="#7bd7f7" backgroundColor="#000000" transparent="1"  />
+                        <widget source="label2" render="Label" position="950,360" size="300,25" font="Regular;22" backgroundColor="#000000" transparent="1"  />
+			<widget source="label30" render="Label" position="850,390" size="300,25" font="Regular;22" foregroundColor="#7bd7f7" backgroundColor="#000000" transparent="1"  />
+                        <widget source="label3" render="Label" position="950,390" size="300,25" font="Regular;22" backgroundColor="#000000" transparent="1"  />
+			<widget source="label4" render="Label" position="850,405" size="350,240" font="Regular;16" valign="center" backgroundColor="#000000" transparent="1"  />
+			<widget name="pixmap1" position="910,90" size="300,260" zPosition="1" backgroundColor="#000000" alphatest="on" />
+                        <ePixmap position="100,650" zPosition="1" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/Exit2.png" />
+
+                    	<widget name="menu" position="100,100" size="580,480" itemHeight="40" backgroundColor="#000000" foregroundColor="#b3b3b9" foregroundColorSelected="#ffffff" backgroundColorSelected="#000000" scrollbarMode="showOnDemand" />
+                        
+		</screen>	
+		<screen name="xbmc3" position="center,center" size="1280,720" title="XBMC Addons" >
+                        <ePixmap position="0,0" zPosition="-2" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/panel3.png" />
+			<widget source="global.CurrentTime" render="Label" position="1100,65" size="140,25" font="Regular;18" halign="right" backgroundColor="black" foregroundColor="#ffffff" transparent="1">
+                        <convert type="ClockToText">Default</convert>
+                        </widget>
+                        <widget source="global.CurrentTime" render="Label" position="1100,40" size="140,25" font="Regular;18" halign="right" backgroundColor="black" foregroundColor="#ffffff" transparent="1" valign="center">
+                        <convert type="ClockToText">Format:%d.%m.%Y</convert>
+                        </widget>
+                        <widget name="pixmap" position="942,372" size="200,200" zPosition="1" alphatest="on" />
+                    	<widget name="menu" position="100,100" size="580,480" itemHeight="40" backgroundColor="#000000" foregroundColor="#b3b3b9" foregroundColorSelected="#ffffff" backgroundColorSelected="#000000" scrollbarMode="showOnDemand" />
+                        <ePixmap position="100,650" zPosition="1" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/Exit2.png" />
+		</screen>
+
+                <screen name="Showrtmp" position="center,center" size="1280,720" title="  " >
+                        <ePixmap position="0,0" zPosition="-2" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/panel3.png" />
+                        <ePixmap position="942,372" size="200,200" zPosition="1" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/default.png" alphatest="on" />
+                        <widget name="info" position="120,100" zPosition="4" size="500,240" font="Regular;25" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" />
+                        <eLabel position="150,660" zPosition="1" size="200,30" backgroundColor="#f23d21" /> 
+                        <eLabel position="152,662" zPosition="1" size="196,26" backgroundColor="#40000000" /> 
+                        <eLabel position="350,660" zPosition="1" size="200,30" backgroundColor="#389416" />
+                        <eLabel position="352,662" zPosition="1" size="196,26" backgroundColor="#40000000" />
+                        <eLabel position="550,660" zPosition="1" size="200,30" backgroundColor="#bab329" />
+                        <eLabel position="552,662" zPosition="1" size="196,26" backgroundColor="#40000000" />
+                        <eLabel position="750,660" zPosition="1" size="200,30" backgroundColor="#0064c7" />
+                        <eLabel position="752,662" zPosition="1" size="196,26" backgroundColor="#40000000" />
+                        <widget name="key_red" position="150,660" size="200,30" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
+                        <widget name="key_green" position="350,660" size="200,30" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
+                        <widget name="key_yellow" position="550,660" size="200,30" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+                        <widget name="key_blue" position="750,660" size="200,30" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+                        <ePixmap position="100,650" zPosition="1" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/XBMCAddons/images/Exit2.png" />
+                </screen>		
+
+</skin>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
