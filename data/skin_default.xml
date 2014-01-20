@@ -3020,10 +3020,29 @@ self.instance.move(ePoint((1280-wsizex)/2, (720-wsizey)/(count &gt; 7 and 2 or 3
     <ePixmap position="234,100" size="18,48" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Xtrend/pic/buttons/red.png" alphatest="blend" zPosition="2" />
     <widget name="favmenu" position="10,130" size="600,375" scrollbarMode="showOnDemand" zPosition="1" />
   </screen>
+   	<!-- Picture in picture -->
+	<screen name="PictureInPicture" position="400,60" zPosition="-1" size="240,192" flags="wfNoBorder">
+		<widget name="video" position="0,0" size="240,192" backgroundColor="transparent" />
+	</screen>
+	<!-- Pin input -->
+	<screen name="PinInputTemplate" >
+		<widget name="service" position="10,10" size="480,25" font="Regular;20" />
+		<widget name="text" position="10,40" size="480,25" font="Regular;20" halign="center" />
+		<widget name="tries" position="10,70" size="480,25" font="Regular;20" halign="center" />
+		<widget name="input" position="10,110" size="480,40" font="Regular;50" halign="center" />
+	</screen>
+	<screen name="PinInput" position="center,center" size="500,170" title="PIN code needed">
+		<panel name="PinInputTemplate" />
+	</screen>
+	<screen name="PinInputPopup" position="center,center" size="500,170" title="PIN code needed">
+		<panel name="PinInputTemplate" />
+	</screen>
+	<!-- Picture in picture setup -->
+	<screen name="PiPSetup" position="center,center" size="600,150" backgroundColor="transparent" flags="wfNoBorder" title="PiP setup">
+		<widget name="text" position="0,0" size="600,150" font="Regular;23" />
+	</screen>
       
 </skin>
-
-
 
 
 
