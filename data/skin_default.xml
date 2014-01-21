@@ -772,202 +772,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 				 "itemHeight": 80
 				}
 			</convert>
-<<<<<<< HEAD
-    </widget>
-  </screen>
-  <screen name="AddonsFileBrowser" position="80,100" size="1120,560" title="Manual Addon Installer Filebrowser">
-    <widget name="filelist" position="10,10" size="1100,500" scrollbarMode="showOnDemand" />
-    <ePixmap pixmap="~/pictures/red_key.png" position="10,520" zPosition="1" size="20,20" alphatest="on" />
-    <ePixmap pixmap="~/pictures/green_key.png" position="280,520" zPosition="1" size="20,20" alphatest="on" />
-    <ePixmap pixmap="~/pictures/yellow_key.png" position="560,520" zPosition="1" size="20,20" alphatest="on" />
-    <ePixmap pixmap="~/pictures/blue_key.png" position="840,520" zPosition="1" size="20,20" alphatest="on" />
-    <widget name="key_red" position="20,520" zPosition="2" size="280,40" valign="center" halign="center" font="Regular;24" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-    <widget name="key_green" position="320,520" zPosition="2" size="280,40" valign="center" halign="center" font="Regular;24" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-    <widget name="key_yellow" position="600,520" zPosition="2" size="280,40" valign="center" halign="center" font="Regular;24" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-    <widget name="key_blue" position="850,520" zPosition="2" size="280,40" valign="center" halign="center" font="Regular;24" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-  </screen>
-  <screen name="XTOpenvpn" position="center,center" size="950,340" title="OpenVpn Setup">
-    <widget name="lab1" position="20,20" size="310,64" font="Regular;24" valign="center" transparent="1" />
-    <widget name="lab1a" position="190,20" size="530,64" font="Regular;24" valign="center" transparent="1" />
-    <widget name="lab2" position="20,80" size="360,32" font="Regular;24" valign="center" transparent="1" />
-    <widget name="labactive" position="260,80" size="310,32" font="Regular;24" valign="center" transparent="1" />
-    <widget name="lab3" position="20,260" size="200,32" font="Regular;24" valign="center" transparent="1" />
-    <widget name="labstop" position="260,260" size="150,32" font="Regular;24" valign="center" halign="center" backgroundColor="red" />
-    <widget name="labrun" position="240,260" size="150,32" zPosition="1" font="Regular;24" valign="center" halign="center" backgroundColor="green" />
-    <ePixmap position="680,60" size="250,40" pixmap="skin_default/buttons/red.png" alphatest="on" zPosition="1" />
-    <ePixmap position="680,120" size="250,40" pixmap="skin_default/buttons/green.png" alphatest="on" zPosition="1" />
-    <ePixmap position="680,180" size="250,40" pixmap="skin_default/buttons/yellow.png" alphatest="on" zPosition="1" />
-    <ePixmap position="680,240" size="250,40" pixmap="skin_default/buttons/blue.png" alphatest="on" zPosition="1" />
-    <widget name="key_red" position="680,68" zPosition="2" size="250,40" font="Regular;24" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
-    <widget name="key_green" position="680,128" zPosition="2" size="250,40" font="Regular;24" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
-    <widget name="key_yellow" position="680,188" zPosition="2" size="250,40" font="Regular;24" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
-    <widget name="key_blue" position="680,248" zPosition="2" size="250,40" font="Regular;24" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
-  </screen>
-  <screen name="XTVpnLog" position="center,center" size="820,615" title="OpenVpn Log">
-    <widget name="infotext" position="20,20" size="810,605" font="Regular;20" />
-  </screen>
-  <screen name="PasswdScreen" position="center,145" size="625,260" title="Change root password">
-    <ePixmap pixmap="~/pictures/red.png" position="5,5" size="150,50" alphatest="on" />
-    <ePixmap pixmap="~/pictures/green.png" position="160,5" size="150,50" alphatest="on" />
-    <ePixmap pixmap="~/pictures/yellow.png" position="315,5" size="150,50" alphatest="on" />
-    <ePixmap pixmap="~/pictures/blue.png" position="470,5" size="150,50" alphatest="on" />
-    <widget source="key_red" render="Label" position="5,5" zPosition="1" size="150,50" font="Regular;20" halign="center" valign="center" backgroundColor="un9f1313" transparent="1" />
-    <widget source="key_green" render="Label" position="160,5" zPosition="1" size="150,50" font="Regular;20" halign="center" valign="center" backgroundColor="un1f771f" transparent="1" />
-    <widget source="key_yellow" render="Label" position="315,5" zPosition="1" size="150,50" font="Regular;20" halign="center" valign="center" backgroundColor="un9f1313" transparent="1" />
-    <widget source="key_blue" render="Label" position="470,5" zPosition="1" size="150,50" font="Regular;20" halign="center" valign="center" backgroundColor="un1f771f" transparent="1" />
-    <widget name="passwd" position="10,85" size="605,30" scrollbarMode="showOnDemand" />
-  </screen>
-  <screen name="XTDVBNTPTime" position="center,center" size="1280,720" title=" " >
-    <widget source="Title" render="Label" position="80,80" size="350,30" zPosition="3" font="Regular;26" transparent="1" />
-    <ePixmap pixmap="skin_default/buttons/button_red.png" position="80,450" size="15,16" alphatest="on" />
-    <ePixmap pixmap="skin_default/buttons/button_green.png" position="80,500" size="15,16" alphatest="on" />
-    <ePixmap pixmap="skin_default/buttons/button_yellow.png" position="80,550" size="15,16" alphatest="on" />
-    <ePixmap pixmap="skin_default/buttons/button_blue.png" position="80,600" size="15,16" alphatest="on" />
-    <widget name="key_red" position="100,446" zPosition="1" size="400,225" font="Regular;22" halign="left" transparent="1" />
-    <widget name="key_green" position="100,496" zPosition="1" size="400,225" font="Regular;22" halign="left" transparent="1" />
-    <widget name="key_yellow" position="100,546" zPosition="1" size="400,225" font="Regular;22" halign="left" transparent="1" />
-    <widget name="key_blue" position="100,596" zPosition="1" size="500,225" font="Regular;22" halign="left" transparent="1" />
-    <widget source="global.CurrentTime" render="Label" position="1091,8" size="80,25" font="Regular;23" valign="top" halign="right" backgroundColor="un333333" transparent="1">
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" position="1173,10" size="30,30" font="Regular;17" valign="top" halign="left" backgroundColor="un333333" transparent="1">
-      <convert type="ClockToText">Format::%S</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" position="1080,36" size="120,22" font="Regular;18" valign="top" halign="right" backgroundColor="un333333" foregroundColor="grey" transparent="1">
-      <convert type="ClockToText">Format:%d.%m.%Y</convert>
-    </widget>
-    <widget source="session.VideoPicture" render="Pig" position="80,120" size="380,215" zPosition="3" backgroundColor="unff000000" />
-    <widget source="menu" render="Listbox" position="550,100" size="610,260" zPosition="3" scrollbarMode="showNever">
-      <convert type="TemplatedMultiContent">
-                    {"template": [
-                            MultiContentEntryText(pos = (10,  5), size = (608, 26), flags = RT_HALIGN_LEFT, text = 1), # index 0 is the MenuText,
-                        ],
-                    "fonts": [gFont("Regular", 22)],
-                    "itemHeight": 35
-                    }
-            </convert>
-    </widget>
-    <widget source="menu" render="Listbox" position="550,350" size="610,250" zPosition="3" scrollbarMode="showNever" selectionDisabled="1" transparent="1">
-      <convert type="TemplatedMultiContent">
-                {"template": [
-                        MultiContentEntryText(pos = (0, 0), size = (610, 250), flags = RT_HALIGN_CENTER|RT_VALIGN_TOP|RT_WRAP, text = 2), # index 0 is the MenuText,
-                    ],
-                "fonts": [gFont("Regular", 19)],
-                "itemHeight": 250
-                }
-            </convert>
-    </widget>
-  </screen>
-  <screen name="AutoBouquetsMenu" position="center,center" size="1100,605" title="AutoBouquets Setup" >
-    <ePixmap pixmap="skin_default/buttons/red.png" position="403,534" size="140,40" alphatest="on" />
-    <ePixmap pixmap="skin_default/buttons/green.png" position="665,530" size="140,40" alphatest="on" />
-    <widget name="key_red" position="401,491" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="un9f1313" transparent="1" />
-    <widget name="key_green" position="664,488" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="un1f771f" transparent="1" />
-    <widget name="config" position="330,223" size="480,150" scrollbarMode="showOnDemand" />
-  </screen>
-  <!-- AutoBouquetsMaker Ordening Screen -->
-  <screen name="AutoBouquetsMaker_Ordering" position="center,center" size=" 840,570" >
-    <widget source="Title" render="Label" position="270,15" size="540,43" font="Regular;35" halign="right" backgroundColor="black" transparent="1" />
-    <widget source="list" render="Listbox" position="25,82" size="789,443" scrollbarMode="showOnDemand" transparent="1">
-      <convert type="TemplatedMultiContent">
-					{"template": [
-						MultiContentEntryText(pos = (12, 1), size = (440, 32), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
-						],
-						"fonts": [gFont("Regular", 22)],
-						"itemHeight": 30
-					}
-				</convert>
-    </widget>
-    <widget name="pleasewait" position="24,81" size="790,140" font="Regular;18" halign="center" valign="center" transparent="1" zPosition="1" />
-    <ePixmap pixmap="skin_default/buttons/red.png" position="30,530" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="skin_default/buttons/green.png" position="220,530" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="skin_default/buttons/yellow.png" position="400,530" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="skin_default/buttons/blue.png" position="580,530" size="35,27" alphatest="blend" />
-    <widget name="key_red" render="Label" position="80,533" size="130,26" zPosition="1" font="Regular;22" halign="left" backgroundColor="black" transparent="1" />
-    <widget name="key_green" render="Label" position="260,533" size="130,26" zPosition="1" font="Regular;22" halign="left" backgroundColor="black" transparent="1" />
-    <widget name="key_yellow" render="Label" position="440,533" size="130,26" zPosition="1" font="Regular;22" halign="left" backgroundColor="black" transparent="1" />
-    <widget name="key_blue" render="Label" position="620,533" size="130,26" zPosition="1" font="Regular;22" halign="left" backgroundColor="black" transparent="1" />
-  </screen>
-  <!-- AutoBouquetsMaker Menu Screen -->
-  <screen name="AutoBouquetsMaker_Menu" position="center,center" size=" 840,570" >
-    <widget source="Title" render="Label" position="270,15" size="540,43" font="Regular;35" halign="right" backgroundColor="black" transparent="1" />
-    <widget source="list" render="Listbox" position="30,81" size="780,450" font="Regular;16" scrollbarMode="showOnDemand" transparent="1" backgroundColorSelected="grey" foregroundColorSelected="black">
-      <convert type="TemplatedMultiContent">
-	{"template": [
-		MultiContentEntryPixmapAlphaTest(pos = (12, 4), size = (32, 32), png = 0),
-		MultiContentEntryText(pos = (58, 5), size = (440, 38), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
-		],
-		"fonts": [gFont("Regular", 24)],
-		"itemHeight": 40
-		}
-    </convert>
-    </widget>
-  </screen>
-  <!-- AutoBouquetsMaker Hide Screen -->
-  <screen name="AutoBouquetsMaker_HideSections" position="center,center" size=" 840,570" >
-    <widget source="Title" render="Label" position="270,15" size="540,43" font="Regular;35" halign="right" backgroundColor="black" transparent="1" />
-    <widget source="list" render="Listbox" position="30,81" size="780,450" font="Regular;16" scrollbarMode="showOnDemand" transparent="1" backgroundColorSelected="grey" foregroundColorSelected="black">
-      <convert type="TemplatedMultiContent">
-	{"template": [
-		MultiContentEntryPixmapAlphaTest(pos = (10, 0), size = (32, 32), png = 0),
-		MultiContentEntryText(pos = (47, 0), size = (400, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
-		MultiContentEntryText(pos = (450, 0), size = (300, 30), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 2),
-		],
-		"fonts": [gFont("Regular", 24)],
-		"itemHeight": 30
-		}
-    </convert>
-    </widget>
-    <ePixmap pixmap="skin_default/buttons/red.png" position=" 30,570" size="35,27" alphatest="blend" />
-    <ePixmap pixmap="skin_default/buttons/green.png" position="226,570" size="35,27" alphatest="blend" />
-    <widget name="key_red" position=" 80,573" size="132,26" zPosition="1" font="Regular;22" halign="left" foregroundColor="black" backgroundColor="grey" transparent="1" />
-    <widget name="key_green" position="280,573" size="141,26" zPosition="1" font="Regular;22" halign="left" foregroundColor="black" backgroundColor="grey" transparent="1" />
-  </screen>
-  <screen name="Downloads" position="center,center" size="840,605" title="AutoBouquets Setup" >
-    <eLabel text="XTREND support Team" position="17,20" size="400,36" font="Regular;32" halign="left" foregroundColor="white" transparent="1" />
-    <!--widget name="text" position="0,0" size="550,25" font="Regular;20" /-->
-    <widget name="list" position="25,119" size="500,350" scrollbarMode="showOnDemand" transparent="1" />
-    <!--widget name="pixmap" position="200,0" size="190,250" /-->
-    <!--eLabel position="70,100" zPosition="-1" size="100,69" backgroundColor="#222222" /-->
-    <widget name="info" position="42,136" zPosition="4" size="350,300" font="Regular;18" foregroundColor="white" transparent="1" halign="left" valign="center" />
-  </screen>
-  <screen name="XtrendMain" position="center,center" size="832,574" backgroundColor="un161616" title="Xtrend Support Forum">
-    <ePixmap position="73,16" size="794,80" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Xtrend/pic/Xtrend.png" alphatest="blend" zPosition="1" />
-    <widget name="menu" position="-1,105" size="781,400" scrollbarMode="showNever" zPosition="1" />
-    <widget name="user" position="1,107" size="804,400" backgroundColor="un161616" foregroundColor="white" font="Regular;20" halign="left" zPosition="1" />
-    <ePixmap pixmap="skin_default/red.png" position="17,556" size="151,51" alphatest="on" />
-    <ePixmap pixmap="skin_default/green.png" position="202,556" size="151,51" alphatest="on" />
-    <ePixmap pixmap="skin_default/yellow.png" position="470,556" size="150,50" alphatest="on" />
-    <ePixmap pixmap="skin_default/blue.png" position="654,556" size="150,50" alphatest="on" />
-    <eLabel text="Favorites" position="59,528" size="87,22" font="Regular;17" backgroundColor="background" foregroundColor="white" transparent="1" />
-    <eLabel text="Lastest Topics" position="227,528" size="126,22" font="Regular;17" backgroundColor="background" foregroundColor="white" transparent="1" />
-    <eLabel text="Background" position="500,528" size="114,22" font="Regular;17" backgroundColor="background" foregroundColor="white" transparent="1" />
-    <eLabel text="Hide" position="715,526" size="87,22" font="Regular;17" backgroundColor="background" foregroundColor="white" transparent="1" />
-  </screen>
-  <screen name="XtrendThread" position="center,center" size="832,574" backgroundColor="un161616" title="Xtrend Support Forum">
-    <ePixmap position="73,16" size="794,80" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Xtrend/pic/Xtrend.png" alphatest="blend" zPosition="1" />
-    <widget name="menu" position="-1,105" size="781,400" scrollbarMode="showNever" zPosition="1" />
-    <widget name="textpage" position="10,107" size="772,400" backgroundColor="un161616" foregroundColor="white" font="Regular;20" halign="left" zPosition="1" />
-    <ePixmap pixmap="skin_default/red.png" position="17,556" size="151,51" alphatest="on" />
-    <ePixmap pixmap="skin_default/green.png" position="202,556" size="151,51" alphatest="on" />
-    <ePixmap pixmap="skin_default/yellow.png" position="470,556" size="150,50" alphatest="on" />
-    <ePixmap pixmap="skin_default/blue.png" position="654,556" size="150,50" alphatest="on" />
-    <eLabel text="Favorites" position="59,528" size="87,22" font="Regular;17" backgroundColor="background" foregroundColor="white" transparent="1" />
-    <eLabel text="Lastest Topics" position="227,528" size="126,22" font="Regular;17" backgroundColor="background" foregroundColor="white" transparent="1" />
-    <eLabel text="Plugin Update" position="500,528" size="114,22" font="Regular;17" backgroundColor="background" foregroundColor="white" transparent="1" />
-    <eLabel text="Hide" position="715,526" size="87,22" font="Regular;17" backgroundColor="background" foregroundColor="white" transparent="1" />
-  </screen>
-  <screen name="getNumber" position="center,center" size="185,55" backgroundColor="background"  title=" ">
-    <widget name="number" position="0,0" size="185,55" font="Regular;30" halign="center" valign="center" transparent="1" zPosition="1" />
-  </screen>
-  <screen name="XtrendFav" position="center,center" size="620,510" title=" ">
-    <ePixmap position="10,10" size="600,80" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Xtrend/pic/Xtrend.png" alphatest="blend" zPosition="1" />
-    <widget name="label" position="258,100" size="250,20" font="Regular;16" foregroundColor="white" backgroundColor="black" halign="left" transparent="1" zPosition="2" />
-    <ePixmap position="234,100" size="18,48" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Xtrend/pic/buttons/red.png" alphatest="blend" zPosition="2" />
-    <widget name="favmenu" position="10,130" size="600,375" scrollbarMode="showOnDemand" zPosition="1" />
-  </screen>
-   	<!-- Picture in picture -->
-=======
 		</widget>
 	</screen>
 	<!-- Nim setup -->
@@ -1000,7 +804,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		<widget name="servicelist" position="10,10" size="500,350" scrollbarMode="showOnDemand" />
 	</screen>
 	<!-- Picture in picture -->
->>>>>>> parent of 12ae7f6... New skin default
 	<screen name="PictureInPicture" position="400,60" zPosition="-1" size="240,192" flags="wfNoBorder">
 		<widget name="video" position="0,0" size="240,192" backgroundColor="transparent" />
 	</screen>
@@ -1021,28 +824,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 	<screen name="PiPSetup" position="center,center" size="600,150" backgroundColor="transparent" flags="wfNoBorder" title="PiP setup">
 		<widget name="text" position="0,0" size="600,150" font="Regular;23" />
 	</screen>
-<<<<<<< HEAD
-      
-</skin>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
 	<!-- Plugin browser -->
 	<screen name="PluginBrowser" position="center,center" size="400,405" title="Plugin browser">
 		<ePixmap pixmap="skin_default/buttons/red-big.png" position="0,0" size="200,40" alphatest="on" />
@@ -1145,7 +926,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		<eLabel text="Cancel" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 		<eLabel text="Scan" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="introduction" position="0,0" size="0,0" font="Regular;23" />
->>>>>>> parent of 12ae7f6... New skin default
 
 		<ePixmap pixmap="skin_default/icons/dish_scan.png" position="5,75" zPosition="0" size="119,110" transparent="1" alphatest="on" />
 		<widget source="Frontend" render="Label" position="190,60" zPosition="2" size="260,20" font="Regular;19" halign="center" valign="center" transparent="1">
@@ -1512,5 +1292,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		<widget name="filelist" position="5,50" size="510,370" scrollbarMode="showOnDemand" />
 	</screen>
 </skin>
+
+
 
 
