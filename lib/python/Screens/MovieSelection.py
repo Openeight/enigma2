@@ -47,6 +47,7 @@ config.movielist.play_audio_internal = ConfigYesNo(default=True)
 config.movielist.settings_per_directory = ConfigYesNo(default=True)
 config.movielist.root = ConfigSelection(default="/media", choices=["/","/media","/media/hdd","/media/hdd/movie"])
 config.movielist.hide_extensions = ConfigYesNo(default=False)
+config.movielist.hide_images = ConfigYesNo(default=True)
 
 userDefinedButtons = None
 last_selected_dest = []
@@ -241,6 +242,7 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 		configList = [
 			getConfigListEntry(_("Sort"), cfg.moviesort),
 			getConfigListEntry(_("Show extended description"), cfg.description),
+			getConfigListEntry(_("Show image items (.jpg, .gif, .bmp, .png)"), config.movielist.hide_images),
 			getConfigListEntry(_("Type"), cfg.listtype),
 			getConfigListEntry(_("Use individual settings for each directory"), config.movielist.settings_per_directory),
 			getConfigListEntry(_("Behavior when a movie reaches the end"), config.usage.on_movie_eof),
@@ -296,6 +298,7 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 			config.movielist.listtype.save()
 			config.movielist.description.save()
 			config.usage.on_movie_eof.save()
+			config.movielist.hide_images.save()
 		self.close(True)
 
 	def cancel(self):
@@ -1142,7 +1145,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 	def setCurrentRef(self, path):
 		self.current_ref = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + path)
 		# Magic: this sets extra things to show
-		self.current_ref.setName('8192:jpg 8192:png 8192:gif 8192:bmp')
+		if config.movielist.hide_images.value:
+		        self.current_ref.setName('8192:jpg 8192:png 8192:gif 8192:bmp')
 
 	def reloadList(self, sel = None, home = False):
 		self.reload_sel = sel
