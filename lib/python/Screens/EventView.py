@@ -71,7 +71,9 @@ class EventViewBase:
 		self["datetime"] = Label()
 		self["channel"] = Label()
 		self["duration"] = Label()
-		self["key_red"] = Button("")
+		self["now"] = Label()
+		self["next"] = Label()
+                self["key_red"] = Button("")
 		if similarEPGCB is not None:
 			self.SimilarBroadcastTimer = eTimer()
 			self.SimilarBroadcastTimer.callback.append(self.getSimilarEvents)
@@ -101,14 +103,20 @@ class EventViewBase:
 	def onCreate(self):
 		self.setService(self.currentService)
 		self.setEvent(self.event)
+		self["now"].show()
+		self["next"].hide()
 
 	def prevEvent(self):
 		if self.cbFunc is not None:
 			self.cbFunc(self.setEvent, self.setService, -1)
+			self["now"].show()
+			self["next"].hide()
 
 	def nextEvent(self):
 		if self.cbFunc is not None:
 			self.cbFunc(self.setEvent, self.setService, +1)
+			self["next"].show()
+			self["now"].hide()
 
 	def removeTimer(self, timer):
 		timer.afterEvent = AFTEREVENT.NONE
@@ -213,7 +221,9 @@ class EventViewBase:
 		self["FullDescription"].setText(ext)
 		self["datetime"].setText(event.getBeginTimeString())
 		self["duration"].setText(_("%d min")%(event.getDuration()/60))
-		self["key_red"].setText("")
+		self["now"].setText(_("Now") + _(":"))
+		self["next"].setText(_("Next up") + _(":"))
+                self["key_red"].setText("")
 		if self.SimilarBroadcastTimer is not None:
 			self.SimilarBroadcastTimer.start(400,True)
 
