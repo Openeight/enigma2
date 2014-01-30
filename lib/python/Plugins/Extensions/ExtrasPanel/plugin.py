@@ -260,7 +260,7 @@ class PanelList(MenuList):
 def MenuEntryItem(entry):
 	res = [entry]
 	#res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 5), size=(100, 40), png=entry[0]))  # png vorn
-	res.append(MultiContentEntryText(pos=(68, 10), size=(440, 40), font=0, text=entry[1]))  # menupunkt
+	res.append(MultiContentEntryText(pos=(35, 5), size=(440, 40), font=0, text=entry[1]))  # menupunkt
 	return res
 ###################  Max Test ###################
 
