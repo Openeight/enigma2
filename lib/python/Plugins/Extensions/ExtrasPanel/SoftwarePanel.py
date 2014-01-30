@@ -28,8 +28,8 @@ class SoftwarePanel(Screen):
 			<widget name="feedstatusRED" position="60,14" size="200,30" zPosition="1" font="Regular;25" halign="left" transparent="1" />
 			<widget name="feedstatusYELLOW" position="60,46" size="200,30" zPosition="1" font="Regular;25" halign="left" transparent="1" />
 			<widget name="feedstatusGREEN" position="60,78" size="200,30" zPosition="1" font="Regular;25" halign="left" transparent="1" />
-			<widget name="packagetext" position="180,50" size="350,30" zPosition="1" font="Regular;25" halign="right" transparent="1" />
-			<widget name="packagenr" position="511,50" size="50,30" zPosition="1" font="Regular;25" halign="right" transparent="1" />
+			<widget name="packagetext" position="276,50" size="247,30" zPosition="1" font="Regular;25" halign="right" transparent="1" />
+			<widget name="packagenr" position="529,50" size="69,30" zPosition="1" font="Regular;25" halign="left" transparent="1" />
 			<widget source="list" render="Listbox" position="10,120" size="630,365" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 					{"template": [
@@ -43,10 +43,12 @@ class SoftwarePanel(Screen):
 					}
 				</convert>
 			</widget>
-			<ePixmap pixmap="skin_default/buttons/red.png" position=" 30,570" size="35,27" alphatest="blend" />
-			<widget name="key_green_pic" pixmap="skin_default/buttons/green.png" position="290,570" size="35,27" alphatest="blend" />
-			<widget name="key_red" position=" 80,573" size="200,26" zPosition="1" font="Regular;22" halign="left" transparent="1" />
-			<widget name="key_green" position="340,573" size="200,26" zPosition="1" font="Regular;22" halign="left" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="30,560" size="138,40" alphatest="blend" />
+			<widget name="key_green_pic" pixmap="skin_default/buttons/green.png" position="255,560" size="138,40" alphatest="blend" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="482,560" size="138,40" alphatest="blend" />
+                        <widget name="key_red" position="38,570" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
+			<widget name="key_green" position="264,570" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
+                        <widget name="key_yellow" position="489,570" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
 		</screen> """
 		self.skin = skin
 		self.list = []
@@ -60,6 +62,7 @@ class SoftwarePanel(Screen):
 		self['key_red_pic'] = Pixmap()
 		self['key_red'] = Label(_("Cancel"))
 		self['key_green'] = Label(_("Update"))
+		self['key_yellow'] = Label(_("Update Log"))
 		self['packagetext'] = Label(_("Updates Available:"))
 		self['packagenr'] = Label("0")
 		self['feedstatusRED'] = Label("<  " + _("feed status"))
