@@ -11,6 +11,8 @@ from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Screens.Standby import TryQuitMainloop
+from Screens.Downloads import Getipklist
+from Screens.Ipkremove import Ipkremove
 
 class SkinSetup(Screen):
     def __init__(self, session):
@@ -29,7 +31,7 @@ class SkinSetup(Screen):
 
     def startSession(self):
                 self.res = []
-                self.res.append(_("Install Skin"))
+                self.res.append(_("Skin Manager"))
                 self.res.append(_("Configure mainmenu"))
                 self.res.append(_("Configure second-infobar"))
 		self.res.append(_("Show Picons in Channel List"))
@@ -40,7 +42,7 @@ class SkinSetup(Screen):
     def okClicked(self):
                 ires = self["list"].getSelectionIndex()
 		if ires == 0:
-		        self.startskin()
+		        self.session.open(SettingsA)  
 		elif ires == 1:
 		        self.session.open(SettingsB)  
                 elif ires == 2:
@@ -53,13 +55,6 @@ class SkinSetup(Screen):
 		else:
                         self.close()
                         
-    def startskin(self):                         
-                try:        
-                        from Plugins.SystemPlugins.SkinSelector.plugin import SkinSelector
-                        self.session.open(SkinSelector) 
-                except:        
-                        self.session.open(MessageBox, _("SystemPlugins SkinSelector is not installed !"), MessageBox.TYPE_ERROR, timeout = 10)
-                        self.close()
 
     def xtaskin(self):                         
                 try:        
@@ -69,6 +64,48 @@ class SkinSetup(Screen):
                         self.session.open(MessageBox, _("Plugin iSkin is not installed !"), MessageBox.TYPE_ERROR, timeout = 10)
                         self.close()
 
+class SettingsA(Screen):
+    def __init__(self, session):
+		Screen.__init__(self, session)
+                self.skinName = "Settings"
+                title = "Skin Manager"
+                self.setTitle(title)
+        	self["list"] = MenuList([])
+		self["info"] = Label()
+#		self["KEY_HELP"] = Button(_("HELP"))
+#                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
+                self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
+                self.cur = config.usage.service_icon_enable.value
+                txt = "Here you can download, install or remove skins"
+                self["info"].setText(txt)
+                self.onLayoutFinish.append(self.startSession)
+
+    def startSession(self):
+                self.res = []
+                self.res.append("Download skin")
+                self.res.append("Install skin")
+                self.res.append("Remove skin")
+                self.res.append("Exit")
+                self["list"].setList(self.res)
+    
+    def okClicked(self):
+                ires = self["list"].getSelectionIndex()
+		if ires == 0:
+		        self.session.open(Getipklist)
+		elif ires == 1:
+		        self.startskin()        
+		elif ires == 2:
+                        self.session.open(Ipkremove)
+		else:
+                        self.close()
+                        
+    def startskin(self):                         
+                try:        
+                        from Plugins.SystemPlugins.SkinSelector.plugin import SkinSelector
+                        self.session.open(SkinSelector) 
+                except:        
+                        self.session.open(MessageBox, _("SystemPlugins SkinSelector is not installed !"), MessageBox.TYPE_ERROR, timeout = 10)
+                        self.close()
 
 
 class SettingsB(Screen):
@@ -232,6 +269,13 @@ class SettingsD(Screen):
     	        config.usage.service_icon_enable.save()
 #    	        self.session.open(TryQuitMainloop, 3)
     
+
+
+
+
+
+
+
 
 
 

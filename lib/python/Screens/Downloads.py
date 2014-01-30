@@ -22,7 +22,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Plugins.Plugin import PluginDescriptor
 from Components.ActionMap import ActionMap
 from Screens.InputBox import InputBox
-from Ipkinstall import Ipkinstall
+#from Ipkinstall import Ipkinstall
 
 from twisted.web.client import getPage, downloadPage
 import os
@@ -154,10 +154,11 @@ class Getipklist(Screen):
     skin = """
 		<screen position="center,center" size="800,500" title=" " >
 			<widget name="text" position="100,20" size="200,30" font="Regular;20" halign="left" />
+                        <ePixmap position="300,25"   zPosition="2" size="140,40" pixmap="skin_default/buttons/button_red.png" transparent="1" alphatest="on" />
                         <widget name="list" position="50,80" size="730,300" scrollbarMode="showOnDemand" />
 
-                        <ePixmap name="red"    position="0,450"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-	                <ePixmap name="green"  position="140,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+                        <ePixmap name="red"    position="0,460"   zPosition="2" size="140,40" pixmap="skin_default/buttons/button_red.png" transparent="1" alphatest="on" />
+	                <ePixmap name="green"  position="140,460" zPosition="2" size="140,40" pixmap="skin_default/buttons/button_green.png" transparent="1" alphatest="on" />
 
 	                <widget name="key_red" position="0,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
 	                <widget name="key_green" position="140,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
@@ -168,7 +169,9 @@ class Getipklist(Screen):
 
 
 
-    def __init__(self, session, addon):
+#    def __init__(self, session, addon):
+    def __init__(self, session):
+
 		self.skin = Getipklist.skin
 		Screen.__init__(self, session)
 
@@ -189,9 +192,9 @@ class Getipklist(Screen):
 		}, -1)
 	        self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Select"))
-		title = addon + " List"
+#		title = addon + " List"
+                title = "Skins List"
 		self["title"] = Button(title)
-                self.addon = addon
                 self.icount = 0
                 self.names = []
                 self.onLayoutFinish.append(self.openTest)
@@ -200,7 +203,7 @@ class Getipklist(Screen):
                 self["info"].setText("Downloading list...")
                 testno = 1
                 
-                xurl = "http://www.et-view-support.com/addons/XTA-team/" + self.addon + "/list.txt"
+                xurl = "http://www.xtrend-alliance.com/skin/list.txt"
                 print "xurl =", xurl
                 getPage(xurl).addCallback(self.gotPage).addErrback(self.getfeedError)
 
@@ -248,9 +251,9 @@ class Getipklist(Screen):
                 print "Here in okClicked A"
 	        sel = self["list"].getSelectionIndex()
                 ipk = self.data[sel]
-                addon = self.addon
-#                self.session.open(Getipk, ipk, addon)
-                ipkinst = Getipk(self.session, ipk, addon) 
+#                addon = self.addon
+#                ipkinst = Getipk(self.session, ipk, addon) 
+                ipkinst = Getipk(self.session, ipk) 
                 ipkinst.openTest()
                 
     def keyLeft(self):
@@ -282,7 +285,8 @@ class Getipk(Screen):
 	                <widget name="key_blue" position="420,450" size="140,50" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /-->
                 </screen>"""
  
-    def __init__(self, session, ipk, addon):
+#    def __init__(self, session, ipk, addon):
+    def __init__(self, session, ipk):
 		Screen.__init__(self, session)
                 self.skin = Getipk.skin
                 title = "Addon Install"
@@ -307,10 +311,9 @@ class Getipk(Screen):
                 print "Getipk : ipk =", ipk
                 self.icount = 0
                 self.ipk = ipk
-                self.addon = addon
+#                self.addon = addon
                  
                 self.onLayoutFinish.append(self.openTest)
-#                self["info"].setText("Must do (1) Download  (2) Play. \n\nVideo selected :-  " + self.name)
                 txt = "You have selected\n\n" + ipk + "\n\n\nPlease press Download"
                 self["info"].setText(txt)
 
@@ -321,7 +324,7 @@ class Getipk(Screen):
                 if not os.path.exists("/etc/ipkinst"): 
                         cmd = "mkdir -p /etc/ipkinst"
                         os.system(cmd)
-                xurl1 = "http://www.et-view-support.com/addons/XTA-team/" + self.addon + "/"        
+                xurl1 = "http://www.xtrend-alliance.com/skin/"      
                 print "xurl1 =", xurl1
                 xurl2 = xurl1 + self.ipk
                 print "xurl2 =", xurl2
@@ -603,6 +606,11 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name="PluginDownload", description="Download/install plugins ", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+
+
+
+
+
 
 
 
