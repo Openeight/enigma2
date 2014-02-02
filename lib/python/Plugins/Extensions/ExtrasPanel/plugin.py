@@ -30,6 +30,7 @@ from Addons import AddonsFileBrowser
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getBackupFilename, RestoreMenu
 from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
 from Screens.SkinSetup import SkinSetup
+from Screens.Ipkuninstall import Ipkuninstall
 from os import system, listdir, symlink, unlink, readlink, path as os_path, stat, mkdir, popen, makedirs, access, rename, remove, W_OK, R_OK, F_OK, chmod, walk, getcwd, chdir, statvfs
 from __init__ import _
 
@@ -498,6 +499,8 @@ class Extraspanel(Screen, InfoBarPiP):
 			self.session.open(PacketManager, self.skin)
 		elif menu == 'IPK-installManager':	
 			self.session.open(AddonsFileBrowser)
+		elif menu == 'IPK-uninstaller':	
+			self.session.open(Ipkuninstall)	
 		elif menu == "MountManager":
 			self.session.open(HddMount)
 		elif menu == "SundtekControlCenter":
@@ -529,6 +532,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('JobManager'), _("JobManager"), 'JobManager')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('SwapManager'), _("SwapManager"), 'SwapManager')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('IPK-installManager'), _("IPK-installManager"), 'IPK-installManager')))
+		self.tlist.append(MenuEntryItem((InfoEntryComponent('IPK-uninstaller'), _("IPK-uninstaller"), 'IPK-uninstaller')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('SundtekControlCenter'), _("SundtekControlCenter"), 'SundtekControlCenter')))
 		self.tlist.append(MenuEntryItem((InfoEntryComponent('PacketManager'), _("PacketManager"), 'PacketManager')))		
 		if os.path.isfile("/usr/lib/enigma2/python/Plugins/Extensions/MultiQuickButton/plugin.pyo") is True:
@@ -1326,6 +1330,7 @@ class Info(Screen):
 		except:
 			o = ''
 			return o
+
 
 
 
