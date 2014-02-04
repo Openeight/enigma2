@@ -20,7 +20,7 @@ from Screens import ScreenSaver
 from Screens import Standby
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Dish import Dish
-from Screens.EventView import EventViewEPGSelect, EventViewSimple
+from Screens.EventView import EventViewEPGSelect, EventViewSimple, EventViewRecording
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Screens.MinuteInput import MinuteInput
@@ -579,7 +579,12 @@ class InfoBarChannelSelection:
 							self.servicelist.prevBouquet()
 					self.servicelist.moveUp()
 					cur = self.servicelist.getCurrentSelection()
-					if cur and (cur.toString() == prev or isPlayableForCur(cur)):
+					if cur:
+						if self.servicelist.dopipzap:
+							isPlayable = self.session.pip.isPlayableForPipService(cur)
+						else:
+							isPlayable = isPlayableForCur(cur)
+					if cur and (cur.toString() == prev or isPlayable):
 							break
 		else:
 			self.servicelist.moveUp()
@@ -596,7 +601,12 @@ class InfoBarChannelSelection:
 					else:
 						self.servicelist.moveDown()
 					cur = self.servicelist.getCurrentSelection()
-					if cur and (cur.toString() == prev or isPlayableForCur(cur)):
+					if cur:
+						if self.servicelist.dopipzap:
+							isPlayable = self.session.pip.isPlayableForPipService(cur)
+						else:
+							isPlayable = isPlayableForCur(cur)
+					if cur and (cur.toString() == prev or isPlayable):
 							break
 		else:
 			self.servicelist.moveDown()
@@ -631,6 +641,7 @@ class InfoBarSimpleEventView:
 		self["EPGActions"] = HelpableActionMap(self, "InfobarEPGActions",
 			{
 				"showEventInfo": (self.openEventView, _("Show event details")),
+				"showEventInfoSingleEPG": (self.openEventView, _("Show event details")),
 				"showInfobarOrEpgWhenInfobarAlreadyVisible": self.showEventInfoWhenNotVisible,
 			})
 
@@ -728,10 +739,13 @@ class InfoBarEPG:
 				"showInfobarOrEpgWhenInfobarAlreadyVisible": self.showEventInfoWhenNotVisible,
 			})
 
-	def getEPGPluginList(self):
-		pluginlist = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO)]
+	def getEPGPluginList(self, getAll=False):
+		pluginlist = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO) \
+				if 'selectedevent' not in p.__call__.func_code.co_varnames]
 		if pluginlist:
-			pluginlist.append((_("Show EPG for current channel..."), self.openSingleServiceEPG))
+			from Components.ServiceEventTracker import InfoBarCount
+			if getAll or InfoBarCount == 1:
+				pluginlist.append((_("Show EPG for current channel..."), self.openSingleServiceEPG))
 			pluginlist.append((_("Multi EPG"), self.openMultiServiceEPG))
 			pluginlist.append((_("Current event EPG"), self.openEventView))
 		return pluginlist
@@ -870,19 +884,23 @@ class InfoBarEPG:
 		self.serviceSel = None
 
 	def openSingleServiceEPG(self):
-		ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		if ref:
-			if self.servicelist.getMutableList() is not None: # bouquet in channellist
-				current_path = self.servicelist.getRoot()
-				services = self.getBouquetServices(current_path)
-				self.serviceSel = SimpleServicelist(services)
-				if self.serviceSel.selectService(ref):
-					self.epg_bouquet = current_path
-					self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref, self.zapToService, serviceChangeCB = self.changeServiceCB)
+		from Components.ServiceEventTracker import InfoBarCount
+		if InfoBarCount > 1:
+			self.openMultiServiceEPG(False)
+		else:
+			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			if ref:
+				if self.servicelist.getMutableList() is not None: # bouquet in channellist
+					current_path = self.servicelist.getRoot()
+					services = self.getBouquetServices(current_path)
+					self.serviceSel = SimpleServicelist(services)
+					if self.serviceSel.selectService(ref):
+						self.epg_bouquet = current_path
+						self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref, self.zapToService, serviceChangeCB = self.changeServiceCB)
+					else:
+						self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref)
 				else:
-					self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref)
-			else:
-				self.session.open(EPGSelection, ref)
+					self.session.open(EPGSelection, ref)
 
 	def runPlugin(self, plugin):
 		plugin(session = self.session, servicelist = self.servicelist)
@@ -900,7 +918,7 @@ class InfoBarEPG:
 			answer[1]()
 
 	def SelectDefaultInfoPlugin(self):
-		self.session.openWithCallback(self.DefaultInfoPluginChosen, ChoiceBox, title=_("Please select a default EPG type..."), list = self.getEPGPluginList(), skin_name = "EPGExtensionsList")
+		self.session.openWithCallback(self.DefaultInfoPluginChosen, ChoiceBox, title=_("Please select a default EPG type..."), list = self.getEPGPluginList(True), skin_name = "EPGExtensionsList")
 
 	def DefaultInfoPluginChosen(self, answer):
 		if answer is not None:
@@ -921,7 +939,7 @@ class InfoBarEPG:
 			answer[1]()
 
 	def SelectDefaultGuidePlugin(self):
-		self.session.openWithCallback(self.DefaultGuidePluginChosen, ChoiceBox, title=_("Please select a default EPG type..."), list = self.getEPGPluginList(), skin_name = "EPGExtensionsList")
+		self.session.openWithCallback(self.DefaultGuidePluginChosen, ChoiceBox, title=_("Please select a default EPG type..."), list = self.getEPGPluginList(True), skin_name = "EPGExtensionsList")
 
 	def DefaultGuidePluginChosen(self, answer):
 		if answer is not None:
@@ -971,24 +989,40 @@ class InfoBarEPG:
 		self.openMultiServiceEPG()		
 
 	def openEventView(self):
-		ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		self.getNowNext()
-		epglist = self.epglist
-		if not epglist:
-			self.is_now_next = False
-			epg = eEPGCache.getInstance()
-			ptr = ref and ref.valid() and epg.lookupEventTime(ref, -1)
+		from Components.ServiceEventTracker import InfoBarCount
+		if InfoBarCount > 1:
+			epglist = [ ]
+			self.epglist = epglist
+			service = self.session.nav.getCurrentService()
+			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			info = service.info()
+			ptr=info.getEvent(0)
 			if ptr:
 				epglist.append(ptr)
-				ptr = epg.lookupEventTime(ref, ptr.getBeginTime(), +1)
+			ptr=info.getEvent(1)
+			if ptr:
+				epglist.append(ptr)
+			if epglist:
+				self.session.open(EventViewRecording, epglist[0], ServiceReference(ref), self.eventViewCallback, self.openMultiServiceEPG, self.openSimilarList)
+		else:
+			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			self.getNowNext()
+			epglist = self.epglist
+			if not epglist:
+				self.is_now_next = False
+				epg = eEPGCache.getInstance()
+				ptr = ref and ref.valid() and epg.lookupEventTime(ref, -1)
 				if ptr:
 					epglist.append(ptr)
-		else:
-			self.is_now_next = True
-		if epglist:
-			self.eventView = self.session.openWithCallback(self.closed, EventViewEPGSelect, epglist[0], ServiceReference(ref), self.eventViewCallback, self.openSingleServiceEPG, self.openMultiServiceEPG, self.openSimilarList)
-			self.dlg_stack.append(self.eventView)
-		else:
+					ptr = epg.lookupEventTime(ref, ptr.getBeginTime(), +1)
+					if ptr:
+						epglist.append(ptr)
+			else:
+				self.is_now_next = True
+			if epglist:
+				self.eventView = self.session.openWithCallback(self.closed, EventViewEPGSelect, epglist[0], ServiceReference(ref), self.eventViewCallback, self.openSingleServiceEPG, self.openMultiServiceEPG, self.openSimilarList)
+				self.dlg_stack.append(self.eventView)
+		if not epglist:
 			print "no epg for the service avail.. so we show multiepg instead of eventinfo"
 			self.openMultiServiceEPG(False)
 
@@ -1925,7 +1959,7 @@ class InfoBarPiP:
 		else:
 			self.session.pip = self.session.instantiateDialog(PictureInPicture)
 			self.session.pip.show()
-			newservice = self.servicelist.servicelist.getCurrent()
+			newservice = self.session.nav.getCurrentlyPlayingServiceReference() or self.servicelist.servicelist.getCurrent()
 			if self.session.pip.playService(newservice):
 				self.session.pipshown = True
 				self.session.pip.servicePath = self.servicelist.getCurrentServicePath()
