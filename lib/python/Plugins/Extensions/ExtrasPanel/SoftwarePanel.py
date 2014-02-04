@@ -1,6 +1,6 @@
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
-from Screens.About import CommitInfo
+from Screens.About import * 
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -18,7 +18,7 @@ class SoftwarePanel(Screen):
 
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _("Software Panel"))
+		Screen.setTitle(self, _("OpenXTA Software Panel"))
 		skin = """
 		<screen name="SoftwarePanel" position="center,center" size="650,605" title="Software Panel">
 			<widget name="a_off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/pics/aoff.png" position="10,10" zPosition="1" size="36,97" alphatest="on" />
@@ -44,11 +44,13 @@ class SoftwarePanel(Screen):
 				</convert>
 			</widget>
 			<ePixmap pixmap="skin_default/buttons/red.png" position="30,560" size="138,40" alphatest="blend" />
-			<widget name="key_green_pic" pixmap="skin_default/buttons/green.png" position="255,560" size="138,40" alphatest="blend" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="482,560" size="138,40" alphatest="blend" />
+                        <widget name="key_green_pic" pixmap="skin_default/buttons/green.png" position="180,560" size="138,40" alphatest="blend" />
+                        <ePixmap pixmap="skin_default/buttons/yellow.png" position="333,560" size="138,40" alphatest="blend" />
+                        <ePixmap pixmap="skin_default/buttons/blue.png" position="481,560" size="138,40" alphatest="blend" />
                         <widget name="key_red" position="38,570" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
-			<widget name="key_green" position="264,570" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
-                        <widget name="key_yellow" position="489,570" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
+                        <widget name="key_green" position="188,570" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
+                        <widget name="key_yellow" position="340,570" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
+                        <widget name="key_blue" position="491,570" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
 		</screen> """
 		self.skin = skin
 		self.list = []
@@ -62,7 +64,8 @@ class SoftwarePanel(Screen):
 		self['key_red_pic'] = Pixmap()
 		self['key_red'] = Label(_("Cancel"))
 		self['key_green'] = Label(_("Update"))
-		self['key_yellow'] = Label(_("Update Log"))
+		self['key_yellow'] = Label(_(""))
+		self['key_blue'] = Label(_("Setup Commits"))
 		self['packagetext'] = Label(_("Updates Available:"))
 		self['packagenr'] = Label("0")
 		self['feedstatusRED'] = Label("<  " + _("feed status"))
@@ -75,15 +78,21 @@ class SoftwarePanel(Screen):
 		self.trafficLight = 0
 		self.ipkg = IpkgComponent()
 		self.ipkg.addCallback(self.ipkgCallback)
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions", "SetupActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions", "SetupActions"],      
 		{
 			"cancel": self.Exit,
 			"green": self.Green,
-			"red": self.Exit,
-			"yellow": self.showCommitLog,
+			"blue": self.showCommitLogSetup,
+			"yellow": self.showCommitLog
 		}, -2)
 
-		self.onLayoutFinish.append(self.layoutFinished)
+		if config.CommitInfoSetup.commiturl.value == 'Enigma2':
+                        self["key_yellow"].setText("E2 Commits")
+                elif config.CommitInfoSetup.commiturl.value == 'XTA':
+                        self["key_yellow"].setText("XTA Commits")
+                elif config.CommitInfoSetup.commiturl.value == 'TechniHD':
+                        self["key_yellow"].setText("THD Commits")
+                self.onLayoutFinish.append(self.layoutFinished)
 
 	def Exit(self):
 		self.ipkg.stop()
@@ -108,7 +117,10 @@ class SoftwarePanel(Screen):
 				self.startActualUpdate(True)
 
 	def showCommitLog(self):
-		self.session.open(CommitInfo)
+                self.session.open(CommitInfo)
+        
+        def showCommitLogSetup(self):
+                self.session.open(CommitInfoSetup)
 
 	def startActualUpdate(self, answer):
 		if answer:

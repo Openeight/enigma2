@@ -7,10 +7,16 @@ from Components.About import about
 from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
 from Tools.Downloader import downloadWithProgress
+from Components.ConfigList import ConfigListScreen
+from Components.config import config, ConfigSubsection, ConfigSelection, getConfigListEntry
+from Components.Label import Label
 import re
 
 from Tools.StbHardware import getFPVersion
 from enigma import eTimer
+
+config.CommitInfoSetup = ConfigSubsection()
+config.CommitInfoSetup.commiturl = ConfigSelection(default='Source-Enigma2', choices=[('Enigma2', _('Source-Enigma2')), ('XTA', _('Skin-XTA')), ('TechniHD', _('Skin-TechniHD'))])
 
 class About(Screen):
 	def __init__(self, session):
@@ -79,7 +85,7 @@ class About(Screen):
 				"green": self.showTranslationInfo,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown
-			})
+			}, -2)
 
 	def showTranslationInfo(self):
 		self.session.open(TranslationInfo)
@@ -120,28 +126,37 @@ class TranslationInfo(Screen):
 			{
 				"cancel": self.close,
 				"ok": self.close,
-			})
+			}, -2)
 
 class CommitInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["CommitInfo", "About"]
 		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
-
-		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
+                self["Commits"] = Label()
+		self["actions"] = ActionMap(["ColorActions", "OkCancelActions", "SetupActions", "DirectionActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
+				"menu": self.keyMenu,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown
-			})
+			}, -2)
 
 		self.Timer = eTimer()
 		self.Timer.callback.append(self.downloadWebSite)
 		self.Timer.start(50, True)
 
 	def downloadWebSite(self):
-		url = 'http://github.com/XTAv2/Enigma2/commits/master'
+                if config.CommitInfoSetup.commiturl.value == 'Enigma2':
+                        self["Commits"].setText("Enigma2")
+                        url = 'http://github.com/XTAv2/Enigma2/commits/master'
+		elif config.CommitInfoSetup.commiturl.value == 'XTA':
+		        self["Commits"].setText("XTA")
+                        url = 'http://github.com/XTAv2/xta/commits/master'
+                elif config.CommitInfoSetup.commiturl.value == 'TechniHD':
+                        self["Commits"].setText("TechniHD")
+                        url = 'http://github.com/XTAv2/TechniHD/commits/master'
 		download = downloadWithProgress(url, '/tmp/.commits')
 		download.start().addCallback(self.download_finished).addErrback(self.download_failed)
 
@@ -165,3 +180,61 @@ class CommitInfo(Screen):
 		except:
 			commitlog = _("Currently the commit log cannot be retreived - please try later again")
 		self["AboutScrollLabel"].setText(commitlog)
+	
+	def keyMenu(self):
+                self.session.open(CommitInfoSetup)
+
+        def showTranslationInfo(self):
+		self.session.open(TranslationInfo)
+
+	def showAbout(self):
+		self.session.open(About)
+
+class CommitInfoSetup(Screen, ConfigListScreen):
+        skin = """
+	    <screen position="c-300,c-250" size="600,200" title="openXTA CommitInfoSetup">
+		    <widget name="config" position="25,25" scrollbarMode="showOnDemand" size="550,400" />
+		    <ePixmap pixmap="skin_default/buttons/red.png" position="20,e-45" size="140,40" alphatest="on" />
+		    <ePixmap pixmap="skin_default/buttons/green.png" position="160,e-45" size="140,40" alphatest="on" />
+		    <widget source="key_red" render="Label" position="20,e-45" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+		    <widget source="key_green" render="Label" position="160,e-45" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+	    </screen>"""
+	    
+        def __init__(self, session):
+                self.skin = CommitInfoSetup.skin
+                Screen.__init__(self, session)
+                self['key_red'] = StaticText(_('Cancel'))
+                self['key_green'] = StaticText(_('OK'))
+                self['actions'] = ActionMap(['SetupActions', 'ColorActions', 'EPGSelectActions', 'NumberActions'], 
+                {'ok': self.keyGo,
+                 'left': self.keyLeft,
+                 'right': self.keyRight,
+                 'save': self.keyGo,
+                 'cancel': self.keyCancel,
+                 'green': self.keyGo,
+                 'red': self.keyCancel}, -2)
+                  
+                self.list = []
+                ConfigListScreen.__init__(self, self.list, session=self.session)
+                self.list.append(getConfigListEntry(_('Select CommitInfo Log'), config.CommitInfoSetup.commiturl))
+                self['config'].list = self.list
+                self['config'].l.setList(self.list)
+        
+        def keyLeft(self):
+                ConfigListScreen.keyLeft(self)
+
+        def keyRight(self):
+                ConfigListScreen.keyRight(self)
+        
+        def keyGo(self):
+                for x in self['config'].list:
+                        x[1].save()
+                        
+                self.close()
+                 
+        def keyCancel(self):
+                for x in self['config'].list:
+                        x[1].cancel()
+
+                self.close()
+         
