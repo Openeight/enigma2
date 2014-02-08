@@ -16,7 +16,7 @@ from Tools.StbHardware import getFPVersion
 from enigma import eTimer
 
 config.CommitInfoSetup = ConfigSubsection()
-config.CommitInfoSetup.commiturl = ConfigSelection(default='Source-Enigma2', choices=[('Enigma2', _('Source-Enigma2')), ('XTA', _('Skin-XTA')), ('TechniHD', _('Skin-TechniHD'))])
+config.CommitInfoSetup.commiturl = ConfigSelection(default='Enigma2', choices=[('Enigma2', _('Source-Enigma2')), ('XTA', _('Skin-XTA')), ('TechniHD', _('Skin-TechniHD'))])
 
 class About(Screen):
 	def __init__(self, session):
