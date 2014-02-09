@@ -55,12 +55,6 @@ AC_ARG_WITH(boxtype,
 AC_SUBST(BOXTYPE)
 AC_DEFINE_UNQUOTED(BOXTYPE,"$BOXTYPE",[box type])
 
-AC_ARG_WITH(distro,
-	[  --with-distro=NAME distro name [[xtav2]]],
-	[DISTRO="$withval"],[DISTRO="xtav2"])
-AC_SUBST(DISTRO)
-AC_DEFINE_UNQUOTED(DISTRO,"$DISTRO",[distro name])
-
 AC_ARG_WITH(machinebrand,
 	[  --with-machinebrand=NAME brand name [[Vu,Xtrend,...]]],
 	[MACHINE_BRAND="$withval"],[MACHINE_BRAND="Vu+"])

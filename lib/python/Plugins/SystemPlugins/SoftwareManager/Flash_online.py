@@ -13,12 +13,12 @@ from Screens.Console import Console
 from Screens.HelpMenu import HelpableScreen
 from Screens.TaskView import JobView
 from Tools.Downloader import downloadWithProgress
-from enigma import getBoxType, getDistro
+from enigma import getBoxType
 import urllib2
 import os
 import shutil
-
-distro = getDistro()
+from boxbranding import getImageDistro
+distro = getImageDistro()
 
 #############################################################################################################
 image = 0 # 0=openATV / 1=openMips / 2=OpenXTA

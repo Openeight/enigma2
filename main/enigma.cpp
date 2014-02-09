@@ -137,7 +137,6 @@ int main(int argc, char **argv)
 
 	gst_init(&argc, &argv);
 
-	printf("Distro:  %s\n", DISTRO);
 	printf("Version: %s\n", IMAGEVERSION);
 	printf("Build:   %s\n", IMAGEBUILD);
 	printf("Brand:   %s\n", MACHINE_BRAND);
@@ -322,11 +321,6 @@ void runMainloop()
 const char *getEnigmaVersionString()
 {
 	return enigma2_version;
-}
-
-const char *getDistro()
-{
-	return DISTRO;
 }
 
 const char *getMachineBrand()
