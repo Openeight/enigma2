@@ -323,16 +323,6 @@ const char *getEnigmaVersionString()
 	return enigma2_version;
 }
 
-const char *getMachineBrand()
-{
-	return MACHINE_BRAND;
-}
-
-const char *getMachineName()
-{
-	return MACHINE_NAME;
-}
-
 const char *getImageVersionString()
 {
 	return IMAGEVERSION;
@@ -341,11 +331,6 @@ const char *getImageVersionString()
 const char *getBuildVersionString()
 {
 	return IMAGEBUILD;
-}
-
-const char *getDriverDateString()
-{
-	return DRIVERDATE;
 }
 
 const char *getBoxType()

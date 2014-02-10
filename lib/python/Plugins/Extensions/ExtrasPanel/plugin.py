@@ -4,6 +4,7 @@ from Screens.Ipkg import Ipkg
 from Components.SelectionList import SelectionList
 from Screens.NetworkSetup import *
 from enigma import *
+from boxbranding import getMachineBrand, getMachineName
 from Screens.Standby import *
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap 

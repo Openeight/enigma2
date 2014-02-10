@@ -17,7 +17,7 @@ from enigma import getBoxType
 import urllib2
 import os
 import shutil
-from boxbranding import getImageDistro
+from boxbranding import getImageDistro, getMachineBrand, getMachineName
 distro = getImageDistro()
 
 #############################################################################################################
@@ -25,7 +25,6 @@ image = 0 # 0=openATV / 1=openMips / 2=OpenXTA
 if distro.lower() == "openmips":
 	image = 1
 elif distro.lower() == "openatv":
-	from enigma import getMachineBrand, getMachineName
 	image = 0
 elif distro.lower() == "openxta":
 	image = 2
