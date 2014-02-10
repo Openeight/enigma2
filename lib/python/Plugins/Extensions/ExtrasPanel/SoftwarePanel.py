@@ -120,8 +120,16 @@ class SoftwarePanel(Screen):
                 self.session.open(CommitInfo)
         
         def showCommitLogSetup(self):
-                self.session.open(CommitInfoSetup)
-
+                self.session.openWithCallback(self.commitinfoupdate, CommitInfoSetup)
+                
+        def commitinfoupdate(self):
+        	if config.CommitInfoSetup.commiturl.value == 'Enigma2':
+                        self["key_yellow"].setText("E2 Commits")
+                elif config.CommitInfoSetup.commiturl.value == 'XTA':
+                        self["key_yellow"].setText("XTA Commits")
+                elif config.CommitInfoSetup.commiturl.value == 'TechniHD':
+                        self["key_yellow"].setText("THD Commits")
+               
 	def startActualUpdate(self, answer):
 		if answer:
 			from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin
