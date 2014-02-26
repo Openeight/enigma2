@@ -13,6 +13,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Tools.BoundFunction import boundFunction
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS
+from Components.Sources.List import List
 from Components.MenuList import MenuList
 from Components.FileList import FileList
 from Components.Label import Label
@@ -38,7 +39,6 @@ from __init__ import _
 import os
 import sys
 import re
-font = "Regular;16"
 import ServiceReference
 import time
 import datetime
@@ -213,9 +213,6 @@ def camstart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	return [
-
-	#// show Extraspanel in Main Menu
-#	PluginDescriptor(name="eXTrAs Panel", description="eXTrAs panel GUI 12/11/2012", where = PluginDescriptor.WHERE_MENU, fnc = Apanel),
 	#// autostart
 	PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART],fnc = camstart),
 	#// SwapAutostart
@@ -227,12 +224,22 @@ def Plugins(**kwargs):
 
 #############------- SKINS --------############################
 
-MENU_SKIN = """<screen position="center,center" size="500,370" title="EXTRAS Panel" >
+MENU_SKIN = """<screen name="Extraspanel" position="center,center" size="500,370" title="Extra Panel" >
 	<widget source="global.CurrentTime" render="Label" position="0, 340" size="500,24" font="Regular;20" foregroundColor="#FFFFFF" halign="right" transparent="1" zPosition="5">
 		<convert type="ClockToText">>Format%H:%M:%S</convert>
 	</widget>
 	<eLabel backgroundColor="#56C856" position="0,330" size="500,1" zPosition="0" />
-	<widget name="Mlist" position="10,10" size="480,300" zPosition="1" scrollbarMode="showOnDemand" backgroundColor="#251e1f20" transparent="1" />
+	<widget source="list" render="Listbox" position="10,25" size="500,280" scrollbarMode="showOnDemand" zPosition="1" transparent="1">
+                <convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (0, 5), size = (520, 28), font=0, text = 0), # menu_entry
+						MultiContentEntryText(pos = (0, 35), size = (520, 22), font=1, text = 2), # menu_entry_description
+					],
+				"fonts": [gFont("Regular",24),gFont("Regular",16)],
+				"itemHeight": 70
+				}
+	 	</convert>
+        </widget>
 	<widget name="label1" position="10,340" size="490,25" font="Regular;20" transparent="1" foregroundColor="#f2e000" halign="left" />
 </screen>"""
 
@@ -250,37 +257,10 @@ INFO_SKIN2 =  """<screen name="PANEL-Info2"  position="center,center" size="530,
 	<widget name="label1" position="10,50" size="510,340" font="Regular;15" zPosition="1" backgroundColor="#251e1f20" transparent="1" />
 </screen>"""
 
-
-###################  Max Test ###################
-class PanelList(MenuList):
-	def __init__(self, list, font0 = 24, font1 = 16, itemHeight = 50, enableWrapAround = True):
-		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", font0))
-		self.l.setFont(1, gFont("Regular", font1))
-		self.l.setItemHeight(itemHeight)
-
-def MenuEntryItem(entry):
-	res = [entry]
-	#res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 5), size=(100, 40), png=entry[0]))  # png vorn
-	res.append(MultiContentEntryText(pos=(35, 5), size=(440, 40), font=0, text=entry[1]))  # menupunkt
-	return res
-###################  Max Test ###################
-
 #g
 from Screens.PiPSetup import PiPSetup
 from Screens.InfoBarGenerics import InfoBarPiP
 #g
-
-def InfoEntryComponent(file):
-	png = LoadPixmap(cached = True, path = resolveFilename(SCOPE_CURRENT_SKIN, "pics/" + file + ".png"));
-	if png == None:
-		png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/pics/" + file + ".png")
-		if png == None:
-			png = LoadPixmap(cached = True, path = resolveFilename(SCOPE_CURRENT_SKIN, "pics/default.png"));
-			if png == None:
-				png = LoadPixmap("/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/pics/default.png")
-	res = (png)
-	return res
 
 class Extraspanel(Screen, InfoBarPiP):
 	servicelist = None
@@ -303,49 +283,35 @@ class Extraspanel(Screen, InfoBarPiP):
 			inEXTRASPanel = self
 		except:
 			print '[Extras-Panel] Error Hide'
-#		global servicelist
+
 		if services is not None:
 			self.servicelist = services
 		else:
 			self.servicelist = None
-		self.list = []
-		#// get the remote buttons
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"],
+
+		self["actions"] = ActionMap(["SetupActions", "DirectionActions", "ColorActions"],
 			{
-				"cancel": self.Exit,
+				"cancel": self.close, #self.Exit,
 				"upUp": self.up,
 				"downUp": self.down,
-				"ok": self.ok,
+				"ok": self.okpress,
 			}, 1)
 		
 		self["label1"] = Label(EXTRAS_Panel_Version)
-
-		self.Mlist = []
-		self.Mlist.append(MenuEntryItem((InfoEntryComponent('BackupFlashManager'), _("Backup/Flash"), ('BackupFlashManager'))))
-#		if Check_Softcam():
-		self.Mlist.append(MenuEntryItem((InfoEntryComponent('CamSetup'), _("CamSetup"), ('CamSetup'))))
-		self.Mlist.append(MenuEntryItem((InfoEntryComponent('SoftwareManager'), _("Image update"), ('software-update'))))
-#		self.Mlist.append(MenuEntryItem((InfoEntryComponent('KeymapSel'), _("Keymap Selection"), 'KeymapSel')))	
-		self.Mlist.append(MenuEntryItem((InfoEntryComponent('ImageTools'), _("Image Tools"), 'ImageTools')))
-		self.Mlist.append(MenuEntryItem((InfoEntryComponent('Infos'), _("Infos"), 'Infos')))
-		self.Mlist.append(MenuEntryItem((InfoEntryComponent('SkinSetup'), _("Skin Setup"), ('Skin-Setup'))))
-		self.onChangedEntry = []
-		if (getDesktop(0).size().width() == 1280):
-			self["Mlist"] = PanelList([])
-		else:
-			self["Mlist"] = PanelList([], font0=24, font1=15, itemHeight=50)
-		self["Mlist"].l.setList(self.Mlist)
-		menu = 0
-		self["Mlist"].onSelectionChanged.append(self.selectionChanged)
-
-	def getCurrentEntry(self):
-		if self['Mlist'].l.getCurrentSelection():
-			selection = self['Mlist'].l.getCurrentSelection()[0]
-			if (selection[0] is not None):
-				return selection[0]
-
-	def selectionChanged(self):
-		item = self.getCurrentEntry()
+		self.list = []
+		self['list'] = List(self.list)
+                self.onLayoutFinish.append(self.HomeMenulist)
+                menu = 0
+                
+        def HomeMenulist(self):
+                self.mylist = []
+                self.mylist.append(((_('Backup/Flash'), 'BackupFlashManager', _('Backup your Image/Settings or Flash a new Image'))))
+                self.mylist.append(((_('Cam Setup'), 'CamSetup', _('select your favourite cam'))))
+                self.mylist.append(((_('Image Update'), 'ImageUpdate', _('Software-Updates and Feed state'))))
+                self.mylist.append(((_('Image Tools'), 'ImageTools', _('Image-Tools'))))
+                self.mylist.append(((_('Infos'), 'Infos', _('Infos...'))))
+                self.mylist.append(((_('Skin Setup'), 'SkinSetup', _('Change your Skin/Gui and Skin settings'))))
+                self['list'].setList(self.mylist)
 
 	def setWindowTitle(self):
 		self.setTitle(_("XTA Panel"))
@@ -380,7 +346,14 @@ class Extraspanel(Screen, InfoBarPiP):
 		#// Not used
 		pass
 
-	def Exit(self):
+	def cancel(self):
+                self.close()
+ 
+#        def layoutFinished(self):
+#                idx = -1
+#                self['list'].index = idx
+                
+        def Exit(self):
 		#// Exit Extraspanel when pressing the EXIT button or go back to the MainMenu
 		global menu
 		if menu == 0:
@@ -407,21 +380,24 @@ class Extraspanel(Screen, InfoBarPiP):
 		else:
 			pass
 
-	def ok(self):
+	def okpress(self):
 		#// Menu Selection
-#		menu = self["Mlist"].getCurrent()
+
 		global INFOCONF
-		menu = self['Mlist'].l.getCurrentSelection()[0][2]
-		print '[Extras-Panel] MenuItem: ' + menu
+#		menu = self['list'].l.getCurrentSelection()[0][2]
+                current = self['list'].getCurrent()
+                if current:
+                        name = current[0]
+                        menu = current[1]
 		if menu == "BackupFlashManager":
 			self.BackupFlashManager()
-		elif menu == "backup-image":
+		elif menu == "BackupImage":
 			self.session.open(ImageBackup)
-		elif menu == "flash-image":
+		elif menu == "FlashImage":
 			self.session.open(FlashOnline)
-		elif menu == "backup-settings":
+		elif menu == "BackupSettings":
 			self.session.openWithCallback(self.backupDone,BackupScreen, runBackup = True)
-		elif menu == "restore-settings":
+		elif menu == "RestoreSettings":
 			self.backuppath = getBackupPath()
 			self.backupfile = getBackupFilename()
 			self.fullbackupfilename = self.backuppath + "/" + self.backupfile
@@ -429,9 +405,9 @@ class Extraspanel(Screen, InfoBarPiP):
 				self.session.openWithCallback(self.startRestore, MessageBox, _("Are you sure you want to restore your STB backup?\nSTB will restart after the restore"))
 			else:
 				self.session.open(MessageBox, _("Sorry no backups found!"), MessageBox.TYPE_INFO, timeout = 10)
-		elif menu == "backup-files":
+		elif menu == "BackupFiles":
 			self.session.openWithCallback(self.backupfiles_choosen,BackupSelection)
-		elif menu == "backuplocation":
+		elif menu == "BackupLocation":
 					parts = [ (r.description, r.mountpoint, self.session) for r in harddiskmanager.getMountedPartitions(onlyhotplug = False)]
 					for x in parts:
 						if not access(x[1], F_OK|R_OK|W_OK) or x[1] == '/':
@@ -441,15 +417,14 @@ class Extraspanel(Screen, InfoBarPiP):
 								
 		elif menu == "CamSetup":
 			self.session.open(Sc.ScNewSelection)
-		elif menu == "advancedrestore":
-					self.session.open(RestoreMenu, self.skin)	
-                elif menu == "Skin-Setup":
+		elif menu == "AdvancedRestore":
+		        self.session.open(RestoreMenu, self.skin)	
+                elif menu == "SkinSetup":
 			self.session.open(SkinSetup)
 		elif menu == "ImageTools":
 			self.Plugins()
 		elif menu == "Pluginbrowser":
 			self.session.open(PluginBrowser)
-
 		elif menu == "Infos":
 			self.Infos()
 		elif menu == "InfoPanel":
@@ -492,7 +467,7 @@ class Extraspanel(Screen, InfoBarPiP):
 			self.session.open(SoftcamPanel)
 		elif menu == "SoftwareManager":
 			self.Software_Manager()
-		elif menu == "software-update":
+		elif menu == "ImageUpdate":
 			self.session.open(SoftwarePanel)
 		elif menu == "MultiQuickButton":
 			self.session.open(MultiQuickButton)
@@ -521,46 +496,34 @@ class Extraspanel(Screen, InfoBarPiP):
 
 	def Plugins(self):
 		#// Create Plugin Menu
-		global menu
-		menu = 1
 		self["label1"].setText(_("Image Tools"))
-		self.tlist = []
-		self.oldmlist = []
-		self.oldmlist = self.Mlist
-                self.tlist.append(MenuEntryItem((InfoEntryComponent('KeymapSel'), _("Keymap Selection"), 'KeymapSel')))			
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('MountManager'), _("MountManager"), 'MountManager')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('CronManager'), _("CronManager"), 'CronManager')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('JobManager'), _("JobManager"), 'JobManager')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('SwapManager'), _("SwapManager"), 'SwapManager')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('IPK-installManager'), _("IPK-installManager"), 'IPK-installManager')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('IPK-uninstaller'), _("IPK-uninstaller"), 'IPK-uninstaller')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('SundtekControlCenter'), _("SundtekControlCenter"), 'SundtekControlCenter')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('PacketManager'), _("PacketManager"), 'PacketManager')))		
+		self.mylist = [] 
+                self.mylist.append(((_('Keymap Selection'), 'KeymapSel', _('change your Keymap: *.usr, *.ntr, *.xml, *.u80'))))			
+		self.mylist.append(((_('Mount Manager'), 'MountManager', _('Mount-Manager...'))))
+		self.mylist.append(((_('Cron Manager'), 'CronManager', _('Cron-Manager...'))))
+		self.mylist.append(((_('Job Manager'), 'JobManager', _('Job-Manager...'))))
+		self.mylist.append(((_('Swap Manager'), 'SwapManager', _('Swap-Manager...'))))
+		self.mylist.append(((_('IPK-install Manager'), 'IPK-installManager', _('install *.ipk, *.tar.gz files'))))
+		self.mylist.append(((_('IPK-uninstaller'), 'IPK-uninstaller', _('uninstall *.ipk files'))))
+		self.mylist.append(((_('Sundtek Control-Center'), 'SundtekControlCenter', _('select your Sundtek USB-Tuner ...'))))
+		self.mylist.append(((_('Packet Manager'), 'PacketManager', _('show all Packages'))))		
 		if os.path.isfile("/usr/lib/enigma2/python/Plugins/Extensions/MultiQuickButton/plugin.pyo") is True:
-			self.tlist.append(MenuEntryItem((InfoEntryComponent('MultiQuickButton'), _("MultiQuickButton"), 'MultiQuickButton')))
-		self["Mlist"].moveToIndex(0)
-		self["Mlist"].l.setList(self.tlist)
+			self.mylist.append(((_('Multi Quick Button'), 'MultiQuickButton', _('change buttons for remote key'))))
+		self['list'].setList(self.mylist)
 
 	def Infos(self):
 		#// Create Infos Menu
-		global menu
-		menu = 1
 		self["label1"].setText(_("Infos"))
-		self.tlist = []
-		self.oldmlist = []
-		self.oldmlist1 = []
-		self.oldmlist = self.Mlist
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('InfoPanel'), _("InfoPanel"), 'InfoPanel')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Default'), _("Default"), 'Default')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('FreeSpace'), _("FreeSpace"), 'FreeSpace')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Kernel'), _("Kernel"), 'Kernel')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Mounts'), _("Mounts"), 'Mounts')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Network'), _("Network"), 'Network')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Ram'), _("Ram"), 'Ram')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('System_Info'), _("System_Info"), 'System_Info')))
-		self["Mlist"].moveToIndex(0)
-		self["Mlist"].l.setList(self.tlist)
-		self.oldmlist1 = self.tlist
+		self.mylist = []
+		self.mylist.append(((_('Info Panel'), 'InfoPanel', _('Info-Panel...'))))
+		self.mylist.append(((_('Default'), 'Default', _('Default'))))
+		self.mylist.append(((_('Free Space'), 'FreeSpace', _('Free-Space...'))))
+		self.mylist.append(((_('Kernel'), 'Kernel', _('Kernel...'))))
+		self.mylist.append(((_('Mounts'), 'Mounts', _('Mounts...'))))
+		self.mylist.append(((_('Network'), 'Network', _('Network...'))))
+		self.mylist.append(((_('Ram'), 'Ram', _('Ram...'))))
+		self.mylist.append(((_('System Info'), 'System_Info', _('System Information...'))))
+		self['list'].setList(self.mylist)
 		
 	def SkinSetup(self):
 		from Screens.SkinSetup import SkinSetup
@@ -568,66 +531,55 @@ class Extraspanel(Screen, InfoBarPiP):
 
 	def System(self):
 		#// Create System Menu
-		global menu
-		menu = 2
 		self["label1"].setText(_("System Info"))
-		self.tlist = []
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Cpu'), _("Cpu"), 'Cpu')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('MemInfo'), _("MemInfo"), 'MemInfo')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Mtd'), _("Mtd"), 'Mtd')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Module'), _("Module"), 'Module')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Partitions'), _("Partitions"), 'Partitions')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Swap'), _("Swap"), 'Swap')))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Top'), _("Top"), 'Top')))
-		self["Mlist"].moveToIndex(0)
-		self["Mlist"].l.setList(self.tlist)
+		self.mylist = []
+		self.mylist.append(((_('Cpu'), 'Cpu', _('Cpu...'))))
+		self.mylist.append(((_('Memory Info'), 'MemInfo', _('Memory Info...'))))
+		self.mylist.append(((_('Mtd'), 'Mtd', _('Mtd...'))))
+		self.mylist.append(((_('Module'), 'Module', _('Module...'))))
+		self.mylist.append(((_('Partitions'), 'Partitions', _('Partitions...'))))
+		self.mylist.append(((_('Swap'), 'Swap', _('Swap...'))))
+		self.mylist.append(((_('Top'), 'Top', _('Top...'))))
+		self['list'].setList(self.mylist)
 
 	def System_main(self):
 		#// Create System Main Menu
 		global menu
 		menu = 1
 		self["label1"].setText(_("System"))
-		self.tlist = []
-		self.oldmlist = []
-		self.oldmlist = self.Mlist
-		self.tlist.append(MenuEntryItem((InfoEntryComponent('Info'), _("Info"), 'Info')))
-		self["Mlist"].moveToIndex(0)
-		self["Mlist"].l.setList(self.tlist)
+		self.mylist = []
+		self.mylist.append(((_('Info'), 'Info', _('Info...'))))
+		self['list'].setList(self.mylist)
 
 	def Software_Manager(self):
 		#// Create Software Manager Menu
 		global menu
 		menu = 1
 		self["label1"].setText(_("Software Manager"))
-		self.tlist = []
-		self.oldmlist = []
-		self.oldmlist = self.Mlist
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("SoftwareManager" ), _("Software update"), ("software-update"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupSettings" ), _("Backup Settings"), ("backup-settings"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("RestoreSettings" ), _("Restore Settings"), ("restore-settings"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("advancedrestore" ), _("Advanced Restore"), ("advancedrestore"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupFiles" ), _("Choose backup files"), ("backup-files"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("Backuplocation" ), _("Choose backup Location"), ("backuplocation"))))
-		self["Mlist"].moveToIndex(0)
-		self["Mlist"].l.setList(self.tlist)
+		self.mylist = []
+		self.mylist.append(((_("Software Manager" ), 'SoftwareUpdate', ("software-update..."))))
+		self.mylist.append(((_("Backup Settings" ), 'BackupSettings', ("backup your settings..."))))
+		self.mylist.append(((_("Restore Settings" ), 'RestoreSettings', ("restore your settings"))))
+		self.mylist.append(((_("advanced restore" ), 'AdvancedRestore', ("advanced restore"))))
+		self.mylist.append(((_("Backup Files" ), 'BackupFiles', ("Choose backup-files"))))
+		self.mylist.append(((_("Backup location" ), 'BackupLocation', ("choose backup location"))))
+	#	self["Mlist"].moveToIndex(0)
+		self['list'].setList(self.mylist)
 
 	def BackupFlashManager(self):
 		#// Create BackupFlash Manager Menu
 		global menu
 		menu = 1
 		self["label1"].setText(_("Backup/Flash Manager"))
-		self.tlist = []
-		self.oldmlist = []
-		self.oldmlist = self.Mlist
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupImage" ), _("Backup Image"), ("backup-image"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("FlashOnline" ), _("Flash Image"), ("flash-image"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupSettings" ), _("Backup Settings"), ("backup-settings"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("RestoreSettings" ), _("Restore Settings"), ("restore-settings"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("advancedrestore" ), _("Advanced Restore"), ("advancedrestore"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("BackupFiles" ), _("Choose backup files"), ("backup-files"))))
-		self.tlist.append(MenuEntryItem((InfoEntryComponent ("Backuplocation" ), _("Choose backup Location"), ("backuplocation"))))
-		self["Mlist"].moveToIndex(0)
-		self["Mlist"].l.setList(self.tlist)
+		self.mylist = []
+		self.mylist.append(((_("Backup Image" ), 'BackupImage', _("Backup your Image"))))
+		self.mylist.append(((_("Flash Online" ), 'FlashImage', _("Flash Online Image"))))
+		self.mylist.append(((_("Backup Settings" ), 'BackupSettings', _("Backup your Settings"))))
+		self.mylist.append(((_("Restore Settings" ), 'RestoreSettings', _("Restore your Settings"))))
+		self.mylist.append(((_("Advanced Restore" ), 'AdvancedRestore', _("Advanced Restore..."))))
+		self.mylist.append(((_("Backup Files" ), 'BackupFiles', _("Choose Backup Files"))))
+		self.mylist.append(((_("Backup location" ), 'BackupLocation', _("Choose Backup location"))))
+		self['list'].setList(self.mylist)
 
 	def backupfiles_choosen(self, ret):
 		#self.backupdirs = ' '.join( config.plugins.configurationbackup.backupdirs.value )
@@ -1331,9 +1283,3 @@ class Info(Screen):
 		except:
 			o = ''
 			return o
-
-
-
-
-
-
