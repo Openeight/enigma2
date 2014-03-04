@@ -133,6 +133,11 @@
 	<map context="InputAsciiActions">
 		<key id="KEY_ASCII" mapto="gotAsciiCode" flags="mr" />
 	</map>
+	
+	<map context="InfobarHDMIActions">
+		<key id="KEY_AUX" mapto="HDMIin" flags="b" />
+		<key id="KEY_AUX" mapto="HDMIinLong" flags="l" />
+	</map>
 
 	<map context="InputBoxActions">
 		<key id="KEY_LEFT" mapto="left" flags="mr" />
