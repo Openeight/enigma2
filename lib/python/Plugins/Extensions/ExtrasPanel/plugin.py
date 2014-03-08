@@ -102,7 +102,9 @@ if not Check_Softcam() and (config.plugins.showextraspanelextensions.getValue() 
 
 # Hide Keymap selection when no other keymaps installed.
 if config.usage.keymap.getValue() != eEnv.resolve("${datadir}/enigma2/keymap.xml"):
-	if not os.path.isfile(eEnv.resolve("${datadir}/enigma2/keymap.usr")) and config.usage.keymap.getValue() == eEnv.resolve("${datadir}/enigma2/keymap.usr"):
+	if not os.path.isfile(eEnv.resolve("${datadir}/enigma2/keymap.mqb")) and config.usage.keymap.getValue() == eEnv.resolve("${datadir}/enigma2/keymap.mqb"):
+		setDefaultKeymap()
+        if not os.path.isfile(eEnv.resolve("${datadir}/enigma2/keymap.usr")) and config.usage.keymap.getValue() == eEnv.resolve("${datadir}/enigma2/keymap.usr"):
 		setDefaultKeymap()
 	if not os.path.isfile(eEnv.resolve("${datadir}/enigma2/keymap.ntr")) and config.usage.keymap.getValue() == eEnv.resolve("${datadir}/enigma2/keymap.ntr"):
 		setDefaultKeymap()
@@ -498,7 +500,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		#// Create Plugin Menu
 		self["label1"].setText(_("Image Tools"))
 		self.mylist = [] 
-                self.mylist.append(((_('Keymap Selection'), 'KeymapSel', _('change your Keymap: *.usr, *.ntr, *.xml, *.u80'))))			
+                self.mylist.append(((_('Keymap Selection'), 'KeymapSel', _('change your Keymap: *.mqb, *.usr, *.ntr, *.xml, *.u80'))))			
 		self.mylist.append(((_('Mount Manager'), 'MountManager', _('Mount-Manager...'))))
 		self.mylist.append(((_('Cron Manager'), 'CronManager', _('Cron-Manager...'))))
 		self.mylist.append(((_('Job Manager'), 'JobManager', _('Job-Manager...'))))
@@ -633,12 +635,15 @@ class KeymapSel(ConfigListScreen, Screen):
 		self["description"] = Label("")
 		self["labelInfo"] = Label(_("Copy your keymap to\n/usr/share/enigma2/keymap.usr"))
 
-		usrkey = eEnv.resolve("${datadir}/enigma2/keymap.usr")
+		mqbkey = eEnv.resolve("${datadir}/enigma2/keymap.mqb")
+                usrkey = eEnv.resolve("${datadir}/enigma2/keymap.usr")
 		ntrkey = eEnv.resolve("${datadir}/enigma2/keymap.ntr")
 		u80key = eEnv.resolve("${datadir}/enigma2/keymap.u80")
 		self.actkeymap = self.getKeymap(config.usage.keymap.getValue())
 		keySel = [ ('keymap.xml',_("Default  (keymap.xml)"))]
-		if os.path.isfile(usrkey):
+		if os.path.isfile(mqbkey):
+			keySel.append(('keymap.mqb',_("ET-MultiQuickButton  (keymap.mqb)")))
+                if os.path.isfile(usrkey):
 			keySel.append(('keymap.usr',_("User  (keymap.usr)")))
 		if os.path.isfile(ntrkey):
 			keySel.append(('keymap.ntr',_("Neutrino  (keymap.ntr)")))
