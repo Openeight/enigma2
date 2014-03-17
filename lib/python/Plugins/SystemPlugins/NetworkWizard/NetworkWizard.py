@@ -1,4 +1,5 @@
 from Screens.Wizard import wizardManager, WizardSummary
+from boxbranding import getMachineBrand, getMachineName, getBoxType
 from Screens.WizardLanguage import WizardLanguage
 from Screens.Rc import Rc
 from Screens.MessageBox import MessageBox
@@ -145,8 +146,11 @@ class NetworkWizard(WizardLanguage, Rc):
 			self.NextStep = 'end'
 		elif index == 'eth0':
 			self.NextStep = 'nwconfig'
+		elif index == 'eth1' and getBoxType() == "et10000":
+			self.NextStep = 'nwconfig'
 		else:
 			self.NextStep = 'asknetworktype'
+
 
 	def InterfaceSelectionMoved(self):
 		self.InterfaceSelect(self.selection)
