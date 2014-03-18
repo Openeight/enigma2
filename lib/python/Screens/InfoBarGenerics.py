@@ -3038,47 +3038,33 @@ class InfoBarPowersaver:
 			print "[InfoBarPowersaver] goto standby"
 			self.session.open(Screens.Standby.Standby)
 
-   
-
 class InfoBarHdmi:
 	def __init__(self):
 		self.hdmi_enabled = False
-		self.longbuttonpressed = False
 		self["HDMIActions"] = HelpableActionMap(self, "InfobarHDMIActions",
 			{
 				"HDMIin":(self.HDMIIn, _("Switch to HDMI in mode")),
-				"HDMIinLong":(self.HDMIInLong, _("Switch to HDMI in mode")),
+				"HDMIinLong":(self.HDMIInLong, _("Switch to HDMI in PiP mode")),
 			}, prio=2)
 
+	def HDMIInLong(self):
+		if not hasattr(self.session, 'pip') and not self.session.pipshown:
+			self.session.pip = self.session.instantiateDialog(PictureInPicture)
+			self.session.pip.playService(eServiceReference('8192:0:1:0:0:0:0:0:0:0:'))
+			self.session.pip.show()
+			self.session.pipshown = True
+		else:
+			curref = self.session.pip.getCurrentService()
+			if curref and curref.type != 8192:
+				self.session.pip.playService(eServiceReference('8192:0:1:0:0:0:0:0:0:0:'))
+			else:
+				self.session.pipshown = False
+				del self.session.pip
 
 	def HDMIIn(self):
-		if self.longbuttonpressed:
-			self.longbuttonpressed = False
-			return
-		if not self.hdmi_enabled:
-			self.curserviceref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			self.session.nav.stopService()
+		slist = self.servicelist
+		curref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+		if curref and curref.type != 8192:
 			self.session.nav.playService(eServiceReference('8192:0:1:0:0:0:0:0:0:0:'))
-			self.hdmi_enabled = True
 		else:
-			self.session.nav.stopService()
-			self.session.nav.playService(self.curserviceref)
-			self.hdmi_enabled = False
-			self.curserviceref = None
-
-
-	def HDMIInLong(self):
-		self.longbuttonpressed = True
-		if not self.hdmi_enabled:
-			if self.session.pipshown:
-				del self.session.pip
-			self.session.pip = self.session.instantiateDialog(PictureInPicture)
-			self.session.pip.show()
-			if self.session.pip.playService(eServiceReference('8192:0:1:0:0:0:0:0:0:0:')):
-				self.session.pipshown = True
-			self.hdmi_enabled = True
-		else:
-			self.session.pipshown = False
-			del self.session.pip
-			self.hdmi_enabled = False
-
+			self.session.nav.playService(slist.servicelist.getCurrent())   
