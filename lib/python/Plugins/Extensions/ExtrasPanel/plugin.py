@@ -472,7 +472,13 @@ class Extraspanel(Screen, InfoBarPiP):
 		elif menu == "ImageUpdate":
 			self.session.open(SoftwarePanel)
 		elif menu == "MultiQuickButton":
-			self.session.open(MultiQuickButton)
+			from Components.PluginComponent import plugins
+			plugin = _('MultiQuickbutton')
+			for p in plugins.getPlugins(where=[PluginDescriptor.WHERE_PLUGINMENU]):
+				if 'MultiQuickbutton' == str(p.name):
+					plugin = p
+			if plugin is not None:
+				plugin(session=self.session)
 		elif menu == "PacketManager":
 			self.session.open(PacketManager, self.skin)
 		elif menu == 'IPK-installManager':	
