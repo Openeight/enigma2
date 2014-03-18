@@ -24,6 +24,7 @@ from time import time
 import os
 
 config.pluginfilter = ConfigSubsection()
+config.pluginfilter.openxta = ConfigYesNo(default = True)
 config.pluginfilter.kernel = ConfigYesNo(default = False)
 config.pluginfilter.drivers = ConfigYesNo(default = True)
 config.pluginfilter.extensions = ConfigYesNo(default = True)
@@ -239,7 +240,9 @@ class PluginDownloadBrowser(Screen):
 	def createPluginFilter(self):
 		#Create Plugin Filter
 		self.PLUGIN_PREFIX2 = []
-		if config.pluginfilter.drivers.getValue():
+		if config.pluginfilter.openxta.getValue():
+			self.PLUGIN_PREFIX2.append(self.PLUGIN_PREFIX + 'openxta')
+                if config.pluginfilter.drivers.getValue():
 			self.PLUGIN_PREFIX2.append(self.PLUGIN_PREFIX + 'drivers')
 		if config.pluginfilter.extensions.getValue():
 			self.PLUGIN_PREFIX2.append(self.PLUGIN_PREFIX + 'extensions')
@@ -589,7 +592,8 @@ class PluginFilter(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("drivers"), config.pluginfilter.drivers, _("This allows you to show drivers modules in downloads")))
+		self.list.append(getConfigListEntry(_("openxta"), config.pluginfilter.openxta, _("This allows you to show all specific openxta in downloads")))
+                self.list.append(getConfigListEntry(_("drivers"), config.pluginfilter.drivers, _("This allows you to show drivers modules in downloads")))
 		self.list.append(getConfigListEntry(_("extensions"), config.pluginfilter.extensions, _("This allows you to show extensions modules in downloads")))
 		self.list.append(getConfigListEntry(_("systemplugins"), config.pluginfilter.systemplugins, _("This allows you to show systemplugins modules in downloads")))
 		if Check_Softcam():
