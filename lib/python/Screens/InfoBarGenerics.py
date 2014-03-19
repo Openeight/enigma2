@@ -125,20 +125,6 @@ resumePointCacheLast = int(time())
 class InfoBarDish:
 	def __init__(self):
 		self.dishDialog = self.session.instantiateDialog(Dish)
-		
-class InfoBarLongKeyDetection:
-	def __init__(self):
-		eActionMap.getInstance().bindAction('', -maxint -1, self.detection) #highest prio
-		self.LongButtonPressed = False
-
-
-	#this function is called on every keypress!
-	def detection(self, key, flag):
-		if flag == 3:
-			self.LongButtonPressed = True
-		elif flag == 0:
-			self.LongButtonPressed = False
-		
 
 class InfoBarUnhandledKey:
 	def __init__(self):
