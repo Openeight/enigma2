@@ -1,0 +1,640 @@
+<?xml version="1.0"	 encoding="UTF-8" ?>
+
+<!-- global file for MultiQuickButton functions -->
+<xml>
+	<Menu>
+		<mqbfunction>
+			<name>SecondInfoBar</name>
+			<code><![CDATA[from Screens.InfoBarGenerics import InfoBarShowHide
+self.secondInfoBarScreen.show()
+]]></code>
+		</mqbfunction>
+		<mqbfunction>						
+			<name>ET-Portal</name>
+			<module>Plugins.Extensions.EtPortal.plugin</module>				
+			<screen><![CDATA[EtPortalScreen]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>HDMI in (Start)</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.HDMIIn(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>HDMI in (PiP)</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.HDMIInLong(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+                <mqbfunction>
+			<name>OSD3DSetup (Mode)</name>
+			<code><![CDATA[from Plugins.SystemPlugins.OSD3DSetup.plugin import startup 
+if config.plugins.OSD3DSetup.mode.value == "off":
+	config.plugins.OSD3DSetup.mode.value = "auto"
+elif config.plugins.OSD3DSetup.mode.value == "auto":
+	config.plugins.OSD3DSetup.mode.value = "sidebyside"
+elif config.plugins.OSD3DSetup.mode.value == "sidebyside":
+	config.plugins.OSD3DSetup.mode.value = "topandbottom"
+else:
+	config.plugins.OSD3DSetup.mode.value = "off"
+config.plugins.OSD3DSetup.save()
+def applySettings(mode):
+	try:
+		file = open("/proc/stb/fb/3dmode", "w")
+		file.write(mode)
+		file.close()
+	except:
+		return
+applySettings(config.plugins.OSD3DSetup.mode.value)
+from Screens.MessageBox import MessageBox
+modelist = {"off": _("Off"), "auto": _("Auto"), "sidebyside": _("Side by Side"), "topandbottom": _("Top and Bottom")}
+self.session.open(MessageBox, _("OSD 3D-Mode") + "\n" + modelist[config.plugins.OSD3DSetup.mode.value], MessageBox.TYPE_INFO, 2)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>HbbTV (Red-Button)</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.activateRedButton(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Main menu</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.mainMenu(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>CI (Common Interface) Setup</name>
+			<module>Screens.Ci</module>
+			<screen><![CDATA[CiSelection]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Smartcard Manager</name>
+			<module>Plugins.PLi.SoftcamSetup.Sc</module>
+			<screen><![CDATA[ScNewSelection]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Tuner Configuration</name>
+			<module>Screens.Satconfig</module>
+			<screen><![CDATA[NimSelection]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Manual Scan</name>
+			<module>Screens.ScanSetup</module>
+			<screen><![CDATA[ScanSetup]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Automatic Scan</name>
+			<module>Screens.ScanSetup</module>
+			<screen><![CDATA[ScanSimple]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Network</name>
+			<module>Screens.NetworkSetup</module>
+			<screen><![CDATA[NetworkAdapterSelection]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>HELP</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.showHelp(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Plugin Browser</name>
+			<module>Screens.PluginBrowser</module>
+			<screen><![CDATA[PluginBrowser]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Extension Selection</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.showExtensionSelection(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Channel Info</name>
+			<module>Screens.ServiceInfo</module>
+			<screen><![CDATA[ServiceInfo]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Timer</name>
+			<module>Screens.TimerEdit</module>
+			<screen><![CDATA[TimerEditList]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Sleeptimer</name>
+			<module>Screens.SleepTimerEdit</module>
+			<screen><![CDATA[SleepTimerEdit]]></screen>
+		</mqbfunction>
+                <mqbfunction>
+			<name>Channel zap +</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapDown(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Channel zap -</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapUp(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Channel zap (list) +</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.switchChannelUp(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Channel zap (list) -</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.switchChannelDown(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Bouquetlist</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+   def showBouquetList(self):
+	self.servicelist.showFavourites()
+	self.session.execDialog(self.servicelist)
+showBouquetList(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Open Servicelist</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.openServiceList(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Zap History -</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.historyBack(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Zap History +</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.historyNext(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Dolby Digital downmix on/off</name>
+			<code><![CDATA[
+if config.av.downmix_ac3.value == False:
+	config.av.downmix_ac3.value = True
+else:
+	config.av.downmix_ac3.value = False
+config.av.downmix_ac3.save()
+from Screens.MessageBox import MessageBox
+downmix = {True: _("eingeschaltet"), False: _("ausgeschaltet")}
+self.session.open(MessageBox, _("Dolby Digital downmix: ") + downmix[config.av.downmix_ac3.value], MessageBox.TYPE_INFO, 2)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>InfoBar</name>
+			<code><![CDATA[from Screens.InfoBarGenerics import InfoBarShowHide
+self.toggleShow()
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>EventInfoPlugins</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.showEventInfoPlugins(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>EventView</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.openEventView(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Graph EPG</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.openGraphEPG(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Single EPG</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.openSingleServiceEPG(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Multi EPG</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.openMultiServiceEPG(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>InfoBar Audio Selection</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.audioSelection(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>InfoBar Show Radio</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.showRadio(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>TV</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.showTv(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>InfoBar Show Movies</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.showMovies(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>InfoBar Record</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.instantRecord(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>InfoBar Instant Record</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.startInstantRecording(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Rewind in LiveTV (Permanent-Timeshift)</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.activateTimeshiftEnd(InfoBar.instance) 
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Play/Pause Timeshift</name>
+						<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.activateTimeshiftEndAndPause(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Start Timeshift</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.startTimeshift(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Stop Timeshift</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.stopTimeshift(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Start Teletext</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.startTeletext(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Toggle AtmoLight</name>
+			<code><![CDATA[os.system('/etc/init.d/atmolight toggle 1>/dev/null 2>/dev/null')]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Subservice Selection</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.subserviceSelection(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Subtitles</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.subtitleSelection(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Cool Search</name>
+			<code><![CDATA[from Plugins.Extensions.CoolTVGuide.plugin import CSmain
+CSmain(self.session, self.servicelist)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Cool TV Guide</name>
+			<code><![CDATA[from Plugins.Extensions.CoolTVGuide.plugin import main
+main(self.session, self.servicelist)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Cool Easy Guide</name>
+			<code><![CDATA[from Plugins.Extensions.CoolTVGuide.plugin import CEGmain
+CEGmain(self.session, self.servicelist)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Cool Single Guide</name>
+			<code><![CDATA[from Plugins.Extensions.CoolTVGuide.plugin import CSGmain
+CSGmain(self.session, self.servicelist)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Cool Info Guide</name>
+			<code><![CDATA[from Plugins.Extensions.CoolTVGuide.plugin import CIGmain
+CIGmain(self.session, self.servicelist)
+]]></code>
+		</mqbfunction>
+                <mqbfunction>
+			<name>Enhanced Movie Center</name>
+			<code><![CDATA[from Plugins.Extensions.EnhancedMovieCenter.plugin import *
+showMoviesNew()
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Video Mode Selection</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.vmodeSelection(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Remount Network Shares</name>
+			<code>from Plugins.SystemPlugins.NetworkBrowser.AutoMount import AutoMount
+AutoMount()</code>
+		</mqbfunction>
+	</Menu>
+	<Plugins>
+		<mqbfunction>
+			<name>MediaPlayer</name>
+			<module>Plugins.Extensions.MediaPlayer.plugin</module>
+			<screen><![CDATA[MediaPlayer]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>DVDPlayer</name>
+			<module>Plugins.Extensions.DVDPlayer.plugin</module>
+			<screen><![CDATA[DVDPlayer]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Picture Player</name>
+			<module>Plugins.Extensions.PicturePlayer.plugin</module>
+			<screen><![CDATA[picshow]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>SkinSelector</name>
+			<module>Plugins.SystemPlugins.SkinSelector.plugin</module>
+			<screen><![CDATA[SkinSelector]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>OSDPositionSetup</name>
+			<module>Plugins.SystemPlugins.OSDPositionSetup.plugin</module>
+			<screen><![CDATA[OSDScreenPosition]]></screen>
+		</mqbfunction>
+	</Plugins>
+	<Setup>
+		<mqbfunction>
+			<name>A/V Settings</name>
+			<module>Screens.Setup</module>
+			<screen><![CDATA[Setup, "avsetup"]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Usage Setup</name>
+			<module>Screens.Setup</module>
+			<screen><![CDATA[Setup, "usage"]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Recording Setup</name>
+			<module>Screens.Setup</module>
+			<screen><![CDATA[Setup, "recording"]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Harddisk Setup</name>
+			<module>Screens.Setup</module>
+			<screen><![CDATA[Setup, "harddisk"]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Subtitles Settings</name>
+			<module>Screens.Setup</module>
+			<screen><![CDATA[Setup, "subtitlesetup"]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>switch 4:3 (Pillarbox) (PanScan)</name>
+			<code><![CDATA[
+if config.av.policy_43.value == "pillarbox":
+	config.av.policy_43.value = "scale"
+elif config.av.policy_43.value == "scale":
+	config.av.policy_43.value = "nonlinear"
+elif config.av.policy_43.value == "nonlinear":
+	config.av.policy_43.value = "panscan"
+elif config.av.policy_43.value == "panscan":
+	config.av.policy_43.value = "auto"
+else:
+	config.av.policy_43.value = "pillarbox"
+config.av.policy_43.save()
+from Screens.MessageBox import MessageBox
+aspectratio = {"scale": _("Nur skalieren"), "nonlinear": _("Nichtlinear"), "panscan": _("Pan&Scan"), "auto": _("Auto"), "pillarbox": _("Pillarbox")}
+self.session.open(MessageBox, _("Zeige 4:3 Format als") + "\n" + aspectratio[config.av.policy_43.value], MessageBox.TYPE_INFO, 2)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>switch 16:9</name>
+			<code><![CDATA[
+if config.av.policy_169.value == "letterbox":
+	config.av.policy_169.value = "scale"
+elif config.av.policy_169.value == "scale":
+	config.av.policy_169.value = "panscan"
+elif config.av.policy_169.value == "panscan":
+	config.av.policy_169.value = "auto"
+else:
+	config.av.policy_169.value = "letterbox"
+config.av.policy_169.save()
+from Screens.MessageBox import MessageBox
+aspectratio = {"scale": _("Nur skalieren"), "panscan": _("Pan&Scan"), "auto": _("Auto"), "letterbox": _("Letterbox")}
+self.session.open(MessageBox, _("Zeige 16:9 Format als") + "\n" + aspectratio[config.av.policy_169.value], MessageBox.TYPE_INFO, 2)
+]]></code>
+		</mqbfunction>
+	</Setup>
+	<Plugins>
+	</Plugins>
+	<pip>
+		<mqbfunction>
+			<name>PIP</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.showPiP(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Swap PIP</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.swapPiP(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Move PIP</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.movePiP(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Toggle PiPzap-mode</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar.instance:
+	InfoBar.togglePipzap(InfoBar.instance)
+]]></code>
+		</mqbfunction>
+	</pip>
+	<Scripte>
+		<mqbfunction>
+			<name>Mount info</name>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Mount info", ["mount"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Volume -</name>
+			<module>Screens.MQBAction</module>
+			<screen><![CDATA[MQBAction, "Volume -", ["wget -q -O - http://127.0.0.1/web/remotecontrol?command=114; exit 0"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Volume +</name>
+			<module>Screens.MQBAction</module>
+			<screen><![CDATA[MQBAction, "Volume +", ["wget -q -O - http://127.0.0.1/web/remotecontrol?command=115; exit 0"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Volume on/off</name>
+			<module>Screens.MQBAction</module>
+			<screen><![CDATA[MQBAction, "Volume on/off", ["wget -q -O - http://127.0.0.1/web/remotecontrol?command=113; exit 0"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Restart Enigma2</name>
+			<module>Screens.MQBAction</module>
+			<screen><![CDATA[MQBAction, "Restart Enigma2", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=3; exit 0"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Reboot</name>
+			<module>Screens.MQBAction</module>
+			<screen><![CDATA[MQBAction, "Reboot", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=2; exit 0"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Standby</name>
+			<module>Screens.MQBAction</module>
+			<screen><![CDATA[MQBAction, "Standby", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=0; cancel"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Deep Standby</name>
+			<module>Screens.MQBAction</module>
+			<screen><![CDATA[MQBAction, "Deep Standby", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=1; exit 0"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Clear EPG</name>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Clear EPG", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=3; sleep 5; rm -f /media/hdd/epg.dat; rm -f /media/hdd/epg.dat.bak; exit 0"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Clear EPG and CrossEPG</name>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Clear EPG and CrossEPG", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=3; sleep 5; rm -f /media/hdd/epg.dat; rm -f /media/hdd/epg.dat.bak; rm -f /media/hdd/crossepg/*; exit 0"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Backup EPG</name>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Backup EPG", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=3; sleep 5; cp -rfp /media/hdd/epg.dat /media/hdd/backup; exit 0"]]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Restore EPG</name>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Restore EPG", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=3; sleep 5; cp -rfp /media/hdd/backup/epg.dat /media/hdd; rm -f /media/hdd/epg.dat.bak; exit 0"]]]></screen>
+		</mqbfunction>
+	</Scripte>
+	<Menu>
+		<mqbfunction>
+			<name>Sender 1</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapToNumber(InfoBar.instance, config.plugins.QuickButton.channel1.getValue())
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Sender 2</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapToNumber(InfoBar.instance, config.plugins.QuickButton.channel2.getValue())
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Sender 3</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapToNumber(InfoBar.instance, config.plugins.QuickButton.channel3.getValue())
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Sender 4</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapToNumber(InfoBar.instance, config.plugins.QuickButton.channel4.getValue())
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Sender 5</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapToNumber(InfoBar.instance, config.plugins.QuickButton.channel5.getValue())
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Sender 6</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapToNumber(InfoBar.instance, config.plugins.QuickButton.channel6.getValue())
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Sender 7</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapToNumber(InfoBar.instance, config.plugins.QuickButton.channel7.getValue())
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Sender 8</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapToNumber(InfoBar.instance, config.plugins.QuickButton.channel8.getValue())
+]]></code>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Sender 9</name>
+			<code><![CDATA[from Screens.InfoBar import InfoBar
+if InfoBar and InfoBar.instance:
+	InfoBar.zapToNumber(InfoBar.instance, config.plugins.QuickButton.channel9.getValue())
+]]></code>
+		</mqbfunction>
+	</Menu>
+</xml>
