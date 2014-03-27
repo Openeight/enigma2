@@ -94,11 +94,15 @@ quitMainloop(2)
 		</code>
 	</step>
 	<step id="restartGui">
-		<text value="The wizard is finished now, and will restart the GUI" />
-		<displaytext value="The wizard is finished now, and will restart the GUI" />
+		<text value="The wizard is finished now. Please press Ok to restart the GUI" />
+		<displaytext value="The wizard is finished now. Please press Ok to restart the GUI" />
+		<list type="dynamic" source="restartGuiAction" evaluation="ActionSelectionMade" onselect="ActionSelectionMoved" />
 		<code>
-from enigma import quitMainloop
-quitMainloop(3)
+self.clearSelectedKeys()
+self.selectKey("OK")
+		</code>
+		<code pos="after" async="yes">
+self.buildList(self.selectedAction)
 		</code> 
 	</step>
 	<step id="noplugins">
