@@ -8,8 +8,9 @@ from Components.config import config, ConfigYesNo, getConfigListEntry, ConfigSel
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Pixmap import Pixmap
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists 
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
+import os
 
 class InputDeviceSelection(Screen,HelpableScreen):
 	skin = """
@@ -351,6 +352,14 @@ class RemoteControlType(Screen, ConfigListScreen):
 		self.et9500 = "/usr/share/enigma2/rc_models/et9500/rc.png"
 		self.et8000 = "/usr/share/enigma2/rc_models/et8000/rc.png"
 
+                if fileExists('/etc/enigma2/EtRcType'):
+                        file = open("/etc/enigma2/EtRcType", "w")
+                else:
+                        action = ' > /etc/enigma2/EtRcType'
+                        os.system(action)
+                        file = open("/etc/enigma2/EtRcType", "w")
+                        file.write('0')
+                
                 if config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 13:
                         rc = self.et4000
                         self["remote"].instance.setPixmapFromFile(rc)
@@ -364,13 +373,19 @@ class RemoteControlType(Screen, ConfigListScreen):
 		        rc = self.et9000
 		        self["remote"].instance.setPixmapFromFile(rc)
                 elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9':
-		        rc = self.et6500
+		        file.write('et6500')
+                        file.close()
+                        rc = self.et6500
                         self["remote"].instance.setPixmapFromFile(rc)                        
                 elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9 ':
+                        file.write('et9500')
+                        file.close()
                         rc = self.et9500
                         self["remote"].instance.setPixmapFromFile(rc)
                 elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9  ':
-		        rc = self.et8000
+		        file.write('et8000')
+                        file.close()
+                        rc = self.et8000
                         self["remote"].instance.setPixmapFromFile(rc)             
                 else:
                         self["remote"].hide
