@@ -20,5 +20,5 @@ install_PYTHON = \
 	Ipkg.py SelectionList.py Scanner.py SystemInfo.py PackageInfo.py \
 	Task.py Console.py ResourceManager.py TuneTest.py \
 	Keyboard.py Sensors.py FanControl.py HdmiCec.py \
-	Netlink.py InputHotplug.py \
+	Netlink.py InputHotplug.py RcModel.py \
 	opkg.py
