@@ -453,9 +453,19 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport):
 				self.list.append(getConfigListEntry(_("Hierarchy info"), self.scan_ter.hierarchy))
 				if self.scan_ter.system.value == eDVBFrontendParametersTerrestrial.System_DVB_T2:
 					self.list.append(getConfigListEntry(_('PLP ID'), self.scan_ter.plp_id))
-		self.list.append(getConfigListEntry(_("Network scan"), self.scan_networkScan))
-		self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices))
-		self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree))
+		if nim.isCompatible("DVB-C"):
+			if self.scan_typecable.value == "complete":
+				self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices))
+				self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree))
+				self.scan_networkScan.value = True
+			else:
+				self.list.append(getConfigListEntry(_("Network scan"), self.scan_networkScan))
+				self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices))
+				self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree))
+		else:
+			self.list.append(getConfigListEntry(_("Network scan"), self.scan_networkScan))
+			self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices))
+			self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
@@ -861,18 +871,18 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport):
 						getInitialTransponderList(tlist, x[0])
 
 		elif nim.isCompatible("DVB-C"):
-			if self.scan_typecable.value == "single_transponder":
+			if self.scan_typecable.value == "single_transponder" or "complete":
 				self.addCabTransponder(tlist, self.scan_cab.frequency.value,
 											  self.scan_cab.symbolrate.value,
 											  self.scan_cab.modulation.value,
 											  self.scan_cab.fec.value,
 											  self.scan_cab.inversion.value)
 				removeAll = False
-			elif self.scan_typecable.value == "complete":
-				if config.Nims[index_to_scan].cable.scan_type.value == "provider":
-					getInitialCableTransponderList(tlist, index_to_scan)
-				else:
-					startScan = False
+			#elif self.scan_typecable.value == "complete":
+			#	if config.Nims[index_to_scan].cable.scan_type.value == "provider":
+			#		getInitialCableTransponderList(tlist, index_to_scan)
+			#	else:
+			#		startScan = False
 
 		elif nim.isCompatible("DVB-T"):
 			if self.scan_typeterrestrial.value == "single_transponder":
