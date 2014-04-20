@@ -63,6 +63,7 @@ class Ipkuninstall(Screen):
 
 
     def test(self, answer): 
+            try:
                 cmd = " "
                 title = " "
                 if answer[1] == "rem":            
@@ -74,9 +75,22 @@ class Ipkuninstall(Screen):
                 self.session.open(Console,_(title),[cmd])
                 self.close()
 
+            except:
+                self.close()
 
 
 
+
+
+
+
+
+
+
+
+
+
+                 
 
 
 
