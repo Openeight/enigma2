@@ -269,7 +269,7 @@ class SecConfigure:
 			pass
 
 		lnbSat = {}
-		for x in range(1,37):
+		for x in range(1,69):
 			lnbSat[x] = []
 
 		#wildcard for all satellites ( for rotor )
@@ -291,7 +291,7 @@ class SecConfigure:
 				currLnb = config.Nims[slotid].advanced.lnb[x]
 				sec.addLNB()
 
-				if x < 33:
+				if x < 65:
 					sec.setLNBNum(x)
 
 				tunermask = 1 << slotid
@@ -456,8 +456,8 @@ class SecConfigure:
 				# finally add the orbital positions
 				for y in lnbSat[x]:
 					self.addSatellite(sec, y)
-					if x > 32:
-						satpos = x > 32 and (3604-(36 - x)) or y
+					if x > 64:
+						satpos = x > 64 and (3604-(68 - x)) or y
 					else:
 						satpos = y
 					currSat = config.Nims[slotid].advanced.sat[satpos]
@@ -1205,7 +1205,7 @@ def InitNimManager(nimmgr):
 	advanced_satlist_choices = nimmgr.satList + [
 		(3601, _('All satellites')+' 1', 1), (3602, _('All satellites')+' 2', 1),
 		(3603, _('All satellites')+' 3', 1), (3604, _('All satellites')+' 4', 1)]
-	advanced_lnb_choices = [("0", "not available")] + [(str(y), "LNB " + str(y)) for y in range(1, 33)]
+	advanced_lnb_choices = [("0", _("not available"))] + [(str(y), "LNB " + str(y)) for y in range(1, 65)]
 	advanced_voltage_choices = [("polarization", _("Polarization")), ("13V", _("13 V")), ("18V", _("18 V"))]
 	advanced_tonemode_choices = [("band", _("Band")), ("on", _("On")), ("off", _("Off"))]
 	advanced_lnb_toneburst_choices = [("none", _("None")), ("A", _("A")), ("B", _("B"))]
@@ -1313,7 +1313,7 @@ def InitNimManager(nimmgr):
 			section.latitude = ConfigFloat(default = [50,767], limits = [(0,359),(0,999)])
 			section.latitudeOrientation = ConfigSelection(latitude_orientation_choices, "north")
 			section.tuningstepsize = ConfigFloat(default = [0,360], limits = [(0,9),(0,999)])
-			section.rotorPositions = ConfigInteger(default = 49, limits = [1,999])
+			section.rotorPositions = ConfigInteger(default = 99, limits = [1,999])
 			section.turningspeedH = ConfigFloat(default = [2,3], limits = [(0,9),(0,9)])
 			section.turningspeedV = ConfigFloat(default = [1,7], limits = [(0,9),(0,9)])
 			section.powerMeasurement = ConfigYesNo(default=True)
@@ -1339,7 +1339,7 @@ def InitNimManager(nimmgr):
 			section.increased_voltage = ConfigYesNo(False)
 			section.toneburst = ConfigSelection(advanced_lnb_toneburst_choices, "none")
 			section.longitude = ConfigNothing()
-			if lnb > 32:
+			if lnb > 64:
 				tmp = ConfigSelection(advanced_lnb_allsat_diseqcmode_choices, "1_2")
 				tmp.section = section
 				configDiSEqCModeChanged(tmp)
@@ -1365,7 +1365,7 @@ def InitNimManager(nimmgr):
 
 	def configModeChanged(configMode):
 		slot_id = configMode.slot_id
- 		nim = config.Nims[slot_id]
+		nim = config.Nims[slot_id]
 		if configMode.value == "advanced" and isinstance(nim.advanced, ConfigNothing):
 			# advanced config:
 			nim.advanced = ConfigSubsection()
@@ -1390,8 +1390,8 @@ def InitNimManager(nimmgr):
 				tmp.tonemode = ConfigSelection(advanced_tonemode_choices, "band")
 				tmp.usals = ConfigYesNo(default=True)
 				tmp.rotorposition = ConfigInteger(default=1, limits=(1, 255))
-				lnbnum = 33+x-3601
-				lnb = ConfigSelection([("0", "not available"), (str(lnbnum), "LNB %d"%(lnbnum))], "0")
+				lnbnum = 65+x-3601
+				lnb = ConfigSelection([("0", _("not available")), (str(lnbnum), "LNB %d"%(lnbnum))], "0")
 				lnb.slot_id = slot_id
 				lnb.addNotifier(configLNBChanged, initial_call = False)
 				tmp.lnb = lnb
@@ -1427,7 +1427,7 @@ def InitNimManager(nimmgr):
 			nim.latitude = ConfigFloat(default=[50,767], limits=[(0,359),(0,999)])
 			nim.latitudeOrientation = ConfigSelection(latitude_orientation_choices, "north")
 			nim.tuningstepsize = ConfigFloat(default = [0,360], limits = [(0,9),(0,999)])
-			nim.rotorPositions = ConfigInteger(default = 49, limits = [1,999])
+			nim.rotorPositions = ConfigInteger(default = 99, limits = [1,999])
 			nim.turningspeedH = ConfigFloat(default = [2,3], limits = [(0,9),(0,9)])
 			nim.turningspeedV = ConfigFloat(default = [1,7], limits = [(0,9),(0,9)])
 			nim.powerMeasurement = ConfigYesNo(True)

@@ -908,7 +908,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 		if not playInBackground:
 			print "Not playing anything in background"
 			return
-		current = self.getCurrent()
 		self.session.nav.stopService()
 		self.list.playInBackground = None
 		if config.movielist.play_audio_internal.value:
@@ -924,6 +923,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 			if ext in AUDIO_EXTENSIONS:
 				self.nextInBackground = next
 				self.callLater(self.preview)
+				self["list"].moveToIndex(index+1)
 
 	def preview(self):
 		current = self.getCurrent()

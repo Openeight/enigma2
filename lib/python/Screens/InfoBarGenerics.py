@@ -174,17 +174,17 @@ class InfoBarScreenSaver:
 		self.screensaver.hide()
 
 	def __onExecBegin(self):
+		eActionMap.getInstance().bindAction('', -maxint - 1, self.keypressScreenSaver)
 		self.ScreenSaverTimerStart()
 
 	def __onExecEnd(self):
-		if self.screensaver.shown:
-			self.screensaver.hide()
-			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
 		self.screenSaverTimer.stop()
+		self.screensaver.hide()
+		eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
 
 	def ScreenSaverTimerStart(self):
 		time = int(config.usage.screen_saver.value)
-		flag = self.seekstate[0]
+		flag = hasattr(self, "seekstate") and self.seekstate[0]
 		if not flag:
 			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			if ref:
@@ -201,14 +201,13 @@ class InfoBarScreenSaver:
 			if hasattr(self, "pvrStateDialog"):
 				self.pvrStateDialog.hide()
 			self.screensaver.show()
-			eActionMap.getInstance().bindAction('', -maxint - 1, self.keypressScreenSaver)
 
 	def keypressScreenSaver(self, key, flag):
 		if flag:
-			self.screensaver.hide()
-			self.show()
+			if self.screensaver.shown:
+				self.screensaver.hide()
+				self.show()
 			self.ScreenSaverTimerStart()
-			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
 
 class SecondInfoBar(Screen):
 
@@ -443,14 +442,18 @@ class InfoBarNumberZap:
 		if number == 0:
 			if isinstance(self, InfoBarPiP) and self.pipHandles0Action():
 				self.pipDoHandle0Action()
-			else:
-				self.servicelist.recallPrevService()
+			elif len(self.servicelist.history) > 1:
+				self.checkTimeshiftRunning(self.recallPrevService)
 		else:
 			if self.has_key("TimeshiftActions") and self.timeshiftEnabled():
 				ts = self.getTimeshift()
 				if ts and ts.isTimeshiftActive():
 					return
 			self.session.openWithCallback(self.numberEntered, NumberZap, number, self.searchNumber)
+
+	def recallPrevService(self, reply):
+		if reply:
+			self.servicelist.recallPrevService()
 
 	def numberEntered(self, service = None, bouquet = None):
 		if service:
