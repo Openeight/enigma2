@@ -31,7 +31,7 @@
 <!-- movieplayer-->
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="132,1">
 		<widget source="session.CurrentService" render="Label" position="0,0" size="132,1">
-			<convert type="ServicePosition">Summary</convert>
+			<convert type="ServicePosition">VFDPosition</convert>
 		</widget>
 	</screen>
 	
@@ -43,10 +43,23 @@
 		<widget source="name" render="Label" position="0,0" size="124,32" font="Regular;16" halign="left" valign="top" />
 	</screen>
 
+<!-- EnhancedMovieCenter -->
+        <screen name="EMCSelection_summary" position="0,0" size="132,100">
+               <widget source="parent.Service" render="Label" position="0,0" size="132,1">
+                       <convert type="ServiceName">Name</convert>
+               </widget>
+        </screen>
+  
+        <screen name="EMCMoviePlayerSummary" position="0,0" size="132,100">
+               <widget source="session.CurrentService" render="Label" position="0,0" size="132,1">
+                       <convert type="ServicePosition">VFDPosition</convert>
+               </widget>
+        </screen>
+  
 <!-- DVD -->
 	<screen name="DVDSummary" position="0,0" size="132,1">
 		<widget source="session.CurrentService" render="Label" position="0,0" size="60,1" font="Regular;16">
-			<convert type="ServicePosition">Position</convert>
+			<convert type="ServicePosition">VFDPosition</convert>
 		</widget>
 	</screen>
 
