@@ -98,6 +98,11 @@ if InfoBar and InfoBar.instance:
 			<screen><![CDATA[ScanSimple]]></screen>
 		</mqbfunction>
 		<mqbfunction>
+			<name>Recording Paths</name>
+			<module>Screens.RecordPaths</module>
+			<screen><![CDATA[RecordPathsSettings]]></screen>
+		</mqbfunction>
+		<mqbfunction>
 			<name>Network</name>
 			<module>Screens.NetworkSetup</module>
 			<screen><![CDATA[NetworkAdapterSelection]]></screen>
@@ -419,9 +424,34 @@ AutoMount()</code>
 			<module>Plugins.SystemPlugins.OSDPositionSetup.plugin</module>
 			<screen><![CDATA[OSDScreenPosition]]></screen>
 		</mqbfunction>
+		<mqbfunction>
+			<name>Cross EPG</name>
+			<module>Plugins.SystemPlugins.CrossEPG.crossepg_menu</module>
+			<screen><![CDATA[CrossEPG_Menu]]></screen>
+		</mqbfunction>
 	</Plugins>
 	<Setup>
 		<mqbfunction>
+			<name>VFD Display Setup</name>
+			<module>Screens.Setup</module>
+			<screen><![CDATA[Setup, "lcd"]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>User Interface</name>
+			<module>Screens.Setup</module>
+			<screen><![CDATA[Setup, "userinterface"]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>EPG Settings</name>
+			<module>Screens.Setup</module>
+			<screen><![CDATA[Setup, "epgsettings"]]></screen>
+		</mqbfunction>
+		<mqbfunction>
+			<name>Auto Language Setup</name>
+			<module>Screens.Setup</module>
+			<screen><![CDATA[Setup, "autolanguagesetup"]]></screen>
+		</mqbfunction>
+                <mqbfunction>
 			<name>A/V Settings</name>
 			<module>Screens.Setup</module>
 			<screen><![CDATA[Setup, "avsetup"]]></screen>
