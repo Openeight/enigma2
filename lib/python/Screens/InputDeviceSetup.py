@@ -359,18 +359,27 @@ class RemoteControlType(Screen, ConfigListScreen):
                         os.system(action)
                         file = open("/etc/enigma2/EtRcType", "w")
                         file.write('0')
+                        file.close
                 
                 if config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 13:
+                        file.write('et4000')
+                        file.close()
                         rc = self.et4000
                         self["remote"].instance.setPixmapFromFile(rc)
                 elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 7:
-		        rc = self.et6000
+		        file.write('et6000')
+                        file.close()
+                        rc = self.et6000
 		        self["remote"].instance.setPixmapFromFile(rc)
                 elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 5:
-		        rc = self.et9000
+		        file.write('et9000')
+                        file.close()
+                        rc = self.et9000
 		        self["remote"].instance.setPixmapFromFile(rc)
                 elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 11:
-		        rc = self.et9000
+		        file.write('et9200')
+                        file.close()
+                        rc = self.et9000
 		        self["remote"].instance.setPixmapFromFile(rc)
                 elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9':
 		        file.write('et6500')

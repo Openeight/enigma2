@@ -28,22 +28,29 @@ class RcModel:
 				remotefolder = 'et9500'
 			elif model == 'et8000':
 				remotefolder = 'et8000'
+			elif model == 'et9000' or 'et9200':
+				remotefolder = 'et9x00'
+			elif model == 'et4000':
+				remotefolder = 'et4x00'
+			elif model == 'et6000':
+				remotefolder = 'et6x00'
 			return remotefolder
-		else:
+		
+                else:
 		        if getBoxType() in ('et6500') and rc == '9':
 			        remotefolder = 'et6500'
 		        elif getBoxType() in ('et9500') and rc == '9':
 			        remotefolder = 'et9500'
 		        elif getBoxType() in ('et8000', 'et10000') and rc == '9':
 			        remotefolder = 'et8000'
-                if rc == '5':
-			remotefolder = 'et9x00'
-		elif rc == '7':
-			remotefolder = 'et6x00'
-		elif rc == '13':
-			remotefolder = 'et4x00'
-		elif rc == '11':
-			remotefolder = 'et9x00'
+                        elif rc == '5':
+			        remotefolder = 'et9x00'
+                        elif rc == '7':
+			        remotefolder = 'et6x00'
+		        elif rc == '13':
+			        remotefolder = 'et4x00'
+		        elif rc == '11':
+			        remotefolder = 'et9x00'
 
 		return remotefolder
                 
