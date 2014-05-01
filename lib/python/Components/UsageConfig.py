@@ -1,5 +1,5 @@
 from Components.Harddisk import harddiskmanager
-from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock, ConfigSlider
+from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock
 from Tools.Directories import resolveFilename, SCOPE_HDD, defaultRecordingLocation
 from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff;
 from enigma import Misc_Options, eEnv;
@@ -263,25 +263,6 @@ def InitUsageConfig():
 	config.usage.show_cryptoinfo = ConfigYesNo(default = True)
 	config.usage.show_eit_nownext = ConfigYesNo(default = True)
 	config.usage.show_vcr_scart = ConfigYesNo(default = False)
-
-	if SystemInfo["Fan"]:
-		choicelist = [('off', _("Off")), ('on', _("On")), ('auto', _("Auto"))]
-		if os.path.exists("/proc/stb/fp/fan_choices"):
-			choicelist = [x for x in choicelist if x[0] in open("/proc/stb/fp/fan_choices", "r").read().strip().split(" ")]
-		config.usage.fan = ConfigSelection(choicelist)
-		def fanChanged(configElement):
-			file = open("/proc/stb/fp/fan", "w")
-			file.write(configElement.value)
-			file.close()
-		config.usage.fan.addNotifier(fanChanged)
-
-	if SystemInfo["FanPWM"]:
-		def fanSpeedChanged(configElement):
-			file = open("/proc/stb/fp/fan_pwm", "w")
-			file.write(hex(configElement.value)[2:])
-			file.close()
-		config.usage.fanspeed = ConfigSlider(default=127, increment=8, limits=(0, 255))
-		config.usage.fanspeed.addNotifier(fanSpeedChanged)
 
 	if SystemInfo["StandbyLED"]:
 		def standbyLEDChanged(configElement):
