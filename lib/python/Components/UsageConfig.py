@@ -1,18 +1,16 @@
 from Components.Harddisk import harddiskmanager
 from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock
 from Tools.Directories import resolveFilename, SCOPE_HDD, defaultRecordingLocation
-from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff;
-from enigma import Misc_Options, eEnv;
+from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, Misc_Options, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent
 from Components.NimManager import nimmanager
 from Components.Harddisk import harddiskmanager
 from Components.ServiceList import refreshServiceList
 from SystemInfo import SystemInfo
 import os
-import enigma
 import time
 
 def InitUsageConfig():
-	config.usage = ConfigSubsection();
+	config.usage = ConfigSubsection()
 	#config.usage.mainmenu_mode = ConfigSelection(default = "horz", choices = [("horz", _("Horizontal")), ("vert", _("Vertical"))]) 
         config.usage.mainmenu_mode = ConfigSelection(default = "horzanim", choices = [("horzanim", _("Horizontal-animated")), ("horzicon", _("Horizontal-icons")), ("vert", _("Vertical-menu"))])
         config.usage.showdish = ConfigYesNo(default = True)
@@ -20,7 +18,7 @@ def InitUsageConfig():
 
 	config.usage.alternative_number_mode = ConfigYesNo(default = False)
 	def alternativeNumberModeChange(configElement):
-		enigma.eDVBDB.getInstance().setNumberingMode(configElement.value)
+		eDVBDB.getInstance().setNumberingMode(configElement.value)
 		refreshServiceList()
 	config.usage.alternative_number_mode.addNotifier(alternativeNumberModeChange)
 
@@ -29,6 +27,8 @@ def InitUsageConfig():
 
 	config.usage.servicetype_icon_mode = ConfigSelection(default = "0", choices = [("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename"))])  
 	config.usage.servicetype_icon_mode.addNotifier(refreshServiceList)
+	config.usage.crypto_icon_mode = ConfigSelection(default = "0", choices = [("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename"))])
+	config.usage.crypto_icon_mode.addNotifier(refreshServiceList)
 
 	config.usage.service_icon_enable = ConfigYesNo(default = False)
 	config.usage.service_icon_enable.addNotifier(refreshServiceList)
@@ -312,12 +312,12 @@ def InitUsageConfig():
 
 	def set12VOutput(configElement):
 		if configElement.value == "on":
-			enigma.Misc_Options.getInstance().set_12V_output(1)
+			Misc_Options.getInstance().set_12V_output(1)
 		elif configElement.value == "off":
-			enigma.Misc_Options.getInstance().set_12V_output(0)
+			Misc_Options.getInstance().set_12V_output(0)
 	config.usage.output_12V.addNotifier(set12VOutput, immediate_feedback=False)
 
-	SystemInfo["12V_Output"] = enigma.Misc_Options.getInstance().detected_12V_output()
+	SystemInfo["12V_Output"] = Misc_Options.getInstance().detected_12V_output()
 
 	config.usage.keymap = ConfigText(default = eEnv.resolve("${datadir}/enigma2/keymap.xml"))
 
@@ -358,9 +358,9 @@ def InitUsageConfig():
 	config.seek.speeds_backward.addNotifier(updateEnterBackward, immediate_feedback = False)
 
 	def updateEraseSpeed(el):
-		enigma.eBackgroundFileEraser.getInstance().setEraseSpeed(int(el.value))
+		eBackgroundFileEraser.getInstance().setEraseSpeed(int(el.value))
 	def updateEraseFlags(el):
-		enigma.eBackgroundFileEraser.getInstance().setEraseFlags(int(el.value))
+		eBackgroundFileEraser.getInstance().setEraseFlags(int(el.value))
 	config.misc.erase_speed = ConfigSelection(default="20", choices = [
 		("10", "10 MB/s"),
 		("20", "20 MB/s"),
@@ -474,12 +474,12 @@ def InitUsageConfig():
 		("tur Audio_TUR", _("Turkish"))]
 
 	def setEpgLanguage(configElement):
-		enigma.eServiceEvent.setEPGLanguage(configElement.value)
+		eServiceEvent.setEPGLanguage(configElement.value)
 	config.autolanguage.audio_epglanguage = ConfigSelection(audio_language_choices[:1] + audio_language_choices [2:], default="---")
 	config.autolanguage.audio_epglanguage.addNotifier(setEpgLanguage)
 
 	def setEpgLanguageAlternative(configElement):
-		enigma.eServiceEvent.setEPGLanguageAlternative(configElement.value)
+		eServiceEvent.setEPGLanguageAlternative(configElement.value)
 	config.autolanguage.audio_epglanguage_alternative = ConfigSelection(audio_language_choices[:1] + audio_language_choices [2:], default="---")
 	config.autolanguage.audio_epglanguage_alternative.addNotifier(setEpgLanguageAlternative)
 
