@@ -234,10 +234,9 @@ if InfoBar and InfoBar.instance:
 ]]></code>
 		</mqbfunction>
 		<mqbfunction>
-			<name>Graph EPG</name>
-			<code><![CDATA[from Screens.InfoBar import InfoBar
-if InfoBar and InfoBar.instance:
-	InfoBar.openGraphEPG(InfoBar.instance)
+			<name>Graphical Multi EPG</name>
+			<code><![CDATA[from Plugins.Extensions.GraphMultiEPG.plugin import main
+main(self.session, self.servicelist)
 ]]></code>
 		</mqbfunction>
 		<mqbfunction>
