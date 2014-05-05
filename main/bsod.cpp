@@ -192,7 +192,7 @@ void bsodFatal(const char *component)
 
 		XmlGenerator xml(f);
 
-		xml.open("openpli");
+		xml.open("openxta");
 
 		xml.open("enigma2");
 		xml.string("crashdate", tm_str);
