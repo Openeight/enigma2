@@ -276,13 +276,15 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		elif answer == "restart":
 			self.doSeek(0)
 			self.setSeekState(self.SEEK_STATE_PLAY)
-		elif answer in ("playlist","playlistquit","loop"):
+		elif answer in ("playlist","playlistquit","loop","playallvideos"):
 			( next_service, item , lenght ) = self.getPlaylistServiceInfo(self.cur_service)
 			if next_service is not None:
 				if config.usage.next_movie_msg.value:
-					self.displayPlayedName(next_service, item, lenght)
+					self.displayPlayedName(next_service, item, lenght, answer)
 				self.session.nav.playService(next_service)
 				self.cur_service = next_service
+				if answer == "playallvideos":
+				        self.hide()
 			else:
 				if answer == "playlist":
 					self.leavePlayerConfirmed([True,"movielist"])
@@ -446,9 +448,10 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 					return (playlist[0], 1, len(playlist))
 		return ( None, 0, 0 )
 
-	def displayPlayedName(self, ref, index, n):
-		from Tools import Notifications
-		Notifications.AddPopup(text = _("%s/%s: %s") % (index, n, self.ref2HumanName(ref)), type = MessageBox.TYPE_INFO, timeout = 5)
+	def displayPlayedName(self, ref, index, n, answer):
+	        if answer != "playallvideos":
+		        from Tools import Notifications
+		        Notifications.AddPopup(text = _("%s/%s: %s") % (index, n, self.ref2HumanName(ref)), type = MessageBox.TYPE_INFO, timeout = 5)
 
 	def ref2HumanName(self, ref):
 		return enigma.eServiceCenter.getInstance().info(ref).getName(ref)
