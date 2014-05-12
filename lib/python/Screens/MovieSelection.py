@@ -1175,7 +1175,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 	def setCurrentRef(self, path):
 		self.current_ref = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + path)
 		# Magic: this sets extra things to show
-		self.current_ref.setName('16384:jpg 16384:png 16384:gif 16384:bmp')
+		if config.movielist.hide_images.value:
+			self.current_ref.setName('16384:jpg 16384:png 16384:gif 16384:bmp')
 
 	def reloadList(self, sel = None, home = False):
 		self.reload_sel = sel
