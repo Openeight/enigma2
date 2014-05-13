@@ -17,8 +17,8 @@ def getScale():
 	return AVSwitch().getFramebufferScale()
 
 config.pic = ConfigSubsection()
-config.pic.framesize = ConfigInteger(default=30, limits=(5, 99))
-config.pic.slidetime = ConfigInteger(default=10, limits=(1, 60))
+config.pic.framesize = ConfigInteger(default=30, limits=(0, 99))
+config.pic.slidetime = ConfigInteger(default=10, limits=(1, 99))
 config.pic.resize = ConfigSelection(default="1", choices = [("0", _("simple")), ("1", _("better"))])
 config.pic.cache = ConfigYesNo(default=True)
 config.pic.lastDir = ConfigText(default=resolveFilename(SCOPE_MEDIA))
@@ -457,8 +457,9 @@ class Pic_Full_View(Screen):
 
 		Screen.__init__(self, session)
 
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MovieSelectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MovieSelectionActions", "MenuActions"],
 		{
+			"ok": self.PlayPause,
 			"cancel": self.Exit,
 			"green": self.PlayPause,
 			"yellow": self.PlayPause,
@@ -467,6 +468,7 @@ class Pic_Full_View(Screen):
 			"left": self.prevPic,
 			"right": self.nextPic,
 			"showEventInfo": self.StartExif,
+			"menu":self.KeyMenu,
 		}, -1)
 
 		self["point"] = Pixmap()
@@ -589,6 +591,9 @@ class Pic_Full_View(Screen):
 		self.shownow = True
 		self.ShowPicture()
 
+	def KeyMenu(self):
+		self.session.openWithCallback(self.setPicloadConf ,Pic_Setup)
+		
 	def StartExif(self):
 		if self.maxentry < 0:
 			return
