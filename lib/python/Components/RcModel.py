@@ -15,7 +15,9 @@ class RcModel:
 		fp = open(target, 'r')
 		out = fp.read()
 		fp.close()
-		return out.split()[0]
+		for x in out:
+			return out.split()[0]
+		return False
 		
 	def getRcFolder(self):
 		remotefolder = 'dmm0'
