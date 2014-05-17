@@ -220,15 +220,15 @@ class Menu(Screen):
                 if menuID is not None:
                     if ('<screen name="Animmain" ' in self.sktxt) and (config.usage.mainmenu_mode.value == "horzanim"): 
                         self.skinName.append("Animmain")
+                        title = self.menuID
+                        self.setTitle(title)
                     elif ('<screen name="Iconmain" ' in self.sktxt) and (config.usage.mainmenu_mode.value == "horzicon"): 
                         self.skinName.append("Iconmain")
+                        title = self.menuID
+                        self.setTitle(title)
                     else:
                         self.skinName.append("menu_" + menuID)
-                else:
-                        self.skinName.append("Menu")
-
-                title = self.menuID
-                self.setTitle(title)
+                self.skinName.append("Menu")
 
 
 		# Sort by Weight
@@ -786,21 +786,3 @@ class MainMenu(Menu):
 	def __init__(self, *x):
 		self.skinName = "Menu"
 		Menu.__init__(self, *x)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
