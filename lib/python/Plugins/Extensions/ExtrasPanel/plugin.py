@@ -472,13 +472,16 @@ class Extraspanel(Screen, InfoBarPiP):
 		elif menu == "ImageUpdate":
 			self.session.open(SoftwarePanel)
 		elif menu == "MultiQuickButton":
+			sz_w = getDesktop(0).size().width()
 			from Components.PluginComponent import plugins
 			plugin = _('MultiQuickbutton')
 			for p in plugins.getPlugins(where=[PluginDescriptor.WHERE_PLUGINMENU]):
 				if 'MultiQuickbutton' == str(p.name):
 					plugin = p
-			if plugin is not None:
+			if plugin is not None and sz_w == 1280:
 				plugin(session=self.session)
+			else:
+				self.session.open(MessageBox, _('Sorry:\nET-MultiQuickButton support only HD skins with 1280x720px'), MessageBox.TYPE_INFO, timeout=10)
 		elif menu == "PacketManager":
 			self.session.open(PacketManager, self.skin)
 		elif menu == 'IPK-installManager':	
