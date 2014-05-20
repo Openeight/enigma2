@@ -117,7 +117,7 @@ class XTDVBNTPTime(Screen):
             currentEntry = current[0]
             if self.menu == 0:
                 if currentEntry == 'XTDVBNTPTimecheck':
-                    self.session.open(Console, _('Checking DVB Time...'), ['dvbdate --print'])
+                    self.session.open(Console, _('Checking DVB Time...'), ['/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/dvbdate --print'])
                 elif currentEntry == 'XTDVBNTPTimeset':
                     if config.misc.useTransponderTime.value == True:
                         self.session.open(MessageBox, _('Set DVB Time not useful,switch off Enigma 2 Timeupdate first !'), MessageBox.TYPE_INFO, timeout=10)
