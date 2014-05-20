@@ -84,6 +84,7 @@ from Plugins.Extensions.ExtrasPanel.CamCheck import *
 from Plugins.Extensions.ExtrasPanel.sundtek import *
 from Plugins.Extensions.ExtrasPanel.SwapManager import Swap, SwapAutostart
 from Plugins.Extensions.ExtrasPanel.SoftwarePanel import SoftwarePanel
+from Plugins.Extensions.ExtrasPanel.XTDVBNTPTime import *
 
 def Check_Softcam():
 	found = True
@@ -484,6 +485,9 @@ class Extraspanel(Screen, InfoBarPiP):
 				self.session.open(MessageBox, _('Sorry:\nET-MultiQuickButton support only HD skins with 1280x720px'), MessageBox.TYPE_INFO, timeout=10)
 		elif menu == "PacketManager":
 			self.session.open(PacketManager, self.skin)
+		elif menu == "DVB-NTP-Time":
+			from Plugins.Extensions.ExtrasPanel.XTDVBNTPTime import *
+                        self.session.open(XTDVBNTPTime)
 		elif menu == 'IPK-installManager':	
 			self.session.open(AddonsFileBrowser)
 		elif menu == 'IPK-uninstaller':	
@@ -520,6 +524,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.mylist.append(((_('Packet Manager'), 'PacketManager', _('show all Packages'))))		
 		if os.path.isfile("/usr/lib/enigma2/python/Plugins/Extensions/MultiQuickButton/plugin.pyo") is True:
 			self.mylist.append(((_('Multi Quick Button'), 'MultiQuickButton', _('change buttons for remote key'))))
+		self.mylist.append(((_('DVB-NTP-Time'), 'DVB-NTP-Time', _('Check and set DVB Time'))))
 		self['list'].setList(self.mylist)
 
 	def Infos(self):
