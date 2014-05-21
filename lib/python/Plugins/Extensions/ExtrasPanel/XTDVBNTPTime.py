@@ -11,7 +11,7 @@ config.plugins.dvbntptime.showntpmessage = ConfigYesNo(default=False)
 showmessage = _('Show NTP message on startup') + ': '
 ntpautostart = _('NTP-Server autostart') + ': '
 tdtautostart = _('DVB Time check autostart') + ': '
-transponderupdate = _('Enigma 2 Timeupdate') + ': '
+transponderupdate = _('Enigma 2 Time update') + ': '
 
 class XTDVBNTPTime(Screen):
     skin = """
@@ -52,11 +52,11 @@ class XTDVBNTPTime(Screen):
         NetworkConnectionAvailable = None
         self.menu = args
         self.list = []
-        self.list.append(('XTDVBNTPTimecheck', _('Check DVB Time'), _('This option check manually if there is a time difference between current system time and the transponder time.')))
-        self.list.append(('XTDVBNTPTimeset', _('Set DVB Time'), _('This option set the time from current transponder as system time.')))
-        self.list.append(('XTDVBNTPTimesetforced', _('Forced set DVB Time'), _('Setting DVB Time forced is only needed if check shows more then 30 min. time difference.\nATTENTION: With forced option make a Enigma 2 restart at the finish !')))
-        self.list.append(('changetime', _('Set system time manually'), _('This option set manually the system time by input with the remote control.')))
-        self.list.append(('checkntptime', _('Check and set with NTP-Server'), _('Comparing the system time with a central time server and set the new system time.')))
+        self.list.append(('XTDVBNTPTimecheck', _('Check DVB Time'), _('This option is to check manually if there is a time difference between current system time and the transponder time.')))
+        self.list.append(('XTDVBNTPTimeset', _('Set DVB Time'), _('This option sets the time from the current transponder as system time.')))
+        self.list.append(('XTDVBNTPTimesetforced', _('Forced set DVB Time'), _('Setting the DVB Time forced is only needed if the check shows a time difference of more then 30 min.\nATTENTION: With forced option make an Enigma 2 restart at the finish !')))
+        self.list.append(('changetime', _('Set system time manually'), _('This option is to set the system time manually with the remote control.')))
+        self.list.append(('checkntptime', _('Check and set with NTP-Server'), _('Compare the system time with a central time server and set the new system time.')))
         self['menu'] = List(self.list)
         self['key_red'] = Label(showmessage)
         self['key_green'] = Label(ntpautostart)
