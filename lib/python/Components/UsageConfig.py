@@ -505,15 +505,12 @@ def InitUsageConfig():
 	config.streaming.descramble = ConfigYesNo(default = True)
 	config.streaming.stream_eit = ConfigYesNo(default = True)
 	config.streaming.stream_ait = ConfigYesNo(default = True)
-<<<<<<< HEAD
-	
+	config.streaming.authentication = ConfigYesNo(default = False)
+
 	SystemInfo["GraphMultiEpg"] = os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/GraphMultiEPG")
 	if SystemInfo["GraphMultiEpg"]:
-                config.misc.graph_mepg = ConfigSubsection()
-                config.misc.graph_mepg.extension_menu = ConfigYesNo(default = True)
-=======
-	config.streaming.authentication = ConfigYesNo(default = False)
->>>>>>> openpli/master
+		config.misc.graph_mepg = ConfigSubsection()
+		config.misc.graph_mepg.extension_menu = ConfigYesNo(default = True)
 
 def updateChoices(sel, choices):
 	if choices:
