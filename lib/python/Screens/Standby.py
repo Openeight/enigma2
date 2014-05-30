@@ -110,8 +110,11 @@ class Standby(Screen):
 		return StandbySummary
 
 	def standbyTimeout(self):
-		from RecordTimer import RecordTimerEntry
-		RecordTimerEntry.TryQuitMainloop()
+		if self.session.screen["TunerInfo"].tuner_use_mask:
+			self.standbyTimeoutTimer.startLongTimer(600)
+		else:
+			from RecordTimer import RecordTimerEntry
+			RecordTimerEntry.TryQuitMainloop()
 
 	def stopService(self):
 		self.prev_running_service = self.session.nav.getCurrentlyPlayingServiceOrGroup()

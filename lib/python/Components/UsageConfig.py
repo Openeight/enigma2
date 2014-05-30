@@ -1,7 +1,7 @@
 from Components.Harddisk import harddiskmanager
 from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock
 from Tools.Directories import resolveFilename, SCOPE_HDD, defaultRecordingLocation
-from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, Misc_Options, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent
+from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent
 from Components.NimManager import nimmanager
 from Components.Harddisk import harddiskmanager
 from Components.ServiceList import refreshServiceList
@@ -181,7 +181,7 @@ def InitUsageConfig():
 			m = abs(i / 60)
 			m = ngettext("%d minute", "%d minutes", m) % m
 		choicelist.append(("%d" % i, m))
-	config.usage.screen_saver = ConfigSelection(default = "0", choices = choicelist)
+	config.usage.screen_saver = ConfigSelection(default = "60", choices = choicelist)
 
 	config.usage.check_timeshift = ConfigYesNo(default = True)
 
@@ -266,11 +266,15 @@ def InitUsageConfig():
 
 	if SystemInfo["StandbyLED"]:
 		def standbyLEDChanged(configElement):
-			file = open("/proc/stb/power/standbyled", "w")
-			file.write(configElement.value and "on" or "off")
-			file.close()
+			open(SystemInfo["StandbyLED"], "w").write(configElement.value and "on" or "off")
 		config.usage.standbyLED = ConfigYesNo(default = True)
 		config.usage.standbyLED.addNotifier(standbyLEDChanged)
+
+	if SystemInfo["WakeOnLAN"]:
+		def standbyLEDChanged(configElement):
+			open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "on" or "off")
+		config.usage.wakeOnLAN = ConfigYesNo(default = False)
+		config.usage.wakeOnLAN.addNotifier(standbyLEDChanged)
 
 	config.epg = ConfigSubsection()
 	config.epg.eit = ConfigYesNo(default = True)
@@ -310,14 +314,10 @@ def InitUsageConfig():
 			hdd[1].setIdleTime(int(configElement.value))
 	config.usage.hdd_standby.addNotifier(setHDDStandby, immediate_feedback=False)
 
-	def set12VOutput(configElement):
-		if configElement.value == "on":
-			Misc_Options.getInstance().set_12V_output(1)
-		elif configElement.value == "off":
-			Misc_Options.getInstance().set_12V_output(0)
-	config.usage.output_12V.addNotifier(set12VOutput, immediate_feedback=False)
-
-	SystemInfo["12V_Output"] = Misc_Options.getInstance().detected_12V_output()
+	if SystemInfo["12V_Output"]:
+		def set12VOutput(configElement):
+			Misc_Options.getInstance().set_12V_output(configElement.value == "on" and 1 or 0)
+		config.usage.output_12V.addNotifier(set12VOutput, immediate_feedback=False)
 
 	config.usage.keymap = ConfigText(default = eEnv.resolve("${datadir}/enigma2/keymap.xml"))
 
@@ -373,15 +373,9 @@ def InitUsageConfig():
 		("3", _("Everywhere"))])
 	config.misc.erase_flags.addNotifier(updateEraseFlags, immediate_feedback = False)
 
-	SystemInfo["ZapMode"] = os.path.exists("/proc/stb/video/zapmode")
 	if SystemInfo["ZapMode"]:
 		def setZapmode(el):
-			try:
-				file = open("/proc/stb/video/zapmode", "w")
-				file.write(el.value)
-				file.close()
-			except:
-				pass
+			open(SystemInfo["ZapMode"], "w").write(el.value)
 		config.misc.zapmode = ConfigSelection(default = "mute", choices = [
 			("mute", _("Black screen")), ("hold", _("Hold screen")), ("mutetilllock", _("Black screen till locked")), ("holdtilllock", _("Hold till locked"))])
 		config.misc.zapmode.addNotifier(setZapmode, immediate_feedback = False)
@@ -511,11 +505,15 @@ def InitUsageConfig():
 	config.streaming.descramble = ConfigYesNo(default = True)
 	config.streaming.stream_eit = ConfigYesNo(default = True)
 	config.streaming.stream_ait = ConfigYesNo(default = True)
+<<<<<<< HEAD
 	
 	SystemInfo["GraphMultiEpg"] = os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/GraphMultiEPG")
 	if SystemInfo["GraphMultiEpg"]:
                 config.misc.graph_mepg = ConfigSubsection()
                 config.misc.graph_mepg.extension_menu = ConfigYesNo(default = True)
+=======
+	config.streaming.authentication = ConfigYesNo(default = False)
+>>>>>>> openpli/master
 
 def updateChoices(sel, choices):
 	if choices:
