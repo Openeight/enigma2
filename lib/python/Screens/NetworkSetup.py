@@ -540,6 +540,8 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.newConfig()
 
 	def keySave(self):
+		if SystemInfo["WakeOnLAN"]:
+			config.usage.wakeOnLAN.save()
 		self.hideInputHelp()
 		if self["config"].isChanged():
 			self.session.openWithCallback(self.keySaveConfirm, MessageBox, (_("Are you sure you want to activate this network configuration?\n\n") + self.oktext ) )

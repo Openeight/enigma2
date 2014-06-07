@@ -137,41 +137,32 @@ def InitUsageConfig():
 		("shutdown", _("Immediate shutdown")),
 		("standby", _("Standby")) ] )
 
-	choicelist = []
-	for i in range(-21600, 21601, 3600):
+	choicelist = [("0", _("Do nothing"))]
+	for i in range(3600, 21601, 3600):
 		h = abs(i / 3600)
 		h = ngettext("%d hour", "%d hours", h) % h
-		if i < 0:
-			choicelist.append(("%d" % i, _("Shutdown in ") + h))
-		elif i > 0:
-			choicelist.append(("%d" % i, _("Standby in ") + h))
-		else:
-			choicelist.append(("0", _("Do nothing")))
+		choicelist.append(("%d" % i, _("Standby in ") + h))
 	config.usage.inactivity_timer = ConfigSelection(default = "0", choices = choicelist)
 	config.usage.inactivity_timer_blocktime = ConfigYesNo(default = True)
 	config.usage.inactivity_timer_blocktime_begin = ConfigClock(default = time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
 	config.usage.inactivity_timer_blocktime_end = ConfigClock(default = time.mktime((0, 0, 0, 23, 0, 0, 0, 0, 0)))
 
-	choicelist = []
-	for i in range(-7200, 7201, 900):
+	choicelist = [("0", _("Disabled")),("event_standby", _("Standby after current event"))]
+	for i in range(900, 7201, 900):
 		m = abs(i / 60)
 		m = ngettext("%d minute", "%d minutes", m) % m
-		if i < 0:
-			choicelist.append(("%d" % i, _("Shutdown in ") + m))
-		elif i > 0:
-			choicelist.append(("%d" % i, _("Standby in ") + m))
-		else:
-			choicelist.append(("event_shutdown", _("Shutdown after current event")))
-			choicelist.append(("0", _("Disabled")))
-			choicelist.append(("event_standby", _("Standby after current event")))
+		choicelist.append(("%d" % i, _("Standby in ") + m))
 	config.usage.sleep_timer = ConfigSelection(default = "0", choices = choicelist)
 
 	choicelist = [("0", _("Disabled"))]
-	for i in range(900, 7201, 900):
+	for i in [60, 300, 600] + range(900, 7201, 900):
 		m = abs(i / 60)
 		m = ngettext("%d minute", "%d minutes", m) % m
 		choicelist.append(("%d" % i, _("after ") + m))
 	config.usage.standby_to_shutdown_timer = ConfigSelection(default = "0", choices = choicelist)
+	config.usage.standby_to_shutdown_timer_blocktime = ConfigYesNo(default = True)
+	config.usage.standby_to_shutdown_timer_blocktime_begin = ConfigClock(default = time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
+	config.usage.standby_to_shutdown_timer_blocktime_end = ConfigClock(default = time.mktime((0, 0, 0, 23, 0, 0, 0, 0, 0)))
 
 	choicelist = [("0", _("Disabled"))]
 	for i in (5, 30, 60, 300, 600, 900, 1200, 1800, 2700, 3600):
@@ -271,10 +262,10 @@ def InitUsageConfig():
 		config.usage.standbyLED.addNotifier(standbyLEDChanged)
 
 	if SystemInfo["WakeOnLAN"]:
-		def standbyLEDChanged(configElement):
+		def wakeOnLANChanged(configElement):
 			open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "on" or "off")
 		config.usage.wakeOnLAN = ConfigYesNo(default = False)
-		config.usage.wakeOnLAN.addNotifier(standbyLEDChanged)
+		config.usage.wakeOnLAN.addNotifier(wakeOnLANChanged)
 
 	config.epg = ConfigSubsection()
 	config.epg.eit = ConfigYesNo(default = True)
@@ -282,6 +273,7 @@ def InitUsageConfig():
 	config.epg.freesat = ConfigYesNo(default = True)
 	config.epg.viasat = ConfigYesNo(default = True)
 	config.epg.netmed = ConfigYesNo(default = True)
+	config.epg.virgin = ConfigYesNo(default = False)
 	config.misc.showradiopic = ConfigYesNo(default = True)
 	def EpgSettingsChanged(configElement):
 		from enigma import eEPGCache
@@ -296,12 +288,15 @@ def InitUsageConfig():
 			mask &= ~eEPGCache.VIASAT
 		if not config.epg.netmed.value:
 			mask &= ~(eEPGCache.NETMED_SCHEDULE | eEPGCache.NETMED_SCHEDULE_OTHER)
+		if not config.epg.virgin.value:
+			mask &= ~(eEPGCache.VIRGIN_NOWNEXT | eEPGCache.VIRGIN_SCHEDULE)
 		eEPGCache.getInstance().setEpgSources(mask)
 	config.epg.eit.addNotifier(EpgSettingsChanged)
 	config.epg.mhw.addNotifier(EpgSettingsChanged)
 	config.epg.freesat.addNotifier(EpgSettingsChanged)
 	config.epg.viasat.addNotifier(EpgSettingsChanged)
 	config.epg.netmed.addNotifier(EpgSettingsChanged)
+	config.epg.virgin.addNotifier(EpgSettingsChanged)
 
 	config.epg.histminutes = ConfigSelectionNumber(min = 0, max = 120, stepwidth = 15, default = 0, wraparound = True)
 	def EpgHistorySecondsChanged(configElement):
