@@ -33,18 +33,18 @@ mdom = xml.etree.cElementTree.parse(resolveFilename(SCOPE_SKIN, 'menu.xml'))
 class MenuUpdater:
 	def __init__(self):
 		self.updatedMenuItems = {}
-	
+
 	def addMenuItem(self, id, pos, text, module, screen, weight):
 		if not self.updatedMenuAvailable(id):
 			self.updatedMenuItems[id] = []
 		self.updatedMenuItems[id].append([text, pos, module, screen, weight])
-	
+
 	def delMenuItem(self, id, pos, text, module, screen, weight):
 		self.updatedMenuItems[id].remove([text, pos, module, screen, weight])
-	
+
 	def updatedMenuAvailable(self, id):
 		return self.updatedMenuItems.has_key(id)
-	
+
 	def getUpdatedMenu(self, id):
 		return self.updatedMenuItems[id]
 
@@ -67,9 +67,9 @@ class Menu(Screen):
 
 	def runScreen(self, arg):
 		# arg[0] is the module (as string)
-		# arg[1] is Screen inside this module 
-		#        plus possible arguments, as 
-		#        string (as we want to reference 
+		# arg[1] is Screen inside this module
+		#        plus possible arguments, as
+		#        string (as we want to reference
 		#        stuff which is just imported)
 		# FIXME. somehow
 		if arg[0] != "":
@@ -164,9 +164,9 @@ class Menu(Screen):
 
 	def __init__(self, session, parent):
 		Screen.__init__(self, session)
-		
+
 		list = []
-		
+
 		menuID = None
 		for x in parent:						#walk through the actual nodelist
 			if not x.tag:
@@ -782,7 +782,7 @@ class IconMain(Screen):
 
 class MainMenu(Menu):
 	#add file load functions for the xml-file
-	
+
 	def __init__(self, *x):
 		self.skinName = "Menu"
 		Menu.__init__(self, *x)

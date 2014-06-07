@@ -994,7 +994,7 @@ class InfoBarEPG:
 			self.defaultGuideType()
 			return
 		pluginlist = self.getEPGPluginList()
-		self.openMultiServiceEPG()		
+		self.openMultiServiceEPG()
 
 	def openEventView(self):
 		from Components.ServiceEventTracker import InfoBarCount
@@ -1909,7 +1909,7 @@ class InfoBarPiP:
 
 		self.lastPiPService = None
 
-		if SystemInfo.get("NumVideoDecoders", 1) > 1:
+		if SystemInfo["PIPAvailable"]:
 			self["PiPActions"] = HelpableActionMap(self, "InfobarPiPActions",
 				{
 					"activatePiP": (self.activePiP, _("Activate PiP")),
@@ -2995,7 +2995,7 @@ class InfoBarPowersaver:
 			self.inactivityTimeoutCallback(True)
 		else:
 			message = _("Your receiver will got to standby due to inactivity.") + "\n" + _("Do you want this?")
-			self.session.openWithCallback(self.inactivityTimeoutCallback, MessageBox, message, timeout=60, simple=True, default=False, timeout_default=True)	
+			self.session.openWithCallback(self.inactivityTimeoutCallback, MessageBox, message, timeout=60, simple=True, default=False, timeout_default=True)
 
 	def inactivityTimeoutCallback(self, answer):
 		if answer:
@@ -3020,7 +3020,7 @@ class InfoBarPowersaver:
 			list = [ (_("Yes"), True), (_("Extend sleeptimer 15 minutes"), "extend"), (_("No"), False) ]
 			message = _("Your receiver will got to stand by due to the sleeptimer.")
 			message += "\n" + _("Do you want this?")
-			self.session.openWithCallback(self.sleepTimerTimeoutCallback, MessageBox, message, timeout=60, simple=True, list=list, default=False, timeout_default=True)	
+			self.session.openWithCallback(self.sleepTimerTimeoutCallback, MessageBox, message, timeout=60, simple=True, list=list, default=False, timeout_default=True)
 
 	def sleepTimerTimeoutCallback(self, answer):
 		if answer == "extend":

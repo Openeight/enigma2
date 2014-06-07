@@ -115,7 +115,7 @@ public:
 		m_epgcache = new eEPGCache();
 		m_mgr->setChannelList(m_dvbdb);
 	}
-	
+
 	~eMain()
 	{
 		m_dvbdb->saveServicelist();
@@ -147,7 +147,7 @@ int main(int argc, char **argv)
 	// set pythonpath if unset
 	setenv("PYTHONPATH", eEnv::resolve("${libdir}/enigma2/python").c_str(), 0);
 	printf("PYTHONPATH: %s\n", getenv("PYTHONPATH"));
-	
+
 	bsodLogInit();
 
 	ePython python;
@@ -156,7 +156,7 @@ int main(int argc, char **argv)
 #if 1
 	ePtr<gMainDC> my_dc;
 	gMainDC::getInstance(my_dc);
-	
+
 	//int double_buffer = my_dc->haveDoubleBuffering();
 
 	ePtr<gLCDDC> my_lcd_dc;
@@ -182,7 +182,7 @@ int main(int argc, char **argv)
 		eDebug(" - double buffering found, enable buffered graphics mode.");
 		dsk.setCompositionMode(eWidgetDesktop::cmBuffered);
 	} */
-	
+
 	wdsk = &dsk;
 	lcddsk = &dsk_lcd;
 
@@ -195,10 +195,10 @@ int main(int argc, char **argv)
 		/* redrawing is done in an idle-timer, so we have to set the context */
 	dsk.setRedrawTask(main);
 	dsk_lcd.setRedrawTask(main);
-	
-	
+
+
 	eDebug("Loading spinners...");
-	
+
 	{
 		int i;
 #define MAX_SPINNER 64
@@ -210,7 +210,7 @@ int main(int argc, char **argv)
 			snprintf(filename, sizeof(filename), "${datadir}/enigma2/skin_default/spinner/wait%d.png", i + 1);
 			rfilename = eEnv::resolve(filename);
 			loadPNG(wait[i], rfilename.c_str());
-			
+
 			if (!wait[i])
 			{
 				if (!i)
@@ -225,13 +225,13 @@ int main(int argc, char **argv)
 		else
 			my_dc->setSpinner(eRect(100, 100, 0, 0), wait, 1);
 	}
-	
+
 	gRC::getInstance()->setSpinnerDC(my_dc);
 
 	eRCInput::getInstance()->keyEvent.connect(slot(keyEvent));
-	
+
 	printf("executing main\n");
-	
+
 	bsodCatchSignals();
 
 	setIoPrio(IOPRIO_CLASS_BE, 3);
@@ -250,7 +250,7 @@ int main(int argc, char **argv)
 		eDebug("(exit code 5)");
 		bsodFatal(0);
 	}
-	
+
 	dsk.paint();
 	dsk_lcd.paint();
 
