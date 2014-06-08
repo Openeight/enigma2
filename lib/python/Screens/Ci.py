@@ -102,6 +102,7 @@ class MMIDialog(Screen):
 
 	def pinEntered(self, value):
 		self.okbuttonClick()
+	
 
 	def okbuttonClick(self):
 		self.timer.stop()
@@ -287,8 +288,8 @@ class CiSelection(Screen):
 		Screen.__init__(self, session)
 		self["actions"] = ActionMap(["OkCancelActions", "CiSelectionActions", "ColorActions"],
 			{
-				#"blue": self.CIAssignment,
-				"left": self.keyLeft,
+				"blue": self.CIAssignment,
+                                "left": self.keyLeft,
 				"right": self.keyLeft,
 				"ok": self.okbuttonClick,
 				"cancel": self.cancel
@@ -297,14 +298,16 @@ class CiSelection(Screen):
 		self.dlg = None
 		self.state = { }
 		self.list = [ ]
-
+                self["key_blue"] = Label(_("CI assignment"))
+                self["key_blue"].hide()
+                
 		for slot in range(MAX_NUM_CI):
 			state = eDVBCI_UI.getInstance().getState(slot)
 			if state != -1:
 				self.appendEntries(slot, state)
 				CiHandler.registerCIMessageHandler(slot, self.ciStateChanged)
-				self["text"] = Label(_("Slot %d")%(1))
-
+                                self["text"] = Label(_("Slot %d")%(1))
+                                
 		menuList = ConfigList(self.list)
 		menuList.list = self.list
 		menuList.l.setList(self.list)
@@ -328,20 +331,23 @@ class CiSelection(Screen):
 	def keyRight(self):
 		self.keyConfigEntry(KEY_RIGHT)
 
-#	def CIAssignment(self):
-#	self.session.open(CIselectMainMenu)
-
-	def appendEntries(self, slot, state):
+	def CIAssignment(self):
+                self.session.open(CIselectMainMenu)
+                        
+        def appendEntries(self, slot, state):
 		self.state[slot] = state
-		self.list.append( (_("Reset"), ConfigNothing(), 0, slot) )
-
+                self.list.append( (_("Reset"), ConfigNothing(), 0, slot) )
+                #self.list.append( (_("Init"), ConfigNothing(), 1, slot) )
+                
 		if self.state[slot] == 0:			#no module
-			self.list.append( (_("no module found"), ConfigNothing(), 2, slot) )
+			self["key_blue"].hide()
+                        self.list.append( (_("no module found"), ConfigNothing(), 2, slot) )
 		elif self.state[slot] == 1:		#module in init
-			self.list.append( (_("CI assignment"), ConfigNothing(), 1, slot) )
-			self.list.append( (_("init module"), ConfigNothing(), 2, slot) )
+                        self["key_blue"].show()
+                        self.list.append( (_("init module"), ConfigNothing(), 2, slot) )
 		elif self.state[slot] == 2:		#module ready
-			#get appname
+			self["key_blue"].show()
+                        #get appname
 			appname = eDVBCI_UI.getInstance().getAppName(slot)
 			self.list.append( (appname, ConfigNothing(), 2, slot) )
 
@@ -392,12 +398,14 @@ class CiSelection(Screen):
 		if cur and len(cur) > 2:
 			action = cur[2]
 			slot = cur[3]
-			if action == 0:		#reset
+                        if action == 0:		#reset
 				eDVBCI_UI.getInstance().setReset(slot)
-			elif action == 1:		#CI-Assignment
-				self.session.open(CIselectMainMenu)
+			elif action == 1:		#init
+                                eDVBCI_UI.getInstance().setInit(slot)
 			elif self.state[slot] == 2:
-				self.dlg = self.session.openWithCallback(self.dlgClosed, MMIDialog, slot, action)
+				self.dlg = self.session.openWithCallback(self.dlgClosed, MMIDialog, slot, action)       
+			         
+				
 
 	def cancel(self):
 		for slot in range(MAX_NUM_CI):
@@ -456,7 +464,7 @@ class CIselectMainMenu(Screen):
 			action = cur[2]
 			slot = cur[3]
 			if action == 1:
-				print "[CI_Wizzard] there is no CI Slot in your %s" % slot
+				print "[CI_Wizzard] there is no CI Slot in your %s" % slot 
 			else:
 				print "[CI_Wizzard] selected CI Slot : %d" % slot
 				if config.usage.setup_level.index > 1: # advanced
@@ -464,7 +472,8 @@ class CIselectMainMenu(Screen):
 				else:
 					self.session.open(easyCIconfigMenu, slot)
 
-	"""def yellowPressed(self): # unused
+				
+        """def yellowPressed(self): # unused
 		NUM_CI=eDVBCIInterfaces.getInstance().getNumOfSlots()
 		print "[CI_Check] FOUND %d CI Slots " % NUM_CI
 		if NUM_CI > 0:
