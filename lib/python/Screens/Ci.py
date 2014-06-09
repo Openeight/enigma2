@@ -12,6 +12,7 @@ from Components.ConfigList import ConfigList
 from Components.Label import Label
 from Components.SelectionList import SelectionList
 from Components.MenuList import MenuList
+from Components.Pixmap import Pixmap
 from ServiceReference import ServiceReference
 from xml.etree.cElementTree import parse as ci_parse
 from Tools.XMLTools import elementsWithTag, mergeText, stringToXML
@@ -300,6 +301,8 @@ class CiSelection(Screen):
 		self.list = [ ]
                 self["key_blue"] = Label(_("CI assignment"))
                 self["key_blue"].hide()
+                self["pixmap_blue"] = Pixmap()
+                self["pixmap_blue"].hide()
                 
 		for slot in range(MAX_NUM_CI):
 			state = eDVBCI_UI.getInstance().getState(slot)
@@ -341,12 +344,15 @@ class CiSelection(Screen):
                 
 		if self.state[slot] == 0:			#no module
 			self["key_blue"].hide()
+			self["pixmap_blue"].hide()
                         self.list.append( (_("no module found"), ConfigNothing(), 2, slot) )
 		elif self.state[slot] == 1:		#module in init
                         self["key_blue"].show()
+                        self["pixmap_blue"].show()
                         self.list.append( (_("init module"), ConfigNothing(), 2, slot) )
 		elif self.state[slot] == 2:		#module ready
 			self["key_blue"].show()
+			self["pixmap_blue"].show()
                         #get appname
 			appname = eDVBCI_UI.getInstance().getAppName(slot)
 			self.list.append( (appname, ConfigNothing(), 2, slot) )
