@@ -16,7 +16,7 @@
 		<color color="#000000" name="WindowTitleBackground"/>
 	</windowstyle>
 	<fonts>
-	<font name="VFDRegular" filename="nmsbd.ttf" scale="90" />
+        <font name="VFDRegular" filename="nmsbd.ttf" scale="90" />
 		<alias name="Huge" font="VFDRegular" size="32" height="32" />
 		<alias name="Bigger" font="VFDRegular" size="17" height="18" />
 		<alias name="Big" font="VFDRegular" size="15" height="16" />
@@ -29,11 +29,6 @@
 	<screen name="SummaryClockPanel">
 		<widget source="global.CurrentTime" render="Label" position="right" size="40,*" font="Clock" halign="right" valign="top" noWrap="1">
 			<convert type="ClockToText"/>
-		</widget>
-	</screen>
-	<screen name="RecordIconPanel">
-		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/skin_default/LCDIcons/rec.png" position="e-15,1" size="15,11">
-			<convert type="ConditionalShowHide"/>
 		</widget>
 	</screen>
 
@@ -52,7 +47,7 @@
 			<convert type="EventTime">Remaining</convert>
                         <convert type="RemainingToText">NoSeconds</convert>
 		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="REC" position="66,24" size="25,10" font="VFDRegular;10" halign="left" valign="center" noWrap="1" zPosition="2">
+		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="66,24" size="25,10" font="VFDRegular;10" halign="left" valign="center" noWrap="1" zPosition="2">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
                 <widget source="global.CurrentTime" render="Label" position="88,16" size="40,15" font="VFDRegular;15" halign="right" valign="top" noWrap="1">
@@ -69,7 +64,6 @@
 			<widget source="parent.Event" render="Label" position="bottom" size="*,12" font="Medium" noWrap="1">
 				<convert type="EventName">Name</convert>
 			</widget>
-			<panel name="RecordIconPanel"/>
 		</panel>
 	</screen>
 
@@ -88,7 +82,7 @@
 			<convert type="EventTime">Remaining</convert>
                         <convert type="RemainingToText">NoSeconds</convert>
 		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="REC" position="66,24" size="25,10" font="VFDRegular;10" halign="left" valign="center" noWrap="1" zPosition="2">
+		<widget source="session.RecordState" render="FixedLabel" text="&#174;" position="66,24" size="25,10" font="VFDRegular;10" halign="left" valign="center" noWrap="1" zPosition="2">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
                 <widget source="global.CurrentTime" render="Label" position="88,16" size="40,15" font="VFDRegular;15" halign="right" valign="top" noWrap="1">
@@ -132,7 +126,6 @@
 			<widget source="session.CurrentService" render="Label" position="top" size="*,12" font="Medium" noWrap="1">
 				<convert type="ServiceName">Name</convert>
 			</widget>
-			<panel name="RecordIconPanel"/>
 		</panel>
 	</screen>
 	
@@ -210,8 +203,8 @@
                        <widget source="global.CurrentTime" render="Label" position="0,20" size="128,15" font="VFDRegular;14" halign="center" valign="center" noWrap="1">
                                 <convert type="ClockToText">Format:%a %d.%m.%Y</convert>
                        </widget>
-                       <widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/skin_default/LCDIcons/rec.png" position="110,22" size="15,10">
-                                <convert type="ConditionalShowHide">Blink</convert>
+                       <widget source="session.RecordState" render="FixedLabel" text="&#174;" position="115,18" size="25,18" font="VFDRegular;14" halign="left" valign="center" noWrap="1" zPosition="2">
+			<convert type="ConditionalShowHide">Blink</convert>
                        </widget>
         </screen>        
 
@@ -234,7 +227,7 @@
 	</screen>	
 
 	<screen name="MessageBox_summary" position="fill" layout="stack">
-		<widget source="parent.Text" render="Label" position="top" size="*,32" font="Small"/>
+		<widget source="parent.Text" render="Label" position="top" size="*,32" font="Medium"/>
 		<widget source="parent.selectedChoice" render="Label" position="bottom" size="*,12" font="Medium" noWrap="1"/>
 	</screen>
 
