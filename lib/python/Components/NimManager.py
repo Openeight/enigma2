@@ -76,7 +76,7 @@ class SecConfigure:
 			else:
 				sec.setVoltageMode(switchParam._14V)
 				sec.setToneMode(switchParam.OFF)
-		elif (diseqcmode == 3): # diseqc 1.2
+		elif diseqcmode == 3: # diseqc 1.2
 			if self.satposdepends.has_key(slotid):
 				for slot in self.satposdepends[slotid]:
 					tunermask |= (1 << slot)
@@ -682,13 +682,12 @@ class NimManager:
 			#print "SATS", self.satellites
 			#print "TRANSPONDERS", self.transponders
 
-		if self.hasNimType("DVB-C"):
+		if self.hasNimType("DVB-C") or self.hasNimType("DVB-T"):
 			print "Reading cables.xml"
 			db.readCables(self.cablesList, self.transponderscable)
 #			print "CABLIST", self.cablesList
 #			print "TRANSPONDERS", self.transponders
 
-		if self.hasNimType("DVB-T"):
 			print "Reading terrestrial.xml"
 			db.readTerrestrials(self.terrestrialsList, self.transpondersterrestrial)
 #			print "TERLIST", self.terrestrialsList
@@ -1030,7 +1029,7 @@ def InitSecParams():
 	x.addNotifier(lambda configElement: secClass.setParam(secClass.DELAY_BETWEEN_DISEQC_REPEATS, configElement.value))
 	config.sec.delay_between_diseqc_repeats = x
 
-	x = ConfigInteger(default=50, limits = (0, 9999))
+	x = ConfigInteger(default=100, limits = (0, 9999))
 	x.addNotifier(lambda configElement: secClass.setParam(secClass.DELAY_AFTER_LAST_DISEQC_CMD, configElement.value))
 	config.sec.delay_after_last_diseqc_command = x
 
@@ -1038,7 +1037,7 @@ def InitSecParams():
 	x.addNotifier(lambda configElement: secClass.setParam(secClass.DELAY_AFTER_TONEBURST, configElement.value))
 	config.sec.delay_after_toneburst = x
 
-	x = ConfigInteger(default=20, limits = (0, 9999))
+	x = ConfigInteger(default=75, limits = (0, 9999))
 	x.addNotifier(lambda configElement: secClass.setParam(secClass.DELAY_AFTER_VOLTAGE_CHANGE_BEFORE_SWITCH_CMDS, configElement.value))
 	config.sec.delay_after_change_voltage_before_switch_command = x
 
@@ -1170,7 +1169,7 @@ def InitNimManager(nimmgr):
 
 	unicable_choices = {
 		"unicable_lnb": _("Unicable LNB"),
-		"unicable_matrix": _("Unicable Martix"),
+		"unicable_matrix": _("Unicable Matrix"),
 		"unicable_user": "Unicable "+_("User defined")}
 	unicable_choices_default = "unicable_lnb"
 
@@ -1437,9 +1436,9 @@ def InitNimManager(nimmgr):
 			nim.powerMeasurement = ConfigYesNo(True)
 			nim.powerThreshold = ConfigInteger(default=hw.get_device_name() == "dm8000" and 15 or 50, limits=(0, 100))
 			nim.turningSpeed = ConfigSelection(turning_speed_choices, "fast")
-			btime = datetime(1970, 1, 1, 7, 0);
+			btime = datetime(1970, 1, 1, 7, 0)
 			nim.fastTurningBegin = ConfigDateTime(default = mktime(btime.timetuple()), formatstring = _("%H:%M"), increment = 900)
-			etime = datetime(1970, 1, 1, 19, 0);
+			etime = datetime(1970, 1, 1, 19, 0)
 			nim.fastTurningEnd = ConfigDateTime(default = mktime(etime.timetuple()), formatstring = _("%H:%M"), increment = 900)
 
 	def createCableConfig(nim, x):
