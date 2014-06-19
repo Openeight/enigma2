@@ -5,6 +5,7 @@ import string
 import re
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler, property_lexical_handler
+from types import *
 try:
 	from _xmlplus.sax.saxlib import LexicalHandler
 	no_comments = False
@@ -27,7 +28,10 @@ class parseXML(ContentHandler, LexicalHandler):
 	def startElement(self, name, attrs):
 		for x in ["text", "title", "value", "caption", "description"]:
 			try:
-				k = str(attrs[x])
+				if type(attrs[x]) == UnicodeType:
+					k = str(attrs[x].encode('UTF-8'))
+				else:
+					k = str(attrs[x])
 				if k.strip() != "" and not self.ishex.match(k):
 					attrlist.add((attrs[x], self.last_comment))
 					self.last_comment = None
@@ -61,7 +65,10 @@ for arg in sys.argv[1:]:
 		if c:
 			for l in c.split('\n'):
 				print "#. ", l
-		print 'msgid "' + str(k) + '"'
+		if type(k) == UnicodeType:
+			print 'msgid "' + str(k.encode('UTF-8')) + '"'
+		else:
+			print 'msgid "' + str(k) + '"'
 		print 'msgstr ""'
 
 	attrlist = set()
