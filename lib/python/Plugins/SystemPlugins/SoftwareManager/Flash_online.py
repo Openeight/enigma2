@@ -220,11 +220,7 @@ class doFlashImage(Screen):
 		self.hide()
 		if self.Online:
 			url = self.feedurl + "/" + box + "/" + sel
-			u = urllib2.urlopen(url)
 			f = open(file_name, 'wb')
-			meta = u.info()
-			file_size = int(meta.getheaders("Content-Length")[0])
-			print "Downloading: %s Bytes: %s" % (sel, file_size)
 			job = ImageDownloadJob(url, file_name, sel)
 			job.afterEvent = "close"
 			job_manager.AddJob(job)
