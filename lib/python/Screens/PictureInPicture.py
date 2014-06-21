@@ -7,9 +7,39 @@ from Tools import Notifications
 from Screens.MessageBox import MessageBox
 from os import access, W_OK
 
-pip_config_initialized = False
 MAX_X = 720
 MAX_Y = 576
+pip_config_initialized = False
+PipPigModeEnabled = False
+PipPigModeTimer = eTimer()
+
+def timedStopPipPigMode():
+	PipPigModeTimer.stop()
+	from Screens.InfoBar import InfoBar
+	if InfoBar.instance and InfoBar.instance.session:
+		if SystemInfo["hasPIPVisibleProc"]:
+			open(SystemInfo["hasPIPVisibleProc"], "w").write("1")
+		elif hasattr(InfoBar.instance.session, "pip"):
+			InfoBar.instance.session.pip.playService(InfoBar.instance.session.pip.currentService)
+	global PipPigModeEnabled
+	PipPigModeEnabled = False
+
+PipPigModeTimer.callback.append(timedStopPipPigMode)
+
+def PipPigMode(value):
+	from Screens.InfoBar import InfoBar
+	if InfoBar.instance and InfoBar.instance.session and hasattr(InfoBar.instance.session, "pip") and config.av.pip_mode.value != "external":
+		if value:
+			PipPigModeTimer.stop()
+			global PipPigModeEnabled
+			if not PipPigModeEnabled:
+				if SystemInfo["hasPIPVisibleProc"]:
+					open(SystemInfo["hasPIPVisibleProc"], "w").write("0")
+				else:
+					InfoBar.instance.session.pip.pipservice = False
+				PipPigModeEnabled = True
+		else:
+			PipPigModeTimer.start(100)
 
 class PictureInPictureZapping(Screen):
 	skin = """<screen name="PictureInPictureZapping" flags="wfNoBorder" position="50,50" size="90,26" title="PiPZap" zPosition="-1">
@@ -39,46 +69,20 @@ class PictureInPicture(Screen):
 			config.av.pip_mode = ConfigSelection(default="standard", choices=self.choicelist)
 			pip_config_initialized = True
 
-		self.pigmodeEnabled = False
-		self.relocateTimer = eTimer()
 		self.onLayoutFinish.append(self.LayoutFinished)
 
 	def __del__(self):
-		if self.relocateTimer.isActive():
-			self.relocateTimer.callback.remove(self.timedRelocate)
-			self.relocateTimer.stop()
 		del self.pipservice
 		self.setExternalPiP(False)
 		self.setSizePosMainWindow()
-
-	def pigmode(self, value):
-		if value:
-			if self.relocateTimer.isActive():
-				self.relocateTimer.callback.remove(self.timedRelocate)
-				self.relocateTimer.stop()
-			elif not self.pigmodeEnabled:
-				self.instance.resize(eSize(*(2, 2)))
-				self["video"].instance.resize(eSize(*(2, 2)))
-				self.instance.move(ePoint(0, 0))
-				self.pigmodeEnabled = True
-		else:
-			self.relocateTimer.callback.append(self.timedRelocate)
-			self.relocateTimer.start(100)
-
-	def timedRelocate(self):
-		self.relocateTimer.callback.remove(self.timedRelocate)
-		self.relocateTimer.stop()
-		self.relocate()
-		self.pigmodeEnabled = False
 
 	def relocate(self):
 		x = config.av.pip.value[0]
 		y = config.av.pip.value[1]
 		w = config.av.pip.value[2]
 		h = config.av.pip.value[3]
-		if x != -1 and y != -1 and w != -1 and h != -1:
-			self.move(x, y)
-			self.resize(w, h)
+		self.move(x, y)
+		self.resize(w, h)
 
 	def LayoutFinished(self):
 		self.onLayoutFinish.remove(self.LayoutFinished)
@@ -106,7 +110,7 @@ class PictureInPicture(Screen):
 		elif config.av.pip_mode.value == "byside":
 			x = MAX_X / 2
 			y = MAX_Y / 4
-		elif config.av.pip_mode.value == "bigpig":
+		elif config.av.pip_mode.value in "bigpig external":
 			x = 0
 			y = 0
 		config.av.pip.save()
@@ -121,7 +125,7 @@ class PictureInPicture(Screen):
 		config.av.pip.value[2] = w
 		config.av.pip.value[3] = h
 		config.av.pip.save()
-		if config.av.pip_mode.value == "standard" or config.av.pip_mode.value == "external":
+		if config.av.pip_mode.value == "standard":
 			self.instance.resize(eSize(*(w, h)))
 			self["video"].instance.resize(eSize(*(w, h)))
 			self.setSizePosMainWindow()
@@ -137,9 +141,10 @@ class PictureInPicture(Screen):
 			self.instance.resize(eSize(*(MAX_X/2, MAX_Y/2 )))
 			self["video"].instance.resize(eSize(*(MAX_X/2, MAX_Y/2)))
 			self.setSizePosMainWindow(0, MAX_Y/4, MAX_X/2, MAX_Y/2)
-		elif config.av.pip_mode.value == "bigpig":
+		elif config.av.pip_mode.value in "bigpig external":
 			self.instance.resize(eSize(*(MAX_X, MAX_Y)))
 			self["video"].instance.resize(eSize(*(MAX_X, MAX_Y)))
+			self.setSizePosMainWindow()
 
 	def setSizePosMainWindow(self, x = 0, y = 0, w = MAX_X, h = MAX_Y):
 		if SystemInfo["VideoDestinationConfigurable"]:

@@ -71,8 +71,8 @@ class Standby(Screen):
 				self.paused_service = self.session.current_dialog
 				self.paused_service.pauseService()
 		if self.session.pipshown:
-			del self.session.pip
-			self.session.pipshown = False
+			from Screens.InfoBar import InfoBar
+			InfoBar.instance and hasattr(InfoBar.instance, "showPiP") and InfoBar.instance.showPiP()
 
 		#set input to vcr scart
 		if SystemInfo["ScartSwitch"]:
@@ -113,7 +113,7 @@ class Standby(Screen):
 		return StandbySummary
 
 	def standbyTimeout(self):
-		if config.usage.inactivity_timer_blocktime.value:
+		if config.usage.standby_to_shutdown_timer_blocktime.value:
 			curtime = localtime(time())
 			if curtime.tm_year > 1970: #check if the current time is valid
 				curtime = (curtime.tm_hour, curtime.tm_min, curtime.tm_sec)

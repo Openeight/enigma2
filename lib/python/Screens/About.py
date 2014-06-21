@@ -178,7 +178,7 @@ class CommitInfo(Screen):
 					commitlog += d.strip() + "\n"
 				commitlog += 140*'-' + "\n"
 		except:
-			commitlog = _("Currently the commit log cannot be retreived - please try later again")
+			commitlog = _("Currently the commit log cannot be retrieved - please try later again")
 		self["AboutScrollLabel"].setText(commitlog)
 	
 	def keyMenu(self):

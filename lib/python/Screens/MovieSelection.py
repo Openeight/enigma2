@@ -48,6 +48,7 @@ config.movielist.settings_per_directory = ConfigYesNo(default=True)
 config.movielist.root = ConfigSelection(default="/media", choices=["/","/media","/media/hdd","/media/hdd/movie"])
 config.movielist.hide_extensions = ConfigYesNo(default=False)
 config.movielist.hide_images = ConfigYesNo(default=True)
+config.movielist.stop_service = ConfigYesNo(default=True)
 
 userDefinedButtons = None
 last_selected_dest = []
@@ -246,6 +247,7 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 			getConfigListEntry(_("Type"), cfg.listtype),
 			getConfigListEntry(_("Use individual settings for each directory"), config.movielist.settings_per_directory),
 			getConfigListEntry(_("Behavior when a movie reaches the end"), config.usage.on_movie_eof),
+			getConfigListEntry(_("Stop service on return to movie list"), config.movielist.stop_service),
 			getConfigListEntry(_("Load length of movies in movie list"), config.usage.load_length_of_movies_in_moviellist),
 			getConfigListEntry(_("Show status icons in movie list"), config.usage.show_icons_in_movielist),
 			getConfigListEntry(_("Show icon for new/unseen items"), config.usage.movielist_unseen),
@@ -258,10 +260,6 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 		ConfigListScreen.__init__(self, configList, session=session, on_change = self.changedEntry)
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Ok"))
-		self["key_yellow"] = Button("")
-		self["key_blue"] = Button("")
-		self["statusbar"] = Label()
-		self["status"] = Label()
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"red": self.cancel,
@@ -1033,16 +1031,20 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 			action()
 
 	def saveLocalSettings(self):
-		try:
-			path = os.path.join(config.movielist.last_videodir.value, ".e2settings.pkl")
-			pickle.dump(self.settings, open(path, "wb"))
-		except Exception, e:
-			print "Failed to save settings to %s: %s" % (path, e)
+		if config.movielist.settings_per_directory.value:
+			try:
+				path = os.path.join(config.movielist.last_videodir.value, ".e2settings.pkl")
+				pickle.dump(self.settings, open(path, "wb"))
+			except Exception, e:
+				print "Failed to save settings to %s: %s" % (path, e)
 		# Also set config items, in case the user has a read-only disk
 		config.movielist.moviesort.value = self.settings["moviesort"]
 		config.movielist.listtype.value = self.settings["listtype"]
 		config.movielist.description.value = self.settings["description"]
 		config.usage.on_movie_eof.value = self.settings["movieoff"]
+		# save moviesort and movieeof values for using by hotkeys
+		config.movielist.moviesort.save()
+		config.usage.on_movie_eof.save()
 
 	def loadLocalSettings(self):
 		'Load settings, called when entering a directory'
@@ -1868,8 +1870,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 	def setNextMovieOffStatus(self):
 		config.usage.on_movie_eof.selectNext()
 		self.settings["movieoff"] = config.usage.on_movie_eof.value
-		if config.movielist.settings_per_directory.value:
-			self.saveLocalSettings()
+		self.saveLocalSettings()
 
 	def can_movieoff_menu(self, item):
 		return True
