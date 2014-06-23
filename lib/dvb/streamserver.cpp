@@ -32,9 +32,7 @@ eStreamClient::~eStreamClient()
 		delete streamThread;
 	}
 	if (encoderFd >= 0)
-	{
 		parent->freeEncoder(this, encoderFd);
-	}
 	if (streamFd >= 0) ::close(streamFd);
 }
 
@@ -186,77 +184,12 @@ void eStreamClient::notifier(int what)
 						encoderFd = parent->allocateEncoder(this, serviceref, bitrate, width, height, framerate, !!interlaced, aspectratio);
 						if (encoderFd >= 0)
 						{
-							const char *reply = "HTTP/1.0 200 OK\r\nConnection: Close\r\nContent-Type: video/mpeg\r\nServer: streamserver\r\n\r\n";
-							writeAll(streamFd, reply, strlen(reply));
-							if (serviceref.substr(0, 10) == "file?file=")
+							running = true;
+							streamThread = new eDVBRecordStreamThread(188);
+							if (streamThread)
 							{
-								/* openwebif file stream request, convert back to serviceref, so we can handle it like any other stream request */
-								serviceref = "1:0:1:0:0:0:0:0:0:0:" + serviceref.substr(10);
-							}
-							pos = serviceref.find('?');
-							if (pos != std::string::npos)
-							{
-								request = serviceref.substr(pos);
-								serviceref = serviceref.substr(0, pos);
-							}
-							else
-							{
-								request.clear();
-							}
-							pos = request.find("?bitrate=");
-							if (pos != std::string::npos)
-							{
-								/* we need to stream transcoded data */
-								int bitrate = 1024 * 1024;
-								int width = 720;
-								int height = 576;
-								int framerate = 25000;
-								int interlaced = 0;
-								int aspectratio = 0;
-								sscanf(request.substr(pos).c_str(), "?bitrate=%d", &bitrate);
-								pos = request.find("?width=");
-								if (pos != std::string::npos)
-								{
-									sscanf(request.substr(pos).c_str(), "?width=%d", &width);
-								}
-								pos = request.find("?height=");
-								if (pos != std::string::npos)
-								{
-									sscanf(request.substr(pos).c_str(), "?height=%d", &height);
-								}
-								pos = request.find("?framerate=");
-								if (pos != std::string::npos)
-								{
-									sscanf(request.substr(pos).c_str(), "?framerate=%d", &framerate);
-								}
-								pos = request.find("?interlaced=");
-								if (pos != std::string::npos)
-								{
-									sscanf(request.substr(pos).c_str(), "?interlaced=%d", &interlaced);
-								}
-								pos = request.find("?aspectratio=");
-								if (pos != std::string::npos)
-								{
-									sscanf(request.substr(pos).c_str(), "?aspectratio=%d", &aspectratio);
-								}
-								encoderFd = parent->allocateEncoder(this, serviceref, bitrate, width, height, framerate, !!interlaced, aspectratio);
-								if (encoderFd >= 0)
-								{
-									running = true;
-									streamThread = new eDVBRecordStreamThread(188);
-									if (streamThread)
-									{
-										streamThread->setTargetFD(streamFd);
-										streamThread->start(encoderFd);
-									}
-								}
-							}
-							else
-							{
-								if (eDVBServiceStream::start(serviceref.c_str(), streamFd) >= 0)
-								{
-									running = true;
-								}
+								streamThread->setTargetFD(streamFd);
+								streamThread->start(encoderFd);
 							}
 						}
 					}
@@ -330,7 +263,7 @@ void eStreamServer::newConnection(int socket)
 
 void eStreamServer::connectionLost(eStreamClient *client)
 {
-	eSmartPtrList<eStreamClient>::iterator it = std::find(clients.begin(), clients.end(), client);
+	eSmartPtrList<eStreamClient>::iterator it = std::find(clients.begin(), clients.end(), client );
 	if (it != clients.end())
 	{
 		clients.erase(it);
