@@ -11,7 +11,8 @@ from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, ConfigSelection, getConfigListEntry
 from Components.Label import Label
 import re
-
+from boxbranding import getBoxType, getMachineBrand, getMachineName, getImageVersion, getImageBuild, getDriverDate
+from os import path
 from Tools.StbHardware import getFPVersion
 from enigma import eTimer
 
@@ -23,11 +24,22 @@ class About(Screen):
 		Screen.__init__(self, session)
 
 
-		AboutText = _("Hardware: ") + about.getHardwareTypeString() + "\n"
+		AboutText = _("Model: %s %s") % (getMachineBrand(), getMachineName()) + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
-		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
-
-		EnigmaVersion = "Enigma: " + about.getEnigmaVersionString()
+		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"                             
+                if path.exists('/proc/stb/info/chipset'):
+			AboutText += _("Chipset: %s") % about.getChipSetString() + "\n"
+                AboutText += _("CPU: %s") % about.getCPUString() + "\n"
+		AboutText += _("Cores: %s") % about.getCpuCoresString() + "\n"
+                AboutText += _("Version: %s") % getImageVersion() + "\n"
+		AboutText += _("Build: %s") % getImageBuild() + "\n"
+                string = getDriverDate()
+		year = string[0:4]
+		month = string[4:6]
+		day = string[6:8]
+		driversdate = '-'.join((year, month, day))
+		AboutText += _("Drivers: %s") % driversdate + "\n"
+                EnigmaVersion = "Enigma: " + about.getEnigmaVersionString()
 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
 		AboutText += EnigmaVersion + "\n"
 
