@@ -219,8 +219,9 @@ class Getipklist(Screen):
                        for line in self.data:
                                ipkname = self.data[icount] 
                                print "gotPage icount, ipk name =", icount, ipkname 
-                               ipos = ipkname.find("_")
-                               remname = ipkname[:ipos]
+#                               ipos = ipkname.find("_")
+#                               remname = ipkname[:ipos]
+                               remname = ipkname
                                state = self.getstate(ipkname)
                                print "gotPage state, remname = ", state, remname
                             #   state = 0 not installed 1 installed
@@ -606,6 +607,7 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name="PluginDownload", description="Download/install plugins ", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+
 
 
 
