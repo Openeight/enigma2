@@ -8,8 +8,8 @@ from enigma import eTimer
 
 class MessageBox(Screen):
 	TYPE_YESNO = 0
-	TYPE_INFO = 1
-	TYPE_WARNING = 2
+	TYPE_WARNING = 1
+	TYPE_INFO = 2
 	TYPE_ERROR = 3
 
 	def __init__(self, session, text, type=TYPE_YESNO, timeout=-1, close_on_any_key=False, default=True, enable_input=True, msgBoxID=None, picon=None, simple=False, list=[], timeout_default=None):
@@ -32,16 +32,28 @@ class MessageBox(Screen):
 		self["ErrorPixmap"] = Pixmap()
 		self["QuestionPixmap"] = Pixmap()
 		self["InfoPixmap"] = Pixmap()
+		self["WarningPixmap"] = Pixmap()
+		self["InfoPixmap"].hide()
+		self["QuestionPixmap"].hide()
+		self["WarningPixmap"].hide()
+		self["ErrorPixmap"].hide()
 		self.timerRunning = False
 		self.initTimeout(timeout)
-
+                self.setTitle(_("Message"))
+                
 		picon = picon or type
-		if picon != self.TYPE_ERROR:
-			self["ErrorPixmap"].hide()
-		if picon != self.TYPE_YESNO:
-			self["QuestionPixmap"].hide()
-		if picon != self.TYPE_INFO:
-			self["InfoPixmap"].hide()
+		if picon == self.TYPE_ERROR:
+			self["ErrorPixmap"].show()
+			self.setTitle(_("Error"))
+		if picon == self.TYPE_YESNO:
+			self["QuestionPixmap"].show()
+			self.setTitle(_("Select"))
+		if picon == self.TYPE_INFO:
+			self["InfoPixmap"].show()
+			self.setTitle(_("Info"))
+		if picon == self.TYPE_WARNING:
+			self["WarningPixmap"].show()
+			self.setTitle(_("Warning"))
 
 		if type == self.TYPE_YESNO:
 			if list:
@@ -50,7 +62,7 @@ class MessageBox(Screen):
 				self.list = [ (_("yes"), True), (_("no"), False) ]
 			else:
 				self.list = [ (_("no"), False), (_("yes"), True) ]
-		else:
+                else:
 			self.list = []
 
 		self["list"] = MenuList(self.list)
