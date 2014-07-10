@@ -249,4 +249,3 @@ class CommitInfoSetup(Screen, ConfigListScreen):
                         x[1].cancel()
 
                 self.close()
-         

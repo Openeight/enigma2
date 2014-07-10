@@ -124,7 +124,7 @@ class ChannelContextMenu(Screen):
 		inAlternativeList = current_root and 'FROM BOUQUET "alternatives' in current_root.getPath()
 		inBouquet = csel.getMutableList() is not None
 		haveBouquets = config.usage.multibouquet.value
-
+		parentalControlEnabled = config.ParentalControl.configured.value and config.ParentalControl.servicepinactive.value
 		if not (current_sel_path or current_sel_flags & (eServiceReference.isDirectory|eServiceReference.isMarker)):
 			append_when_current_valid(current, menu, (_("show transponder info"), self.showServiceInformations), level = 2)
 		if csel.bouquet_mark_edit == OFF and not csel.movemode:
@@ -135,7 +135,7 @@ class ChannelContextMenu(Screen):
 						append_when_current_valid(current, menu, (_("stop using as startup service"), self.unsetStartupService), level = 0)
 					else:
 						append_when_current_valid(current, menu, (_("set as startup service"), self.setStartupService), level = 0)
-					if config.ParentalControl.configured.value:
+					if parentalControlEnabled:
 						from Components.ParentalControl import parentalControl
 						if parentalControl.getProtectionLevel(csel.getCurrentSelection().toCompareString()) == -1:
 							append_when_current_valid(current, menu, (_("add to parental protection"), boundFunction(self.addParentalProtection, csel.getCurrentSelection())), level = 0)
@@ -155,7 +155,7 @@ class ChannelContextMenu(Screen):
 
 					if SystemInfo["PIPAvailable"]:
 						# only allow the service to be played directly in pip / mainwindow when the service is not under parental control
-						if not config.ParentalControl.configured.value or parentalControl.getProtectionLevel(csel.getCurrentSelection().toCompareString()) == -1:
+						if parentalControlEnabled and parentalControl.getProtectionLevel(csel.getCurrentSelection().toCompareString()) == -1:
 							if not csel.dopipzap:
 								append_when_current_valid(current, menu, (_("play as picture in picture"), self.showServiceInPiP), level = 0, key = "blue")
 								self.pipAvailable = True
@@ -883,6 +883,8 @@ class ChannelSelectionBase(Screen):
 				"nextMarker": self.nextMarker,
 				"prevMarker": self.prevMarker,
 				"gotAsciiCode": self.keyAsciiCode,
+				"keyLeft": self.keyLeft,
+				"keyRight": self.keyRight,
 				"1": self.keyNumberGlobal,
 				"2": self.keyNumberGlobal,
 				"3": self.keyNumberGlobal,
@@ -893,7 +895,7 @@ class ChannelSelectionBase(Screen):
 				"8": self.keyNumberGlobal,
 				"9": self.keyNumberGlobal,
 				"0": self.keyNumber0
-			})
+			}, -2)
 		self.maintitle = _("Channel selection")
 		self.recallBouquetMode()
 
@@ -1187,16 +1189,32 @@ class ChannelSelectionBase(Screen):
 		return self.servicelist.atEnd()
 
 	def nextBouquet(self):
-		if "reverseB" in config.usage.servicelist_cursor_behavior.value:
+		if config.usage.oldstyle_channel_select_controls.value:
+			self.servicelist.instance.moveSelection(self.servicelist.instance.pageUp)
+		elif "reverseB" in config.usage.servicelist_cursor_behavior.value:
 			self.changeBouquet(-1)
 		else:
 			self.changeBouquet(+1)
 
 	def prevBouquet(self):
-		if "reverseB" in config.usage.servicelist_cursor_behavior.value:
+		if config.usage.oldstyle_channel_select_controls.value:
+			self.servicelist.instance.moveSelection(self.servicelist.instance.pageDown)
+		elif "reverseB" in config.usage.servicelist_cursor_behavior.value:
 			self.changeBouquet(+1)
 		else:
 			self.changeBouquet(-1)
+
+	def keyLeft(self):
+		if config.usage.oldstyle_channel_select_controls.value:
+			self.changeBouquet(-1)
+		else:
+			self.servicelist.instance.moveSelection(self.servicelist.instance.pageUp)
+
+	def keyRight(self):
+		if config.usage.oldstyle_channel_select_controls.value:
+			self.changeBouquet(+1)
+		else:
+			self.servicelist.instance.moveSelection(self.servicelist.instance.pageDown)
 
 	def showFavourites(self):
 		if not self.pathChangeDisabled:
@@ -1379,9 +1397,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 
 		self.startServiceRef = None
 
-		self.history_tv = [ ]
-		self.history_radio = [ ]
-		self.history = self.history_tv
+		self.history = [ ]
 		self.history_pos = 0
 
 		if config.servicelist.startupservice.value and config.servicelist.startuproot.value:
@@ -1449,7 +1465,6 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 	def setModeTv(self):
 		if self.revertMode is None:
 			self.revertMode = self.mode
-		self.history = self.history_tv
 		self.lastservice = config.tv.lastservice
 		self.lastroot = config.tv.lastroot
 		config.servicelist.lastmode.value = "tv"
@@ -1466,7 +1481,6 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		if self.revertMode is None:
 			self.revertMode = self.mode
 		if config.usage.e1like_radio_mode.value:
-			self.history = self.history_radio
 			self.lastservice = config.radio.lastservice
 			self.lastroot = config.radio.lastroot
 			config.servicelist.lastmode.value = "radio"
@@ -1670,6 +1684,10 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			path += i.toString()
 			path += ';'
 		if path and path != self.lastroot.value:
+			if self.mode == MODE_RADIO and 'FROM BOUQUET "bouquets.tv"' in path:
+				self.setModeTv()
+			elif 'FROM BOUQUET "bouquets.radio"' in path:
+				self.setModeRadio()
 			self.lastroot.value = path
 			self.lastroot.save()
 
