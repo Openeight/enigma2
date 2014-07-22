@@ -31,7 +31,7 @@ def InitUsageConfig():
 	config.usage.crypto_icon_mode.addNotifier(refreshServiceList)
 
 	choicelist = [("-1", _("Devide")), ("0", _("Disable"))]
-	for i in range(100,1300,100):
+	for i in range(100,1850,50):
 		choicelist.append(("%d" % i, ngettext("%d pixel wide", "%d pixels wide", i) % i))
 	config.usage.servicelist_column = ConfigSelection(default="0", choices=choicelist)
 	config.usage.servicelist_column.addNotifier(refreshServiceList)
