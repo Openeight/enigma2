@@ -178,10 +178,10 @@ class CommitInfo(Screen):
 	def download_finished(self, string=""):
 		commitlog = ""
 		try:
-			for x in  "".join(open('/tmp/.commits', 'r').read().split('<li class="commit commit-group-item js-navigation-item js-details-container">')[1:]).split('<p class="commit-title  js-pjax-commit-title">'):
+			for x in  "".join(open('/tmp/.commits', 'r').read().split('<li class="commit commit-group-item table-list-item js-navigation-item js-details-container">')[1:]).split('<p class="commit-title  js-pjax-commit-title">'):
 				title = re.findall('class="message" data-pjax="true" title="(.*?)"', x, re.DOTALL)
-				author = re.findall('rel="author">(.*?)</', x)
-				date   = re.findall('<time class="js-relative-date" datetime=".*?" title="(.*?)">', x)
+				author = re.findall('rel="contributor">((?!\\<).*)</a>', x)
+				date   = re.findall('<time datetime=".*?" is="relative-time">(.*?)</time>', x)
 				for t in title:
 					commitlog += t.strip().replace('&amp;', '&').replace('&quot;', '"').replace('&lt;', '\xc2\xab').replace('&gt;', '\xc2\xbb') + "\n"
 				for a in author:
@@ -194,9 +194,9 @@ class CommitInfo(Screen):
 		self["AboutScrollLabel"].setText(commitlog)
 	
 	def keyMenu(self):
-                self.session.open(CommitInfoSetup)
+		self.session.open(CommitInfoSetup)
 
-        def showTranslationInfo(self):
+	def showTranslationInfo(self):
 		self.session.open(TranslationInfo)
 
 	def showAbout(self):
