@@ -150,11 +150,10 @@ class FastScanScreen(ConfigListScreen, Screen):
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
 		{
 			"ok": self.keyGo,
-			"save": self.keySave,
+			"save": self.keyGo,
 			"cancel": self.keyCancel,
 			"menu": self.closeRecursive,
 		}, -2)
-
 		providerList = list(x[0] for x in self.providers)
 
 		lastConfiguration = eval(config.misc.fastscan.last_configuration.value)
