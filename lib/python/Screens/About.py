@@ -17,7 +17,7 @@ from Tools.StbHardware import getFPVersion
 from enigma import eTimer
 
 config.CommitInfoSetup = ConfigSubsection()
-config.CommitInfoSetup.commiturl = ConfigSelection(default='Enigma2', choices=[('Enigma2', _('Source-Enigma2')), ('XTA', _('Skin-XTA')), ('TechniHD', _('Skin-TechniHD'))])
+config.CommitInfoSetup.commiturl = ConfigSelection(default='Enigma2', choices=[('Enigma2', _('Source-Enigma2')), ('XTA', _('Skin-XTA')), ('TechniHD', _('Skin-TechniHD')), ('Metrix', _('Skin-Metrix'))])
 
 class About(Screen):
 	def __init__(self, session):
@@ -169,6 +169,9 @@ class CommitInfo(Screen):
                 elif config.CommitInfoSetup.commiturl.value == 'TechniHD':
                         self["Commits"].setText("TechniHD")
                         url = 'http://github.com/XTAv2/TechniHD/commits/master'
+                elif config.CommitInfoSetup.commiturl.value == 'Metrix':
+                        self["Commits"].setText("Metrix")
+                        url = 'http://github.com/XTAv2/metrix-skin/commits/master'
 		download = downloadWithProgress(url, '/tmp/.commits')
 		download.start().addCallback(self.download_finished).addErrback(self.download_failed)
 
