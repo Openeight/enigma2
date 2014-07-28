@@ -131,6 +131,8 @@ class SoftwarePanel(Screen):
                         self["key_yellow"].setText("XTA Commits")
                 elif config.CommitInfoSetup.commiturl.value == 'TechniHD':
                         self["key_yellow"].setText("THD Commits")
+                elif config.CommitInfoSetup.commiturl.value == 'Metrix':
+                        self["key_yellow"].setText("Metrix Commits")
                
 	def startActualUpdate(self, answer):
 		if answer:
