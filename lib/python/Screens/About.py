@@ -181,7 +181,7 @@ class CommitInfo(Screen):
 	def download_finished(self, string=""):
 		commitlog = ""
 		try:
-			for x in  "".join(open('/tmp/.commits', 'r').read().split('<li class="commit commit-group-item table-list-item js-navigation-item js-details-container">')[1:]).split('<p class="commit-title  js-pjax-commit-title">'):
+			for x in  "".join(open('/tmp/.commits', 'r').read().split('<li class="commit commit-group-item')[1:]).split('<p class="commit-title'):
 				title = re.findall('class="message" data-pjax="true" title="(.*?)"', x, re.DOTALL)
 				author = re.findall('rel="contributor">((?!\\<).*)</a>', x)
 				date   = re.findall('<time datetime=".*?" is="relative-time">(.*?)</time>', x)
