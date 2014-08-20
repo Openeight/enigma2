@@ -63,12 +63,6 @@ self.condition = (self.InterfaceState == True )
 self.clearSelectedKeys()
 self.selectKey("OK")
                 </code>
-                <code pos="after">
-currStep = self.numSteps
-self.wizard[currStep]["nextstep"] = None
-self.markDone()
-self.close()
-                </code>
         </step>
         <step id="checklanstatusend">
 		<condition>
@@ -181,12 +175,6 @@ self.condition = (self.InterfaceState == True )
 self.clearSelectedKeys()
 self.selectKey("OK")
 self["text"].setText(self.Text)
-                </code>
-                <code pos="after">
-currStep = self.numSteps
-self.wizard[currStep]["nextstep"] = None
-self.markDone()
-self.close()
                 </code>
         </step>
         <step id="checkWlanstatusend">

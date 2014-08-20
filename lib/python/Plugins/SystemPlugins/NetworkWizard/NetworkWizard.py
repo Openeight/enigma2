@@ -71,7 +71,7 @@ class NetworkWizard(WizardLanguage, Rc):
 	def exitWizardQuestion(self, ret = False):
 		if (ret):
 			self.markDone()
-			self.close()
+			self.exit()
 
 	def markDone(self):
 		self.stopScan()
