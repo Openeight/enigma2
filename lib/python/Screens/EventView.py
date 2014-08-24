@@ -195,7 +195,7 @@ class EventViewBase:
 		self["datetime"].setText(event.getBeginTimeString())
 		self["duration"].setText(_("%d min")%(event.getDuration()/60))
 		self["now"].setText(_("Now") + _(":"))
-		self["next"].setText(_("Next up") + _(":"))
+		self["next"].setText(_("Following") + _(":"))
                 self["key_red"].setText("")
 		if self.SimilarBroadcastTimer is not None:
 			self.SimilarBroadcastTimer.start(400,True)
