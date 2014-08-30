@@ -28,6 +28,7 @@ config.pluginfilter.openxta = ConfigYesNo(default = True)
 config.pluginfilter.kernel = ConfigYesNo(default = False)
 config.pluginfilter.drivers = ConfigYesNo(default = True)
 config.pluginfilter.extensions = ConfigYesNo(default = True)
+config.pluginfilter.e2_locales = ConfigYesNo(default = True)
 config.pluginfilter.m2k = ConfigYesNo(default = True)
 config.pluginfilter.picons = ConfigYesNo(default = True)
 config.pluginfilter.pli = ConfigYesNo(default = False)
@@ -196,6 +197,7 @@ class PluginDownloadBrowser(Screen):
 		self.type = type
 		self.needupdate = needupdate
 		self.createPluginFilter()
+		self.LanguageList = language.getLanguageList()
 
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
@@ -245,6 +247,8 @@ class PluginDownloadBrowser(Screen):
 			self.PLUGIN_PREFIX2.append(self.PLUGIN_PREFIX + 'drivers')
 		if config.pluginfilter.extensions.getValue():
 			self.PLUGIN_PREFIX2.append(self.PLUGIN_PREFIX + 'extensions')
+		if config.pluginfilter.e2_locales.getValue():
+			self.PLUGIN_PREFIX2.append('enigma2-locale-')
 		if config.pluginfilter.m2k.getValue():
 			self.PLUGIN_PREFIX2.append(self.PLUGIN_PREFIX + 'm2k')
 		if config.pluginfilter.picons.getValue():
@@ -370,13 +374,13 @@ class PluginDownloadBrowser(Screen):
 					self.doRemove(self.installFinished, self["list"].l.getCurrentSelection()[0].name)
 
 	def doRemove(self, callback, pkgname):
-		if pkgname.startswith('kernel-module-'):
+		if pkgname.startswith('kernel-module-') or pkgname.startswith('enigma2-locale-'):
 			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_remove + Ipkg.opkgExtraDestinations() + " " + pkgname, "sync"], closeOnSuccess = True)
 		else:
 			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_remove + Ipkg.opkgExtraDestinations() + " " + self.PLUGIN_PREFIX + pkgname, "sync"], closeOnSuccess = True)
 
 	def doInstall(self, callback, pkgname):
-		if pkgname.startswith('kernel-module-'):
+		if pkgname.startswith('kernel-module-') or pkgname.startswith('enigma2-locale-'):
 			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_install + " " + pkgname, "sync"], closeOnSuccess = True)
 		else:
 			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_install + " " + self.PLUGIN_PREFIX + pkgname, "sync"], closeOnSuccess = True)
@@ -428,7 +432,7 @@ class PluginDownloadBrowser(Screen):
 		except:
 			pass
 		for plugin in self.pluginlist:
-			if plugin[3] == self["list"].l.getCurrentSelection()[0].name:
+			if plugin[3] == self["list"].l.getCurrentSelection()[0].name or plugin[0] == self["list"].l.getCurrentSelection()[0].name:
 				self.pluginlist.remove(plugin)
 				break
 		self.plugins_changed = True
@@ -533,13 +537,33 @@ class PluginDownloadBrowser(Screen):
 		for x in self.pluginlist:
 			split = x[3].split('-', 1)
 			if x[0][0:14] == 'kernel-module-':
-					split[0] = "kernel modules"
+				split[0] = "kernel modules"
+			elif x[0][0:15] == 'enigma2-locale-':
+				split[0] = "languages"
 
 			if not self.plugins.has_key(split[0]):
 				self.plugins[split[0]] = []
 
 			if split[0] == "kernel modules":
 				self.plugins[split[0]].append((PluginDescriptor(name = x[0], description = x[2], icon = verticallineIcon), x[0][14:], x[1]))
+			elif split[0] == "languages":
+				for l in self.LanguageList:
+					if len(x[3]) > 2:
+						tmp = l[0].lower()
+						tmp = tmp.replace('_','-')
+						if tmp == x[3]:
+							countryIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/" + l[0] + ".png"))
+							if countryIcon is None:
+								countryIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/missing.png"))
+							self.plugins[split[0]].append((PluginDescriptor(name = x[0], description = x[2], icon = countryIcon), l[1][0], x[1]))
+							break
+					else:
+						if l[0][:2] == x[3]:
+							countryIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/" + l[0][:2] + ".png"))
+							if countryIcon is None:
+								countryIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/missing.png"))
+							self.plugins[split[0]].append((PluginDescriptor(name = x[0], description = x[2], icon = countryIcon), l[1][0], x[1]))
+							break
 			else:
 				if len(split) < 2:
 					continue
@@ -592,8 +616,9 @@ class PluginFilter(ConfigListScreen, Screen):
 		self.editListEntry = None
 		self.list = []
 		self.list.append(getConfigListEntry(_("openxta"), config.pluginfilter.openxta, _("This allows you to show all specific openxta in downloads")))
-                self.list.append(getConfigListEntry(_("drivers"), config.pluginfilter.drivers, _("This allows you to show drivers modules in downloads")))
+		self.list.append(getConfigListEntry(_("drivers"), config.pluginfilter.drivers, _("This allows you to show drivers modules in downloads")))
 		self.list.append(getConfigListEntry(_("extensions"), config.pluginfilter.extensions, _("This allows you to show extensions modules in downloads")))
+		self.list.append(getConfigListEntry(_("languages"), config.pluginfilter.e2_locales, _("This allows you to show enigma2 languages in downloads")))
 		self.list.append(getConfigListEntry(_("systemplugins"), config.pluginfilter.systemplugins, _("This allows you to show systemplugins modules in downloads")))
 		if Check_Softcam():
 			self.list.append(getConfigListEntry(_("softcams"), config.pluginfilter.softcams, _("This allows you to show softcams modules in downloads")))
