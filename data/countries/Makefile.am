@@ -4,7 +4,6 @@ dist_install_DATA = \
 	ad.png \
 	ae.png \
 	bg.png \
-	br.png \
 	cz.png \
 	de.png \
 	dk.png \
@@ -28,6 +27,7 @@ dist_install_DATA = \
 	no.png \
 	pl.png \
 	pt.png \
+	pt_BR.png \
 	ro.png \
 	ru.png \
 	se.png \

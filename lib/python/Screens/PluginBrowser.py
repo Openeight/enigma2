@@ -559,7 +559,7 @@ class PluginDownloadBrowser(Screen):
 							break
 					else:
 						if l[0][:2] == x[3]:
-							countryIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/" + l[0][:2] + ".png"))
+							countryIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/" + l[1][2].lower() + ".png"))
 							if countryIcon is None:
 								countryIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/missing.png"))
 							self.plugins[split[0]].append((PluginDescriptor(name = x[0], description = x[2], icon = countryIcon), l[1][0], x[1]))
