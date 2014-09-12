@@ -333,6 +333,9 @@ class InfoBarShowHide(InfoBarScreenSaver):
 				self.secondInfoBarScreen.hide()
 		elif isStandardInfoBar(self) and config.usage.show_second_infobar.value == "EPG":
 			self.showDefaultEPG()
+                elif isStandardInfoBar(self) and config.usage.show_second_infobar.value == "SingleEPG":
+			pluginlist = self.getEPGPluginList()
+                        self.openSingleServiceEPG()        
 		elif self.secondInfoBarScreen and config.usage.show_second_infobar.value and not self.secondInfoBarScreen.shown:
 			self.secondInfoBarScreen.show()
 			self.startHideTimer()
