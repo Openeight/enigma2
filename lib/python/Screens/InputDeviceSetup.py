@@ -393,7 +393,7 @@ class RemoteControlType(Screen, ConfigListScreen):
                         file.close()
                         rc = self.et9500
                         self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == '17':
+                elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 17:
 		        file.write('et8500')
                         file.close()
                         rc = self.et8000
