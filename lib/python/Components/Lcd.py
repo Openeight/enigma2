@@ -140,7 +140,7 @@ def standbyCounterChanged(configElement):
 	config.lcd.ledbrightnessdeepstandby.apply()
 
 def InitLcd():
-	if getBoxType() in ('et4000', 'et5000', 'et6000'):
+	if getBoxType() in ('et4000', 'et5000', 'et6000', 'et7000', 'et8500'):
 		detected = False
 	else:
 		detected = eDBoxLCD.getInstance().detected()
