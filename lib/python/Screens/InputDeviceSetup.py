@@ -305,6 +305,7 @@ class RemoteControlType(Screen, ConfigListScreen):
                         ("9 ", "ET-9500"),
                         ("17", "ET-8500"), 
                         ("9  ", "ET-8000 / ET-10000"),
+                        ("9   ", "ET-7000 / ET-7500"),
 		]
 
 	defaultRcList = [
@@ -312,6 +313,8 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("et5000", 7),
 			("et6000", 7),
 			("et6500", 9),
+			("et7000", 9),
+			("et7500", 9),
 			("et8000", 9),
 			("et8500", 17),
 			("et9000", 5),
@@ -352,6 +355,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 		self.et6500 = "/usr/share/enigma2/rc_models/et6500/rc.png"
 		self.et9000 = "/usr/share/enigma2/rc_models/et9x00/rc.png"
 		self.et9500 = "/usr/share/enigma2/rc_models/et9500/rc.png"
+		self.et7000 = "/usr/share/enigma2/rc_models/et7x00/rc.png"
 		self.et8000 = "/usr/share/enigma2/rc_models/et8000/rc.png"
 
                 if fileExists('/etc/enigma2/EtRcType'):
@@ -362,7 +366,8 @@ class RemoteControlType(Screen, ConfigListScreen):
                         file = open("/etc/enigma2/EtRcType", "w")
                         file.write('0')
                         file.close
-                
+                print type(self.rctype.value)
+                print self.rctype.value
                 if config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 13:
                         file.write('et4000')
                         file.close()
@@ -383,6 +388,11 @@ class RemoteControlType(Screen, ConfigListScreen):
                         file.close()
                         rc = self.et9000
 		        self["remote"].instance.setPixmapFromFile(rc)
+                elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 17:
+		        file.write('et8500')
+                        file.close()
+                        rc = self.et8000
+		        self["remote"].instance.setPixmapFromFile(rc)
                 elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9':
 		        file.write('et6500')
                         file.close()
@@ -393,18 +403,19 @@ class RemoteControlType(Screen, ConfigListScreen):
                         file.close()
                         rc = self.et9500
                         self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 17:
-		        file.write('et8500')
-                        file.close()
-                        rc = self.et8000
-		        self["remote"].instance.setPixmapFromFile(rc)
                 elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9  ':
 		        file.write('et8000')
                         file.close()
                         rc = self.et8000
+                        self["remote"].instance.setPixmapFromFile(rc)
+                elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9   ':
+		        file.write('et7000')
+                        file.close()
+                        rc = self.et7000
                         self["remote"].instance.setPixmapFromFile(rc)             
                 else:
                         self["remote"].hide
+                        file.close()
 			
         def getDefaultRcType(self):
 		data = iRcTypeControl.getBoxType()

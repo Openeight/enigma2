@@ -28,15 +28,15 @@ class RcModel:
 				remotefolder = 'et6500'
 			elif model == 'et9500':
 				remotefolder = 'et9500'
-			elif model == 'et8000'or 'et8500':
+			elif model == 'et8000' or model == 'et8500':
 				remotefolder = 'et8000'
-			elif model == 'et9000' or 'et9200':
+			elif model == 'et9000' or model == 'et9200':
 				remotefolder = 'et9x00'
 			elif model == 'et4000':
 				remotefolder = 'et4x00'
 			elif model == 'et6000':
 				remotefolder = 'et6x00'
-			elif model == 'et7000' or 'et7500':
+			elif model == 'et7000' or model == 'et7500':
 				remotefolder = 'et7x00'
 			return remotefolder
 		
