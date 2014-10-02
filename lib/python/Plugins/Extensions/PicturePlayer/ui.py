@@ -151,13 +151,13 @@ class Pic_Setup(Screen, ConfigListScreen):
 		self.onChangedEntry = []
 		self.session = session
 		ConfigListScreen.__init__(self, [], session = session, on_change = self.changedEntry)
-		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
+		self["actions"] = ActionMap(["SetupActions", "MenuActions", "ColorActions"],
 			{
-				"cancel": self.keyCancel,
+                                "cancel": self.keyCancel,
+                                "red": self.keyCancel, 
 				"save": self.keySave,
 				"ok": self.keySave,
-				"menu": self.closeRecursive,
-			}, -2)
+			}, -1)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self.createSetup()
@@ -191,6 +191,11 @@ class Pic_Setup(Screen, ConfigListScreen):
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
+
+        def keyCancel(self):
+                for x in self['config'].list:
+                        x[1].cancel()
+                self.close()
 
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
