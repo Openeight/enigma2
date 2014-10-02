@@ -303,9 +303,9 @@ class RemoteControlType(Screen, ConfigListScreen):
                         ("11", "ET-9200"), 
                         ("9", "ET-6500"), 
                         ("9 ", "ET-9500"),
-                        ("17", "ET-8500"), 
+                        ("17", "ET-8500"),
+                        ("16", "ET-7000 / ET-7500"), 
                         ("9  ", "ET-8000 / ET-10000"),
-                        ("9   ", "ET-7000 / ET-7500"),
 		]
 
 	defaultRcList = [
@@ -313,8 +313,8 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("et5000", 7),
 			("et6000", 7),
 			("et6500", 9),
-			("et7000", 9),
-			("et7500", 9),
+			("et7000", 16),
+			("et7500", 16),
 			("et8000", 9),
 			("et8500", 17),
 			("et9000", 5),
@@ -393,6 +393,11 @@ class RemoteControlType(Screen, ConfigListScreen):
                         file.close()
                         rc = self.et8000
 		        self["remote"].instance.setPixmapFromFile(rc)
+                elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 16:
+		        file.write('et7000')
+                        file.close()
+                        rc = self.et7000
+		        self["remote"].instance.setPixmapFromFile(rc)
                 elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9':
 		        file.write('et6500')
                         file.close()
@@ -407,12 +412,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 		        file.write('et8000')
                         file.close()
                         rc = self.et8000
-                        self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9   ':
-		        file.write('et7000')
-                        file.close()
-                        rc = self.et7000
-                        self["remote"].instance.setPixmapFromFile(rc)             
+                        self["remote"].instance.setPixmapFromFile(rc)                           
                 else:
                         self["remote"].hide
                         file.close()
