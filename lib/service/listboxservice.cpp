@@ -8,6 +8,7 @@
 #include <lib/nav/core.h>
 #include <lib/python/connections.h>
 #include <lib/python/python.h>
+#include <ctype.h>
 
 ePyObject eListboxServiceContent::m_GetPiconNameFunc;
 
@@ -88,15 +89,19 @@ bool eListboxServiceContent::setCurrent(const eServiceReference &ref)
 {
 	int index=0;
 	for (list::iterator i(m_list.begin()); i != m_list.end(); ++i, ++index)
+	{
 		if ( *i == ref )
 		{
 			m_cursor = i;
 			m_cursor_number = index;
 			if (m_listbox)
+			{
 				m_listbox->moveSelectionTo(cursorResolve(index));
 				return true;
+			}
 			break;
 		}
+	}
 	return false;
 }
 
@@ -124,7 +129,7 @@ int eListboxServiceContent::getNextBeginningWithChar(char c)
 		while ( idx <= len )
 		{
 			char cc = text[idx++];
-			if ( cc >= 33 && cc < 127)
+			if (isprint(cc))
 			{
 				if (cc == c)
 					return index;
@@ -465,8 +470,10 @@ int eListboxServiceContent::currentCursorSelectable()
 	if (cursorValid())
 	{
 		/* don't allow markers to be selected, unless we're in edit mode (because we want to provide some method to the user to remove a marker) */
-		if (m_cursor->flags & eServiceReference::isMarker && m_marked.empty()) return 0;
-		return 1;
+		if (m_cursor->flags & eServiceReference::isMarker && m_marked.empty())
+			return 0;
+		else
+			return 1;
 	}
 	return 0;
 }
@@ -669,7 +676,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 			{
 				int flags=gPainter::RT_VALIGN_CENTER;
 				int yoffs = 0;
-				eRect &area = m_element_position[e];
+				eRect area = m_element_position[e];
 				std::string text = "<n/a>";
 				switch (e)
 				{
@@ -691,6 +698,14 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				{
 					if (service_info)
 						service_info->getName(*m_cursor, text);
+					if (!isPlayable)
+					{
+						area.setWidth(area.width() + m_element_position[celServiceEventProgressbar].width() + 10);
+						if (m_element_position[celServiceEventProgressbar].left() == 0)
+							area.setLeft(0);
+						if (m_element_position[celServiceNumber].width() && m_element_position[celServiceEventProgressbar].left() == m_element_position[celServiceNumber].width() + 10)
+							area.setLeft(m_element_position[celServiceNumber].width() + 10);
+					}
 					break;
 				}
 				case celServiceInfo:
@@ -843,7 +858,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							}
 							int correction = (area.height() - pixmap_size.height()) / 2;
 							area.moveBy(offset);
-							if (service_info->isCrypted(*m_cursor))
+							if (service_info->isCrypted())
 							{
 								if (m_crypto_icon_mode == 2)
 								{
@@ -911,6 +926,8 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					eRect area = m_element_position[e == celFolderPixmap ? celServiceName: celServiceNumber];
 					int correction = (area.height() - pixmap_size.height()) / 2;
 					if (e == celFolderPixmap)
+						if (m_element_position[celServiceEventProgressbar].left() == 0)
+							area.setLeft(0);
 						xoffset = pixmap_size.width() + 8;
 					area.moveBy(offset);
 					painter.clip(area);

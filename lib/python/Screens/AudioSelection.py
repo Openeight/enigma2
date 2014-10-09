@@ -127,7 +127,7 @@ class AudioSelection(Screen, ConfigListScreen):
 						if cnt:
 							language += ' / '
 						if LanguageCodes.has_key(lang):
-							language += LanguageCodes[lang][0]
+							language += _(LanguageCodes[lang][0])
 						elif lang == "und":
 							""
 						else:
@@ -191,7 +191,7 @@ class AudioSelection(Screen, ConfigListScreen):
 				try:
 					if x[4] != "und":
 						if LanguageCodes.has_key(x[4]):
-							language = LanguageCodes[x[4]][0]
+							language = _(LanguageCodes[x[4]][0])
 						else:
 							language = x[4]
 				except:
