@@ -45,6 +45,7 @@ dist_install_DATA = \
 	input_rcnew.png \
 	input_rcold-configured.png \
 	input_rcold.png \
+	input_xtrc.png \
 	lock_error.png \
 	lock_off.png \
 	lock_on.png \

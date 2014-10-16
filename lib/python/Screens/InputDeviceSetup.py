@@ -30,7 +30,7 @@ class InputDeviceSelection(Screen,HelpableScreen):
 									MultiContentEntryPixmapAlphaTest(pos = (2, 8), size = (54, 54), png = 2), # index 3 is the interface pixmap
 									MultiContentEntryText(pos = (65, 6), size = (450, 54), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text = 1), # index 1 is the interfacename
 								],
-							"fonts": [gFont("Regular", 28),gFont("Regular", 20)],
+							"fonts": [gFont("Regular",26),gFont("Regular", 20)],
 							"itemHeight": 70
 							}
 			</convert>
@@ -109,6 +109,8 @@ class InputDeviceSelection(Screen,HelpableScreen):
 				devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/input_mouse.png"))
 		elif isinputdevice:
 			devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/input_rcnew.png"))
+		else:
+		        devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/input_xtrc.png"))
 		return ((device, description, devicepng, divpng))
 
 	def updateList(self):
