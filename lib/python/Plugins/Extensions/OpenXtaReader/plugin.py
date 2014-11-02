@@ -28,6 +28,7 @@ def transHTML(text):
 	text = text.replace('&nbsp;', ' ').replace('&#33;', '!').replace('&#034;', '"').replace('&#039;', "'").replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&#8211;', '-').replace('&laquo;', '\xc2\xab').replace('&raquo;', '\xc2\xbb').replace('&rdquo;', '"').replace('&rsquo;', "'").replace('&sup2;', '\xc2\xb2').replace('&bull;', '\xe2\x80\xa2').replace('&euro;', '\xe2\x82\xac').replace('&reg;', '\xc2\xae')
 	text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&hellip;', '...').replace('&deg;', '\xc2\xb0').replace('&acute;', "'").replace('&aacute;', '\xc3\xa1').replace('&eacute;', '\xc3\xa9').replace('&iacute;', '\xc3\xad').replace('&oacute;', '\xc3\xb3').replace('&egrave;', '\xc3\xa8').replace('&agrave;', '\xc3\xa0').replace('&lt;', '\xc2\xab').replace('&gt;', '\xc2\xbb').replace('&iquest;', '\xc2\xbf')
 	text = text.replace('&Uuml;', '\xc3\x9c').replace('&Auml;', '\xc3\x84').replace('&Ouml;', '\xc3\x96').replace('&#34;', '"').replace('&#38;', 'und').replace('&#39;', "'").replace('&#196;', 'Ae').replace('&#214;', 'Oe').replace('&#220;', 'Ue').replace('&#223;', 'ss').replace('&#228;', '\xc3\xa4').replace('&#246;', '\xc3\xb6').replace('&#252;', '\xc3\xbc').replace('&copy;', '\xc2\xa9').replace('&#8364;', '\xe2\x82\xac')
+	text = text.replace('&#60;','<').replace('&#62;','>')
 	return text
 
 def convertDate(date):
@@ -849,7 +850,7 @@ class OpenXtaMain(Screen):
 			self.close()
 
 		else:
-			endpos1 = find(output, '<div class=\'ipsSideBlock')
+			endpos1 = find(output, '<div class=\'ipsSideBlock\'')
 			bereich = output[startpos1:endpos1]
 			bereich = transHTML(bereich)
 			titel = re.findall('<td class=\'col_c_forum\'>\s*?<h4>\s*?<a href=".*?" title=\'.*?\'>(.*?)</a>', bereich)
