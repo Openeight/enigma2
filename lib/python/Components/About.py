@@ -83,8 +83,7 @@ def getImageTypeString():
 	try:
 		return open("/etc/issue").readlines()[-2].capitalize().strip()[:-6]
 	except:
-		pass
-	return _("undefined")
+		return _("undefined")
 
 # For modules that do "from About import about"
 about = sys.modules[__name__]
