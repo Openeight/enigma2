@@ -338,6 +338,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			pluginlist = self.getEPGPluginList()
                         self.openSingleServiceEPG()        
 		elif self.secondInfoBarScreen and config.usage.show_second_infobar.value and not self.secondInfoBarScreen.shown:
+			self.show()
 			self.secondInfoBarScreen.show()
 			self.startHideTimer()
 		else:
@@ -729,6 +730,10 @@ class InfoBarChannelSelection:
 		else:
 			self.servicelist.moveDown()
 		self.servicelist.zap(enable_pipzap = True)
+
+	def openFavouritesList(self):
+		self.servicelist.showFavourites()
+		self.openServiceList()
 
 	def openServiceList(self):
 		self.session.execDialog(self.servicelist)
