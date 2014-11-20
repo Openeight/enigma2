@@ -129,6 +129,10 @@ class ConfigElement(object):
 		if initial_call:
 			notifier(self)
 
+	def clearNotifiers(self):
+		self.__notifiers = None
+		self.__notifiers_final = None
+
 	def disableSave(self):
 		self.save_disabled = True
 
