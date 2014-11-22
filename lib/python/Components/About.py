@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-import sys
-import os
-import time
+import sys, os, time
 from Tools.HardwareInfo import HardwareInfo
 
 def getVersionString():

@@ -3,7 +3,9 @@ installdir = $(pkgdatadir)/skin_default/icons
 dist_install_DATA = \
 	ask.png \
 	az.png \
+	bullet.png \
 	clock.png \
+	default.png \
 	dish.png \
 	dish_scan.png \
 	dmm_logo.png \
