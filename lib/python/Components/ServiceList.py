@@ -68,6 +68,7 @@ class ServiceList(HTMLComponent, GUIComponent):
 		self.ItemHeight = 28
 		self.ServiceNameFont = parseFont("Regular;22", ((1,1),(1,1)))
 		self.ServiceInfoFont = parseFont("Regular;18", ((1,1),(1,1)))
+		self.ServicePercFont = parseFont("Regular;18", ((1,1),(1,1)))
 		self.ServiceNumberFont = parseFont("Regular;20", ((1,1),(1,1)))
 		self.onSelectionChanged = [ ]
 
@@ -114,6 +115,8 @@ class ServiceList(HTMLComponent, GUIComponent):
 					self.ServiceNameFont = parseFont(value, ((1,1),(1,1)))
 				elif attrib == "serviceInfoFont":
 					self.ServiceInfoFont = parseFont(value, ((1,1),(1,1)))
+				elif attrib == "servicePercFont":
+					self.ServicePercFont = parseFont(value, ((1,1),(1,1)))
 				elif attrib == "serviceNumberFont":
 					self.ServiceNumberFont = parseFont(value, ((1,1),(1,1)))
 				elif attrib == "progressbarHeight":
@@ -334,7 +337,7 @@ class ServiceList(HTMLComponent, GUIComponent):
 		self.l.setElementFont(self.l.celServiceNumber, self.ServiceNumberFont)
 		self.l.setElementFont(self.l.celServiceInfo, self.ServiceInfoFont)
 		if "perc" in config.usage.show_event_progress_in_servicelist.value:
-			self.l.setElementFont(self.l.celServiceEventProgressbar, self.ServiceInfoFont)
+			self.l.setElementFont(self.l.celServiceEventProgressbar, self.ServicePercFont)
 		self.l.setHideNumberMarker(config.usage.hide_number_markers.value)
 		self.l.setServiceTypeIconMode(int(config.usage.servicetype_icon_mode.value))
 		self.l.setCryptoIconMode(int(config.usage.crypto_icon_mode.value))
