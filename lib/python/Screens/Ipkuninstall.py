@@ -29,7 +29,7 @@ class Ipkuninstall(Screen):
     def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skin = Ipkuninstall.skin
-                title = "Setup Skin"
+                title = "IPK-uninstaller"
                 self.setTitle(title)
         	self["list"] = MenuList([])
 		self["info"] = Label()
