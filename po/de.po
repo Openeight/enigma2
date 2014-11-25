@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-03 21:17+0100\n"
+"POT-Creation-Date: 2014-11-25 18:33+0100\n"
 "PO-Revision-Date: 2014-11-20 21:05+0100\n"
 "Last-Translator: edcrane\n"
 "Language-Team: OpenPLi <openpli.org>\n"
@@ -128,6 +128,13 @@ msgstr ""
 
 msgid ""
 "\n"
+"Recording in progress."
+msgstr 
+"\n"
+"Eine Aufnahme läuft."
+
+msgid ""
+"\n"
 "Restore your backups by date."
 msgstr ""
 "\n"
@@ -176,6 +183,9 @@ msgid ""
 msgstr ""
 "\n"
 "[Benutzerspezifische - Kanallisten (RADIO)]\n"
+
+msgid " (Channel %s)"
+msgstr " (Kanal %s)"
 
 #, python-format
 msgid " (Partition %d)"
@@ -966,9 +976,8 @@ msgstr "Arabisch"
 msgid "Are you ready to run the script ?"
 msgstr "Bereit, das Skript auszuführen?"
 
-#, python-format
-msgid "Are you sure to remove all %d.%d° %s services?"
-msgstr "Wollen Sie wirklich alle %d.%d° %s Sender entfernen?"
+msgid "Are you sure to remove all %d.%d%s%s services?"
+msgstr "Wollen Sie wirklich alle %d.%d%s%s Sender entfernen?"
 
 msgid "Are you sure to remove all cable services?"
 msgstr "Wollen Sie wirklich alle Kabelsender entfernen?"
@@ -1059,6 +1068,16 @@ msgstr "Am Anfang"
 
 msgid "At end"
 msgstr "Am Ende"
+
+msgid "Attention, this is repeated timer!\n"
+msgstr "Achtung, dies ist ein sich wiederholender Timer!\n"
+
+msgid ""
+"Attention, this is repeated timer!\n"
+"What do you want to do?"
+msgstr ""
+"Achtung, dies ist ein sich wiederholender Timer!\n"
+"Was möchten Sie tun?"
 
 msgid "Audio"
 msgstr "Ton"
@@ -2535,9 +2554,6 @@ msgstr "Gerätename:"
 msgid "Devices"
 msgstr "Geräte"
 
-msgid "Devide"
-msgstr "Devide"
-
 msgid "DiSEqC"
 msgstr "DiSEqC"
 
@@ -2597,6 +2613,9 @@ msgstr "Bild im Bild ausschalten"
 
 msgid "Disable background scanning"
 msgstr "Deaktivieren von Hintergrundscanning"
+
+msgid "Disable current event but not coming events"
+msgstr "Laufendes Ereignis abbrechen, aber kommende ausführen"
 
 msgid "Disable timer"
 msgstr "Timer deaktivieren"
@@ -2982,11 +3001,17 @@ msgstr "Aktiviere ViaSat EPG"
 msgid "Enable Virgin EPG"
 msgstr "Aktiviere Virgin EPG"
 
+msgid "Enable auto cable scan"
+msgstr "Automatischen Kabelscan aktivieren"
+
 msgid "Enable auto fast scan"
-msgstr "Automatischer Schnellscan aktiviert"
+msgstr "Automatischen Schnellscan aktivieren"
 
 msgid "Enable bouquet selection in multi-EPG"
 msgstr "Aktiviere Bouquet-Auswahl im Multi-EPG"
+
+msgid "Enable fallback remote receiver"
+msgstr "Tuner eines anderen Receivers benutzen"
 
 msgid "Enable freesat EPG"
 msgstr "Aktiviere freesat EPG"
@@ -2996,6 +3021,9 @@ msgstr "Mehrere Bouquets erlauben"
 
 msgid "Enable parental control"
 msgstr "Jugendschutz anschalten"
+
+msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
+msgstr "URL eines Enigma2 Receivers, der genutzt werden soll, wenn der Sender auf dem Hauptreceiver nicht verfügbar ist. Z,B, weil der Tuner belegt ist, oder nicht auf diesen Sender eingestellt ist. Geben Sie die genaue URL ein mit  http:// und  Portnummer (Standard ...:8001), Also: http://second_box:8001"
 
 msgid "Enable teletext caching"
 msgstr "Aktiviere Teletext Cache"
@@ -3231,8 +3259,8 @@ msgstr "Fehlgeschlagen"
 msgid "Failed to write /tmp/positionersetup.log: "
 msgstr "Fehler beim Schreiben: /tmp/positionersetup.log"
 
-msgid "Fallback remote receiver"
-msgstr "Tuner eines anderen Receivers benutzen"
+msgid "Fallback remote receiver URL"
+msgstr "Tuner eines anderen Receivers benutzen (URL)"
 
 #, python-format
 msgid "Fan %d"
@@ -3610,7 +3638,7 @@ msgstr "Festplatten Einstellungen"
 msgid "Hebrew"
 msgstr "Hebräisch"
 
-msgid "Helps setting up your dish"
+msgid "Helps setting up your antenna"
 msgstr "Hilfe zur Einrichten der Antenne"
 
 msgid "Here you can change skin, configure mainmenu, configure second-infobar or configure skin XTA."
@@ -4917,8 +4945,8 @@ msgstr "Keinen rotortauglichen Tuner gefunden."
 msgid "No satellite frontend found!!"
 msgstr "Kein Sat-Frontend gefunden!"
 
-msgid "No satellites configured. Plese check your tuner setup."
-msgstr "Keine Satelliten konfiguriert. Bitte überprüfen Sie die Tuner-Einstellungen."
+msgid "No satellite, terrestrial or cable tuner is configured. Please check your tuner setup."
+msgstr "Keine Tuner konfiguriert. Bitte überprüfen Sie die Tuner-Einstellungen."
 
 msgid "No service"
 msgstr "Kein Service"
@@ -5178,6 +5206,9 @@ msgstr "OpenVpn Einstellungen"
 
 msgid "OpenXTA Software Panel"
 msgstr "OpenXTA Software Panel"
+
+msgid "Options disable timer"
+msgstr "Optionen Timer deaktivieren"
 
 msgid "Orbital position"
 msgstr "Orbitale Position"
@@ -5440,6 +5471,9 @@ msgstr "Bitte einen Dateinamen eingeben (leer = Dateiname ist aktuelles Datum)"
 
 msgid "Please enter name of the new directory"
 msgstr "Bitte den Namen des neuen Verzeichnisses eingeben"
+
+msgid "Please enter new description:"
+msgstr "Bitte neue Beschreibung eingeben:"
 
 msgid "Please enter new name:"
 msgstr "Bitte neuen Namen eingeben:"
@@ -6011,6 +6045,9 @@ msgstr "Auswahl der Bildwiederholfrequenz"
 msgid "Regard deep standby as standby"
 msgstr "Deep-Standby wie Standby behandeln"
 
+msgid "Region"
+msgstr "Region"
+
 msgid "Relative"
 msgstr "Relativ"
 
@@ -6110,6 +6147,9 @@ msgstr "Umbenennen"
 msgid "Rename failed!"
 msgstr "Umbenennen fehlgeschlagen!"
 
+msgid "Rename name and description for new events"
+msgstr "Name und Beschreibung von neuen Events ändern"
+
 msgid "Rename to:"
 msgstr "Umbenennen in:"
 
@@ -6125,6 +6165,13 @@ msgstr "Wiederholen der Display-Meldung"
 
 msgid "Repeat type"
 msgstr "Wiederholungstyp"
+
+msgid ""
+"Repeating event currently recording.\n"
+"What do you want to do?"
+msgstr ""
+"Wiederholender Aufnahmetimer ist zurzeit aktiv...\n"
+"Was wollen Sie machen?"
 
 msgid "Repeating event currently recording... What do you want to do?"
 msgstr ""
@@ -6581,9 +6628,8 @@ msgstr "Funk-Netzwerk auswählen"
 msgid "Select action"
 msgstr "Wählen Sie eine Aktion"
 
-#, python-format
-msgid "Select action for timer %s:"
-msgstr "Wähle Aktion für Timer %s:"
+msgid "Select action for timer '%s'."
+msgstr "Wähle Aktion für Timer '%s':"
 
 msgid "Select all"
 msgstr "Wähle alle"
@@ -6692,6 +6738,9 @@ msgstr "Auswahl Satelliten 1 (USALS)"
 
 msgid "Selecting satellites 2 (USALS)"
 msgstr "Auswahl Satelliten 2 (USALS)"
+
+msgid "Send DiSEqC"
+msgstr "Sende DiSEqC"
 
 msgid "Send DiSEqC only on satellite change"
 msgstr "DiSEqC nur bei Sat-Wechsel senden"
@@ -7262,6 +7311,9 @@ msgstr "Signalstärke:"
 msgid "Signal: "
 msgstr "Signal: "
 
+msgid "Silently zap between bouquets"
+msgstr "Ohne Meldung zwischen Bouquets wechseln"
+
 msgid "Similar"
 msgstr "Ähnlich"
 
@@ -7288,9 +7340,6 @@ msgstr "Einzelnen Satelliten"
 
 msgid "Single step (GOP)"
 msgstr "Einzelschritt (GOP)"
-
-msgid "Single transponder"
-msgstr "Einzelnen Transponder"
 
 msgid "Site latitude"
 msgstr "Breitengrad ausrichten"
@@ -7942,6 +7991,12 @@ msgstr "Teste die Netzwerkkonfiguration Ihres %s %s.\n"
 msgid "Test type"
 msgstr "Testtyp"
 
+msgid "Testscreens"
+msgstr "Testbilder"
+
+msgid "Testscreens that are helpfull to fine-tune your display"
+msgstr "Die Testbilder können für das Finetuning der TV Einstellungen verwendet werden"
+
 msgid "Text color"
 msgstr "Textfarbe"
 
@@ -8552,6 +8607,9 @@ msgstr "Tuner-Konfiguration"
 msgid "Tuner is not supported"
 msgstr "Nicht unterstützter Tuner"
 
+msgid "Tuner not available."
+msgstr "Tuner nicht verfügbar"
+
 msgid "Tuner slot"
 msgstr "Tuner-Slot"
 
@@ -8589,8 +8647,8 @@ msgstr "Typ: "
 msgid "UP80  (keymap.u80)"
 msgstr "UP80  (keymap.u80)"
 
-msgid "URL of an enigma2 receiver that will be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr "URL eines Enigma2 Receivers, der genutzt werden soll, wenn der Sender auf dem Hauptreceiver nicht verfügbar ist. Z,B, weil der Tuner belegt ist, oder nicht auf diesen Sender eingestellt ist. Geben Sie die genaue URL ein mit  http:// und  Portnummer (Standard ...:8001), Also: http://second_box:8001                                                            "
+msgid "URL of fallback remote receiver"
+msgstr "Tuner eines anderen Receivers benutzen(URL)"
 
 msgid "USALS"
 msgstr "USALS"
@@ -8930,9 +8988,6 @@ msgstr "Erweiterte A/V-Einstellungen"
 
 msgid "Video enhancement setup"
 msgstr "Erweiterte A/V-Einstellungen"
-
-msgid "Video fine tuning"
-msgstr "Video-Feineinstellung"
 
 msgid ""
 "Video input selection\n"
@@ -10171,9 +10226,6 @@ msgstr "Den gerade laufenden Sender finden"
 msgid "fine arts"
 msgstr "Kunstwissenschaft"
 
-msgid "fine-tune your display"
-msgstr "Ändern Sie die Feineinstellungen Ihres Bildschirms"
-
 msgid "fitness & health"
 msgstr "Fitness & Gesundheit"
 
@@ -11097,6 +11149,9 @@ msgstr "®"
 #~ msgid "Configure which tuner type will be preferred, when the same service is available on different types of tuners."
 #~ msgstr "Bevorzugter Tunertyp falls der Kanal auf mehreren Typen von Tunern zur Verfügung steht."
 
+#~ msgid "Devide"
+#~ msgstr "Devide"
+
 #~ msgid "Edit the nameserver configuration of your receiver.\n"
 #~ msgstr "Bearbeiten Sie die Nameserver-Einstellungen Ihres Receivers.\n"
 
@@ -11133,6 +11188,9 @@ msgstr "®"
 #~ msgid "Shutdown in "
 #~ msgstr "Ausschalten in "
 
+#~ msgid "Single transponder"
+#~ msgstr "Einzelnen Transponder"
+
 #~ msgid "Switch next channel"
 #~ msgstr "Nächster Kanal"
 
@@ -11160,6 +11218,9 @@ msgstr "®"
 #~ msgid "Use the network wizard to configure your network\n"
 #~ msgstr "Nutzen Sie den Netzwerkassistenten, um Ihr Netzwerk zu konfigurieren\n"
 
+#~ msgid "Video fine tuning"
+#~ msgstr "Video-Feineinstellung"
+
 #~ msgid "Your receiver will restart after pressing OK on your remote control."
 #~ msgstr "Ihr Receiver startet neu nach Betätigung der OK-Taste."
 
@@ -11169,5 +11230,5 @@ msgstr "®"
 #~ msgid "Your receiver will shutdown due to the sleeptimer."
 #~ msgstr "Ihr Receiver schaltet sich nun gemäß des Sleeptimers aus."
 
-#~ msgid "not available"
-#~ msgstr "Nicht verfügbar"
+#~ msgid "fine-tune your display"
+#~ msgstr "Ändern Sie die Feineinstellungen Ihres Bildschirms"
