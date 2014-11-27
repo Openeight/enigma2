@@ -68,7 +68,7 @@ class SettingsA(Screen):
     def __init__(self, session):
 		Screen.__init__(self, session)
                 self.skinName = "Settings"
-                title = "Skin Manager"
+                title = _("Skin Manager")
                 self.setTitle(title)
         	self["list"] = MenuList([])
 		self["info"] = Label()
@@ -76,16 +76,16 @@ class SettingsA(Screen):
 #                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
                 self.cur = config.usage.service_icon_enable.value
-                txt = "Here you can download, install or remove skins"
+                txt = _("Here you can download, install or remove skins")
                 self["info"].setText(txt)
                 self.onLayoutFinish.append(self.startSession)
 
     def startSession(self):
                 self.res = []
-                self.res.append("Download skin")
-                self.res.append("Install skin")
-                self.res.append("Remove skin")
-                self.res.append("Exit")
+                self.res.append(_("Download skin"))
+                self.res.append(_("Install skin"))
+                self.res.append(_("Remove skin"))
+                self.res.append(_("Exit"))
                 self["list"].setList(self.res)
     
     def okClicked(self):
@@ -93,17 +93,17 @@ class SettingsA(Screen):
 		if ires == 0:
 		        self.session.open(Getipklist)
 		elif ires == 1:
-		        self.startskin()        
+		        self.startskin()
 		elif ires == 2:
                         self.session.open(Ipkremove)
 		else:
                         self.close()
                         
-    def startskin(self):                         
-                try:        
+    def startskin(self):
+                try:
                         from Plugins.SystemPlugins.SkinSelector.plugin import SkinSelector
-                        self.session.open(SkinSelector) 
-                except:        
+                        self.session.open(SkinSelector)
+                except:
                         self.session.open(MessageBox, _("SystemPlugins SkinSelector is not installed !"), MessageBox.TYPE_ERROR, timeout = 10)
                         self.close()
 
@@ -112,7 +112,7 @@ class SettingsB(Screen):
     def __init__(self, session):
 		Screen.__init__(self, session)
                 self.skinName = "Settings"
-                title = "Configure Mainmenu"
+                title = _("Configure Mainmenu")
                 self.setTitle(title)
         	self["list"] = MenuList([])
 		self["info"] = Label()
@@ -121,20 +121,20 @@ class SettingsB(Screen):
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
                 self.cur = config.usage.mainmenu_mode.value
                 if self.cur == "horzicon":
-                        txt = "Current Mainmenu list setting is Horizontal-icon.\nHere you can change it.\nAfter select enigma will restart."
+                        txt = _("Current Mainmenu list setting is Horizontal-icon.\nHere you can change it.\nAfter select enigma will restart.")
                 elif self.cur == "vert":
-                        txt = "Current Mainmenu list setting is Vertical.\nHere you can change it.\nAfter select enigma will restart."
+                        txt = _("Current Mainmenu list setting is Vertical.\nHere you can change it.\nAfter select enigma will restart.")
                 elif self.cur == "horzanim":
-                        txt = "Current Mainmenu list setting is Horizontal-Animated.\nHere you can change it.\nAfter select enigma will restart."
+                        txt = _("Current Mainmenu list setting is Horizontal-Animated.\nHere you can change it.\nAfter select enigma will restart.")
                 self["info"].setText(txt)
                 self.onLayoutFinish.append(self.startSession)
 
     def startSession(self):
                 self.res = []
-                self.res.append("Horizontal icon list")
-                self.res.append("Vertical list")
-                self.res.append("Horizontal animated list")
-                self.res.append("Exit")
+                self.res.append(_("Horizontal icon list"))
+                self.res.append(_("Vertical list"))
+                self.res.append(_("Horizontal animated list"))
+                self.res.append(_("Exit"))
                 self["list"].setList(self.res)
     
     def okClicked(self):
@@ -167,7 +167,7 @@ class SettingsC(Screen):
     def __init__(self, session):
 		Screen.__init__(self, session)
                 self.skinName = "Settings"
-                title = "Configure second-infobar"
+                title = _("Configure second-infobar")
                 self.setTitle(title)
         	self["list"] = MenuList([])
 		self["info"] = Label()
@@ -177,17 +177,17 @@ class SettingsC(Screen):
                 self.cur = config.usage.show_second_infobar.value
                 txt = " " 
                 if self.cur is None:
-                        txt = "Current Second-infobar setting is None.\nHere you can change it."
+                        txt = _("Current Second-infobar setting is None.\nHere you can change it.")
                 else:
-                        txt = "Current Second-infobar setting is Show.\nHere you can change it."
+                        txt = _("Current Second-infobar setting is Show.\nHere you can change it.")
                 self["info"].setText(txt)
                 self.onLayoutFinish.append(self.startSession)
 
     def startSession(self):
                 self.res = []
-                self.res.append("Show second-infobar")
-                self.res.append("Remove second-infobar")
-                self.res.append("Exit")
+                self.res.append(_("Show second-infobar"))
+                self.res.append(_("Remove second-infobar"))
+                self.res.append(_("Exit"))
                 self["list"].setList(self.res)
     
     def okClicked(self):
@@ -220,7 +220,7 @@ class SettingsD(Screen):
     def __init__(self, session):
 		Screen.__init__(self, session)
                 self.skinName = "Settings"
-                title = "Show Picons in Channel List"
+                title = _("Show Picons in Channel List")
                 self.setTitle(title)
         	self["list"] = MenuList([])
 		self["info"] = Label()
@@ -230,17 +230,17 @@ class SettingsD(Screen):
                 self.cur = config.usage.service_icon_enable.value
                 txt = " " 
                 if self.cur is True:
-                        txt = "Current picon setting is True.\nHere you can change it."
+                        txt = _("Current picon setting is True.\nHere you can change it.")
                 else:
-                        txt = "Current picon setting is False.\nHere you can change it."
+                        txt = _("Current picon setting is False.\nHere you can change it.")
                 self["info"].setText(txt)
                 self.onLayoutFinish.append(self.startSession)
 
     def startSession(self):
                 self.res = []
-                self.res.append("Show Picons in Channel List")
-                self.res.append("Remove Picons in Channel List")
-                self.res.append("Exit")
+                self.res.append(_("Show Picons in Channel List"))
+                self.res.append(_("Remove Picons in Channel List"))
+                self.res.append(_("Exit"))
                 self["list"].setList(self.res)
     
     def okClicked(self):
@@ -269,54 +269,3 @@ class SettingsD(Screen):
     	        config.usage.service_icon_enable.save()
 #    	        self.session.open(TryQuitMainloop, 3)
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
