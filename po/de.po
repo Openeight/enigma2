@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-25 18:33+0100\n"
+"POT-Creation-Date: 2014-11-27 18:33+0100\n"
 "PO-Revision-Date: 2014-11-20 21:05+0100\n"
 "Last-Translator: edcrane\n"
 "Language-Team: OpenPLi <openpli.org>\n"
@@ -129,7 +129,7 @@ msgstr ""
 msgid ""
 "\n"
 "Recording in progress."
-msgstr 
+msgstr ""
 "\n"
 "Eine Aufnahme läuft."
 
@@ -184,6 +184,7 @@ msgstr ""
 "\n"
 "[Benutzerspezifische - Kanallisten (RADIO)]\n"
 
+#, python-format
 msgid " (Channel %s)"
 msgstr " (Kanal %s)"
 
@@ -976,6 +977,7 @@ msgstr "Arabisch"
 msgid "Are you ready to run the script ?"
 msgstr "Bereit, das Skript auszuführen?"
 
+#, python-format
 msgid "Are you sure to remove all %d.%d%s%s services?"
 msgstr "Wollen Sie wirklich alle %d.%d%s%s Sender entfernen?"
 
@@ -1808,6 +1810,9 @@ msgstr "Konfigurationsmodus: %s"
 msgid "Configuration..."
 msgstr "Konfiguration..."
 
+msgid "Configure Mainmenu"
+msgstr "Hauptmenü konfigurieren"
+
 msgid "Configure an additional delay to improve external subtitle synchronisation."
 msgstr "Konfiguriert eine zusätzliche Verzögerung zur besseren Synchronisation externer Untertitel."
 
@@ -2256,11 +2261,43 @@ msgstr "Cron-Manager..."
 msgid "Current CEC address"
 msgstr "Aktuelle CEC-Adresse"
 
+msgid ""
+"Current Mainmenu list setting is Horizontal-Animated.\n"
+"Here you can change it.\n"
+"After select enigma will restart."
+msgstr ""
+
+msgid ""
+"Current Mainmenu list setting is Horizontal-icon.\n"
+"Here you can change it.\n"
+"After select enigma will restart."
+msgstr ""
+
+msgid ""
+"Current Mainmenu list setting is Vertical.\n"
+"Here you can change it.\n"
+"After select enigma will restart."
+msgstr ""
+
 msgid "Current Second-infobar setting is None !"
 msgstr "Aktuelle Second-Infobar Einstellung ist: Keine!"
 
+msgid ""
+"Current Second-infobar setting is None.\n"
+"Here you can change it."
+msgstr ""
+"Aktuelle Second-Infobar Einstellung ist: Keine!\n"
+"Dies kann hier geändert werden."
+
 msgid "Current Second-infobar setting is Show !"
 msgstr "Aktuelle Second-Infobar Einstellung ist: Anzeigen!"
+
+msgid ""
+"Current Second-infobar setting is Show.\n"
+"Here you can change it."
+msgstr ""
+"Aktuelle Second-Infobar Einstellung ist: Anzeigen!\n"
+"Dies kann hier geändert werden."
 
 msgid "Current Status:"
 msgstr "Aktueller Status:"
@@ -2278,8 +2315,21 @@ msgstr "Aktueller Modus: %s \n"
 msgid "Current picon setting is False !"
 msgstr "Aktuelle Picon Einstellung ist falsch!"
 
+msgid ""
+"Current picon setting is False.\n"
+"Here you can change it."
+msgstr ""
+"Aktuelle Picon Einstellung ist falsch!\n"
+"Dies kann hier geändert werden."
+
 msgid "Current picon setting is True !"
 msgstr "Aktuelle Picon Einstellung gilt!"
+
+msgid ""
+"Current picon setting is True.\n"
+"Here you can change it."
+msgstr "Aktuelle Picon Einstellung gilt!\n"
+"Dies kann hier geändert werden."
 
 msgid "Current settings:"
 msgstr "Aktuelle Einstellungen:"
@@ -2841,6 +2891,9 @@ msgstr "Cam herunterladen und installieren"
 
 msgid "Download plugins"
 msgstr "Plugins herunterladen"
+
+msgid "Download skin"
+msgstr "Skin installieren"
 
 msgid "Downloadable plugins"
 msgstr "Herunterladbare Plugins"
@@ -3644,6 +3697,9 @@ msgstr "Hilfe zur Einrichten der Antenne"
 msgid "Here you can change skin, configure mainmenu, configure second-infobar or configure skin XTA."
 msgstr "Hier können Sie den Skin ändern, das Hauptmenü, die zweite Infobar oder den XTA Skin konfigurieren."
 
+msgid "Here you can download, install or remove skins"
+msgstr "Hier können Sie Skins anzeigen, installieren, oder deinstallieren"
+
 msgid "Here you can select which files should be added to backupfile. (default: E2-setup, channels, network"
 msgstr "Hier können Sie auswählen, welche Dateien der Sicherungsdatei hinzugefügt werden. (Standard: E2-Einstellungen, Kanäle, Netzwerk)"
 
@@ -3694,6 +3750,12 @@ msgstr "Hops:"
 
 msgid "Horizontal"
 msgstr "Horizontal"
+
+msgid "Horizontal animated list"
+msgstr "Horizontal animierte Liste"
+
+msgid "Horizontal icon list"
+msgstr "Horizontale Symbole Liste"
 
 msgid "Horizontal turning speed"
 msgstr "Horizontale Drehgeschwindigkeit"
@@ -3943,6 +4005,9 @@ msgstr "Installiere Picons auf"
 
 msgid "Install plugins"
 msgstr "Installiere Plugins"
+
+msgid "Install skin"
+msgstr "Installierte Skins anzeigen"
 
 msgid "Install softcam"
 msgstr "Installiere Softcam"
@@ -6090,6 +6155,9 @@ msgstr "Entfernen"
 msgid "Remove Confirmation"
 msgstr "Bestätigung entfernen"
 
+msgid "Remove Picons in Channel List"
+msgstr "Entferne Picons in Kanalliste"
+
 msgid "Remove Plugins"
 msgstr "Plugins entfernen"
 
@@ -6116,6 +6184,12 @@ msgstr "Löschen aus Mülleimer nach (Tagen)"
 
 msgid "Remove plugins"
 msgstr "Plugins entfernen"
+
+msgid "Remove second-infobar"
+msgstr "Zweite Infoleiste nicht anzeigen"
+
+msgid "Remove skin"
+msgstr "Skin deinstallieren"
 
 msgid "Remove title"
 msgstr "Titel entfernen"
@@ -6628,6 +6702,7 @@ msgstr "Funk-Netzwerk auswählen"
 msgid "Select action"
 msgstr "Wählen Sie eine Aktion"
 
+#, python-format
 msgid "Select action for timer '%s'."
 msgstr "Wähle Aktion für Timer '%s':"
 
@@ -7234,6 +7309,9 @@ msgid "Show screensaver"
 msgstr "Zeige Screensaver"
 
 msgid "Show second infobar"
+msgstr "Zeige zweite Infoleiste"
+
+msgid "Show second-infobar"
 msgstr "Zeige zweite Infoleiste"
 
 msgid "Show service type icons"
@@ -8958,6 +9036,9 @@ msgstr "Version: %s"
 
 msgid "Vertical"
 msgstr "Vertikal"
+
+msgid "Vertical list"
+msgstr "Vertikale Liste"
 
 msgid "Vertical turning speed"
 msgstr "Vertikale Drehgeschwindigkeit"
