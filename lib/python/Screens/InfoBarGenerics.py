@@ -1678,7 +1678,7 @@ class InfoBarShowMovies:
 				"movieList": (self.showMovies, _("Open the movie list")),
 				"up": (self.up, _("Open the movie list")),
 				"down": (self.down, _("Open the movie list"))
-			})
+			}, prio=2)
 
 # InfoBarTimeshift requires InfoBarSeek, instantiated BEFORE!
 
