@@ -18,10 +18,12 @@ class Console(Screen):
 		self.errorOcurred = False
 
 		self["text"] = ScrollLabel("")
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions"],
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "OkCancelActions"],
 		{
-			"ok": self.cancel,
-			"back": self.cancel,
+			#"ok": self.cancel,
+			#"back": self.cancel,
+			"ok": self.close,
+			"cancel": self.close,
 			"up": self["text"].pageUp,
 			"down": self["text"].pageDown
 		}, -1)
