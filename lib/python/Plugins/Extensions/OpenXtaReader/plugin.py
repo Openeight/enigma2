@@ -304,7 +304,7 @@ class OpenXtaThread(Screen):
 
 	def makePostviewPage(self, output):
 		self['menu'].hide()
-		startpos = find(output, '<div class="tcatBar clear clearfix">')
+		startpos = find(output, '<!-- ::: CONTENT ::: -->')
 		endpos = find(output, '<!-- Close topic -->')
 		bereich = output[startpos:endpos]
 		bereich = transHTML(bereich)
@@ -325,6 +325,9 @@ class OpenXtaThread(Screen):
 		bereich = sub('<blockquote  class="ipsBlockquote" data-author=".*?" data-cid=".*?" data-time=".*?">([\s\S]*?)</blockquote>', '<p>Quote: \g<1> :Quote end</p>', bereich) # quote 1
 		bereich = sub('(<p>Quote: )[[\s\S]*?<p>([\s\S]*?)</p>[\s\S]*?]*( :Quote end</p>)', '\g<1>\g<2>\g<3>', bereich) # quote 2
 		bereich = sub('<li id="like_post_.*?" class=\'ipsLikeBar_info\' >\s*?.*?\s*?</li>', '', bereich) # del likes
+		bereich = sub('<span>Please log in to reply</span>', '', bereich) # del "Please log in to reply"
+		bereich = sub('<span class=\'ipsType_small\'>\s*?.*?to this topic.*?\s*?</span>', '', bereich) # del # replies
+		bereich = sub('<div class=\"signature\".*?\s*?.*?\s*?</div>', '', bereich) # del signature
 		bereich = sub('<span>(.*?)</span>', '\g<1>', bereich)
 		if self.xd == True:
 			bereich = sub('<ul id=\'postControlsNormal_[0-9]*\' class=\'post_controls clear clearfix\' >', '<p>\n==============================================</p>', bereich)
@@ -850,7 +853,7 @@ class OpenXtaMain(Screen):
 			self.close()
 
 		else:
-			endpos1 = find(output, '<div class=\'ipsSideBlock\'')
+			endpos1 = find(output, '<!-- ::: FOOTER')
 			bereich = output[startpos1:endpos1]
 			bereich = transHTML(bereich)
 			titel = re.findall('<td class=\'col_c_forum\'>\s*?<h4>\s*?<a href=".*?" title=\'.*?\'>(.*?)</a>', bereich)
