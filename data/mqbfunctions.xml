@@ -552,38 +552,38 @@ if InfoBar.instance:
 		</mqbfunction>
 		<mqbfunction>
 			<name>Volume -</name>
-			<module>Screens.MQBAction</module>
-			<screen><![CDATA[MQBAction, "Volume -", ["wget -q -O - http://127.0.0.1/web/remotecontrol?command=114; exit 0"]]]></screen>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Volume -", ["wget -q -O - http://127.0.0.1/web/remotecontrol?command=114; exit 0"]]]></screen>
 		</mqbfunction>
 		<mqbfunction>
 			<name>Volume +</name>
-			<module>Screens.MQBAction</module>
-			<screen><![CDATA[MQBAction, "Volume +", ["wget -q -O - http://127.0.0.1/web/remotecontrol?command=115; exit 0"]]]></screen>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Volume +", ["wget -q -O - http://127.0.0.1/web/remotecontrol?command=115; exit 0"]]]></screen>
 		</mqbfunction>
 		<mqbfunction>
 			<name>Volume on/off</name>
-			<module>Screens.MQBAction</module>
-			<screen><![CDATA[MQBAction, "Volume on/off", ["wget -q -O - http://127.0.0.1/web/remotecontrol?command=113; exit 0"]]]></screen>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Volume on/off", ["wget -q -O - http://127.0.0.1/web/remotecontrol?command=113; exit 0"]]]></screen>
 		</mqbfunction>
 		<mqbfunction>
 			<name>Restart Enigma2</name>
-			<module>Screens.MQBAction</module>
-			<screen><![CDATA[MQBAction, "Restart Enigma2", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=3; exit 0"]]]></screen>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Restart Enigma2", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=3; exit 0"]]]></screen>
 		</mqbfunction>
 		<mqbfunction>
 			<name>Reboot</name>
-			<module>Screens.MQBAction</module>
-			<screen><![CDATA[MQBAction, "Reboot", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=2; exit 0"]]]></screen>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Reboot", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=2; exit 0"]]]></screen>
 		</mqbfunction>
 		<mqbfunction>
 			<name>Standby</name>
-			<module>Screens.MQBAction</module>
-			<screen><![CDATA[MQBAction, "Standby", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=0; cancel"]]]></screen>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Standby", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=0; cancel"]]]></screen>
 		</mqbfunction>
 		<mqbfunction>
 			<name>Deep Standby</name>
-			<module>Screens.MQBAction</module>
-			<screen><![CDATA[MQBAction, "Deep Standby", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=1; exit 0"]]]></screen>
+			<module>Screens.Console</module>
+			<screen><![CDATA[Console, "Deep Standby", ["wget -q -O - http://127.0.0.1/web/powerstate?newstate=1; exit 0"]]]></screen>
 		</mqbfunction>
 		<mqbfunction>
 			<name>Clear EPG</name>
