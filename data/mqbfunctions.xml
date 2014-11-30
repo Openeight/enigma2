@@ -670,24 +670,17 @@ if InfoBar and InfoBar.instance:
 	InfoBar.zapToNumber(InfoBar.instance, config.plugins.QuickButton.channel9.getValue())
 ]]></code>
 		</mqbfunction>
+		<mqbfunction>
+			<name>Automatic Volume Adjustment</name>
+			<module>Plugins.SystemPlugins.AutomaticVolumeAdjustment.AutomaticVolumeAdjustmentSetup</module>
+			<screen><![CDATA[AutomaticVolumeAdjustmentConfigScreen]]></screen>
+		</mqbfunction>
 	</Menu>
 	<Scripts>
 		<mqbfunction>
 			<name>Ecm info</name>
 			<module>Screens.Console</module>
 			<screen><![CDATA[Console, "Ecm info", ["cat /tmp/ecm.info"]]]></screen>
-		</mqbfunction>
-		<mqbfunction>
-			<name>Shellscripts</name>
-			<code><![CDATA[
-import os
-from Screens.Console import Console 
-if os.path.isdir("/usr/script"):
-        for x in [x for x in os.listdir("/usr/script") if x.endswith(".sh")]:
-                run = x[:-3]
-                script = run
-                self.session.open(Console, script.replace("_", " "), cmdlist=[("/usr/script/%s.sh" % script)])
-]]></code>
 		</mqbfunction>
 	</Scripts>
 </xml>
