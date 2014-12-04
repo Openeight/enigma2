@@ -32,6 +32,7 @@ SCOPE_PLAYLIST = 11
 SCOPE_CURRENT_SKIN = 12
 SCOPE_METADIR = 16
 SCOPE_CURRENT_PLUGIN = 17
+SCOPE_ACTIVE_SKIN = 18
 
 PATH_CREATE = 0
 PATH_DONTCREATE = 1
@@ -94,7 +95,36 @@ def resolveFilename(scope, base = "", path_prefix = None):
 					path = tmp
 			else:
 				path = tmp
-
+        elif scope == SCOPE_ACTIVE_SKIN:
+		from Components.config import config
+		# allow files in the config directory to replace skin files
+		tmp = defaultPaths[SCOPE_CONFIG][0]
+		if base and pathExists(tmp + base):
+			path = tmp
+		elif base and pathExists(defaultPaths[SCOPE_SKIN][0] + base):
+			path = defaultPaths[SCOPE_SKIN][0]
+		else:
+			tmp = defaultPaths[SCOPE_SKIN][0]
+			pos = config.skin.primary_skin.value.rfind('/')
+			if pos != -1:
+				tmpfile = tmp+config.skin.primary_skin.value[:pos+1] + base
+				if pathExists(tmpfile) or (':' in tmpfile and pathExists(tmpfile.split(':')[0])):
+					path = tmp+config.skin.primary_skin.value[:pos+1]
+				elif pathExists(tmp + base) or (':' in base and pathExists(tmp + base.split(':')[0])):
+					path = tmp
+				else:
+					if 'skin_default' not in tmp:
+						path = tmp + 'skin_default/'
+					else:
+						path = tmp
+			else:
+				if pathExists(tmp + base):
+					path = tmp
+				elif 'skin_default' not in tmp:
+					path = tmp + 'skin_default/'
+				else:
+					path = tmp
+					
 	elif scope == SCOPE_CURRENT_PLUGIN:
 		tmp = defaultPaths[SCOPE_PLUGINS]
 		from Components.config import config
