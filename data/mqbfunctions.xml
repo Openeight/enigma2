@@ -675,6 +675,11 @@ if InfoBar and InfoBar.instance:
 			<module>Plugins.SystemPlugins.AutomaticVolumeAdjustment.AutomaticVolumeAdjustmentSetup</module>
 			<screen><![CDATA[AutomaticVolumeAdjustmentConfigScreen]]></screen>
 		</mqbfunction>
+		<mqbfunction>
+			<name>Cable Scan</name>
+			<module>Plugins.SystemPlugins.CableScan.plugin</module>
+			<screen><![CDATA[CableScanScreen]]></screen>
+		</mqbfunction>
 	</Menu>
 	<Scripts>
 		<mqbfunction>
