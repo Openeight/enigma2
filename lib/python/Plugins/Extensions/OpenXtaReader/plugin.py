@@ -202,7 +202,7 @@ class OpenXtaThread(Screen):
 
 			bereich = sub('<h4><a href=\'(.*?)\' title=\'View result\'>(.*?)</a></h4>', '<link>\g<1></link><titel>\g<2></titel>', bereich)
 
-			bereich = sub('<td class=\'col_f_views\'>\s*?<ul>\s*?<li>(.*?) replies</li>\s*?<li class=\'views desc\'>(.*?) views</li>\s*?</ul>\s*?</td>', '<stats>Replies: \g<1>, Views: \g<2></stats>', bereich)
+			bereich = sub('<td class=\'col_f_views\'>\s*?<ul>\s*?<li>(.*?) repl.*?</li>\s*?<li class=\'views desc\'>(.*?) views</li>\s*?</ul>\s*?</td>', '<stats>Replies: \g<1>, Views: \g<2></stats>', bereich)
 
 			bereich = sub('<ul class=\'last_post ipsType_small\'>\s*?<li>\s*?([a-zA-Z0-9 ]*?)\s*?</li>', '<user>\g<1></user>', bereich)
 		logo = re.findall('<logo>(.*?)</logo>', bereich)
