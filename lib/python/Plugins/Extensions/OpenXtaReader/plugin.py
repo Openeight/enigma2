@@ -328,6 +328,7 @@ class OpenXtaThread(Screen):
 		bereich = sub('<span>Please log in to reply</span>', '', bereich) # del "Please log in to reply"
 		bereich = sub('<span class=\'ipsType_small\'>\s*?.*?to this topic.*?\s*?</span>', '', bereich) # del # replies
 		bereich = sub('<div class=\"signature\".*?\s*?.*?\s*?</div>', '', bereich) # del signature
+		bereich = sub('<div class=\'pagination clearfix left \'>[\s\S]*?</div>', '', bereich) # del page quick links 1, 2, 3....
 		bereich = sub('<span>(.*?)</span>', '\g<1>', bereich)
 		if self.xd == True:
 			bereich = sub('<ul id=\'postControlsNormal_[0-9]*\' class=\'post_controls clear clearfix\' >', '<p>\n==============================================</p>', bereich)
