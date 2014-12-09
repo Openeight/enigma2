@@ -205,6 +205,7 @@ class OpenXtaThread(Screen):
 			bereich = sub('<td class=\'col_f_views\'>\s*?<ul>\s*?<li>(.*?) repl.*?</li>\s*?<li class=\'views desc\'>(.*?) views</li>\s*?</ul>\s*?</td>', '<stats>Replies: \g<1>, Views: \g<2></stats>', bereich)
 
 			bereich = sub('<ul class=\'last_post ipsType_small\'>\s*?<li>\s*?([a-zA-Z0-9_ ]*?)\s*?</li>', '<user>\g<1></user>', bereich)
+			self.setTitle(_("Latest Posts"))
 		logo = re.findall('<logo>(.*?)</logo>', bereich)
 		titel = re.findall('<titel>(.*?)</titel>', bereich)
 		stats = re.findall('<stats>(.*?)</stats>', bereich)
@@ -750,8 +751,8 @@ class OpenXtaFav(Screen):
 
 
 class infoOpenXta(Screen):
-	skin = '\n\t\t\t\t<screen position="center,center" size="425,425" title="OpenXTA Forum Reader 0.2" >\n\t\t\t\t\t<ePixmap position="0,0" size="425,425" pixmap="' + eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/OpenXtaReader/pic/info.png') + '" zPosition="1"/>\n\t\t\t\t\t<widget name="label" position="0,62" size="425,350" font="Regular;18" foregroundColor="#E5382F" backgroundColor="#161616" halign="center" valign="center" transparent="1" zPosition="2" />\n\t\t\t\t</screen>'
-	skinwhite = '\n\t\t\t\t<screen position="center,center" size="425,425" title="OpenXTA Forum Reader 0.2" >\n\t\t\t\t\t<ePixmap position="0,0" size="425,425" pixmap="' + eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/OpenXtaReader/pic/info_white.png') + '" zPosition="1"/>\n\t\t\t\t\t<widget name="label" position="0,62" size="425,350" font="Regular;18" foregroundColor="#D42828" backgroundColor="#FFFFFF" halign="center" valign="center" transparent="1" zPosition="2" />\n\t\t\t\t</screen>'
+	skin = '\n\t\t\t\t<screen position="center,center" size="425,425" title="OpenXTA Forum Reader 0.3" >\n\t\t\t\t\t<ePixmap position="0,0" size="425,425" pixmap="' + eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/OpenXtaReader/pic/info.png') + '" zPosition="1"/>\n\t\t\t\t\t<widget name="label" position="0,62" size="425,350" font="Regular;18" foregroundColor="#E5382F" backgroundColor="#161616" halign="center" valign="center" transparent="1" zPosition="2" />\n\t\t\t\t</screen>'
+	skinwhite = '\n\t\t\t\t<screen position="center,center" size="425,425" title="OpenXTA Forum Reader 0.3" >\n\t\t\t\t\t<ePixmap position="0,0" size="425,425" pixmap="' + eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/OpenXtaReader/pic/info_white.png') + '" zPosition="1"/>\n\t\t\t\t\t<widget name="label" position="0,62" size="425,350" font="Regular;18" foregroundColor="#D42828" backgroundColor="#FFFFFF" halign="center" valign="center" transparent="1" zPosition="2" />\n\t\t\t\t</screen>'
 
 	def __init__(self, session):
 		self.colorfile = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/OpenXtaReader/db/color')
