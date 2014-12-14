@@ -33,9 +33,9 @@ def transHTML(text):
 
 def convertDate(date):
 	if date[0:5] == 'Today':
-		return 'Today'
+		return _('Today')
 	elif date[0:9] == 'Yesterday':
-		return 'Yesterday'
+		return _('Yesterday')
 	dd = date[0:2]
 	mm = date[3:6]
 	if mm == 'Jan':
@@ -189,7 +189,7 @@ class OpenXtaThread(Screen):
 			title = search('<title>(.*?)</title>', output)
 			title = title.group(1)
 			title = transHTML(title)
-			title = title + ' | Seite ' + str(self.count) + ' von ' + str(self.maxcount)
+			title += ' | ' + _('Page %i of %i') % (self.count, self.maxcount)
 			self.threadtitle = title
 			self.setTitle(title)
 		else:
@@ -313,9 +313,9 @@ class OpenXtaThread(Screen):
 		title = title.group(1)
 		title = transHTML(title)
 		if self.xd == True:
-			title = title[0:40] + '... | Seite ' + str(self.postcount) + ' von ' + str(self.maxpostcount)
+			title = title[0:40] + '... | ' + _('Page %i of %i') % (self.postcount, self.maxpostcount)
 		else:
-			title = title[0:45] + '... | Seite ' + str(self.postcount) + ' von ' + str(self.maxpostcount)
+			title = title[0:45] + '... | ' + _('Page %i of %i') % (self.postcount, self.maxpostcount)
 		self.setTitle(title)
 		bereich = sub('<br />', '</p><p>', bereich)
 		bereich = sub('<a href="http://www.xtrend-alliance.com/index.php\?app=core&module=attach&section=attach&attach_id=.*?" title="Download attachment"><strong>(.*?)</strong></a>', '<p>Attachment: \g<1></p>', bereich)
@@ -375,7 +375,7 @@ class OpenXtaThread(Screen):
 			try:
 				c = self['menu'].getSelectedIndex()
 				name = self.titellist[c]
-				self.session.openWithCallback(self.red_return, MessageBox, _("\nPost '%s' zu den Favoriten hinzuf\xc3\xbcgen?") % name, MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(self.red_return, MessageBox, _("\nAdd post '%s' to favorites?") % name, MessageBox.TYPE_YESNO)
 			except IndexError:
 				pass
 
@@ -456,9 +456,9 @@ class OpenXtaThread(Screen):
 				if int(number) > self.maxcount:
 					number = self.maxcount
 					if number > 1:
-						self.session.open(MessageBox, '\nNur %s Seiten verf\xc3\xbcgbar. Gehe zu Seite %s.' % (number, number), MessageBox.TYPE_INFO, timeout=3)
+						self.session.open(MessageBox, _('\nOnly %s pages available. Goto page %s.') % (number, number), MessageBox.TYPE_INFO, timeout=3)
 					else:
-						self.session.open(MessageBox, '\nNur %s Seite verf\xc3\xbcgbar. Gehe zu Seite %s.' % (number, number), MessageBox.TYPE_INFO, timeout=3)
+						self.session.open(MessageBox, _('\nOnly %s page available. Goto page %s.') % (number, number), MessageBox.TYPE_INFO, timeout=3)
 				self.count = int(number)
 				link = self.link + '/page-' + str(self.count)
 				self.titellist = []
@@ -473,15 +473,15 @@ class OpenXtaThread(Screen):
 			if int(number) > self.maxpostcount:
 				number = self.maxpostcount
 				if number > 1:
-					self.session.open(MessageBox, '\nNur %s Seiten verf\xc3\xbcgbar. Gehe zu Seite %s.' % (number, number), MessageBox.TYPE_INFO, timeout=5)
+					self.session.open(MessageBox, _('\nOnly %s pages available. Goto page %s.') % (number, number), MessageBox.TYPE_INFO, timeout=5)
 				else:
-					self.session.open(MessageBox, '\nNur %s Seite verf\xc3\xbcgbar. Gehe zu Seite %s.' % (number, number), MessageBox.TYPE_INFO, timeout=5)
+					self.session.open(MessageBox, _('\nOnly %s page available. Goto page %s.') % (number, number), MessageBox.TYPE_INFO, timeout=5)
 			self.postcount = int(number)
 			link = self.postlink + '/page-' + str(self.postcount)
 			self.download(link, self.makePostviewPage)
 
 	def showHelp(self):
-		self.session.open(MessageBox, '\n%s' % '0 - 999 = Seite\nBouquet = +- Seite\nRot = Zu Favoriten hinzuf\xc3\xbcgen\nHelp = Update Check', MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, '\n%s' % '0 - 999 = ' + _('Page') + '\nBouquet = +- ' + _('Page') +'\n' + _('Red') + ' = ' + _('Add to favorites') + '\nHelp = Update Check', MessageBox.TYPE_INFO)
 
 	def selectMenu(self):
 		self['menu'].selectionEnabled(1)
@@ -638,7 +638,7 @@ class OpenXtaFav(Screen):
 		self.hideflag = True
 		self.count = 0
 		self['favmenu'] = MenuList([])
-		self['label'] = Label('= Entferne Favorit')
+		self['label'] = Label('= ' + _('Delete favorite'))
 		self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions'], {'ok': self.ok,
 		 'cancel': self.exit,
 		 'down': self.down,
@@ -686,7 +686,7 @@ class OpenXtaFav(Screen):
 			except IndexError:
 				name = ''
 
-			self.session.openWithCallback(self.red_return, MessageBox, _("\nPost '%s' aus den Favoriten entfernen?") % name, MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.red_return, MessageBox, '\n' + _("Delete post '%s' from favorites?") % name, MessageBox.TYPE_YESNO)
 
 	def red_return(self, answer):
 		if answer is True:
@@ -968,9 +968,9 @@ class OpenXtaMain(Screen):
 	def yellow(self):
 		if self.ready == True:
 			if self.white == False:
-				self.session.openWithCallback(self.whitecolor, MessageBox, _('\nFarbe zu Weiss wechseln?'), MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(self.whitecolor, MessageBox, '\n' + _('Change to white skin?'), MessageBox.TYPE_YESNO)
 			elif self.white == True:
-				self.session.openWithCallback(self.graycolor, MessageBox, _('\nFarbe zu Grau wechseln?'), MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(self.graycolor, MessageBox, '\n' + _('Change to grey skin?'), MessageBox.TYPE_YESNO)
 
 	def red(self):
 		if self.ready == True:
@@ -1002,7 +1002,7 @@ class OpenXtaMain(Screen):
 		self.close()
 
 	def showHelp(self):
-		self.session.open(MessageBox, '\n%s' % 'Rot = Favoriten\nGelb = Farbe wechseln\nGr\xc3\xbcn = Die neusten Beitr\xc3\xa4ge\nHelp = Update Check', MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, '\n%s' % _('Red') + ' = Favoriten\n' + _('Yellow = Change skin\nGreen = Latest posts') + '\nHelp = Update Check', MessageBox.TYPE_INFO)
 
 	def selectMenu(self):
 		self['menu'].selectionEnabled(1)
