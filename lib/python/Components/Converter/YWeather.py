@@ -60,7 +60,7 @@ class YWeather(Poll, Converter, object):
                 info = ""
                 if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/iSkin/Weather/Config/Location_id"):
                         weather_city = open("/usr/lib/enigma2/python/Plugins/Extensions/iSkin/Weather/Config/Location_id").read()
-                else if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/YahooWeather/Config/Location_id"):
+                elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/YahooWeather/Config/Location_id"):
                         weather_city = open("/usr/lib/enigma2/python/Plugins/Extensions/YahooWeather/Config/Location_id").read()
                 if fileExists("/tmp/yweather.xml"):
                         if int((time.time() - os.stat("/tmp/yweather.xml").st_mtime)/60) >= time_update:
