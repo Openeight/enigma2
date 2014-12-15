@@ -650,7 +650,7 @@ class OpenXtaFav(Screen):
 		self.makeFav()
 
 	def makeFav(self):
-		self.setTitle('OpenXTA:::Favoriten')
+		self.setTitle('OpenXTA:::' + _('Favorites'))
 		self.favoriten = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/OpenXtaReader/db/favoriten')
 		if fileExists(self.favoriten):
 			f = open(self.favoriten, 'r')
@@ -1002,7 +1002,7 @@ class OpenXtaMain(Screen):
 		self.close()
 
 	def showHelp(self):
-		self.session.open(MessageBox, '\n%s' % _('Red') + ' = Favoriten\n' + _('Yellow = Change skin\nGreen = Latest posts') + '\nHelp = Update Check', MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, '\n%s' % _('Red') + ' = ' + _('Favorites') + '\n' + _('Yellow = Change skin\nGreen = Latest posts') + '\nHelp = Update Check', MessageBox.TYPE_INFO)
 
 	def selectMenu(self):
 		self['menu'].selectionEnabled(1)
