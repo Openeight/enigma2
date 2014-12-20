@@ -158,10 +158,14 @@ def InitUsageConfig():
 		("standby", _("Standby")) ] )
 
 	choicelist = [("0", _("Do nothing"))]
-	for i in range(3600, 21601, 3600):
-		h = abs(i / 3600)
-		h = ngettext("%d hour", "%d hours", h) % h
-		choicelist.append(("%d" % i, _("Standby in ") + h))
+	for i in range(1800, 21601, 600):
+		if (i == 1800 or (i > 3600 and i < 7200)):
+			h = abs(i / 60)
+			choicelist.append(("%d" % i, _("Standby in ") + str(h) + " " + _("minutes")))
+		elif ((i % 3600) == 0):
+			h = abs(i / 3600)
+			h = ngettext("%d hour", "%d hours", h) % h
+			choicelist.append(("%d" % i, _("Standby in ") + h))
 	config.usage.inactivity_timer = ConfigSelection(default = "0", choices = choicelist)
 	config.usage.inactivity_timer_blocktime = ConfigYesNo(default = True)
 	config.usage.inactivity_timer_blocktime_begin = ConfigClock(default = time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
