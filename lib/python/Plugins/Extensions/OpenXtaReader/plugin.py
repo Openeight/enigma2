@@ -177,7 +177,7 @@ class OpenXtaThread(Screen):
 			bereich = sub('<li><strong>(.*?)</strong> topics</li>\s*?<li>', '<stats>Threads: \g<1>', bereich)
 			bereich = sub('<strong>(.*?)</strong> replies</li>', ' Posts: \g<1></stats>', bereich)
 
-			bereich = sub('<ul class=\'last_post ipsType_small\'>\s*?<li>\s*?([a-zA-Z0-9_ ]*?)\s*?</li>', '<user>\g<1></user>', bereich)
+			bereich = sub('<ul class=\'last_post ipsType_small\'>\s*?<li>\s*?[\t]*(.*?)\s*?</li>', '<user>\g<1></user>', bereich)
 			bereich = sub('<li>By \n\t(.*?)\s*?</li>', '<user>\g<1></user>', bereich)
 
 			bereich = sub('<a itemprop="url" id=".*?" href="(.*?)"', '<link>\g<1></link>', bereich)
@@ -204,7 +204,7 @@ class OpenXtaThread(Screen):
 
 			bereich = sub('<td class=\'col_f_views\'>\s*?<ul>\s*?<li>(.*?) repl.*?</li>\s*?<li class=\'views desc\'>(.*?) views</li>\s*?</ul>\s*?</td>', '<stats>Replies: \g<1>, Views: \g<2></stats>', bereich)
 
-			bereich = sub('<ul class=\'last_post ipsType_small\'>\s*?<li>\s*?([a-zA-Z0-9_ ]*?)\s*?</li>', '<user>\g<1></user>', bereich)
+			bereich = sub('<ul class=\'last_post ipsType_small\'>\s*?<li>\s*?[\t]*(.*?)\s*?</li>', '<user>\g<1></user>', bereich)
 			self.setTitle(_("Latest Posts"))
 		logo = re.findall('<logo>(.*?)</logo>', bereich)
 		titel = re.findall('<titel>(.*?)</titel>', bereich)
