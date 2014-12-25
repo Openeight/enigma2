@@ -487,6 +487,8 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 				self.list.append(self.gatewayEntry)
 				if self.hasGatewayConfigEntry.value:
 					self.list.append(getConfigListEntry(_('Gateway'), self.gatewayConfigEntry))
+			if SystemInfo["WakeOnLAN"] and self.iface == 'eth0':
+				self.list.append(getConfigListEntry(_('Enable Wake On LAN'), config.usage.wakeOnLAN))
 
 			self.extended = None
 			self.configStrings = None
@@ -538,6 +540,8 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.newConfig()
 
 	def keySave(self):
+		if SystemInfo["WakeOnLAN"]:
+			config.usage.wakeOnLAN.save()
 		self.hideInputHelp()
 		if self["config"].isChanged():
 			self.session.openWithCallback(self.keySaveConfirm, MessageBox, (_("Are you sure you want to activate this network configuration?\n\n") + self.oktext ) )
@@ -1356,7 +1360,7 @@ class NetworkAdapterTest(Screen):
 	def LinkStatedataAvail(self,data):
 		for item in data.splitlines():
 			if "Link detected:" in item:
-			        if "yes" in item:
+				if "yes" in item:
 					self["Network"].setForegroundColorNum(2)
 					self["Network"].setText(_("connected"))
 					self["NetworkInfo_Check"].setPixmapNum(0)
