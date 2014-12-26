@@ -190,8 +190,6 @@ class OpenXtaThread(Screen):
 			title = title.group(1)
 			title = transHTML(title)
 			title += ' | ' + _('Page %i of %i') % (self.count, self.maxcount)
-			self.threadtitle = title
-			self.setTitle(title)
 		else:
 			startpos = find(output, '<!-- ::: CONTENT ::: -->')
 			endpos = find(output, '</table>')
@@ -205,7 +203,9 @@ class OpenXtaThread(Screen):
 			bereich = sub('<td class=\'col_f_views\'>\s*?<ul>\s*?<li>(.*?) repl.*?</li>\s*?<li class=\'views desc\'>(.*?) views</li>\s*?</ul>\s*?</td>', '<stats>Replies: \g<1>, Views: \g<2></stats>', bereich)
 
 			bereich = sub('<ul class=\'last_post ipsType_small\'>\s*?<li>\s*?[\t]*(.*?)\s*?</li>', '<user>\g<1></user>', bereich)
-			self.setTitle(_("Latest Posts"))
+			title = _("Latest Posts")
+		self.threadtitle = title
+		self.setTitle(title)
 		logo = re.findall('<logo>(.*?)</logo>', bereich)
 		titel = re.findall('<titel>(.*?)</titel>', bereich)
 		stats = re.findall('<stats>(.*?)</stats>', bereich)
