@@ -1478,7 +1478,12 @@ class InfoBarSeek:
 
 	def unPauseService(self):
 		print "unpause"
-		if self.seekstate == self.SEEK_STATE_PLAY:
+		if self.seekAction <> 0:
+			self.seekAction = 0
+			self.doPause(False)
+			return
+			
+                if self.seekstate == self.SEEK_STATE_PLAY:
 			return 0
 		self.setSeekState(self.SEEK_STATE_PLAY)
 
