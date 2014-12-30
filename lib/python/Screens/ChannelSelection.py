@@ -30,7 +30,6 @@ from Screens.InputBox import PinInput
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
 from Screens.ServiceInfo import ServiceInfo
-from Screens.Hotkey import InfoBarHotkey, hotkeyActionMap, getHotkeyFunctions
 profile("ChannelSelection.py 4")
 from Screens.PictureInPicture import PictureInPicture
 from Screens.RdsDisplay import RassInteractive
@@ -507,51 +506,111 @@ class SelectionEventInfo:
 		service.newService(cur)
 		self["Event"].newEvent(service.event)
 
-class ChannelSelectionEPG(InfoBarHotkey):
+class ChannelSelectionEPG:
 	def __init__(self):
-		self.hotkeys = [("Info (EPG)", "info", "Infobar/openEventView"),
-			("Info (EPG)" + " " + _("long"), "info_long", "Infobar/showEventInfoPlugins"),
-			("Epg/Guide", "epg", "Plugins/Extensions/GraphMultiEPG/1"),
-			("Epg/Guide" + " " + _("long"), "epg_long", "Infobar/showEventInfoPlugins")]
-		self["ChannelSelectEPGActions"] = hotkeyActionMap(["HotkeyActions"], dict((x[1], self.hotkeyGlobal) for x in self.hotkeys))
+		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
+			{
+				"showEPGList": self.showEPGList,
+				"showGuideList": self.showGuideList,
+				"showEPGListChosen": self.showEPGListChosen,
+				"showGuideListChosen": self.showGuideListChosen,
+			})
 		self.eventViewEPG = self.start_bouquet = self.epg_bouquet = None
+		self.GraphMultiEPG = fileExists("/usr/lib/enigma2/python/Plugins/Extensions/GraphMultiEPG/plugin.pyo")
+		self.defaultEPGType = self.getDefaultEPGtype()
+		self.defaultGuideType = self.getDefaultGuidetype()
 		self.currentSavedPath = []
-		self.onExecBegin.append(self.clearLongkeyPressed)
 
-	def getKeyFunctions(self, key):
-		selection = eval("config.misc.hotkey." + key + ".value.split(',')")
-		selected = []
-		for x in selection:
-			function = list(function for function in getHotkeyFunctions() if function[1] == x and function[2] == "EPG")
-			if function:
-				selected.append(function[0])
-		return selected
+	def showEPGList(self):
+		ref = self.getCurrentSelection()
+		if ref and not (ref.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+			if self.defaultEPGType:
+				self.defaultEPGType()
+			else:
+				self.openSingleEPG()
 
-	def runPlugin(self, plugin):
-		Screens.InfoBar.InfoBar.instance.runPlugin(plugin)
+	def showGuideList(self):
+		ref = self.getCurrentSelection()
+		if ref and not (ref.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+			if self.defaultGuideType:
+				self.defaultGuideType()
+			else:
+				self.openSingleEPG()
 
-	def getEPGPluginList(self, getAll=False):
-		pluginlist = [(p.name, boundFunction(self.runPlugin, p), p.path) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO) \
-				if 'selectedevent' not in p.__call__.func_code.co_varnames] or []
-		from Components.ServiceEventTracker import InfoBarCount
-		if getAll or InfoBarCount == 1:
-			pluginlist.append((_("Show EPG for current channel..."), self.openSingleServiceEPG, "current_channel"))
-		pluginlist.append((_("Multi EPG"), self.openMultiServiceEPG, "multi_epg"))
-		pluginlist.append((_("Current event EPG"), self.openEventView, "event_epg"))
+	def getEPGList(self, getAll=False):
+		pluginlist = []
+		if self.GraphMultiEPG:
+			pluginlist.append((_("Graphical Multi EPG"), self.openGraphMultiEPG, "graphical_epg"))
+		pluginlist.append((_("Single EPG"), self.openSingleEPG, "single_epg"))
+		pluginlist.append((_("Multi EPG"), self.openMultiEPG, "multi_epg"))
+		ref = self.getCurrentSelection()
+		info = ref and eServiceCenter.getInstance().info(ref)
+		event = info and info.getEvent(ref)
+		if event or getAll:
+			pluginlist.append((_("Currently selected event EPG"), self.openEventViewEPG, "event_epg"))
 		return pluginlist
 
-	def showEventInfoPlugins(self):
-		pluginlist = self.getEPGPluginList()
-		if pluginlist:
-			self.session.openWithCallback(self.EventInfoPluginChosen, ChoiceBox, title=_("Please choose an extension..."), list = pluginlist, skin_name = "EPGExtensionsList")
-		else:
-			self.openSingleServiceEPG()
+	def getDefaultEPGtype(self):
+		config.usage.defaultEPGType = ConfigText()
+		for p in self.getEPGList(True):
+			if p[2] == config.usage.defaultEPGType.value:
+				return p[1]
+		return None
 
-	def EventInfoPluginChosen(self, answer):
+	def getDefaultGuidetype(self):
+		config.usage.defaultGuideType = ConfigText(default = self.GraphMultiEPG and "graphical_epg" or "")
+		for p in self.getEPGList(True):
+			if p[2] == config.usage.defaultGuideType.value:
+				return p[1]
+		return None
+
+	def showEPGListChosen(self):
+		ref = self.getCurrentSelection()
+		if ref and not (ref.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+			pluginlist = self.getEPGList()
+			if pluginlist:
+				pluginlist.append((_("Select default EPG type..."), self.SelectDefaultEPG))
+				self.session.openWithCallback(self.EventEPGChosen, ChoiceBox, title=_("Select EPG type..."), list = pluginlist)
+
+	def EventEPGChosen(self, answer):
 		if answer is not None:
 			answer[1]()
 
-	def openEventView(self):
+	def SelectDefaultEPG(self):
+		self.session.openWithCallback(self.DefaultEPGChosen, ChoiceBox, title=_("Please select a default EPG type..."), list = self.getEPGList(True))
+
+	def DefaultEPGChosen(self, answer):
+		if answer is not None:
+			self.defaultEPGType = answer[1]
+			config.usage.defaultEPGType.value = answer[2]
+			config.usage.defaultEPGType.save()
+
+	def showGuideListChosen(self):
+		ref = self.getCurrentSelection()
+		if ref and not (ref.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
+			pluginlist = self.getEPGList()
+			if pluginlist:
+				pluginlist.append((_("Select default EPG type..."), self.SelectDefaultGuide))
+				self.session.openWithCallback(self.EventGuideChosen, ChoiceBox, title=_("Select EPG type..."), list = pluginlist)
+
+	def EventGuideChosen(self, answer):
+		if answer is not None:
+			answer[1]()
+
+	def SelectDefaultGuide(self):
+		self.session.openWithCallback(self.DefaultGuideChosen, ChoiceBox, title=_("Please select a default EPG type..."), list = self.getEPGList(True))
+
+	def DefaultGuideChosen(self, answer):
+		if answer is not None:
+			self.defaultGuideType = answer[1]
+			config.usage.defaultGuideType.value = answer[2]
+			config.usage.defaultGuideType.save()
+
+	def openGraphMultiEPG(self):
+		from Plugins.Extensions.GraphMultiEPG.plugin import main
+		main(self.session)
+
+	def openEventViewEPG(self):
 		epglist = [ ]
 		self.epglist = epglist
 		ref = self.getCurrentSelection()
@@ -563,7 +622,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 			if next_event:
 				epglist.append(next_event)
 		if epglist:
-			self.eventViewEPG = self.session.openWithCallback(self.eventViewEPGClosed, EventViewEPGSelect, epglist[0], ServiceReference(ref), self.eventViewEPGCallback, self.openSingleServiceEPG, self.openMultiServiceEPG, self.openSimilarList)
+			self.eventViewEPG = self.session.openWithCallback(self.eventViewEPGClosed, EventViewEPGSelect, epglist[0], ServiceReference(ref), self.eventViewEPGCallback, self.openSingleEPG, self.openMultiEPG, self.openSimilarList)
 
 	def eventViewEPGCallback(self, setEvent, setService, val):
 		epglist = self.epglist
@@ -578,7 +637,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 		if ret:
 			self.close()
 
-	def openMultiServiceEPG(self):
+	def openMultiEPG(self):
 		ref = self.getCurrentSelection()
 		if ref:
 			self.start_bouquet = self.epg_bouquet = self.servicelist.getRoot()
@@ -587,7 +646,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 			services = self.getServicesList(self.servicelist.getRoot())
 			self.session.openWithCallback(self.SingleMultiEPGClosed, EPGSelection, services, self.zapToService, None, bouquetChangeCB=self.changeBouquetForMultiEPG)
 
-	def openSingleServiceEPG(self):
+	def openSingleEPG(self):
 		ref = self.getCurrentSelection()
 		if ref:
 			self.start_bouquet = self.epg_bouquet = self.servicelist.getRoot()
