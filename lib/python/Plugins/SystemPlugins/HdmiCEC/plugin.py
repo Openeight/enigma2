@@ -5,18 +5,18 @@ from Components.Sources.StaticText import StaticText
 
 class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	skin = """
-	<screen position="c-300,c-250" size="600,500" title="HDMI CEC setup">
-		<widget name="config" position="25,25" size="550,350" />
-		<widget source="current_address" render="Label" position="25,375" size="550,30" zPosition="10" font="Regular;21" halign="left" valign="center" />
-		<widget source="fixed_address" render="Label" position="25,405" size="550,30" zPosition="10" font="Regular;21" halign="left" valign="center" />
-		<ePixmap pixmap="skin_default/buttons/red.png" position="20,e-45" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="160,e-45" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" position="300,e-45" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/blue.png" position="440,e-45" size="140,40" alphatest="on" />
-		<widget source="key_red" render="Label" position="20,e-45" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		<widget source="key_green" render="Label" position="160,e-45" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget source="key_yellow" render="Label" position="300,e-45" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-		<widget source="key_blue" render="Label" position="440,e-45" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+	<screen position="center,center" size="740,500" title="HDMI-CEC setup">
+		<widget name="config" position="25,25" size="694,350" />
+		<widget source="current_address" render="Label" position="25,375" size="694,30" zPosition="10" font="Regular;21" halign="left" valign="center" />
+		<widget source="fixed_address" render="Label" position="25,405" size="694,30" zPosition="10" font="Regular;21" halign="left" valign="center" />
+		<eLabel position="24,445" size="160,5" zPosition="2" backgroundColor="#ce0000" />
+		<eLabel position="201,445" size="160,5" zPosition="2" backgroundColor="#23981a" />
+		<eLabel position="377,445" size="160,5" zPosition="2" backgroundColor="#e6c00e" />
+		<eLabel position="554,445" size="160,5" zPosition="2" backgroundColor="#4e53bb" />
+		<widget source="key_red" render="Label" position="24,455" zPosition="1" size="160,40" font="Regular;16" halign="center" valign="top" transparent="1" />
+		<widget source="key_green" render="Label" position="201,455" zPosition="1" size="160,40" font="Regular;16" halign="center" valign="top" transparent="1" />
+		<widget source="key_yellow" render="Label" position="377,455" zPosition="1" size="160,40" font="Regular;16" halign="center" valign="top" transparent="1" />
+		<widget source="key_blue" render="Label" position="554,455" zPosition="1" size="160,40" font="Regular;16" halign="center" valign="top" transparent="1" />
 	</screen>"""
 
 	def __init__(self, session):
