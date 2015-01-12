@@ -54,6 +54,7 @@ class PiconUni(Renderer):
             if (self.pngname != pngname):
                 self.pngname = pngname
                 self.rTimer()
+                self.instance.setScale(1)
                 self.instance.setPixmapFromFile(self.pngname)
 
     def findPicon(self, serviceName):
