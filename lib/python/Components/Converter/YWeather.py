@@ -127,7 +127,13 @@ class YWeather(Poll, Converter, object):
                 
         @cached
         def getText(self):
-                xweather = {'yday2':"N/A", 'yday3':"N/A", 'yday4':"N/A", 'yday5':"N/A", 'ycity':"N/A", 'ycountry':"N/A", 'ydirection':"N/A", 'yspeed':"N/A", 'yhumidity':"N/A", 'yvisibility':"N/A", 'ypressure':"N/A", 'ytext':"N/A", 'ytemp':"N/A", 'ypicon':"3200"}
+                xweather = {'ycity':"N/A", 'ycountry':"N/A", 'ydirection':"N/A", 'yspeed':"N/A", 'yhumidity':"N/A", 'yvisibility':"N/A", 'ypressure':"N/A", 'ytext':"N/A", 'ytemp':"N/A", 'ypicon':"3200",
+                            'yday2':"N/A", 'yday3':"N/A", 'yday4':"N/A", 'yday5':"N/A",
+                            'ypiconday2':"3200", 'ypiconday3':"3200", 'ypiconday4':"3200", 'ypiconday5':"3200",
+                            'ydate2':"N/A", 'ydate3':"N/A", 'ydate4':"N/A", 'ydate5':"N/A",
+                            'ytextday2':"N/A", 'ytextday3':"N/A", 'ytextday4':"N/A", 'ytextday5':"N/A",
+                            'ytemphighday2':"N/A", 'ytemphighday3':"N/A", 'ytemphighday4':"N/A", 'ytemphighday5':"N/A",
+                            'ytemplowday2':"N/A", 'ytemplowday3':"N/A", 'ytemplowday4':"N/A", 'ytemplowday5':"N/A"}
                 direct = 0
                 info = ""
                 if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/iSkin/Weather/Config/Location_id"):
@@ -258,7 +264,6 @@ class YWeather(Poll, Converter, object):
                                 info = xweather['ytemp']
                 elif self.type == self.picon:
                         info = xweather['ypicon']
-                #test start#
                 elif self.type == self.wtext2:
                         info = xweather['ytextday2']
                 elif self.type == self.templow2:
@@ -297,9 +302,15 @@ class YWeather(Poll, Converter, object):
                 elif self.type == self.wtext3:
                         info = xweather['ytextday3']
                 elif self.type == self.templow3:
-                        info = xweather['ytemplowday3'] + '%s' % unichr(176).encode("latin-1")
+                        if info != "N/A":
+                                info = xweather['ytemplowday3'] + '%s' % unichr(176).encode("latin-1")
+                        else:
+                                info = xweather['ytemplowday3']
                 elif self.type == self.temphigh3:
-                        info = xweather['ytemphighday3'] + '%s' % unichr(176).encode("latin-1")
+                        if info != "N/A":
+                                info = xweather['ytemphighday3'] + '%s' % unichr(176).encode("latin-1")
+                        else:
+                                info = xweather['ytemphighday3']
                 elif self.type == self.picon3:
                         info = xweather['ypiconday3']
                 elif self.type == self.day3:
@@ -326,9 +337,15 @@ class YWeather(Poll, Converter, object):
                 elif self.type == self.wtext4:
                         info = xweather['ytextday4']
                 elif self.type == self.templow4:
-                        info = xweather['ytemplowday4'] + '%s' % unichr(176).encode("latin-1")
+                        if info != "N/A":
+                                info = xweather['ytemplowday4'] + '%s' % unichr(176).encode("latin-1")
+                        else:
+                                info = xweather['ytemplowday4']
                 elif self.type == self.temphigh4:
-                        info = xweather['ytemphighday4'] + '%s' % unichr(176).encode("latin-1")
+                        if info != "N/A":
+                                info = xweather['ytemphighday4'] + '%s' % unichr(176).encode("latin-1")
+                        else:
+                                info = xweather['ytemphighday4']
                 elif self.type == self.picon4:
                         info = xweather['ypiconday4']
                 elif self.type == self.day4:
@@ -355,9 +372,15 @@ class YWeather(Poll, Converter, object):
                 elif self.type == self.wtext5:
                         info = xweather['ytextday5']
                 elif self.type == self.templow5:
-                        info = xweather['ytemplowday5'] + '%s' % unichr(176).encode("latin-1")
-                elif self.type == self.temphigh4:
-                        info = xweather['ytemphighday5'] + '%s' % unichr(176).encode("latin-1")
+                        if info != "N/A":
+                                info = xweather['ytemplowday5'] + '%s' % unichr(176).encode("latin-1")
+                        else:
+                                info = xweather['ytemplowday5']
+                elif self.type == self.temphigh5:
+                        if info != "N/A":
+                                info = xweather['ytemphighday5'] + '%s' % unichr(176).encode("latin-1")
+                        else:
+                                info = xweather['ytemphighday5']
                 elif self.type == self.picon5:
                         info = xweather['ypiconday5']
                 elif self.type == self.day5:
