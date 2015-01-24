@@ -181,7 +181,7 @@
 		<item text="Contrast">config.osd.contrast</item>
 	</setup>
 	<setup key="lcd" title="Display setup" requires="FrontpanelDisplay">
-	        <item level="0" text="Show LCD Live TV Modus" description="Set the LCD in live or info modus.">config.lcd.et8500</item>
+		<item level="0" text="Clone TV screen to LCD" description="Shows live tv or informations on LCD.">config.lcd.et8500</item>
 		<item level="0" text="Power on/off display" description="This option allows you to power off the display.">config.lcd.power</item>
 		<item level="0" text="Power LED state in (deep)-standby" description="Turn on the power LED during standby." requires="StandbyLED">config.usage.standbyLED</item>
 		<item level="0" text="Brightness (Normal)" description="Configure the brightness level of the front panel displa for normal operation.">config.lcd.bright</item>

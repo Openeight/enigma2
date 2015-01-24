@@ -116,7 +116,7 @@ class LCD:
 		print 'setLCDet8500',value
 		f = open("/proc/stb/fb/sd_detach", "w")
 		f.write(value)
-		f.close()	
+		f.close()
 
 	def setRepeat(self, value):
 		print 'setLCDRepeat',value
@@ -247,7 +247,7 @@ def InitLcd():
 			config.lcd.scrollspeed = ConfigNothing()
 
 		if fileExists("/proc/stb/power/vfd"):
-			config.lcd.power = ConfigSelection([("0", _("No")), ("1", _("Yes"))], "1")
+			config.lcd.power = ConfigSelection([("1", _("No")), ("0", _("Yes"))], "0")
 			config.lcd.power.addNotifier(setLCDpower);
 		else:
 			config.lcd.power = ConfigNothing()
