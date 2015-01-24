@@ -165,6 +165,7 @@ data/countries/Makefile
 data/extensions/Makefile
 data/keymaps/Makefile
 data/hw_info/Makefile
+data/display/Makefile
 data/skin_default/Makefile
 data/skin_default/menu/Makefile
 data/skin_default/icons/Makefile

@@ -90,9 +90,24 @@ addSkin('skin_box.xml')
 # add optional discrete second infobar
 addSkin('skin_second_infobar.xml')
 # Only one of these is present, compliments of AM_CONDITIONAL
+
+DEFAULT_DISPLAY_SKIN = "skin_display.xml"
+config.skin.display_skin = ConfigText(default=DEFAULT_DISPLAY_SKIN)
+
 display_skin_id = 1
-addSkin('skin_display.xml')
-if addSkin('skin_display96.xml'):
+try:
+	print "loading display skin ", config.skin.display_skin.value
+	if not addSkin(os.path.join('display', config.skin.display_skin.value)):
+		raise DisplaySkinError, "display skin not found"
+except Exception, err:
+	print "SKIN ERROR:", err
+	skin = DEFAULT_DISPLAY_SKIN
+	print "defaulting to standard display skin...", skin
+	config.skin.display_skin.value = skin
+	addSkin(os.path.join('display', skin))
+	del skin
+
+if addSkin(os.path.join('display', 'skin_display96.xml')):
 	# Color OLED
 	display_skin_id = 2
 addSkin('skin_text.xml')
