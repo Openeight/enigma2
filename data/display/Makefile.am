@@ -1,3 +1,5 @@
+SUBDIRS = LCDAnalogClock_1_Standby LCDAnalogClock_2_Standby LCDWeather_Standby
+
 installdir = $(pkgdatadir)/display
 
 if HAVE_COLORLCD
