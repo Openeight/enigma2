@@ -680,6 +680,27 @@ if InfoBar and InfoBar.instance:
 			<module>Plugins.SystemPlugins.CableScan.plugin</module>
 			<screen><![CDATA[CableScanScreen]]></screen>
 		</mqbfunction>
+		<mqbfunction>
+			<name>Clone TV screen to LCD-Display (Xtrend et8500)</name>
+                        <code><![CDATA[
+if config.lcd.et8500.value == "0":
+	config.lcd.et8500.value = "1"
+else:
+        config.lcd.et8500.value = "0"
+config.lcd.et8500.save()
+def applySettings(et8500):
+        try:
+                f = open("/proc/stb/fb/sd_detach", "w")
+		f.write(value)
+		f.close()
+        except:
+                return
+applySettings(config.lcd.et8500.value)
+from Screens.MessageBox import MessageBox
+modelist = {"0": _("Yes"), "1": _("No")}
+self.session.open(MessageBox, _("Clone TV screen to LCD:") + "\n" + modelist[config.lcd.et8500.value], MessageBox.TYPE_INFO, 1)
+]]></code>
+                </mqbfunction>
 	</Menu>
 	<Scripts>
 		<mqbfunction>
