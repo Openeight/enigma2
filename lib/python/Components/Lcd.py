@@ -208,7 +208,7 @@ def InitLcd():
 		def setLEDblinkingtime(configElement):
 			ilcd.setLEDBlinkingTime(configElement.value)
 
-		standby_default = 0
+		standby_default = 5
 
 		ilcd = LCD()
 
