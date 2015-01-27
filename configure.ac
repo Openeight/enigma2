@@ -172,6 +172,7 @@ data/display/Makefile
 data/display/LCDAnalogClock_1_Standby/Makefile
 data/display/LCDAnalogClock_2_Standby/Makefile
 data/display/LCDWeather_Standby/Makefile
+data/display/LCDAnalogClock_3_Weather_Infobar/Makefile
 data/skin_default/Makefile
 data/skin_default/menu/Makefile
 data/skin_default/icons/Makefile
