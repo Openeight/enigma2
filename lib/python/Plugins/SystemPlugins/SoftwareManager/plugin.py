@@ -1956,6 +1956,8 @@ class PacketManager(Screen, NumericalTextInput):
 			self.packetlist = []
 			last_name = ""
 			for x in result.splitlines():
+				if x[0] == " ":
+					continue
 				tokens = x.split(' - ')
 				name = tokens[0].strip()
 				if not any(name.endswith(x) for x in self.unwanted_extensions):
