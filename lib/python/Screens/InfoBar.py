@@ -127,9 +127,16 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 
 	def showMPortal(self):
 		try:
-			from Plugins.Extensions.MediaPortal.plugin import haupt_Screen
-                        self.session.open(haupt_Screen)
-                        no_plugin = False
+			from Screens.PluginBrowser import PluginBrowser
+			from Plugins.Plugin import PluginDescriptor
+			from Components.PluginList import *
+			from Components.PluginComponent import plugins
+			pluginlist = []
+			pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU)
+			for plugin in pluginlist:
+				if 'MediaPortal' in str(plugin.name):
+					break
+                        plugin(session=self.session)
 		except Exception, e:
 			self.session.open(MessageBox, _("The MediaPortal plugin is not installed!\nPlease install it."), type = MessageBox.TYPE_INFO,timeout = 10 )
 			
