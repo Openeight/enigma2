@@ -96,7 +96,7 @@ class About(Screen):
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
 		self["key_green"] = Button(_("Translations"))
 		self["key_red"] = Button(_("Latest Commits"))
-		self["key_blue"] = Button(_("Memory Info"))
+		self["key_yellow"] = Button(_("Memory Info"))
 
 		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
 			{
@@ -104,7 +104,7 @@ class About(Screen):
 				"ok": self.close,
 				"red": self.showCommits,
 				"green": self.showTranslationInfo,
-				"blue": self.showMemoryInfo,
+				"yellow": self.showMemoryInfo,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown
 			}, -2)
