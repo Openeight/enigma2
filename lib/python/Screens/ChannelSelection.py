@@ -992,6 +992,7 @@ class ChannelSelectionEdit:
 
 	def removeSatelliteServicesCallback(self, answer):
 		if answer:
+			currentIndex = self.servicelist.getCurrentIndex()
 			current = self.getCurrentSelection()
 			unsigned_orbpos = current.getUnsignedData(4) >> 16
 			if unsigned_orbpos == 0xFFFF:
@@ -1008,7 +1009,11 @@ class ChannelSelectionEdit:
 						satpos = int(tmp[:idx])
 						eDVBDB.getInstance().removeServices(-1, -1, -1, satpos)
 			refreshServiceList()
-			hasattr(self.session, 'showSatellites') and self.showSatellites()
+			if hasattr(self, 'showSatellites'):
+				self.showSatellites()
+				self.servicelist.moveToIndex(currentIndex)
+				if currentIndex != self.servicelist.getCurrentIndex():
+					self.servicelist.instance.moveSelection(self.servicelist.instance.moveEnd)
 
 #  multiple marked entry stuff ( edit mode, later multiepg selection )
 	def startMarkedEdit(self, type):
@@ -1217,13 +1222,14 @@ class ChannelSelectionBase(Screen):
 		self.dopipzap = False
 		self.pathChangeDisabled = False
 		self.movemode = False
+		self.showSatDetails = False
 
 		self["ChannelSelectBaseActions"] = NumberActionMap(["ChannelSelectBaseActions", "NumberActions", "InputAsciiActions"],
 			{
 				"showFavourites": self.showFavourites,
 				"showAllServices": self.showAllServices,
 				"showProviders": self.showProviders,
-				"showSatellites": self.showSatellites,
+				"showSatellites": boundFunction(self.showSatellites, changeMode=True),
 				"nextBouquet": self.nextBouquet,
 				"prevBouquet": self.prevBouquet,
 				"nextMarker": self.nextMarker,
@@ -1418,7 +1424,7 @@ class ChannelSelectionBase(Screen):
 					self.enterPath(ref)
 					self.setCurrentSelectionAlternative(self.session.nav.getCurrentlyPlayingServiceOrGroup())
 
-	def showSatellites(self):
+	def showSatellites(self, changeMode=False):
 		if not self.pathChangeDisabled:
 			refstr = '%s FROM SATELLITES ORDER BY satellitePosition'%(self.service_types)
 			if not self.preEnterPath(refstr):
@@ -1436,7 +1442,13 @@ class ChannelSelectionBase(Screen):
 						justSet=True
 						self.clearPath()
 						self.enterPath(ref, True)
+					if changeMode and currentRoot and currentRoot == ref:
+						self.showSatDetails = not self.showSatDetails
+						justSet = True
+						self.clearPath()
+						self.enterPath(ref, True)
 				if justSet:
+					addCableAndTerrestrialLater = []
 					serviceHandler = eServiceCenter.getInstance()
 					servicelist = serviceHandler.list(ref)
 					if not servicelist is None:
@@ -1449,29 +1461,32 @@ class ChannelSelectionBase(Screen):
 							if orbpos < 0:
 								orbpos += 3600
 							if "FROM PROVIDER" in service.getPath():
-								service_type = _("Providers")
+								service_type = self.showSatDetails and _("Providers")
 							elif ("flags == %d" %(FLAG_SERVICE_NEW_FOUND)) in service.getPath():
-								service_type = _("New")
+								service_type = self.showSatDetails and _("New")
 							else:
 								service_type = _("Services")
-							try:
-								# why we need this cast?
-								service_name = str(nimmanager.getSatDescription(orbpos))
-							except:
+							if service_type:
 								if unsigned_orbpos == 0xFFFF: #Cable
 									service_name = _("Cable")
+									addCableAndTerrestrialLater.append(("%s - %s" % (service_name, service_type), service.toString()))			
 								elif unsigned_orbpos == 0xEEEE: #Terrestrial
 									service_name = _("Terrestrial")
+									addCableAndTerrestrialLater.append(("%s - %s" % (service_name, service_type), service.toString()))			
 								else:
-									if orbpos > 1800: # west
-										orbpos = 3600 - orbpos
-										h = _("W")
-									else:
-										h = _("E")
-									service_name = ("%d.%d" + h) % (orbpos / 10, orbpos % 10)
-							service.setName("%s - %s" % (service_name, service_type))
-							self.servicelist.addService(service)
+									try:
+										service_name = str(nimmanager.getSatDescription(orbpos))
+									except:
+										if orbpos > 1800: # west
+											orbpos = 3600 - orbpos
+											h = _("W")
+										else:
+											h = _("E")
+										service_name = ("%d.%d" + h) % (orbpos / 10, orbpos % 10)
+									service.setName("%s - %s" % (service_name, service_type))
+									self.servicelist.addService(service)
 						cur_ref = self.session.nav.getCurrentlyPlayingServiceReference()
+						self.servicelist.l.sort()
 						if cur_ref:
 							pos = self.service_types.rfind(':')
 							refstr = '%s (channelID == %08x%04x%04x) && %s ORDER BY name' %(self.service_types[:pos+1],
@@ -1481,8 +1496,12 @@ class ChannelSelectionBase(Screen):
 								self.service_types[pos+1:])
 							ref = eServiceReference(refstr)
 							ref.setName(_("Current transponder"))
-							self.servicelist.addService(ref)
-						self.servicelist.finishFill()
+							self.servicelist.addService(ref, beforeCurrent=True)
+						for (service_name, service_ref) in addCableAndTerrestrialLater:
+							ref = eServiceReference(service_ref)
+							ref.setName(service_name)
+							self.servicelist.addService(ref, beforeCurrent=True)
+						self.servicelist.l.FillFinished()
 						if prev is not None:
 							self.setCurrentSelection(prev)
 						elif cur_ref:
@@ -2150,11 +2169,15 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			self.new_service_played = True
 			self.session.nav.playService(self.startServiceRef)
 			self.saveChannel(self.startServiceRef)
+		else:
+			self.restoreMode()
 		self.startServiceRef = None
 		self.startRoot = None
 		if self.dopipzap:
 			# This unfortunately won't work with subservices
 			self.setCurrentSelection(self.session.pip.getCurrentService())
+		else:
+			self.setCurrentSelection(self.session.nav.getCurrentlyPlayingServiceOrGroup())
 
 	def setStartRoot(self, root):
 		if root:
@@ -2164,6 +2187,13 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 				self.setModeRadio()
 			self.revertMode = None
 			self.enterUserbouquet(root)
+
+	def restoreMode(self):
+		if self.revertMode == MODE_TV:
+			self.setModeTv()
+		elif self.revertMode == MODE_RADIO:
+			self.setModeRadio()
+		self.revertMode = None
 
 	def correctChannelNumber(self):
 		current_ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
