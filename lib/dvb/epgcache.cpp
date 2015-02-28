@@ -7,6 +7,7 @@
 #include <lib/service/event.h>
 #endif
 
+#include <deque>
 #include <fstream>
 #include <time.h>
 #include <unistd.h>  // for usleep
@@ -382,10 +383,11 @@ void eEPGCache::timeUpdated()
 {
 	if (!m_filename.empty())
 	{
-		if (!sync())
+		if (!m_running)
 		{
 			eDebug("[EPGC] time updated.. start EPG Mainloop");
 			run();
+			m_running = true;
 			singleLock s(channel_map_lock);
 			channelMapIterator it = m_knownChannels.begin();
 			for (; it != m_knownChannels.end(); ++it)
@@ -1046,6 +1048,7 @@ void eEPGCache::cleanLoop()
 
 eEPGCache::~eEPGCache()
 {
+	m_running = false;
 	messages.send(Message::quit);
 	kill(); // waiting for thread shutdown
 	singleLock s(cache_lock);
@@ -1184,13 +1187,11 @@ void eEPGCache::gotMessage( const Message &msg )
 void eEPGCache::thread()
 {
 	hasStarted();
-	m_running = true;
 	nice(4);
 	load();
 	cleanLoop();
 	runLoop();
 	save();
-	m_running = false;
 }
 
 static const char* EPGDAT_IN_FLASH = "/epg.dat";
@@ -2986,8 +2987,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 PyObject *eEPGCache::search(ePyObject arg)
 {
 	ePyObject ret;
-	int descridx = -1;
-	uint32_t descr[512];
+	std::deque<uint32_t> descr;
 	int eventid = -1;
 	const char *argstring=0;
 	char *refstr=0;
@@ -3078,7 +3078,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 									switch(descr_data[0])
 									{
 									case 0x4D ... 0x4E:
-										descr[++descridx]=crc;
+										descr.push_back(crc);
 									default:
 										break;
 									}
@@ -3086,7 +3086,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 								tmp-=4;
 							}
 						}
-						if (descridx<0)
+						if (descr.empty())
 							eDebug("event not found");
 					}
 					else
@@ -3130,7 +3130,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 					singleLock s(cache_lock);
 					std::string title;
 					for (descriptorMap::iterator it(eventData::descriptors.begin());
-						it != eventData::descriptors.end() && descridx < 511; ++it)
+						it != eventData::descriptors.end(); ++it)
 					{
 						uint8_t *data = it->second.second;
 						if ( data[0] == 0x4D ) // short event descriptor
@@ -3164,7 +3164,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 								{
 									if (!strncasecmp(titleptr, str, textlen))
 									{
-										descr[++descridx] = it->first;
+										descr.push_back(it->first);
 										break;
 									}
 									title_len--;
@@ -3177,7 +3177,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 								{
 									if (!memcmp(titleptr, str, textlen))
 									{
-										descr[++descridx] = it->first;
+										descr.push_back(it->first);
 										break;
 									}
 									title_len--;
@@ -3219,7 +3219,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 		return NULL;
 	}
 
-	if (descridx > -1)
+	if (!descr.empty())
 	{
 		int maxcount=maxmatches;
 		eServiceReferenceDVB ref(refstr?(const eServiceReferenceDVB&)handleGroup(eServiceReference(refstr)):eServiceReferenceDVB(""));
@@ -3250,13 +3250,14 @@ PyObject *eEPGCache::search(ePyObject arg)
 				int tmp = evit->second->ByteSize-10;
 				uint32_t *p = (uint32_t*)(data+10);
 				// check if any of our descriptor used by this event
-				int cnt=-1;
+				int cnt = 0;
 				while(tmp>3)
 				{
 					uint32_t crc32 = *p++;
-					for ( int i=0; i <= descridx; ++i)
+					for (std::deque<uint32_t>::const_iterator it = descr.begin();
+						it != descr.end(); ++it)
 					{
-						if (descr[i] == crc32)  // found...
+						if (*it == crc32)  // found...
 						{
 							++cnt;
 							if (querytype)
@@ -3269,8 +3270,8 @@ PyObject *eEPGCache::search(ePyObject arg)
 					}
 					tmp-=4;
 				}
-				if ( (querytype == 0 && cnt == descridx) ||
-					 ((querytype > 0) && cnt != -1) )
+				if ( (querytype == 0 && cnt == descr.size()) ||
+					 ((querytype > 0) && cnt != 0) )
 				{
 					const uniqueEPGKey &service = cit->first;
 					std::vector<eServiceReference> refs;

@@ -218,6 +218,29 @@ def copyServiceFiles(serviceref, dest, name=None):
 	CopyFiles.copyFiles(moveList, name)
 	print "[MovieSelection] Copying in background..."
 
+# Appends possible destinations to the bookmarks object. Appends tuples
+# in the form (description, path) to it.
+def buildMovieLocationList(bookmarks):
+	inlist = []
+	for d in config.movielist.videodirs.value:
+		d = os.path.normpath(d)
+		bookmarks.append((d,d))
+		inlist.append(d)
+	for p in Components.Harddisk.harddiskmanager.getMountedPartitions():
+		d = os.path.normpath(p.mountpoint)
+		if d in inlist:
+			# improve shortcuts to mountpoints
+			try:
+				bookmarks[bookmarks.index((d,d))] = (p.tabbedDescription(), d)
+			except:
+				pass # When already listed as some "friendly" name
+		else:
+			bookmarks.append((p.tabbedDescription(), d))
+		inlist.append(d)
+	for d in last_selected_dest:
+		if d not in inlist:
+			bookmarks.append((d,d))
+
 class MovieBrowserConfiguration(ConfigListScreen,Screen):
 	skin = """
 <screen position="center,center" size="560,400" title="Movie Browser Configuration" >
@@ -258,7 +281,7 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 			getConfigListEntry(_("Root directory"), config.movielist.root),
 			getConfigListEntry(_("Hide known extensions"), config.movielist.hide_extensions),
 			]
-		for btn in ('red', 'green', 'yellow', 'blue', 'TV', 'Radio', 'Text'):
+		for btn in ('red', 'green', 'yellow', 'blue', 'TV', 'Radio', 'Text', 'F1', 'F2', 'F3'):
 			configList.append(getConfigListEntry(_(btn), userDefinedButtons[btn]))
 		ConfigListScreen.__init__(self, configList, session=session, on_change = self.changedEntry)
 		self["key_red"] = Button(_("Cancel"))
@@ -540,9 +563,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 		self["InfobarActions"] = HelpableActionMap(self, "InfobarActions",
 			{
 				"showMovies": (self.doPathSelect, _("Select the movie path")),
-				"showRadio": (self.btn_radio, "?"),
-				"showTv": (self.btn_tv, _("Home")),
-				"showText": (self.btn_text, _("On end of movie")),
+				"showRadio": (self.btn_radio, boundFunction(self.getinitUserDefinedActionsDescription, "btn_radio")),
+				"showTv": (self.btn_tv, boundFunction(self.getinitUserDefinedActionsDescription, "btn_tv")),
+				"showText": (self.btn_text, boundFunction(self.getinitUserDefinedActionsDescription, "btn_text")),
 			})
 
 		self["NumberActions"] =  NumberActionMap(["NumberActions", "InputAsciiActions"],
@@ -576,10 +599,16 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 			{
-				"red": (self.btn_red, _("Delete...")),
-				"green": (self.btn_green, _("Move to other directory")),
-				"yellow": (self.btn_yellow, _("Select the movie path")),
-				"blue": (self.btn_blue, _("Show tag menu")),
+				"red": (self.btn_red, boundFunction(self.getinitUserDefinedActionsDescription, "btn_red")),
+				"green": (self.btn_green, boundFunction(self.getinitUserDefinedActionsDescription, "btn_green")),
+				"yellow": (self.btn_yellow, boundFunction(self.getinitUserDefinedActionsDescription, "btn_yellow")),
+				"blue": (self.btn_blue, boundFunction(self.getinitUserDefinedActionsDescription, "btn_blue")),
+			})
+		self["FunctionKeyActions"] = HelpableActionMap(self, "FunctionKeyActions",
+			{
+				"f1": (self.btn_F1, boundFunction(self.getinitUserDefinedActionsDescription, "btn_F1")),
+				"f2": (self.btn_F2, boundFunction(self.getinitUserDefinedActionsDescription, "btn_F2")),
+				"f3": (self.btn_F3, boundFunction(self.getinitUserDefinedActionsDescription, "btn_F3")),
 			})
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 			{
@@ -651,6 +680,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 			}
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
 				userDefinedActions['@' + p.name] = p.description
+			locations = []
+			buildMovieLocationList(locations)
+			prefix = _("Goto") + ": "
+			for d,p in locations:
+				if p and p.startswith('/'):
+					userDefinedActions[p] = prefix + d
 			config.movielist.btn_red = ConfigSelection(default='delete', choices=userDefinedActions)
 			config.movielist.btn_green = ConfigSelection(default='move', choices=userDefinedActions)
 			config.movielist.btn_yellow = ConfigSelection(default='bookmarks', choices=userDefinedActions)
@@ -658,6 +693,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 			config.movielist.btn_radio = ConfigSelection(default='tags', choices=userDefinedActions)
 			config.movielist.btn_tv = ConfigSelection(default='gohome', choices=userDefinedActions)
 			config.movielist.btn_text = ConfigSelection(default='movieoff', choices=userDefinedActions)
+			config.movielist.btn_F1 = ConfigSelection(default='movieoff_menu', choices=userDefinedActions)
+			config.movielist.btn_F2 = ConfigSelection(default='preview', choices=userDefinedActions)
+			config.movielist.btn_F3 = ConfigSelection(default='/media', choices=userDefinedActions)
 			userDefinedButtons ={
 				'red': config.movielist.btn_red,
 				'green': config.movielist.btn_green,
@@ -666,7 +704,13 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 				'Radio': config.movielist.btn_radio,
 				'TV': config.movielist.btn_tv,
 				'Text': config.movielist.btn_text,
+				'F1': config.movielist.btn_F1,
+				'F2': config.movielist.btn_F2,
+				'F3': config.movielist.btn_F3
 			}
+
+	def getinitUserDefinedActionsDescription(self, key):
+		return _(userDefinedActions.get(eval("config.movielist." + key + ".value"), _("Not Defined")))
 
 	def _callButton(self, name):
 		if name.startswith('@'):
@@ -676,13 +720,15 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 				for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
 					if name == p.name:
 						p(self.session, item[0])
-			return
-		try:
-			a = getattr(self, 'do_' + name)
-		except Exception:
-			# Undefined action
-			return
-		a()
+		elif name.startswith('/'):
+			self.gotFilename(name)
+		else:
+			try:
+				a = getattr(self, 'do_' + name)
+			except Exception:
+				# Undefined action
+				return
+			a()
 
 	def btn_red(self):
 		self._callButton(config.movielist.btn_red.value)
@@ -698,6 +744,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 		self._callButton(config.movielist.btn_tv.value)
 	def btn_text(self):
 		self._callButton(config.movielist.btn_text.value)
+	def btn_F1(self):
+		self._callButton(config.movielist.btn_F1.value)
+	def btn_F2(self):
+		self._callButton(config.movielist.btn_F2.value)
+	def btn_F3(self):
+		self._callButton(config.movielist.btn_F3.value)
 
 	def keyUp(self):
 		if self["list"].getCurrentIndex() < 1:
@@ -843,6 +895,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 			action = userDefinedButtons[name].value
 			if action.startswith('@'):
 				check = self.can_default
+			elif action.startswith('/'):
+				check = self.can_gohome
 			else:
 				try:
 					check = getattr(self, 'can_' + action)
@@ -1347,25 +1401,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase):
 
 	def selectMovieLocation(self, title, callback):
 		bookmarks = [("("+_("Other")+"...)", None)]
-		inlist = []
-		for d in config.movielist.videodirs.value:
-			d = os.path.normpath(d)
-			bookmarks.append((d,d))
-			inlist.append(d)
-		for p in Components.Harddisk.harddiskmanager.getMountedPartitions():
-			d = os.path.normpath(p.mountpoint)
-			if d in inlist:
-				# improve shortcuts to mountpoints
-				try:
-					bookmarks[bookmarks.index((d,d))] = (p.tabbedDescription(), d)
-				except:
-					pass # When already listed as some "friendly" name
-			else:
-				bookmarks.append((p.tabbedDescription(), d))
-			inlist.append(d)
-		for d in last_selected_dest:
-			if d not in inlist:
-				bookmarks.append((d,d))
+		buildMovieLocationList(bookmarks)
 		self.onMovieSelected = callback
 		self.movieSelectTitle = title
 		self.session.openWithCallback(self.gotMovieLocation, ChoiceBox, title=title, list = bookmarks)

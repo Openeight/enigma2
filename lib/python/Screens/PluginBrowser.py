@@ -3,6 +3,7 @@ from Components.Language import language
 from enigma import eConsoleAppContainer, eDVBDB
 
 from Components.ActionMap import ActionMap
+from Components.config import config, ConfigSubsection, ConfigText
 from Components.PluginComponent import plugins
 from Components.PluginList import *
 from Components.Label import Label
@@ -66,6 +67,9 @@ def CreateFeedConfig():
 	container = eConsoleAppContainer()
 	container.execute('ipkg update')
 	del container
+
+config.misc.pluginbrowser = ConfigSubsection()
+config.misc.pluginbrowser.plugin_order = ConfigText(default="")
 
 class PluginBrowserSummary(Screen):
 	def __init__(self, session, parent):
@@ -191,6 +195,33 @@ class PluginBrowser(Screen):
 	def run(self):
 		plugin = self["list"].l.getCurrentSelection()[0]
 		plugin(session=self.session)
+
+	def moveUp(self):
+		self.move(-1)
+
+	def moveDown(self):
+		self.move(1)
+
+	def move(self, direction):
+		if len(self.list) > 1:
+			currentIndex = self["list"].getSelectionIndex()
+			swapIndex = (currentIndex + direction) % len(self.list)
+			if currentIndex == 0 and swapIndex != 1:
+				self.list = self.list[1:] + [self.list[0]]
+			elif swapIndex == 0 and currentIndex != 1:
+				self.list = [self.list[-1]] + self.list[:-1]
+			else:
+				self.list[currentIndex], self.list[swapIndex] = self.list[swapIndex], self.list[currentIndex]
+			self["list"].l.setList(self.list)
+			if direction == 1:
+				self["list"].down()
+			else:
+				self["list"].up()
+			plugin_order = []
+			for x in self.list:
+				plugin_order.append(x[0].path[24:])
+			config.misc.pluginbrowser.plugin_order.value = ",".join(plugin_order)
+			config.misc.pluginbrowser.plugin_order.save()
 
 	def updateList(self):
 		self.list = []
