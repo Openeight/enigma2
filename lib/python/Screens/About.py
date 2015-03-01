@@ -297,7 +297,8 @@ class MemoryInfo(Screen):
 
 		self['info'] = Label(_("This info is for developers only.\nFor a normal users it is not important.\nDon't panic, please, when here will be displayed any suspicious informations!"))
 
-		self.setTitle(_("Memory Info"))
+		Typ = _("%s  ") % (getMachineName())
+		self.setTitle(Typ + "[" + (_("Memory Info"))+ "]")
 		self.onLayoutFinish.append(self.getMemoryInfo)
 
 	def getMemoryInfo(self):
