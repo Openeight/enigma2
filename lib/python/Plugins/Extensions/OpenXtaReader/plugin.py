@@ -177,6 +177,7 @@ class OpenXtaThread(Screen):
 			bereich = sub('<li><strong>(.*?)</strong> topics</li>\s*?<li>', '<stats>Threads: \g<1>', bereich)
 			bereich = sub('<strong>(.*?)</strong> replies</li>', ' Posts: \g<1></stats>', bereich)
 
+			bereich = sub('<ul class=\'last_post ipsType_small\'>\s*?<li><a href.*?</a></li>', '', bereich) # delete when link is included
 			bereich = sub('<ul class=\'last_post ipsType_small\'>\s*?<li>\s*?[\t]*(.*?)\s*?</li>', '<user>\g<1></user>', bereich)
 			bereich = sub('<li>By \n\t(.*?)\s*?</li>', '<user>\g<1></user>', bereich)
 
