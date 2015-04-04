@@ -8,7 +8,6 @@ from Components.SystemInfo import SystemInfo
 from Tools.Directories import fileExists
 import usb
 
-
 def IconCheck(session=None, **kwargs):
 	if fileExists("/proc/stb/lcd/symbol_network") or fileExists("/proc/stb/lcd/symbol_usb"):
 		global networklinkpoller
@@ -111,7 +110,7 @@ class LCD:
 		f = open("/proc/stb/power/vfd", "w")
 		f.write(value)
 		f.close()
-		
+
 	def setEt8500(self, value):
 		print 'setLCDet8500',value
 		f = open("/proc/stb/fb/sd_detach", "w")

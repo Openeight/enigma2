@@ -1,5 +1,6 @@
 #include <lib/dvb/epgcache.h>
 #include <lib/dvb/dvb.h>
+#include <lib/dvb/lowlevel/eit.h>
 
 #undef EPG_DEBUG
 
@@ -40,7 +41,7 @@ struct DescriptorPair
 	DescriptorPair(int c, __u8* d): reference_count(c), data(d) {}
 };
 
-typedef std::map<uint32_t, DescriptorPair> DescriptorMap;
+typedef std::tr1::unordered_map<uint32_t, DescriptorPair> DescriptorMap;
 
 struct eventData
 {
@@ -58,10 +59,6 @@ struct eventData
 	static void save(FILE *);
 	static void cacheCorrupt(const char* context);
 	const eit_event_struct* get() const;
-	operator const eit_event_struct*() const
-	{
-		return get();
-	}
 	int getEventID() const
 	{
 		return (rawEITdata[0] << 8) | rawEITdata[1];
@@ -318,11 +315,12 @@ eventData::~eventData()
 
 void eventData::load(FILE *f)
 {
-	int size=0;
+	int size = 0;
 	int id=0;
-	uint8_t header[2];
 	DescriptorPair p;
+	uint8_t header[2];
 	fread(&size, sizeof(int), 1, f);
+	descriptors.rehash(size);
 	while(size)
 	{
 		fread(&id, sizeof(uint32_t), 1, f);
@@ -335,7 +333,6 @@ void eventData::load(FILE *f)
 		fread(p.data+2, bytes-2, 1, f);
 		descriptors[id] = p;
 		--size;
-		CacheSize += bytes;
 	}
 }
 
@@ -370,7 +367,7 @@ void eventData::cacheCorrupt(const char* context)
 
 
 eEPGCache* eEPGCache::instance;
-pthread_mutex_t eEPGCache::cache_lock=
+static pthread_mutex_t cache_lock =
 	PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
 static pthread_mutex_t channel_map_lock =
 	PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
@@ -429,8 +426,8 @@ void eEPGCache::timeUpdated()
 			run();
 			m_running = true;
 			singleLock s(channel_map_lock);
-			channelMapIterator it = m_knownChannels.begin();
-			for (; it != m_knownChannels.end(); ++it)
+			for (ChannelMap::const_iterator it = m_knownChannels.begin();
+				it != m_knownChannels.end(); ++it)
 			{
 				if (it->second->state == -1) {
 					it->second->state=0;
@@ -468,7 +465,7 @@ void eEPGCache::DVBChannelAdded(eDVBChannel *chan)
 
 void eEPGCache::DVBChannelRunning(iDVBChannel *chan)
 {
-	channelMapIterator it =
+	ChannelMap::const_iterator it =
 		m_knownChannels.find(chan);
 	if ( it == m_knownChannels.end() )
 		eDebug("[eEPGCache] will start non existing channel %p !!!", chan);
@@ -596,7 +593,7 @@ void eEPGCache::DVBChannelRunning(iDVBChannel *chan)
 
 void eEPGCache::DVBChannelStateChanged(iDVBChannel *chan)
 {
-	channelMapIterator it =
+	ChannelMap::iterator it =
 		m_knownChannels.find(chan);
 	if ( it != m_knownChannels.end() )
 	{
@@ -713,10 +710,10 @@ bool eEPGCache::FixOverlapping(std::pair<eventMap,timeMap> &servicemap, time_t T
 
 void eEPGCache::sectionRead(const uint8_t *data, int source, channel_data *channel)
 {
-	eit_t *eit = (eit_t*) data;
+	const eit_t *eit = (const eit_t*) data;
 
-	int len=HILO(eit->section_length)-1;//+3-4;
-	int ptr=EIT_SIZE;
+	int len = HILO(eit->section_length) - 1;
+	int ptr = EIT_SIZE;
 	if ( ptr >= len )
 		return;
 
@@ -1008,17 +1005,16 @@ void eEPGCache::flushEPG(const uniqueEPGKey & s)
 #endif
 		channelLastUpdated.clear();
 		singleLock m(channel_map_lock);
-		for (channelMapIterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+		for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
 			it->second->startEPG();
 	}
 }
 
 void eEPGCache::cleanLoop()
 {
-	singleLock s(cache_lock);
-	if (!eventDB.empty())
-	{
+	{ /* scope for cache lock */
 		time_t now = ::time(0) - historySeconds;
+		singleLock s(cache_lock);
 
 		for (eventCache::iterator DBIt = eventDB.begin(); DBIt != eventDB.end(); DBIt++)
 		{
@@ -1073,7 +1069,7 @@ void eEPGCache::cleanLoop()
 			}
 #endif
 		}
-	}
+	} /* release lock */
 	cleanTimer->start(CLEAN_INTERVAL,true);
 }
 
@@ -1098,7 +1094,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::startChannel:
 		{
 			singleLock s(channel_map_lock);
-			channelMapIterator channel =
+			ChannelMap::const_iterator channel =
 				m_knownChannels.find(msg.channel);
 			if ( channel != m_knownChannels.end() )
 				channel->second->startChannel();
@@ -1107,7 +1103,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::leaveChannel:
 		{
 			singleLock s(channel_map_lock);
-			channelMapIterator channel =
+			ChannelMap::const_iterator channel =
 				m_knownChannels.find(msg.channel);
 			if ( channel != m_knownChannels.end() )
 				channel->second->abortEPG();
@@ -1120,7 +1116,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::got_private_pid:
 		{
 			singleLock s(channel_map_lock);
-			for (channelMapIterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+			for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
 			{
 				eDVBChannel *channel = (eDVBChannel*) it->first;
 				channel_data *data = it->second;
@@ -1154,7 +1150,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::got_mhw2_channel_pid:
 		{
 			singleLock s(channel_map_lock);
-			for (channelMapIterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+			for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
 			{
 				eDVBChannel *channel = (eDVBChannel*) it->first;
 				channel_data *data = it->second;
@@ -1172,7 +1168,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::got_mhw2_title_pid:
 		{
 			singleLock s(channel_map_lock);
-			for (channelMapIterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+			for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
 			{
 				eDVBChannel *channel = (eDVBChannel*) it->first;
 				channel_data *data = it->second;
@@ -1190,7 +1186,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::got_mhw2_summary_pid:
 		{
 			singleLock s(channel_map_lock);
-			for (channelMapIterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+			for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
 			{
 				eDVBChannel *channel = (eDVBChannel*) it->first;
 				channel_data *data = it->second;
@@ -1270,6 +1266,7 @@ void eEPGCache::load()
 		{
 			singleLock s(cache_lock);
 			fread( &size, sizeof(int), 1, f);
+			eventDB.rehash(size); /* Reserve buckets in advance */
 			while(size--)
 			{
 				uniqueEPGKey key;
@@ -1485,7 +1482,7 @@ eEPGCache::channel_data::channel_data(eEPGCache *ml)
 	pthread_mutex_init(&channel_active, 0);
 }
 
-bool eEPGCache::channel_data::finishEPG()
+void eEPGCache::channel_data::finishEPG()
 {
 	if (!isRunning)  // epg ready
 	{
@@ -1503,11 +1500,9 @@ bool eEPGCache::channel_data::finishEPG()
 #ifdef ENABLE_FREESAT
 		cleanupFreeSat();
 #endif
-		singleLock l(cache->cache_lock);
+		singleLock l(cache_lock);
 		cache->channelLastUpdated[channel->getChannelID()] = ::time(0);
-		return true;
 	}
-	return false;
 }
 
 void eEPGCache::channel_data::startEPG()
@@ -2179,16 +2174,6 @@ RESULT eEPGCache::lookupEventTime(const eServiceReference &service, time_t t, co
 	return -1;
 }
 
-RESULT eEPGCache::lookupEventTime(const eServiceReference &service, time_t t, const eit_event_struct *&result, int direction)
-{
-	singleLock s(cache_lock);
-	const eventData *data=0;
-	RESULT ret = lookupEventTime(service, t, data, direction);
-	if ( !ret && data )
-		result = data->get();
-	return ret;
-}
-
 RESULT eEPGCache::lookupEventTime(const eServiceReference &service, time_t t, Event *& result, int direction)
 {
 	singleLock s(cache_lock);
@@ -2237,15 +2222,45 @@ RESULT eEPGCache::lookupEventId(const eServiceReference &service, int event_id, 
 	return -1;
 }
 
-RESULT eEPGCache::lookupEventId(const eServiceReference &service, int event_id, const eit_event_struct *&result)
+RESULT eEPGCache::saveEventToFile(const char* filename, const eServiceReference &service, int eit_event_id, time_t begTime, time_t endTime)
 {
+	RESULT ret = -1;
 	singleLock s(cache_lock);
-	const eventData *data=0;
-	RESULT ret = lookupEventId(service, event_id, data);
-	if ( !ret && data )
-		result = data->get();
+	const eventData *data = NULL;
+	if ( eit_event_id != -1 )
+	{
+		eDebug("[EPGC] %s epg event id %x", __func__, eit_event_id);
+		ret = lookupEventId(service, eit_event_id, data);
+	}
+	if ( (ret != 0) && (begTime != -1) )
+	{
+		time_t queryTime = begTime;
+		if (endTime != -1)
+			queryTime += (endTime - begTime) / 2;
+		ret = lookupEventTime(service, queryTime, data);
+	}
+	if (ret == 0)
+	{
+		int fd = open(filename, O_CREAT|O_WRONLY, 0666);
+		if (fd < 0)
+		{
+			eDebug("[EPGC] Failed to create file: %s", filename);
+			return fd;
+		}
+		const eit_event_struct *event = data->get();
+		int evLen = HILO(event->descriptors_loop_length) + 12/*EIT_LOOP_SIZE*/;
+		int wr = ::write( fd, event, evLen );
+		::close(fd);
+		if ( wr != evLen )
+		{
+			::unlink(filename); /* Remove faulty file */
+			eDebug("[EPGC] eit write error (%m) writing %s", filename);
+			ret = (wr < 0) ? wr : -1;
+		}
+	}
 	return ret;
 }
+
 
 RESULT eEPGCache::lookupEventId(const eServiceReference &service, int event_id, Event *& result)
 {
@@ -3529,9 +3544,10 @@ void eEPGCache::privateSectionRead(const uniqueEPGKey &current_service, const ui
 	contentMap &content_time_table = content_time_tables[current_service];
 	singleLock s(cache_lock);
 	std::map< date_time, std::list<uniqueEPGKey>, less_datetime > start_times;
-	eventMap &evMap = eventDB[current_service].first;
-	timeMap &tmMap = eventDB[current_service].second;
-	int ptr=8;
+	std::pair<eventMap,timeMap> &eventDBitem = eventDB[current_service];
+	eventMap &evMap = eventDBitem.first;
+	timeMap &tmMap = eventDBitem.second;
+	int ptr = 8;
 	int content_id = data[ptr++] << 24;
 	content_id |= data[ptr++] << 16;
 	content_id |= data[ptr++] << 8;
