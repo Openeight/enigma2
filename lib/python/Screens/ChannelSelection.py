@@ -815,7 +815,7 @@ class ChannelSelectionEdit:
 				current = self.servicelist.getCurrent()
 				current.setName(name)
 				index = self.servicelist.getCurrentIndex()
-				mutableList.removeService(current)
+				mutableList.removeService(current, False)
 				mutableList.addService(current)
 				mutableList.moveService(current, index)
 				mutableList.flushChanges()
@@ -1693,7 +1693,7 @@ class ChannelSelectionBase(Screen):
 					s = list.getNext()
 					if not s.valid():
 						break
-					if s.flags & eServiceReference.isDirectory:
+					if s.flags & eServiceReference.isDirectory and not s.flags & eServiceReference.isInvisible:
 						info = serviceHandler.info(s)
 						if info:
 							bouquets.append((info.getName(s), s))
@@ -2201,6 +2201,10 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			tmp_mode = config.servicelist.lastmode.value
 			tmp_root = self.getRoot()
 			tmp_ref = self.getCurrentSelection()
+			pip_ref = self.session.pip.getCurrentService()
+			if tmp_ref and pip_ref and tmp_ref != pip_ref:
+				self.revertMode = None
+				return
 			if self.mainScreenMode == "tv":
 				self.setModeTv()
 			elif self.mainScreenMode == "radio":
@@ -2220,10 +2224,17 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			elif tmp_mode == "radio":
 				self.setModeRadio()
 			self.enterUserbouquet(tmp_root)
-			pip_ref = self.session.pip.getCurrentService()
+			title = self.instance.getTitle()
+			pos = title.find(" (")
+			if pos != -1:
+				title = title[:pos]
+				title += _(" (PiP)")
+				self.setTitle(title)
+				self.buildTitleString()
 			if tmp_ref and pip_ref and tmp_ref.getChannelNum() != pip_ref.getChannelNum():
 				self.session.pip.currentService = tmp_ref
 			self.setCurrentSelection(tmp_ref)
+		self.revertMode = None
 
 class RadioInfoBar(Screen):
 	def __init__(self, session):
