@@ -24,8 +24,7 @@ class AVSwitch:
 			return (4,3)
 		elif valstr == "16_9": # auto ... 4:3 or 16:9
 			try:
-				aspect_str = open("/proc/stb/vmpeg/0/aspect", "r").read()
-				if aspect_str == "1": # 4:3
+				if "1" in open("/proc/stb/vmpeg/0/aspect", "r").read(): # 4:3
 					return (4,3)
 			except IOError:
 				pass
@@ -97,9 +96,12 @@ def InitAVSwitch():
 	"panscan": _("Pan&scan"),
 	# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if this breaks the aspect)
 	"scale": _("Just scale")}
-	if os.path.exists("/proc/stb/video/policy2_choices") and "auto" in open("/proc/stb/video/policy2_choices").readline():
-		# TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
-		policy2_choices.update({"auto": _("Auto")})
+	try:
+		if "auto" in open("/proc/stb/video/policy2_choices").read():
+			# TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+			policy2_choices.update({"auto": _("Auto")})
+	except:
+		pass
 	config.av.policy_169 = ConfigSelection(choices=policy2_choices, default = "letterbox")
 	policy_choices = {
 	# TRANSLATORS: (aspect ratio policy: black bars on left/right) in doubt, keep english term.
@@ -110,9 +112,12 @@ def InitAVSwitch():
 	"nonlinear": _("Nonlinear"),
 	# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if this breaks the aspect)
 	"scale": _("Just scale")}
-	if os.path.exists("/proc/stb/video/policy_choices") and "auto" in open("/proc/stb/video/policy_choices").readline():
-		# TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
-		policy_choices.update({"auto": _("Auto")})
+	try:
+		if "auto" in open("/proc/stb/video/policy_choices").read():
+			# TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+			policy_choices.update({"auto": _("Auto")})
+	except:
+		pass
 	config.av.policy_43 = ConfigSelection(choices=policy_choices, default = "pillarbox")
 	config.av.tvsystem = ConfigSelection(choices = {"pal": _("PAL"), "ntsc": _("NTSC"), "multinorm": _("multinorm")}, default="pal")
 	config.av.wss = ConfigEnableDisable(default = True)
@@ -147,28 +152,46 @@ def InitAVSwitch():
 	SystemInfo["ScartSwitch"] = eAVSwitch.getInstance().haveScartSwitch()
 
 	try:
-		can_downmix = "downmix" in open("/proc/stb/audio/ac3_choices", "r").read()
+		SystemInfo["CanDownmixAC3"] = "downmix" in open("/proc/stb/audio/ac3_choices", "r").read()
 	except:
-		can_downmix = False
+		SystemInfo["CanDownmixAC3"] = False
 
-	SystemInfo["CanDownmixAC3"] = can_downmix
-	if can_downmix:
+	if SystemInfo["CanDownmixAC3"]:
 		def setAC3Downmix(configElement):
 			open("/proc/stb/audio/ac3", "w").write(configElement.value and "downmix" or "passthrough")
 		config.av.downmix_ac3 = ConfigYesNo(default = True)
 		config.av.downmix_ac3.addNotifier(setAC3Downmix)
 
 	try:
-		can_osd_alpha = open("/proc/stb/video/alpha", "r") and True or False
+		SystemInfo["CanDownmixDTS"] = "downmix" in open("/proc/stb/audio/dts_choices", "r").read()
 	except:
-		can_osd_alpha = False
+		SystemInfo["CanDownmixDTS"] = False
 
-	SystemInfo["CanChangeOsdAlpha"] = can_osd_alpha
+	if SystemInfo["CanDownmixDTS"]:
+		def setDTSDownmix(configElement):
+			open("/proc/stb/audio/dts", "w").write(configElement.value and "downmix" or "passthrough")
+		config.av.downmix_dts = ConfigYesNo(default = True)
+		config.av.downmix_dts.addNotifier(setDTSDownmix)
 
-	def setAlpha(config):
-		open("/proc/stb/video/alpha", "w").write(str(config.value))
+	try:
+		SystemInfo["CanDownmixAAC"] = "downmix" in open("/proc/stb/audio/aac_choices", "r").read()
+	except:
+		SystemInfo["CanDownmixAAC"] = False
 
-	if can_osd_alpha:
+	if SystemInfo["CanDownmixAAC"]:
+		def setAACDownmix(configElement):
+			open("/proc/stb/audio/aac", "w").write(configElement.value and "downmix" or "passthrough")
+		config.av.downmix_aac = ConfigYesNo(default = True)
+		config.av.downmix_aac.addNotifier(setAACDownmix)
+
+	try:
+		SystemInfo["CanChangeOsdAlpha"] = open("/proc/stb/video/alpha", "r") and True or False
+	except:
+		SystemInfo["CanChangeOsdAlpha"] = False
+
+	if SystemInfo["CanChangeOsdAlpha"]:
+		def setAlpha(config):
+			open("/proc/stb/video/alpha", "w").write(str(config.value))
 		config.av.osd_alpha = ConfigSlider(default=255, limits=(0,255))
 		config.av.osd_alpha.addNotifier(setAlpha)
 

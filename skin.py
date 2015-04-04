@@ -496,8 +496,8 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 			addFont(resolved_font, name, scale, is_replacement, render)
 			#print "Font: ", resolved_font, name, scale, is_replacement
 		for alias in c.findall("alias"):
-		        get = alias.attrib.get
-		        try:
+			get = alias.attrib.get
+			try:
 				name = get("name")
 				font = get("font")
 				size = int(get("size"))
