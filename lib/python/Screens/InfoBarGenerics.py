@@ -1458,7 +1458,10 @@ class InfoBarSeek:
 			return
 			
 		if self.seekstate != self.SEEK_STATE_PLAY:
-			self.unPauseService()
+			if self.seekstate[2]:
+				self.setSeekState(self.SEEK_STATE_PAUSE);
+			else:
+				self.unPauseService()
 		else:
 			self.pauseService()
 
