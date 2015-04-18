@@ -10,6 +10,7 @@ from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Pixmap import Pixmap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
+from boxbranding import getBoxType
 import os
 
 class InputDeviceSelection(Screen,HelpableScreen):
@@ -360,14 +361,13 @@ class RemoteControlType(Screen, ConfigListScreen):
 		self.et7000 = "/usr/share/enigma2/rc_models/et7x00/rc.png"
 		self.et8000 = "/usr/share/enigma2/rc_models/et8000/rc.png"
 
-                if fileExists('/etc/enigma2/EtRcType'):
-                        file = open("/etc/enigma2/EtRcType", "w")
-                else:
-                        action = ' > /etc/enigma2/EtRcType'
-                        os.system(action)
-                        file = open("/etc/enigma2/EtRcType", "w")
-                        file.write('0')
-                        file.close
+		if not fileExists('/etc/enigma2/EtRcType'):
+			action = ' > /etc/enigma2/EtRcType'
+			os.system(action)
+			file = open("/etc/enigma2/EtRcType", "w")
+			file.write(getBoxType())
+			file.close
+		file = open("/etc/enigma2/EtRcType", "w")
                 print type(self.rctype.value)
                 print self.rctype.value
                 if config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 13:
