@@ -173,6 +173,9 @@ self.selectKey("RIGHT")
 			</code>
 		</step>-->
 		<step id="end" laststep="true">
+			<condition>
+self.condition = self.isLastWizard
+			</condition>
 			<text value="Thank you for using the wizard. Your receiver is now ready for use.\nPress OK to start using your receiver." />
 			<code>
 self.clearSelectedKeys()
