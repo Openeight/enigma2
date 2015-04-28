@@ -495,7 +495,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		elif menu == 'IPK-uninstaller':	
 			self.session.open(Ipkuninstall)	
 		elif menu == "MountManager":
-			self.session.open(HddMount)
+			self.session.open(DevicesMountPanel)
 		elif menu == "SundtekControlCenter":
 			self.session.open(SundtekControlCenter)
 		elif menu == "SwapManager":

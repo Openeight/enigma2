@@ -1,0 +1,548 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-28 22:15+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: plugin.py:935
+msgid " as "
+msgstr ""
+
+#: plugin.py:496
+msgid " from "
+msgstr ""
+
+#: plugin.py:291
+#, python-format
+msgid "%s points"
+msgstr ""
+
+#: plugin.py:315 plugin.py:349
+#, python-format
+msgid "'%s' not found!"
+msgstr ""
+
+#: plugin.py:309
+msgid ""
+"'/usr/share/usb.ids' or /lib/libusb-1.0.so.0' not found!\n"
+"Please reinstall plugin again!"
+msgstr ""
+
+#: plugin.py:897
+msgid "*****blkid*****"
+msgstr ""
+
+#: plugin.py:889
+msgid "*****df -h*****"
+msgstr ""
+
+#: plugin.py:909
+msgid "*****e2fsprogs*****"
+msgstr ""
+
+#: plugin.py:913
+msgid "*****e2fsprogs-tune2fs*****"
+msgstr ""
+
+#: plugin.py:917
+msgid "*****fdisk*****"
+msgstr ""
+
+#: plugin.py:901
+msgid "*****kernel-module-ext2*****"
+msgstr ""
+
+#: plugin.py:905
+msgid "*****kernel-module-ext3*****"
+msgstr ""
+
+#: plugin.py:885
+msgid "*****mount*****"
+msgstr ""
+
+#: plugin.py:893
+msgid "*****sfdisk -l*****"
+msgstr ""
+
+#: plugin.py:921
+msgid "*****util-linux-blkid*****"
+msgstr ""
+
+#: fstabViewer.py:72 fstabViewer.py:80
+msgid "Add entry"
+msgstr ""
+
+#: fstabViewer.py:179
+msgid "Add new entry"
+msgstr ""
+
+#: plugin.py:982
+msgid "All device umount.Select action:"
+msgstr ""
+
+#: fstabViewer.py:106 fstabViewer.py:328
+msgid ""
+"Attention!\n"
+"Not highly recommend that you remove or edit the system entry!\n"
+msgstr ""
+
+#: plugin.py:527
+msgid ""
+"Can't unmount partiton, make sure it is not being used for swap or record/"
+"timeshift paths!"
+msgstr ""
+
+#: fstabViewer.py:71 fstabViewer.py:258
+msgid "Cancel"
+msgstr ""
+
+#: plugin.py:568
+msgid ""
+"Cannot unmount from the previous device from /media/hdd.\n"
+"A record in progress, timeshift or some external tools (like samba, nfsd,"
+"transmission and etc) may cause this problem.\n"
+"Please stop this actions/applications and try again!"
+msgstr ""
+
+#: fstabViewer.py:182
+msgid "Clone selected entry"
+msgstr ""
+
+#: dirSelect.py:32
+msgid "Close"
+msgstr ""
+
+#: fstabViewer.py:83 fstabViewer.py:88
+msgid "Close plugin"
+msgstr ""
+
+#: plugin.py:825
+msgid ""
+"Device changes need a system restart to take effects.\n"
+"Restart your Box now?"
+msgstr ""
+
+#: fstabViewer.py:37
+msgid "Device name:"
+msgstr ""
+
+#: plugin.py:287 plugin.py:297 plugin.py:377 plugin.py:407 plugin.py:434
+#: plugin.py:493 plugin.py:507 plugin.py:538 plugin.py:552
+msgid "Device: "
+msgstr ""
+
+#: plugin.py:969
+msgid ""
+"Devices changes need a system restart to take effects.\n"
+"Restart your Box now?"
+msgstr ""
+
+#: fstabViewer.py:41
+msgid "Dump frequency:"
+msgstr ""
+
+#: fstabViewer.py:70
+msgid "Edit"
+msgstr ""
+
+#: plugin.py:641
+msgid "Edit fstab"
+msgstr ""
+
+#: dirSelect.py:34
+msgid "Enter directory"
+msgstr ""
+
+#: plugin.py:364
+#, python-format
+msgid "Error in ioctl '%s'!"
+msgstr ""
+
+#: plugin.py:355
+#, python-format
+msgid "Error opening output file '%s'!"
+msgstr ""
+
+#: plugin.py:319
+#, python-format
+msgid "Error response '%s'!"
+msgstr ""
+
+#: plugin.py:933
+msgid ""
+"Error!\n"
+"The same mount point!"
+msgstr ""
+
+#: plugin.py:976
+msgid "Exit"
+msgstr ""
+
+#: fstabViewer.py:142
+msgid ""
+"Failed to read /etc/fstab! Restore fstab.backup or edit the file manually."
+msgstr ""
+
+#: fstabViewer.py:39
+msgid "File system type:"
+msgstr ""
+
+#: plugin.py:255 plugin.py:272 plugin.py:761 plugin.py:774
+msgid "GB"
+msgstr ""
+
+#: plugin.py:207 plugin.py:739
+msgid "HARD DISK: "
+msgstr ""
+
+#: plugin.py:642
+msgid "Install / Info"
+msgstr ""
+
+#: plugin.py:640
+msgid "Label for device"
+msgstr ""
+
+#: plugin.py:260 plugin.py:277 plugin.py:763 plugin.py:776
+msgid "MB"
+msgstr ""
+
+#: plugin.py:197
+msgid "MMC: "
+msgstr ""
+
+#: plugin.py:1064
+msgid "Manage you devices mountpoints"
+msgstr ""
+
+#: plugin.py:68
+msgid "Mount"
+msgstr ""
+
+#: plugin.py:1056
+msgid "Mount Manager"
+msgstr ""
+
+#: plugin.py:63
+msgid "Mount Manager - edit label/fstab"
+msgstr ""
+
+#: plugin.py:386 plugin.py:974
+msgid "Mount all device from the fstab"
+msgstr ""
+
+#: plugin.py:478
+msgid ""
+"Mount current device failed!\n"
+"Maybe this device is not spelled out in the fstab?"
+msgstr ""
+
+#: plugin.py:384
+msgid "Mount current device from the fstab"
+msgstr ""
+
+#: plugin.py:385
+#, python-format
+msgid "Mount current device to %s"
+msgstr ""
+
+#: plugin.py:458
+msgid "Mount failed!"
+msgstr ""
+
+#: fstabViewer.py:38
+msgid "Mount point:"
+msgstr ""
+
+#: plugin.py:99 plugin.py:287 plugin.py:297 plugin.py:376 plugin.py:492
+#: plugin.py:506 plugin.py:551
+msgid "Mount: "
+msgstr ""
+
+#: plugin.py:235 plugin.py:237 plugin.py:241 plugin.py:243 plugin.py:495
+#: plugin.py:509 plugin.py:574 plugin.py:750
+msgid "None"
+msgstr ""
+
+#: fstabViewer.py:225
+msgid "Not found restore file!"
+msgstr ""
+
+#: fstabViewer.py:89
+msgid "Open editor"
+msgstr ""
+
+#: fstabViewer.py:277
+msgid "Open selector"
+msgstr ""
+
+#: fstabViewer.py:40
+msgid "Options:"
+msgstr ""
+
+#: fstabViewer.py:336
+msgid "Pass num value 1 use only for root filesystem (mountpoint '/')!"
+msgstr ""
+
+#: fstabViewer.py:42
+msgid "Pass number:"
+msgstr ""
+
+#: fstabViewer.py:321 fstabViewer.py:333
+msgid "Please enter a value for every input field!"
+msgstr ""
+
+#: plugin.py:812
+#, python-format
+msgid "Please enter label for %s:"
+msgstr ""
+
+#: plugin.py:808
+msgid "Please install tune2fs"
+msgstr ""
+
+#: plugin.py:418
+msgid "Please wait..."
+msgstr ""
+
+#: fstabViewer.py:364
+msgid "Really delete the selected entry?"
+msgstr ""
+
+#: fstabViewer.py:106
+msgid "Really edit the selected entry?"
+msgstr ""
+
+#: plugin.py:925
+msgid "Really save in fstab mount by UUID:\n"
+msgstr ""
+
+#: plugin.py:496
+msgid "Really unmount "
+msgstr ""
+
+#: plugin.py:541
+#, python-format
+msgid "Really use and mount %s as HDD ?"
+msgstr ""
+
+#: fstabViewer.py:256 fstabViewer.py:271
+msgid "Remove entry"
+msgstr ""
+
+#: plugin.py:66
+msgid "Reset USB devices"
+msgstr ""
+
+#: plugin.py:361
+#, python-format
+msgid "Reset successful '%s'!"
+msgstr ""
+
+#: plugin.py:827 plugin.py:971
+msgid "Restart Box..."
+msgstr ""
+
+#: plugin.py:975
+msgid "Restart your box"
+msgstr ""
+
+#: fstabViewer.py:81
+msgid "Restore backup fstab"
+msgstr ""
+
+#: fstabViewer.py:210
+msgid "Restore default fstab"
+msgstr ""
+
+#: fstabViewer.py:97
+msgid "Restore fstab"
+msgstr ""
+
+#: fstabViewer.py:207
+msgid "Restore fstab.backup"
+msgstr ""
+
+#: fstabViewer.py:269
+msgid "Return with saving"
+msgstr ""
+
+#: fstabViewer.py:270 fstabViewer.py:276
+msgid "Return without saving"
+msgstr ""
+
+#: fstabViewer.py:73 fstabViewer.py:82
+msgid "Run mount -a"
+msgstr ""
+
+#: fstabViewer.py:257
+msgid "Save"
+msgstr ""
+
+#: plugin.py:639
+msgid "Save mount in fstab"
+msgstr ""
+
+#: fstabViewer.py:192 fstabViewer.py:223
+msgid "Select action:"
+msgstr ""
+
+#: plugin.py:344
+msgid "Select device for reset:"
+msgstr ""
+
+#: plugin.py:392
+#, python-format
+msgid "Select mount action for %s:"
+msgstr ""
+
+#: plugin.py:880
+msgid "Select system info or install module:"
+msgstr ""
+
+#: plugin.py:69 plugin.py:638
+msgid "Setup Mounts"
+msgstr ""
+
+#: plugin.py:252 plugin.py:255 plugin.py:260 plugin.py:269 plugin.py:272
+#: plugin.py:277 plugin.py:759 plugin.py:761 plugin.py:763 plugin.py:772
+#: plugin.py:774 plugin.py:776
+msgid "Size: "
+msgstr ""
+
+#: plugin.py:252 plugin.py:269 plugin.py:759 plugin.py:772
+msgid "TB"
+msgstr ""
+
+#: plugin.py:414 plugin.py:442
+msgid "The device is already mounted!"
+msgstr ""
+
+#: plugin.py:556
+msgid "This Device is already mounted as HDD."
+msgstr ""
+
+#: fstabViewer.py:341
+msgid "This entry already exists in the fstab!"
+msgstr ""
+
+#: plugin.py:287 plugin.py:297
+msgid "Type: "
+msgstr ""
+
+#: plugin.py:256 plugin.py:273
+msgid "USB: "
+msgstr ""
+
+#: plugin.py:67
+msgid "Unmount"
+msgstr ""
+
+#: plugin.py:101
+msgid "Use as HDD"
+msgstr ""
+
+#: plugin.py:118
+msgid "Wait please while scanning for devices..."
+msgstr ""
+
+#: plugin.py:643
+msgid "Wait please while scanning your box devices..."
+msgstr ""
+
+#: plugin.py:379 plugin.py:540
+msgid "Warning, this device is used for more than one mount point!\n"
+msgstr ""
+
+#: plugin.py:868
+msgid "blkid"
+msgstr ""
+
+#: fstabViewer.py:301 fstabViewer.py:314
+msgid "device name: "
+msgstr ""
+
+#: plugin.py:866
+msgid "df -h"
+msgstr ""
+
+#: fstabViewer.py:305
+msgid "dump (0 - create backup off): "
+msgstr ""
+
+#: fstabViewer.py:303
+msgid "file system type (auto): "
+msgstr ""
+
+#: fstabViewer.py:220
+msgid "fstab restored!"
+msgstr ""
+
+#: fstabViewer.py:92 fstabViewer.py:280
+msgid "fstab-Editor"
+msgstr ""
+
+#: plugin.py:869
+msgid "install ext2 kernel module"
+msgstr ""
+
+#: plugin.py:870
+msgid "install ext3 kernel module"
+msgstr ""
+
+#: plugin.py:871
+msgid "install filesystem utilities (e2fsprogs)"
+msgstr ""
+
+#: plugin.py:872
+msgid "install filesystem utilities (e2fsprogs-tune2fs)"
+msgstr ""
+
+#: plugin.py:873
+msgid "install linux utilities (fdisk)"
+msgstr ""
+
+#: plugin.py:874
+msgid "install linux utilities (util-linux-blkid)"
+msgstr ""
+
+#: plugin.py:865
+msgid "mount"
+msgstr ""
+
+#: fstabViewer.py:302 fstabViewer.py:314
+msgid "mount point: "
+msgstr ""
+
+#: fstabViewer.py:304
+msgid "options mount file system (default): "
+msgstr ""
+
+#: fstabViewer.py:306
+msgid "pass num (0 - fsck off): "
+msgstr ""
+
+#: dirSelect.py:82
+msgid "select:"
+msgstr ""
+
+#: plugin.py:867
+msgid "sfdisk -l"
+msgstr ""
+
+#: plugin.py:242 plugin.py:751
+msgid "unavailable"
+msgstr ""
