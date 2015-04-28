@@ -27,7 +27,7 @@ import fstabViewer
 
 # Equivalent of the _IO('U', 20) constant in the linux kernel.
 USBDEVFS_RESET = ord('U') << (4*2) | 20 # same as USBDEVFS_RESET= 21780
-EXT_LSUSB = "/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/bin/ext_lsusb"
+EXT_LSUSB = "/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/ext_lsusb"
 device2 = ''
 
 class DevicesMountPanel(Screen):
