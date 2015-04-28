@@ -25,7 +25,7 @@ class SkinSetup(Screen):
 #		self["KEY_HELP"] = Button(_("HELP"))
 #                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
-                txt = _("Here you can change skin, configure mainmenu, configure second-infobar or configure skin XTA.")
+                txt = _("Here you can change skin, configure mainmenu, configure second-infobar or configure TechniHD skin.")
                 self["info"].setText(txt)
                 self.onShown.append(self.startSession)
 
@@ -35,7 +35,7 @@ class SkinSetup(Screen):
                 self.res.append(_("Configure mainmenu"))
                 self.res.append(_("Configure second-infobar"))
 		self.res.append(_("Show Picons in Channel List"))
-                self.res.append(_("XTAskin Setup"))
+                self.res.append(_("TechniHD Setup"))
                 self.res.append(_("Exit"))
                 self["list"].setList(self.res)
     
@@ -58,10 +58,10 @@ class SkinSetup(Screen):
 
     def xtaskin(self):                         
                 try:        
-                        from Plugins.Extensions.iSkin.plugin import MenuStart
-                        self.session.open(MenuStart) 
+                        from Plugins.Extensions.TechniHDSetup.plugin import TechniHDSetup
+                        self.session.open(TechniHDSetup) 
                 except:        
-                        self.session.open(MessageBox, _("Plugin iSkin is not installed !"), MessageBox.TYPE_ERROR, timeout = 10)
+                        self.session.open(MessageBox, _("TechniHD is not installed on your Xtrend box !"), MessageBox.TYPE_ERROR, timeout = 10)
                         self.close()
 
 class SettingsA(Screen):
