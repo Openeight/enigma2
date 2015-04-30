@@ -304,8 +304,8 @@ class DevicesMountPanel(Screen):
 				chmod(EXT_LSUSB, 0755)
 			except:
 				pass
-			if not fileExists('/usr/share/usb.ids') or not fileExists('/lib/libusb-1.0.so.0'):
-				self.session.open(MessageBox, _("'/usr/share/usb.ids' or /lib/libusb-1.0.so.0' not found!\nPlease reinstall plugin again!"), MessageBox.TYPE_ERROR, timeout=5)
+			if not fileExists('/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/usb.ids') or not fileExists('/lib/libusb-1.0.so.0'):
+				self.session.open(MessageBox, _("'/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/usb.ids' or /lib/libusb-1.0.so.0' not found!\nPlease reinstall plugin again!"), MessageBox.TYPE_ERROR, timeout=5)
 			else:
 				self.Console = Console()
 				cmd = "%s > /tmp/ext_lsusb.tmp" % EXT_LSUSB
