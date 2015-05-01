@@ -22,12 +22,7 @@ import os
 from time import sleep
 from re import search
 import fstabViewer
-#import enigma
-#enigma.eConsoleAppContainer().execute()
 
-# Equivalent of the _IO('U', 20) constant in the linux kernel.
-USBDEVFS_RESET = ord('U') << (4*2) | 20 # same as USBDEVFS_RESET= 21780
-EXT_LSUSB = "/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/ext_lsusb"
 device2 = ''
 
 class DevicesMountPanel(Screen):
@@ -63,7 +58,7 @@ class DevicesMountPanel(Screen):
 		self.setup_title = _("Mount Manager - edit label/fstab")
 		Screen.__init__(self, session)
 		self['key_red'] = Label(" ")
-		self['key_green'] = Label(_("Reset USB devices"))
+		self['key_green'] = Label()
 		self['key_yellow'] = Label(_("Unmount"))
 		self['key_blue'] = Label(_("Mount"))
 		self['key_menu'] = Label(_("Setup Mounts"))
@@ -74,7 +69,7 @@ class DevicesMountPanel(Screen):
 		self.Console = None
 		self['list'] = List(self.list)
 		self["list"].onSelectionChanged.append(self.selectionChanged)
-		self['actions'] = ActionMap(['WizardActions', 'ColorActions', "MenuActions"], {'back': self.close, 'green': self.openListUSBdevice, 'red': self.saveMypoints, 'yellow': self.Unmount, 'blue': self.Mount, "menu": self.SetupMounts})
+		self['actions'] = ActionMap(['WizardActions', 'ColorActions', "MenuActions"], {'back': self.close, 'red': self.saveMypoints, 'yellow': self.Unmount, 'blue': self.Mount, "menu": self.SetupMounts})
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.updateList2)
 		self.updateList()
@@ -297,70 +292,6 @@ class DevicesMountPanel(Screen):
 						res = (fullname, prev_des, png, extmount)
 						if res not in self.list:
 							self.list.append(res)
-
-	def openListUSBdevice(self):
-		if fileExists(EXT_LSUSB):
-			try:
-				chmod(EXT_LSUSB, 0755)
-			except:
-				pass
-			if not fileExists('/usr/share/usb.ids') or not fileExists('/lib/libusb-1.0.so.0'):
-				self.session.open(MessageBox, _("'/usr/share/usb.ids' or /lib/libusb-1.0.so.0' not found!\nPlease reinstall plugin again!"), MessageBox.TYPE_ERROR, timeout=5)
-			else:
-				self.Console = Console()
-				cmd = "%s > /tmp/ext_lsusb.tmp" % EXT_LSUSB
-				self.Console.ePopen(cmd, self.openListUSBdeviceAnswer, [])
-		else:
-			self.session.open(MessageBox, _("'%s' not found!") % EXT_LSUSB, MessageBox.TYPE_ERROR, timeout=5)
-
-	def openListUSBdeviceAnswer(self, result = None, retval = None, extra_args = None):
-		if result is None:
-			self.session.open(MessageBox, _("Error response '%s'!") % EXT_LSUSB, MessageBox.TYPE_ERROR, timeout=5)
-		else:
-			entrylist = []
-			try:
-				f = open('/tmp/ext_lsusb.tmp', 'r')
-			except:
-				return
-			for line in f.readlines():
-				if line.startswith('Bus') and line.find('root hub') < 0 and line.find('dead:beef') < 0:
-					parts = line.split()
-					if len(parts) > 4:
-						bus = parts[1]
-						dev = parts[3][:3]
-						dev_path = '/dev/bus/usb/%s/%s' % (bus, dev)
-						entrylist.append((line, dev_path))
-			f.close()
-			if fileExists('/tmp/ext_lsusb.tmp'):
-				try:
-					remove('/tmp/ext_lsusb.tmp')
-				except:
-					pass
-			if entrylist:
-				def ChoiceAction(choice):
-					if choice is not None:
-						self.send_reset(choice[1])
-				self.session.openWithCallback(ChoiceAction, ChoiceBox, list = entrylist, title= _("Select device for reset:"))
-
-	def send_reset(self, dev_path = ''):
-		if dev_path != '':
-			if not fileExists(dev_path):
-				self.session.open(MessageBox, _("'%s' not found!") % dev_path, MessageBox.TYPE_ERROR, timeout=5)
-				return
-			try:
-				#fd = os.open(dev_path, os.O_WRONLY)
-				fd = open(dev_path, 'w', os.O_WRONLY)
-			except:
-				self.session.open(MessageBox, _("Error opening output file '%s'!") % dev_path, MessageBox.TYPE_ERROR, timeout=5)
-				return
-			try:
-				fcntl.ioctl(fd, USBDEVFS_RESET, 0)
-				#os.close(fd)
-				fd.close()
-				self.session.open(MessageBox, _("Reset successful '%s'!") % dev_path, MessageBox.TYPE_INFO, timeout=5)
-				self.updateList()
-			except:
-				self.session.open(MessageBox, _("Error in ioctl '%s'!") % dev_path, MessageBox.TYPE_ERROR, timeout=5)
 
 	def SetupMounts(self):
 		self.session.openWithCallback(self.updateList, DeviceMountPanelConf)
