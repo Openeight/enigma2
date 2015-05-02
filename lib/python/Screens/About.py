@@ -37,12 +37,19 @@ class About(Screen):
 		AboutText += _("Cores: %s") % about.getCpuCoresString() + "\n"
                 AboutText += _("Version: %s") % getImageVersion() + "\n"
 		AboutText += _("Build: %s") % getImageBuild() + "\n"
-                string = getDriverDate()
-		year = string[0:4]
-		month = string[4:6]
-		day = string[6:8]
-		driversdate = '-'.join((year, month, day))
-		AboutText += _("Drivers: %s") % driversdate + "\n"
+		if path.exists('/proc/stb/info/release'):
+			realdriverdate = open("/proc/stb/info/release", 'r')
+			for line in realdriverdate:
+				tmp = line.strip()
+				AboutText += _("Drivers: %s") % tmp + "\n"
+			realdriverdate.close()
+		else:
+			string = getDriverDate()
+			year = string[0:4]
+			month = string[4:6]
+			day = string[6:8]
+			driversdate = '-'.join((year, month, day))
+			AboutText += _("Drivers: %s") % driversdate + "\n"
                 EnigmaVersion = "Enigma: " + about.getEnigmaVersionString()
 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
 		AboutText += EnigmaVersion + "\n"
