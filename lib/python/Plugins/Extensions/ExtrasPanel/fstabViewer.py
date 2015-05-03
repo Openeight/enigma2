@@ -21,25 +21,42 @@ lengthList = [0,0,0,0]
 
 class fstabMenuList(MenuList):
 	def __init__(self, list):
-		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-		self.l.setFont(0, gFont("Regular", 22))
-		self.l.setFont(1, gFont("Regular", 18))
-		self.l.setItemHeight(220)
+		MenuList.__init__(self, list, True, eListboxPythonMultiContent)
+		# skin.xml <alias name="fstabMenuList" font="Regular" size="28" height="50"/>
+		try:
+			font = skin.fonts.get("fstabMenuList", ("Regular", 20, 220))
+			self.l.setFont(0, gFont(font[0], font[1]))
+			self.l.setItemHeight(font[2])
+		except:
+			self.l.setFont(0, gFont("Regular", 20))
+			self.l.setItemHeight(220)
 
 def fstabMenuListEntry(devicename, mountpoint, fstype, options, dumpfreq, passnum):
 	res = [ (devicename, mountpoint,fstype, options, dumpfreq, passnum) ]
-	res.append(MultiContentEntryText(pos=(230,15),size=(370,25), font=0, text=devicename))
-	res.append(MultiContentEntryText(pos=(230,60),size=(370,25), font=0, text=mountpoint))
-	res.append(MultiContentEntryText(pos=(230,90),size=(370,25), font=0, text=fstype))
-	res.append(MultiContentEntryText(pos=(230,120),size=(370,25), font=0, text=options))
-	res.append(MultiContentEntryText(pos=(230,150),size=(370,25), font=0, text=dumpfreq))
-	res.append(MultiContentEntryText(pos=(230,180),size=(370,25), font=0, text=passnum))
-	res.append(MultiContentEntryText(pos=(0,17),size=(200,25), font=1, flags=RT_HALIGN_RIGHT, text= _("Device name:")))
-	res.append(MultiContentEntryText(pos=(0,62),size=(200,25), font=1, flags=RT_HALIGN_RIGHT, text= _("Mount point:")))
-	res.append(MultiContentEntryText(pos=(0,92),size=(200,25), font=1, flags=RT_HALIGN_RIGHT, text= _("File system type:")))
-	res.append(MultiContentEntryText(pos=(0,122),size=(200,25), font=1, flags=RT_HALIGN_RIGHT, text= _("Options:")))
-	res.append(MultiContentEntryText(pos=(0,152),size=(200,25), font=1, flags=RT_HALIGN_RIGHT, text= _("Dump frequency:")))
-	res.append(MultiContentEntryText(pos=(0,182),size=(200,25), font=1, flags=RT_HALIGN_RIGHT, text= _("Pass number:")))
+	# skin.xml <parameter name="fstabMenuList" value="0,30,600,50,700,30,500,50" />
+	try:
+		x, y, w, h , x1, y1, w1, h1 = skin.parameters.get("fstabMenuList",(0, 0, 200, 25, 230, 0, 370, 25))
+	except:
+		x = 0
+		y = 0
+		w = 200
+		h = 25
+		x1 = 230
+		y1 = 0
+		w1 = 370
+		h1 = 25
+	res.append(MultiContentEntryText(pos=(x,30+y),size=(w,h), font=0, flags=RT_HALIGN_RIGHT, text= _("Device name:")))
+	res.append(MultiContentEntryText(pos=(x,60+y),size=(w,h), font=0, flags=RT_HALIGN_RIGHT, text= _("Mount point:")))
+	res.append(MultiContentEntryText(pos=(x,90+y),size=(w,h), font=0, flags=RT_HALIGN_RIGHT, text= _("File system type:")))
+	res.append(MultiContentEntryText(pos=(x,120+y),size=(w,h), font=0, flags=RT_HALIGN_RIGHT, text= _("Options:")))
+	res.append(MultiContentEntryText(pos=(x,150+y),size=(w,h), font=0, flags=RT_HALIGN_RIGHT, text= _("Dump frequency:")))
+	res.append(MultiContentEntryText(pos=(x,180+y),size=(w,h), font=0, flags=RT_HALIGN_RIGHT, text= _("Pass number:")))
+	res.append(MultiContentEntryText(pos=(x1,30+y1),size=(w1,h1), font=0, text=devicename))
+	res.append(MultiContentEntryText(pos=(x1,60+y1),size=(w1,h1), font=0, text=mountpoint))
+	res.append(MultiContentEntryText(pos=(x1,90+y1),size=(w1,h1), font=0, text=fstype))
+	res.append(MultiContentEntryText(pos=(x1,120+y1),size=(w1,h1), font=0, text=options))
+	res.append(MultiContentEntryText(pos=(x1,150+y1),size=(w1,h1), font=0, text=dumpfreq))
+	res.append(MultiContentEntryText(pos=(x1,180+y1),size=(w1,h1), font=0, text=passnum))
 	return res
 
 class fstabViewerScreen(Screen,HelpableScreen):
