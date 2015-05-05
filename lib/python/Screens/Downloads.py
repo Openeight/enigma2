@@ -36,6 +36,20 @@ from Screens.Console import Console
 ##################################################
 
 
+class RSList(MenuList):
+	def __init__(self, list):
+		MenuList.__init__(self, list, True, eListboxPythonMultiContent)
+		# skin.xml <alias name="RSList" font="Regular" size="28" height="50"/>
+		try:
+			font = skin.fonts.get("RSList", ("Regular", 20, 30))
+			self.l.setFont(0, gFont(font[0], font[1]))
+			self.l.setItemHeight(font[2])
+		except:
+			self.l.setFont(0, gFont("Regular", 20))
+			self.l.setItemHeight(30)
+
+##############################################################################
+
 def RSListEntry(download, state):
 	res = [(download)]
 	# skin.xml <parameter name="RSList" value="40,0,1200,50,10,3,50,50" />
