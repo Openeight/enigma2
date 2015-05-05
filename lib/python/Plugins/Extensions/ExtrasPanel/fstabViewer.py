@@ -15,6 +15,7 @@ from Tools.Directories import fileExists
 from dirSelect import dirSelectDlg
 from enigma import RT_HALIGN_LEFT, RT_HALIGN_RIGHT, eListboxPythonMultiContent, gFont
 import os
+import skin
 
 entryList = []
 lengthList = [0,0,0,0]
