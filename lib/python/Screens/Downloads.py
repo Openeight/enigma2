@@ -4,7 +4,7 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from enigma import eTimer, quitMainloop, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eListbox, gFont, getDesktop, ePicLoad
 from Tools.LoadPixmap import LoadPixmap
 from enigma import getDesktop
-
+import skin
 import urllib
 from urllib2 import urlopen
 from Components.MenuList import MenuList
@@ -36,24 +36,28 @@ from Screens.Console import Console
 ##################################################
 
 
-class RSList(MenuList):
-	def __init__(self, list):
-		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-		self.l.setItemHeight(30)
-		self.l.setFont(0, gFont("Regular", 20))
-
-##############################################################################
-
 def RSListEntry(download, state):
 	res = [(download)]
-	res.append(MultiContentEntryText(pos=(40, 0), size=(620, 25), font=0, text=download))
-        if state == 0:
-              res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 6), size=(25,25), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_green.png"))))
-        else:
-              res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 6), size=(25,25), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_red.png"))))
+	# skin.xml <parameter name="RSList" value="40,0,1200,50,10,3,50,50" />
+	try:
+		x, y, w, h , x1, y1, w1, h1 = skin.parameters.get("RSList",(40, 0, 1280, 25, 5, 6, 25, 25))
+	except:
+		x = 40
+		y = 0
+		w = 620
+		h = 25
+		x1 = 5
+		y1 = 6
+		w1 = 25
+		h1 = 25
+	res.append(MultiContentEntryText(pos=(x, y), size=(w, h), font=0, text=download))
+	if state == 0:
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(x1, y1), size=(w1,h1), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_green.png"))))
+	else:
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(x1, y1), size=(w1,h1), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_red.png"))))
 
 	print "res =", res
-        return res
+	return res
 
 ##############################################################################
 
