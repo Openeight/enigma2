@@ -300,7 +300,8 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 
 class RemoteControlType(Screen, ConfigListScreen):
 	rcList = [
-			("13", "ET-4000"), 
+			("4", "DMM normal"),
+			("13", "ET-4000"),
 			("7", "ET-5000 / ET-6000"), 
 			("5", "ET-9000"), 
 			("11", "ET-9200"), 
@@ -360,6 +361,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 		self.et9500 = "/usr/share/enigma2/rc_models/et9500/rc.png"
 		self.et7000 = "/usr/share/enigma2/rc_models/et7x00/rc.png"
 		self.et8000 = "/usr/share/enigma2/rc_models/et8000/rc.png"
+		self.dmm = "/usr/share/enigma2/skin_default/rc.png"
 
 		if not fileExists('/etc/enigma2/EtRcType'):
 			action = ' > /etc/enigma2/EtRcType'
@@ -414,7 +416,12 @@ class RemoteControlType(Screen, ConfigListScreen):
 		        file.write('et8000')
                         file.close()
                         rc = self.et8000
-                        self["remote"].instance.setPixmapFromFile(rc)                           
+                        self["remote"].instance.setPixmapFromFile(rc)
+                elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '4':
+		        file.write('dmm')
+                        file.close()
+                        rc = self.dmm
+                        self["remote"].instance.setPixmapFromFile(rc)
                 else:
                         self["remote"].hide
                         file.close()
