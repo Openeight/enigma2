@@ -176,7 +176,32 @@ class DevicesMountPanel(Screen):
 		except:
 			device2 = ''
 		try:
-			if device =='mmcblk0p1':
+			if device.find('5') > 0:
+				device2 = device.replace('5', '')
+		except:
+			device2 = ''
+		try:
+			if device.find('6') > 0:
+				device2 = device.replace('6', '')
+		except:
+			device2 = ''
+		try:
+			if device.find('7') > 0:
+				device2 = device.replace('7', '')
+		except:
+			device2 = ''
+		try:
+			if device.find('8') > 0:
+				device2 = device.replace('8', '')
+		except:
+			device2 = ''
+		try:
+			if device.find('9') > 0:
+				device2 = device.replace('9', '')
+		except:
+			device2 = ''
+		try:
+			if device == 'mmcblk0p1':
 				device2 = 'mmcblk0'
 		except:
 			device2 = ''
@@ -189,13 +214,19 @@ class DevicesMountPanel(Screen):
 		name = "USB: "
 		if devicetype.find('sdhci') != -1:
 			name = _("MMC: ")
-			model = file('/sys/block/' + device2 + '/device/name').read()
-			model = str(model).replace('\n', '')
+			try:
+				model = file('/sys/block/' + device2 + '/device/name').read()
+				model = str(model).replace('\n', '')
+			except:
+				pass
 			mypixmap = '/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/dev_mmc.png'
 		else:
 			mypixmap = '/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/dev_usb.png'
-			model = file('/sys/block/' + device2 + '/device/model').read()
-			model = str(model).replace('\n', '')
+			try:
+				model = file('/sys/block/' + device2 + '/device/model').read()
+				model = str(model).replace('\n', '')
+			except:
+				pass
 		des = ''
 		if devicetype.find('/devices/pci') != -1 or devicetype.find('/devices/platform/strict-ahci') != -1:
 			name = _("HARD DISK: ")
@@ -637,6 +668,31 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 		try:
 			if device.find('4') > 0:
 				device2 = device.replace('4', '')
+		except:
+			device2 = ''
+		try:
+			if device.find('5') > 0:
+				device2 = device.replace('5', '')
+		except:
+			device2 = ''
+		try:
+			if device.find('6') > 0:
+				device2 = device.replace('6', '')
+		except:
+			device2 = ''
+		try:
+			if device.find('7') > 0:
+				device2 = device.replace('7', '')
+		except:
+			device2 = ''
+		try:
+			if device.find('8') > 0:
+				device2 = device.replace('8', '')
+		except:
+			device2 = ''
+		try:
+			if device.find('9') > 0:
+				device2 = device.replace('9', '')
 		except:
 			device2 = ''
 		try:
