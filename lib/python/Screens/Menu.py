@@ -6,6 +6,7 @@
 # amendment provided you  keep this Licence.         #
 ######################################################
 from Screen import Screen
+from Screens.ParentalControlSetup import ProtectedScreen
 from Components.Sources.List import List
 from Components.ActionMap import NumberActionMap
 from Components.Sources.StaticText import StaticText
@@ -53,7 +54,7 @@ menuupdater = MenuUpdater()
 class MenuSummary(Screen):
 	pass
 
-class Menu(Screen):
+class Menu(Screen, ProtectedScreen):
 	ALLOW_SUSPEND = True
 
 	def okbuttonClick(self):
@@ -164,7 +165,6 @@ class Menu(Screen):
 
 	def __init__(self, session, parent):
 		Screen.__init__(self, session)
-
 		list = []
 
 		menuID = None
@@ -214,22 +214,22 @@ class Menu(Screen):
 		self.skinName = [ ]
 		self.menuID = menuID
 		skfile = "/usr/share/enigma2/" + config.skin.primary_skin.value 
-                f1 = file(skfile, "r")
-                self.sktxt = f1.read()
-                f1.close()    	
-                if menuID is not None:
-                    if ('<screen name="Animmain" ' in self.sktxt) and (config.usage.mainmenu_mode.value == "horzanim"): 
-                        self.skinName.append("Animmain")
-                        title = self.menuID
-                        self.setTitle(title)
-                    elif ('<screen name="Iconmain" ' in self.sktxt) and (config.usage.mainmenu_mode.value == "horzicon"): 
-                        self.skinName.append("Iconmain")
-                        title = self.menuID
-                        self.setTitle(title)
-                    else:
-                        self.skinName.append("menu_" + menuID)
-                self.skinName.append("Menu")
-
+		f1 = file(skfile, "r")
+		self.sktxt = f1.read()
+		f1.close()    	
+		if menuID is not None:
+		if ('<screen name="Animmain" ' in self.sktxt) and (config.usage.mainmenu_mode.value == "horzanim"): 
+			self.skinName.append("Animmain")
+			title = self.menuID
+			self.setTitle(title)
+		elif ('<screen name="Iconmain" ' in self.sktxt) and (config.usage.mainmenu_mode.value == "horzicon"): 
+			self.skinName.append("Iconmain")
+			title = self.menuID
+			self.setTitle(title)
+		else:
+			self.skinName.append("menu_" + menuID)
+		self.skinName.append("Menu")
+		ProtectedScreen.__init__(self)
 
 		# Sort by Weight
 		list.sort(key=lambda x: int(x[3]))
@@ -780,6 +780,16 @@ class IconMain(Screen):
 ##################### pcd end ###############
 		
 
+	def isProtected(self):
+		if config.ParentalControl.setuppinactive.value:
+			if config.ParentalControl.config_sections.main_menu.value:
+				return self.menuID == "mainmenu"
+			elif config.ParentalControl.config_sections.configuration.value and self.menuID == "setup":
+				return True
+			elif config.ParentalControl.config_sections.timer_menu.value and self.menuID == "timermenu":
+				return True
+			elif config.ParentalControl.config_sections.standby_menu.value and self.menuID == "shutdown":
+				return True
 class MainMenu(Menu):
 	#add file load functions for the xml-file
 

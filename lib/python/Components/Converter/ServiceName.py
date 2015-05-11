@@ -83,7 +83,7 @@ class ServiceName(Converter, object):
 			else:
 				result = info.getInfoString(iServiceInformation.sServiceref)
 			if "%3a//" in result:
-				return result.split("%3a//")[1].split("/")[0]
+				return result.rsplit("%3a//", 1)[1].split("/")[0]
 			return ""
 
 	text = property(getText)
@@ -97,7 +97,7 @@ class ServiceName(Converter, object):
 	def dvb_t(self):
 		return "%s %s %d/%s" % (self.system(), self.ch_number(), self.freq()/1000000 + 0.5 , self.bandwidth())
 	def dvb_c(self):
-		return "%s %d %s %s" % (self.system(), self.freq()/1000, _("kHz"), self.bandwidth())
+		return "%s %d %s" % (self.system(), self.freq()/1000, _("kHz"))
 	def system(self):
 		return self.t_info["system"]
 	def freq(self):
@@ -116,6 +116,7 @@ class ServiceName(Converter, object):
 		if '(' in op:
 			op = op.split('(')[1]
 			return "%s°%s" % (op[:-2],op[-2:-1])
+		op = op.split(' ')[0]
 		return "%s°%s" % (op[:-1],op[-1:])
 	def fec(self):
 		return self.t_info["fec_inner"]
