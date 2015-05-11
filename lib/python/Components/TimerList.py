@@ -10,7 +10,7 @@ from Tools.Alternatives import GetWithAlternative
 from Tools.LoadPixmap import LoadPixmap
 from Tools.TextBoundary import getTextBoundarySize
 from timer import TimerEntry
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_SKIN_IMAGE
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 
 class TimerList(HTMLComponent, GUIComponent, object):
 #

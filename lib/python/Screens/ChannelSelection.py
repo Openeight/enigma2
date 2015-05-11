@@ -8,7 +8,6 @@ from Components.ServiceList import ServiceList, refreshServiceList
 from Components.ActionMap import NumberActionMap, ActionMap, HelpableActionMap
 from Components.MenuList import MenuList
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
-from Components.SystemInfo import SystemInfo
 profile("ChannelSelection.py 1")
 from EpgSelection import EPGSelection
 from enigma import eServiceReference, eEPGCache, eServiceCenter, eRCInput, eTimer, eDVBDB, iPlayableService, iServiceInformation, getPrevAsciiCode, eEnv
@@ -150,7 +149,7 @@ class ChannelContextMenu(Screen):
 		haveBouquets = config.usage.multibouquet.value
 		from Components.ParentalControl import parentalControl
 		self.parentalControl = parentalControl
-		self.parentalControlEnabled = config.ParentalControl.configured.value and config.ParentalControl.servicepinactive.value
+		self.parentalControlEnabled = config.ParentalControl.servicepinactive.value
 		if not (current_sel_path or current_sel_flags & (eServiceReference.isDirectory|eServiceReference.isMarker)):
 			append_when_current_valid(current, menu, (_("show transponder info"), self.showServiceInformations), level=2, key="0")
 		if csel.bouquet_mark_edit == OFF and not csel.entry_marked:
@@ -168,6 +167,8 @@ class ChannelContextMenu(Screen):
 							append_when_current_valid(current, menu, (_("add to parental protection"), boundFunction(self.addParentalProtection, csel.getCurrentSelection())), level=0, key="bullet")
 						else:
 							append_when_current_valid(current, menu, (_("remove from parental protection"), boundFunction(self.removeParentalProtection, csel.getCurrentSelection())), level=0, key="bullet")
+						if config.ParentalControl.hideBlacklist.value and not parentalControl.sessionPinCached:
+							append_when_current_valid(current, menu, (_("Unhide parental control services"), boundFunction(self.unhideParentalServices)), level=0, key="bullet")
 					if haveBouquets:
 						bouquets = self.csel.getBouquetList()
 						if bouquets is None:
@@ -387,17 +388,37 @@ class ChannelContextMenu(Screen):
 
 	def addParentalProtection(self, service):
 		self.parentalControl.protectService(service.toCompareString())
+		if config.ParentalControl.hideBlacklist.value and not self.parentalControl.sessionPinCached:
+			self.csel.servicelist.resetRoot()
 		self.close()
 
 	def removeParentalProtection(self, service):
-		self.session.openWithCallback(boundFunction(self.pinEntered, service.toCompareString()), PinInput, pinList=[config.ParentalControl.servicepin[0].value], triesEntry=config.ParentalControl.retries.servicepin, title=_("Enter the service pin"), windowTitle=_("Change pin code"))
+		self.session.openWithCallback(boundFunction(self.pinEntered, service.toCompareString()), PinInput, pinList=[config.ParentalControl.servicepin[0].value], triesEntry=config.ParentalControl.retries.servicepin, title=_("Enter the service pin"), windowTitle=_("Enter pin code"))
 
-	def pinEntered(self, service, result):
-		if result:
+	def pinEntered(self, service, answer):
+		if answer:
 			self.parentalControl.unProtectService(service)
 			self.close()
-		else:
+		elif answer is not None:
 			self.session.openWithCallback(self.close, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR)
+		else:
+			self.close()
+
+	def unhideParentalServices(self):
+		self.session.openWithCallback(self.unhideParentalServicesCallback, PinInput, pinList=[config.ParentalControl.servicepin[0].value], triesEntry=config.ParentalControl.retries.servicepin, title=_("Enter the service pin"), windowTitle=_("Enter pin code"))
+
+	def unhideParentalServicesCallback(self, answer):
+		if answer:
+			service = self.csel.servicelist.getCurrent()
+			self.parentalControl.setSessionPinCached()
+			self.parentalControl.hideBlacklist(config.ParentalControl.hideBlacklist)
+			self.csel.servicelist.resetRoot()
+			self.csel.servicelist.setCurrent(service)
+			self.close()
+		elif answer is not None:
+			self.session.openWithCallback(self.close, MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR)	
+		else:
+			self.close()
 
 	def showServiceInPiP(self):
 		if self.csel.dopipzap or (self.parentalControlEnabled and not self.parentalControl.getProtectionLevel(self.csel.getCurrentSelection().toCompareString()) == -1):
