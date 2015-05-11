@@ -134,6 +134,7 @@ MAP_NL = (
 	u"pqrs7PQRS",
 	u"tuv8TUV",
 	u"wxyz9WXYZ",
+	)
 MAP_LV = (
 	u"0,?!&@=*'+\"()$~%",
 	u" 1.:;/-_",
