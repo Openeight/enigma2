@@ -19,6 +19,7 @@ from enigma import eTimer, eLabel
 
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
+import skin
 
 config.CommitInfoSetup = ConfigSubsection()
 config.CommitInfoSetup.commiturl = ConfigSelection(default='Enigma2', choices=[('Enigma2', _('Source-Enigma2')), ('XTA', _('Skin-XTA')), ('TechniHD', _('Skin-TechniHD')), ('Metrix', _('Skin-Metrix'))])
@@ -26,7 +27,7 @@ config.CommitInfoSetup.commiturl = ConfigSelection(default='Enigma2', choices=[(
 class About(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-
+		hddsplit, = skin.parameters.get("AboutHddSplit", (0,))
 
 		AboutText = _("Model: %s %s") % (getMachineBrand(), getMachineName()) + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
@@ -54,13 +55,15 @@ class About(Screen):
 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
 		AboutText += EnigmaVersion + "\n"
 
-		GStreamerVersion = "GStreamer: " + about.getGStreamerVersionString()
+		GStreamerVersion = "GStreamer: " + about.getGStreamerVersionString().replace("GStreamer","")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
 		AboutText += GStreamerVersion + "\n"
 
 		ImageVersion = _("Last upgrade: ") + about.getImageVersionString()
 		self["ImageVersion"] = StaticText(ImageVersion)
 		AboutText += ImageVersion + "\n"
+
+		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
 
 		fp_version = getFPVersion()
 		if fp_version is None:
@@ -88,14 +91,15 @@ class About(Screen):
 		hddlist = harddiskmanager.HDDList()
 		hddinfo = ""
 		if hddlist:
+			formatstring = hddsplit and "%s:%s, %.1f %sB %s" or "%s\n(%s, %.1f %sB %s)"
 			for count in range(len(hddlist)):
 				if hddinfo:
 					hddinfo += "\n"
 				hdd = hddlist[count][1]
 				if int(hdd.free()) > 1024:
-					hddinfo += "%s\n(%s, %.1f GB %s)" % (hdd.model(), hdd.capacity(), hdd.free()/1024., _("free"))
+					hddinfo += formatstring % (hdd.model(), hdd.capacity(), hdd.free()/1024, "G", _("free"))
 				else:
-					hddinfo += "%s\n(%s, %d MB %s)" % (hdd.model(), hdd.capacity(), hdd.free(), _("free"))
+					hddinfo += formatstring % (hdd.model(), hdd.capacity(), hdd.free()/1024, "M", _("free"))
 		else:
 			hddinfo = _("none")
 		self["hddA"] = StaticText(hddinfo)
