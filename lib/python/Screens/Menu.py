@@ -216,18 +216,18 @@ class Menu(Screen, ProtectedScreen):
 		skfile = "/usr/share/enigma2/" + config.skin.primary_skin.value 
 		f1 = file(skfile, "r")
 		self.sktxt = f1.read()
-		f1.close()    	
+		f1.close()
 		if menuID is not None:
-		if ('<screen name="Animmain" ' in self.sktxt) and (config.usage.mainmenu_mode.value == "horzanim"): 
-			self.skinName.append("Animmain")
-			title = self.menuID
-			self.setTitle(title)
-		elif ('<screen name="Iconmain" ' in self.sktxt) and (config.usage.mainmenu_mode.value == "horzicon"): 
-			self.skinName.append("Iconmain")
-			title = self.menuID
-			self.setTitle(title)
-		else:
-			self.skinName.append("menu_" + menuID)
+			if ('<screen name="Animmain" ' in self.sktxt) and (config.usage.mainmenu_mode.value == "horzanim"): 
+				self.skinName.append("Animmain")
+				title = self.menuID
+				self.setTitle(title)
+			elif ('<screen name="Iconmain" ' in self.sktxt) and (config.usage.mainmenu_mode.value == "horzicon"): 
+				self.skinName.append("Iconmain")
+				title = self.menuID
+				self.setTitle(title)
+			else:
+				self.skinName.append("menu_" + menuID)
 		self.skinName.append("Menu")
 		ProtectedScreen.__init__(self)
 
