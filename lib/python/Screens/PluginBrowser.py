@@ -137,6 +137,9 @@ class PluginBrowser(Screen):
 	def exit(self):
 		self.close(True)
 
+	def exit(self):
+		self.close(True)
+
 	def saveListsize(self):
 		listsize = self["list"].instance.size()
 		self.listWidth = listsize.width()

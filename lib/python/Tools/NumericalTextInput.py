@@ -78,6 +78,18 @@ MAP_SE = (
 MAP_CZ = (
 	u"0,?'+\"()@$!=&*%#<>§[]",
 	u" 1.:;/-_",
+	u"abc2áčABCÁČ",
+	u"def3ďéěDEFĎÉĚ",
+	u"ghi4íGHIÍ",
+	u"jkl5JKL",
+	u"mno6ňóMNOŇÓ",
+	u"pqrs7řšPQRSŘŠ",
+	u"tuv8ťúůTUVŤÚŮ",
+	u"wxyz9ýžWXYZÝŽ",
+	)
+MAP_SK = (
+	u"0,?'+\"()@$!=&*%",
+	u" 1.:;/-_",
 	u"abc2áäčABCÁÄČ",
 	u"def3ďéěDEFĎÉĚ",
 	u"ghi4íGHIÍ",
@@ -122,6 +134,17 @@ MAP_NL = (
 	u"pqrs7PQRS",
 	u"tuv8TUV",
 	u"wxyz9WXYZ",
+MAP_LV = (
+	u"0,?!&@=*'+\"()$~%",
+	u" 1.:;/-_",
+	u"aābcč2AĀBCČ",
+	u"deēf3DEĒF",
+	u"gģhiī4GĢHIĪ",
+	u"jkķlļ5JKĶLĻ",
+	u"mnņo6MNŅO",
+	u"pqrsš7PQRSŠ",
+	u"tuūv8TUŪV",
+	u"wxyzž9WXYZŽ",
 	)
 MAPPINGS = {
 	'de_DE': MAP_DE,
@@ -129,10 +152,11 @@ MAPPINGS = {
 	'sv_SE': MAP_SE,
 	'fi_FI': MAP_SE,
 	'cs_CZ': MAP_CZ,
-	'sk_SK': MAP_CZ,
+	'sk_SK': MAP_SK,
 	'pl_PL': MAP_PL,
 	'ru_RU': MAP_RU,
 	'nl_NL': MAP_NL,
+	'lv_LV': MAP_LV,
 	}
 
 class NumericalTextInput:
