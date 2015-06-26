@@ -1422,7 +1422,7 @@ class UpdatePlugin(Screen):
 		self.CheckDateDone = True
 		tmpdate = getEnigmaVersionString()
 		imageDate = date(int(tmpdate[0:4]), int(tmpdate[5:7]), int(tmpdate[8:10]))
-		datedelay = imageDate +  timedelta(days=30)
+		datedelay = imageDate +  timedelta(days=180)
 		message = _("Your image is out of date!\n\n"
 				"After such a long time, there is a risk that your %s %s will not\n"
 				"boot after online-update, or will show disfunction in running Image.\n\n"
