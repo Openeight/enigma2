@@ -1,7 +1,7 @@
 from Components.Harddisk import harddiskmanager
 from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock
 from Tools.Directories import resolveFilename, SCOPE_HDD, defaultRecordingLocation
-from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent
+from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent, eEPGCache
 from Components.NimManager import nimmanager
 from Components.Harddisk import harddiskmanager
 from Components.ServiceList import refreshServiceList
@@ -339,6 +339,19 @@ def InitUsageConfig():
 		from enigma import eEPGCache
 		eEPGCache.getInstance().setEpgHistorySeconds(config.epg.histminutes.getValue()*60)
 	config.epg.histminutes.addNotifier(EpgHistorySecondsChanged)
+
+	hddchoices = [('/', 'Internal Flash'), ('/hdd', '/hdd')]
+	for p in harddiskmanager.getMountedPartitions():
+		if os.path.exists(p.mountpoint):
+			d = os.path.normpath(p.mountpoint)
+			if p.mountpoint != '/':
+				hddchoices.append((p.mountpoint, d))
+	config.misc.epgcachepath = ConfigSelection(default = '/hdd', choices = hddchoices)
+	def EpgCacheChanged(configElement):
+		eEPGCache.getInstance().setCacheFile(config.misc.epgcachepath.value + "/epg.dat")
+		epgcache = eEPGCache.getInstance()
+		epgcache.save()
+	config.misc.epgcachepath.addNotifier(EpgCacheChanged, immediate_feedback = False)
 
 	def setHDDStandby(configElement):
 		for hdd in harddiskmanager.HDDList():
