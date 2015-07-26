@@ -65,27 +65,29 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 		self.changePin = None
 		self.reloadLists = None
 		self.list = []
-		self.changePin = getConfigListEntry(_("Change PIN"), NoSave(ConfigNothing()))
-		self.list.append(self.changePin)
-		if config.ParentalControl.servicepin[0].value:
-			self.list.append(getConfigListEntry(_("Protect services"), config.ParentalControl.servicepinactive))
-			if config.ParentalControl.servicepinactive.value:
-				self.list.append(getConfigListEntry(_("Remember service PIN"), config.ParentalControl.storeservicepin))
-				if config.ParentalControl.storeservicepin.value != "never":
-					self.list.append(getConfigListEntry(_("Hide parentel locked services"), config.ParentalControl.hideBlacklist))
-				self.list.append(getConfigListEntry(_("Protect on epg age"), config.ParentalControl.age))
-				self.reloadLists = getConfigListEntry(_("Reload blacklists"), NoSave(ConfigNothing()))
-				self.list.append(self.reloadLists)
-			self.list.append(getConfigListEntry(_("Protect Screens"), config.ParentalControl.setuppinactive))
-			if config.ParentalControl.setuppinactive.value:
-				self.list.append(getConfigListEntry(_("Protect main menu"), config.ParentalControl.config_sections.main_menu))
-				if not config.ParentalControl.config_sections.main_menu.value:
-					self.list.append(getConfigListEntry(_("Protect timer menu"), config.ParentalControl.config_sections.timer_menu))
-					self.list.append(getConfigListEntry(_("Protect plugin browser"), config.ParentalControl.config_sections.plugin_browser))
-					self.list.append(getConfigListEntry(_("Protect configuration"), config.ParentalControl.config_sections.configuration))
-					self.list.append(getConfigListEntry(_("Protect standby menu"), config.ParentalControl.config_sections.standby_menu))
-				self.list.append(getConfigListEntry(_("Protect movie list"), config.ParentalControl.config_sections.movie_list))
-				self.list.append(getConfigListEntry(_("Protect context menus"), config.ParentalControl.config_sections.context_menus))
+		self.list.append(getConfigListEntry(_("Protect services"), config.ParentalControl.servicepinactive))
+		if config.ParentalControl.servicepinactive.value:
+			self.changePin = getConfigListEntry(_("Change PIN"), NoSave(ConfigNothing()))
+			self.list.append(self.changePin)
+			self.list.append(getConfigListEntry(_("Remember service PIN"), config.ParentalControl.storeservicepin))
+			if config.ParentalControl.storeservicepin.value != "never":
+				self.list.append(getConfigListEntry(_("Hide parentel locked services"), config.ParentalControl.hideBlacklist))
+			self.list.append(getConfigListEntry(_("Protect on epg age"), config.ParentalControl.age))
+			self.reloadLists = getConfigListEntry(_("Reload blacklists"), NoSave(ConfigNothing()))
+			self.list.append(self.reloadLists)
+		self.list.append(getConfigListEntry(_("Protect Screens"), config.ParentalControl.setuppinactive))
+		if config.ParentalControl.setuppinactive.value:
+			if not self.changePin:
+				self.changePin = getConfigListEntry(_("Change PIN"), NoSave(ConfigNothing()))
+				self.list.append(self.changePin)
+			self.list.append(getConfigListEntry(_("Protect main menu"), config.ParentalControl.config_sections.main_menu))
+			if not config.ParentalControl.config_sections.main_menu.value:
+				self.list.append(getConfigListEntry(_("Protect timer menu"), config.ParentalControl.config_sections.timer_menu))
+				self.list.append(getConfigListEntry(_("Protect plugin browser"), config.ParentalControl.config_sections.plugin_browser))
+				self.list.append(getConfigListEntry(_("Protect configuration"), config.ParentalControl.config_sections.configuration))
+				self.list.append(getConfigListEntry(_("Protect standby menu"), config.ParentalControl.config_sections.standby_menu))
+			self.list.append(getConfigListEntry(_("Protect movie list"), config.ParentalControl.config_sections.movie_list))
+			self.list.append(getConfigListEntry(_("Protect context menus"), config.ParentalControl.config_sections.context_menus))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 
