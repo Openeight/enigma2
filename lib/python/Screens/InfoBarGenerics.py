@@ -2408,10 +2408,29 @@ class InfoBarInstantRecord:
 			if InfoBarInstance:
 				self.recording = InfoBarInstance.recording
 
+	def moveToTrash(self, entry):
+		print "instantRecord stop and delete recording: ", entry.name
+		import Tools.Trashcan
+		trash = Tools.Trashcan.createTrashFolder(entry.Filename)
+		from MovieSelection import moveServiceFiles
+		moveServiceFiles(entry.Filename, trash, entry.name, allowCopy=False)
+
 	def stopCurrentRecording(self, entry = -1):
 		if entry is not None and entry != -1:
 			self.session.nav.RecordTimer.removeEntry(self.recording[entry])
+			if self.deleteRecording:
+				self.moveToTrash(self.recording[entry])
 			self.recording.remove(self.recording[entry])
+
+	def stopAllCurrentRecordings(self, list):
+		msg = ''
+		for entry in list:
+			msg += entry[0].name + "\n"
+			self.session.nav.RecordTimer.removeEntry(entry[0])
+			self.recording.remove(entry[0])
+			if self.deleteRecording:
+				self.moveToTrash(entry[0])
+		self.session.open(MessageBox, _("Stopped recordings:") + "\n" + msg, MessageBox.TYPE_INFO, timeout=5)
 
 	def getProgramInfoAndEvent(self, info, name):
 		info["serviceref"] = hasattr(self, "SelectedInstantServiceRef") and self.SelectedInstantServiceRef or self.session.nav.getCurrentlyPlayingServiceOrGroup()
@@ -2513,6 +2532,7 @@ class InfoBarInstantRecord:
 			elif x.dontSave and x.isRunning():
 				list.append((x, False))
 
+		self.deleteRecording = False
 		if answer[1] == "changeduration":
 			if len(self.recording) == 1:
 				self.changeDuration(0)
@@ -2527,7 +2547,21 @@ class InfoBarInstantRecord:
 			import TimerEdit
 			self.session.open(TimerEdit.TimerEditList)
 		elif answer[1] == "stop":
-			self.session.openWithCallback(self.stopCurrentRecording, TimerSelection, list)
+			if len(self.recording) == 1:
+				self.stopCurrentRecording(0)
+			else:
+				self.session.openWithCallback(self.stopCurrentRecording, TimerSelection, list)
+		elif answer[1] == "stopdelete":
+			self.deleteRecording = True
+			if len(self.recording) == 1:
+				self.stopCurrentRecording(0)
+			else:
+				self.session.openWithCallback(self.stopCurrentRecording, TimerSelection, list)
+		elif answer[1] == "stopall":
+			self.stopAllCurrentRecordings(list)
+		elif answer[1] == "stopdeleteall":
+			self.deleteRecording = True
+			self.stopAllCurrentRecordings(list)
 		elif answer[1] in ( "indefinitely" , "manualduration", "manualendtime", "event"):
 			self.startInstantRecording(limitEvent = answer[1] in ("event", "manualendtime") or False)
 			if answer[1] == "manualduration":
@@ -2607,9 +2641,16 @@ class InfoBarInstantRecord:
 			common = ()
 		if self.isInstantRecordRunning():
 			title =_("A recording is currently running.\nWhat do you want to do?")
-			list = ((_("Stop recording"), "stop"),) + common + \
+			list = common + \
 				((_("Change recording (duration)"), "changeduration"),
 				(_("Change recording (endtime)"), "changeendtime"),)
+			list += ((_("Stop recording"), "stop"),)
+			if config.usage.movielist_trashcan.value:
+				list += ((_("Stop and delete recording"), "stopdelete"),)
+			if len(self.recording) > 1:
+				list += ((_("Stop all current recordings"), "stopall"),)
+				if config.usage.movielist_trashcan.value:
+					list += ((_("Stop and delete all current recordings"), "stopdeleteall"),)
 			if self.isTimerRecordRunning():
 				list += ((_("Stop timer recording"), "timer"),)
 			list += ((_("Do nothing"), "no"),)
