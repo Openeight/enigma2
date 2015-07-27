@@ -118,6 +118,10 @@ class OpenXtaThread(Screen):
 		self['menu'].hide()
 		self['textpage'] = ScrollLabel('')
 		self['textpage'].hide()
+		self["key_red"] = Label(_("Add to Favourites"))
+		self["key_green"] = Label(_("Info"))
+		self["key_yellow"] = Label(_("Info"))
+		self["key_blue"] = Label(_("Hide"))
 		self.current = 'menu'
 		self['NumberActions'] = NumberActionMap(['NumberActions',
 		 'OkCancelActions',
@@ -829,6 +833,10 @@ class OpenXtaMain(Screen):
 		self['menu'].hide()
 		self['user'] = ScrollLabel('')
 		self['user'].hide()
+		self["key_red"] = Label(_("Favourites"))
+		self["key_green"] = Label(_("Latest Posts"))
+		self["key_yellow"] = Label(_("Change Color"))
+		self["key_blue"] = Label(_("Hide"))
 		self['actions'] = ActionMap(['OkCancelActions',
 		 'DirectionActions',
 		 'ColorActions',
