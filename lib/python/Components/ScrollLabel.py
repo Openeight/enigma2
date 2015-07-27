@@ -57,7 +57,7 @@ class ScrollLabel(HTMLComponent, GUIComponent):
 		self.scrollbar.setRange(0,100)
 		self.scrollbar.setBorderWidth(1)
 		self.long_text.move(ePoint(0,0))
-		self.long_text.resize(eSize(s.width()-30, self.pageHeight*50))
+		self.long_text.resize(eSize(s.width()-30, self.pageHeight*100))
 		if self.split:
 			self.right_text.move(ePoint(self.column,0))
 			self.right_text.resize(eSize(s.width()-self.column-30, self.pageHeight*16))
