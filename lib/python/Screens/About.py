@@ -39,7 +39,7 @@ class About(Screen):
 		AboutText += _("Cores: %s") % about.getCpuCoresString() + "\n"
                 AboutText += _("Version: %s") % getImageVersion() + "\n"
 		AboutText += _("Build: %s") % getImageBuild() + "\n"
-		if path.exists('/proc/stb/info/release'):
+		if path.exists('/proc/stb/info/release') and getBoxType() in ('et7000', 'et7500', 'et8500'):
 			realdriverdate = open("/proc/stb/info/release", 'r')
 			for line in realdriverdate:
 				tmp = line.strip()
