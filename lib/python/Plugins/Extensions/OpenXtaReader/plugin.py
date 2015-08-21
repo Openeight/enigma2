@@ -325,7 +325,15 @@ class OpenXtaThread(Screen):
 		bereich = sub('<br />', '</p><p>', bereich)
 		bereich = sub('<a href="http://www.xtrend-alliance.com/index.php\?app=core&module=attach&section=attach&attach_id=.*?" title="Download attachment"><strong>(.*?)</strong></a>', '<p>Attachment: \g<1></p>', bereich)
 		bereich = sub('<img src=\'http://www.xtrend-alliance.com/public/style_emoticons/default/.*?\' class=\'bbc_emoticon\' alt=\'(.*?)\' /x>', '<p>Smilie: \g<1>', bereich)
-		bereich = sub('<script type=\'text/javascript\'>\s*?.*?\s*?</script>', '', bereich)
+		bereich = sub('<script.*?</script>', '', bereich, flags=re.DOTALL) # del java script
+		bereich = sub('<a href=\'#ipboard_body\' class=\'top\' title=\'Back to top\'>Back to top</a>', '', bereich) # del link
+		bereich = sub('<span itemprop=\"creator name\" class=\"author vcard\">.*?</span>', '', bereich, flags=re.DOTALL) # del username
+		bereich = sub('<li class=\'post_count desc lighter\'>.*?</li>', '', bereich, flags=re.DOTALL) # del post count
+		bereich = sub('<li class=\'group_title\'>.*?</li>', '', bereich, flags=re.DOTALL) # del group title
+		bereich = sub('<span class=\'ft\'>.*?</span>', '', bereich, flags=re.DOTALL) # del Location
+		bereich = sub('<span class=\'fc\'>.*?</span>', '', bereich, flags=re.DOTALL) # del Location 2
+		bereich = sub('<span itemprop=\"creator\">\s(.*?)\s.*?</span>', '\g<1>', bereich) # remove new line in creator name
+		bereich = sub('<div class=\'ipsPad_top_slimmer right\'>.*?</div>', '', bereich, flags=re.DOTALL) # del Back to upper topic
 		bereich = sub('<p class=\'posted_info desc lighter ipsType_small\'>', '<p>', bereich) # posted date
 		bereich = sub('<span class=\'hide\' itemprop="name">(.*?)</span>\s*?<ul class=\'basic_info\'>\s*?<p class=\'desc member_title\'>(.*?)</p>', '<p>\g<1>, \g<2></p>', bereich) # user name, status
 		bereich = sub('<blockquote  class="ipsBlockquote".*?>([\s\S]*?)</blockquote>', '<p>Quote: </p>\g<1><p> :Quote end</p>', bereich) # quote 1
@@ -342,12 +350,7 @@ class OpenXtaThread(Screen):
 		else:
 			bereich = sub('<ul id=\'postControlsNormal_[0-9]*\' class=\'post_controls clear clearfix\' >', '<p>\n===========================================================</p>', bereich)
 		text = ''
-		a = findall('<p>(.*?)</p>', bereich, re.S)
-		for x in a:
-			if x != '':
-				text = text + x + '\n'
-
-		text = sub('<[^>]*>', ' ', text)
+		text = sub('<[^>]*>', ' ', bereich)
 		text = sub('</p<<p<', '\n\n', text)
 		text = sub('\n\\s+\n*', '\n\n', text)
 		self['textpage'].setText(text)
