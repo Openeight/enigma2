@@ -1,6 +1,10 @@
 from Screens.Screen import Screen
+from Screens.ChannelSelection import FLAG_IS_DEDICATED_3D
 from Components.ConfigList import ConfigListScreen
+from Components.ServiceEventTracker import ServiceEventTracker
+from Components.SystemInfo import SystemInfo
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigSlider, getConfigListEntry
+from enigma import iPlayableService, iServiceInformation, eServiceCenter, eServiceReference, eDVBDB
 
 modelist = {"off": _("Off"), "auto": _("Auto"), "sidebyside": _("Side by side"), "topandbottom": _("Top and bottom")}
 
@@ -75,50 +79,72 @@ class OSD3DSetupScreen(Screen, ConfigListScreen):
 		self.close()
 
 	def keyCancel(self):
-		setConfiguredSettings()
+		applySettings()
 		self.close()
 
-def applySettings(mode, znorm):
-	path_mode = ""
-	path_znorm = ""
-	from os import path
-	if path.exists(PROC_ET_3DMODE):
-		path_mode = PROC_ET_3DMODE
-		path_znorm = PROC_ET_ZNORM
-	elif path.exists(PROC_DM_3DMODE):
-		path_mode = PROC_DM_3DMODE
-		path_znorm = PROC_DM_ZNORM
-		if mode == 'sidebyside':
-			mode = 'sbs'
-		elif mode == 'topandbottom':
-			mode = 'tab'
-		else:
-			mode = 'off'
-	else:
-		return
-	try:
-		file = open(path_mode, "w")
-		file.write(mode)
-		file.close()
-		file = open(path_znorm, "w")
-		file.write('%d' % znorm)
-		file.close()
-	except:
-		return
+previous = None
 
-def setConfiguredSettings():
-	applySettings(config.plugins.OSD3DSetup.mode.value, int(config.plugins.OSD3DSetup.znorm.value))
+def applySettings(mode=config.plugins.OSD3DSetup.mode.value, znorm=int(config.plugins.OSD3DSetup.znorm.value)):
+	global previous
+	mode == "3dmode" in SystemInfo["3DMode"] and mode or 'sidebyside' and 'sbs' or mode == 'topandbottom' and 'tab' or 'off'
+	if previous != (mode, znorm):
+		try:
+			open(SystemInfo["3DMode"], "w").write(mode)
+			open(SystemInfo["3DZNorm"], "w").write('%d' % znorm)
+			previous = (mode, znorm)
+		except:
+			return
+
+class auto3D(Screen):
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
+			{
+				iPlayableService.evStart: self.__evStart
+			})
+
+	def checkIfDedicated3D(self):
+			service = self.session.nav.getCurrentlyPlayingServiceReference()
+			servicepath = service and service.getPath()
+			if servicepath:
+				if service.toString().startswith("1:"):
+					info = eServiceCenter.getInstance().info(service)
+					service = info and info.getInfoString(service, iServiceInformation.sServiceref)
+					return service and eDVBDB.getInstance().getFlag(eServiceReference(service)) & FLAG_IS_DEDICATED_3D
+				elif "://" not in servicepath:
+					return ".3d." in servicepath
+				else:
+					return False
+			service = self.session.nav.getCurrentService()
+			info = service and service.info()
+			return info and info.getInfo(iServiceInformation.sIsDedicated3D) == 1
+
+	def __evStart(self):
+		if config.plugins.OSD3DSetup.mode.value == "auto":
+			if self.checkIfDedicated3D():
+				applySettings("sidebyside")
+			else:
+				applySettings()
 
 def main(session, **kwargs):
 	session.open(OSD3DSetupScreen)
 
-def startup(reason, **kwargs):
-	setConfiguredSettings()
+def startSetup(menuid):
+	if menuid != "system":
+		return [ ]
+	return [(_("OSD 3D setup"), main, "auto_3d_setup", 0)]
+
+def autostart(reason, **kwargs):
+	if "session" in kwargs:
+		session = kwargs["session"]
+		global event_tracker
+		session.open(auto3D)
 
 def Plugins(**kwargs):
 	from os import path
-	if path.exists(PROC_ET_3DMODE) or path.exists(PROC_DM_3DMODE):
+	if SystemInfo["3DMode"]:
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(name = "OSD 3D setup", description = _("Adjust 3D settings"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-					PluginDescriptor(name = "OSD 3D setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
+		return [PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART], fnc = autostart),
+			PluginDescriptor(name = "OSD 3D setup", description = _("Adjust 3D settings"), where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
 	return []
