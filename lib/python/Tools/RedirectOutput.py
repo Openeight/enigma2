@@ -13,4 +13,7 @@ class EnigmaOutput:
 	def isatty(self):
 		return True
 
+        def isatty(self):
+                return True
+
 sys.stdout = sys.stderr = EnigmaOutput()
