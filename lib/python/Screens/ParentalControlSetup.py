@@ -40,7 +40,7 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
-		self.createSetup()
+		self.createSetup(initial=True)
 
 		self["actions"] = NumberActionMap(["SetupActions", "MenuActions"],
 		{
@@ -61,13 +61,12 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 			(not config.ParentalControl.setuppinactive.value and config.ParentalControl.config_sections.configuration.value) or\
 			(not config.ParentalControl.config_sections.configuration.value and config.ParentalControl.setuppinactive.value and not config.ParentalControl.config_sections.main_menu.value)
 
-	def createSetup(self):
-		self.changePin = None
+	def createSetup(self, initial=False):
 		self.reloadLists = None
 		self.list = []
-		self.changePin = getConfigListEntry(_("Change PIN"), NoSave(ConfigNothing()))
-		self.list.append(self.changePin)
-		if config.ParentalControl.servicepin[0].value:
+		if config.ParentalControl.servicepin[0].value or config.ParentalControl.servicepinactive.value or config.ParentalControl.setuppinactive.value or not initial:
+			self.changePin = getConfigListEntry(_("Change PIN"), NoSave(ConfigNothing()))
+			self.list.append(self.changePin)
 			self.list.append(getConfigListEntry(_("Protect services"), config.ParentalControl.servicepinactive))
 			if config.ParentalControl.servicepinactive.value:
 				self.list.append(getConfigListEntry(_("Remember service PIN"), config.ParentalControl.storeservicepin))
@@ -79,13 +78,17 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 			self.list.append(getConfigListEntry(_("Protect Screens"), config.ParentalControl.setuppinactive))
 			if config.ParentalControl.setuppinactive.value:
 				self.list.append(getConfigListEntry(_("Protect main menu"), config.ParentalControl.config_sections.main_menu))
-				if not config.ParentalControl.config_sections.main_menu.value:
-					self.list.append(getConfigListEntry(_("Protect timer menu"), config.ParentalControl.config_sections.timer_menu))
-					self.list.append(getConfigListEntry(_("Protect plugin browser"), config.ParentalControl.config_sections.plugin_browser))
-					self.list.append(getConfigListEntry(_("Protect configuration"), config.ParentalControl.config_sections.configuration))
-					self.list.append(getConfigListEntry(_("Protect standby menu"), config.ParentalControl.config_sections.standby_menu))
+				self.list.append(getConfigListEntry(_("Protect timer menu"), config.ParentalControl.config_sections.timer_menu))
+				self.list.append(getConfigListEntry(_("Protect plugin browser"), config.ParentalControl.config_sections.plugin_browser))
+				self.list.append(getConfigListEntry(_("Protect configuration"), config.ParentalControl.config_sections.configuration))
+				self.list.append(getConfigListEntry(_("Protect standby menu"), config.ParentalControl.config_sections.standby_menu))
+				self.list.append(getConfigListEntry(_("Protect software update screen"), config.ParentalControl.config_sections.software_update))
+				self.list.append(getConfigListEntry(_("Protect manufacturer reset screen"), config.ParentalControl.config_sections.manufacturer_reset))
 				self.list.append(getConfigListEntry(_("Protect movie list"), config.ParentalControl.config_sections.movie_list))
 				self.list.append(getConfigListEntry(_("Protect context menus"), config.ParentalControl.config_sections.context_menus))
+		else:
+			self.changePin = getConfigListEntry(_("Enable parental protection"), NoSave(ConfigNothing()))
+			self.list.append(self.changePin)
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 

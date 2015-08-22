@@ -147,7 +147,12 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 			if ref and not self.session.nav.getCurrentlyPlayingServiceOrGroup():
 				self.session.nav.playService(ref)
 		else:
-			self.session.open(MoviePlayer, service, slist=self.servicelist, lastservice=ref, infobar=self)
+			from Components.ParentalControl import parentalControl
+			if parentalControl.isServicePlayable(service, self.openMoviePlayer):
+				self.openMoviePlayer(service)
+
+	def openMoviePlayer(self, ref):
+		self.session.open(MoviePlayer, ref, slist=self.servicelist, lastservice=self.session.nav.getCurrentlyPlayingServiceOrGroup(), infobar=self)
 
 class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBarShowMovies, InfoBarInstantRecord,
 		InfoBarAudioSelection, HelpableScreen, InfoBarNotifications, InfoBarServiceNotifications, InfoBarPVRState,
@@ -192,8 +197,10 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		self.cur_service = service
 		self.returning = False
 		self.onClose.append(self.__onClose)
+		config.misc.standbyCounter.addNotifier(self.standbyCountChanged, initial_call=False)
 
 	def __onClose(self):
+		config.misc.standbyCounter.removeNotifier(self.standbyCountChanged)
 		from Screens.MovieSelection import playlist
 		del playlist[:]
 		if not config.movielist.stop_service.value:
@@ -201,6 +208,12 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		self.session.nav.playService(self.lastservice)
 		config.usage.last_movie_played.value = self.cur_service.toString()
 		config.usage.last_movie_played.save()
+
+	def standbyCountChanged(self, value):
+		if config.ParentalControl.servicepinactive.value:
+			from Components.ParentalControl import parentalControl
+			if parentalControl.isProtected(self.cur_service):
+				self.close()
 
 	def handleLeave(self, how):
 		self.is_closing = True

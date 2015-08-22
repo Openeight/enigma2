@@ -17,6 +17,7 @@ dist_pkgdata_DATA = \
 	startwizard.xml \
 	freesat.t1 \
 	freesat.t2 \
+	timezone.xml \
 	unicable.xml
 
 if HAVE_TEXTLCD
