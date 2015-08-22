@@ -929,18 +929,13 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport):
 						getInitialTransponderList(tlist, x[0])
 
 		elif nim.isCompatible("DVB-C"):
-			if self.scan_typecable.value == "single_transponder" or "complete":
-				self.addCabTransponder(tlist, self.scan_cab.frequency.value,
-											  self.scan_cab.symbolrate.value,
+			if self.scan_typecable.value == "single_transponder":
+				self.addCabTransponder(tlist, self.scan_cab.frequency.value*1000,
+											  self.scan_cab.symbolrate.value*1000,
 											  self.scan_cab.modulation.value,
 											  self.scan_cab.fec.value,
 											  self.scan_cab.inversion.value)
 				removeAll = False
-			#elif self.scan_typecable.value == "complete":
-			#	if config.Nims[index_to_scan].cable.scan_type.value == "provider":
-			#		getInitialCableTransponderList(tlist, index_to_scan)
-			#	else:
-			#		startScan = False
 			elif self.scan_typecable.value == "predefined_transponder":
 				tps = nimmanager.getTranspondersCable(index_to_scan)
 				if len(tps) and len(tps) > self.CableTransponders.index :
@@ -948,6 +943,11 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport):
 					# 0 transponder type, 1 freq, 2 sym, 3 mod, 4 fec, 5 inv, 6 sys
 					self.addCabTransponder(tlist, tp[1], tp[2], tp[3], tp[4], tp[5])
 				removeAll = False
+			elif self.scan_typecable.value == "complete":
+				if config.Nims[index_to_scan].cable.scan_type.value == "provider":
+					getInitialCableTransponderList(tlist, index_to_scan)
+				else:
+					startScan = False
 
 		elif nim.isCompatible("DVB-T"):
 			if self.scan_typeterrestrial.value == "single_transponder":
@@ -1145,6 +1145,10 @@ class ScanSimple(ConfigListScreen, Screen, CableTransponderSearchSupport):
 	def getNetworksForNim(self, nim):
 		if nim.isCompatible("DVB-S"):
 			networks = nimmanager.getSatListForNim(nim.slot)
+		elif nim.isCompatible("DVB-C"):
+			networks = nimmanager.getTranspondersCable(nim.slot)
+			if not networks and config.Nims[nim.slot].configMode.value == "enabled":
+				networks = [ nim.type ]
 		elif not nim.empty:
 			networks = [ nim.type ] # "DVB-C" or "DVB-T". TODO: seperate networks for different C/T tuners, if we want to support that.
 		else:
