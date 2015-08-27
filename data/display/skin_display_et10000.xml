@@ -143,7 +143,20 @@
 	<screen name="DVDSummary" position="fill">
 		<panel name="InfoBarMoviePlayerSummary"/>
 	</screen>
-
+<!-- EMC -->
+	<screen name="EMCSelection_summary" position="fill">
+		<widget source="parent.Service" render="Label" position="top" size="*,16" font="Big" noWrap="1">
+                      <convert type="ServiceName">Name</convert>
+                </widget>
+                <panel position="fill" name="SummaryClockPanel" layout="stack">
+			<widget source="parent.Service" render="Label" position="fill" font="Big" noWrap="1">
+				<convert type="MovieInfo">FileSize</convert>
+			</widget>
+		</panel>
+	</screen>
+	<screen name="EMCMoviePlayerSummary" position="fill">
+		<panel name="InfoBarMoviePlayerSummary"/>
+	</screen>
 <!-- setup-->
 	<screen name="SetupSummary" position="fill">
 		<widget source="SetupEntry" render="Label" position="top" size="*,20" font="Small"/>
