@@ -688,11 +688,6 @@ if InfoBar and InfoBar.instance:
 			<name>close (DVD-drive)</name>
 			<code><![CDATA[os.system('eject -t /dev/sr0')]]></code>
 		</mqbfunction>
-		<mqbfunction>
-                        <name>Mount Manager</name>
-                        <module>Plugins.SystemPlugins.MountManager.plugin</module>
-                        <screen><![CDATA[DevicesPanel]]></screen>
-                </mqbfunction>
                 <mqbfunction>
                         <name>ET Fan Control</name>
                         <module>Plugins.SystemPlugins.ETFanControl.plugin</module>
@@ -719,12 +714,47 @@ modelist = {"0": _("Yes"), "1": _("No")}
 self.session.open(MessageBox, _("Clone TV screen to LCD:") + "\n" + modelist[config.lcd.et8500.value], MessageBox.TYPE_INFO, 1)
 ]]></code>
                 </mqbfunction>
-	</Menu>
+        </Menu>
 	<Scripts>
 		<mqbfunction>
 			<name>Ecm info</name>
 			<module>Screens.Console</module>
 			<screen><![CDATA[Console, "Ecm info", ["cat /tmp/ecm.info"]]]></screen>
 		</mqbfunction>
-	</Scripts>
+	        <mqbfunction>
+                        <name>Mount Manager (XTAPanel)</name>
+                        <module>Plugins.Extensions.ExtrasPanel.MountManager</module>
+                        <screen><![CDATA[DevicesMountPanel]]></screen>
+                </mqbfunction>
+                <mqbfunction>
+                        <name>fstab Editor (XTAPanel)</name>
+                        <module>Plugins.Extensions.ExtrasPanel.fstabViewer</module>
+                        <screen><![CDATA[fstabViewerScreen]]></screen>
+                </mqbfunction>
+        </Scripts>
+	<Menu>
+                <mqbfunction>
+                        <name>Latest Commits</name>
+                        <module>Screens.About</module>
+                        <screen><![CDATA[CommitInfo]]></screen>
+                </mqbfunction>
+                <mqbfunction>
+                        <name>Restart Softcam</name>
+                        <module>Plugins.PLi.SoftcamSetup.Sc</module>
+                        <screen><![CDATA[ScNewSelection]]></screen>
+                        <code><![CDATA[from Components.InputDevice import iInputDevices
+from enigma import eActionMap
+rcdevicename = iInputDevices.getDeviceName('event0')
+keyaction = eActionMap.getInstance()
+key = int("352")
+keyaction.keyPressed(rcdevicename, key, int(0))
+keyaction.keyPressed(rcdevicename, key, int(1))
+]]></code>
+                </mqbfunction>
+                <mqbfunction>
+                        <name>LCD Skin Selector</name>
+                        <module>Screens.SkinSelector</module>
+                        <screen><![CDATA[LcdSkinSelector]]></screen>
+                </mqbfunction>
+	</Menu>
 </xml>
