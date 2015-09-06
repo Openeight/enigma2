@@ -16,7 +16,13 @@ import re
 from boxbranding import getBoxType, getMachineBrand, getMachineName, getImageVersion, getImageBuild, getDriverDate
 from os import path
 from Tools.StbHardware import getFPVersion
-from enigma import eTimer, eLabel
+
+from enigma import ePicLoad, getDesktop, eSize, eTimer, eLabel
+from Components.Pixmap import Pixmap
+from Tools.LoadPixmap import LoadPixmap
+from Components.InputDevice import iInputDevices, iRcTypeControl
+from Components.AVSwitch import AVSwitch
+import os 
 
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
@@ -65,18 +71,34 @@ class About(Screen):
 		self["ImageVersion"] = StaticText(ImageVersion)
 		AboutText += ImageVersion + "\n"
 
-		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
+		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n" + "\n"
 
 		fp_version = getFPVersion()
 		if fp_version is None:
-			fp_version = ""
+			fp_version = "" 
 		else:
 			fp_version = _("Frontprocessor version: %d") % fp_version
 			AboutText += fp_version + "\n"
 
 		self["FPVersion"] = StaticText(fp_version)
+		
+		AboutText += _("Skin Name: %s") % config.skin.primary_skin.value[0:-9] + "\n"
 
-		self["TunerHeader"] = StaticText(_("Detected NIMs:"))
+		if path.exists('/etc/enigma2/EtRcType'):
+		        rfp = open('/etc/enigma2/EtRcType', "r")
+		        Remote = rfp.read()
+			rfp.close
+                        AboutText += _("Remote control type") + _(": ") + Remote + "\n"
+                else:
+                        AboutText += _("Remote control type") + _(": ") + iRcTypeControl.getBoxType() 
+                        
+                if path.exists('/proc/stb/ir/rc/type'):
+		        fp = open('/proc/stb/ir/rc/type', "r")
+		        RcID = fp.read()
+			fp.close
+                        AboutText += _("Remote control ID") + _(": ") + RcID 
+		
+                self["TunerHeader"] = StaticText(_("Detected NIMs:"))
 		AboutText += "\n" + _("Detected NIMs:") + "\n"
 
 		nims = nimmanager.nimList()
@@ -107,17 +129,20 @@ class About(Screen):
 		self["hddA"] = StaticText(hddinfo)
 		AboutText += hddinfo
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
-		self["key_green"] = Button(_("Translations"))
+		
+                self["key_green"] = Button(_("Translations"))
 		self["key_red"] = Button(_("Latest Commits"))
 		self["key_yellow"] = Button(_("Memory Info"))
-
-		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
+		self["key_blue"] = Button(_("%s ") % getMachineName() + _("picture"))
+                
+                self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
 				"red": self.showCommits,
 				"green": self.showTranslationInfo,
 				"yellow": self.showMemoryInfo,
+				"blue": self.showModelPic,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown
 			}, -2)
@@ -130,7 +155,67 @@ class About(Screen):
 
 	def showMemoryInfo(self):
 		self.session.open(MemoryInfo)
+		
+	def showModelPic(self):
+		self.session.open(ModelPic)
 
+class ModelPic(Screen):
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.skinName = ["ModelPic", "About"]
+		
+		self["key_green"] = Button(_(" "))
+		self["key_red"] = Button(_(" "))
+		self["key_yellow"] = Button(_(" "))
+		self["key_blue"] = Button(_("%s ") % (getMachineName()) + _("Info"))
+		
+                self["model"] = Label(_("%s %s") % (getMachineBrand(), getMachineName())) 
+		self["boxpic"] = Pixmap()
+                self.onFirstExecBegin.append(self.poster_resize)
+
+                self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
+			{
+				"cancel": self.close,
+				"ok": self.close,
+				"blue": self.close
+			}, -2)		              
+		
+        def poster_resize(self):
+                if getBoxType() in ('et4x00'):
+                        model = "et4x00.jpg"
+                elif getBoxType() in ('et5000', 'et5x00'):
+                        model = "et5x00.jpg"
+                elif getBoxType() in ('et6x00', 'et6000'):
+                        model = "et6x00.jpg"
+                elif getBoxType() in ('et6500'):
+                        model = "et6500.jpg"
+                elif getBoxType() in ('et7000'):
+                        model = "et7000.jpg"
+                elif getBoxType() in ('et7500'):
+                        model = "et7500.jpg"
+                elif getBoxType() in ('et8000'):
+                        model = "et8000.jpg"
+                elif getBoxType() in ('et8500', 'et8500s'):
+                        model = "et8500.jpg"
+                elif getBoxType() in ('et9000', 'et9x00', 'et9200'):
+                        model = "et9x00.jpg"
+                elif getBoxType() in ('et10000'):
+                        model = "et10000.jpg"
+                else:
+                        model = None
+                        
+                poster_path = "/usr/share/enigma2/%s" % model        
+                self["boxpic"].hide()
+                sc = AVSwitch().getFramebufferScale()
+                self.picload = ePicLoad()
+                size = self["boxpic"].instance.size()
+                self.picload.setPara((size.width(), size.height(), sc[0], sc[1], False, 1, "#00000000"))
+                if self.picload.startDecode(poster_path, 0, 0, False) == 0:
+                        ptr = self.picload.getData()
+                        if ptr != None:
+                                self["boxpic"].instance.setPixmap(ptr)
+                                self["boxpic"].show()                                	
+                
 class TranslationInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
