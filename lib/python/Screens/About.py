@@ -82,7 +82,9 @@ class About(Screen):
 
 		self["FPVersion"] = StaticText(fp_version)
 		
-		AboutText += _("Skin Name: %s") % config.skin.primary_skin.value[0:-9] + "\n"
+		skinWidth = getDesktop(0).size().width()
+		skinHeight = getDesktop(0).size().height()
+		AboutText += _("Skin Name: %s") % config.skin.primary_skin.value[0:-9] + _("  (%s x %s)") % (skinWidth, skinHeight) + "\n"
 
 		if path.exists('/etc/enigma2/EtRcType'):
 		        rfp = open('/etc/enigma2/EtRcType', "r")
