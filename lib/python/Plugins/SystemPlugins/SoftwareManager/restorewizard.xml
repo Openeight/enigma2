@@ -12,103 +12,10 @@ self.buildList(self.selectedAction)
 		</code>
 	</step>
 
-	<step id="settingsquestion">
-		<text value="Do you want to restore your Enigma2 settings ?" />
-		<displaytext value="Do you want to restore your Enigma2 settings ?" />
-		<list type="dynamic" source="listSettings" evaluation="ActionSelectionMade" onselect="ActionSelectionMoved" />
-		<code>
-self.clearSelectedKeys()
-self.selectKey("OK")
-		</code>
-		<code pos="after" async="yes">
-self.buildList(self.selectedAction)
-		</code>
+	<step id="settingsrestore" nextstep="end">
+		<text value="You have chosen to restore your settings." />
 	</step>
 
-	<step id="settingsrestore">
-		<text value="Please select the file to restore ?" />
-		<displaytext value="Please select the file to restore ?" />
-		<list type="dynamic" source="listDevices" evaluation="settingsdeviceSelectionMade" onselect="settingsdeviceSelectionMoved" />
-		<code>
-self.clearSelectedKeys()
-self.selectKey("OK")
-		</code>
-		<code pos="after" async="yes">
-self.buildList(self.selectedAction)
-		</code>
-	</step>
-
-	<step id="incompatsettingsquestion">
-		<text value="Settings backup might not be compatible with the image. Continue anyway?" />
-		<displaytext value="Settings backup might not be compatible with the image. Continue anyway?" />
-		<list type="dynamic" source="listYesNo" evaluation="ActionSelectionMade" onselect="ActionSelectionMoved" />
-		<code>
-self.clearSelectedKeys()
-self.selectKey("OK")
-		</code>
-		<code pos="after" async="yes">
-self.buildList(self.selectedAction)
-		</code>
-	</step>
-
-	<step id="pluginsquestion">
-		<text value="Do you want to restore your Enigma2 plugins ?" />
-		<displaytext value="Do you want to restore your Enigma2 plugins ?" />
-		<list type="dynamic" source="listPlugins" evaluation="ActionSelectionMade" onselect="ActionSelectionMoved" />
-		<code>
-self.clearSelectedKeys()
-self.selectKey("OK")
-		</code>
-		<code pos="after" async="yes">
-self.buildList(self.selectedAction)
-		</code>
-	</step>
-
-	<step id="pluginsrestoredevice">
-		<text value="Please select the file to restore ?" />
-		<displaytext value="Please select the file to restore ?" />
-		<list type="dynamic" source="listDevices" evaluation="pluginsdeviceSelectionMade" onselect="pluginsdeviceSelectionMoved" />
-		<code>
-self.clearSelectedKeys()
-self.selectKey("OK")
-		</code>
-		<code pos="after" async="yes">
-self.buildList(self.selectedAction)
-		</code>
-	</step>
-
-	<step id="pluginrestore">
-		<text value="The wizard is finished now, and will reboot" />
-		<displaytext value="The wizard is finished now, and will reboot" />
-		<code>
-self.buildList(None)
-		</code>
-	</step>
-
-	<step id="reboot">
-		<text value="The wizard is finished now, and will reboot" />
-		<displaytext value="The wizard is finished now, and will reboot" />
-		<code>
-from enigma import quitMainloop
-quitMainloop(2)
-		</code>
-	</step>
-	<step id="restartGui">
-		<text value="The wizard is finished now. Please press Ok to restart the GUI" />
-		<displaytext value="The wizard is finished now. Please press Ok to restart the GUI" />
-		<list type="dynamic" source="restartGuiAction" evaluation="ActionSelectionMade" onselect="ActionSelectionMoved" />
-		<code>
-self.clearSelectedKeys()
-self.selectKey("OK")
-		</code>
-		<code pos="after" async="yes">
-self.buildList(self.selectedAction)
-		</code> 
-	</step>
-	<step id="noplugins">
-		<text value="No plugins where needed to be installed" />
-		<displaytext value="No plugins where needed to be installed" />
-	</step>
 	<step id="end">
 		<text value="The wizard is finished now." />
 		<displaytext value="The wizard is finished now." />
