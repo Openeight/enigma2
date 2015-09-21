@@ -519,7 +519,7 @@ class RestorePlugins(Screen):
 	def __init__(self, session, menulist):
 		Screen.__init__(self, session)
 		skin = """
-		        <screen name="Restore Plugins" position="center,center" size="650,500" title="Restore Plugins">
+		        <screen name="RestorePlugins" position="center,center" size="650,500" title="Restore Plugins">
 		        <widget source="menu" render="Listbox" position="12,12" size="627,416" scrollbarMode="showOnDemand">
 		        	<convert type="TemplatedMultiContent">
 		        		{"template": [
