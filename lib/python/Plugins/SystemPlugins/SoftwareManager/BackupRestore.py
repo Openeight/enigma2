@@ -516,9 +516,27 @@ class installedPlugins(Screen):
 		self.close()
 
 class RestorePlugins(Screen):
-
 	def __init__(self, session, menulist):
 		Screen.__init__(self, session)
+		skin = """
+		        <screen name="Restore Plugins" position="center,center" size="650,500" title="Restore Plugins">
+		        <widget source="menu" render="Listbox" position="12,12" size="627,416" scrollbarMode="showOnDemand">
+		        	<convert type="TemplatedMultiContent">
+		        		{"template": [
+		        		MultiContentEntryText(pos = (50,7), size = (590,60), flags = RT_HALIGN_LEFT, text = 0),
+		        		MultiContentEntryPixmapAlphaBlend(pos = (10,7), size = (50,40), png = 1),
+		        		],
+		        		"fonts": [gFont("Regular",22)],
+		        		"itemHeight":40
+		        		}
+		        	</convert>
+		        </widget>
+		        <ePixmap pixmap="skin_default/buttons/red.png" position="162,448" size="138,40" alphatest="blend" />
+		        <ePixmap pixmap="skin_default/buttons/green.png" position="321,448" size="138,40" alphatest="blend" />
+		        <widget name="key_red" position="169,455" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
+		        <widget name="key_green" position="329,455" size="124,26" zPosition="1" font="Regular;17" halign="center" transparent="1" />
+		        </screen>"""
+		self.skin = skin        
 		Screen.setTitle(self, _("Restore Plugins"))
 		self.index = 0
 		self.list = menulist
