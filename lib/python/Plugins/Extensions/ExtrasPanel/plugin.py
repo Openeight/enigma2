@@ -593,7 +593,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.mylist.append(((_("Backup Image" ), 'BackupImage', _("Backup your Image"))))
 		self.mylist.append(((_("Flash Online" ), 'FlashImage', _("Flash Online Image"))))
 		self.mylist.append(((_("Backup Settings" ), 'BackupSettings', _("Backup your Settings"))))
-		self.mylist.append(((_("Restore Settings" ), 'RestoreSettings', _("Restore your Settings"))))
+		self.mylist.append(((_("Restore latest Settings" ), 'RestoreSettings', _("Restore your Settings"))))
 		self.mylist.append(((_("Advanced Restore" ), 'AdvancedRestore', _("Advanced Restore..."))))
 		self.mylist.append(((_("Backup Files" ), 'BackupFiles', _("Choose Backup Files"))))
 		self.mylist.append(((_("Backup location" ), 'BackupLocation', _("Choose Backup location"))))

@@ -19,7 +19,7 @@ from enigma import eTimer, eEnv, eConsoleAppContainer, eEPGCache
 from Tools.Directories import *
 from os import popen, path, makedirs, listdir, access, stat, rename, remove, W_OK, R_OK
 from time import gmtime, strftime, localtime
-from datetime import date
+from datetime import datetime
 from boxbranding import getBoxType, getMachineBrand, getMachineName
 
 boxtype = getBoxType()
@@ -103,7 +103,7 @@ class BackupScreen(Screen, ConfigListScreen):
 			cmd3 = "tar -czvf " + self.fullbackupfilename + " " + self.backupdirs
 			cmd = [cmd1, cmd2, cmd3]
 			if path.exists(self.fullbackupfilename):
-				dt = str(date.fromtimestamp(stat(self.fullbackupfilename).st_ctime))
+				dt = datetime.fromtimestamp(stat(self.fullbackupfilename).st_ctime).strftime('%Y%m%d%H%M%S')
 				self.newfilename = self.backuppath + "/" + dt + '-' + self.backupfile
 				if path.exists(self.newfilename):
 					remove(self.newfilename)
