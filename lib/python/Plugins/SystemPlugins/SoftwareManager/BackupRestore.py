@@ -103,7 +103,7 @@ class BackupScreen(Screen, ConfigListScreen):
 			cmd3 = "tar -czvf " + self.fullbackupfilename + " " + self.backupdirs
 			cmd = [cmd1, cmd2, cmd3]
 			if path.exists(self.fullbackupfilename):
-				dt = datetime.fromtimestamp(stat(self.fullbackupfilename).st_ctime).strftime('%Y%m%d%H%M%S')
+				dt = datetime.fromtimestamp(stat(self.fullbackupfilename).st_ctime).strftime('%Y-%m-%d-%H%M%S')
 				self.newfilename = self.backuppath + "/" + dt + '-' + self.backupfile
 				if path.exists(self.newfilename):
 					remove(self.newfilename)
@@ -276,7 +276,9 @@ class RestoreMenu(Screen):
 	def fill_list(self):
 		self.flist = []
 		self.path = getBackupPath()
-		if path.exists(self.path) == False:
+		if not path.isdir(self.path):
+			self.path = getOldBackupPath()
+		if not path.isdir(self.path):
 			makedirs(self.path)
 		for file in listdir(self.path):
 			if file.endswith(".tar.gz"):
