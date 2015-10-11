@@ -199,7 +199,7 @@ class ModelPic(Screen):
                         model = "et8000.jpg"
                 elif getBoxType() in ('et8500', 'et8500s'):
                         model = "et8500.jpg"
-                elif getBoxType() in ('et9000', 'et9x00', 'et9200'):
+                elif getBoxType() in ('et9000', 'et9x00', 'et9200', 'et9500'):
                         model = "et9x00.jpg"
                 elif getBoxType() in ('et10000'):
                         model = "et10000.jpg"
