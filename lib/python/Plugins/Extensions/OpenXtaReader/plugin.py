@@ -184,7 +184,7 @@ class OpenXtaThread(OpenXtaScreen):
 				logo = 'thread_old-30'
 
 				link_element = subforum.find('.//h4[@class]/a')
-				link = link_element.get('href')
+				link = link_element.get('href').encode('utf8').strip()
 
 				self.addTableEntry(subforum_title, stats, date, user, logo, link)
 
@@ -212,7 +212,7 @@ class OpenXtaThread(OpenXtaScreen):
 					logo = 'thread_old-30'
 
 				link_element = thread.find('.//h4[@class]/a')
-				link = link_element.get('href')
+				link = link_element.get('href').encode('utf8').strip()
 
 				self.addTableEntry(thread_title, stats, date, user, logo, link)
 
