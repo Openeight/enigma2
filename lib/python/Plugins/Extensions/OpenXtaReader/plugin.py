@@ -568,7 +568,7 @@ class OpenXtaPost(OpenXtaScreen):
 				text += '  ' + _('Date: ') + convertDate(date) + '\n\n'
 
 				comment_element = post.find('.//div[@data-commentid]/div/div[@data-role="commentContent"]')
-				comment = etree.tostring(comment_element, method = 'text', encoding = 'utf8').strip()
+				comment = self.print_comment(comment_element)
 				comment += '\n===========================================================\n'
 
 				text += comment
@@ -583,6 +583,23 @@ class OpenXtaPost(OpenXtaScreen):
 			print 'OpenXtaReader Exception: ', e
 
 		self.ready = True
+
+	def print_comment(self, comment_element):
+		text = ''
+		for c in comment_element:
+			if c.tag == 'blockquote':
+				if c.get("data-ipsquote-username"):
+					text += '\n\nQuote ' + c.get("data-ipsquote-username") + ': \n'
+				else:
+					text += '\n\nQuote: \n'
+			if c.text:
+				text += c.text.encode('utf8').strip()
+			if c.tail:
+				text += c.tail.encode('utf8').strip()
+			text += self.print_comment(c)
+			if c.tag == 'blockquote':
+				text += '\nEnd quote\n\n'
+		return text
 
 	def red(self):
 		if self.ready == True:
