@@ -17,15 +17,24 @@ from lxml import etree
 from datetime import datetime, date, timedelta
 
 
-def convertDate(datestr):
+def convertDate(datestr, with_time = False):
 	if datestr == '':
 		return ''
 	d = datetime.strptime(datestr,'%Y-%m-%dT%H:%M:%SZ')
 	if datetime.now().date() == d.date():
-		return _('Today')
+		if with_time:
+			return _('Today') + d.strftime(' %H:%M:%S')
+		else:
+			return _('Today')
 	elif (datetime.now() - timedelta(days=1)).date() == d.date():
-		return _('Yesterday')
-	return d.strftime('%d-%m-%y')
+		if with_time:
+			return _('Yesterday') + d.strftime(' %H:%M:%S')
+		else:
+			return _('Yesterday')
+	if with_time:
+		return d.strftime('%d-%m-%y %H:%M:%S')
+	else:
+		return d.strftime('%d-%m-%y')
 
 
 class OpenXtaScreen(Screen):
@@ -133,7 +142,7 @@ class OpenXtaThread(OpenXtaScreen):
 		res.append(MultiContentEntryText(pos=(45, 25), size=(485, 24), font=-1, backcolor=1447446, color=16777215, backcolor_sel=1447446, color_sel=15022127, flags=RT_HALIGN_LEFT, text=stats))
 		res.append(MultiContentEntryText(pos=(530, 25), size=(120, 24), font=-1, backcolor=1447446, color=16777215, backcolor_sel=1447446, color_sel=15022127, flags=RT_HALIGN_LEFT, text=convertDate(date)))
 		res.append(MultiContentEntryText(pos=(650, 25), size=(150, 24), font=-1, backcolor=1447446, color=16777215, backcolor_sel=1447446, color_sel=15022127, flags=RT_HALIGN_LEFT, text=user))
-		if convertDate(date) == 'Today':
+		if convertDate(date) == _('Today'):
 			png = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/OpenXtaReader/pic/thread_new-30.png')
 			if fileExists(png):
 				res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(44, 44), backcolor=1447446, backcolor_sel=1447446, png=loadPNG(png)))
@@ -388,7 +397,7 @@ class OpenXtaLatestPosts(OpenXtaScreen):
 		res.append(MultiContentEntryText(pos=(45, 25), size=(485, 24), font=-1, backcolor=1447446, color=16777215, backcolor_sel=1447446, color_sel=15022127, flags=RT_HALIGN_LEFT, text=stats))
 		res.append(MultiContentEntryText(pos=(530, 25), size=(120, 24), font=-1, backcolor=1447446, color=16777215, backcolor_sel=1447446, color_sel=15022127, flags=RT_HALIGN_LEFT, text=convertDate(date)))
 		res.append(MultiContentEntryText(pos=(650, 25), size=(150, 24), font=-1, backcolor=1447446, color=16777215, backcolor_sel=1447446, color_sel=15022127, flags=RT_HALIGN_LEFT, text=user))
-		if convertDate(date) == 'Today':
+		if convertDate(date) == _('Today'):
 			png = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/OpenXtaReader/pic/thread_new-30.png')
 			if fileExists(png):
 				res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(44, 44), backcolor=1447446, backcolor_sel=1447446, png=loadPNG(png)))
@@ -565,7 +574,7 @@ class OpenXtaPost(OpenXtaScreen):
 
 				date_element = post.find('.//div[@data-commentid]/div/p/time')
 				date = date_element.get('datetime')
-				text += '  ' + _('Date: ') + convertDate(date) + '\n\n'
+				text += '  ' + _('Date: ') + convertDate(date, True) + '\n\n'
 
 				comment_element = post.find('.//div[@data-commentid]/div/div[@data-role="commentContent"]')
 				comment = self.print_comment(comment_element)
@@ -901,9 +910,9 @@ class OpenXtaMain(OpenXtaScreen):
 					else:
 						date = ''
 
-					user_element = subforum.find('.//ul[@class]/li/a[@data-ipsHover]')
-					if user_element is not None:
-						user = etree.tostring(user_element, method='text').strip()
+					user_element = subforum.xpath('.//ul[@class]/li[starts-with(text(),"By")]/a')
+					if len(user_element) == 1:
+						user = user_element[0].text.encode('utf8').strip()
 					else:
 						user = ''
 
@@ -917,7 +926,7 @@ class OpenXtaMain(OpenXtaScreen):
 					res.append(MultiContentEntryText(pos=(45, 25), size=(340, 24), font=0, backcolor=1447446, color=16777215, backcolor_sel=1447446, color_sel=15022127, flags=RT_HALIGN_LEFT, text=last_post_title))
 					res.append(MultiContentEntryText(pos=(385, 25), size=(105, 24), font=0, backcolor=1447446, color=16777215, backcolor_sel=1447446, color_sel=15022127, flags=RT_HALIGN_LEFT, text=convertDate(date)))
 					res.append(MultiContentEntryText(pos=(490, 25), size=(110, 24), font=0, backcolor=1447446, color=16777215, backcolor_sel=1447446, color_sel=15022127, flags=RT_HALIGN_LEFT, text=user))
-					if convertDate(date) == 'Today':
+					if convertDate(date) == _('Today'):
 						png = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/OpenXtaReader/pic/forum_new-48.png')
 						if fileExists(png):
 							res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 2), size=(44, 44), backcolor=1447446, backcolor_sel=1447446, png=loadPNG(png)))
