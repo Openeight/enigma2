@@ -23,16 +23,16 @@ def convertDate(datestr, with_time = False):
 	d = datetime.strptime(datestr,'%Y-%m-%dT%H:%M:%SZ')
 	if datetime.now().date() == d.date():
 		if with_time:
-			return _('Today') + d.strftime(' %H:%M:%S')
+			return _('Today') + d.strftime('  %H:%M:%S')
 		else:
 			return _('Today')
 	elif (datetime.now() - timedelta(days=1)).date() == d.date():
 		if with_time:
-			return _('Yesterday') + d.strftime(' %H:%M:%S')
+			return _('Yesterday') + d.strftime('  %H:%M:%S')
 		else:
 			return _('Yesterday')
 	if with_time:
-		return d.strftime('%d-%m-%y %H:%M:%S')
+		return d.strftime('%d-%m-%y  %H:%M:%S')
 	else:
 		return d.strftime('%d-%m-%y')
 
@@ -604,10 +604,12 @@ class OpenXtaPost(OpenXtaScreen):
 			if c.text:
 				text += c.text.encode('utf8').strip()
 			if c.tail:
-				text += c.tail.encode('utf8').strip()
+				text += '\n' + c.tail.encode('utf8').strip()
 			text += self.print_comment(c)
 			if c.tag == 'blockquote':
 				text += '\nEnd quote\n\n'
+			if c.tag == 'div':
+				text += '\n'
 		return text
 
 	def red(self):
