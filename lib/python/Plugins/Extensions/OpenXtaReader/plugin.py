@@ -574,10 +574,20 @@ class OpenXtaPost(OpenXtaScreen):
 
 				date_element = post.find('.//div[@data-commentid]/div/p/time')
 				date = date_element.get('datetime')
-				text += '  ' + _('Date: ') + convertDate(date, True) + '\n\n'
+				text += '    ' + _('Date: ') + convertDate(date, True) + '\n\n'
 
 				comment_element = post.find('.//div[@data-commentid]/div/div[@data-role="commentContent"]')
-				comment = self.print_comment(comment_element)
+				# delete unnecessary \t\n before "edited by xyz" element
+				edit_comment_element = comment_element.find('.//span[@data-excludequote]')
+				edit_comment = ''
+				if edit_comment_element is not None:
+					edit_comment = etree.tostring(edit_comment_element, method='text').strip()
+					edit_comment_element.getparent().remove(edit_comment_element)
+				comment = self.print_comment(comment_element).rstrip()
+				comment = ' '.join(comment.split(' '))
+				comment = ''.join(comment.split('\t'))
+				if edit_comment:
+					comment += '\n\n' + edit_comment
 				comment += '\n===========================================================\n'
 
 				text += comment
@@ -602,13 +612,17 @@ class OpenXtaPost(OpenXtaScreen):
 				else:
 					text += '\n\nQuote: \n'
 			if c.text:
-				text += c.text.encode('utf8').strip()
+				text += c.text.encode('utf8').replace('\\n','<newline>')
 			if c.tail:
-				text += '\n' + c.tail.encode('utf8').strip()
+				if c.tag == 'br':
+					text += '\n'
+				else:
+					text += ' '
+				text += c.tail.encode('utf8').replace('\\n','<newline>')
 			text += self.print_comment(c)
 			if c.tag == 'blockquote':
 				text += '\nEnd quote\n\n'
-			if c.tag == 'div':
+			if c.tag in ('div','p'):
 				text += '\n'
 		return text
 
