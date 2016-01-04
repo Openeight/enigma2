@@ -274,6 +274,12 @@ msgstr "%s%d min"
 msgid "%s/%s: %s"
 msgstr "%s/%s: %s"
 
+msgid "(activated +%d min)"
+msgstr "(actief +%d min)"
+
+msgid "(not activated)"
+msgstr "(niet actief)"
+
 msgid "(ZAP)"
 msgstr "(ZAP)"
 
@@ -387,13 +393,13 @@ msgid ": %s"
 msgstr ":%s"
 
 msgid "<Current movielist location>"
-msgstr "<Huidige opnamelijstlocatie>"
+msgstr "<Huidige opnamelijst locatie>"
 
 msgid "<Default movie location>"
-msgstr "<Standaard opnamelocatie>"
+msgstr "<Standaard opname locatie>"
 
 msgid "<Last timer location>"
-msgstr "<Laatste timerlocatie>"
+msgstr "<Laatste timer locatie>"
 
 msgid "<unknown>"
 msgstr "<onbekend>"
@@ -852,7 +858,7 @@ msgid "Auto focus commencing ..."
 msgstr "Starten van de auto focus..."
 
 msgid "Auto language selection"
-msgstr "Automatische taalkeuzeselectie"
+msgstr "Automatische taalkeuze selectie"
 
 msgid "Auto scart switching"
 msgstr "Automatisch scart schakelen"
@@ -1021,6 +1027,9 @@ msgstr "Berekening gereed"
 
 msgid "Calibrate"
 msgstr "Calibreren"
+
+msgid "Cam Setup"
+msgstr "Cam instellingen"
 
 msgid "Can be used for different fps between external subtitles and video."
 msgstr ""
@@ -1993,7 +2002,7 @@ msgid "Cut"
 msgstr "Knip"
 
 msgid "Cutlist editor..."
-msgstr "Cutlijst editor"
+msgstr "Knip lijst bewerken"
 
 msgid "Czech"
 msgstr "Tsjechisch"
@@ -2054,11 +2063,12 @@ msgstr "Deens"
 
 msgid "Date"
 msgstr "Datum"
-msgid "Date: "
-msgstr "Datum: "
 
 msgid "Date/time input"
 msgstr "Tijd / Datum invoer"
+
+msgid "Date: "
+msgstr "Datum: "
 
 msgid "Deep standby"
 msgstr "Volledig uitschakelen"
@@ -2533,10 +2543,10 @@ msgid "End time"
 msgstr "Eindtijd"
 
 msgid "End time to ignore inactivity sleeptimer"
-msgstr "De eindtijd die de inactiviteit sleeptimer negeert"
+msgstr "De eindtijd om de inactiviteits sleeptimer te negeren"
 
 msgid "End time to ignore shutdown in standby"
-msgstr "Eind tijd om in standby gaan te negeren"
+msgstr "De eindtijd om 'afsluiten indien in standby' te negeren"
 
 msgid "English"
 msgstr "Engels"
@@ -2645,6 +2655,9 @@ msgstr "Expert"
 msgid "Extend sleeptimer 15 minutes"
 msgstr "Verleng de sleeptimer met 15 minuten"
 
+msgid "Extended"
+msgstr "Uitgebreid"
+
 msgid "Extended Software"
 msgstr "Uitgebreide software"
 
@@ -2669,8 +2682,17 @@ msgstr "Externe PIP"
 msgid "External subtitle color"
 msgstr "Kleur van de externe ondertitel"
 
+msgid "Extra end time to ignore inactivity sleeptimer"
+msgstr "De extra eindtijd om de inactiviteits sleeptimer te negeren"
+
 msgid "Extra motor options"
 msgstr "Extra motor opties"
+
+msgid "Extra Setup"
+msgstr "Extra Instellingen"
+
+msgid "Extra start time to ignore inactivity sleeptimer"
+msgstr "De extra starttijd om de inactiviteits sleeptimer te negeren"
 
 msgid "FEC"
 msgstr "FEC"
@@ -3148,7 +3170,7 @@ msgid "Input device setup"
 msgstr "Invoerapparaat setup"
 
 msgid "Input devices"
-msgstr "Invoerapparaten"
+msgstr "Invoer apparaten"
 
 msgid "Install"
 msgstr "Installeer"
@@ -3539,14 +3561,6 @@ msgstr "Minimum verzend interval"
 msgid "Missing "
 msgstr "Ontbrekend"
 
-msgctxt "Satellite configuration mode"
-msgid "Mode"
-msgstr "Modus "
-
-msgctxt "Video output mode"
-msgid "Mode"
-msgstr "Modus "
-
 msgid "Model: "
 msgstr "Model: "
 
@@ -3756,14 +3770,6 @@ msgstr "Nieuwe versie:"
 msgid "News Current Affairs"
 msgstr "Nieuws/actualiteiten"
 
-msgctxt "button label, 'next screen'"
-msgid "Next"
-msgstr "Volgende"
-
-msgctxt "now/next: 'next' event label"
-msgid "Next"
-msgstr "Straks"
-
 msgid "No"
 msgstr "Nee"
 
@@ -3972,10 +3978,6 @@ msgstr ""
 "Niets gevonden!\n"
 "Vóór het zoeken dient uw tuner correct ingesteld te zijn."
 
-msgctxt "now/next: 'now' event label"
-msgid "Now"
-msgstr "Nu"
-
 msgid "Now playing"
 msgstr "Huidige weergave"
 
@@ -3998,6 +4000,9 @@ msgstr "OK, mij tijdens de software update begeleiden"
 
 msgid "ONID"
 msgstr "ONID"
+
+msgid "OSD 3D setup"
+msgstr "OSD 3D instellingen"
 
 msgid "OSD name request"
 msgstr "OSD naam aanvragen"
@@ -4532,10 +4537,6 @@ msgstr "Druk op OK om de selectie te de/activeren."
 msgid "Press yellow to set this interface as default interface."
 msgstr "Druk op geel om deze interface als standaard in te stellen."
 
-msgctxt "button label, 'previous screen'"
-msgid "Prev"
-msgstr "Vorige"
-
 msgid "Preview"
 msgstr "Voorbeeld"
 
@@ -4668,7 +4669,7 @@ msgid "Recording in progress"
 msgstr "Opnemen bezig"
 
 msgid "Recording paths"
-msgstr "Opnamelocaties"
+msgstr "Opname locaties"
 
 msgid "Recording type"
 msgstr "Opnamesoort"
@@ -4932,6 +4933,10 @@ msgstr "Za"
 
 msgid "Satellite"
 msgstr "Satelliet"
+
+msgctxt "Satellite configuration mode"
+msgid "Mode"
+msgstr "Modus "
 
 msgid "Satellite dish setup"
 msgstr "Schotelconfiguratie"
@@ -5529,7 +5534,7 @@ msgid "Similar broadcasts:"
 msgstr "Gelijksoortige uitzendingen:"
 
 msgid "Simple"
-msgstr "Standaardgebruiker"
+msgstr "Eenvoudig"
 
 msgid "Simple titleset (compatibility for legacy players)"
 msgstr "Eenvoudige titelset (compatibel met gewone spelers)"
@@ -5554,6 +5559,12 @@ msgstr "Breedtegraad van de locatie"
 
 msgid "Site longitude"
 msgstr "Lengtegraad van de locatie"
+
+msgid "Skin Setup"
+msgstr "Skin instellingen"
+
+msgid "Skin setup"
+msgstr "Skin Instellingen"
 
 msgid "Skin"
 msgstr "Skin"
@@ -5687,6 +5698,9 @@ msgstr "Zuid"
 msgid "Spanish"
 msgstr "Spaans"
 
+msgid "Specify extra timeframe to ignore inactivity sleeptimer"
+msgstr "Geef een extra tijdsperiode op, om de inactiviteits sleeptimer te negeren"
+
 msgid ""
 "Specify the end time to ignore the shutdown timer when the receiver is in "
 "standby mode"
@@ -5694,9 +5708,18 @@ msgstr ""
 "Specificeer de eind tijd wanneer de uitschakeltimer genegeerd moet worden "
 "wanneer de ontvanger in standby is."
 
+msgid "Specify the extra end time until the inactivity sleeptimer should be ignored"
+msgstr ""
+"Selecteer het extra eind tijdstip tot wanneer de inactiviteits sleeptimer moet worden genegeerd"
+
 msgid "Specify the end time until the inactivity sleeptimer should be ignored"
 msgstr ""
-"Selecteer het eind tijdstip vanaf wanneer de sleeptimer moet worden genegeerd"
+"Selecteer het eind tijdstip tot wanneer de inactiviteits sleeptimer moet worden genegeerd"
+
+msgid "Specify the extra start time when the inactivity sleeptimer should be ignored"
+msgstr ""
+"Selecteer het extra start tijdstip vanaf wanneer de inactiviteits sleeptimer moet worden "
+"genegeerd"
 
 msgid ""
 "Specify the start time to ignore the shutdown timer when the receiver is in "
@@ -5707,14 +5730,14 @@ msgstr ""
 
 msgid "Specify the start time when the inactivity sleeptimer should be ignored"
 msgstr ""
-"Selecteer het start tijdstip vanaf wanneer de sleeptimer moet worden "
+"Selecteer het start tijdstip vanaf wanneer de inactiviteits sleeptimer moet worden "
 "genegeerd"
 
 msgid "Specify timeframe to ignore inactivity sleeptimer"
-msgstr "Geef de tijdperiode op waarin de sleeptimer wordt genegeerd"
+msgstr "Geef een tijdsperiode op, om de inactiviteits sleeptimer te negeren"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
-msgstr "Specificeer tijdsruimte om in standby te gaan te negeren"
+msgstr "Geef een tijdsperiode op, om 'afsluiten indien in standby' te negeren"
 
 msgid "Split preview mode"
 msgstr "Splits preview-modus"
@@ -5770,10 +5793,10 @@ msgid "Start time"
 msgstr "Starttijd"
 
 msgid "Start time to ignore inactivity sleeptimer"
-msgstr "Tijdsduur hoe lang de inactiviteitssleeptimer genegeerd wordt"
+msgstr "De starttijd om de inactiviteits sleeptimer te negeren"
 
 msgid "Start time to ignore shutdown in standby"
-msgstr "Start tijd om in standby gaan te negeren"
+msgstr "De starttijd om 'afsluiten indien in standby' te negeren"
 
 msgid "Start timeshift"
 msgstr "Start de timeshift"
@@ -5916,7 +5939,7 @@ msgid "Subtitle selection..."
 msgstr "Ondertitelselectie..."
 
 msgid "Subtitle settings"
-msgstr "Ondertitelinstellingen"
+msgstr "Ondertitel instellingen"
 
 msgid "Subtitles"
 msgstr "Ondertitels"
@@ -5986,6 +6009,9 @@ msgstr "Sync probleem bij draaiing naar nulpunt !"
 
 msgid "System"
 msgstr "Systeem"
+
+msgid "Testscreens"
+msgstr "Test beelden"
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
@@ -6383,7 +6409,7 @@ msgid "Timer overview"
 msgstr "Timeroverzicht"
 
 msgid "Timer recording location"
-msgstr "Opnamelocatie timeropnames"
+msgstr "Opname locatie timeropnames"
 
 msgid "Timer sanity error"
 msgstr "Timerlogica fout"
@@ -6404,7 +6430,7 @@ msgid "Timeshift Live"
 msgstr "Live Timeshift"
 
 msgid "Timeshift location"
-msgstr "Opnamelocatie timeshift opnames"
+msgstr "Opname locatie timeshift opnames"
 
 msgid "Timeshift not possible!"
 msgstr "Timeshift is niet mogelijk!"
@@ -6765,7 +6791,7 @@ msgid "User defined transponder"
 msgstr "Gebruikergedefinieerde transponder"
 
 msgid "User interface"
-msgstr "Gebruikersinterface"
+msgstr "Gebruikers instellingen"
 
 msgid "Username"
 msgstr "Gebruikersnaam"
@@ -6809,10 +6835,10 @@ msgid "Video enhancement preview"
 msgstr "Videoverbetering preview"
 
 msgid "Video enhancement settings"
-msgstr "Videoverbeteringsinstellingen..."
+msgstr "Video verbeterings instellingen..."
 
 msgid "Video enhancement setup"
-msgstr "Videoverbeteringsinstelling..."
+msgstr "Video verbeterings instelling..."
 
 msgid "Video fine tuning"
 msgstr "Video fijnafstellingen"
@@ -6831,10 +6857,14 @@ msgstr ""
 "De volgende videooptie wordt over +/- 10 seconden automatisch geprobeerd."
 
 msgid "Video mode selection."
-msgstr "Videomodeselectie"
+msgstr "Videomodes selectie"
 
 msgid "Video output"
 msgstr "Video uitgang"
+
+msgctxt "Video output mode"
+msgid "Mode"
+msgstr "Modus "
 
 msgid "Video setup"
 msgstr "Video instellingen"
@@ -7089,6 +7119,15 @@ msgid ""
 "inactivity timeout is disabled"
 msgstr ""
 "Je kunt een periode opgeven waarin de inactiviteits sleeptimer wordt "
+"genegeerd. De detectie wordt niet uitgeschakeld maar de inactiviteits "
+"timeout wordt uitgeschakeld."
+
+msgid ""
+"When enabled you can specify an extra timeframe were the inactivity sleeptimer is "
+"ignored. Not the detection is disabled during this timeframe but the "
+"inactivity timeout is disabled"
+msgstr ""
+"Je kunt een extra periode opgeven waarin de inactiviteits sleeptimer wordt "
 "genegeerd. De detectie wordt niet uitgeschakeld maar de inactiviteits "
 "timeout wordt uitgeschakeld."
 
@@ -7902,6 +7941,14 @@ msgstr "blauw"
 msgid "broadcasting/press"
 msgstr "feeds / pers"
 
+msgctxt "button label, 'next screen'"
+msgid "Next"
+msgstr "Volgende"
+
+msgctxt "button label, 'previous screen'"
+msgid "Prev"
+msgstr "Vorige"
+
 msgid "by date"
 msgstr "op datum"
 
@@ -8335,6 +8382,14 @@ msgstr "niet gebruikt"
 msgid "nothing connected"
 msgstr "niets aangesloten"
 
+msgctxt "now/next: 'next' event label"
+msgid "Next"
+msgstr "Straks"
+
+msgctxt "now/next: 'now' event label"
+msgid "Now"
+msgstr "Nu"
+
 msgid "of a DUAL layer medium used."
 msgstr "op een DUAL layer medium gebruikt."
 
@@ -8574,9 +8629,6 @@ msgstr "willekeurig"
 
 msgid "shut down"
 msgstr "uitschakelen"
-
-msgid "simple"
-msgstr "eenvoudig"
 
 msgid "skip backward"
 msgstr "Achteruit springen"
