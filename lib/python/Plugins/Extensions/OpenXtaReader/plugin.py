@@ -608,7 +608,7 @@ class OpenXtaPost(OpenXtaScreen):
 		for c in comment_element:
 			if c.tag == 'blockquote':
 				if c.get("data-ipsquote-username"):
-					text += '\n\nQuote ' + c.get("data-ipsquote-username") + ': \n'
+					text += '\n\nQuote ' + c.get("data-ipsquote-username").encode('utf8') + ': \n'
 				else:
 					text += '\n\nQuote: \n'
 			if c.text:
