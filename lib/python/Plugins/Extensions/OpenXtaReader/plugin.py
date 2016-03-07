@@ -14,6 +14,7 @@ from enigma import eListboxPythonMultiContent, eTimer, gFont, loadPNG, RT_HALIGN
 import os
 from twisted.web.client import getPage, downloadPage
 from lxml import etree
+import calendar
 from datetime import datetime, date, timedelta
 
 
@@ -21,6 +22,10 @@ def convertDate(datestr, with_time = False):
 	if datestr == '':
 		return ''
 	d = datetime.strptime(datestr,'%Y-%m-%dT%H:%M:%SZ')
+	# this is a utc timestamp -> convert it to local time
+	utc_timestamp = calendar.timegm(d.timetuple())
+	d = datetime.fromtimestamp(utc_timestamp)
+
 	if datetime.now().date() == d.date():
 		if with_time:
 			return _('Today') + d.strftime('  %H:%M:%S')
