@@ -42,6 +42,7 @@ EXTRA_OECONF = "\
 	--enable-dependency-tracking \
 	${@base_contains("MACHINE_FEATURES", "textlcd", "--with-textlcd" , "", d)} \
 	${@base_contains("MACHINE_FEATURES", "colorlcd", "--with-colorlcd" , "", d)} \
+	${@base_contains("GST_VERSION", "1.0", "--with-gstversion=1.0", "", d)} \
 	BUILD_SYS=${BUILD_SYS} \
 	HOST_SYS=${HOST_SYS} \
 	STAGING_INCDIR=${STAGING_INCDIR} \
