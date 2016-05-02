@@ -484,7 +484,7 @@ class Extraspanel(Screen, InfoBarPiP):
 			if plugin is not None and sz_w == 1280:
 				plugin(session=self.session)
 			else:
-				self.session.open(MessageBox, _('Sorry:\nET-MultiQuickButton support only HD skins with 1280x720px'), MessageBox.TYPE_INFO, timeout=10)
+				self.session.open(MessageBox, _('Sorry:\nET-MultiQuickButton supports only HD skins with 1280x720px'), MessageBox.TYPE_INFO, timeout=10)
 		elif menu == "PacketManager":
 			self.session.open(PacketManager, self.skin)
 		elif menu == "DVB-NTP-Time":
@@ -525,7 +525,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.mylist.append(((_('Sundtek Control-Center'), 'SundtekControlCenter', _('select your Sundtek USB-Tuner ...'))))
 		self.mylist.append(((_('Packet Manager'), 'PacketManager', _('show all Packages'))))		
 		if os.path.isfile("/usr/lib/enigma2/python/Plugins/Extensions/MultiQuickButton/plugin.pyo") is True:
-			self.mylist.append(((_('Multi Quick Button'), 'MultiQuickButton', _('change buttons for remote key'))))
+			self.mylist.append(((_('Multi Quick Button'), 'MultiQuickButton', _('change the button functions of your remote control'))))
 		self.mylist.append(((_('DVB-NTP-Time'), 'DVB-NTP-Time', _('Check and set DVB Time'))))
 		self['list'].setList(self.mylist)
 
@@ -1115,7 +1115,7 @@ class Info(Screen):
 			info3 = self.Do_cut(info1 + info2)
 			self["label1"].setText(info3)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Sytem_info(self):
 		try:
@@ -1124,7 +1124,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Default(self):
 
@@ -1143,7 +1143,7 @@ class Info(Screen):
 			info6 = self.Do_cut(info1 + info2 + info3 + info4 + info5)
 			self["label1"].setText(info6)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def FreeSpace(self):
 		try:
@@ -1152,7 +1152,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Mounts(self):
 		try:
@@ -1161,7 +1161,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Network(self):
 		try:
@@ -1171,7 +1171,7 @@ class Info(Screen):
 			info3 = self.Do_cut(info1 + info2)
 			self["label1"].setText(info3)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Kernel(self):
 		try:
@@ -1185,7 +1185,7 @@ class Info(Screen):
 			info5 = self.Do_cut(info1 + info2 + info3 + info4)
 			self["label1"].setText(info5)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Free(self):
 		try:
@@ -1194,7 +1194,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Cpu(self):
 		try:
@@ -1203,7 +1203,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Top(self):
 		try:
@@ -1212,7 +1212,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def MemInfo(self):
 		try:
@@ -1221,7 +1221,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Module(self):
 		try:
@@ -1230,7 +1230,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Mtd(self):
 		try:
@@ -1239,7 +1239,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Partitions(self):
 		try:
@@ -1248,7 +1248,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 	def Swap(self):
 		try:
@@ -1268,7 +1268,7 @@ class Info(Screen):
 			info1 = self.Do_cut(info1)
 			self["label1"].setText(info1)
 		except:
-			self["label1"].setText(_("an internal error has occur"))
+			self["label1"].setText(_("an internal error has occured"))
 
 
 	def Do_find(self, text, search):
