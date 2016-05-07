@@ -435,7 +435,17 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	m_state = stIdle;
 	eDebug("[eServiceMP3] construct!");
 
-	const char *filename = m_ref.path.c_str();
+	const char *filename;
+	std::string filename_str;
+	size_t pos = m_ref.path.find('#');
+	if (pos != std::string::npos && m_ref.path.compare(0, 4, "http") == 0)
+	{
+		filename_str = m_ref.path.substr(0, pos);
+		filename = filename_str.c_str();
+		m_extra_headers = m_ref.path.substr(pos + 1);
+	}
+	else
+		filename = m_ref.path.c_str();
 	const char *ext = strrchr(filename, '.');
 	if (!ext)
 		ext = filename + strlen(filename);
@@ -486,7 +496,9 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		m_sourceinfo.audiotype = atMP3;
 	else if ( strcasecmp(ext, ".wma") == 0 )
 		m_sourceinfo.audiotype = atWMA;
-	else if ( (strncmp(filename, "/media/sr", 9) || strncmp(filename+strlen(filename)-13, "/track-", 7) || strcasecmp(ext, ".wav")) == 0 )
+	else if ( strcasecmp(ext, ".wav") == 0 )
+		m_sourceinfo.audiotype = atPCM;
+	else if ( strcasecmp(ext, ".cda") == 0)
 		m_sourceinfo.containertype = ctCDA;
 	if ( strcasecmp(ext, ".dat") == 0 )
 	{
@@ -511,7 +523,6 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		}
 		if (m_useragent.empty())
 			m_useragent = "Enigma2 Mediaplayer";
-		m_extra_headers = eConfigManager::getConfigValue("config.mediaplayer.extraHeaders");
 		if ( m_ref.getData(7) & BUFFERING_ENABLED )
 		{
 			m_use_prefillbuffer = true;
@@ -528,7 +539,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	}
 	else if ( m_sourceinfo.containertype == ctCDA )
 	{
-		int i_track = atoi(filename+17);
+		int i_track = atoi(filename+(strlen(filename) - 6));
 		uri = g_strdup_printf ("cdda://%i", i_track);
 	}
 	else if ( m_sourceinfo.containertype == ctVCD )
@@ -1293,7 +1304,7 @@ std::string eServiceMP3::getInfoString(int w)
 	}
 	if ( !tag )
 		return "";
-	gchar *value;
+	gchar *value = NULL;
 	if (m_stream_tags && gst_tag_list_get_string(m_stream_tags, tag, &value))
 	{
 		std::string res = value;
@@ -2210,7 +2221,7 @@ void eServiceMP3::playbinNotifySource(GObject *object, GParamSpec *unused, gpoin
 				std::string name, value;
 				size_t start = pos;
 				size_t len = std::string::npos;
-				pos = _this->m_extra_headers.find(':', pos);
+				pos = _this->m_extra_headers.find('=', pos);
 				if (pos != std::string::npos)
 				{
 					len = pos - start;
@@ -2218,7 +2229,7 @@ void eServiceMP3::playbinNotifySource(GObject *object, GParamSpec *unused, gpoin
 					name = _this->m_extra_headers.substr(start, len);
 					start = pos;
 					len = std::string::npos;
-					pos = _this->m_extra_headers.find('|', pos);
+					pos = _this->m_extra_headers.find('&', pos);
 					if (pos != std::string::npos)
 					{
 						len = pos - start;
