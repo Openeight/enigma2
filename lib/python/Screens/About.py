@@ -7,29 +7,20 @@ from Components.NimManager import nimmanager
 from Components.About import about
 from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
-from Tools.Downloader import downloadWithProgress
-from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSubsection, ConfigSelection, getConfigListEntry
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
-import re
 from boxbranding import getBoxType, getMachineBrand, getMachineName, getImageVersion, getImageBuild, getDriverDate
-from os import path
-from Tools.StbHardware import getFPVersion
 
+from Tools.StbHardware import getFPVersion
 from enigma import ePicLoad, getDesktop, eSize, eTimer, eLabel
 from Components.Pixmap import Pixmap
 from Tools.LoadPixmap import LoadPixmap
 from Components.InputDevice import iInputDevices, iRcTypeControl
 from Components.AVSwitch import AVSwitch
-import os 
-
+from os import path
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
 import skin
-
-config.CommitInfoSetup = ConfigSubsection()
-config.CommitInfoSetup.commiturl = ConfigSelection(default='Enigma2', choices=[('Enigma2', _('Source-Enigma2')), ('XTA', _('Skin-XTA')), ('TechniHD', _('Skin-TechniHD')), ('Metrix', _('Skin-Metrix'))])
 
 class About(Screen):
 	def __init__(self, session):
@@ -75,7 +66,7 @@ class About(Screen):
 
 		fp_version = getFPVersion()
 		if fp_version is None:
-			fp_version = "" 
+			fp_version = ""
 		else:
 			fp_version = _("Frontprocessor version: %d") % fp_version
 			AboutText += fp_version + "\n"
@@ -100,7 +91,7 @@ class About(Screen):
 			fp.close
                         AboutText += _("Remote control ID") + _(": ") + RcID 
 		
-                self["TunerHeader"] = StaticText(_("Detected NIMs:"))
+		self["TunerHeader"] = StaticText(_("Detected NIMs:"))
 		AboutText += "\n" + _("Detected NIMs:") + "\n"
 
 		nims = nimmanager.nimList()
@@ -130,14 +121,13 @@ class About(Screen):
 			hddinfo = _("none")
 		self["hddA"] = StaticText(hddinfo)
 		AboutText += hddinfo
-		self["AboutScrollLabel"] = ScrollLabel(AboutText)
-		
-                self["key_green"] = Button(_("Translations"))
+		self["AboutScrollLabel"] = ScrollLabel(AboutText)	
+		self["key_green"] = Button(_("Translations"))
 		self["key_red"] = Button(_("Latest Commits"))
 		self["key_yellow"] = Button(_("Memory Info"))
 		self["key_blue"] = Button(_("%s ") % getMachineName() + _("picture"))
-                
-                self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
+
+		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
@@ -147,7 +137,7 @@ class About(Screen):
 				"blue": self.showModelPic,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown
-			}, -2)
+			})
 
 	def showTranslationInfo(self):
 		self.session.open(TranslationInfo)
@@ -252,120 +242,72 @@ class TranslationInfo(Screen):
 			{
 				"cancel": self.close,
 				"ok": self.close,
-			}, -2)
+			})
 
 class CommitInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["CommitInfo", "About"]
 		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
-                self["Commits"] = Label()
-		self["actions"] = ActionMap(["ColorActions", "OkCancelActions", "SetupActions", "DirectionActions"],
+
+		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
-				"menu": self.keyMenu,
 				"up": self["AboutScrollLabel"].pageUp,
-				"down": self["AboutScrollLabel"].pageDown
-			}, -2)
+				"down": self["AboutScrollLabel"].pageDown,
+				"left": self.left,
+				"right": self.right
+			})
 
+		self["key_red"] = Button(_("Cancel"))
+
+		self.project = 0
+		self.projects = [
+			("Enigma2", "Enigma2"),
+			("TechniHD", "TechniHD"),
+			("metrix-skin", "Metrix")
+		]
+		self.cachedProjects = {}
 		self.Timer = eTimer()
-		self.Timer.callback.append(self.downloadWebSite)
+		self.Timer.callback.append(self.readGithubCommitLogs)
 		self.Timer.start(50, True)
 
-	def downloadWebSite(self):
-                if config.CommitInfoSetup.commiturl.value == 'Enigma2':
-                        self["Commits"].setText("Enigma2")
-                        url = 'http://github.com/XTAv2/Enigma2/commits/master'
-		elif config.CommitInfoSetup.commiturl.value == 'XTA':
-		        self["Commits"].setText("XTA")
-                        url = 'http://github.com/XTAv2/xta/commits/master'
-                elif config.CommitInfoSetup.commiturl.value == 'TechniHD':
-                        self["Commits"].setText("TechniHD")
-                        url = 'http://github.com/XTAv2/TechniHD/commits/master'
-                elif config.CommitInfoSetup.commiturl.value == 'Metrix':
-                        self["Commits"].setText("Metrix")
-                        url = 'http://github.com/XTAv2/metrix-skin/commits/master'
-		download = downloadWithProgress(url, '/tmp/.commits')
-		download.start().addCallback(self.download_finished).addErrback(self.download_failed)
-
-	def download_failed(self, failure_instance=None, error_message=""):
-		self["AboutScrollLabel"].setText(_("Currently the commit log cannot be retreived - please try later again"))
-
-	def download_finished(self, string=""):
+	def readGithubCommitLogs(self):
+		url = 'https://api.github.com/repos/XTAv2/%s/commits' % self.projects[self.project][0]
 		commitlog = ""
+		from datetime import datetime
+		from json import loads
+		from urllib2 import urlopen
 		try:
-			for x in  "".join(open('/tmp/.commits', 'r').read().split('<li class="commit')[1:]).split('<p class="commit-title'):
-				title = re.findall('class="message" data-pjax="true" title="(.*?)"', x, re.DOTALL)
-				author = re.findall('rel="contributor">((?!\\<).*)</a>', x)
-				date   = re.findall('<time datetime=".*?" is="relative-time">(.*?)</time>', x)
-				for t in title:
-					commitlog += t.strip().replace('&amp;', '&').replace('&quot;', '"').replace('&lt;', '\xc2\xab').replace('&gt;', '\xc2\xbb') + "\n"
-				for a in author:
-					commitlog += "Author: " + a.strip().replace('&lt;', '\xc2\xab').replace('&gt;', '\xc2\xbb') + "\n"
-				for d in date:
-					commitlog += d.strip() + "\n"
-				commitlog += 140*'-' + "\n"
+			commitlog += 80 * '-' + '\n'
+			commitlog += url.split('/')[-2] + '\n'
+			commitlog += 80 * '-' + '\n'
+			for c in loads(urlopen(url, timeout=5).read()):
+				creator = c['commit']['author']['name']
+				title = c['commit']['message']
+				date = datetime.strptime(c['commit']['committer']['date'], '%Y-%m-%dT%H:%M:%SZ').strftime('%x %X')
+				commitlog += date + ' ' + creator + '\n' + title + 2 * '\n'
+			commitlog = commitlog.encode('utf-8')
+			self.cachedProjects[self.projects[self.project][1]] = commitlog
 		except:
-			commitlog = _("Currently the commit log cannot be retrieved - please try later again")
+			commitlog += _("Currently the commit log cannot be retrieved - please try later again")
 		self["AboutScrollLabel"].setText(commitlog)
-	
-	def keyMenu(self):
-		self.session.open(CommitInfoSetup)
 
-	def showTranslationInfo(self):
-		self.session.open(TranslationInfo)
+	def updateCommitLogs(self):
+		if self.cachedProjects.has_key(self.projects[self.project][1]):
+			self["AboutScrollLabel"].setText(self.cachedProjects[self.projects[self.project][1]])
+		else:
+			self["AboutScrollLabel"].setText(_("Please wait"))
+			self.Timer.start(50, True)
 
-	def showAbout(self):
-		self.session.open(About)
+	def left(self):
+		self.project = self.project == 0 and len(self.projects) - 1 or self.project - 1
+		self.updateCommitLogs()
 
-class CommitInfoSetup(Screen, ConfigListScreen):
-        skin = """
-	    <screen position="c-300,c-250" size="600,200" title="openXTA CommitInfoSetup">
-		    <widget name="config" position="25,25" scrollbarMode="showOnDemand" size="550,400" />
-		    <ePixmap pixmap="skin_default/buttons/red.png" position="20,e-45" size="140,40" alphatest="on" />
-		    <ePixmap pixmap="skin_default/buttons/green.png" position="160,e-45" size="140,40" alphatest="on" />
-		    <widget source="key_red" render="Label" position="20,e-45" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		    <widget source="key_green" render="Label" position="160,e-45" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-	    </screen>"""
-	    
-        def __init__(self, session):
-                self.skin = CommitInfoSetup.skin
-                Screen.__init__(self, session)
-                self['key_red'] = StaticText(_('Cancel'))
-                self['key_green'] = StaticText(_('OK'))
-                self['actions'] = ActionMap(['SetupActions', 'ColorActions', 'EPGSelectActions', 'NumberActions'], 
-                {'ok': self.keyGo,
-                 'left': self.keyLeft,
-                 'right': self.keyRight,
-                 'save': self.keyGo,
-                 'cancel': self.keyCancel,
-                 'green': self.keyGo,
-                 'red': self.keyCancel}, -2)
-                  
-                self.list = []
-                ConfigListScreen.__init__(self, self.list, session=self.session)
-                self.list.append(getConfigListEntry(_('Select CommitInfo Log'), config.CommitInfoSetup.commiturl))
-                self['config'].list = self.list
-                self['config'].l.setList(self.list)
-        
-        def keyLeft(self):
-                ConfigListScreen.keyLeft(self)
-
-        def keyRight(self):
-                ConfigListScreen.keyRight(self)
-        
-        def keyGo(self):
-                for x in self['config'].list:
-                        x[1].save()
-                        
-                self.close()
-                 
-        def keyCancel(self):
-                for x in self['config'].list:
-                        x[1].cancel()
-
-                self.close()
+	def right(self):
+		self.project = self.project != len(self.projects) - 1 and self.project + 1 or 0
+		self.updateCommitLogs()
 
 class MemoryInfo(Screen):
 	def __init__(self, session):
@@ -395,7 +337,7 @@ class MemoryInfo(Screen):
 
 		self["params"] = MemoryInfoSkinParams()
 
-		self['info'] = Label(_("This info is for developers only.\nFor a normal user it is not important.\nDon't panic please, if any suspicious information is displayed here!"))
+		self['info'] = Label(_("This info is for developers only.\nFor a normal users it is not important.\nDon't panic, please, when here will be displayed any suspicious informations!"))
 
 		Typ = _("%s  ") % (getMachineName())
 		self.setTitle(Typ + "[" + (_("Memory Info"))+ "]")
