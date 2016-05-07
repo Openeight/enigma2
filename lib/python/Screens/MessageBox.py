@@ -90,7 +90,7 @@ class MessageBox(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		self.setTitle(_(self.title))
+		self.setTitle(self.title)
 
 	def initTimeout(self, timeout):
 		self.timeout = timeout
