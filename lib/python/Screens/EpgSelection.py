@@ -47,6 +47,7 @@ class EPGSelection(Screen):
 		self.session = session
 		if isinstance(service, str) and eventid != None:
 			self.type = EPG_TYPE_SIMILAR
+			self.setTitle(_("Similar EPG"))
 			self["key_yellow"] = Button()
 			self["key_blue"] = Button()
 			self["key_red"] = Button()
@@ -54,6 +55,7 @@ class EPGSelection(Screen):
 			self.eventid = eventid
 			self.zapFunc = None
 		elif isinstance(service, eServiceReference) or isinstance(service, str):
+			self.setTitle(_("Single EPG"))
 			self.type = EPG_TYPE_SINGLE
 			self["key_yellow"] = Button()
 			self["key_blue"] = Button(_("Select Channel"))
@@ -62,6 +64,7 @@ class EPGSelection(Screen):
 			self.sort_type = 0
 			self.setSortDescription()
 		else:
+			self.setTitle(_("Multi EPG"))
 			self.skinName = "EPGSelectionMulti"
 			self.type = EPG_TYPE_MULTI
 			self["key_yellow"] = Button(pgettext("button label, 'previous screen'", "Prev"))
@@ -144,7 +147,7 @@ class EPGSelection(Screen):
 			def boxAction(choice):
 				if choice:
 					choice[1]()
-			self.session.openWithCallback(boxAction, ChoiceBox, title=text, list=menu)
+			self.session.openWithCallback(boxAction, ChoiceBox, title=text, list=menu, windowTitle=_("Further options"))
 
 	def runPlugin(self, plugin):
 		event = self["list"].getCurrent()
