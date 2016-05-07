@@ -2004,9 +2004,6 @@ msgstr "DiSEqC режим"
 msgid "DiSEqC port %s: %s"
 msgstr "DiSEqC порт %s: %s"
 
-msgid "DiSEqC-tester settings"
-msgstr "Тест настроек DiSEqC"
-
 msgid "Digital contour removal"
 msgstr "Цифровое удаление контура"
 
@@ -2990,13 +2987,13 @@ msgid "Inactivity Sleeptimer"
 msgstr "Таймер неактивности"
 
 msgid "Include AIT in http streams"
-msgstr "Включать AIT в http стрим"
+msgstr "Включать AIT в http стрим потоки"
 
 msgid "Include ECM in http streams"
-msgstr "Включать ECM в http стрим"
+msgstr "Включать ECM в http стрим потоки"
 
 msgid "Include EIT in http streams"
-msgstr "Включать EIT в http стрим"
+msgstr "Включать EIT в http стрим потоки"
 
 msgid "Incorrect type service for PiP!"
 msgstr "Некорректный тип сервиса для PiP!"
@@ -4417,9 +4414,6 @@ msgstr "Нажмите OK для активации настроек."
 msgid "Press OK to edit the settings."
 msgstr "Нажмите OK, для измения настройки."
 
-#, python-format
-msgid "Press OK to get further details for %s"
-msgstr "Нажмите ОК, для получения подробной информации для %s"
 
 msgid "Press OK to scan"
 msgstr "Нажмите OK для сканирования."
@@ -5928,12 +5922,6 @@ msgstr "Остановить сервис и вернуться к списку 
 msgid "Stop test"
 msgstr "Остановить тест"
 
-msgid "Stop testing plane after # failed transponders"
-msgstr "Остановить тестирование после # ошибки транспондера"
-
-msgid "Stop testing plane after # successful transponders"
-msgstr "Остановить тестирование после # исправного транспондера"
-
 msgid "Stop timer recording"
 msgstr "Остановка записей по таймеру"
 
@@ -6135,9 +6123,6 @@ msgstr "Наземный"
 
 msgid "Terrestrial provider"
 msgstr "Наземный провайдер"
-
-msgid "Test DiSEqC settings"
-msgstr "Тест настроек DiSEqC"
 
 msgid "Test mode"
 msgstr "Режим теста"
@@ -8678,9 +8663,6 @@ msgstr "с текстом"
 msgid "with tuner name"
 msgstr "с именем тюнера"
 
-msgid "working"
-msgstr "работающий"
-
 msgid "xp1000"
 msgstr "xp1000"
 
@@ -9376,3 +9358,104 @@ msgstr "AGC:"
 
 msgid "Maybe the reason that recording is currently running. Please stop the recording before trying to configure the positioner."
 msgstr "Может быть причина этого, что сейчас идет запись. Остановите пожалуйста запись,перед настройкой позиционера."
+
+msgid "Audio plugins"
+msgstr "Аудио плагины"
+
+msgid "Enable timer conflict detection"
+msgstr "Включить обнаружение конфликтов таймера"
+
+msgid "Descramble sending http streams"
+msgstr "Декодировать отправленные http стрим потоки"
+
+msgid "Descramble receiving http streams"
+msgstr "Декодировать полученные http стрим потоки"
+
+msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
+msgstr "Если это включено, то полученные http стрим потоки будут всегда декодироватся.Это занимает больше ресурсов (декодирование демультиплексорами), включить только при необходимости. Индивидуальные стрим потоки всегда декодируются, если 0x100 добавляется к типу сервиса, независимо от этого параметра. По дефолту выключено."
+
+msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
+msgstr "Если это включено, то http стрим потоки декодируются на стороне сервера. (Дистанционный) клиент получатель стрим потока не должен делать декодирование. По дефолту включено."
+
+msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
+msgstr "При использовании дистанционного резервного тюнера для записей, обнаружение конфликтов таймеров не может сделать исключение для резервного тюнера. Эта опция позволяет отключить обнаружение конфликта таймера. Не рекомендуется!"
+
+
+msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
+msgstr "В текущее время идет запись. Пожалуйста остановите запись перед началом тестирования DiSEqC."
+
+msgid "DiSEqC Tester"
+msgstr "Тестирование DiSEqC"
+
+msgid "DiSEqC-tester settings"
+msgstr "Настройки DiSEqC-тестер"
+
+msgid "Failed:"
+msgstr "Неудачно:"
+
+msgid "Log results to /tmp"
+msgstr "Запись результата лога в /tmp"
+
+msgid "Not tested:"
+msgstr "Без теста:"
+
+msgid "Overall progress:"
+msgstr "Общий прогресс:"
+
+msgid "Press OK to get further details for %s"
+msgstr "Нажмите ОК, чтобы получить подробную информацию для %s"
+
+msgid "Progress:"
+msgstr "Прогресс:"
+
+msgid "Stop testing plane after # failed transponders"
+msgstr "Остановка теста после # неудачного транспондера"
+
+msgid "Stop testing plane after # successful transponders"
+msgstr "Остановка теста после # успешного транспондера"
+
+msgid "Succeeded:"
+msgstr "Успешных:"
+
+msgid "Test DiSEqC settings"
+msgstr "Настройки теста DiSEqC"
+
+
+msgid "The results have been written to %s"
+msgstr "Результаты были записаны в %s"
+
+msgid "With errors:"
+msgstr "С ошибками:"
+
+msgid "failed"
+msgstr "неудачно"
+
+msgid "not tested"
+msgstr "без теста"
+
+msgid "successful"
+msgstr "успешно"
+
+msgid "with errors"
+msgstr "с ошибками"
+
+msgid "working"
+msgstr "в работе"
+
+msgid ""
+"Warning!\n"
+"This is an option for advanced users.\n"
+"Really disable timer conflict detection?"
+msgstr ""
+"Внимание!\n"
+"Это вариант для продвинутых пользователей, нужен только при использовании запасного ресивера.\n"
+"Действительно отключить обнаружение конфликтов таймера?"
+
+msgid "and never ask this again"
+msgstr "и никогда больше не спрашивать опять"
+
+msgid "Ignore conflict"
+msgstr "Игнорировать конфликт"
+
+msgid "Show warning before set 'Ignore conflict'"
+msgstr "Показать предупреждение перед установкой 'Игнорировать конфликт'"
