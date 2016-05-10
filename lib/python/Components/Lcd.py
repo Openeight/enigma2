@@ -143,7 +143,7 @@ def leaveStandby():
 	config.lcd.ledbrightness.apply()
 	config.lcd.ledbrightnessdeepstandby.apply()
 
-def standbyCounterChanged(configElement):
+def standbyCounterChanged(dummy):
 	from Screens.Standby import inStandby
 	inStandby.onClose.append(leaveStandby)
 	config.lcd.standby.apply()

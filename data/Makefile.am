@@ -25,3 +25,4 @@ dist_pkgdata_DATA += skin_text.xml
 else
 SUBDIRS += display
 endif
+
