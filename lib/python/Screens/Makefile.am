@@ -17,4 +17,4 @@ install_PYTHON = \
 	TextBox.py FactoryReset.py RecordPaths.py UnhandledKey.py ServiceStopScreen.py \
 	InputDeviceSetup.py DVD.py SoftwareUpdate.py AutoDiseqc.py InstallWizard.py ScreenSaver.py \
 	CCcamInfo.py OScamInfo.py ExtraSetup.py SkinSetup.py SkinSelector.py Downloads.py Ipkremove.py Ipkuninstall.py
-
+	StreamingClientsInfo.py
