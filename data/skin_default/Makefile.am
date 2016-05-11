@@ -40,7 +40,8 @@ dist_install_DATA = \
 	nim_active.png \
 	no_coverArt.png \
 	openxta.png \
-	overscan.png \
+	overscan1280x720.png \
+	overscan1920x1080.png \
 	picon_default.png \
 	position_arrow.png \
 	position_pointer.png \
