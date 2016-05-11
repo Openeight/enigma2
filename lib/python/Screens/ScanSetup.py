@@ -770,21 +770,9 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 						self.scan_ter.system.value = eDVBFrontendParametersTerrestrial.System_DVB_T
 					self.TerrestrialRegionEntry = getConfigListEntry(_('Region'), self.TerrestrialRegion)
 					self.list.append(self.TerrestrialRegionEntry)
-
-		if nim.isCompatible("DVB-C"):
-			if self.scan_typecable.value == "complete":
-				self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices))
-				self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree))
-				self.scan_networkScan.value = True
-			else:
-				self.list.append(getConfigListEntry(_("Network scan"), self.scan_networkScan))
-				self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices))
-				self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree))
-		else:
-			self.list.append(getConfigListEntry(_("Network scan"), self.scan_networkScan))
-			self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices))
-			self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree))
-
+		self.list.append(getConfigListEntry(_("Network scan"), self.scan_networkScan))
+		self.list.append(getConfigListEntry(_("Clear before scan"), self.scan_clearallservices))
+		self.list.append(getConfigListEntry(_("Only free scan"), self.scan_onlyfree))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
