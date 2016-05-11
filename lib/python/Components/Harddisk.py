@@ -99,7 +99,7 @@ class Harddisk:
 			self.card = self.device[:2] == "hd" and "host0" not in self.dev_path
 
 		print "[Harddisk] new device", self.device, '->', self.dev_path, '->', self.disk_path
-		if not removable:
+		if not removable and not self.card:
 			self.startIdle()
 
 	def __lt__(self, ob):
@@ -152,7 +152,7 @@ class Harddisk:
 					return cap / 1000 / 1000
 				except:
 					pass
-			return cap
+		return cap
 
 	def capacity(self):
 		cap = self.diskSize()
@@ -937,11 +937,23 @@ class MkfsTask(Task.LoggingTask):
 
 harddiskmanager = HarddiskManager()
 
-def internalHDDNotSleeping():
+def isSleepStateDevice(device):
+	ret = os.popen("hdparm -C %s" % device).read()
+	if 'SG_IO' in ret or 'HDIO_DRIVE_CMD' in ret:
+		return None
+	if 'drive state is:  standby' in ret or 'drive state is:  idle' in ret:
+		return True
+	elif 'drive state is:  active/idle' in ret:
+		return False
+	return None
+
+def internalHDDNotSleeping(external=False):
+	state = False
 	if harddiskmanager.HDDCount():
 		for hdd in harddiskmanager.HDDList():
-			if ("pci" in hdd[1].phys_path or "ahci" in hdd[1].phys_path) and hdd[1].max_idle_time and not hdd[1].isSleeping():
-				return True
-	return False
+			if hdd[1].internal or external:
+				if hdd[1].idle_running and hdd[1].max_idle_time and not hdd[1].isSleeping():
+					state = True
+	return state
 
 SystemInfo["ext4"] = isFileSystemSupported("ext4")
