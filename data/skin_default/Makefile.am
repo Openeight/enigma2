@@ -39,7 +39,7 @@ dist_install_DATA = \
 	mute.png \
 	nim_active.png \
 	no_coverArt.png \
-	openxta.png \
+	openeight.png \
 	overscan1280x720.png \
 	overscan1920x1080.png \
 	picon_default.png \
