@@ -142,7 +142,7 @@ boxversion = getBoxType()
 machinename = getMachineName()
 machinebrand = getMachineBrand()
 
-EXTRAS_Panel_Version = 'XTA Panel V1.0'
+EXTRAS_Panel_Version = 'Eight Panel V1.0'
 print "[eXTrAs-Panel] machinebrand: %s"  % (machinebrand)
 print "[eXTrAs-Panel] machinename: %s"  % (machinename)
 print "[eXTrAs-Panel] boxversion: %s"  % (boxversion)
@@ -223,7 +223,7 @@ def Plugins(**kwargs):
 	#// SwapAutostart
 	PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART,PluginDescriptor.WHERE_AUTOSTART],fnc = SwapAutostart),
 	#// show Extraspanel in EXTENSIONS Menu
-	PluginDescriptor(name="XTA Panel", description="XTA panel GUI 12/11/2012", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main) ]
+	PluginDescriptor(name="Eight Panel", description="Eight panel GUI 12/11/2012", where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc = main) ]
 
 
 
@@ -241,7 +241,7 @@ MENU_SKIN = """<screen name="Extraspanel" position="center,center" size="500,370
 						MultiContentEntryText(pos = (0, 35), size = (520, 22), font=1, text = 2), # menu_entry_description
 					],
 				"fonts": [gFont("Regular",24),gFont("Regular",16)],
-				"itemHeight": 70
+				"itemHEight": 70
 				}
 	 	</convert>
         </widget>
@@ -319,7 +319,7 @@ class Extraspanel(Screen, InfoBarPiP):
                 self['list'].setList(self.mylist)
 
 	def setWindowTitle(self):
-		self.setTitle(_("XTA Panel"))
+		self.setTitle(_("Eight Panel"))
 
 	def up(self):
 		#self["Mlist"].up()
