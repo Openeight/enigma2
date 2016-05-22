@@ -4,7 +4,6 @@ dist_pkgdata_DATA = \
 	encoding.conf \
 	keymap.xml \
 	keymap.mqb \
-	mqbfunctions.xml \
 	menu.xml \
 	prev.png \
 	radio.mvi \
