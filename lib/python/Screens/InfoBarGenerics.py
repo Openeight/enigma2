@@ -2013,19 +2013,18 @@ class InfoBarExtensions:
 		self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions",
 			{
 				"extensions": (self.showExtensionSelection, _("view extensions...")),
-                "Extraspanel": (self.ct, _("open Extraspanel...")),
-
+				"Extraspanel": (self.ct, _("open Extraspanel...")),
 			}, 1) # lower priority
-        def ct(self):
-                try:
-                        pluginlist = []
-                        pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSMENU)
-                        for plugin in pluginlist:
-                                if "XTA Panel" in str(plugin.name):
-                                        plugin(session=self.session)
-                except:
-                        return
 
+	def ct(self):
+		try:
+			pluginlist = []
+			pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSMENU)
+			for plugin in pluginlist:
+				if "Eight Panel" in str(plugin.name):
+					plugin(session=self.session)
+		except:
+			return
 
 	def addExtension(self, extension, key = None, type = EXTENSION_SINGLE):
 		self.list.append((type, extension, key))
