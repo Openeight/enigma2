@@ -29,7 +29,7 @@ config.misc.pluginbrowser = ConfigSubsection()
 config.misc.pluginbrowser.plugin_order = ConfigText(default="")
 
 config.pluginfilter = ConfigSubsection()
-config.pluginfilter.openxta = ConfigYesNo(default = True)
+config.pluginfilter.openeight = ConfigYesNo(default = True)
 config.pluginfilter.kernel = ConfigYesNo(default = False)
 config.pluginfilter.drivers = ConfigYesNo(default = True)
 config.pluginfilter.extensions = ConfigYesNo(default = True)
@@ -353,8 +353,8 @@ class PluginDownloadBrowser(Screen):
 	def createPluginFilter(self):
 		#Create Plugin Filter
 		self.PLUGIN_PREFIX2 = []
-		if config.pluginfilter.openxta.getValue():
-			self.PLUGIN_PREFIX2.append(self.PLUGIN_PREFIX + 'openxta')
+		if config.pluginfilter.openeight.getValue():
+			self.PLUGIN_PREFIX2.append(self.PLUGIN_PREFIX + 'openeight')
                 if config.pluginfilter.drivers.getValue():
 			self.PLUGIN_PREFIX2.append(self.PLUGIN_PREFIX + 'drivers')
 		if config.pluginfilter.extensions.getValue():
@@ -727,7 +727,7 @@ class PluginFilter(ConfigListScreen, Screen):
 	def createSetup(self):
 		self.editListEntry = None
 		self.list = []
-		self.list.append(getConfigListEntry(_("openxta"), config.pluginfilter.openxta, _("This allows you to show all specific openxta in downloads")))
+		self.list.append(getConfigListEntry(_("openeight"), config.pluginfilter.openeight, _("This allows you to show all specific openeight in downloads")))
 		self.list.append(getConfigListEntry(_("drivers"), config.pluginfilter.drivers, _("This allows you to show drivers modules in downloads")))
 		self.list.append(getConfigListEntry(_("extensions"), config.pluginfilter.extensions, _("This allows you to show extensions modules in downloads")))
 		self.list.append(getConfigListEntry(_("languages"), config.pluginfilter.e2_locales, _("This allows you to show enigma2 languages in downloads")))
