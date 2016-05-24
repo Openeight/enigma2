@@ -174,10 +174,10 @@ class ModelPic(Screen):
 			}, -2)		              
 		
         def poster_resize(self):
-                if getBoxType() in ('et4x00'):
-                        model = "et4x00.jpg"
-                elif getBoxType() in ('et5000', 'et5x00'):
-                        model = "et5x00.jpg"
+                if getBoxType() in ('sf108'):
+                        model = "sf108.jpg"
+                elif getBoxType() in ('sf3038'):
+                        model = "sf3038.jpg"
                 elif getBoxType() in ('et6x00', 'et6000'):
                         model = "et6x00.jpg"
                 elif getBoxType() in ('et6500'):
