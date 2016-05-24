@@ -241,7 +241,7 @@ MENU_SKIN = """<screen name="Extraspanel" position="center,center" size="500,370
 						MultiContentEntryText(pos = (0, 35), size = (520, 22), font=1, text = 2), # menu_entry_description
 					],
 				"fonts": [gFont("Regular",24),gFont("Regular",16)],
-				"itemHeight": 70
+				"itemHEight": 70
 				}
 	 	</convert>
         </widget>
@@ -315,7 +315,7 @@ class Extraspanel(Screen, InfoBarPiP):
                 self.mylist.append(((_('Image Update'), 'ImageUpdate', _('Software-Updates and Feed state'))))
                 self.mylist.append(((_('Image Tools'), 'ImageTools', _('Image-Tools'))))
                 self.mylist.append(((_('Infos'), 'Infos', _('Infos...'))))
-                self.mylist.append(((_('Skin Setup'), 'SkinSetup', _('Change your Skin/Gui and Skin settings'))))
+                #self.mylist.append(((_('Skin Setup'), 'SkinSetup', _('Change your Skin/Gui and Skin settings'))))
                 self['list'].setList(self.mylist)
 
 	def setWindowTitle(self):
