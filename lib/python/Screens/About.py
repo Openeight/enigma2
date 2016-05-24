@@ -265,9 +265,9 @@ class CommitInfo(Screen):
 
 		self.project = 0
 		self.projects = [
-			("Enigma2", "Enigma2"),
-			("TechniHD", "TechniHD"),
-			("metrix-skin", "Metrix")
+			("enigma2", "enigma2"),
+			("OctagonEightFHD", "OctagonEightFHD"),
+			
 		]
 		self.cachedProjects = {}
 		self.Timer = eTimer()
@@ -275,7 +275,7 @@ class CommitInfo(Screen):
 		self.Timer.start(50, True)
 
 	def readGithubCommitLogs(self):
-		url = 'https://api.github.com/repos/XTAv2/%s/commits' % self.projects[self.project][0]
+		url = 'https://api.github.com/repos/Openeight/%s/commits' % self.projects[self.project][0]
 		commitlog = ""
 		from datetime import datetime
 		from json import loads
