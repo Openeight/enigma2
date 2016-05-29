@@ -241,7 +241,7 @@ MENU_SKIN = """<screen name="Extraspanel" position="center,center" size="500,370
 						MultiContentEntryText(pos = (0, 35), size = (520, 22), font=1, text = 2), # menu_entry_description
 					],
 				"fonts": [gFont("Regular",24),gFont("Regular",16)],
-				"itemHEight": 70
+				"itemHeight": 70
 				}
 	 	</convert>
         </widget>
