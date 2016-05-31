@@ -14,11 +14,10 @@ from Screens.Console import Console
 from Screens.HelpMenu import HelpableScreen
 from Screens.TaskView import JobView
 from Tools.Downloader import downloadWithProgress
-from enigma import getBoxType
 import urllib2
 import os
 import shutil
-from boxbranding import getImageDistro, getMachineBrand, getMachineName
+from boxbranding import getImageDistro, getMachineBrand, getMachineName, getBoxType
 distro = getImageDistro()
 
 #############################################################################################################
@@ -202,7 +201,10 @@ class doFlashImage(Screen):
 		box = self.box()
 		self.hide()
 		if self.Online:
-			url = self.feedurl + "/" + box + "/" + sel
+			if self.feed == "openeight":
+				url = self.feedurl + "/images/" + box + "/" + sel
+			else:
+				url = self.feedurl + "/" + box + "/" + sel
 			print "[Flash Online] Download image: >%s<" % url
 			try:
 				u = urllib2.urlopen(url)
@@ -450,9 +452,14 @@ class doFlashImage(Screen):
 			lines = the_page.split('\n')
 			tt = len(box)
 			for line in lines:
-				if line.find("<a href='%s/" % box) > -1:
-					t = line.find("<a href='%s/" % box)
-					self.imagelist.append(line[t+tt+10:t+tt+tt+39])
+				if self.feed == "openeight":
+					if line.find("/images/%s/" % box) > -1:
+						t = line.find("/images/%s/" % box)
+						self.imagelist.append(line[t+tt+9:t+tt+tt+40])
+				else:
+					if line.find("<a href='%s/" % box) > -1:
+						t = line.find("<a href='%s/" % box)
+						self.imagelist.append(line[t+tt+10:t+tt+tt+39])
 		else:
 			self["key_blue"].setText(_("Delete"))
 			self["key_yellow"].setText(_("Devices"))
