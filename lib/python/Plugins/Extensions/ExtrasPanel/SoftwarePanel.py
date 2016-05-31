@@ -18,7 +18,7 @@ class SoftwarePanel(Screen):
 
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _("OpenXTA Software Panel"))
+		Screen.setTitle(self, _("Openeight Software Panel"))
 		skin = """
 		<screen name="SoftwarePanel" position="center,center" size="650,605" title="Software Panel">
 			<widget name="a_off" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/pics/aoff.png" position="10,10" zPosition="1" size="36,97" alphatest="on" />
@@ -65,7 +65,6 @@ class SoftwarePanel(Screen):
 		self['key_red'] = Label(_("Cancel"))
 		self['key_green'] = Label(_("Update"))
 		self['key_yellow'] = Label(_(""))
-		self['key_blue'] = Label(_("Setup Commits"))
 		self['packagetext'] = Label(_("Updates Available:"))
 		self['packagenr'] = Label("0")
 		self['feedstatusRED'] = Label("<  " + _("feed status"))
@@ -82,19 +81,10 @@ class SoftwarePanel(Screen):
 		{
 			"cancel": self.Exit,
 			"green": self.Green,
-			"blue": self.showCommitLogSetup,
 			"yellow": self.showCommitLog
 		}, -2)
 
-		if config.CommitInfoSetup.commiturl.value == 'Enigma2':
-                        self["key_yellow"].setText("E2 Commits")
-                elif config.CommitInfoSetup.commiturl.value == 'XTA':
-                        self["key_yellow"].setText("XTA Commits")
-                elif config.CommitInfoSetup.commiturl.value == 'TechniHD':
-                        self["key_yellow"].setText("THD Commits")
-                elif config.CommitInfoSetup.commiturl.value == 'Metrix':
-                        self["key_yellow"].setText("Metrix Commits")
-                self.onLayoutFinish.append(self.layoutFinished)
+		self.onLayoutFinish.append(self.layoutFinished)
 
 	def Exit(self):
 		self.ipkg.stop()
@@ -103,15 +93,15 @@ class SoftwarePanel(Screen):
 	def Green(self):
 		if self.packages > 0 and self.trafficLight > 0:
 			if self.trafficLight == 1: # yellow
-				message = _("The current image might not be stable.\nFor more information see %s.") % ("www.xtrend-alliance.com")
+				message = _("The current image might not be stable.\nFor more information see %s.") % ("http://octagon-forum.eu")
 				picon = MessageBox.TYPE_WARNING
 			elif self.trafficLight == 2: # red
-				message = _("The current image is not stable.\nFor more information see %s.") % ("www.xtrend-alliance.com")
+				message = _("The current image is not stable.\nFor more information see %s.") % ("http://octagon-forum.eu")
 				picon = MessageBox.TYPE_ERROR
 				self.session.open(MessageBox, message, type=MessageBox.TYPE_ERROR, picon=picon, timeout = 15, close_on_any_key=True)
 				return
 			elif self.trafficLight == 3: # unknown
-				message = _("The status of the current image could not be checked because %s can not be reached.") % ("www.xtrend-alliance.com")
+				message = _("The status of the current image could not be checked because %s can not be reached.") % ("http://octagon-forum.eu")
 				picon = MessageBox.TYPE_ERROR
 			message += "\n" + _("Do you want to update your receiver?")
 			self.session.openWithCallback(self.startActualUpdate, MessageBox, message, default = False, picon = picon)
@@ -119,21 +109,8 @@ class SoftwarePanel(Screen):
 				self.startActualUpdate(True)
 
 	def showCommitLog(self):
-                self.session.open(CommitInfo)
-        
-        def showCommitLogSetup(self):
-                self.session.openWithCallback(self.commitinfoupdate, CommitInfoSetup)
-                
-        def commitinfoupdate(self):
-        	if config.CommitInfoSetup.commiturl.value == 'Enigma2':
-                        self["key_yellow"].setText("E2 Commits")
-                elif config.CommitInfoSetup.commiturl.value == 'XTA':
-                        self["key_yellow"].setText("XTA Commits")
-                elif config.CommitInfoSetup.commiturl.value == 'TechniHD':
-                        self["key_yellow"].setText("THD Commits")
-                elif config.CommitInfoSetup.commiturl.value == 'Metrix':
-                        self["key_yellow"].setText("Metrix Commits")
-               
+		self.session.open(CommitInfo)
+
 	def startActualUpdate(self, answer):
 		if answer:
 			from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin
@@ -169,8 +146,8 @@ class SoftwarePanel(Screen):
 		currentTimeoutDefault = socket.getdefaulttimeout()
 		socket.setdefaulttimeout(3)
 		try:
-			urlOpenXta = "http://feed.openxta.com/status"
-			d = urlopen(urlOpenXta)
+			urlOpeneight = "http://feed.openeight.de/status"
+			d = urlopen(urlOpeneight)
 			self.trafficLight = int(d.read())
 			if self.trafficLight == 2:
 				self['a_off'].hide()
