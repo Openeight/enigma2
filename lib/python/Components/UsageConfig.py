@@ -595,6 +595,8 @@ def InitUsageConfig():
 	if SystemInfo["GraphMultiEpg"]:
 		config.misc.graph_mepg = ConfigSubsection()
 		config.misc.graph_mepg.extension_menu = ConfigYesNo(default = True)
+		
+	config.misc.ci_autopin = ConfigYesNo(default = False)
 
 def updateChoices(sel, choices):
 	if choices:
