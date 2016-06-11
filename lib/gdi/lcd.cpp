@@ -75,17 +75,32 @@ eDBoxLCD::eDBoxLCD()
 	flipped = false;
 	inverted = 0;
 	lcd_type = 0;
+	FILE *boxtype_file;
+	char boxtype_name[20];
 #ifndef NO_LCD
-	lcdfd = open("/dev/dbox/oled0", O_RDWR);
-	if (lcdfd < 0)
+	if((boxtype_file = fopen("/proc/stb/info/boxtype", "r")) != NULL)
 	{
-		if (!access("/proc/stb/lcd/oled_brightness", W_OK) ||
-		    !access("/proc/stb/fp/oled_brightness", W_OK) )
-			lcd_type = 2;
-		lcdfd = open("/dev/dbox/lcd0", O_RDWR);
+		fgets(boxtype_name, sizeof(boxtype_name), boxtype_file);
+		fclose(boxtype_file);
+
+		if (strcmp(boxtype_name, "vg5000\n") == 0)
+		{
+			lcdfd = open("/dev/null", O_RDWR);
+		}
 	}
-	else
-		lcd_type = 1;
+	if (lcdfd == -1)
+	{
+		lcdfd = open("/dev/dbox/oled0", O_RDWR);
+		if (lcdfd < 0)
+		{
+			if (!access("/proc/stb/lcd/oled_brightness", W_OK) ||
+				!access("/proc/stb/fp/oled_brightness", W_OK) )
+				lcd_type = 2;
+			lcdfd = open("/dev/dbox/lcd0", O_RDWR);
+		}
+		else
+			lcd_type = 1;
+	}
 
 	if (lcdfd < 0)
 		eDebug("[eDboxLCD] No oled0 or lcd0 device found!");
