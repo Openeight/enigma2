@@ -66,6 +66,7 @@
 		<key id="KEY_0" mapto="0" flags="m"/>
 		<key id="KEY_FILE" mapto="file" flags="m"/>
 		<key id="KEY_VIDEO" mapto="file" flags="m"/>
+		<key id="KEY_MEDIA" mapto="file" flags="m"/>
 	</map>
 
 	<map context="InputActions">
@@ -201,6 +202,7 @@
 		<key id="KEY_RADIO" mapto="showRadio" flags="b"/>
 		<key id="KEY_TV" mapto="showTv" flags="b"/>
 		<key id="KEY_FILE" mapto="showMovies" flags="m"/>
+		<key id="KEY_MEDIA" mapto="showMovies" flags="m"/>
 		<key id="KEY_TEXT" mapto="showText" flags="m"/>
 	</map>
 
@@ -398,6 +400,7 @@
 		<key id="KEY_DOWN" mapto="down" flags="m"/>
 		<key id="KEY_VIDEO" mapto="movieList" flags="m"/>
 		<key id="KEY_FILE" mapto="movieList" flags="m"/>
+		<key id="KEY_MEDIA" mapto="movieList" flags="m"/>
 	</map>
 
 	<map context="MoviePlayerActions">
@@ -458,6 +461,7 @@
 		<key id="KEY_DOWN" mapto="prevPage" flags="m"/>
 		<key id="KEY_OK" mapto="ok" flags="m"/>
 		<key id="KEY_FILE" mapto="transparent" flags="m"/>
+		<key id="KEY_MEDIA" mapto="transparent" flags="m"/>
 		<key id="KEY_GREEN" mapto="green" flags="m"/>
 		<key id="KEY_YELLOW" mapto="yellow" flags="m"/>
 		<key id="KEY_RED" mapto="red" flags="m"/>
@@ -808,6 +812,8 @@
 	        <key id="KEY_INFO" mapto="info" flags="b"/>
 		<key id="KEY_INFO" mapto="info_long" flags="l"/>
 		<key id="KEY_VIDEO" mapto="list" flags="m"/>
+		<key id="KEY_MEDIA" mapto="list" flags="m"/>
+		<key id="KEY_FILE" mapto="list" flags="m"/>
 	        <key id="KEY_BACK" mapto="back" flags="b"/>
 		<key id="KEY_BACK" mapto="back_long" flags="l"/>
 	        <key id="KEY_END" mapto="end" flags="m"/>
