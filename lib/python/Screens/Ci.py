@@ -287,6 +287,7 @@ class MMIDialog(Screen):
 class CiMessageHandler:
 	def __init__(self):
 		self.session = None
+		self.auto_close = False
 		self.ci = { }
 		self.dlgs = { }
 		eDVBCI_UI.getInstance().ciStateChanged.get().append(self.ciStateChanged)
