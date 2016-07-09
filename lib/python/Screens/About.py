@@ -266,8 +266,8 @@ class CommitInfo(Screen):
 		self.project = 0
 		self.projects = [
 			("enigma2", "enigma2"),
+			("OctagonEightSD", "OctagonEightSD"),
 			("OctagonEightFHD", "OctagonEightFHD"),
-			
 		]
 		self.cachedProjects = {}
 		self.Timer = eTimer()
