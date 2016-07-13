@@ -84,7 +84,9 @@ def getHotkeys():
 		("Power", "power", ""),
 		("Power" + " " + _("long"), "power_long", ""),
 		("HDMIin", "HDMIin", "Infobar/HDMIIn"),
-		("HDMIin" + " " + _("long"), "HDMIin_long", "")]
+		("HDMIin" + " " + _("long"), "HDMIin_long", ""),
+		("Favorites", "favorites", "Infobar/openFavouritesList"),
+		("Favorites" + " " + _("long"), "favorites_long", "")]
 
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
