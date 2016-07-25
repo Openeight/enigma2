@@ -87,9 +87,9 @@ from Plugins.Extensions.ExtrasPanel.SoftwarePanel import SoftwarePanel
 from Plugins.Extensions.ExtrasPanel.XTDVBNTPTime import *
 
 def Check_Softcam():
-	found = True
-	for x in os.listdir('/etc'):
-		if x.find('.emu') > -1:
+	found = False
+	for x in os.listdir('/etc/init.d'):
+		if x.find('softcam.') > -1 and x <> 'softcam.None':
 			found = True
 			break;
 	return found
@@ -305,18 +305,19 @@ class Extraspanel(Screen, InfoBarPiP):
 		self["label1"] = Label(EXTRAS_Panel_Version)
 		self.list = []
 		self['list'] = List(self.list)
-                self.onLayoutFinish.append(self.HomeMenulist)
-                menu = 0
-                
-        def HomeMenulist(self):
-                self.mylist = []
-                self.mylist.append(((_('Backup/Flash'), 'BackupFlashManager', _('Backup your Image/Settings or Flash a new Image'))))
-                self.mylist.append(((_('Cam Setup'), 'CamSetup', _('select your favourite cam'))))
-                self.mylist.append(((_('Image Update'), 'ImageUpdate', _('Software-Updates and Feed state'))))
-                self.mylist.append(((_('Image Tools'), 'ImageTools', _('Image-Tools'))))
-                self.mylist.append(((_('Infos'), 'Infos', _('Infos...'))))
-                #self.mylist.append(((_('Skin Setup'), 'SkinSetup', _('Change your Skin/Gui and Skin settings'))))
-                self['list'].setList(self.mylist)
+		self.onLayoutFinish.append(self.HomeMenulist)
+		menu = 0
+
+	def HomeMenulist(self):
+		self.mylist = []
+		self.mylist.append(((_('Backup/Flash'), 'BackupFlashManager', _('Backup your Image/Settings or Flash a new Image'))))
+		if Check_Softcam():
+			self.mylist.append(((_('Cam Setup'), 'CamSetup', _('select your favourite cam'))))
+		self.mylist.append(((_('Image Update'), 'ImageUpdate', _('Software-Updates and Feed state'))))
+		self.mylist.append(((_('Image Tools'), 'ImageTools', _('Image-Tools'))))
+		self.mylist.append(((_('Infos'), 'Infos', _('Infos...'))))
+		#self.mylist.append(((_('Skin Setup'), 'SkinSetup', _('Change your Skin/Gui and Skin settings'))))
+		self['list'].setList(self.mylist)
 
 	def setWindowTitle(self):
 		self.setTitle(_("Eight Panel"))
@@ -352,13 +353,13 @@ class Extraspanel(Screen, InfoBarPiP):
 		pass
 
 	def cancel(self):
-                self.close()
+		self.close()
  
 #        def layoutFinished(self):
 #                idx = -1
 #                self['list'].index = idx
-                
-        def Exit(self):
+
+	def Exit(self):
 		#// Exit Extraspanel when pressing the EXIT button or go back to the MainMenu
 		global menu
 		if menu == 0:
