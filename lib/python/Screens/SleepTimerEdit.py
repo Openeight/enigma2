@@ -47,8 +47,11 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 			_("Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer")))
 		self.list.append(getConfigListEntry(_("Inactivity Sleeptimer"),
 			config.usage.inactivity_timer,
-			_("Configure the duration in hours the receiver should go to standby when the receiver is not controlled.")))
+			_("Configure the duration in hours the receiver should go to (deep)standby when the receiver is not controlled.")))
 		if int(config.usage.inactivity_timer.value):
+			self.list.append(getConfigListEntry(_("Inactivity sleeptimer standby mode"),
+				config.usage.inactivity_timer_deep_standby,
+				_("Specify whether receiver should go to deep or normal standby")))
 			self.list.append(getConfigListEntry(_("Specify timeframe to ignore inactivity sleeptimer"),
 				config.usage.inactivity_timer_blocktime,
 				_("When enabled you can specify a timeframe were the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled")))

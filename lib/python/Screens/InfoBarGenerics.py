@@ -3337,12 +3337,18 @@ class InfoBarPowersaver:
 		if Screens.Standby.inStandby:
 			self.inactivityTimeoutCallback(True)
 		else:
-			message = _("Your receiver will got to standby due to inactivity.") + "\n" + _("Do you want this?")
-			self.session.openWithCallback(self.inactivityTimeoutCallback, MessageBox, message, timeout=60, simple=True, default=False, timeout_default=True)
+			if config.usage.inactivity_timer_deep_standby.value == "deep":
+				message = _("Your receiver will go to deep standby due to inactivity.") + "\n" + _("Do you want this?")
+			else:
+				message = _("Your receiver will go to standby due to inactivity.") + "\n" + _("Do you want this?")
+			self.session.openWithCallback(self.inactivityTimeoutCallback, MessageBox, message, timeout=120, simple=True, default=False, timeout_default=True)
 
 	def inactivityTimeoutCallback(self, answer):
 		if answer:
-			self.goStandby()
+			if config.usage.inactivity_timer_deep_standby.value == "deep":
+				self.goDeepStandby()
+			else:
+				self.goStandby()
 		else:
 			print "[InfoBarPowersaver] abort"
 
@@ -3384,6 +3390,10 @@ class InfoBarPowersaver:
 		if not Screens.Standby.inStandby:
 			print "[InfoBarPowersaver] goto standby"
 			self.session.open(Screens.Standby.Standby)
+
+	def goDeepStandby(self):
+		if not Screens.Standby.inTryQuitMainloop and self.session.current_dialog:
+			self.session.open(Screens.Standby.TryQuitMainloop, 1)
 
 class InfoBarHDMI:
 	def HDMIIn(self):
