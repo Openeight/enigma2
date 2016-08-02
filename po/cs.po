@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ims\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-21 09:29+0200\n"
+"POT-Creation-Date: 2016-08-02 19:09+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
@@ -14,6 +14,18 @@ msgstr ""
 "X-Poedit-Language: Czech\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+msgid ""
+"\n"
+"\n"
+"Use following address as IPTV media server?\n"
+msgstr ""
+
+msgid ""
+"\n"
+"\n"
+"[User - bouquets (TV)]\n"
+msgstr ""
 
 #
 msgid ""
@@ -38,6 +50,17 @@ msgstr ""
 "\n"
 "Záloha nastavení Vašeho přijímače."
 
+#, python-format
+msgid ""
+"\n"
+"Backup your running %s %s image to HDD or USB."
+msgstr ""
+
+msgid ""
+"\n"
+"Conflict detection disabled!"
+msgstr ""
+
 #
 msgid ""
 "\n"
@@ -45,6 +68,11 @@ msgid ""
 msgstr ""
 "\n"
 "Upravit adresy aktualizačních zdrojů."
+
+msgid ""
+"\n"
+"Flash on the fly your receiver."
+msgstr ""
 
 msgid ""
 "\n"
@@ -90,13 +118,6 @@ msgstr ""
 "\n"
 "Obnova nastavení Vašeho přijímače."
 
-msgid ""
-"\n"
-"Restore your receiver with a new firmware."
-msgstr ""
-"\n"
-"Obnova přijímače s novým firmware."
-
 #
 msgid ""
 "\n"
@@ -129,6 +150,23 @@ msgstr ""
 "\n"
 "Zobrazit, instalovat a odstranit dostupné nebo instalované balíčky."
 
+msgid ""
+"\n"
+"[Installed Plugins]\n"
+msgstr ""
+
+msgid ""
+"\n"
+"[User - bouquets (RADIO)]\n"
+msgstr ""
+
+msgid " "
+msgstr ""
+
+#, python-format
+msgid "  (%s x %s)"
+msgstr ""
+
 #, python-format
 msgid " (Channel %s)"
 msgstr " (Kanál %s)"
@@ -159,9 +197,25 @@ msgstr "(vyšší, než jakékoliv auto motoru)"
 msgid " (lower than any auto)"
 msgstr "(nižší, než jakékoliv auto)"
 
+msgid ""
+" Not Started !!\n"
+"\n"
+"Cam binname must be in the start command line\n"
+"Check your emu config file"
+msgstr ""
+
+msgid " and"
+msgstr ""
+
+msgid " as "
+msgstr ""
+
 #
 msgid " extensions."
 msgstr "rozšíření."
+
+msgid " from "
+msgstr ""
 
 msgid " ms"
 msgstr "ms"
@@ -203,9 +257,6 @@ msgstr "%A %e. %B %Y"
 msgid "%H:%M"
 msgstr "%H:%M"
 
-msgid "%Y-%m-%d %H:%M"
-msgstr ""
-
 #. TRANSLATORS: short date representation short dayname daynum short monthname in strftime() format! See 'man strftime'
 msgid "%a %e/%m"
 msgstr "%a %e/%m"
@@ -214,6 +265,13 @@ msgstr "%a %e/%m"
 msgid "%a %e/%m  %-H:%M"
 msgstr ""
 
+#, python-format
+msgid "%d Min"
+msgid_plural "%d Mins"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. TRANSLATORS: Intermediate scanning result, '%d' channel(s) have been found so far
 #, python-format
 msgid "%d channel found"
@@ -221,13 +279,6 @@ msgid_plural "%d channels found"
 msgstr[0] "%d kanál nalezen"
 msgstr[1] "%d kanály nalezeny"
 msgstr[2] "%d kanálů nalezeno"
-
-#, python-format
-msgid "%d core"
-msgid_plural "%d cores"
-msgstr[0] "%d jádro"
-msgstr[1] "%d jádra"
-msgstr[2] "%d jader"
 
 #, python-format
 msgid "%d file"
@@ -316,6 +367,18 @@ msgstr "%d. %B %Y"
 msgid "%k:%M %e/%m"
 msgstr ""
 
+#, python-format
+msgid "%s "
+msgstr ""
+
+#, python-format
+msgid "%s  "
+msgstr ""
+
+#, python-format
+msgid "%s %s"
+msgstr ""
+
 #
 #, python-format
 msgid "%s %s free disk space"
@@ -330,6 +393,10 @@ msgstr "%s (%s)\n"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s není dlouho používán. Může být odstraněn?"
+
+#, python-format
+msgid "%s points"
+msgstr ""
 
 #
 #, python-format
@@ -349,6 +416,12 @@ msgstr ""
 
 #, python-format
 msgid "%s:%s"
+msgstr ""
+
+msgid "( All readers)"
+msgstr ""
+
+msgid "(Show only reader:"
 msgstr ""
 
 #
@@ -374,6 +447,36 @@ msgstr "(zobrazit případné DVD audio menu)"
 msgid "* Only available if more than one interface is active."
 msgstr "* dostupné pouze při více než jenom aktivním interface."
 
+msgid "*****blkid*****"
+msgstr ""
+
+msgid "*****df -h*****"
+msgstr ""
+
+msgid "*****e2fsprogs*****"
+msgstr ""
+
+msgid "*****e2fsprogs-tune2fs*****"
+msgstr ""
+
+msgid "*****fdisk*****"
+msgstr ""
+
+msgid "*****kernel-module-ext2*****"
+msgstr ""
+
+msgid "*****kernel-module-ext3*****"
+msgstr ""
+
+msgid "*****mount*****"
+msgstr ""
+
+msgid "*****sfdisk -l*****"
+msgstr ""
+
+msgid "*****util-linux-blkid*****"
+msgstr ""
+
 msgid "/s"
 msgstr ""
 
@@ -381,9 +484,18 @@ msgstr ""
 msgid "0"
 msgstr "0"
 
+msgid "0 (disabled)"
+msgstr ""
+
 #
 msgid "1"
 msgstr "1"
+
+msgid "1 min."
+msgstr ""
+
+msgid "1 second"
+msgstr ""
 
 #
 msgid "1.0"
@@ -397,6 +509,24 @@ msgstr "1.1"
 msgid "1.2"
 msgstr "1.2"
 
+msgid "10"
+msgstr ""
+
+msgid "10 (default)"
+msgstr ""
+
+msgid "10 min."
+msgstr ""
+
+msgid "10 seconds"
+msgstr ""
+
+msgid "120"
+msgstr ""
+
+msgid "128 Mb"
+msgstr ""
+
 #
 msgid "12V output"
 msgstr "12V výstup"
@@ -404,6 +534,12 @@ msgstr "12V výstup"
 #
 msgid "13 V"
 msgstr "13 V"
+
+msgid "15 min."
+msgstr ""
+
+msgid "15 seconds"
+msgstr ""
 
 #
 msgid "16:10"
@@ -433,9 +569,18 @@ msgstr "vždy 16:9"
 msgid "18 V"
 msgstr "18 V"
 
+msgid "1X"
+msgstr ""
+
 #
 msgid "2"
 msgstr "2"
+
+msgid "20"
+msgstr ""
+
+msgid "20 seconds"
+msgstr ""
 
 msgid "23.976"
 msgstr ""
@@ -443,10 +588,19 @@ msgstr ""
 msgid "24"
 msgstr ""
 
+msgid "240"
+msgstr ""
+
 msgid "25"
 msgstr ""
 
+msgid "256 Mb"
+msgstr ""
+
 msgid "29.97"
+msgstr ""
+
+msgid "2X"
 msgstr ""
 
 #
@@ -454,6 +608,18 @@ msgid "3"
 msgstr "3"
 
 msgid "30"
+msgstr ""
+
+msgid "30 min."
+msgstr ""
+
+msgid "30 seconds"
+msgstr ""
+
+msgid "32 Mb"
+msgstr ""
+
+msgid "3X"
 msgstr ""
 
 #
@@ -476,13 +642,34 @@ msgstr "4:3 Letterbox"
 msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
+msgid "4X"
+msgstr ""
+
 #
 msgid "5"
 msgstr "5"
 
+msgid "5 (default)"
+msgstr ""
+
+msgid "5 min."
+msgstr ""
+
+msgid "5 seconds"
+msgstr ""
+
+msgid "512 Mb"
+msgstr ""
+
 #
 msgid "6"
 msgstr "6"
+
+msgid "60"
+msgstr ""
+
+msgid "64 Mb"
+msgstr ""
 
 #
 msgid "7"
@@ -496,8 +683,17 @@ msgstr "8"
 msgid "9"
 msgstr "9"
 
+msgid ":"
+msgstr ""
+
+msgid ": "
+msgstr ""
+
 #, python-format
 msgid ": %s"
+msgstr ""
+
+msgid ": 0000 - default (disabled)"
 msgstr ""
 
 #
@@ -523,6 +719,12 @@ msgstr "??"
 #
 msgid "A"
 msgstr "A"
+
+msgid "A background update check is in progress, please wait a few minutes and try again."
+msgstr ""
+
+msgid "A backup has been detected."
+msgstr ""
 
 #
 #, python-format
@@ -585,6 +787,12 @@ msgstr "Nahrává se. Prosím, zastavte nahrávání před konfigurací pozicion
 msgid "A recording is currently running. Please stop the recording before trying to scan."
 msgstr "Probíhá nahrávání. Zrušte nahrávání před prohledáváním."
 
+msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
+msgstr ""
+
+msgid "A recording is currently running. Please stop the recording before trying to start the satfinder."
+msgstr ""
+
 #
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -640,6 +848,21 @@ msgstr ""
 msgid "AC3 downmix"
 msgstr ""
 
+msgid "AFP"
+msgstr ""
+
+msgid "AFP Setup"
+msgstr ""
+
+msgid "AGC:"
+msgstr ""
+
+msgid "AV Settings"
+msgstr ""
+
+msgid "AV Setup"
+msgstr ""
+
 #
 msgid "Abort"
 msgstr "Zrušit"
@@ -664,6 +887,9 @@ msgstr "Dlouhý stisk tlačítka pro vypnutí"
 msgid "Action on short powerbutton press"
 msgstr "Krátký stisk tlačítka pro vypnutí"
 
+msgid "Activate"
+msgstr ""
+
 msgid "Activate HbbTV (Redbutton)"
 msgstr "Aktivovat HbbTV (červené tlačítko)"
 
@@ -687,6 +913,12 @@ msgid "Activate timeshift End"
 msgstr ""
 
 msgid "Activate timeshift end and pause"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Active clients"
 msgstr ""
 
 #
@@ -717,6 +949,9 @@ msgstr "Přidat záložku"
 msgid "Add directory to playlist"
 msgstr "Přidat adresář do playlistu"
 
+msgid "Add entry"
+msgstr ""
+
 #
 msgid "Add file to playlist"
 msgstr "Přidat soubor do playlistu"
@@ -724,6 +959,9 @@ msgstr "Přidat soubor do playlistu"
 #
 msgid "Add files to playlist"
 msgstr "Přidat soubory do playlistu"
+
+msgid "Add new entry"
+msgstr ""
 
 #
 msgid "Add provider"
@@ -768,6 +1006,18 @@ msgstr "Přidat do oblíbených"
 msgid "Add/remove change timer for current event"
 msgstr "Přidat/odstranit časovač pro aktuální událost"
 
+msgid "Addons install rar"
+msgstr ""
+
+msgid "Addons install tar.gz or tgz or tar.bz2"
+msgstr ""
+
+msgid "Addons install zip"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
 #
 msgid "Adjust 3D settings"
 msgstr "Seřídit 3D nastavení"
@@ -779,6 +1029,12 @@ msgstr "Upravte barevné nastavení tak, aby všechny barevné odstíny byly roz
 #
 msgid "Advanced"
 msgstr "rozšířený"
+
+msgid "Advanced Restore"
+msgstr ""
+
+msgid "Advanced Restore..."
+msgstr ""
 
 #
 msgid "Advanced options"
@@ -812,6 +1068,9 @@ msgstr "Po skončení"
 msgid "Album"
 msgstr "Album"
 
+msgid "Alias"
+msgstr ""
+
 msgid "Alignment of events"
 msgstr "Zarovnání událostí"
 
@@ -824,6 +1083,9 @@ msgstr "Vše"
 
 msgid "All ages"
 msgstr " "
+
+msgid "All device umount.Select action:"
+msgstr ""
 
 msgid "All frequency"
 msgstr ""
@@ -844,6 +1106,9 @@ msgstr "Všechny satelity 3 (USALS)"
 msgid "All satellites 4 (USALS)"
 msgstr "Všechny satelity 4 (USALS)"
 
+msgid "All services provider"
+msgstr ""
+
 msgid "Allocate"
 msgstr "Přidělit"
 
@@ -859,9 +1124,15 @@ msgstr "Titulky shodné se zvukem"
 msgid "Allow subtitles for hearing impaired"
 msgstr "Povolit titulky pro sluchově postižené"
 
+msgid "Allows you to enable/disable displaying icons on the frontpanel."
+msgstr ""
+
 #
 msgid "Alpha"
 msgstr "Alfa"
+
+msgid "Already installed"
+msgstr ""
 
 msgid "Also on standby"
 msgstr "Také při standby"
@@ -884,6 +1155,12 @@ msgstr "Vždy se ptát"
 msgid "Always hide infobar"
 msgstr "Vždy skrývat infobar"
 
+msgid "Always include ECM in recordings"
+msgstr ""
+
+msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
+msgstr ""
+
 #
 msgid "An empty filename is illegal."
 msgstr "Neplatný název souboru."
@@ -899,12 +1176,18 @@ msgstr "Vyskytla se neznámá chyba!"
 msgid "And will put your receiver in standby over "
 msgstr "a přepne přijímač do standby za"
 
+msgid "Answer is none"
+msgstr ""
+
 msgid "Any activity"
 msgstr "jakákoliv aktivita"
 
 #
 msgid "Arabic"
 msgstr "Arabsky"
+
+msgid "Are you ready to run the script ?"
+msgstr ""
 
 msgid "Are you sure to purge all deleted userbouquets?"
 msgstr "Opravdu chcete odstranit všechny smazané přehledy?"
@@ -939,6 +1222,11 @@ msgstr ""
 "Opravdu chcete smazat následující zálohu:\n"
 "\n"
 
+msgid ""
+"Are you sure you want to delete this:\n"
+" "
+msgstr ""
+
 #
 msgid "Are you sure you want to exit this wizard?"
 msgstr "Opravdu chcete ukončit tohoto průvodce?"
@@ -964,13 +1252,16 @@ msgstr ""
 "\n"
 "Uživatelské rozhraní bude po obnově restartováno!"
 
-#
+#, python-format
 msgid ""
-"Are you sure you want to restore the backup?\n"
-"Your receiver will restart after the backup has been restored!"
+"Are you sure you want to restore your %s %s backup?\n"
+"STB will restart after the restore"
 msgstr ""
-"Opravdu chcete obnovit zálohu?\n"
-"Po obnově bude přijímač restartován!"
+
+msgid ""
+"Are you sure you want to restore your STB backup?\n"
+"STB will restart after the restore"
+msgstr ""
 
 #
 msgid "Artist"
@@ -978,6 +1269,9 @@ msgstr "Umělec"
 
 msgid "Arts/Culture"
 msgstr "umění/kultura"
+
+msgid "As defined by the skin"
+msgstr ""
 
 #
 msgid "Ask user"
@@ -1003,6 +1297,11 @@ msgstr "Na začátek"
 msgid "At end"
 msgstr "Na konec"
 
+msgid ""
+"Attention!\n"
+"Not highly recommend that you remove or edit the system entry!\n"
+msgstr ""
+
 msgid "Attention, this is repeated timer!\n"
 msgstr "or, toto je opakovaný časovač!\n"
 
@@ -1018,6 +1317,12 @@ msgid "Audio"
 msgstr "Zvuk"
 
 msgid "Audio PID"
+msgstr ""
+
+msgid "Audio Selection"
+msgstr ""
+
+msgid "Audio Sync"
 msgstr ""
 
 #
@@ -1039,6 +1344,9 @@ msgstr "Volba jazyka zvuku 4"
 #
 msgid "Audio options..."
 msgstr "Nastavení zvuku..."
+
+msgid "Audio plugins"
+msgstr ""
 
 #
 #, python-format
@@ -1063,6 +1371,15 @@ msgstr "Mód authoringu"
 msgid "Auto"
 msgstr "Auto"
 
+msgid "Auto EXIF Orientation rotation/flipping"
+msgstr ""
+
+msgid "Auto Language"
+msgstr ""
+
+msgid "Auto Language Selection"
+msgstr ""
+
 #
 msgid "Auto chapter split every ? minutes (0=never)"
 msgstr "Automaticky vytvořit kapitoly každých ? minut (0=žádné)"
@@ -1081,6 +1398,9 @@ msgstr "Auto fokus zahájen ..."
 msgid "Auto language selection"
 msgstr "Automatický výběr jazyka"
 
+msgid "Auto play blu-ray file"
+msgstr ""
+
 #
 msgid "Auto scart switching"
 msgstr "Automatické přepínání scart"
@@ -1096,15 +1416,30 @@ msgstr "Automatické prohledávání"
 msgid "Automatic scan"
 msgstr "Automatické prohledávání"
 
+msgid "Automatic scan for services"
+msgstr ""
+
 msgid "Automatically start timeshift after"
 msgstr "Automaticky spustit timeshift po"
 
 msgid "Automatically turn on external subtitles"
 msgstr "Automaticky zapínat externí titulky"
 
+msgid "Automatically update Client/Server View?"
+msgstr ""
+
+msgid "Autostart"
+msgstr ""
+
+msgid "Autostart:"
+msgstr ""
+
 #
 msgid "Available format variables"
 msgstr "Použitelný formát proměnných"
+
+msgid "Available shares:"
+msgstr ""
 
 #
 msgid "B"
@@ -1122,6 +1457,10 @@ msgstr "BER:"
 msgid "Back"
 msgstr "Zpět"
 
+#, python-format
+msgid "Back-up Tool for an %s\n"
+msgstr ""
+
 #
 msgid "Background"
 msgstr "Pozadí"
@@ -1138,9 +1477,25 @@ msgstr "Možnosti mazání na pozadí"
 msgid "Background delete speed"
 msgstr "Rychlost mazání na pozadí"
 
+#, python-format
+msgid "Backup Date: %s\n"
+msgstr ""
+
+msgid "Backup Files"
+msgstr ""
+
+msgid "Backup Image"
+msgstr ""
+
+msgid "Backup Settings"
+msgstr ""
+
 #
 msgid "Backup completed."
 msgstr "Záloha dokončena."
+
+msgid "Backup done."
+msgstr ""
 
 #
 msgid "Backup failed."
@@ -1150,9 +1505,44 @@ msgstr "Záloha selhala."
 msgid "Backup is running..."
 msgstr "Probíhá zálohování..."
 
+msgid "Backup location"
+msgstr ""
+
+msgid ""
+"Backup plugins found\n"
+"do you want to install now?"
+msgstr ""
+
 #
 msgid "Backup system settings"
 msgstr "Záloha nastavení"
+
+msgid "Backup your Image"
+msgstr ""
+
+msgid "Backup your Image/Settings or Flash a new Image"
+msgstr ""
+
+msgid "Backup your Settings"
+msgstr ""
+
+msgid "Backup your current image"
+msgstr ""
+
+msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box"
+msgstr ""
+
+msgid "Backup your current settings"
+msgstr ""
+
+msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files"
+msgstr ""
+
+msgid "Backup/Flash"
+msgstr ""
+
+msgid "Backup/Flash Manager"
+msgstr ""
 
 #
 msgid "Band"
@@ -1217,13 +1607,29 @@ msgstr "Zesílení modré"
 msgid "Bookmarks"
 msgstr "Záložky"
 
+msgid "Bouquet + = install or update driver"
+msgstr ""
+
+msgid "Bouquet - = scan for IPTV server addresses"
+msgstr ""
+
 #
 msgid "Brightness"
 msgstr "Jas"
 
+msgid "Brightness (Normal)"
+msgstr ""
+
+msgid "Brightness (Standby)"
+msgstr ""
+
 #, python-format
 msgid "Buffering %d%%"
 msgstr "Vyrovnávací paměť %d%%"
+
+#, python-format
+msgid "Build: %s"
+msgstr ""
 
 msgid "Bulgarian"
 msgstr "Bulharsky"
@@ -1248,8 +1654,14 @@ msgstr "Vypálit na DVD"
 msgid "Bus: "
 msgstr "Sběrnice: "
 
+msgid "Button Setup"
+msgstr ""
+
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "Standardně ( jestliže to podporuje tuner) je SNR zobrazován v dB. Toto nastavení umožní zobrazování v procentech."
+
+msgid "By openATV Image Team"
+msgstr ""
 
 #
 msgid "C"
@@ -1258,6 +1670,53 @@ msgstr ""
 #
 msgid "C-Band"
 msgstr "C-Band"
+
+msgid "CAID"
+msgstr ""
+
+msgid "CCcam Client Info"
+msgstr ""
+
+msgid "CCcam Config Switcher"
+msgstr ""
+
+msgid "CCcam ECM Info"
+msgstr ""
+
+msgid "CCcam Info"
+msgstr ""
+
+#, python-format
+msgid ""
+"CCcam Info %s\n"
+"by AliAbdul %s\n"
+"\n"
+"This plugin shows you the status of your CCcam."
+msgstr ""
+
+msgid "CCcam Info Config"
+msgstr ""
+
+msgid "CCcam Info Setup"
+msgstr ""
+
+msgid "CCcam Provider Info"
+msgstr ""
+
+msgid "CCcam Remote Info"
+msgstr ""
+
+msgid "CCcam Server Info"
+msgstr ""
+
+msgid "CCcam Share Info"
+msgstr ""
+
+msgid "CCcam Shares Info"
+msgstr ""
+
+msgid "CCcamInfo"
+msgstr ""
 
 msgid "CH"
 msgstr "K"
@@ -1273,12 +1732,19 @@ msgstr "CI (Common Interface)"
 msgid "CI assignment"
 msgstr "CI přiřazení"
 
-msgid "CPU: "
-msgstr "CPU:"
+msgid "CI slot: "
+msgstr ""
+
+#, python-format
+msgid "CPU: %s"
+msgstr ""
 
 #
 msgid "CVBS"
 msgstr "CVBS"
+
+msgid "CaID: "
+msgstr ""
 
 #
 msgid "Cable"
@@ -1304,8 +1770,14 @@ msgstr "Přepočítání dokončeno"
 msgid "Calibrate"
 msgstr "Kalibrovat"
 
+msgid "Cam Setup"
+msgstr ""
+
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Může být použito při odlišné fps mezi obrazem a externími titulky."
+
+msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
+msgstr ""
 
 #
 msgid "Cancel"
@@ -1323,6 +1795,15 @@ msgstr "Nelze přesunout do koše soubory z jiného disku nebo systému"
 msgid "Cannot move to trash can"
 msgstr "Nelze přesunout do koše"
 
+msgid ""
+"Cannot unmount from the previous device from /media/hdd.\n"
+"A record in progress, timeshift or some external tools (like samba, nfsd,transmission and etc) may cause this problem.\n"
+"Please stop this actions/applications and try again!"
+msgstr ""
+
+msgid "Capabilities: "
+msgstr ""
+
 #
 msgid "Capacity: "
 msgstr "Kapacita:"
@@ -1330,6 +1811,21 @@ msgstr "Kapacita:"
 #
 msgid "Card"
 msgstr "Karta"
+
+msgid "Card infos (CCcam-Reader)"
+msgstr ""
+
+msgid "Cards:"
+msgstr ""
+
+msgid "Cards: "
+msgstr ""
+
+msgid "Cards: 0"
+msgstr ""
+
+msgid "Cardserial"
+msgstr ""
 
 msgid "Cascade PiP"
 msgstr "Kaskádový PiP"
@@ -1341,8 +1837,21 @@ msgstr "Centrovat DVB titulky"
 msgid "Center time-labels and remove date"
 msgstr "Skrýt datum a vycentrovat čas"
 
+msgid ""
+"Change NTP-Server autostart not not possible:\n"
+"\n"
+"Network status: Unreachable !"
+msgstr ""
+
 msgid "Change PIN"
 msgstr "Změnit PIN"
+
+#, python-format
+msgid ""
+"Change Systemtime was canceled:\n"
+"\n"
+"%s"
+msgstr ""
 
 #
 msgid "Change bouquets in quickzap"
@@ -1371,9 +1880,6 @@ msgstr "Změnit velikost kroku"
 msgid "Change timer"
 msgstr "Změnit časovač"
 
-msgid "Changelog"
-msgstr "Protokol změn"
-
 #
 msgid "Channel"
 msgstr "Kanál"
@@ -1392,6 +1898,9 @@ msgstr "Kanál není v seznamu služeb"
 #
 msgid "Channel selection"
 msgstr "Výběr programu"
+
+msgid "Channel selection configuration"
+msgstr ""
 
 #
 msgid "Channel:"
@@ -1417,11 +1926,40 @@ msgstr "Kapitola:"
 msgid "Check"
 msgstr "Ověřit"
 
+msgid "Check DVB Time"
+msgstr ""
+
+msgid "Check HDD"
+msgstr ""
+
+msgid ""
+"Check Network status.\n"
+"Please wait..."
+msgstr ""
+
+msgid "Check and set DVB Time"
+msgstr ""
+
+msgid "Check and set with NTP-Server"
+msgstr ""
+
+msgid "Check and set with NTP-Server not useful,switch off Enigma 2 Timeupdate first !"
+msgstr ""
+
 msgid "Check the internet connection"
 msgstr "Zkontrolujte připojení k internetu"
 
 msgid "Check the internet connection again"
 msgstr "Zkontrolujte znovu připojení k internetu"
+
+msgid "Check/Install online updates (you must have a working internet connection)"
+msgstr ""
+
+msgid "Checking DVB Time..."
+msgstr ""
+
+msgid "Checking Feeds"
+msgstr ""
 
 #
 msgid "Checking filesystem..."
@@ -1432,17 +1970,38 @@ msgstr "Kontrola internetového připojení"
 
 #, python-format
 msgid ""
-"Checking tuner %d\n"
+"Checking tuner %s\n"
 "DiSEqC port %s for %s"
 msgstr ""
-"Kontrola tuneru %d\n"
-"DiSEqC port %s pro %s"
 
 msgid "Children/Youth"
 msgstr "děti/mládež"
 
+#, python-format
+msgid "Chipset: %s"
+msgstr ""
+
+#, python-format
+msgid "Chipset: BCM%s"
+msgstr ""
+
+msgid "Choose Backup Files"
+msgstr ""
+
+msgid "Choose Backup location"
+msgstr ""
+
 msgid "Choose Tuner"
 msgstr "Zvolte tuner"
+
+msgid "Choose bouquet"
+msgstr ""
+
+msgid "Choose the files to backup"
+msgstr ""
+
+msgid "Choose the location where the EPG data will be stored when the receiver is shut down. The location must be available at boot time."
+msgstr ""
 
 msgid "Choose which tuner to configure."
 msgstr "Vyberte si, který tuner chcete nastavovat."
@@ -1480,7 +2039,13 @@ msgstr "Smazat log"
 msgid "Clear playlist"
 msgstr "Vymazat playlist"
 
+msgid "Clients"
+msgstr ""
+
 msgid "Clone TV screen to LCD"
+msgstr ""
+
+msgid "Clone selected entry"
 msgstr ""
 
 #
@@ -1489,6 +2054,9 @@ msgstr "Zavřít"
 
 msgid "Close PiP on exit"
 msgstr "Zavřít PIP při ukončení"
+
+msgid "Close plugin"
+msgstr ""
 
 #
 msgid "Close title selection"
@@ -1520,6 +2088,9 @@ msgstr "Nastavení kompilace"
 msgid "Color format"
 msgstr "Formát barev"
 
+msgid "Command To Run"
+msgstr ""
+
 #
 msgid "Command execution..."
 msgstr "Výkonání příkazu..."
@@ -1528,9 +2099,15 @@ msgstr "Výkonání příkazu..."
 msgid "Command order"
 msgstr "Pořadí příkazů"
 
+msgid "Command type"
+msgstr ""
+
 #
 msgid "Common Interface"
 msgstr "Common Interface"
+
+msgid "Common Interface Assignment"
+msgstr ""
 
 #
 msgid "Common Interface assignment"
@@ -1544,12 +2121,15 @@ msgstr "Komunikace"
 msgid "Compact flash"
 msgstr "Compact flash"
 
-msgid "Compensate for overscan"
+msgid "Compare the system time with a central time server and set the new system time."
 msgstr ""
 
 #
 msgid "Complete"
 msgstr "Kompletní"
+
+msgid "Complete Backup"
+msgstr ""
 
 #
 msgid "Complex (allows mixing audio tracks and aspects)"
@@ -1558,9 +2138,16 @@ msgstr "komplexní (umožňuje míchat audio stopy a zobrazení)"
 msgid "Composition of the recording filenames"
 msgstr "Vytváření názvů nahrávaných souborů"
 
+msgid "Config"
+msgstr ""
+
 #
 msgid "Config resolution of pictures"
 msgstr "Nastavení rozlišení obrázků"
+
+#, python-format
+msgid "Configfile %s saved."
+msgstr ""
 
 msgid "Configuration mode"
 msgstr "Konfigurační mód"
@@ -1572,6 +2159,9 @@ msgstr "Konfigurační mód:  %s"
 #
 msgid "Configuration..."
 msgstr "nastavení..."
+
+msgid "Configure Mainmenu"
+msgstr ""
 
 msgid "Configure an additional delay to improve external subtitle synchronisation."
 msgstr "Nastavení zpoždění pro lepší synchronizaci externích titulků."
@@ -1585,11 +2175,11 @@ msgstr "Nastavuje, jak dlouho po zobrazení bude viditelný infobar."
 msgid "Configure for how many minutes finished events should remain visible in the EPG. Useful when you need information about an event which has just finished, or has been delayed."
 msgstr "Nastavuje, kolik minut může zůstat ukončená událost viditelná v EPG. Užitečné, když potřebujete informace o události, která právě skončila nebo byla zpožděná."
 
+msgid "Configure how many channels are shown in the selection list."
+msgstr ""
+
 msgid "Configure how recording filenames are constructed."
 msgstr "Nastavuje způsob vytváření názvů souborů pro nahrávání."
-
-msgid "Configure how the fan should operate"
-msgstr "Nastavuje jak bude pracovat ventilátor"
 
 #
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
@@ -1609,6 +2199,9 @@ msgstr "Nastavuje zda a jak bude zobrazovat indikaci nahrávaného kanálu v sez
 msgid "Configure if and how wide columns will be shown in the channel selection list."
 msgstr "Nastavuje zda a jak široké sloupce budou zobrazeny v seznamu kanálů."
 
+msgid "Configure if behind the subtitles a background is shown."
+msgstr ""
+
 #
 msgid "Configure if service picons will be shown in the channel selection list."
 msgstr "Nastavuje, zda budou picony zobrazeny v seznamu kanálů."
@@ -1620,6 +2213,9 @@ msgstr ""
 msgid "Configure interface"
 msgstr "Nastavuje interface"
 
+msgid "Configure mainmenu"
+msgstr ""
+
 #
 msgid "Configure nameservers"
 msgstr "Nastavuje DNS servery"
@@ -1629,6 +2225,9 @@ msgstr "Nastavuje, na kterých zařízeních může být nastaveno mazání na p
 
 msgid "Configure remote control type"
 msgstr "Nastavit typ dálkového ovládání"
+
+msgid "Configure second-infobar"
+msgstr ""
 
 msgid "Configure the DiSEqC mode for this LNB."
 msgstr "Nastavuje DiSEqC mód pro tento LNB."
@@ -1657,11 +2256,11 @@ msgstr "Nastavuje chování při dosažení konce filmu během přehrávání."
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr "Nastavuje šířku okrajů titulků. Tmavé okraje dělají titulky lépe čitelné na světlém pozadí."
 
-msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Nastavuje úroveň jasu předního displeje v pohotovostním režimu."
+msgid "Configure the brightness level of the front panel displa for normal operation."
+msgstr ""
 
-msgid "Configure the brightness level of the front panel display."
-msgstr "Nastavuje úroveň jasu předního displeje."
+msgid "Configure the brightness level of the front panel displa for standby."
+msgstr ""
 
 msgid "Configure the color of the external subtitles, alternative (normal in white, italic in yellow, bold in cyan, underscore in green), white or yellow."
 msgstr "Nastavuje barvy externích titulků - alternativní (normální bíle, kurzíva žlutě, tučné azurově, podtržené zeleně), bílá nebo žlutá."
@@ -1676,9 +2275,8 @@ msgstr "Nastavuje úroveň kontrastu předního displeje."
 msgid "Configure the cursor behaviour in the channel selection list. When opening the channel selection list you can keep on the current service or already select up/down and you are able to revert the B+/B- buttons."
 msgstr "Nastavuje chování kurzoru v přehledu kanálů. Při otevření přehledu kanálů můžete zůstat na aktuálním programu nebo se posunout nahoru/dolů a můžete též prohodit B+/B- tlačítka."
 
-#
-msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
-msgstr "Nastavte dobu v hodinách pro přechod přijímače do standby, jestliže po tuto dobu nebyl ovládán."
+msgid "Configure the duration in hours the receiver should go to (deep)standby when the receiver is not controlled."
+msgstr ""
 
 msgid "Configure the duration in minutes for the screensaver."
 msgstr "Nastavení doby v minutách pro spořič obrazovky."
@@ -1811,9 +2409,6 @@ msgstr "Konfigurace zdroje frontend dat zobrazovaných v Infobaru.  \" Nastaven�
 msgid "Configure the speed of the background deletion process. Lower speed will consume less hard disk drive performance."
 msgstr "Nastavuje rychlost mazání na pozadí. Nižší rychlost spotřebuje méně výkonu pevného disku."
 
-msgid "Configure the speed of the fan"
-msgstr "Nastavit rychlost ventilátoru"
-
 msgid "Configure the subtitle delay when timing information is not available."
 msgstr "Nastavuje zpoždění titulků pro případ, kdy není časování dostupné."
 
@@ -1876,6 +2471,9 @@ msgstr "Konfigurace, který typ tuneru bude mít přednost, je-li k dispozici st
 msgid "Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites."
 msgstr "Nastavuje, který tuner bude preferovaný, jestliže je k dispozici více než jeden tuner. V případě nastavení na 'automaticky' bude preferován tuner s nejnižším počtem kanálů/satelitů."
 
+msgid "Configure your Network"
+msgstr ""
+
 #
 msgid "Configure your internal LAN"
 msgstr "Nastavte vnitřní LAN"
@@ -1902,16 +2500,15 @@ msgid "Conflict not resolved!"
 msgstr ""
 
 #
-msgid "Conflicting timer"
-msgstr "Konfliktní časovač"
-
-#
 msgid "Connect"
 msgstr "Připojit"
 
 #
 msgid "Connect to a wireless network"
 msgstr "Připojit k bezdrátové síti"
+
+msgid "Connected clients"
+msgstr ""
 
 #
 msgid "Connected satellites"
@@ -1921,9 +2518,21 @@ msgstr "Připojené satelity"
 msgid "Connected to"
 msgstr "Připojeno k"
 
+msgid "Connected!"
+msgstr ""
+
+msgid "Connected: "
+msgstr ""
+
+msgid "Console"
+msgstr ""
+
 #
 msgid "Constellation"
 msgstr "Sestava"
+
+msgid "Content"
+msgstr ""
 
 #
 msgid "Content does not fit on DVD!"
@@ -1944,6 +2553,9 @@ msgstr "Pokračovat v přehrávání"
 msgid "Continue playing"
 msgstr "pokračovat v přehrávání"
 
+msgid "Continues"
+msgstr ""
+
 msgid "Continues play (loop)"
 msgstr "přehrát další (opakování ve smyčce)"
 
@@ -1951,11 +2563,17 @@ msgstr "přehrát další (opakování ve smyčce)"
 msgid "Contrast"
 msgstr "Kontrast"
 
+msgid "Control your Softcams"
+msgstr ""
+
 msgid "Convert ext3 filesystem to ext4"
 msgstr "Konvertovat ext3 systém souborů na ext4"
 
 msgid "Convert ext3 to ext4"
 msgstr "Konverze ext3 na ext4"
+
+msgid "Convert filesystem ext3 to ext4"
+msgstr ""
 
 msgid "Converting ext3 to ext4..."
 msgstr "Konverze ext3 na ext4..."
@@ -1963,8 +2581,14 @@ msgstr "Konverze ext3 na ext4..."
 msgid "Copy"
 msgstr "Kopírovat"
 
-msgid "Could not connect to receiver .NFI image feed server:"
-msgstr "Nelze se připojit ke zdrojovému serveru s .NFI image"
+msgid ""
+"Copy your keymap to\n"
+"/usr/share/enigma2/keymap.usr"
+msgstr ""
+
+#, python-format
+msgid "Cores: %s"
+msgstr ""
 
 msgid "Could not find installed channel list."
 msgstr "Nelze najít nainstalováný seznam kanálů."
@@ -1977,6 +2601,10 @@ msgstr "Nelze načíst médium. Není vložen disk?"
 msgid "Could not open Picture in Picture"
 msgstr "Nelze otevřít obraz v obraze"
 
+#, python-format
+msgid "Could not open the file %s!"
+msgstr ""
+
 #
 #, python-format
 msgid "Could not record due to conflicting timer %s"
@@ -1985,6 +2613,19 @@ msgstr "Nelze nahrávat z důvodu konfliktu časovače %s"
 #, python-format
 msgid "Could not record due to invalid service %s"
 msgstr "Nelze nahrávat z důvodu neplatného programu %s"
+
+#, python-format
+msgid "Could not save configfile %s!"
+msgstr ""
+
+msgid "Cpu"
+msgstr ""
+
+msgid "Cpu..."
+msgstr ""
+
+msgid "Create"
+msgstr ""
 
 #
 msgid "Create DVD-ISO"
@@ -2006,12 +2647,58 @@ msgstr "Zakládá se souborový systém"
 msgid "Creating partition"
 msgstr "Zakládá se tabulka rozdělení disku"
 
+msgid "Creating start scripts and starting the cam"
+msgstr ""
+
 #
 msgid "Croatian"
 msgstr "Chorvatsky"
 
+msgid "Cron Manager"
+msgstr ""
+
+msgid "Cron-Manager..."
+msgstr ""
+
 msgid "Current CEC address"
 msgstr "Současná CEC adresa"
+
+msgid ""
+"Current Mainmenu list setting is Horizontal-Animated.\n"
+"Here you can change it.\n"
+"After select enigma will restart."
+msgstr ""
+
+msgid ""
+"Current Mainmenu list setting is Horizontal-icon.\n"
+"Here you can change it.\n"
+"After select enigma will restart."
+msgstr ""
+
+msgid ""
+"Current Mainmenu list setting is Vertical.\n"
+"Here you can change it.\n"
+"After select enigma will restart."
+msgstr ""
+
+msgid "Current Second-infobar setting is None !"
+msgstr ""
+
+msgid ""
+"Current Second-infobar setting is None.\n"
+"Here you can change it."
+msgstr ""
+
+msgid "Current Second-infobar setting is Show !"
+msgstr ""
+
+msgid ""
+"Current Second-infobar setting is Show.\n"
+"Here you can change it."
+msgstr ""
+
+msgid "Current Status:"
+msgstr ""
 
 msgid "Current device: "
 msgstr "Aktuální zařízení: "
@@ -2030,9 +2717,31 @@ msgstr ""
 msgid "Current mode: %s \n"
 msgstr "Aktuální mód: %s \n"
 
+msgid "Current picon setting is False !"
+msgstr ""
+
+msgid ""
+"Current picon setting is False.\n"
+"Here you can change it."
+msgstr ""
+
+msgid "Current picon setting is True !"
+msgstr ""
+
+msgid ""
+"Current picon setting is True.\n"
+"Here you can change it."
+msgstr ""
+
+msgid "Current rotor position: "
+msgstr ""
+
 #
 msgid "Current settings:"
 msgstr "Aktuální nastavení:"
+
+msgid "Current time"
+msgstr ""
 
 #
 msgid "Current transponder"
@@ -2042,15 +2751,11 @@ msgstr "Aktuální transponder"
 msgid "Current value: "
 msgstr "Aktuální hodnota: "
 
-#
-msgid "Current version:"
-msgstr "Aktuální verze:"
-
-msgid "Currently installed image"
-msgstr "Nainstalované image"
-
 msgid "Currently the commit log cannot be retrieved - please try later again"
 msgstr "V současné době není možné získat aktuální seznam změn - prosím, zkuste to později"
+
+msgid "Custom"
+msgstr ""
 
 #
 msgid "Custom skip time for '1'/'3' buttons"
@@ -2064,6 +2769,12 @@ msgstr "Vlastní časový posun pro tlačítka '4'/'6'"
 msgid "Custom skip time for '7'/'9' buttons"
 msgstr "Vlastní časový posun pro tlačítka '7'/'9'"
 
+msgid "Customise"
+msgstr ""
+
+msgid "Customise enigma2 personal settings"
+msgstr ""
+
 #
 msgid "Customize"
 msgstr "Přizpůsobení"
@@ -2075,6 +2786,9 @@ msgstr "Chování kurzoru v seznamu kanálů"
 #
 msgid "Cut"
 msgstr "Střih"
+
+msgid "Cutlist editor"
+msgstr ""
 
 #
 msgid "Cutlist editor..."
@@ -2092,12 +2806,8 @@ msgstr "D"
 msgid "DHCP"
 msgstr "DHCP"
 
-#
-msgid "DMM advanced"
-msgstr "rozšířené"
-
-msgid "DMM normal"
-msgstr "normální"
+msgid "DLNA support"
+msgstr ""
 
 msgid "DTS downmix"
 msgstr ""
@@ -2106,8 +2816,38 @@ msgstr ""
 msgid "DUAL LAYER DVD"
 msgstr "DVOUVRSTVÉ DVD"
 
-msgid "DVB drivers: "
-msgstr "DVB ovladače:"
+msgid "DVB NTP Time menu"
+msgstr ""
+
+msgid "DVB Time check autostart"
+msgstr ""
+
+#, python-format
+msgid ""
+"DVB Time check results:\n"
+"%s"
+msgstr ""
+
+#, python-format
+msgid ""
+"DVB Time setting aborted:\n"
+"\n"
+"%s"
+msgstr ""
+
+msgid ""
+"DVB Time update running.\n"
+"Please wait..."
+msgstr ""
+
+#, python-format
+msgid ""
+"DVB Time updating to %s\n"
+"successfully done."
+msgstr ""
+
+msgid "DVB Transmission Way"
+msgstr ""
 
 #
 msgid "DVB subtitle black transparency"
@@ -2119,9 +2859,15 @@ msgstr "DVB-C"
 msgid "DVB-C ANNEX C"
 msgstr "DVB-C ANNEX C"
 
+msgid "DVB-NTP-Time"
+msgstr ""
+
 #
 msgid "DVB-S"
 msgstr "DVB-S"
+
+msgid "DVB-S/SVB-S2"
+msgstr ""
 
 #
 msgid "DVB-S2"
@@ -2132,6 +2878,12 @@ msgstr "DVB-T"
 
 msgid "DVB-T2"
 msgstr "DVB-T2"
+
+msgid "DVD Burn"
+msgstr ""
+
+msgid "DVD Menu"
+msgstr ""
 
 msgid "DVD data format"
 msgstr "DVD datový formát"
@@ -2152,6 +2904,9 @@ msgstr "DVD přehrávač"
 msgid "DVD titlelist"
 msgstr "DVD seznam titulů"
 
+msgid "Daily"
+msgstr ""
+
 #
 msgid "Danish"
 msgstr "Dánsky"
@@ -2164,6 +2919,9 @@ msgstr "Datum"
 msgid "Date/time input"
 msgstr "Nastavení data/času"
 
+msgid "Deactivate"
+msgstr ""
+
 #
 msgid "Deep standby"
 msgstr "Hluboký spánek"
@@ -2172,6 +2930,15 @@ msgstr "Hluboký spánek"
 msgid "Default"
 msgstr "Defaultní"
 
+msgid "Default  (keymap.xml)"
+msgstr ""
+
+msgid "Default (Timeshift)"
+msgstr ""
+
+msgid "Default Services Scanner"
+msgstr ""
+
 #
 msgid "Default movie location"
 msgstr "Standardní umístění souborů"
@@ -2179,6 +2946,10 @@ msgstr "Standardní umístění souborů"
 #
 msgid "Default settings"
 msgstr "Standardní nastavení"
+
+#, python-format
+msgid "Deflating %s to /"
+msgstr ""
 
 msgid "Delay after change voltage before switch command"
 msgstr ""
@@ -2235,18 +3006,19 @@ msgstr ""
 msgid "Delay for external subtitles"
 msgstr "Zpoždění externích titulků"
 
-msgid "Delay in miliseconds after finish scrolling text on display."
-msgstr ""
-
-msgid "Delay in miliseconds before start of scrolling text on display."
-msgstr ""
-
-msgid "Delay in miliseconds between scrolling characters on display."
-msgstr ""
-
 #
 msgid "Delete"
 msgstr "Smazat"
+
+#, python-format
+msgid "Delete %s?"
+msgstr ""
+
+msgid "Delete Plugins"
+msgstr ""
+
+msgid "Delete and unstall Plugins. This will remove the Plugin from your box"
+msgstr ""
 
 #
 msgid "Delete entry"
@@ -2275,6 +3047,10 @@ msgstr "Odstranit časovač"
 msgid "Deleted"
 msgstr "Mazáno"
 
+#, python-format
+msgid "Deleted %s!"
+msgstr ""
+
 #
 msgid "Deleted items"
 msgstr "Smazané položky"
@@ -2283,9 +3059,11 @@ msgstr "Smazané položky"
 msgid "Depth"
 msgstr "Hloubka"
 
-#
-msgid "Descramble http streams"
-msgstr "Dekódovat http streamy"
+msgid "Descramble receiving http streams"
+msgstr ""
+
+msgid "Descramble sending http streams"
+msgstr ""
 
 #
 msgid "Description"
@@ -2306,9 +3084,31 @@ msgstr "Detekován HDD:"
 msgid "Detected NIMs:"
 msgstr "Detekován NIMs:"
 
+msgid "Device Manager"
+msgstr ""
+
+msgid ""
+"Device changes need a system restart to take effects.\n"
+"Restart your Box now?"
+msgstr ""
+
+msgid "Device name:"
+msgstr ""
+
+msgid "Device: "
+msgstr ""
+
 #
 msgid "Devicename:"
 msgstr "Název zařízení:"
+
+msgid "Devices"
+msgstr ""
+
+msgid ""
+"Devices changes need a system restart to take effects.\n"
+"Restart your Box now?"
+msgstr ""
 
 #
 msgid "DiSEqC"
@@ -2334,6 +3134,9 @@ msgstr "DiSEqC A/B"
 msgid "DiSEqC A/B/C/D"
 msgstr "DiSEqC A/B/C/D"
 
+msgid "DiSEqC Tester"
+msgstr ""
+
 #
 msgid "DiSEqC mode"
 msgstr "DiSEqC mód"
@@ -2346,6 +3149,9 @@ msgstr "DiSEqC port %s: %s"
 #
 msgid "DiSEqC-tester settings"
 msgstr "Nastavení DiSEqC testeru"
+
+msgid "Dialing:"
+msgstr ""
 
 #
 msgid "Digital contour removal"
@@ -2394,8 +3200,17 @@ msgstr "Zakázat časovač"
 msgid "Disabled"
 msgstr "zakázán"
 
+msgid "Disconnect"
+msgstr ""
+
+msgid "Dish"
+msgstr ""
+
 msgid "Disk space to reserve for recordings (in GB)"
 msgstr "Rezerva volného místa pro nahrávání (v GB)"
+
+msgid "Display"
+msgstr ""
 
 #
 msgid "Display 16:9 content as"
@@ -2408,6 +3223,12 @@ msgstr "Zobrazovat obraz 4:3 jako"
 #
 msgid "Display >16:9 content as"
 msgstr "Zobrazovat >16:9 obsah jako"
+
+msgid "Display Settings"
+msgstr ""
+
+msgid "Display Setup"
+msgstr ""
 
 #
 msgid "Display and userinterface"
@@ -2423,6 +3244,9 @@ msgstr "Nastavení displeje"
 #
 msgid "Do not change"
 msgstr "Neměnit"
+
+msgid "Do not flash image"
+msgstr ""
 
 #
 msgid "Do not record"
@@ -2447,19 +3271,20 @@ msgstr ""
 "Opravdu chcete převést systém souborů?\n"
 "Nelze se vrátit zpět!"
 
+#, python-format
+msgid ""
+"Do you really want to delete\n"
+"%s ?"
+msgstr ""
+
 #
 #, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Opravdu chcete smazat \"%s\"?"
 
-#
 #, python-format
-msgid ""
-"Do you really want to download\n"
-"the plugin \"%s\"?"
+msgid "Do you really want to download the plugin \"%s\"?"
 msgstr ""
-"Chcete opravdu stáhnout\n"
-"plugin \"%s\"?"
 
 #
 msgid "Do you really want to exit?"
@@ -2475,17 +3300,12 @@ msgstr ""
 
 #
 #, python-format
-msgid ""
-"Do you really want to remove\n"
-"the plugin \"%s\"?"
-msgstr ""
-"Chcete opravdu odstranit\n"
-"plugin \"%s\"?"
-
-#
-#, python-format
 msgid "Do you really want to remove directory %s from the disk?"
 msgstr "Chcete opravdu odstranit z disku adresář %s?"
+
+#, python-format
+msgid "Do you really want to remove the plugin \"%s\"?"
+msgstr ""
 
 #
 #, python-format
@@ -2494,6 +3314,14 @@ msgstr "Chcete opravdu smazat Vaši záložku z %s?"
 
 msgid "Do you want this?"
 msgstr "Chcete to?"
+
+msgid ""
+"Do you want to also install samba client ?\n"
+"This allows you to mount your windows shares on this device."
+msgstr ""
+
+msgid "Do you want to backup your settings now?"
+msgstr ""
 
 #
 msgid "Do you want to burn this collection to DVD medium?"
@@ -2506,10 +3334,6 @@ msgstr "Chcete vyhledat programy?"
 #
 msgid "Do you want to do another manual service scan?"
 msgstr "Chcete provést další ruční prohledávání?"
-
-#, python-format
-msgid "Do you want to download the image to %s ?"
-msgstr "Chcete stáhnout image do %s?"
 
 #
 msgid "Do you want to install a channel list?"
@@ -2527,12 +3351,22 @@ msgstr "Chcete přehrát DVD v mechanice?"
 msgid "Do you want to preview this DVD before burning?"
 msgstr "Chcete si toto DVD před vypálením prohlédnout?"
 
+#, python-format
+msgid "Do you want to reboot your %s %s?"
+msgstr ""
+
 msgid "Do you want to reboot your receiver?"
 msgstr "Chcete přijímač restartovat?"
 
 #
 msgid "Do you want to remove the package:\n"
 msgstr "Chcete odstranit balíček:\n"
+
+msgid "Do you want to restart Enigma2?"
+msgstr ""
+
+msgid "Do you want to restart now?"
+msgstr ""
 
 #
 msgid "Do you want to restore your settings?"
@@ -2541,6 +3375,10 @@ msgstr "Chcete obnovit Vaše nastavení?"
 #
 msgid "Do you want to resume this playback?"
 msgstr "Chcete obnovit přehrávání?"
+
+#, python-format
+msgid "Do you want to update your %s %s?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to update your receiver to %s?"
@@ -2569,6 +3407,10 @@ msgstr ""
 msgid "Don't zap and remove timer"
 msgstr ""
 
+#, python-format
+msgid "Done - Installed or upgraded %d packages"
+msgstr ""
+
 #
 #, python-format
 msgid "Done - Installed, upgraded or removed %d package (%s)"
@@ -2577,24 +3419,40 @@ msgstr[0] "Dokončeno - instalován, aktualizován nebo odstraněn %d balíček 
 msgstr[1] "Dokončeno - instalovány, aktualizovány nebo odstraněny %d balíčky (%s)"
 msgstr[2] "Dokončeno - instalováno, aktualizováno nebo odstraněno %d balíčků (%s)"
 
-#
-msgid "Download"
-msgstr "Stáhnout"
+msgid "Download Failed !!"
+msgstr ""
 
 #, python-format
-msgid "Download %s from server"
-msgstr "Stahnout %s ze serveru"
+msgid ""
+"Download Failed !!\n"
+"%s"
+msgstr ""
 
-msgid "Download .NFI-files for USB-flasher"
-msgstr "Stáhnout .NFI-soubory pro USB-Flasher"
+msgid "Download Failed!-Server error:"
+msgstr ""
+
+#, python-format
+msgid "Download Failed!Unknown Error:%s"
+msgstr ""
+
+msgid "Download Plugins"
+msgstr ""
+
+msgid "Download Softcams"
+msgstr ""
+
+msgid "Download and install Plugins"
+msgstr ""
+
+msgid "Download and install cam"
+msgstr ""
 
 #
 msgid "Download plugins"
 msgstr "Stáhnout pluginy"
 
-#
-msgid "Downloadable new plugins"
-msgstr "Instalovat nové pluginy"
+msgid "Download skin"
+msgstr ""
 
 #
 msgid "Downloadable plugins"
@@ -2604,9 +3462,24 @@ msgstr "Stažitelné pluginy"
 msgid "Downloading"
 msgstr "Stahuji"
 
+#, python-format
+msgid "Downloading %s"
+msgstr ""
+
 #
 msgid "Downloading plugin information. Please wait..."
 msgstr "Stahuji informace o pluginech. Prosím, čekejte..."
+
+#, python-format
+msgid "Drivers:\t%s"
+msgstr ""
+
+#, python-format
+msgid "Drivers: %s"
+msgstr ""
+
+msgid "Dump frequency:"
+msgstr ""
 
 #
 msgid "Dutch"
@@ -2620,7 +3493,25 @@ msgstr "Dynamický kontrast"
 msgid "E"
 msgstr "Východní"
 
+msgid "ECM Statistics"
+msgstr ""
+
+msgid "ECM Time"
+msgstr ""
+
+msgid "ECM avg"
+msgstr ""
+
+msgid "ECM last"
+msgstr ""
+
+msgid "ECM-Time"
+msgstr ""
+
 msgid "EPG"
+msgstr ""
+
+msgid "EPG Setup"
 msgstr ""
 
 #
@@ -2630,6 +3521,9 @@ msgstr "EPG jazyk 1"
 #
 msgid "EPG language selection 2"
 msgstr "EPG jazyk 2"
+
+msgid "EPG location"
+msgstr ""
 
 #
 msgid "EPG selection"
@@ -2642,6 +3536,9 @@ msgstr "Nastavení EPG"
 #, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr "CHYBA - prohledávání selhalo (%s)!"
+
+msgid "ET-MultiQuickButton  (keymap.mqb)"
+msgstr ""
 
 #
 msgid "East"
@@ -2662,15 +3559,20 @@ msgstr "Upravit DNS"
 msgid "Edit chapters of current title"
 msgstr "Upravit kapitoly zvoleného titulu"
 
+msgid "Edit fstab"
+msgstr ""
+
 #
 msgid "Edit settings"
 msgstr "upravit nastavení"
 
-msgid "Edit the nameserver configuration of your receiver.\n"
-msgstr "Upravuje nastavení DNS.\n"
+#, python-format
+msgid "Edit the Nameserver configuration of your %s %s.\n"
+msgstr ""
 
-msgid "Edit the network configuration of your receiver.\n"
-msgstr "Upravuje nastavení sítě.\n"
+#, python-format
+msgid "Edit the network configuration of your %s %s.\n"
+msgstr ""
 
 #
 msgid "Edit timer"
@@ -2686,6 +3588,15 @@ msgstr "Upravit url zdroje aktualizací."
 
 msgid "Education/Science/..."
 msgstr "vzdělání/věda..."
+
+msgid "Eight Panel"
+msgstr ""
+
+msgid "Elapsed"
+msgstr ""
+
+msgid "Elapsed & Remaining"
+msgstr ""
 
 #
 msgid "Electronic Program Guide"
@@ -2723,12 +3634,18 @@ msgstr "Povolit OK jako náhled ve výběru kanálů"
 msgid "Enable OK for channel selection"
 msgstr "Povolit OK pro výběr kanálu"
 
+msgid "Enable Swap at startup"
+msgstr ""
+
 msgid "Enable ViaSat EPG"
 msgstr "Povolit ViaSat EPG"
 
 #
 msgid "Enable Virgin EPG"
 msgstr "Povolit Virgin EPG"
+
+msgid "Enable Wake On LAN"
+msgstr ""
 
 msgid "Enable auto cable scan"
 msgstr "Povolit automatické prohledání kabelu"
@@ -2758,8 +3675,14 @@ msgstr "Na vzdáleném přijímač se bude zkoušet naladit služby, které nelz
 msgid "Enable teletext caching"
 msgstr "Povolit caching teletextu"
 
+msgid "Enable timer conflict detection"
+msgstr ""
+
 msgid "Enable volume control with arrow buttons"
 msgstr "Povolit ovládání hlasitosti pomocí tlačítek se šipkami"
+
+msgid "Enable wakeup timer"
+msgstr ""
 
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Povolit přepínání  s CH+/-, B+/-, P+/-"
@@ -2807,12 +3730,30 @@ msgstr "Anglicky"
 msgid "Enigma (re)starts: %d\n"
 msgstr "Enigma (re)startována: %d\n"
 
+msgid "Enigma 2 Time update"
+msgstr ""
+
+msgid "Enigma 2 must be restarted to set the new Systemtime ?"
+msgstr ""
+
+msgid "Enigma 2 restart abort by user !"
+msgstr ""
+
 msgid "Enigma2 skin selector"
 msgstr "Enigma2 výběr skinu"
+
+msgid "Enter PIN"
+msgstr ""
+
+msgid "Enter directory"
+msgstr ""
 
 #
 msgid "Enter main menu..."
 msgstr "Hlavní menu..."
+
+msgid "Enter persistent PIN code"
+msgstr ""
 
 #
 msgid "Enter pin code"
@@ -2821,6 +3762,9 @@ msgstr "Zadejte pin kód"
 #
 msgid "Enter the service pin"
 msgstr "Zadejte programový PIN"
+
+msgid "Entitlements"
+msgstr ""
 
 #
 msgid "Equal to"
@@ -2838,6 +3782,17 @@ msgstr "Kód chyby"
 msgid "Error executing plugin"
 msgstr "Chyba při provádění pluginu"
 
+msgid "Error installing package"
+msgstr ""
+
+msgid "Error reading webpage!"
+msgstr ""
+
+msgid ""
+"Error!\n"
+"The same mount point!"
+msgstr ""
+
 #
 #, python-format
 msgid ""
@@ -2851,9 +3806,6 @@ msgstr ""
 msgid "Estonian"
 msgstr "Estonsky"
 
-msgid "EtPortal"
-msgstr ""
-
 msgid "Ethernet network interface"
 msgstr "Ethernet síťové rozhraní"
 
@@ -2864,9 +3816,18 @@ msgstr "Velikost písma pro událost (relativně k velikosti skinu)"
 msgid "Event view"
 msgstr "Zobrazení události"
 
+msgid "Event view context menu"
+msgstr ""
+
 #
 msgid "Event view menu"
 msgstr "Menu přehledu událostí"
+
+msgid "Events info menu"
+msgstr ""
+
+msgid "Every known"
+msgstr ""
 
 #
 msgid "Everywhere"
@@ -2928,9 +3889,15 @@ msgstr "Zavřít seznam síťových rozhraní"
 msgid "Exit network wizard"
 msgstr "Ukončit síťového průvodce"
 
+msgid "Exit the restore wizard"
+msgstr ""
+
 #
 msgid "Exit the wizard"
 msgstr "Ukončit průvodce"
+
+msgid "Exit/OK"
+msgstr ""
 
 msgid "Expert"
 msgstr "expertní"
@@ -2939,6 +3906,15 @@ msgid "Extend sleeptimer 15 minutes"
 msgstr "Přidat 15 minut k časovači usínání"
 
 msgid "Extended"
+msgstr ""
+
+msgid "Extended Networksetup Plugin..."
+msgstr ""
+
+msgid "Extended Setup..."
+msgstr ""
+
+msgid "Extended Shares"
 msgstr ""
 
 #
@@ -2965,6 +3941,9 @@ msgstr "Rozšíření"
 msgid "Extensions management"
 msgstr "Správa rozšíření"
 
+msgid "Extensions menu"
+msgstr ""
+
 msgid "External"
 msgstr "Externí"
 
@@ -2984,6 +3963,9 @@ msgstr ""
 msgid "External subtitle switch fonts"
 msgstr ""
 
+msgid "Extra Setup"
+msgstr ""
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Konec dalšího úseku ignorování časovače vypnutí"
 
@@ -2993,14 +3975,40 @@ msgstr "Další nastavení motoru"
 msgid "Extra start time to ignore inactivity sleeptimer"
 msgstr "Začátek dalšího úseku ignorování časovače vypnutí"
 
-msgid "F1/F3"
+msgid "F"
+msgstr ""
+
+msgid "FBC Unicable"
+msgstr ""
+
+msgid "FBC automatic loop through"
+msgstr ""
+
+msgid ""
+"FBC automatic loop through\n"
+"inactive"
+msgstr ""
+
+#, python-format
+msgid ""
+"FBC automatic loop through\n"
+"linked to %s"
 msgstr ""
 
 #
 msgid "FEC"
 msgstr "FEC"
 
+msgid "FEC:"
+msgstr ""
+
 msgid "FTA"
+msgstr ""
+
+msgid "FTP"
+msgstr ""
+
+msgid "FTP Setup"
 msgstr ""
 
 #
@@ -3011,8 +4019,14 @@ msgstr "Tovární nastavení"
 msgid "Failed"
 msgstr "Selhalo"
 
+msgid "Failed to read /etc/fstab! Restore fstab.backup or edit the file manually."
+msgstr ""
+
 msgid "Failed to write /tmp/positionersetup.log: "
 msgstr "Selhal zápis do /tmp/positionersetup.log: "
+
+msgid "Failed:"
+msgstr ""
 
 msgid "Fallback remote receiver URL"
 msgstr "Adresa vzdáleného záložního přijímače"
@@ -3031,12 +4045,6 @@ msgstr "PWM ventilátoru %d"
 #, python-format
 msgid "Fan %d voltage"
 msgstr "Napětí ventilátoru %d"
-
-msgid "Fan operation"
-msgstr "Režim ventilátoru"
-
-msgid "Fan speed"
-msgstr "Rychlost ventilátoru"
 
 #
 msgid "Fast"
@@ -3065,18 +4073,29 @@ msgstr "Oblíbené"
 msgid "File appears to be busy.\n"
 msgstr "Soubor se zdá být zaneprázdněn.\n"
 
+msgid ""
+"File oscam.conf not found.\n"
+"Please enter username/password manually."
+msgstr ""
+
+msgid "File system type:"
+msgstr ""
+
+msgid "Filesystem Check"
+msgstr ""
+
 #
 msgid "Filesystem check"
 msgstr "Kontrola souborového systému"
+
+msgid "Filesystem check your Harddisk"
+msgstr ""
 
 msgid "Final position at"
 msgstr "Konečná pozice na"
 
 msgid "Final position at index"
 msgstr "Konečná pozice na indexu"
-
-msgid "Final scroll delay"
-msgstr ""
 
 msgid "Fine movement"
 msgstr "Jemné natáčení"
@@ -3108,17 +4127,68 @@ msgstr "Pevná"
 msgid "Flash"
 msgstr "Nahrát"
 
-#
-msgid "Flashing failed"
-msgstr "Nahrání selhalo"
+msgid "Flash On the Fly"
+msgstr ""
+
+msgid "Flash On the fly (select an image)"
+msgstr ""
+
+msgid "Flash Online"
+msgstr ""
+
+msgid "Flash Online Image"
+msgstr ""
+
+msgid "Flash Online a new image"
+msgstr ""
+
+msgid "Flash and restore settings and all saved plugins"
+msgstr ""
+
+msgid "Flash and restore settings and no plugins"
+msgstr ""
+
+msgid "Flash and restore settings and selected plugins (ask user)"
+msgstr ""
+
+msgid "Flash and start installation wizard"
+msgstr ""
+
+msgid "Flash on the fly your your Receiver software."
+msgstr ""
+
+msgid "Flashing: "
+msgstr ""
+
+msgid "Following"
+msgstr ""
 
 #
 msgid "Following tasks will be done after you press OK!"
 msgstr "Následující úlohy budou provedeny po stisknutí OK!"
 
+msgid "Force Remove"
+msgstr ""
+
+#, python-format
+msgid "Force Removing ipk %s"
+msgstr ""
+
+msgid "Forced set DVB Time"
+msgstr ""
+
+msgid "Forced set DVB Time not useful,switch off Enigma 2 Timeupdate first !"
+msgstr ""
+
 #
 msgid "Format"
 msgstr "Formát"
+
+msgid "Format HDD"
+msgstr ""
+
+msgid "Format your Harddisk"
+msgstr ""
 
 msgid "Forward volume keys"
 msgstr "Předávat hlasitost"
@@ -3126,6 +4196,24 @@ msgstr "Předávat hlasitost"
 #
 msgid "Frame size in full view"
 msgstr "Velikost rámečku při plném zobrazení"
+
+msgid "Free Space"
+msgstr ""
+
+msgid "Free memory"
+msgstr ""
+
+msgid "Free memory:"
+msgstr ""
+
+msgid "Free-Space..."
+msgstr ""
+
+msgid "Free:"
+msgstr ""
+
+msgid "FreeSpace"
+msgstr ""
 
 #
 msgid "French"
@@ -3166,6 +4254,19 @@ msgstr "Z :"
 msgid "Frontprocessor version: %d"
 msgstr "Frontprocesor verze: %d"
 
+msgid "Frozen Cam Check"
+msgstr ""
+
+msgid "Ftpd service type: Vsftpd server"
+msgstr ""
+
+msgid "Full Image Backup "
+msgstr ""
+
+#, python-format
+msgid "Full back-up on %s"
+msgstr ""
+
 #
 msgid "Full transparency"
 msgstr "Průhledné"
@@ -3180,6 +4281,15 @@ msgstr "Funkce tlačítka OK"
 msgid "Further Options"
 msgstr "Další možnosti"
 
+msgid "Further options"
+msgstr ""
+
+msgid "G"
+msgstr ""
+
+msgid "GB"
+msgstr ""
+
 #
 msgid ""
 "GUI needs a restart to apply a new skin\n"
@@ -3191,6 +4301,9 @@ msgstr ""
 #
 msgid "Gateway"
 msgstr "Brána"
+
+msgid "General"
+msgstr ""
 
 #
 msgid "General AC3 delay"
@@ -3208,11 +4321,8 @@ msgstr "Žánr"
 msgid "German"
 msgstr "Německy"
 
-msgid "Get latest experimental image"
-msgstr "Získat poslední experimentální image"
-
-msgid "Get latest release image"
-msgstr "Získat poslední uvolněné image"
+msgid "Getting Softcam list. Please wait..."
+msgstr ""
 
 #
 msgid "Getting plugin information. Please wait..."
@@ -3314,13 +4424,21 @@ msgstr "Zesílení zelené"
 msgid "Guard interval"
 msgstr "Ochranný interval"
 
+msgid "H"
+msgstr ""
+
+msgid "H: = Hourly / D: = Daily / W: = Weekly / M: = Monthly"
+msgstr ""
+
+msgid "HARD DISK: "
+msgstr ""
+
 msgid "HD list"
 msgstr "Seznam HD"
 
-msgid "HD1100/et7x00/et8500"
-msgstr ""
-
-msgid "HD2400"
+msgid ""
+"HDD = Do you want to make an USB-back-up image on HDD? \n"
+"This only takes 2 or 10 minutes and is fully automatic."
 msgstr ""
 
 #
@@ -3352,14 +4470,23 @@ msgstr "Pevný disk"
 msgid "Harddisk Setup"
 msgstr "Nastavení pevného disku"
 
-msgid "Hardware: "
-msgstr "Hardware: "
-
 msgid "Hebrew"
 msgstr "Hebrejsky"
 
 msgid "Helps setting up your antenna"
 msgstr "Pomáhá nastavit vaší anténu"
+
+msgid "Here you can change skin, configure mainmenu, configure second-infobar or configure TechniHD skin."
+msgstr ""
+
+msgid "Here you can download, install or remove skins"
+msgstr ""
+
+msgid "Here you can select which files should be added to backupfile. (default: E2-setup, channels, network"
+msgstr ""
+
+msgid "Here you can select which files should be updated with a online update"
+msgstr ""
 
 msgid "Hidden network"
 msgstr "Skrytá síť"
@@ -3415,12 +4542,30 @@ msgstr "Počkat na uzamčení"
 msgid "Home"
 msgstr "domů"
 
+msgid "Hops:"
+msgstr ""
+
 #
 msgid "Horizontal"
 msgstr "Horizontální"
 
+msgid "Horizontal animated list"
+msgstr ""
+
+msgid "Horizontal icon list"
+msgstr ""
+
 msgid "Horizontal turning speed"
 msgstr "Horizontální rychlost ladění"
+
+msgid "Horizontal-animated"
+msgstr ""
+
+msgid "Horizontal-icons"
+msgstr ""
+
+msgid "Hostname: "
+msgstr ""
 
 msgid "HotKey Setup"
 msgstr ""
@@ -3435,6 +4580,15 @@ msgid "Hotkey Setup"
 msgstr "Nastavení Hotkey"
 
 msgid "Hotkey zap"
+msgstr ""
+
+msgid "Hourly"
+msgstr ""
+
+msgid "Hours Mins"
+msgstr ""
+
+msgid "Hours Mins Secs"
 msgstr ""
 
 msgid "How many minutes do you want add to record?"
@@ -3452,8 +4606,26 @@ msgstr "Odstín"
 msgid "Hungarian"
 msgstr "Maďarsky"
 
+msgid "I"
+msgstr ""
+
 msgid "IP address"
 msgstr "IP adresa"
+
+msgid "IP-Address"
+msgstr ""
+
+msgid "IP:"
+msgstr ""
+
+msgid "IPK Installer"
+msgstr ""
+
+msgid "IPK-install Manager"
+msgstr ""
+
+msgid "IPK-uninstaller"
+msgstr ""
 
 #
 msgid "ISO file is too large for this filesystem!"
@@ -3466,6 +4638,12 @@ msgstr "umístění ISO souboru"
 #
 msgid "Icons"
 msgstr "ikony"
+
+msgid "Idle Time: "
+msgstr ""
+
+msgid "If the text is too long to be displayed on the front panel, it will be repeated (number of times):"
+msgstr ""
 
 #
 msgid ""
@@ -3487,6 +4665,21 @@ msgstr ""
 "Nemějte obavy o světlé stíny. Budou nastaveny v dalším kroku.\n"
 "Pokud jste spokojeni s výsledkem, stiskněte OK."
 
+msgid "Ignore conflict"
+msgstr ""
+
+msgid "Image Info"
+msgstr ""
+
+msgid "Image Tools"
+msgstr ""
+
+msgid "Image Update"
+msgstr ""
+
+msgid "Image-Tools"
+msgstr ""
+
 msgid "Image: "
 msgstr ""
 
@@ -3502,8 +4695,23 @@ msgstr "Aby mohla být zaznamenána událost z časovače, bylo přepnuto na nah
 msgid "In progress"
 msgstr "Průběh"
 
+msgid "Inactive"
+msgstr ""
+
 msgid "Inactivity Sleeptimer"
 msgstr "Časovač neaktivity"
+
+msgid "Inactivity sleeptimer standby mode"
+msgstr ""
+
+msgid "Inadyn"
+msgstr ""
+
+msgid "Inadyn Log"
+msgstr ""
+
+msgid "Inadyn Setup"
+msgstr ""
 
 #
 msgid "Include AIT in http streams"
@@ -3535,6 +4743,12 @@ msgstr "Index přiřazen:"
 msgid "Info"
 msgstr "Informace"
 
+msgid "Info = show tuner informations"
+msgstr ""
+
+msgid "Info Panel"
+msgstr ""
+
 #
 msgid "Info bar"
 msgstr "InfoBar"
@@ -3543,6 +4757,12 @@ msgstr "InfoBar"
 msgid "Info bar timeout"
 msgstr "Doba po které skrývat infobar"
 
+msgid "Info-Panel..."
+msgstr ""
+
+msgid "Info..."
+msgstr ""
+
 msgid "Infobar frontend data source"
 msgstr "Zdroj Infobar frontend dat"
 
@@ -3550,9 +4770,14 @@ msgstr "Zdroj Infobar frontend dat"
 msgid "Information"
 msgstr "Informace"
 
-#
-msgid "Init"
-msgstr "Init"
+msgid "Infos"
+msgstr ""
+
+msgid "Infos..."
+msgstr ""
+
+msgid "Init.d"
+msgstr ""
 
 #
 msgid "Initial fast forward speed"
@@ -3568,9 +4793,6 @@ msgstr "Zachovat původní poměr"
 #
 msgid "Initial rewind speed"
 msgstr "Počáteční rychlost pro přetáčení zpět"
-
-msgid "Initial scroll delay"
-msgstr ""
 
 msgid "Initial signal quality"
 msgstr "Počáteční kvalita signálu"
@@ -3590,6 +4812,9 @@ msgstr "Inicializovat"
 msgid "Initializing storage device..."
 msgstr "Inicializace zařízení pro ukládání..."
 
+msgid "Inotify Monitoring"
+msgstr ""
+
 #
 msgid "Input"
 msgstr "Zadání"
@@ -3604,13 +4829,20 @@ msgstr "Vstupní zařízení"
 msgid "Install"
 msgstr "Instalovat"
 
-#
-msgid "Install a new image with a USB stick"
-msgstr "Instalovat nové image pomocí USB zařízení"
+msgid "Install / Info"
+msgstr ""
 
-#
-msgid "Install a new image with your web browser"
-msgstr "Instalovat nové image pomocí web prohlížeče"
+msgid "Install Failed !!"
+msgstr ""
+
+msgid "Install Finished."
+msgstr ""
+
+msgid "Install Plugins"
+msgstr ""
+
+msgid "Install Softcams"
+msgstr ""
 
 #
 msgid "Install channel list"
@@ -3624,6 +4856,9 @@ msgstr "Instalovat rozšíření"
 msgid "Install extensions."
 msgstr "Instalovat rozšíření."
 
+msgid "Install lcd picons on"
+msgstr ""
+
 #
 msgid "Install local extension"
 msgstr "Instalovat místní rozšíření"
@@ -3631,6 +4866,12 @@ msgstr "Instalovat místní rozšíření"
 #
 msgid "Install picons on"
 msgstr "Instalovat picons do"
+
+msgid "Install plugins"
+msgstr ""
+
+msgid "Install skin"
+msgstr ""
 
 #
 msgid "Install softcam"
@@ -3643,12 +4884,22 @@ msgstr "Instalace byla dokončena."
 msgid "Installation or removal has completed."
 msgstr "Instalace nebo odstranění dokončeno."
 
-msgid "Installed: "
-msgstr "Instalováno:"
+msgid "Installation/Upgrade finished."
+msgstr ""
 
 #
 msgid "Installing"
 msgstr "Instaluji"
+
+msgid "Installing Service"
+msgstr ""
+
+#, python-format
+msgid "Installing addon %s"
+msgstr ""
+
+msgid "Installing plugins..."
+msgstr ""
 
 #
 msgid "Installing software..."
@@ -3664,6 +4915,9 @@ msgstr "Okamžité nahrávání"
 #
 msgid "Instant recording..."
 msgstr "Okamžité nahrávání..."
+
+msgid "Interface"
+msgstr ""
 
 #
 msgid "Interface: "
@@ -3688,18 +4942,41 @@ msgstr "pouze interní disk"
 msgid "Interval between keys when repeating:"
 msgstr "Rychlost opakování:"
 
+#, python-format
+msgid "Invalid day %s !"
+msgstr ""
+
 #
 #, python-format
 msgid "Invalid directory selected: %s"
 msgstr "Zvolen neplatný adresář: %s"
 
+msgid "Invalid format !"
+msgstr ""
+
+#, python-format
+msgid "Invalid hour %s !"
+msgstr ""
+
 #
 msgid "Invalid location"
 msgstr "Neplatné umístění"
 
+#, python-format
+msgid "Invalid minute %s !"
+msgstr ""
+
+#, python-format
+msgid "Invalid month %s !"
+msgstr ""
+
 #
 msgid "Invalid transponder data"
 msgstr "neplatná data transponderu"
+
+#, python-format
+msgid "Invalid year %s !"
+msgstr ""
 
 #
 msgid "Inversion"
@@ -3713,12 +4990,18 @@ msgstr "Inverze"
 msgid "Ipkg"
 msgstr "Ipkg"
 
-msgid "Is this setting ok?"
-msgstr "Použít toto nastavení?"
+msgid "Ipkremove"
+msgstr ""
+
+msgid "Is this Remote Control OK ?"
+msgstr ""
 
 #
 msgid "Is this video mode ok?"
 msgstr "Je tento videomód vpořádku?"
+
+msgid "It seems the sundtek driver is not installed or not installed properly. Install the driver now?"
+msgstr ""
 
 #
 msgid "Italian"
@@ -3730,9 +5013,18 @@ msgstr "Položek na stránku"
 msgid "Items per page for list screen"
 msgstr "Položek na stránku pro seznam"
 
+msgid "J"
+msgstr ""
+
+msgid "Job Manager"
+msgstr ""
+
 #
 msgid "Job overview"
 msgstr "Přehled práce"
+
+msgid "Job-Manager..."
+msgstr ""
 
 msgid "Jump to beginning of list"
 msgstr "Na začátek seznamu"
@@ -3758,8 +5050,18 @@ msgstr "Celá obrazovka (nedodržuje poměr stran)"
 msgid "Keep service"
 msgstr "zůstat na programu"
 
+msgid "Kernel"
+msgstr ""
+
 msgid "Kernel version: "
 msgstr "Verze kernelu: "
+
+msgid "Kernel..."
+msgstr ""
+
+#, python-format
+msgid "Kernel: %s"
+msgstr ""
 
 #
 msgid "Keyboard"
@@ -3773,6 +5075,12 @@ msgstr "Rozložení kláves"
 msgid "Keyboard setup"
 msgstr "Nastavení klávesnice"
 
+msgid "Keymap Selection"
+msgstr ""
+
+msgid "Keymap changed, you need to restart the GUI"
+msgstr ""
+
 #
 msgid "LAN adapter"
 msgstr "Síťová karta"
@@ -3780,9 +5088,36 @@ msgstr "Síťová karta"
 msgid "LAN connection"
 msgstr "LAN připojení"
 
+msgid "LCD Skin Setup"
+msgstr ""
+
+msgid "LED Deep Standby"
+msgstr ""
+
+msgid "LED Normal"
+msgstr ""
+
+msgid "LED Standby"
+msgstr ""
+
+msgid "LED brightness during deep standby."
+msgstr ""
+
+msgid "LED brightness during normal operations."
+msgstr ""
+
+msgid "LED brightness during standby."
+msgstr ""
+
 #
 msgid "LNB"
 msgstr "LNB"
+
+msgid "Label"
+msgstr ""
+
+msgid "Label for device"
+msgstr ""
 
 #
 msgid "Language"
@@ -3792,6 +5127,9 @@ msgstr "Jazyk"
 msgid "Language selection"
 msgstr "Výběr jazyka"
 
+msgid "Last Req."
+msgstr ""
+
 #
 msgid "Last config"
 msgstr "Poslední konfigurace"
@@ -3800,8 +5138,15 @@ msgstr "Poslední konfigurace"
 msgid "Last speed"
 msgstr "Poslední rychlost"
 
+#, python-format
+msgid "Last update:\t%s"
+msgstr ""
+
 msgid "Last upgrade: "
 msgstr "Poslední aktualizace: "
+
+msgid "Last used share: "
+msgstr ""
 
 #
 msgid "Latest Commits"
@@ -3924,6 +5269,12 @@ msgstr "Načíst playlist"
 msgid "Load unlinked userbouquets"
 msgstr "Načítat smazané přehledy"
 
+msgid "Local = Flash an image from local path /hdd/images"
+msgstr ""
+
+msgid "Local box"
+msgstr ""
+
 #
 msgid "Local network"
 msgstr "Místní síť"
@@ -3943,9 +5294,8 @@ msgstr "Zachovat poměr"
 msgid "Lock:"
 msgstr "Zámek:"
 
-#
-msgid "Log results to harddisk"
-msgstr "Protokol výsledků na pevný disk"
+msgid "Log results to /tmp"
+msgstr ""
 
 msgid "Long filenames"
 msgstr "dlouhé názvy souborů"
@@ -3965,9 +5315,15 @@ msgstr "propojeno s"
 msgid "Luxembourgish"
 msgstr "Lucembursky"
 
+msgid "MB"
+msgstr ""
+
 #
 msgid "MMC card"
 msgstr "MMC karta"
+
+msgid "MMC: "
+msgstr ""
 
 #
 msgid "MORE"
@@ -3976,6 +5332,12 @@ msgstr "VÍCE"
 #
 msgid "Main menu"
 msgstr "Hlavní menu"
+
+msgid "Mainmenu"
+msgstr ""
+
+msgid "Mainmenu mode"
+msgstr ""
 
 #
 msgid "Maintain old EPG data for"
@@ -3997,6 +5359,15 @@ msgstr "Udělat z této značky jen značku"
 msgid "Manage extensions"
 msgstr "Správa rozšíření"
 
+msgid "Manage network mounts"
+msgstr ""
+
+msgid "Manage you devices mountpoints"
+msgstr ""
+
+msgid "Manage your online update files"
+msgstr ""
+
 #
 msgid "Manage your receiver's software"
 msgstr "Spravujte software Vašeho přijímače  "
@@ -4004,6 +5375,9 @@ msgstr "Spravujte software Vašeho přijímače  "
 #
 msgid "Manual"
 msgstr "Ručně"
+
+msgid "Manual Addon Installer - Filebrowser"
+msgstr ""
 
 #
 msgid "Manual Scan"
@@ -4015,6 +5389,9 @@ msgstr "Ruční konfigurace"
 #
 msgid "Manual scan"
 msgstr "Ruční prohledávání"
+
+msgid "Manual scan for services"
+msgstr ""
 
 #
 msgid "Manual transponder"
@@ -4042,6 +5419,18 @@ msgstr "Maximum pozic paměti"
 msgid "Max. bitrate: "
 msgstr "Max. datový tok: "
 
+msgid "Maxdown +"
+msgstr ""
+
+msgid "Maxdown -"
+msgstr ""
+
+msgid "Maxdown: "
+msgstr ""
+
+msgid "Maybe the reason that recording is currently running. Please stop the recording before trying to configure the positioner."
+msgstr ""
+
 #
 msgid "Media player"
 msgstr "Přehrávač médií"
@@ -4058,6 +5447,9 @@ msgstr "Médiem není zapisovatelné DVD!"
 msgid "Medium is not empty!"
 msgstr "Médium není prázdné!"
 
+msgid "MemInfo"
+msgstr ""
+
 #
 msgid "Memory"
 msgstr "Paměť"
@@ -4065,12 +5457,18 @@ msgstr "Paměť"
 msgid "Memory Info"
 msgstr "Informace o paměti"
 
+msgid "Memory Info..."
+msgstr ""
+
 msgid "Memory index"
 msgstr "Pozice (index) paměti"
 
 #
 msgid "Menu"
 msgstr "Menu"
+
+msgid "Menu config"
+msgstr ""
 
 #
 msgid "Message"
@@ -4080,12 +5478,27 @@ msgstr "Zpráva"
 msgid "Message..."
 msgstr "Zpráva..."
 
+msgid "MiniDLNA"
+msgstr ""
+
+msgid "MiniDLNA Log"
+msgstr ""
+
+msgid "MiniDLNA Setup"
+msgstr ""
+
 #, python-format
 msgid "Minimum age %d years"
 msgstr "minimální věk %d roků"
 
 msgid "Minimum send interval"
 msgstr "Minimální interval posílání"
+
+msgid "Mins"
+msgstr ""
+
+msgid "Mins Secs"
+msgstr ""
 
 msgid "Missing "
 msgstr "Chybí"
@@ -4104,6 +5517,14 @@ msgstr "Mód"
 msgid "Model: "
 msgstr "Model:"
 
+#, python-format
+msgid "Model: %s %s"
+msgstr ""
+
+#, python-format
+msgid "Model: %s %s\n"
+msgstr ""
+
 #
 msgid "Modulation"
 msgstr "Modulace"
@@ -4111,6 +5532,12 @@ msgstr "Modulace"
 #
 msgid "Modulator"
 msgstr "Modulátor"
+
+msgid "Module"
+msgstr ""
+
+msgid "Module..."
+msgstr ""
 
 #
 msgid "Mon"
@@ -4123,6 +5550,9 @@ msgstr "Po - Pá"
 #
 msgid "Monday"
 msgstr "Pondělí"
+
+msgid "Monthly"
+msgstr ""
 
 #
 msgid "Mosquito noise reduction"
@@ -4137,6 +5567,54 @@ msgstr ""
 #
 msgid "Mount"
 msgstr "Připojit"
+
+msgid "Mount Manager"
+msgstr ""
+
+msgid "Mount Manager - edit label/fstab"
+msgstr ""
+
+msgid "Mount Setup"
+msgstr ""
+
+msgid "Mount all device from the fstab"
+msgstr ""
+
+msgid ""
+"Mount current device failed!\n"
+"Maybe this device is not spelled out in the fstab?"
+msgstr ""
+
+msgid "Mount current device from the fstab"
+msgstr ""
+
+#, python-format
+msgid "Mount current device to %s"
+msgstr ""
+
+msgid "Mount failed!"
+msgstr ""
+
+msgid "Mount point:"
+msgstr ""
+
+msgid "Mount-Manager..."
+msgstr ""
+
+msgid "Mount: "
+msgstr ""
+
+msgid "Mounts"
+msgstr ""
+
+msgid "Mounts Devices"
+msgstr ""
+
+msgid "Mounts Setup"
+msgstr ""
+
+msgid "Mounts..."
+msgstr ""
 
 #
 msgid "Move"
@@ -4202,9 +5680,18 @@ msgstr "Natáčení na pozici"
 msgid "Moving west ..."
 msgstr "Natáčení na západ ..."
 
+msgid "Mtd"
+msgstr ""
+
+msgid "Mtd..."
+msgstr ""
+
 #
 msgid "Multi EPG"
 msgstr "Multi EPG"
+
+msgid "Multi Quick Button"
+msgstr ""
 
 msgid "Multi channel downmix"
 msgstr ""
@@ -4212,6 +5699,9 @@ msgstr ""
 #
 msgid "Multi-EPG bouquet selection"
 msgstr "Volba přehledu při spuštění Multi-EPG"
+
+msgid "MultiQuickbutton"
+msgstr ""
 
 #
 msgid "Multimedia"
@@ -4239,6 +5729,9 @@ msgstr "hudba/balet/tanec"
 msgid "Mute"
 msgstr "Ztišit"
 
+msgid "N"
+msgstr ""
+
 #
 msgid "N/A"
 msgstr "Není k dispozici"
@@ -4247,20 +5740,45 @@ msgstr "Není k dispozici"
 msgid "NEXT"
 msgstr "DALŠÍ"
 
-#
-msgid "NFI image flashing"
-msgstr "Nahrát NFI image"
+msgid "NFS"
+msgstr ""
 
-#
-msgid "NFI image flashing completed. Press Yellow to Reboot!"
-msgstr "Nahrátí NFI image bylo dokončeno. Zmáčkněte Žluté pro restart přijímače!"
+msgid "NFS Setup"
+msgstr ""
 
 msgid "NIM"
+msgstr ""
+
+msgid "NO"
 msgstr ""
 
 #
 msgid "NOW"
 msgstr "NYNÍ"
+
+#, python-format
+msgid ""
+"NTP Time check successfully.\n"
+"System time set to %s finished."
+msgstr ""
+
+msgid ""
+"NTP check not not possible:\n"
+"\n"
+"Network status: Unreachable !"
+msgstr ""
+
+msgid "NTP-Server autostart"
+msgstr ""
+
+msgid "NTP-Server autostart is enabled,please switch off first !"
+msgstr ""
+
+#, python-format
+msgid ""
+"NTP-Server check and system time update\n"
+"to %s successfully done."
+msgstr ""
 
 #
 msgid "NTSC"
@@ -4269,6 +5787,9 @@ msgstr "NTSC"
 #
 msgid "Name"
 msgstr "Jméno"
+
+msgid "Name:"
+msgstr ""
 
 #
 msgid "Nameserver"
@@ -4299,9 +5820,39 @@ msgstr "Síťová maska"
 msgid "Network"
 msgstr "Síť"
 
+msgid "Network Adapter Selection"
+msgstr ""
+
+msgid "Network Browser"
+msgstr ""
+
 #
 msgid "Network ID"
 msgstr "Network ID"
+
+msgid "Network IP"
+msgstr ""
+
+msgid "Network Interface"
+msgstr ""
+
+msgid "Network Restart"
+msgstr ""
+
+msgid "Network Services"
+msgstr ""
+
+msgid "Network Setup"
+msgstr ""
+
+msgid "Network Test"
+msgstr ""
+
+msgid "Network Wizard"
+msgstr ""
+
+msgid "Network configuration"
+msgstr ""
 
 #
 msgid "Network configuration..."
@@ -4342,17 +5893,31 @@ msgstr "Test sítě: "
 msgid "Network wizard"
 msgstr "Pomocník sítě"
 
+msgid "Network..."
+msgstr ""
+
 #
 msgid "Network:"
 msgstr "Síť:"
+
+msgid "Neutrino  (keymap.ntr)"
+msgstr ""
+
+msgid "Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off."
+msgstr ""
+
+msgid "Never decrypt while recording"
+msgstr ""
 
 #
 msgid "New"
 msgstr "Nové programy"
 
-#
-msgid "New version:"
-msgstr "Nová verze:"
+msgid "New profile: "
+msgstr ""
+
+msgid "New time string too short !"
+msgstr ""
 
 msgid "News Current Affairs"
 msgstr "zpravodajství, publicistika "
@@ -4373,24 +5938,56 @@ msgstr "Ne"
 msgid "No (supported) DVDROM found!"
 msgstr "Nenalezena žádná (podporovaná) DVDROM!"
 
+msgid ""
+"No /hdd found !!\n"
+"Please make sure you have a HDD mounted.\n"
+msgstr ""
+
+msgid ""
+"No /hdd found !!\n"
+"Please make sure you have a HDD mounted.\n"
+"\n"
+"Exit plugin."
+msgstr ""
+
+msgid ""
+"No Cam started !!\n"
+"\n"
+"Cam 1 must be different from Cam 2"
+msgstr ""
+
 #
 msgid "No Connection"
 msgstr "Žádné připojení"
+
+msgid "No Devices Found !!"
+msgstr ""
+
+msgid "No ECM info"
+msgstr ""
 
 #
 msgid "No HDD found or HDD not initialized!"
 msgstr "Žádný HDD nenalezen nebo není inicializován!"
 
+msgid "No IPTV media server found"
+msgstr ""
+
+msgid ""
+"No USB-Device found for fullbackup !!\n"
+"\n"
+"\n"
+msgstr ""
+
 msgid "No age block"
 msgstr "neblokovat"
 
 #
-msgid "No backup needed"
-msgstr "Záloha není potřeba"
-
-#
 msgid "No cable tuner found!"
 msgstr "Žádný kabelový tuner nenalezen!"
+
+msgid "No card inserted!"
+msgstr ""
 
 #
 msgid ""
@@ -4407,10 +6004,6 @@ msgstr "Žádné"
 #
 msgid "No description available."
 msgstr "Žádný popis k dispozici."
-
-#
-msgid "No details for this image file"
-msgstr "Žádné detaily o tomto image souboru"
 
 #
 msgid "No displayable files on this medium found!"
@@ -4431,6 +6024,15 @@ msgstr "Žádný volný index k dispozici"
 msgid "No free tuner!"
 msgstr "Žádný volný tuner!"
 
+msgid "No httpport defined in oscam.conf. This value is required!"
+msgstr ""
+
+msgid "No httppwd defined in oscam.conf"
+msgstr ""
+
+msgid "No httpuser defined in oscam.conf"
+msgstr ""
+
 #
 msgid "No network connection available."
 msgstr "Žádné síťové připojení k dispozici."
@@ -4439,8 +6041,17 @@ msgstr "Žádné síťové připojení k dispozici."
 msgid "No networks found"
 msgstr "Žádné sítě nenalezeny"
 
-msgid "No new plugins found"
-msgstr "Zádný nový plugin nenalezen."
+msgid "No new ECM info"
+msgstr ""
+
+msgid "No new time input !"
+msgstr ""
+
+msgid "No packages were upgraded yet. So you can check your network and try again."
+msgstr ""
+
+msgid "No plugins found"
+msgstr ""
 
 #
 msgid "No positioner capable frontend found."
@@ -4448,6 +6059,12 @@ msgstr "Nebyl nalezen žádný vhodný pozicioner."
 
 msgid "No priority"
 msgstr "Žádná priorita"
+
+msgid "No satellite frontend found!"
+msgstr ""
+
+msgid "No satellite frontend found!!"
+msgstr ""
 
 msgid "No satellite, terrestrial or cable tuner is configured. Please check your tuner setup."
 msgstr "Žádný satelitní, terestriální nebo kabelový tuner není nakonfigurován. Zkontrolujte nastavení tuneru."
@@ -4462,6 +6079,9 @@ msgstr "Žádný program/poskytovatel není vybrán"
 #
 msgid "No standby"
 msgstr "Neusínat"
+
+msgid "No stream clients"
+msgstr ""
 
 msgid "No suitable sat tuner found!"
 msgstr "Nenalezen žádný vhodný tuner!"
@@ -4532,15 +6152,17 @@ msgstr ""
 msgid "No, but restart from begin"
 msgstr "Ne, jen restartovat od začátku"
 
-#
-msgid "No, do nothing."
-msgstr "Ne, nic nedělej."
-
-msgid "No, just start my receiver"
-msgstr "Ne, pouze spusť můj přijímač"
+msgid "No, except Wakeup timer"
+msgstr ""
 
 msgid "No, never"
 msgstr "Ne, nikdy"
+
+msgid "NodeID"
+msgstr ""
+
+msgid "NodeID: "
+msgstr ""
 
 #
 msgid "None"
@@ -4577,6 +6199,33 @@ msgstr "nenakonfigurováno"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Nedostatek místa na disku. Uvolněte prostor na disku a zkuste znovu. (%d MB požadováno, %d MB k dispozici)"
 
+#, python-format
+msgid ""
+"Not enough free space on %s !!\n"
+"You need at least 300Mb free space.\n"
+msgstr ""
+
+msgid ""
+"Not enough free space on /hdd !!\n"
+"You need at least 300Mb free space.\n"
+msgstr ""
+
+msgid ""
+"Not enough free space on /hdd !!\n"
+"You need at least 300Mb free space.\n"
+"\n"
+"Exit plugin."
+msgstr ""
+
+msgid "Not found restore file!"
+msgstr ""
+
+msgid "Not tested:"
+msgstr ""
+
+msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
+msgstr ""
+
 #
 msgid "Nothing connected"
 msgstr "nic není připojeno"
@@ -4588,6 +6237,9 @@ msgid ""
 msgstr ""
 "Nic k prohledávání!\n"
 "Předtím, než začnete prohledávat kanály, nastavte Váš tuner."
+
+msgid "Nothing to upgrade"
+msgstr ""
 
 msgid "Now"
 msgstr "Aktuální čas"
@@ -4604,16 +6256,18 @@ msgstr "Přehrává se"
 msgid "Now, use the contrast setting to turn up the brightness of the background as much as possible, but make sure that you can still see the difference between the two brightest levels of shades.If you have done that, press OK."
 msgstr "Nyní použijte nastavení kontrastu pro nastavení světlosti pozadí na nejvyšší hodnotu, ale ujistěte se, že stále vidíte rozdíl mezi dvěma nejsvětlejšími odstíny. Pokud jste hotovi, stiskněte OK."
 
-msgid "Number of repeating text on display."
+msgid "Number of channels shown in channel selection list"
 msgstr ""
 
 #
 msgid "OK"
 msgstr "OK"
 
-#
-msgid "OK, guide me through the upgrade process"
-msgstr "OK, provést aktualizačním procesem."
+msgid "OK will set new time and restart Enigma 2 !"
+msgstr ""
+
+msgid "OK/ green = activate settings"
+msgstr ""
 
 msgid "ONID"
 msgstr ""
@@ -4646,6 +6300,9 @@ msgstr "Zpoždění offline dekódování (ms)"
 msgid "Ok"
 msgstr "Ok"
 
+msgid "Ok, to perform a restore"
+msgstr ""
+
 #
 msgid "On"
 msgstr "Zapnuto"
@@ -4661,6 +6318,12 @@ msgstr "Po skončení filmu (jako menu)"
 msgid "One"
 msgstr "Jeden"
 
+msgid "Online = Download an image and flash it"
+msgstr ""
+
+msgid "Online software update"
+msgstr ""
+
 #
 msgid "Only extensions."
 msgstr "Pouze rozšíření"
@@ -4672,21 +6335,48 @@ msgstr "Hledat pouze volné"
 msgid "Only on startup"
 msgstr "Pouze při startu"
 
+msgid "Open editor"
+msgstr ""
+
 msgid "Open select location"
 msgstr ""
 
 msgid "Open select location as timer name"
 msgstr ""
 
+msgid "Open selector"
+msgstr ""
+
 #
 msgid "Open service list"
 msgstr "Otevřít přehled programů"
+
+msgid "Open setup tuner "
+msgstr ""
+
+msgid "Open the Plugin Browser"
+msgstr ""
 
 #
 msgid "Open the movie list"
 msgstr "Otevřít seznam filmů"
 
+msgid "OpenVPN"
+msgstr ""
+
+msgid "OpenVpn Log"
+msgstr ""
+
+msgid "OpenVpn Setup"
+msgstr ""
+
+msgid "Openeight Software Panel"
+msgstr ""
+
 msgid "Options disable timer"
+msgstr ""
+
+msgid "Options:"
 msgstr ""
 
 msgid "Orbital position"
@@ -4695,12 +6385,24 @@ msgstr "Orbitální pozice"
 msgid "Original"
 msgstr "Originál"
 
+msgid "Oscam Info - Configuration"
+msgstr ""
+
+msgid "Oscam Info - Main Menu"
+msgstr ""
+
+msgid "OscamInfo"
+msgstr ""
+
 msgid "Other"
 msgstr "Další"
 
 #
 msgid "Output"
 msgstr "Výstup"
+
+msgid "Overall progress:"
+msgstr ""
 
 msgid "Overwrite configuration files during software upgrade?"
 msgstr "Přepsat konfigurační soubory při aktualizaci software ?"
@@ -4735,12 +6437,24 @@ msgstr ""
 msgid "PPanel"
 msgstr "PPanel"
 
+msgid "Package installed succesfully"
+msgstr ""
+
+msgid "Package list"
+msgstr ""
+
 #
 msgid "Package list update"
 msgstr "Aktualizace seznamu doplňků"
 
+msgid "Packages"
+msgstr ""
+
 msgid "Packages to update"
 msgstr "Balíčky k aktualizaci"
+
+msgid "Packet Manager"
+msgstr ""
 
 #
 msgid "Packet management"
@@ -4774,6 +6488,27 @@ msgstr "Nastavení rodičovského zámku"
 msgid "Parental control setup"
 msgstr "Nastavení rodičovského zámku"
 
+msgid "Partitions"
+msgstr ""
+
+msgid "Partitions..."
+msgstr ""
+
+msgid "Pass num value 1 use only for root filesystem (mountpoint '/')!"
+msgstr ""
+
+msgid "Pass number:"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Password (httpwd)"
+msgstr ""
+
+msgid "Password:"
+msgstr ""
+
 #
 msgid "Pause"
 msgstr "Pauza"
@@ -4789,6 +6524,12 @@ msgstr "Pauza/přehrávání"
 msgid "Pauze/Continue playback"
 msgstr "Pozastavit/Pokračovat v přehrávání"
 
+msgid "Peak load (max queued requests per workerthread)"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
 msgid "Percentage left"
 msgstr "Procenta vlevo"
 
@@ -4803,6 +6544,9 @@ msgstr "Trvale odstranit veškeré smazané položky"
 
 msgid "Persian"
 msgstr "Persky"
+
+msgid "Phone number"
+msgstr ""
 
 #
 msgid "PiP setup"
@@ -4830,6 +6574,9 @@ msgstr ""
 #
 msgid "Play"
 msgstr "Přehrát"
+
+msgid "Play All Videos (without infos)"
+msgstr ""
 
 #
 msgid "Play DVD"
@@ -4880,21 +6627,29 @@ msgstr "přehrát předchozí"
 msgid "Play recorded movies..."
 msgstr "Přehrát nahrané pořady..."
 
+msgid "Please Enter new Systemtime:"
+msgstr ""
+
 #
 msgid "Please add titles to the compilation."
 msgstr "Přidejte tituly do kompilace."
+
+msgid "Please be patient, a backup will now be made,\n"
+msgstr ""
 
 #
 msgid "Please change recording endtime"
 msgstr "Změňte dobu ukončení nahrávání"
 
-#
-msgid "Please check your network settings!"
-msgstr "Zkontrolujte Vaše nastavení sítě!"
+msgid "Please choose CCcam-Reader"
+msgstr ""
 
 #
 msgid "Please choose an extension..."
 msgstr "Vyberte si z nabídky rozšíření..."
+
+msgid "Please choose reader"
+msgstr ""
 
 #
 msgid ""
@@ -4931,9 +6686,16 @@ msgstr "Zadejte název pro novou záložku"
 msgid "Please enter a new filename"
 msgstr "Zadejte nové jméno souboru"
 
+msgid "Please enter a value for every input field!"
+msgstr ""
+
 #
 msgid "Please enter filename (empty = use current date)"
 msgstr "Zadejte název souboru (prázdné = dnešní datum)"
+
+#, python-format
+msgid "Please enter label for %s:"
+msgstr ""
 
 #
 msgid "Please enter name of the new directory"
@@ -4955,9 +6717,15 @@ msgstr "Zadejte nový PIN"
 msgid "Please enter the old PIN code"
 msgstr "Zadejte starý PIN kód"
 
+msgid "Please enter the your personal feed URL"
+msgstr ""
+
 #
 msgid "Please follow the instructions on the TV"
 msgstr "Následujte instrukce na TV"
+
+msgid "Please install tune2fs"
+msgstr ""
 
 #
 msgid "Please note that the previously selected media could not be accessed and therefore the default directory is being used instead."
@@ -4990,8 +6758,17 @@ msgstr "Prosím, vyberte podprogram pro nahrávání..."
 msgid "Please select a subservice..."
 msgstr "Prosím vyberte podprogram..."
 
-msgid "Please select an NFI file and press green key to flash!"
-msgstr "Zvolte NFI soubor a stiskněte zelené tlačítko pro naprogramování!"
+msgid "Please select device to use as swapfile location"
+msgstr ""
+
+msgid "Please select ipk to uninstall."
+msgstr ""
+
+msgid "Please select ipkg to remove"
+msgstr ""
+
+msgid "Please select medium"
+msgstr ""
 
 #
 msgid "Please select medium to be scanned"
@@ -5029,6 +6806,11 @@ msgstr ""
 "\n"
 "Stiskněte OK pro pokračování."
 
+msgid ""
+"Please select what to do after flashing the image:\n"
+"(In addition, if it exists, a local script will be executed as well at /media/hdd/images/config/myrestore.sh)"
+msgstr ""
+
 #
 msgid "Please set up tuner A"
 msgstr "Prosím, nastavte tuner A"
@@ -5044,6 +6826,27 @@ msgstr "Prosím, nastavte tuner C"
 #
 msgid "Please set up tuner D"
 msgstr "Prosím, nastavte tuner D"
+
+msgid "Please set up tuner E"
+msgstr ""
+
+msgid "Please set up tuner F"
+msgstr ""
+
+msgid "Please set up tuner G"
+msgstr ""
+
+msgid "Please set up tuner H"
+msgstr ""
+
+msgid "Please set up tuner I"
+msgstr ""
+
+msgid "Please set up tuner J"
+msgstr ""
+
+msgid "Please set up tuner K"
+msgstr ""
 
 #
 msgid ""
@@ -5083,6 +6886,9 @@ msgstr "Čekejte prosím na aktivaci Vaší síťové konfigurace..."
 msgid "Please wait while scanning is in progress..."
 msgstr "Čekejte prosím, dokud probíhá vyhledávání..."
 
+msgid "Please wait while we check your installed plugins..."
+msgstr ""
+
 #
 msgid "Please wait while we configure your network..."
 msgstr "Čekejte prosím, zatímco my nastavíme Vaši síť..."
@@ -5098,6 +6904,9 @@ msgstr "Čekejte prosím, zatímco my testujeme Vaši síť..."
 msgid "Please wait while your network is restarting..."
 msgstr "Čekejte, dokud není síť restartována..."
 
+msgid "Please wait whilst feeds state is checked."
+msgstr ""
+
 #
 msgid "Please wait..."
 msgstr "Prosím, čekejte..."
@@ -5106,8 +6915,20 @@ msgstr "Prosím, čekejte..."
 msgid "Please wait... Loading list..."
 msgstr "Prosím čekejte... Načítá se seznam..."
 
+msgid "Please: DO NOT reboot your STB and turn off the power.\n"
+msgstr ""
+
 msgid "Plugin Browser"
 msgstr "Pluginy"
+
+msgid "Plugin ExtrasPanel is not installed !"
+msgstr ""
+
+msgid "Plugin Filter"
+msgstr ""
+
+msgid "Plugin Filter..."
+msgstr ""
 
 #
 msgid "Plugin browser"
@@ -5128,9 +6949,6 @@ msgstr "Pluginy"
 msgid "Polarisation"
 msgstr "Polarizace"
 
-msgid "Polarisation:"
-msgstr "Polarizace:"
-
 #
 msgid "Polarization"
 msgstr "Polarizace"
@@ -5138,6 +6956,9 @@ msgstr "Polarizace"
 #
 msgid "Polish"
 msgstr "Polsky"
+
+msgid "Port"
+msgstr ""
 
 #
 msgid "Port A"
@@ -5154,6 +6975,9 @@ msgstr "Port C"
 #
 msgid "Port D"
 msgstr "Port D"
+
+msgid "Port:"
+msgstr ""
 
 #
 msgid "Portuguese"
@@ -5181,9 +7005,21 @@ msgstr "Nastavení pozicioneru"
 msgid "Positioner setup"
 msgstr "Nastavení pozicioneru"
 
+msgid "Positioner setup log"
+msgstr ""
+
+msgid "Power LED state in (deep)-standby"
+msgstr ""
+
+msgid "Power on/off display"
+msgstr ""
+
 #
 msgid "Power threshold in mA"
 msgstr "Prahový proud v mA"
+
+msgid "Predefined"
+msgstr ""
 
 #
 msgid "Predefined transponder"
@@ -5211,12 +7047,27 @@ msgstr "Preferovat titulky uložené kanálem"
 msgid "Preferred tuner"
 msgstr "Preferovaný tuner"
 
+msgid "Preferred tuner DVB-C"
+msgstr ""
+
+msgid "Preferred tuner DVB-C for recordings"
+msgstr ""
+
+msgid "Preferred tuner DVB-S"
+msgstr ""
+
+msgid "Preferred tuner DVB-S for recordings"
+msgstr ""
+
+msgid "Preferred tuner DVB-T"
+msgstr ""
+
+msgid "Preferred tuner DVB-T for recordings"
+msgstr ""
+
 #
 msgid "Preferred tuner for recordings"
 msgstr "Preferovaný tuner pro nahrávání"
-
-msgid "Prepare another USB stick for image flashing"
-msgstr "Připravte další USB zařízení pro nahrání image"
 
 #
 msgid "Preparing... Please wait"
@@ -5280,6 +7131,9 @@ msgstr "Stiskněte OK pro změnu označení"
 msgid "Press OK to toggle the selection."
 msgstr "Stiskněte OK pro změnu označení."
 
+msgid "Press OK, save and exit..."
+msgstr ""
+
 #
 msgid "Press yellow to set this interface as default interface."
 msgstr "Stiskem žlutého tlačítka nastavíte tento interface jako standardní.  "
@@ -5317,6 +7171,12 @@ msgstr "Priorita"
 msgid "Process"
 msgstr "Provést"
 
+msgid "Profile"
+msgstr ""
+
+msgid "Profile: Local box"
+msgstr ""
+
 #
 msgid "Progress"
 msgstr "Průběh"
@@ -5326,6 +7186,9 @@ msgstr "Pásky vlevo"
 
 msgid "Progress bar right"
 msgstr "Pásky vpravo"
+
+msgid "Progress:"
+msgstr ""
 
 #
 msgid "Properties of current title"
@@ -5368,23 +7231,41 @@ msgstr ""
 msgid "Protect timer menu"
 msgstr ""
 
+msgid "Protocol"
+msgstr ""
+
 #
 msgid "Provider"
 msgstr "Poskytovatel"
+
+msgid "Provider Name: "
+msgstr ""
 
 #
 msgid "Provider to scan"
 msgstr "Poskytovatel k vyhledání"
 
+msgid "Provider: "
+msgstr ""
+
 #
 msgid "Providers"
 msgstr "Poskytovatelé"
+
+msgid "Providers:"
+msgstr ""
+
+msgid "Providers: "
+msgstr ""
 
 msgid "Put TV in standby"
 msgstr "Přepínat TV do standby"
 
 msgid "Put receiver in standby"
 msgstr "Přepínat receiver do standby"
+
+msgid "Python Camstarter (default)"
+msgstr ""
 
 #
 msgid "Python frontend for /tmp/mmi.socket"
@@ -5396,6 +7277,9 @@ msgstr "Python verze:"
 #
 msgid "Quick"
 msgstr "Rychlý"
+
+msgid "Quick Launch Menu"
+msgstr ""
 
 #
 msgid "Quick zap"
@@ -5413,9 +7297,15 @@ msgstr "RGB"
 msgid "Radio"
 msgstr "Rádio"
 
+msgid "Ram"
+msgstr ""
+
 #
 msgid "Ram disk"
 msgstr "Ram disk"
+
+msgid "Ram..."
+msgstr ""
 
 #
 msgid "Random"
@@ -5428,6 +7318,23 @@ msgstr "hodnocení určeno vysíláním - %d"
 msgid "Rating undefined"
 msgstr "hodnocení neurčeno"
 
+msgid "Read Userdata from oscam.conf"
+msgstr ""
+
+msgid "Reader"
+msgstr ""
+
+msgid "Reader Statistics"
+msgstr ""
+
+#, python-format
+msgid "Ready to install %s ?"
+msgstr ""
+
+#, python-format
+msgid "Ready to remove %s ?"
+msgstr ""
+
 #
 msgid "Really close without saving settings?"
 msgstr "Opravdu zavřít bez uloženého nastavení?"
@@ -5435,6 +7342,12 @@ msgstr "Opravdu zavřít bez uloženého nastavení?"
 #
 msgid "Really delete done timers?"
 msgstr "Opravdu smazat dokončené časovače?"
+
+msgid "Really delete the selected entry?"
+msgstr ""
+
+msgid "Really edit the selected entry?"
+msgstr ""
 
 #
 msgid "Really exit the subservices quickzap?"
@@ -5448,9 +7361,19 @@ msgstr "Opravdu provést reboot? "
 msgid "Really restart now?"
 msgstr "Opravdu nyní restartovat? "
 
+msgid "Really save in fstab mount by UUID:\n"
+msgstr ""
+
 #
 msgid "Really shutdown now?"
 msgstr "Opravdu nyní vypnout? "
+
+#, python-format
+msgid "Really store at index %2d for current position?"
+msgstr ""
+
+msgid "Really unmount "
+msgstr ""
 
 msgid "Really upgrade the frontprocessor and reboot now?"
 msgstr "Skutečně aktualizovat frontprocesor a restartovat?"
@@ -5458,13 +7381,15 @@ msgstr "Skutečně aktualizovat frontprocesor a restartovat?"
 msgid "Really upgrade your settop box and reboot now?"
 msgstr "Skutečně aktualizovat přijímač a restartovat"
 
-#
-msgid "Reboot"
-msgstr "Restartovat"
+#, python-format
+msgid "Really use and mount %s as HDD ?"
+msgstr ""
 
-#
-msgid "Rec"
-msgstr "Rec"
+msgid "Reason: Abort by User !"
+msgstr ""
+
+msgid "Reason: Answer is none"
+msgstr ""
 
 msgid "Recall to previous service"
 msgstr "Vyvolat předchozí program"
@@ -5504,6 +7429,9 @@ msgstr "Probíhá nahrávání"
 msgid "Recording paths"
 msgstr "Umístění nahrávání"
 
+msgid "Recording settings"
+msgstr ""
+
 msgid "Recording type"
 msgstr "Typ nahrávání"
 
@@ -5527,6 +7455,12 @@ msgstr "Červené tlačítko"
 
 msgid "Red colored"
 msgstr "Červeně zbarvený"
+
+msgid "RedPanel"
+msgstr ""
+
+msgid "Reenter PIN"
+msgstr ""
 
 msgid "Reflash recommended!"
 msgstr ""
@@ -5562,6 +7496,12 @@ msgstr ""
 msgid "Reloading bouquets and services..."
 msgstr "Obnovuji přehledy a programy..."
 
+msgid "Remaining"
+msgstr ""
+
+msgid "Remaining & Elapsed"
+msgstr ""
+
 msgid "Remember last service in PiP"
 msgstr "Zapamatovat poslední program v PiP"
 
@@ -5570,6 +7510,12 @@ msgstr "Zapamatovat programový PIN"
 
 msgid "Reminder, you have chosen to save timeshift file."
 msgstr "Připomínáme, že jste se rozhodli uložit timeshift soubor."
+
+msgid "Remote box"
+msgstr ""
+
+msgid "Remote control ID"
+msgstr ""
 
 #
 msgid "Remote control type"
@@ -5582,6 +7528,18 @@ msgstr "Odstranění bylo dokončeno."
 #
 msgid "Remove"
 msgstr "Smazat"
+
+msgid "Remove Confirmation"
+msgstr ""
+
+msgid "Remove Picons in Channel List"
+msgstr ""
+
+msgid "Remove Plugins"
+msgstr ""
+
+msgid "Remove Service"
+msgstr ""
 
 #
 msgid "Remove a mark"
@@ -5602,12 +7560,21 @@ msgstr "Dokončené časovače odstraňovat po (dnech)"
 msgid "Remove currently selected title"
 msgstr "Odstranit vybraný titul"
 
+msgid "Remove entry"
+msgstr ""
+
 msgid "Remove items from trash can after (days)"
 msgstr "Položky z koše odstraňovat po (dnech)"
 
 #
 msgid "Remove plugins"
 msgstr "Odstranit pluginy"
+
+msgid "Remove second-infobar"
+msgstr ""
+
+msgid "Remove skin"
+msgstr ""
 
 #
 msgid "Remove title"
@@ -5617,10 +7584,21 @@ msgstr "Odebrat titul"
 msgid "Removing"
 msgstr "Odstranění"
 
+msgid "Removing Service"
+msgstr ""
+
+#, python-format
+msgid "Removing addon %s"
+msgstr ""
+
 #
 #, python-format
 msgid "Removing directory %s failed. (Maybe not empty.)"
 msgstr "Odstranění adresáře %s se nezdařilo. (Možná není prázdný.)"
+
+#, python-format
+msgid "Removing ipk %s"
+msgstr ""
 
 msgid "Removing partition table"
 msgstr "Odstraňuje se tabulka rozdělení disku"
@@ -5629,11 +7607,27 @@ msgstr "Odstraňuje se tabulka rozdělení disku"
 msgid "Rename"
 msgstr "Přejmenovat"
 
+msgid "Rename failed!"
+msgstr ""
+
 msgid "Rename name and description for new events"
 msgstr "Přejmenovat název a popis pro nové události"
 
+msgid "Rename to:"
+msgstr ""
+
+#, python-format
+msgid "Renamed %s!"
+msgstr ""
+
 msgid "Repeat"
 msgstr "Opakovat"
+
+msgid "Repeat Display Message"
+msgstr ""
+
+msgid "Repeat leave standby messages"
+msgstr ""
 
 #
 msgid "Repeat type"
@@ -5679,6 +7673,9 @@ msgstr "Reset"
 msgid "Reset and renumerate title names"
 msgstr "Zresetovat a přečíslovat názvy"
 
+msgid "Reset persistent PIN code"
+msgstr ""
+
 #
 msgid "Reset playback position"
 msgstr "resetovat pozici přehrávání"
@@ -5691,6 +7688,9 @@ msgstr "Nastavit pokročilá nastavení videa na výchozí nastavení?"
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "Nastavit pokročilá nastavení videa na Vaší poslední konfiguraci?"
 
+msgid "Reshare:"
+msgstr ""
+
 #
 msgid "Resolution"
 msgstr "Rozlišení"
@@ -5699,9 +7699,26 @@ msgstr "Rozlišení"
 msgid "Restart"
 msgstr "Restartovat"
 
+msgid "Restart Box..."
+msgstr ""
+
+msgid "Restart Enigma 2 for automatic NTP-Server check on startup (on/off) ?"
+msgstr ""
+
+msgid "Restart Enigma 2 to display DVB Time check results on startup (on/off) ?"
+msgstr ""
+
+msgid ""
+"Restart Enigma 2 to switch on/off Enigma 2 Timeupdate on startup ?\n"
+"ATTENTION: When you switch off,all automatic time updates are disabled !!!"
+msgstr ""
+
 #
 msgid "Restart GUI now?"
 msgstr "Restartovat GUI nyní?"
+
+msgid "Restart Network Adapter"
+msgstr ""
 
 #
 msgid "Restart enigma"
@@ -5711,29 +7728,74 @@ msgstr "Restart enigma"
 msgid "Restart network"
 msgstr "Restartovat síť"
 
+msgid "Restart network and remount connections"
+msgstr ""
+
+msgid "Restart network to with current setup"
+msgstr ""
+
 #
 msgid "Restart test"
 msgstr "Restart testu"
+
+msgid "Restart your box"
+msgstr ""
 
 #
 msgid "Restart your network connection and interfaces.\n"
 msgstr "Restartuje síťové připojení a rozhraní.\n"
 
+msgid ""
+"Restarting Enigma 2 to switch on/off\n"
+"the NTP message on startup ?"
+msgstr ""
+
+msgid ""
+"Restarting Enigma 2 to switch on/off display\n"
+"the DVB Time in the Mainmenu ?"
+msgstr ""
+
 #
 msgid "Restore"
 msgstr "Obnovit"
+
+msgid "Restore Plugins"
+msgstr ""
+
+msgid "Restore Settings"
+msgstr ""
+
+msgid "Restore Wizard"
+msgstr ""
+
+msgid "Restore backup fstab"
+msgstr ""
 
 #
 msgid "Restore backups"
 msgstr "Obnovit zálohu"
 
-#
-msgid "Restore is running..."
-msgstr "Probíhá obnova..."
+msgid "Restore default fstab"
+msgstr ""
+
+msgid "Restore fstab"
+msgstr ""
+
+msgid "Restore fstab.backup"
+msgstr ""
+
+msgid "Restore settings from a backup"
+msgstr ""
 
 #
 msgid "Restore system settings"
 msgstr "Obnova nastavení"
+
+msgid "Restore your settings back from a backup. After restore the box will restart to activated the new settings"
+msgstr ""
+
+msgid "Restores your latest Settings Backup"
+msgstr ""
 
 #
 msgid "Restoring..."
@@ -5766,6 +7828,12 @@ msgstr "zpět na seznam filmů"
 #
 msgid "Return to previous service"
 msgstr "návrat na předchozí program"
+
+msgid "Return with saving"
+msgstr ""
+
+msgid "Return without saving"
+msgstr ""
 
 #
 msgid "Reverse bouquet buttons"
@@ -5814,13 +7882,40 @@ msgstr ""
 msgid "Round start time on"
 msgstr "Zaokrouhlit začátek na"
 
+msgid "Run"
+msgstr ""
+
+msgid "Run Confirmation"
+msgstr ""
+
+msgid "Run how often ?"
+msgstr ""
+
+msgid "Run mount -a"
+msgstr ""
+
+msgid "Running"
+msgstr ""
+
+msgid "Running Myrestore script, Please wait ..."
+msgstr ""
+
 #
 msgid "Russian"
 msgstr "Rusky"
 
+msgid "S"
+msgstr ""
+
 #
 msgid "S-Video"
 msgstr "S-Video"
+
+msgid "SABnzbd"
+msgstr ""
+
+msgid "SABnzbd Setup"
+msgstr ""
 
 msgid "SID"
 msgstr ""
@@ -5841,12 +7936,24 @@ msgstr "SNR:"
 msgid "SSID:"
 msgstr "SSID:"
 
+msgid "Samba"
+msgstr ""
+
+msgid "Samba Log"
+msgstr ""
+
+msgid "Samba Setup"
+msgstr ""
+
 msgid "Same resolution as skin"
 msgstr "Stejné rozlišení jako skin"
 
 #
 msgid "Sat"
 msgstr "So"
+
+msgid "Sat Finder"
+msgstr ""
 
 #
 msgid "Satellite"
@@ -5899,6 +8006,9 @@ msgstr "Uložit a restartovat timeshift"
 
 msgid "Save and stop timeshift"
 msgstr "Uložit a zastavit timeshift"
+
+msgid "Save mount in fstab"
+msgstr ""
 
 #
 msgid "Save playlist"
@@ -5954,6 +8064,9 @@ msgstr "Prohledat dodatečný SR"
 msgid "Scan files..."
 msgstr "Hledat soubory..."
 
+msgid "Scan for local extensions and install them"
+msgstr ""
+
 msgid "Scan options"
 msgstr ""
 
@@ -5995,15 +8108,21 @@ msgstr "prohledávání..."
 msgid "Scans default lamedbs sorted by satellite with a connected dish positioner"
 msgstr "Prohledá standardní lamedbs setříděné podle satelitu a připojeného pozicioneru"
 
-msgid "Scroll delay"
+msgid "Scrolling Speed"
 msgstr ""
 
-msgid "Scroll repeats"
+msgid "Search Sats"
+msgstr ""
+
+msgid "Search Sats, check signal and lock"
 msgstr ""
 
 #
 msgid "Search east"
 msgstr "Hledej východ"
+
+msgid "Search for network shares"
+msgstr ""
 
 #
 msgid "Search west"
@@ -6058,9 +8177,18 @@ msgstr "Přeskočit dopředu (zadat čas)"
 msgid "Select"
 msgstr "Zvolit"
 
+msgid "Select Backup files"
+msgstr ""
+
 #
 msgid "Select CAId"
 msgstr "Vyberte CAId"
+
+msgid "Select Cam 1"
+msgstr ""
+
+msgid "Select Cam 2"
+msgstr ""
 
 #
 msgid "Select Channel"
@@ -6069,6 +8197,9 @@ msgstr "Vybrat kanál"
 #
 msgid "Select HDD"
 msgstr "Zvolte HDD"
+
+msgid "Select Lan/Wlan"
+msgstr ""
 
 #
 msgid "Select a bouquet"
@@ -6081,6 +8212,9 @@ msgstr "Vyberte film"
 #
 msgid "Select a network adapter"
 msgstr "Vyberte síťový adaptér"
+
+msgid "Select a script to run:"
+msgstr ""
 
 #
 msgid "Select a skin"
@@ -6102,12 +8236,12 @@ msgstr "Zvolte akci"
 msgid "Select action for timer '%s'."
 msgstr "Zvolte akci pro časovač '%s'."
 
+msgid "Select action:"
+msgstr ""
+
 #
 msgid "Select all"
 msgstr "Vybrat vše"
-
-msgid "Select an image to be downloaded"
-msgstr "Vyberte image ke stažení"
 
 #
 msgid "Select audio track"
@@ -6132,9 +8266,6 @@ msgstr "Vyberte kanál z kterého chcete nahrávat"
 msgid "Select copy destination for:"
 msgstr "Zvolte umístění kopie pro:"
 
-msgid "Select desired image from feed list"
-msgstr "Vyberte požadované image ze seznamu"
-
 #
 msgid "Select destination for:"
 msgstr "Zvolte umístění pro:"
@@ -6146,6 +8277,9 @@ msgstr "Výběr souborů pro zálohování."
 msgid "Select files/folders to backup"
 msgstr "Vyberte soubory/složky pro zálohování"
 
+msgid "Select folders"
+msgstr ""
+
 msgid "Select input device"
 msgstr "Vyberte vstupní zařízení"
 
@@ -6155,6 +8289,13 @@ msgstr "Volba vstupního zařízení"
 #
 msgid "Select interface"
 msgstr "Vyberte interface"
+
+msgid "Select location"
+msgstr ""
+
+#, python-format
+msgid "Select mount action for %s:"
+msgstr ""
 
 #
 msgid "Select movie"
@@ -6176,13 +8317,22 @@ msgstr "Vyberte satelity"
 msgid "Select service to add..."
 msgstr "Vyberte program pro přidání..."
 
+msgid "Select slot"
+msgstr ""
+
 #
 msgid "Select sort method:"
 msgstr "Zvolte způsob třídění:"
 
+msgid "Select system info or install module:"
+msgstr ""
+
 #
 msgid "Select target folder"
 msgstr "Vyberte cílovou složku"
+
+msgid "Select the Swap File Size:"
+msgstr ""
 
 #
 msgid "Select the movie path"
@@ -6207,6 +8357,12 @@ msgstr "Zvolte video mód"
 #
 msgid "Select wireless network"
 msgstr "Vyberte bezdrátovou síť"
+
+msgid "Select your Language for Audio/Subtitles"
+msgstr ""
+
+msgid "Select your Skin"
+msgstr ""
 
 #
 msgid "Select your provider, and press OK to start the scan"
@@ -6239,9 +8395,24 @@ msgstr "Opakovat sekvenci"
 msgid "Serbian"
 msgstr "Srbsky"
 
+msgid "Serial No"
+msgstr ""
+
+msgid "Serv.Name"
+msgstr ""
+
+msgid "Servers"
+msgstr ""
+
+msgid "Servers:"
+msgstr ""
+
 #
 msgid "Service"
 msgstr "O programu"
+
+msgid "Service Searching"
+msgstr ""
 
 #
 msgid "Service has been added to the favourites."
@@ -6300,12 +8471,27 @@ msgstr ""
 msgid "Services"
 msgstr "Programy"
 
+msgid "Set DVB Time"
+msgstr ""
+
+msgid "Set DVB Time not useful,switch off Enigma 2 Timeupdate first !"
+msgstr ""
+
+msgid "Set PIN"
+msgstr ""
+
+msgid "Set System"
+msgstr ""
+
 msgid "Set all hotkey to default?"
 msgstr "Výchozí nastavení hotkey?"
 
 #
 msgid "Set default"
 msgstr "defaultní"
+
+msgid "Set default settings?"
+msgstr ""
 
 #
 msgid "Set end time"
@@ -6324,8 +8510,20 @@ msgstr "Nastavit interface jako standardní"
 msgid "Set limits"
 msgstr "Nastavit meze"
 
+msgid "Set pin code persistent"
+msgstr ""
+
 msgid "Set startup service"
 msgstr "Nastavit kanál po spuštění"
+
+msgid "Set system time manually"
+msgstr ""
+
+msgid "Set system time manually not useful,switch off Enigma 2 Timeupdate first !"
+msgstr ""
+
+msgid "Set the scrolling speed of text on the front display."
+msgstr ""
 
 #
 msgid "Set the type of the progress indication in the channel selection screen."
@@ -6353,13 +8551,90 @@ msgstr "Nastavit časové okno na 6 hodin"
 msgid "Set voltage and 22KHz"
 msgstr "Nastavovat napětí a 22KHz"
 
+msgid ""
+"Setting DVB Time with forced option.\n"
+"When finished Enigma 2 restarts automatically !\n"
+"Please wait..."
+msgstr ""
+
+msgid ""
+"Setting the DVB Time forced is only needed if the check shows a time difference of more then 30 min.\n"
+"ATTENTION: With forced option make an Enigma 2 restart at the finish !"
+msgstr ""
+
 #
 msgid "Settings"
 msgstr "Nastavení"
 
+msgid "Settings..."
+msgstr ""
+
 #
 msgid "Setup"
 msgstr "Nastavení"
+
+msgid "Setup AFP"
+msgstr ""
+
+msgid "Setup Audio Sync"
+msgstr ""
+
+msgid "Setup Audio Sync settings"
+msgstr ""
+
+msgid "Setup Enigma2"
+msgstr ""
+
+msgid "Setup FTP"
+msgstr ""
+
+msgid "Setup Inadyn"
+msgstr ""
+
+msgid "Setup MiniDLNA"
+msgstr ""
+
+msgid "Setup Mounts"
+msgstr ""
+
+msgid "Setup NFS"
+msgstr ""
+
+msgid "Setup Network Services"
+msgstr ""
+
+msgid "Setup Network Services (Samba, Ftp, NFS, ...)"
+msgstr ""
+
+msgid "Setup OpenVPN"
+msgstr ""
+
+msgid "Setup Plugin filter"
+msgstr ""
+
+msgid "Setup Plugin filter. Here you can select which Plugins are showed in the PluginBrowser"
+msgstr ""
+
+msgid "Setup SABnzbd"
+msgstr ""
+
+msgid "Setup Samba"
+msgstr ""
+
+msgid "Setup Telnet"
+msgstr ""
+
+msgid "Setup Tuner"
+msgstr ""
+
+msgid "Setup Videomode"
+msgstr ""
+
+msgid "Setup each tuner for your satellite system"
+msgstr ""
+
+msgid "Setup interface"
+msgstr ""
 
 msgid "Setup menu"
 msgstr "Nastavení"
@@ -6368,17 +8643,87 @@ msgstr "Nastavení"
 msgid "Setup mode"
 msgstr "Nastavovací mód"
 
+msgid "Setup network. Here you can setup DHCP, IP, DNS"
+msgstr ""
+
+msgid "Setup rotor"
+msgstr ""
+
+msgid "Setup tuner(s)"
+msgstr ""
+
+msgid "Setup uShare"
+msgstr ""
+
+msgid "Setup your Channel selection configuration"
+msgstr ""
+
+msgid "Setup your Device mounts (USB, HDD, others...)"
+msgstr ""
+
+msgid "Setup your EPG config"
+msgstr ""
+
+msgid "Setup your Harddisk"
+msgstr ""
+
+msgid "Setup your LCD"
+msgstr ""
+
+msgid "Setup your OSD"
+msgstr ""
+
+msgid "Setup your System"
+msgstr ""
+
+msgid "Setup your Tuner and search for channels"
+msgstr ""
+
+msgid "Setup your Video Mode, Video Output and other Video Settings"
+msgstr ""
+
+msgid "Setup your display"
+msgstr ""
+
+msgid "Setup your local network"
+msgstr ""
+
+msgid "Setup your local network. For Wlan you need to boot with a USB-Wlan stick"
+msgstr ""
+
+msgid "Setup your mounts for network"
+msgstr ""
+
+msgid "Setup your network interface. If no Wlan stick is used, you only can select Lan"
+msgstr ""
+
+msgid "Setup your network mounts"
+msgstr ""
+
 msgid "Setup your positioner"
 msgstr "Nastavení pozicioneru"
+
+msgid "Setup your positioner for your satellite system"
+msgstr ""
+
+msgid "Setup your recording config"
+msgstr ""
+
+msgid "Setup your remote buttons"
+msgstr ""
 
 #
 msgid "Setup your satellite equipment"
 msgstr "Nastavení satelitního zařízení"
 
-#
-#, python-format
-msgid "Shall the USB stick wizard proceed and program the image file %s into flash memory?"
-msgstr "Má průvodce pro USB zařízení pokračovat a naprogramovat image soubor %s do flash paměti?"
+msgid "Share Folder's"
+msgstr ""
+
+msgid "Share View"
+msgstr ""
+
+msgid "Shares"
+msgstr ""
 
 #
 msgid "Sharpness"
@@ -6390,8 +8735,20 @@ msgstr "Skript"
 msgid "Short filenames"
 msgstr "krátké názvy souborů"
 
+msgid "Show /tmp/ecm.info"
+msgstr ""
+
 msgid "Show Audioselection"
 msgstr "Nastavení zvuku"
+
+msgid "Show CCcamInfo in Extensions Menu"
+msgstr ""
+
+msgid "Show Clients"
+msgstr ""
+
+msgid "Show Display Icons"
+msgstr ""
 
 msgid "Show EIT now/next in infobar"
 msgstr "Zobrazovat EIT nyní/další v infobaru"
@@ -6407,14 +8764,44 @@ msgstr "Zobrazit EPG..."
 msgid "Show Games show"
 msgstr "zábava"
 
+msgid "Show Graphical Multi EPG in extensions menu"
+msgstr ""
+
 msgid "Show InfoBar"
 msgstr "Zobrazit infobar"
+
+msgid "Show Log"
+msgstr ""
+
+msgid "Show Media playback Remaining/Elapsed as"
+msgstr ""
+
+msgid "Show NTP message on startup"
+msgstr ""
+
+msgid "Show OscamInfo in Extensions Menu"
+msgstr ""
 
 msgid "Show PIP"
 msgstr "Zobrazit PiP"
 
+msgid "Show Picons in Channel List"
+msgstr ""
+
+msgid "Show Readers/Proxies"
+msgstr ""
+
 msgid "Show SNR percentage instead of dB value"
 msgstr "Zobrazovat SNR v procentech místo v dB"
+
+msgid "Show Softcam-Panel Red-key long"
+msgstr ""
+
+msgid "Show Time Remaining/Elapsed"
+msgstr ""
+
+msgid "Show Transponder Remaining/Elapsed as"
+msgstr ""
 
 msgid "Show VCR scart on main menu"
 msgstr "Zobrazovat VCR scart v hlavním menu"
@@ -6425,6 +8812,9 @@ msgstr "Zobrazit stav WLAN"
 
 msgid "Show animation while busy"
 msgstr "Zobrazovat animaci při zaneprázdnění"
+
+msgid "Show background behind subtitles"
+msgstr ""
 
 msgid "Show background in radio mode"
 msgstr "Zobrazovat pozadí v rádio módu"
@@ -6457,6 +8847,9 @@ msgstr "Zobrazit detailní informace o události"
 msgid "Show disclaimer"
 msgstr "Zobrazit právní omezení"
 
+msgid "Show eXTrAs-Panel Red-key"
+msgstr ""
+
 #
 msgid "Show event details"
 msgstr "Zobrazit podrobnosti události"
@@ -6475,10 +8868,6 @@ msgstr "Zobrazit rozšířený popis"
 msgid "Show extension selection"
 msgstr "Zobrazit menu rozšíření"
 
-#
-msgid "Show extensions..."
-msgstr "Zobrazit rozšíření..."
-
 msgid "Show favourites list"
 msgstr "Oblíbené"
 
@@ -6488,6 +8877,9 @@ msgstr "Nápověda"
 #
 msgid "Show icon for new/unseen items"
 msgstr "Ikona u nových/neshlédnutých položek"
+
+msgid "Show image items (.jpg, .gif, .bmp, .png)"
+msgstr ""
 
 msgid "Show in extensions menu"
 msgstr "Zobrazovat v menu rozšíření"
@@ -6518,6 +8910,9 @@ msgstr ""
 msgid "Show latest upgrade log"
 msgstr "Zobrazit log poslední aktualizace"
 
+msgid "Show mainmenu as horizontal or vertical list."
+msgstr ""
+
 #
 msgid "Show message when recording starts"
 msgstr "Zobrazit zprávu při začátku nahrávání"
@@ -6531,12 +8926,14 @@ msgstr "Nahrané soubory"
 msgid "Show multi channel EPG"
 msgstr "Zobrazovat vícekanálovou EPG"
 
+msgid "Show only found image and mtd partitions.\n"
+msgstr ""
+
 msgid "Show packages to be upgraded"
 msgstr "Zobrazit aktualizované balíčky"
 
-#
-msgid "Show picons in channel list"
-msgstr "Zobrazovat pikony v seznamu kanálů"
+msgid "Show picons in channel selection list"
+msgstr ""
 
 #
 msgid "Show positioner movement"
@@ -6544,6 +8941,9 @@ msgstr "Zobrazovat otáčení pozicioneru."
 
 msgid "Show positioner position"
 msgstr "Zobrazovat pozici pozicioneru"
+
+msgid "Show record clock icons"
+msgstr ""
 
 #
 msgid "Show record indicator"
@@ -6558,6 +8958,9 @@ msgstr "Zobrazit druhý infobar"
 #
 msgid "Show second infobar"
 msgstr "Zobrazovat druhý infobar"
+
+msgid "Show second-infobar"
+msgstr ""
 
 msgid "Show service list"
 msgstr "Přehled programů"
@@ -6595,11 +8998,32 @@ msgstr "Zobrazit přehrávač rádií"
 msgid "Show the tv player..."
 msgstr "Zobrazit TV..."
 
+msgid "Show time elapsed as positive"
+msgstr ""
+
 msgid "Show vertical timelines"
 msgstr "Zobrazovat časové linky"
 
+msgid "Show warning before set 'Ignore conflict'"
+msgstr ""
+
 msgid "Show warning when timeshift is stopped"
 msgstr "Zobrazovat upozornění při zastavení timeshiftu"
+
+msgid "Show/hide window"
+msgstr ""
+
+msgid "Shows Plugins Browser. Here you can setup installed Plugin"
+msgstr ""
+
+msgid "Shows available plugins. Here you can download and install them"
+msgstr ""
+
+msgid "Shows available pluigns. Here you can download and install them"
+msgstr ""
+
+msgid "Shows available softcams. Here you can download and install them"
+msgstr ""
 
 msgid "Shows live tv or informations on LCD."
 msgstr ""
@@ -6636,12 +9060,12 @@ msgstr "Síla signálu:"
 msgid "Signal: "
 msgstr "Signál: "
 
-msgid "Silently zap between bouquets"
-msgstr "Skrytě přepínat mezi přehledy"
-
 #
 msgid "Similar"
 msgstr "Další vysílání"
+
+msgid "Similar EPG"
+msgstr ""
 
 #
 msgid "Similar broadcasts:"
@@ -6654,6 +9078,9 @@ msgstr "jednoduchý"
 #
 msgid "Simple titleset (compatibility for legacy players)"
 msgstr "jednoduché (kompatibilita pro starší přehrávače)"
+
+msgid "Simulate (no write)"
+msgstr ""
 
 #
 msgid "Single"
@@ -6677,8 +9104,24 @@ msgstr "Zeměpisná šířka"
 msgid "Site longitude"
 msgstr "Zeměpisná délka"
 
+msgid "Size: "
+msgstr ""
+
 #
 msgid "Skin"
+msgstr ""
+
+msgid "Skin Manager"
+msgstr ""
+
+#, python-format
+msgid "Skin Name: %s"
+msgstr ""
+
+msgid "Skin Setting"
+msgstr ""
+
+msgid "Skin Setup"
 msgstr ""
 
 msgid "Skin setup"
@@ -6693,6 +9136,9 @@ msgstr "Přeskakovat prázdné programy"
 
 msgid "Skip internet connection check (disables automatic package installation)"
 msgstr "Přeskočit test internetového připojení (zakáže automatickou instalaci balíčků)."
+
+msgid "Sleep Timer selection..."
+msgstr ""
 
 #
 msgid "Sleep timer"
@@ -6740,17 +9186,38 @@ msgstr "Rychlosti zpomaleného přehrávání"
 msgid "Small progress"
 msgstr "Průběh"
 
+msgid "Smartcard PIN"
+msgstr ""
+
 msgid "Social/Political/Economics"
 msgstr "sociální/politická ekonomika"
 
-msgid "SoftCam / CI"
-msgstr "SoftCam / CI"
+msgid "Softcam"
+msgstr ""
+
+msgid "Softcam Panel"
+msgstr ""
+
+msgid "Softcam Panel V2.0"
+msgstr ""
 
 msgid "Softcam type"
 msgstr "Typ softcamu"
 
+msgid "Softcam-Panel Setup"
+msgstr ""
+
 #
 msgid "Software"
+msgstr ""
+
+msgid "Software Manager"
+msgstr ""
+
+msgid "Software Manager Setup"
+msgstr ""
+
+msgid "Software Update"
 msgstr ""
 
 #
@@ -6761,12 +9228,11 @@ msgid "Software manager setup"
 msgstr "Nastavení správy software"
 
 #
-msgid "Software restore"
-msgstr "Obnovit software"
-
-#
 msgid "Software update"
 msgstr "Aktualizace software"
+
+msgid "Software-Updates and Feed state"
+msgstr ""
 
 msgid "Softwaremanager information"
 msgstr "Info správy software"
@@ -6774,6 +9240,27 @@ msgstr "Info správy software"
 #
 msgid "Some plugins are not available:\n"
 msgstr "Některé pluginy nejsou dostupné:\n"
+
+msgid "Sorry Inadyn Config is Missing"
+msgstr ""
+
+msgid "Sorry MediaScanner is not installed!"
+msgstr ""
+
+msgid "Sorry MiniDLNA Config is Missing"
+msgstr ""
+
+msgid "Sorry feeds are down for maintenance"
+msgstr ""
+
+msgid "Sorry feeds are down for maintenance, please try again later."
+msgstr ""
+
+msgid "Sorry no backups found!"
+msgstr ""
+
+msgid "Sorry uShare Config is Missing"
+msgstr ""
 
 #
 #, python-format
@@ -6784,12 +9271,17 @@ msgid "Sorry, deleting directories can (for now) only be done through the trash 
 msgstr "Je nám líto, ale smazat adresářě lze pouze (prozatím) přes koš."
 
 #
-msgid "Sorry, no backups found!"
-msgstr "Žádné zálohy nenalezeny!"
-
-#
 msgid "Sorry, no details available!"
 msgstr "Žádné detaily nejsou k dispozici!"
+
+msgid "Sorry, no physical devices that supports SWAP attached. Can't create Swapfile on network or fat32 filesystems"
+msgstr ""
+
+msgid "Sorry, no settings backups found!"
+msgstr ""
+
+msgid "Sorry, this tuner is in use."
+msgstr ""
 
 #
 msgid ""
@@ -6798,6 +9290,11 @@ msgid ""
 msgstr ""
 "Do zvoleného místa pro zálohy nelze zapisovat.\n"
 "Prosím, zvolte jiné umístění."
+
+msgid ""
+"Sorry:\n"
+"ET-MultiQuickButton supports only HD skins with 1280x720px"
+msgstr ""
 
 msgid "Sort"
 msgstr "Třídění"
@@ -6875,6 +9372,9 @@ msgstr "Určit dobu ignorování časovače neaktivity"
 msgid "Specify timeframe to ignore the shutdown in standby"
 msgstr "Časový interval ignorování vypnutí ve standby"
 
+msgid "Specify whether receiver should go to deep or normal standby"
+msgstr ""
+
 #
 msgid "Split preview mode"
 msgstr "Rozdělit prohlížecí mód"
@@ -6917,7 +9417,10 @@ msgstr "Napětí ventilátoru %d ve standby"
 msgid "Standby in "
 msgstr "standby za "
 
-msgid "StandbyLED"
+msgid "Start"
+msgstr ""
+
+msgid "Start Tuner"
 msgstr ""
 
 #
@@ -6960,6 +9463,18 @@ msgstr "Spustit timeshift"
 msgid "Start with list screen"
 msgstr "Start se seznamem"
 
+msgid "Start/stop/select cam"
+msgstr ""
+
+msgid "Start/stop/select your cam, You need to install first a softcam"
+msgstr ""
+
+msgid "Starting Cam 1: "
+msgstr ""
+
+msgid "Starting Cam 2: "
+msgstr ""
+
 #
 msgid "Starting on"
 msgstr "Začíná"
@@ -6971,6 +9486,12 @@ msgstr "Po startu přepne set top box do pohotovostního režimu"
 #
 msgid "Startup to Standby"
 msgstr "Po startu přepnout do Standby"
+
+msgid "Status"
+msgstr ""
+
+msgid "Status:"
+msgstr ""
 
 #
 msgid "Step east"
@@ -6993,6 +9514,9 @@ msgstr "zastavit"
 #
 msgid "Stop PiP"
 msgstr "Ukončit PIP"
+
+msgid "Stop Tuner"
+msgstr ""
 
 msgid "Stop all current recordings"
 msgstr "Ukončit všechna nahrávání"
@@ -7086,6 +9610,12 @@ msgstr ""
 msgid "Stream request"
 msgstr "požadavek streamu"
 
+msgid "Streaming clients info"
+msgstr ""
+
+msgid "Strict DLNA"
+msgstr ""
+
 msgid "Strongest position"
 msgstr "Nejsilnější pozice"
 
@@ -7154,6 +9684,9 @@ msgstr "Titulky"
 msgid "Subtitles Settings"
 msgstr "Nastavení titulků"
 
+msgid "Succeeded:"
+msgstr ""
+
 #
 msgid "Sun"
 msgstr "Ne"
@@ -7162,6 +9695,29 @@ msgstr "Ne"
 msgid "Sunday"
 msgstr "Neděle"
 
+msgid "Sundtek Control Center"
+msgstr ""
+
+msgid "Sundtek Control-Center"
+msgstr ""
+
+msgid ""
+"Sundtek legal notice:\n"
+"This software comes without any warranty, use it at your own risk?"
+msgstr ""
+
+msgid "Support at"
+msgstr ""
+
+msgid "Swap"
+msgstr ""
+
+msgid "Swap File not found. You have to create the file before to activate."
+msgstr ""
+
+msgid "Swap Manager"
+msgstr ""
+
 msgid "Swap PIP"
 msgstr "Prohodit PiP"
 
@@ -7169,9 +9725,21 @@ msgstr "Prohodit PiP"
 msgid "Swap PiP and main picture"
 msgstr "Zaměnit PIP a hlavní obraz"
 
+msgid "Swap Place:"
+msgstr ""
+
+msgid "Swap Size:"
+msgstr ""
+
 #
 msgid "Swap services"
 msgstr "Prohodit programy"
+
+msgid "Swap-Manager..."
+msgstr ""
+
+msgid "Swap..."
+msgstr ""
 
 #
 msgid "Swedish"
@@ -7190,6 +9758,9 @@ msgid "Switch channel down"
 msgstr ""
 
 msgid "Switch channel up"
+msgstr ""
+
+msgid "Switch config"
 msgstr ""
 
 msgid "Switch to TV mode"
@@ -7252,6 +9823,24 @@ msgstr "Selhání synchronizace přesouvá zpět na původní !"
 msgid "System"
 msgstr "Systém"
 
+msgid "System Info"
+msgstr ""
+
+msgid "System Information..."
+msgstr ""
+
+msgid "System Setup"
+msgstr ""
+
+msgid "System: "
+msgstr ""
+
+msgid "SystemPlugins SkinSelector is not installed !"
+msgstr ""
+
+msgid "TB"
+msgstr ""
+
 #
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
 msgid "TRANSLATOR_INFO"
@@ -7262,6 +9851,9 @@ msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS soubor je příliš velký pro ISO9660 level 1!"
 
 msgid "TSID"
+msgstr ""
+
+msgid "TUNER:"
 msgstr ""
 
 msgid "TV physical address report"
@@ -7277,8 +9869,26 @@ msgstr "Obsah kompilace"
 msgid "Tags"
 msgstr "Tagy"
 
+msgid "TechniHD Setup"
+msgstr ""
+
+msgid "TechniHD is not installed on your Xtrend box !"
+msgstr ""
+
 msgid "Teletext subtitle color"
 msgstr "Barva teletextových titulků"
+
+msgid "Telnet"
+msgstr ""
+
+msgid "Telnet Interface"
+msgstr ""
+
+msgid "Telnet Port"
+msgstr ""
+
+msgid "Telnet Setup"
+msgstr ""
 
 #
 msgid "Temperature and fan control"
@@ -7300,8 +9910,9 @@ msgstr "Test DiSEqC nastavení"
 msgid "Test mode"
 msgstr "Testovací mód"
 
-msgid "Test the network configuration of your receiver.\n"
-msgstr "Otestuje síťové nastavení přijímače.\n"
+#, python-format
+msgid "Test the network configuration of your %s %s.\n"
+msgstr ""
 
 #
 msgid "Test type"
@@ -7335,6 +9946,11 @@ msgstr ""
 "Děkujeme za použítí průvodce. Přijímač je nyní připraven k používání.\n"
 "Stiskněte OK a začněte přijímač používat."
 
+msgid ""
+"That makes no sense when turned off the auto start from the NTP-Server.\n"
+"Please switch on the autostart first !"
+msgstr ""
+
 #, python-format
 msgid "The %d min remaining before the end of the event."
 msgstr "Do skončení události zbývá %d minut. "
@@ -7354,19 +9970,11 @@ msgstr ""
 msgid "The PIN code has been changed successfully."
 msgstr "PIN kód byl úspěšně změněn."
 
+msgid "The PIN code has been saved successfully."
+msgstr ""
+
 msgid "The PIN codes you entered are different."
 msgstr "PIN kód, který jste zadali, je odlišný."
-
-msgid ""
-"The USB stick was prepared to be bootable.\n"
-"Now you can download an NFI image file!"
-msgstr ""
-"USB zařízení bylo připraveno jako bootovací.\n"
-"Nyní můžete nahrát soubor NFI s image! "
-
-#
-msgid "The backup failed. Please choose a different backup location."
-msgstr "Zálohování selhalo. Zvolte jiné umístění zálohy."
 
 #
 #, python-format
@@ -7376,6 +9984,21 @@ msgid ""
 msgstr ""
 "Aktuální beta image nemusí být stabilní.\n"
 "Pro více informací navštivte %s."
+
+#, python-format
+msgid ""
+"The current image is not stable.\n"
+"For more information see %s."
+msgstr ""
+
+#, python-format
+msgid ""
+"The current image might not be stable.\n"
+"For more information see %s."
+msgstr ""
+
+msgid "The device is already mounted!"
+msgstr ""
 
 #
 #, python-format
@@ -7387,26 +10010,11 @@ msgstr ""
 "Vyberete adresář, do kterého je možné zapisovat."
 
 #
-#, python-format
-msgid ""
-"The following device was found:\n"
-"\n"
-"%s\n"
-"\n"
-"Do you want to write the USB flasher to this stick?"
-msgstr ""
-"Bylo nalezeno zařízení:\n"
-"\n"
-"%s\n"
-"\n"
-"Přejete si zapsat USB flasher do tohoto zařízení?"
-
-#
 msgid "The following files were found..."
 msgstr "Následující soubory byly nalezeny..."
 
-msgid "The md5sum validation failed, the file may be corrupted!"
-msgstr "Ověření md5sum selhalo, soubor může být poškozen!"
+msgid "The image or kernel will be flashing and auto booted in few minutes.\n"
+msgstr ""
 
 #
 msgid ""
@@ -7424,8 +10032,11 @@ msgid "The pin code you entered is wrong."
 msgstr "Zadaný PIN kód je chybný."
 
 #, python-format
-msgid "The results have been written to %s."
-msgstr "Výsledky byly zapsány do %s."
+msgid "The results have been written to %s"
+msgstr ""
+
+msgid "The saved PIN was cleared."
+msgstr ""
 
 msgid "The sleep timer has been activated."
 msgstr "Časovač vypnutí byl aktivován."
@@ -7445,6 +10056,10 @@ msgstr ""
 #, python-format
 msgid "The status of the current beta image could not be checked because %s can not be reached."
 msgstr "Stav aktuálního beta image nemohl být ověřen z důvodu nedostupnosti %s."
+
+#, python-format
+msgid "The status of the current image could not be checked because %s can not be reached."
+msgstr ""
 
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
 msgstr "Soubor časovače (timers.xml) je porušený a nemohl být načten."
@@ -7473,13 +10088,6 @@ msgstr ""
 "Plugin pro bezdrátovou LAN není nainstalován!\n"
 "Nainstalujte plugin."
 
-msgid "The wizard can backup your current settings. Do you want to do a backup now?"
-msgstr "Průvodce může uložit Vaše současná nastavení. Přejete si nyní zazálohovat?"
-
-#, python-format
-msgid "The wizard found a configuration backup. Do you want to restore your old settings from %s?"
-msgstr "Průvodce nalezl zálohu konfigurace. Přejete si obnovit Vaše stará nastavení z %s?"
-
 #
 msgid "The wizard is finished now."
 msgstr "Průvodce skončil."
@@ -7501,6 +10109,9 @@ msgstr "V současné době nejsou žádné nedokončené akce."
 msgid "There are no updates available."
 msgstr "Nejsou žádné dostupné aktualizace."
 
+msgid "There is no [webif] section in oscam.conf"
+msgstr ""
+
 msgid "There is no signal to lock on !"
 msgstr "Není signál pro uzamčení!"
 
@@ -7512,29 +10123,96 @@ msgstr ""
 "Nemusí být dostatek místa na vybraném disku.\n"
 "Opravdu si přejete pokračovat."
 
+msgid "There was an error downloading the updatelist. Please try again."
+msgstr ""
+
 #
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "DVD RW médium je již naformátováno - nové formátování smaže veškerý obsah na tomto DVD."
 
-msgid ""
-"This info is for developers only.\n"
-"For a normal users it is not important.\n"
-"Don't panic, please, when here will be displayed any suspicious informations!"
+msgid "This Device is already mounted as HDD."
 msgstr ""
-"Tyto informace jsou určeny vývojářům.\n"
-"Pro běžné uživatele nejsou důležité.\n"
-"Nepanikařte, jestliže uvidíte nějaké podezřelé údaje!"
+
+msgid "This allows you to show all specific openeight in downloads"
+msgstr ""
+
+msgid "This allows you to show drivers modules in downloads"
+msgstr ""
+
+msgid "This allows you to show enigma2 languages in downloads"
+msgstr ""
+
+msgid "This allows you to show extensions modules in downloads"
+msgstr ""
+
+msgid "This allows you to show kernel modules in downloads"
+msgstr ""
+
+msgid "This allows you to show lcd skins in downloads"
+msgstr ""
+
+msgid "This allows you to show m2k modules in downloads"
+msgstr ""
+
+msgid "This allows you to show picons modules in downloads"
+msgstr ""
+
+msgid "This allows you to show pli modules in downloads"
+msgstr ""
+
+msgid "This allows you to show security modules in downloads"
+msgstr ""
+
+msgid "This allows you to show settings modules in downloads"
+msgstr ""
+
+msgid "This allows you to show skins modules in downloads"
+msgstr ""
+
+msgid "This allows you to show softcams modules in downloads"
+msgstr ""
+
+msgid "This allows you to show systemplugins modules in downloads"
+msgstr ""
+
+msgid "This allows you to show vix modules in downloads"
+msgstr ""
+
+msgid "This allows you to show weblinks modules in downloads"
+msgstr ""
+
+msgid "This entry already exists in the fstab!"
+msgstr ""
 
 msgid ""
-"This plugin creates a USB stick which can be used to update the firmware of your receiver without the need for a network or WLAN connection.\n"
-"First, a USB stick needs to be prepared so that it becomes bootable.\n"
-"In the next step, an NFI image file can be downloaded from the update server and saved on the USB stick.\n"
-"If you already have a prepared bootable USB stick, please insert it now. Otherwise plug in a USB stick with a minimum size of 64 MB!"
+"This info is for developers only.\n"
+"For a normal users it is not relevant.\n"
+"Don't panic please when you see values being displayed that you think look suspicious!"
 msgstr ""
-"Tento plugin vytvoří USB zařízení, které může být použito k aktualizaci firmware Vašeho přijímače bez použití sítě nebo WLAN připojení.\n"
-"Nejprve je potřeba USB zařízení připravit jako bootovací.\n"
-"V dalším kroku může být stažen NFI soubor ze serveru s aktualizacemi a uložen na USB zařízení.\n"
-"Jestliže máte již připravené bootovací USB zařízení, připojte ho nyní. V opačném případě připojte USB zařízení o minimální velikosti 64 MB!"
+
+msgid "This option allows you choose how to display elapsed time as + or -"
+msgstr ""
+
+msgid "This option allows you choose how to display remaining time, or elapsed time, or both."
+msgstr ""
+
+msgid "This option allows you choose how to display the remaining/elapsed time for Media playback."
+msgstr ""
+
+msgid "This option allows you choose how to display the remaining/elapsed time for live tv."
+msgstr ""
+
+msgid "This option allows you to power off the display."
+msgstr ""
+
+msgid "This option is to check manually if there is a time difference between current system time and the transponder time."
+msgstr ""
+
+msgid "This option is to set the system time manually with the remote control."
+msgstr ""
+
+msgid "This option sets the time from the current transponder as system time."
+msgstr ""
 
 #
 msgid "This plugin is installed."
@@ -7592,21 +10270,14 @@ msgstr ""
 "- nebyla nalezna žádná platná IP adresa\n"
 "- ověřte nastavení DHCP, kabelu a síťové karty"
 
-#
 msgid ""
 "This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\n"
 "If you get a \"disabled\" message:\n"
 " - then your LAN adapter is configured for manual IP setup\n"
 "- verify thay you have entered correct IP informations in the adapter setup dialog.\n"
-"If you get an \"enabeld\" message:\n"
+"If you get an \"enabled\" message:\n"
 "-verify that you have a configured and working DHCP server in your network."
 msgstr ""
-"Tento test ověří, zda je nastavena síťová karta pro automatickou konfiguraci pomocí DHCP.\n"
-"Pokud obdržíte zprávu \"zakázáno\":\n"
-"- pak je síťová karta nastavena na ruční nastavení síťové adresy (IP)\n"
-"- ověřte, že jste zadali správnou IP adresu\n"
-"Pokud obdržíte zprávu \"povoleno\":\n"
-"- ověřte, že máte správně nastavený a fungující DHCP server ve Vaší síti."
 
 #
 msgid "This test detects your configured LAN adapter."
@@ -7618,6 +10289,9 @@ msgid ""
 msgstr ""
 "Budou (pře)počítány všechny pozice Vašeho motoru a mohou být odstraněny předchozí uložené pozice a jemné ladění!\n"
 "Jste si jistý ?"
+
+msgid "This will go fast forward/backward with time frames of x secs"
+msgstr ""
 
 #
 msgid "Three"
@@ -7639,13 +10313,25 @@ msgstr "Náhledy"
 msgid "Thursday"
 msgstr "Čtvrtek"
 
+msgid "TiVo support"
+msgstr ""
+
 #
 msgid "Time"
 msgstr "Čas"
 
+msgid "Time Update in Minutes"
+msgstr ""
+
+msgid "Time Update in Minutes:"
+msgstr ""
+
 #
 msgid "Time scale"
 msgstr "Měřítko času"
+
+msgid "Time to execute command or script"
+msgstr ""
 
 #
 msgid "Timer"
@@ -7658,10 +10344,6 @@ msgstr "Přehled časovačů"
 #
 msgid "Timer edit"
 msgstr "Upravit časovač"
-
-#
-msgid "Timer editor"
-msgstr "Úprava časovače"
 
 #
 msgid "Timer entry"
@@ -7739,20 +10421,12 @@ msgstr "Nastavování titulu"
 msgid "To audio selection"
 msgstr "Výběr zvuku"
 
+msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
+msgstr ""
+
 #
 msgid "To subtitle selection"
 msgstr "Výběr titulků"
-
-msgid ""
-"To update your receiver firmware, please follow these steps:\n"
-"1) Turn off your box with the rear power switch and make sure the bootable USB stick is plugged in.\n"
-"2) Turn mains back on and hold the DOWN button on the front panel pressed for 10 seconds.\n"
-"3) Wait for bootup and follow instructions of the wizard."
-msgstr ""
-"Pro aktualizaci firmware Vašeho přijímače proveďte následující kroky:\n"
-"1) vypněte přijímač hlavním vypínačem vzadu na přístroji a ujistěte se, že bootovací USB zařízení je připojeno.\n"
-"2) zapněte hlavní vypínač a držte 10s stisknuté tlačítko DOWN na předním panelu.\n"
-"3) počkejte, až zařízení nabootuje a následujte instrukce průvodce."
 
 #
 msgid "Today"
@@ -7768,6 +10442,9 @@ msgid "Toggle LCD LiveTV"
 msgstr ""
 
 msgid "Toggle PIPzap"
+msgstr ""
+
+msgid "Toggle Pillarbox <> Pan&Scan"
 msgstr ""
 
 #
@@ -7793,12 +10470,40 @@ msgstr "Toneburst"
 msgid "Toneburst A/B"
 msgstr "Toneburst A/B"
 
+msgid "Top"
+msgstr ""
+
 msgid "Top and bottom"
 msgstr "Nahoru a dolů"
+
+msgid "Top..."
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Total cards:"
+msgstr ""
+
+#, python-format
+msgid "Total clients streaming: %d (%s)"
+msgstr ""
+
+msgid "Total handled client ecm's"
+msgstr ""
+
+msgid "Total handled client emm's"
+msgstr ""
+
+msgid "Total:"
+msgstr ""
 
 #
 msgid "Track"
 msgstr "Stopa"
+
+msgid "Transcoding: "
+msgstr ""
 
 #
 msgid "Translation"
@@ -7842,6 +10547,9 @@ msgstr ""
 msgid "Trying to download a new packetlist. Please wait..."
 msgstr "Stahuje se nový seznam balíčků. Prosím, čekejte..."
 
+msgid "Trying to download a new updatelist. Please wait..."
+msgstr ""
+
 #
 msgid "Tue"
 msgstr "Út"
@@ -7867,6 +10575,9 @@ msgstr "Tuner"
 
 msgid "Tuner Configuration"
 msgstr "Konfigurace tuneru"
+
+msgid "Tuner Setup"
+msgstr ""
 
 #
 msgid "Tuner configuration"
@@ -7917,6 +10628,12 @@ msgstr "Typ"
 msgid "Type of scan"
 msgstr "Typ prohledávání"
 
+msgid "Type: "
+msgstr ""
+
+msgid "UP80  (keymap.u80)"
+msgstr ""
+
 msgid "URL of fallback remote receiver"
 msgstr "URL pro záložní vzdálený přijímač"
 
@@ -7927,13 +10644,21 @@ msgstr "USALS"
 msgid "USALS calibration"
 msgstr "USALS kalibrace"
 
+msgid ""
+"USB = Do you want to make a back-up on USB?\n"
+"This will take between 4 and 15 minutes depending on the used filesystem and is fully automatic.\n"
+"Make sure you first insert an USB flash drive before you select USB."
+msgstr ""
+
 #
 msgid "USB stick"
 msgstr "USB zařízení"
 
-#
-msgid "USB stick wizard"
-msgstr "Průvodce pro USB zařízení"
+msgid "USB/Network"
+msgstr ""
+
+msgid "USB: "
+msgstr ""
 
 msgid "Ukrainian"
 msgstr "Ukrajinsky"
@@ -7979,6 +10704,9 @@ msgstr ""
 msgid "Unicable Martix"
 msgstr ""
 
+msgid "Unicable Matrix"
+msgstr ""
+
 #
 msgid "Uninstall"
 msgstr "Odinstalovat"
@@ -8000,6 +10728,9 @@ msgstr "Odpojit"
 #
 msgid "Unsupported"
 msgstr "Nepodporováno"
+
+msgid "Unzipping files, Please wait ..."
+msgstr ""
 
 #
 msgid "Update"
@@ -8032,17 +10763,44 @@ msgstr "Aktualizace se nezdařila. Přijímač nemá funkční připojení k int
 msgid "Update has completed."
 msgstr "Aktualizace je dokončena."
 
+msgid "Update interval (in seconds)"
+msgstr ""
+
+msgid "Update/Backup your firmware, Backup/Restore settings"
+msgstr ""
+
+msgid "Update/Backup/Restore your box"
+msgstr ""
+
 #
 msgid "Updatefeed not available."
 msgstr "Zdroj aktualizací není k dispozici."
+
+msgid "Updates Available:"
+msgstr ""
 
 #
 msgid "Updating software catalog"
 msgstr "Aktualizace katalogu programů"
 
+msgid "Upgrade finished."
+msgstr ""
+
 #
 msgid "Upgrading"
 msgstr "Aktualizace"
+
+msgid "Uphops +"
+msgstr ""
+
+msgid "Uphops -"
+msgstr ""
+
+msgid "Uphops: "
+msgstr ""
+
+msgid "Uptime"
+msgstr ""
 
 msgid "Usage Setup"
 msgstr "Přizpůsobení"
@@ -8060,6 +10818,9 @@ msgstr "Používat EIT EPG informace, jestliže jsou dostupné."
 
 msgid "Use FreeSat EPG information when it is available."
 msgstr "Používat FreeSat EPG informace, jestliže jsou dostupné."
+
+msgid "Use Keymap"
+msgstr ""
 
 msgid "Use MHW EPG information when it is available."
 msgstr "Používat MHW EPG informace, jestliže jsou dostupné."
@@ -8084,6 +10845,9 @@ msgstr "Používat Virgin EPG informace, jestliže jsou dostupné."
 #
 msgid "Use a gateway"
 msgstr "Použít bránu (gateway)"
+
+msgid "Use as HDD"
+msgstr ""
 
 msgid "Use circular LNB"
 msgstr "Použít kruhový LNB"
@@ -8119,13 +10883,18 @@ msgstr "Použít původní pozici teletextu"
 msgid "Use power measurement"
 msgstr "Použít měření proudu"
 
+msgid "Use the Networkwizard to configure your Network. The wizard will help you to setup your network"
+msgstr ""
+
+msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam"
+msgstr ""
+
 #
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Použijte síťového průvodce k nakonfigurování vybraného síťového adaptéru"
 
-#
-msgid "Use the network wizard to configure your network\n"
-msgstr "Použijte průvodce pro nakonfigurování vaší sítě\n"
+msgid "Use the network wizard to configure your Network\n"
+msgstr ""
 
 #
 msgid "Use the up/down keys on your remote control to select an option. After that, press OK."
@@ -8145,6 +10914,9 @@ msgstr "Použít tato nastavení?"
 msgid "Use this video enhancement settings?"
 msgstr "Použít toto rozšiřující video nastavení?"
 
+msgid "Use time jumps for fast forward/backward"
+msgstr ""
+
 #
 msgid "Use trash can in movielist"
 msgstr "Používat koš v seznamu souborů"
@@ -8152,6 +10924,12 @@ msgstr "Používat koš v seznamu souborů"
 #
 msgid "Used service scan type"
 msgstr "Použítý typ vyhledávání programu"
+
+msgid "Used:"
+msgstr ""
+
+msgid "User  (keymap.usr)"
+msgstr ""
 
 #
 msgid "User - bouquets"
@@ -8167,12 +10945,24 @@ msgstr "uživatem definovaný transponder"
 msgid "User interface"
 msgstr "Uživatelské rozhraní"
 
+msgid "Username"
+msgstr ""
+
+msgid "Username (httpuser)"
+msgstr ""
+
+msgid "Username:"
+msgstr ""
+
 #, python-format
 msgid "Using LNB %d"
 msgstr "Používá se LNB %d"
 
 msgid "Using fixed address"
 msgstr "Používaná pevná adresa"
+
+msgid "Using old profile: "
+msgstr ""
 
 #, python-format
 msgid "Using tuner %s"
@@ -8185,21 +10975,49 @@ msgstr "Obvykle, když je jazyk titulků stejný jako jazyk zvuku, titulky nebud
 msgid "VCR scart"
 msgstr "VCR scart"
 
+msgid "VLAN connection"
+msgstr ""
+
 #
 msgid "VMGM (intro trailer)"
 msgstr ""
 
-msgid "VU+"
+msgid "Version: "
+msgstr ""
+
+#, python-format
+msgid "Version: %s"
 msgstr ""
 
 #
 msgid "Vertical"
 msgstr "Vertikální"
 
+msgid "Vertical list"
+msgstr ""
+
 msgid "Vertical turning speed"
 msgstr "Vertikální rychlost ladění"
 
+msgid "Vertical-menu"
+msgstr ""
+
+#, python-format
+msgid "Video Download Failed!Corrupted Download File:%s"
+msgstr ""
+
+#, python-format
+msgid "Video Download Failed!Could not read RTMP-Packet:%s"
+msgstr ""
+
+#, python-format
+msgid "Video Download Failed!Segmentation fault:%s"
+msgstr ""
+
 msgid "Video PID"
+msgstr ""
+
+msgid "Video clipping setup"
 msgstr ""
 
 #
@@ -8246,6 +11064,12 @@ msgstr "Video průvodce"
 
 #, python-format
 msgid "Video: %s fps"
+msgstr ""
+
+msgid "VideoEnhancement"
+msgstr ""
+
+msgid "VideoEnhancement Setup"
 msgstr ""
 
 msgid "VideoMode"
@@ -8379,6 +11203,21 @@ msgstr "WPA2"
 msgid "WSS on 4:3"
 msgstr "WSS na 4:3"
 
+msgid "Wait please while creating swapfile..."
+msgstr ""
+
+msgid "Wait please while scanning for devices..."
+msgstr ""
+
+msgid "Wait please while scanning your box devices..."
+msgstr ""
+
+msgid "Wait please while scanning..."
+msgstr ""
+
+msgid "Wait time before start Cam 2"
+msgstr ""
+
 #
 msgid "Waiting"
 msgstr "Čekání"
@@ -8389,7 +11228,7 @@ msgstr "Čeká se na připojení"
 msgid "Waiting for partition"
 msgstr "Čeká se na oddíl"
 
-msgid "Wake On LAN"
+msgid "Waiting..."
 msgstr ""
 
 msgid "Wakeup"
@@ -8407,8 +11246,26 @@ msgstr "Probouzet receiver ze standby"
 msgid "Wakeup signal from TV"
 msgstr "Signál probuzení z TV"
 
+msgid "Wakeup time"
+msgstr ""
+
+msgid "Wakeup timer"
+msgstr ""
+
 msgid "Wakeup type"
 msgstr "Typ probuzení"
+
+msgid "Warning"
+msgstr ""
+
+msgid ""
+"Warning!\n"
+"This is an option for advanced users.\n"
+"Really disable timer conflict detection?"
+msgstr ""
+
+msgid "Warning, this device is used for more than one mount point!\n"
+msgstr ""
 
 msgid "Warning: no LNB; using factory defaults."
 msgstr "Varování: žádný LNB; použiváno tovární nastavení."
@@ -8421,6 +11278,9 @@ msgstr "Sledovat filmy..."
 msgid "Watch recordings..."
 msgstr "Sledovat nahrávky..."
 
+msgid "Web Interface"
+msgstr ""
+
 #
 msgid "Wed"
 msgstr "St"
@@ -8431,6 +11291,9 @@ msgstr "Středa"
 
 msgid "Weekday"
 msgstr "Všední den "
+
+msgid "Weekly"
+msgstr ""
 
 msgid "Weighted position"
 msgstr "Vážená pozice"
@@ -8449,8 +11312,12 @@ msgstr ""
 "\n"
 "Poté najděte konec, stiskněte OK a zvolte 'konec střihu'. To je vše."
 
-msgid "Welcome to the image upgrade wizard. The wizard will assist you in upgrading the firmware of your receiver by providing a backup facility for your current settings and a short explanation of how to upgrade your firmware."
-msgstr "Vítejte v průvodci aktualizace image. Průvodce pomůže při aktualizaci image přijímače, provedení zálohy nastavení a krátkého vysvětlení, jak zaktualizovat firmware."
+msgid ""
+"Welcome to the restore wizard.\n"
+"\n"
+"A backup has been detected.\n"
+"You can use this wizard to restore your setting and any extra plugins that where installed when the backup was created.\n"
+msgstr ""
 
 msgid ""
 "Welcome.\n"
@@ -8487,6 +11354,12 @@ msgstr "Západní"
 msgid "West limit set"
 msgstr "Západní limit nastaven"
 
+msgid "What Day of month ?"
+msgstr ""
+
+msgid "What Day of week ?"
+msgstr ""
+
 #
 msgid "What do you want to scan?"
 msgstr "Co chcete prohledat?"
@@ -8502,9 +11375,6 @@ msgstr "Jestliže je povoleno, pak šipky okolo tlačítka OK budou používat '
 
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr "Jestliže je povoleno, pak tlačítka vlevo, vpravo, CH+/-, B+/-, P+/- budou používat 'neutrino' styl pro přepínání namísto stylu enigma2."
-
-msgid "When enabled the set top box is able to wakeup on LAN"
-msgstr ""
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr "Pokud je povoleno a vyberete nový kanál ve výběru kanálů, pak výběr kanálů nebude uzavřen. Zavře se pouze tehdy, jestliže vyberete aktuální přehrávanou službu. To je druh režimu náhledu"
@@ -8537,6 +11407,9 @@ msgstr "Při povolení budou přidávána ECM data do streamu. To umožní klien
 msgid "When enabled, EIT data will be included in http streams. This allows a client receiver to show EPG."
 msgstr "Při povolení budou přidávána EIT data do streamu. To umožní klientskému přijímači zobrazovat EPG."
 
+msgid "When enabled, Show in extensions menu."
+msgstr ""
+
 msgid "When enabled, a popup message will be shown when a movie has finished and the next one will start."
 msgstr "Při povolení bude zobrazována zpráva po skončení přehrávání před začátkem nového přehrávání."
 
@@ -8551,6 +11424,9 @@ msgstr "Jestliže je povoleno, pak v případě, když není již zádný volný
 
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
 msgstr "Jestliže je povoleno, bude zobrazeno varování a uživatel bude mít možnost timeshift ukončit nebo pokračovat."
+
+msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
+msgstr ""
 
 #
 msgid "When enabled, authentication is required to watch http streams."
@@ -8595,8 +11471,8 @@ msgstr "Jestliže je povoleno, grafické DVB titulky budou zobrazovány na jejic
 msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color."
 msgstr "Jestliže je povoleno, grafické DVB titulky budou zobrazovány žlutě namísto jejich původní barvy."
 
-msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
-msgstr "Při povolení budou http streamy dekódovány na straně serveru. Vzdálený klientský přijímač nemusí pak provádět dekódování."
+msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
+msgstr ""
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Jestliže je povoleno, je možné opouštět movieplayer pomocí Exit."
@@ -8662,6 +11538,12 @@ msgstr "Jestliže je povoleno, přijímač bude vybírat AC3 stopu (bude-li dost
 msgid "When enabled, the receiver will select an AC3+ track (when available)."
 msgstr "Jestliže je povoleno, přijímač bude vybírat AC3+ stopu (bude-li dostupná)"
 
+msgid "When enabled, this setting has more weight than 'Preferred tuner for recordings'."
+msgstr ""
+
+msgid "When enabled, this setting has more weight than 'Preferred tuner'."
+msgstr ""
+
 msgid "When enabled, timeshift starts automatically in background after specified time."
 msgstr "Jestliže je povoleno, timeshift se na pozadí automaticky spustí po nastavené době."
 
@@ -8699,10 +11581,6 @@ msgstr ""
 "Chcete opravdu provést tovární nastavení?"
 
 #
-msgid "Where do you want to backup your settings?"
-msgstr "Kam chcete zazálohovat Vaše nastavení?"
-
-#
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Kam ukládat dočasný záznam timeshiftu?"
 
@@ -8726,14 +11604,18 @@ msgstr "Nastavení připojení bezdrátové sítě."
 msgid "Wireless network state"
 msgstr "Stav bezdrátové sítě"
 
+msgid "With errors:"
+msgstr ""
+
 msgid "With popup"
 msgstr "s dialogem"
 
 msgid "Without popup"
 msgstr "bez dialogu"
 
-msgid "Would you like to install a softcam?"
-msgstr "Chcete nainstalovat softcam?"
+#, python-format
+msgid "Would you save the entered PIN %s persistent?"
+msgstr ""
 
 #
 msgid "Write error while recording. Disk full?\n"
@@ -8742,6 +11624,15 @@ msgstr "Chyba zápisu během nahrávání. Plný disk?\n"
 #
 msgid "Write failed!"
 msgstr "Zápis selhal!"
+
+msgid "Write to /tmp/positionersetup.log"
+msgstr ""
+
+msgid "XBox 360 support"
+msgstr ""
+
+msgid "YES"
+msgstr ""
 
 #
 msgid "YPbPr"
@@ -8758,9 +11649,15 @@ msgstr ""
 msgid "Yellow DVB subtitles"
 msgstr "Žluté DVB titulky"
 
+msgid "Yellow Key Action"
+msgstr ""
+
 #
 msgid "Yes"
 msgstr "Ano"
+
+msgid "Yes (save index in setup tuner)"
+msgstr ""
 
 msgid "Yes and save"
 msgstr "Ano a uložit"
@@ -8780,10 +11677,6 @@ msgid "Yes, and delete this movie"
 msgstr "Ano, a smazat tento film"
 
 #
-msgid "Yes, backup my settings!"
-msgstr "Ano, zazálohuj moje nastavení!"
-
-#
 msgid "Yes, delete this movie and return to movie list"
 msgstr "Ano, a smazat film a zpět na seznam filmů"
 
@@ -8800,20 +11693,22 @@ msgid "Yes, do another manual scan now"
 msgstr "Ano, proveď další ruční prohledávání"
 
 #
-msgid "Yes, perform a shutdown now."
-msgstr "Ano, vypnout systém."
-
-#
-msgid "Yes, restore the settings now"
-msgstr "Ano, nyní obnovit nastavení"
-
-#
 msgid "Yes, returning to movie list"
 msgstr "Ano, vrátit se na seznam filmů"
 
 #
 msgid "Yesterday"
 msgstr "Včera"
+
+msgid "You PIN code is 0000. This is the default PIN code and it disable parental control!\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"You already have a bootlogo installed,\n"
+"would you like to remove\n"
+"\"%s\"?"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -8836,6 +11731,9 @@ msgstr "Můžete zrušit odstranění."
 msgid "You can continue watching TV etc. while this is running."
 msgstr "V průběhu můžete pokračovat ve sledování TV atd. "
 
+msgid "You can disable Telnet Server and use ssh to login."
+msgstr ""
+
 #
 msgid "You can install this plugin."
 msgstr "Můžete instalovat tento plugin."
@@ -8854,17 +11752,14 @@ msgstr "Nemůžete toto smazat!"
 msgid "You didn't select a channel to record from."
 msgstr "Nezvolili jste kanál pro nahrávání."
 
-#
-msgid "You have chosen to backup your settings. Please press OK to start the backup now."
-msgstr "Zvolili jste zálohování Vašich nastavení. Prosím, stiskněte OK pro spuštění zálohování."
+msgid "You have chosen to restore your settings."
+msgstr ""
 
-#
-msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
-msgstr "Zvolili jste vytvoření nového bootovacího USB zařízení. To způsobí, že na USB zařízení budou všechna předchozí data vymazána. "
+msgid "You have no script to run."
+msgstr ""
 
-#
-msgid "You have chosen to restore your settings. Enigma2 will restart after restore. Please press OK to start the restore now."
-msgstr "Zvolili jste obnovení Vašich nastavení. Enigma2 se po obnově zrestartuje. Prosím, stiskněte OK pro spuštění obnovy."
+msgid "You have to create a Swap File before to activate the autostart."
+msgstr ""
 
 #
 #, python-format
@@ -8875,19 +11770,38 @@ msgstr "Musíte počkat %s!"
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr ""
 
-msgid ""
-"You need a PC connected to your receiver. If you need further instructions, please visit the website http://www.dm7025.de.\n"
-"Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
-msgstr ""
-"Potřebujete PC připojené k Vašemu přijímači. Pokud potřebujete další informace, navštivte stránku http://www.dm7025.de.\n"
-"Váš přijímač bude nyní zastaven. Poté, co provedete aktualizaci pomocí instrukcí popsaných na zmíněné stránce, se Vás přijímač zeptá na obnovu nastavení."
-
 msgid "You system does not support ext4"
 msgstr "Váš systém nepodporuje ext4"
 
-#
-msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
-msgstr "Vaše záloha byla úspěšně provedena . Budeme pokračovat vysvětlením dalšího postupu aktualizace."
+#, python-format
+msgid "Your %s %s is not connected to the internet, please check your network settings and try again."
+msgstr ""
+
+#, python-format
+msgid "Your %s %s isn't connected to the internet properly. Please check it and try again."
+msgstr ""
+
+#, python-format
+msgid "Your %s %s will Reboot..."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your %s %s will be restarted after the installation of service\n"
+"Ready to install %s ?"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your %s %s will be restarted after the removal of service\n"
+"Do you want to remove now ?"
+msgstr ""
+
+msgid "Your STB will freeze during the flashing process.\n"
+msgstr ""
+
+msgid "Your STB will restart after pressing OK on your remote control."
+msgstr ""
 
 #
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
@@ -8897,14 +11811,6 @@ msgstr "Vaše kompilace přesahuje kapacitu jednovrstvého DVD. Budete potřebov
 msgid "Your current collection will get lost!"
 msgstr "Vaše současná kompilace bude ztracena!"
 
-#
-msgid ""
-"Your frontprocessor firmware must be upgraded.\n"
-"Press OK to start upgrade."
-msgstr ""
-"Firmware Vašeho frontprocesoru musí být aktualizován.\n"
-"Stiskněte OK pro aktualizaci."
-
 msgid ""
 "Your frontprocessor will be upgraded\n"
 "Please wait until your receiver reboots\n"
@@ -8913,6 +11819,21 @@ msgstr ""
 "Frontprocesor bude aktualizován\n"
 "Čekejte, dokud se přijímač nerestartuje\n"
 "To může trvat několik minut"
+
+#, python-format
+msgid ""
+"Your image is out of date!\n"
+"\n"
+"After such a long time, there is a risk that your %s %s will not\n"
+"boot after online-update, or will show disfunction in running Image.\n"
+"\n"
+"A new flash will increase the stability\n"
+"\n"
+"An online update is done at your own risk !!\n"
+"\n"
+"\n"
+"Do you still want to update?"
+msgstr ""
 
 #
 msgid ""
@@ -8964,20 +11885,17 @@ msgstr "Přijímač se restartuje"
 msgid "Your receiver is shutting down"
 msgstr "Přijímač se vypíná"
 
-msgid "Your receiver is shutting down. Please stand by..."
-msgstr "Váš přijímač se vypíná. Prosím, počkejte..."
-
 msgid "Your receiver might be unusable now. Please consult the manual for further assistance before rebooting your receiver."
 msgstr "Přijímač může být nyní nepoužitelný. Prosím, konzultujte s manuálem další pomoc před restartováním přijímače."
 
+msgid "Your receiver will go to deep standby due to inactivity."
+msgstr ""
+
+msgid "Your receiver will go to standby due to inactivity."
+msgstr ""
+
 msgid "Your receiver will got to stand by due to the sleeptimer."
 msgstr "Přijímač přešel do standby kvůli časovači usínání."
-
-msgid "Your receiver will got to standby due to inactivity."
-msgstr "Přijímač přešel do standby z důvodu neaktivity."
-
-msgid "Your receiver will restart after pressing OK on your remote control."
-msgstr "Váš přijímač bude restartován po stisknutí OK na dálkovém ovladači."
 
 #
 msgid ""
@@ -9006,6 +11924,9 @@ msgstr "Přepnout zpět na program před nastavováním pozicioneru?"
 msgid "Zap back to service before tuner setup?"
 msgstr "Přepnout zpět na program před nastavením tuneru?"
 
+msgid "Zap bouquets blindly on zap buttons"
+msgstr ""
+
 msgid "Zap down"
 msgstr ""
 
@@ -9032,7 +11953,10 @@ msgstr "Přepnout na vybraný kanál nebo zobrazit detailní informace o událos
 msgid "Zap up"
 msgstr ""
 
-msgid "[REC]"
+msgid "[Enigma2 Settings]\n"
+msgstr ""
+
+msgid "[Image Info]\n"
 msgstr ""
 
 #
@@ -9079,6 +12003,12 @@ msgstr "právě začne"
 msgid "activate network adapter configuration"
 msgstr "aktivace nastavení síťového adaptéru"
 
+msgid "active CAM 1: "
+msgstr ""
+
+msgid "active CAM 2: "
+msgstr ""
+
 msgid "actual time only"
 msgstr "pouze aktuální čas"
 
@@ -9114,12 +12044,18 @@ msgstr "přidat program do oblíbených"
 msgid "add to parental protection"
 msgstr "přidat do rodičovské ochrany"
 
+msgid "address:"
+msgstr ""
+
 msgid "adult movie/drama"
 msgstr "pro dospělé/drama"
 
 #
 msgid "advanced"
 msgstr "rozšířený"
+
+msgid "advanced restore"
+msgstr ""
 
 msgid "adventure/western/war"
 msgstr "dobrodružný/western/válečný"
@@ -9148,8 +12084,14 @@ msgstr "alternativa"
 msgid "always"
 msgstr "vždy"
 
+msgid "an internal error has occured"
+msgstr ""
+
 msgid "and never ask again this session again"
 msgstr "a více nežádat v tuto chvíli"
+
+msgid "and never ask this again"
+msgstr ""
 
 #
 msgid "and never show this message again"
@@ -9192,11 +12134,17 @@ msgstr "zpět"
 msgid "background image"
 msgstr "Obrázek pozadí"
 
+msgid "backupstick or backupstick.txt"
+msgstr ""
+
 msgid "ballet"
 msgstr "balet"
 
 #, python-format
 msgid "bc%s"
+msgstr ""
+
+msgid "because of the used filesystem the back-up\n"
 msgstr ""
 
 #
@@ -9214,6 +12162,9 @@ msgstr "černobílé"
 msgid "blacklist"
 msgstr "blacklist"
 
+msgid "blkid"
+msgstr ""
+
 #
 msgid "blue"
 msgstr "Modré"
@@ -9224,6 +12175,15 @@ msgstr "vysílání/tisk"
 #
 msgid "by date"
 msgstr "podle data"
+
+msgid "caid:"
+msgstr ""
+
+msgid "card"
+msgstr ""
+
+msgid "card reader"
+msgstr ""
 
 msgid "cartoon/puppets"
 msgstr "karikatury/loutky"
@@ -9237,6 +12197,12 @@ msgstr "uprostřed"
 
 msgid "centered, wrapped"
 msgstr "uprostřed, více řádků"
+
+msgid "change the button functions of your remote control"
+msgstr ""
+
+msgid "change your Keymap: *.mqb, *.usr, *.ntr, *.xml, *.u80"
+msgstr ""
 
 #
 msgid "chapters"
@@ -9252,6 +12218,16 @@ msgstr "levá kruhová (polarizace)"
 #
 msgid "circular right"
 msgstr "pravá kruhová (polarizace)"
+
+msgid "clip overscan / letterbox borders"
+msgstr ""
+
+msgid "close share view"
+msgstr ""
+
+#, python-format
+msgid "comand line: %s"
+msgstr ""
 
 msgid "comedy"
 msgstr "komedie"
@@ -9272,9 +12248,10 @@ msgstr "potvrzeno"
 msgid "connected"
 msgstr "připojeno"
 
-#
-msgid "continue"
-msgstr "pokračovat"
+msgid ""
+"contain a file with the name: \n"
+"\n"
+msgstr ""
 
 msgid "cooking"
 msgstr "vaření"
@@ -9287,10 +12264,6 @@ msgstr "zkopírovat do přehledů"
 msgid "create directory"
 msgstr "založit adresář"
 
-#, python-format
-msgid "currently installed image: %s"
-msgstr "instalované image: %s"
-
 #
 msgid "daily"
 msgstr "denně"
@@ -9298,6 +12271,9 @@ msgstr "denně"
 #
 msgid "day"
 msgstr "den"
+
+msgid "decrease uphop by 1"
+msgstr ""
 
 #
 msgid "default"
@@ -9313,9 +12289,18 @@ msgstr "použít descramble a nahrávat ecm"
 msgid "detective/thriller"
 msgstr "detektivka/thriller"
 
+msgid "device name: "
+msgstr ""
+
+msgid "df -h"
+msgstr ""
+
 #
 msgid "disable"
 msgstr "zakázat"
+
+msgid "disable intro screen"
+msgstr ""
 
 #
 msgid "disable move mode"
@@ -9332,6 +12317,9 @@ msgstr "odpojeno"
 msgid "discussion/interview/debate"
 msgstr "diskuse/rozhovor/debata"
 
+msgid "display"
+msgstr ""
+
 #
 msgid "do nothing"
 msgstr "nedělat nic"
@@ -9346,8 +12334,23 @@ msgstr "nepoužít descramble, nahrávat ecm"
 msgid "done!"
 msgstr "dokončeno!"
 
+msgid "dont wait"
+msgstr ""
+
+msgid "drivers"
+msgstr ""
+
+msgid "dump (0 - create backup off): "
+msgstr ""
+
 msgid "east"
 msgstr "východ"
+
+msgid "ecm time:"
+msgstr ""
+
+msgid "ecm.info"
+msgstr ""
 
 msgid "economics/social advisory"
 msgstr "ekonomika/sociální poradenství "
@@ -9375,6 +12378,9 @@ msgstr "povolit úpravu přehledu"
 msgid "enable favourite edit"
 msgstr "Povolit úpravu oblíbených"
 
+msgid "enable intro screen"
+msgstr ""
+
 #
 msgid "enable move mode"
 msgstr "povolit přesun"
@@ -9399,6 +12405,9 @@ msgstr "konec střihu zde"
 msgid "end favourites edit"
 msgstr "ukončit úpravu oblíbených"
 
+msgid "ene"
+msgstr ""
+
 msgid "entertainment (10-16 year old)"
 msgstr "zábavný (10-16 let)"
 
@@ -9421,24 +12430,18 @@ msgstr ""
 msgid "error while scanning"
 msgstr ""
 
-msgid "et4000"
+msgid "ese"
 msgstr ""
 
-msgid "et5000/6000"
-msgstr ""
-
-msgid "et8000/et10000"
-msgstr ""
-
-msgid "et9000/et9100"
-msgstr ""
-
-msgid "et9200/9500/6500"
+msgid "execute cuts (requires MovieCut plugin)"
 msgstr ""
 
 #
 msgid "exit DVD player or return to file browser"
 msgstr "ukončit DVD přehrávač a vrátit se na seznam souborů"
+
+msgid "exit mounts setup menu"
+msgstr ""
 
 #
 msgid "exit network adapter configuration"
@@ -9451,12 +12454,30 @@ msgstr "zavřít menu nastavení sítě"
 msgid "experimental film/video"
 msgstr "experimentální film/video"
 
+msgid "extensions"
+msgstr ""
+
+msgid "failed"
+msgstr ""
+
 #
 msgid "false"
 msgstr "ne"
 
 msgid "fashion"
 msgstr "móda"
+
+msgid "fast"
+msgstr ""
+
+msgid "feed status"
+msgstr ""
+
+msgid "file oscam.conf could not be found"
+msgstr ""
+
+msgid "file system type (auto): "
+msgstr ""
 
 #
 msgid "fileformats (BMP, PNG, JPG, GIF)"
@@ -9507,6 +12528,12 @@ msgstr "volného místa"
 msgid "from"
 msgstr "z"
 
+msgid "fstab restored!"
+msgstr ""
+
+msgid "fstab-Editor"
+msgstr ""
+
 msgid "further education"
 msgstr "další vzdělávání"
 
@@ -9515,6 +12542,9 @@ msgstr "hra/kvíz/soutěž"
 
 msgid "gardening"
 msgstr "zahradnictví"
+
+msgid "get the cards' server"
+msgstr ""
 
 #
 msgid "go to deep standby"
@@ -9535,6 +12565,9 @@ msgstr "Zelené"
 msgid "handicraft"
 msgstr "ruční práce"
 
+msgid "handled"
+msgstr ""
+
 #
 msgid "height"
 msgstr "výška"
@@ -9543,9 +12576,15 @@ msgstr "výška"
 msgid "help..."
 msgstr "nápověda..."
 
+msgid "hops:"
+msgstr ""
+
 #
 msgid "horizontal"
 msgstr "horizontální"
+
+msgid "increase uphop by 1"
+msgstr ""
 
 msgid "information/education/school program"
 msgstr "informace/vzdělání/školní program"
@@ -9562,6 +12601,30 @@ msgstr "inicializace modulů"
 msgid "insert mark here"
 msgstr "vložit značku"
 
+msgid "install *.ipk, *.tar.gz files"
+msgstr ""
+
+msgid "install ext2 kernel module"
+msgstr ""
+
+msgid "install ext3 kernel module"
+msgstr ""
+
+msgid "install filesystem utilities (e2fsprogs)"
+msgstr ""
+
+msgid "install filesystem utilities (e2fsprogs-tune2fs)"
+msgstr ""
+
+msgid "install linux utilities (fdisk)"
+msgstr ""
+
+msgid "install linux utilities (util-linux-blkid)"
+msgstr ""
+
+msgid "installs the sundtek driver and runs related shellscripts"
+msgstr ""
+
 msgid "invalid type"
 msgstr "neplatný typ"
 
@@ -9577,6 +12640,9 @@ msgid "jump forward to the next title"
 msgstr "přejít na další titul"
 
 msgid "jump to chapter by number"
+msgstr ""
+
+msgid "kernel modules"
 msgstr ""
 
 msgid "languages"
@@ -9636,6 +12702,9 @@ msgstr ""
 msgid "loopthrough to"
 msgstr "propojeno s"
 
+msgid "m2k"
+msgstr ""
+
 msgid "magazines/reports/documentary"
 msgstr "magazíny/reportáže/dokumentární"
 
@@ -9657,6 +12726,9 @@ msgstr "menu"
 msgid "mins"
 msgstr "minut"
 
+msgid "minute"
+msgstr ""
+
 #
 msgid "minutes"
 msgstr "minut"
@@ -9670,6 +12742,12 @@ msgstr "motoristické sporty"
 
 msgid "motoring"
 msgstr "motorismus"
+
+msgid "mount"
+msgstr ""
+
+msgid "mount point: "
+msgstr ""
 
 #
 msgid "move down to last entry"
@@ -9703,6 +12781,9 @@ msgstr "muzikál/opera"
 msgid "nature/animals/environment"
 msgstr "příroda/zvířata/životní prostředí"
 
+msgid "ne"
+msgstr ""
+
 #
 msgid "never"
 msgstr "nikdy"
@@ -9719,6 +12800,12 @@ msgstr "zprávy/publicistika (obecně)"
 msgid "news/weather report"
 msgstr "zprávy/zpravy o počasí"
 
+msgid "nne"
+msgstr ""
+
+msgid "nnw"
+msgstr ""
+
 #
 msgid "no"
 msgstr "ne"
@@ -9727,9 +12814,18 @@ msgstr "ne"
 msgid "no CAId selected"
 msgstr "nevybrán CAid "
 
+msgid "no CAM 1 active"
+msgstr ""
+
+msgid "no CAM 2 active"
+msgstr ""
+
 #
 msgid "no CI slots found"
 msgstr "žádný CI slot nenalezen"
+
+msgid "no cam"
+msgstr ""
 
 msgid "no channel list"
 msgstr "žádný seznam kanálů"
@@ -9737,6 +12833,9 @@ msgstr "žádný seznam kanálů"
 #
 msgid "no module found"
 msgstr "žádný modul nenalezen"
+
+msgid "no or unknown card inserted"
+msgstr ""
 
 msgid "no resource manager"
 msgstr ""
@@ -9763,13 +12862,22 @@ msgstr "nezamknuto"
 msgid "not supported"
 msgstr "nepodporováno"
 
+msgid "not tested"
+msgstr ""
+
 #
 msgid "not used"
 msgstr "nepoužito"
 
+msgid "not_tested"
+msgstr ""
+
 #
 msgid "nothing connected"
 msgstr "nic není připojeno"
+
+msgid "nw"
+msgstr ""
 
 #
 msgid "of a DUAL layer medium used."
@@ -9785,6 +12893,16 @@ msgstr "vypnuto"
 
 msgid "offset is"
 msgstr "posun je"
+
+msgid ""
+"ofgwrite not found !!\n"
+"Please make sure you have ofgwrite installed in /usr/bin/ofgwrite.\n"
+"\n"
+"Exit plugin."
+msgstr ""
+
+msgid "ofgwrite will stop enigma2 now to run the flash.\n"
+msgstr ""
 
 #
 msgid "on"
@@ -9806,9 +12924,18 @@ msgstr "pouze z hlubokého spánku"
 msgid "only from standby"
 msgstr "pouze ze standby"
 
+msgid "open Extraspanel..."
+msgstr ""
+
 #
 msgid "open nameserver configuration"
 msgstr "otevřít konfiguraci DNS"
+
+msgid "openeight"
+msgstr ""
+
+msgid "options mount file system (default): "
+msgstr ""
 
 msgid "original"
 msgstr "původní"
@@ -9820,8 +12947,20 @@ msgstr "původní jazyk"
 msgid "pass"
 msgstr "Průchod"
 
+msgid "pass num (0 - fsck off): "
+msgstr ""
+
 msgid "performing arts"
 msgstr "scénické umění"
+
+msgid "picons"
+msgstr ""
+
+msgid "picture"
+msgstr ""
+
+msgid "pid:"
+msgstr ""
 
 #
 msgid "play as picture in picture"
@@ -9838,11 +12977,23 @@ msgstr "stiskněte OK až budete připraveni"
 msgid "please wait, loading picture..."
 msgstr "Prosím čekejte... náčítám obrázek..."
 
+msgid "please wait..."
+msgstr ""
+
+msgid "pli"
+msgstr ""
+
 msgid "popular culture/traditional arts"
 msgstr "lidová kultura/tradiční umění"
 
 msgid "pre-school children's program"
 msgstr "program pro předškolní děti"
+
+msgid "provid:"
+msgstr ""
+
+msgid "provider:"
+msgstr ""
 
 msgid "purge deleted userbouquets"
 msgstr "odstranit smazané přehledy"
@@ -9956,6 +13107,9 @@ msgstr "rock/pop"
 msgid "romance"
 msgstr "romance"
 
+msgid "root and kernel"
+msgstr ""
+
 #
 msgid "save last directory on exit"
 msgstr "Uložit poslední adresář při ukončení"
@@ -9971,6 +13125,9 @@ msgstr "stav prohledávání"
 msgid "science fiction/fantasy/horror"
 msgstr "scifi/fantastický/horor"
 
+msgid "se"
+msgstr ""
+
 #
 msgid "second cable of motorized LNB"
 msgstr "druhý kabel z natáčeného LNB"
@@ -9978,6 +13135,9 @@ msgstr "druhý kabel z natáčeného LNB"
 #
 msgid "seconds"
 msgstr "sekund"
+
+msgid "security"
+msgstr ""
 
 #
 msgid "select"
@@ -9991,18 +13151,45 @@ msgstr "výběr CAid's"
 msgid "select menu entry"
 msgstr "zvolit položku z menu"
 
+msgid "select your Sundtek USB-Tuner ..."
+msgstr ""
+
+msgid "select your favourite cam"
+msgstr ""
+
+msgid "select:"
+msgstr ""
+
 msgid "serious music/classic music"
 msgstr "vážná hudba/klasická muzika"
 
 msgid "serious/classical/religious/historical movie/drama"
 msgstr "závažný/klasický/náboženský/historický film/drama"
 
+msgid "service is in bouquet parental protection"
+msgstr ""
+
 msgid "set as startup service"
 msgstr "nastavit jako program po spuštění"
+
+msgid "settings"
+msgstr ""
+
+msgid "sfdisk -l"
+msgstr ""
+
+msgid "share:"
+msgstr ""
 
 #
 msgid "show DVD main menu"
 msgstr "zobrazit DVD hlavní menu"
+
+msgid "show all Packages"
+msgstr ""
+
+msgid "show all cards"
+msgstr ""
 
 #
 msgid "show all tags"
@@ -10011,6 +13198,36 @@ msgstr "zobrazit všechny tagy"
 #
 msgid "show alternatives"
 msgstr "zobrazit alternativy"
+
+msgid "show cards with uphop 0"
+msgstr ""
+
+msgid "show cards with uphop 1"
+msgstr ""
+
+msgid "show cards with uphop 2"
+msgstr ""
+
+msgid "show cards with uphop 3"
+msgstr ""
+
+msgid "show cards with uphop 4"
+msgstr ""
+
+msgid "show cards with uphop 5"
+msgstr ""
+
+msgid "show cards with uphop 6"
+msgstr ""
+
+msgid "show cards with uphop 7"
+msgstr ""
+
+msgid "show cards with uphop 8"
+msgstr ""
+
+msgid "show cards with uphop 9"
+msgstr ""
 
 #
 msgid "show event details"
@@ -10045,6 +13262,9 @@ msgstr "vypnout"
 msgid "simple"
 msgstr "jednoduchý"
 
+msgid "skins"
+msgstr ""
+
 #
 msgid "skip backward"
 msgstr "přeskočit dozadu"
@@ -10052,6 +13272,9 @@ msgstr "přeskočit dozadu"
 #
 msgid "skip forward"
 msgstr "přeskočit dopředu"
+
+msgid "slow"
+msgstr ""
 
 msgid "soap/melodram/folkloric"
 msgstr "soap/melodrama/folklórní"
@@ -10061,6 +13284,9 @@ msgstr "společensko politické problémy/ekonomie (obecně)"
 
 msgid "social/spiritual science"
 msgstr "sociální/duchovní vědy"
+
+msgid "softcams"
+msgstr ""
 
 #
 msgid "sorting of playlists"
@@ -10077,6 +13303,12 @@ msgstr "sporty (obecně)"
 
 msgid "sports magazine"
 msgstr "sportovní magazín"
+
+msgid "sse"
+msgstr ""
+
+msgid "ssw"
+msgstr ""
 
 #
 msgid "standard"
@@ -10100,6 +13332,15 @@ msgstr "stereo"
 msgid "stop using as startup service"
 msgstr "zrušit nastavení po spuštění"
 
+msgid "successful"
+msgstr ""
+
+msgid "sundtek control center plugin"
+msgstr ""
+
+msgid "sw"
+msgstr ""
+
 #
 msgid "switch to bookmarks"
 msgstr "přepnout do záložek"
@@ -10119,6 +13360,12 @@ msgstr "přepnout na další zvukovou stopu"
 #
 msgid "switch to the next subtitle language"
 msgstr "přepnout na další jazyk ve skrytých titulcích"
+
+msgid "system:"
+msgstr ""
+
+msgid "systemplugins"
+msgstr ""
 
 msgid "talk show"
 msgstr "talk show"
@@ -10147,6 +13394,9 @@ msgstr "toto nahrávání"
 msgid "this service is protected by a parental control pin"
 msgstr "tento programl je chráněný rodičovským zámkem"
 
+msgid "this will take between 2 and 9 minutes\n"
+msgstr ""
+
 #
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "přepnout informace mezi časem, kapitolou, audiostopou, titulky"
@@ -10162,6 +13412,21 @@ msgstr "turistika/cestování"
 msgid "true"
 msgstr "ano"
 
+msgid "uShare"
+msgstr ""
+
+msgid "uShare Log"
+msgstr ""
+
+msgid "uShare Name"
+msgstr ""
+
+msgid "uShare Port"
+msgstr ""
+
+msgid "uShare Setup"
+msgstr ""
+
 msgid "unavailable"
 msgstr "nedostupný"
 
@@ -10171,6 +13436,9 @@ msgstr "nepotvrzeno"
 
 msgid "undefined"
 msgstr "nedefinováno"
+
+msgid "uninstall *.ipk files"
+msgstr ""
 
 #
 msgid "unknown"
@@ -10183,6 +13451,9 @@ msgstr "neznámý program"
 msgid "unpublished"
 msgstr "nepublikováno"
 
+msgid "untestable"
+msgstr ""
+
 #
 msgid "until standby/restart"
 msgstr "do standby/restartu"
@@ -10191,12 +13462,30 @@ msgstr "do standby/restartu"
 msgid "user defined"
 msgstr "uživatelské"
 
+msgid "user feed url"
+msgstr ""
+
+msgid "using:"
+msgstr ""
+
 msgid "variety show"
 msgstr "varieté"
 
 #
 msgid "vertical"
 msgstr "vertikální"
+
+msgid "via Network"
+msgstr ""
+
+msgid "via USB"
+msgstr ""
+
+msgid "view extensions..."
+msgstr ""
+
+msgid "vix"
+msgstr ""
 
 #
 msgid "wait for ci..."
@@ -10212,6 +13501,9 @@ msgstr "čekání"
 
 msgid "water sport"
 msgstr "vodní sporty"
+
+msgid "weblinks"
+msgstr ""
 
 #
 msgid "weekly"
@@ -10234,6 +13526,9 @@ msgstr "bílá"
 msgid "width"
 msgstr "šířka"
 
+msgid "will take about 3-12 minutes for this system\n"
+msgstr ""
+
 msgid "winter sport"
 msgstr "zimní sporty"
 
@@ -10247,17 +13542,26 @@ msgstr[0] "s %d chybou"
 msgstr[1] "se %d chybami"
 msgstr[2] "s %d chybami"
 
+msgid "with errors"
+msgstr ""
+
 msgid "with text"
 msgstr "s textem"
 
 msgid "with tuner name"
 msgstr "s názvem tuneru"
 
+msgid "with_errors"
+msgstr ""
+
+msgid "wnw"
+msgstr ""
+
 #
 msgid "working"
 msgstr "pracuji"
 
-msgid "xp1000"
+msgid "wsw"
 msgstr ""
 
 #
@@ -10272,6 +13576,10 @@ msgstr "ano"
 msgid "yes (keep feeds)"
 msgstr "ano (uchovat zdroje)"
 
+#, python-format
+msgid "your %s %s might be unusable now. Please consult the manual for further assistance before rebooting your %s %s."
+msgstr ""
+
 #
 msgid "zap"
 msgstr "přepnout"
@@ -10283,5 +13591,422 @@ msgstr "přepnout a nahrát"
 msgid "zapped"
 msgstr "přepnutý"
 
-msgid "®"
-msgstr ""
+#~ msgid ""
+#~ "\n"
+#~ "Restore your receiver with a new firmware."
+#~ msgstr ""
+#~ "\n"
+#~ "Obnova přijímače s novým firmware."
+
+#~ msgid "%d core"
+#~ msgid_plural "%d cores"
+#~ msgstr[0] "%d jádro"
+#~ msgstr[1] "%d jádra"
+#~ msgstr[2] "%d jader"
+
+#
+#~ msgid ""
+#~ "Are you sure you want to restore the backup?\n"
+#~ "Your receiver will restart after the backup has been restored!"
+#~ msgstr ""
+#~ "Opravdu chcete obnovit zálohu?\n"
+#~ "Po obnově bude přijímač restartován!"
+
+#~ msgid "CPU: "
+#~ msgstr "CPU:"
+
+#~ msgid "Changelog"
+#~ msgstr "Protokol změn"
+
+#~ msgid ""
+#~ "Checking tuner %d\n"
+#~ "DiSEqC port %s for %s"
+#~ msgstr ""
+#~ "Kontrola tuneru %d\n"
+#~ "DiSEqC port %s pro %s"
+
+#~ msgid "Configure how the fan should operate"
+#~ msgstr "Nastavuje jak bude pracovat ventilátor"
+
+#~ msgid "Configure the brightness level of the front panel display during standby."
+#~ msgstr "Nastavuje úroveň jasu předního displeje v pohotovostním režimu."
+
+#~ msgid "Configure the brightness level of the front panel display."
+#~ msgstr "Nastavuje úroveň jasu předního displeje."
+
+#
+#~ msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
+#~ msgstr "Nastavte dobu v hodinách pro přechod přijímače do standby, jestliže po tuto dobu nebyl ovládán."
+
+#~ msgid "Configure the speed of the fan"
+#~ msgstr "Nastavit rychlost ventilátoru"
+
+#
+#~ msgid "Conflicting timer"
+#~ msgstr "Konfliktní časovač"
+
+#~ msgid "Could not connect to receiver .NFI image feed server:"
+#~ msgstr "Nelze se připojit ke zdrojovému serveru s .NFI image"
+
+#
+#~ msgid "Current version:"
+#~ msgstr "Aktuální verze:"
+
+#~ msgid "Currently installed image"
+#~ msgstr "Nainstalované image"
+
+#
+#~ msgid "DMM advanced"
+#~ msgstr "rozšířené"
+
+#~ msgid "DMM normal"
+#~ msgstr "normální"
+
+#~ msgid "DVB drivers: "
+#~ msgstr "DVB ovladače:"
+
+#
+#~ msgid "Descramble http streams"
+#~ msgstr "Dekódovat http streamy"
+
+#
+#~ msgid ""
+#~ "Do you really want to download\n"
+#~ "the plugin \"%s\"?"
+#~ msgstr ""
+#~ "Chcete opravdu stáhnout\n"
+#~ "plugin \"%s\"?"
+
+#
+#~ msgid ""
+#~ "Do you really want to remove\n"
+#~ "the plugin \"%s\"?"
+#~ msgstr ""
+#~ "Chcete opravdu odstranit\n"
+#~ "plugin \"%s\"?"
+
+#~ msgid "Do you want to download the image to %s ?"
+#~ msgstr "Chcete stáhnout image do %s?"
+
+#
+#~ msgid "Download"
+#~ msgstr "Stáhnout"
+
+#~ msgid "Download %s from server"
+#~ msgstr "Stahnout %s ze serveru"
+
+#~ msgid "Download .NFI-files for USB-flasher"
+#~ msgstr "Stáhnout .NFI-soubory pro USB-Flasher"
+
+#
+#~ msgid "Downloadable new plugins"
+#~ msgstr "Instalovat nové pluginy"
+
+#~ msgid "Edit the nameserver configuration of your receiver.\n"
+#~ msgstr "Upravuje nastavení DNS.\n"
+
+#~ msgid "Edit the network configuration of your receiver.\n"
+#~ msgstr "Upravuje nastavení sítě.\n"
+
+#~ msgid "Fan operation"
+#~ msgstr "Režim ventilátoru"
+
+#~ msgid "Fan speed"
+#~ msgstr "Rychlost ventilátoru"
+
+#
+#~ msgid "Flashing failed"
+#~ msgstr "Nahrání selhalo"
+
+#~ msgid "Get latest experimental image"
+#~ msgstr "Získat poslední experimentální image"
+
+#~ msgid "Get latest release image"
+#~ msgstr "Získat poslední uvolněné image"
+
+#~ msgid "Hardware: "
+#~ msgstr "Hardware: "
+
+#
+#~ msgid "Init"
+#~ msgstr "Init"
+
+#
+#~ msgid "Install a new image with a USB stick"
+#~ msgstr "Instalovat nové image pomocí USB zařízení"
+
+#
+#~ msgid "Install a new image with your web browser"
+#~ msgstr "Instalovat nové image pomocí web prohlížeče"
+
+#~ msgid "Installed: "
+#~ msgstr "Instalováno:"
+
+#~ msgid "Is this setting ok?"
+#~ msgstr "Použít toto nastavení?"
+
+#
+#~ msgid "Log results to harddisk"
+#~ msgstr "Protokol výsledků na pevný disk"
+
+#
+#~ msgid "NFI image flashing"
+#~ msgstr "Nahrát NFI image"
+
+#
+#~ msgid "NFI image flashing completed. Press Yellow to Reboot!"
+#~ msgstr "Nahrátí NFI image bylo dokončeno. Zmáčkněte Žluté pro restart přijímače!"
+
+#
+#~ msgid "New version:"
+#~ msgstr "Nová verze:"
+
+#
+#~ msgid "No backup needed"
+#~ msgstr "Záloha není potřeba"
+
+#
+#~ msgid "No details for this image file"
+#~ msgstr "Žádné detaily o tomto image souboru"
+
+#~ msgid "No new plugins found"
+#~ msgstr "Zádný nový plugin nenalezen."
+
+#
+#~ msgid "No, do nothing."
+#~ msgstr "Ne, nic nedělej."
+
+#~ msgid "No, just start my receiver"
+#~ msgstr "Ne, pouze spusť můj přijímač"
+
+#
+#~ msgid "OK, guide me through the upgrade process"
+#~ msgstr "OK, provést aktualizačním procesem."
+
+#
+#~ msgid "Please check your network settings!"
+#~ msgstr "Zkontrolujte Vaše nastavení sítě!"
+
+#~ msgid "Please select an NFI file and press green key to flash!"
+#~ msgstr "Zvolte NFI soubor a stiskněte zelené tlačítko pro naprogramování!"
+
+#~ msgid "Polarisation:"
+#~ msgstr "Polarizace:"
+
+#~ msgid "Prepare another USB stick for image flashing"
+#~ msgstr "Připravte další USB zařízení pro nahrání image"
+
+#
+#~ msgid "Reboot"
+#~ msgstr "Restartovat"
+
+#
+#~ msgid "Rec"
+#~ msgstr "Rec"
+
+#
+#~ msgid "Restore is running..."
+#~ msgstr "Probíhá obnova..."
+
+#~ msgid "Select an image to be downloaded"
+#~ msgstr "Vyberte image ke stažení"
+
+#~ msgid "Select desired image from feed list"
+#~ msgstr "Vyberte požadované image ze seznamu"
+
+#
+#~ msgid "Shall the USB stick wizard proceed and program the image file %s into flash memory?"
+#~ msgstr "Má průvodce pro USB zařízení pokračovat a naprogramovat image soubor %s do flash paměti?"
+
+#
+#~ msgid "Show extensions..."
+#~ msgstr "Zobrazit rozšíření..."
+
+#
+#~ msgid "Show picons in channel list"
+#~ msgstr "Zobrazovat pikony v seznamu kanálů"
+
+#~ msgid "Silently zap between bouquets"
+#~ msgstr "Skrytě přepínat mezi přehledy"
+
+#~ msgid "SoftCam / CI"
+#~ msgstr "SoftCam / CI"
+
+#
+#~ msgid "Software restore"
+#~ msgstr "Obnovit software"
+
+#
+#~ msgid "Sorry, no backups found!"
+#~ msgstr "Žádné zálohy nenalezeny!"
+
+#~ msgid "Test the network configuration of your receiver.\n"
+#~ msgstr "Otestuje síťové nastavení přijímače.\n"
+
+#~ msgid ""
+#~ "The USB stick was prepared to be bootable.\n"
+#~ "Now you can download an NFI image file!"
+#~ msgstr ""
+#~ "USB zařízení bylo připraveno jako bootovací.\n"
+#~ "Nyní můžete nahrát soubor NFI s image! "
+
+#
+#~ msgid "The backup failed. Please choose a different backup location."
+#~ msgstr "Zálohování selhalo. Zvolte jiné umístění zálohy."
+
+#
+#~ msgid ""
+#~ "The following device was found:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Do you want to write the USB flasher to this stick?"
+#~ msgstr ""
+#~ "Bylo nalezeno zařízení:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Přejete si zapsat USB flasher do tohoto zařízení?"
+
+#~ msgid "The md5sum validation failed, the file may be corrupted!"
+#~ msgstr "Ověření md5sum selhalo, soubor může být poškozen!"
+
+#~ msgid "The results have been written to %s."
+#~ msgstr "Výsledky byly zapsány do %s."
+
+#~ msgid "The wizard can backup your current settings. Do you want to do a backup now?"
+#~ msgstr "Průvodce může uložit Vaše současná nastavení. Přejete si nyní zazálohovat?"
+
+#~ msgid "The wizard found a configuration backup. Do you want to restore your old settings from %s?"
+#~ msgstr "Průvodce nalezl zálohu konfigurace. Přejete si obnovit Vaše stará nastavení z %s?"
+
+#~ msgid ""
+#~ "This info is for developers only.\n"
+#~ "For a normal users it is not important.\n"
+#~ "Don't panic, please, when here will be displayed any suspicious informations!"
+#~ msgstr ""
+#~ "Tyto informace jsou určeny vývojářům.\n"
+#~ "Pro běžné uživatele nejsou důležité.\n"
+#~ "Nepanikařte, jestliže uvidíte nějaké podezřelé údaje!"
+
+#~ msgid ""
+#~ "This plugin creates a USB stick which can be used to update the firmware of your receiver without the need for a network or WLAN connection.\n"
+#~ "First, a USB stick needs to be prepared so that it becomes bootable.\n"
+#~ "In the next step, an NFI image file can be downloaded from the update server and saved on the USB stick.\n"
+#~ "If you already have a prepared bootable USB stick, please insert it now. Otherwise plug in a USB stick with a minimum size of 64 MB!"
+#~ msgstr ""
+#~ "Tento plugin vytvoří USB zařízení, které může být použito k aktualizaci firmware Vašeho přijímače bez použití sítě nebo WLAN připojení.\n"
+#~ "Nejprve je potřeba USB zařízení připravit jako bootovací.\n"
+#~ "V dalším kroku může být stažen NFI soubor ze serveru s aktualizacemi a uložen na USB zařízení.\n"
+#~ "Jestliže máte již připravené bootovací USB zařízení, připojte ho nyní. V opačném případě připojte USB zařízení o minimální velikosti 64 MB!"
+
+#
+#~ msgid ""
+#~ "This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\n"
+#~ "If you get a \"disabled\" message:\n"
+#~ " - then your LAN adapter is configured for manual IP setup\n"
+#~ "- verify thay you have entered correct IP informations in the adapter setup dialog.\n"
+#~ "If you get an \"enabeld\" message:\n"
+#~ "-verify that you have a configured and working DHCP server in your network."
+#~ msgstr ""
+#~ "Tento test ověří, zda je nastavena síťová karta pro automatickou konfiguraci pomocí DHCP.\n"
+#~ "Pokud obdržíte zprávu \"zakázáno\":\n"
+#~ "- pak je síťová karta nastavena na ruční nastavení síťové adresy (IP)\n"
+#~ "- ověřte, že jste zadali správnou IP adresu\n"
+#~ "Pokud obdržíte zprávu \"povoleno\":\n"
+#~ "- ověřte, že máte správně nastavený a fungující DHCP server ve Vaší síti."
+
+#
+#~ msgid "Timer editor"
+#~ msgstr "Úprava časovače"
+
+#~ msgid ""
+#~ "To update your receiver firmware, please follow these steps:\n"
+#~ "1) Turn off your box with the rear power switch and make sure the bootable USB stick is plugged in.\n"
+#~ "2) Turn mains back on and hold the DOWN button on the front panel pressed for 10 seconds.\n"
+#~ "3) Wait for bootup and follow instructions of the wizard."
+#~ msgstr ""
+#~ "Pro aktualizaci firmware Vašeho přijímače proveďte následující kroky:\n"
+#~ "1) vypněte přijímač hlavním vypínačem vzadu na přístroji a ujistěte se, že bootovací USB zařízení je připojeno.\n"
+#~ "2) zapněte hlavní vypínač a držte 10s stisknuté tlačítko DOWN na předním panelu.\n"
+#~ "3) počkejte, až zařízení nabootuje a následujte instrukce průvodce."
+
+#
+#~ msgid "USB stick wizard"
+#~ msgstr "Průvodce pro USB zařízení"
+
+#
+#~ msgid "Use the network wizard to configure your network\n"
+#~ msgstr "Použijte průvodce pro nakonfigurování vaší sítě\n"
+
+#~ msgid "Welcome to the image upgrade wizard. The wizard will assist you in upgrading the firmware of your receiver by providing a backup facility for your current settings and a short explanation of how to upgrade your firmware."
+#~ msgstr "Vítejte v průvodci aktualizace image. Průvodce pomůže při aktualizaci image přijímače, provedení zálohy nastavení a krátkého vysvětlení, jak zaktualizovat firmware."
+
+#~ msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
+#~ msgstr "Při povolení budou http streamy dekódovány na straně serveru. Vzdálený klientský přijímač nemusí pak provádět dekódování."
+
+#
+#~ msgid "Where do you want to backup your settings?"
+#~ msgstr "Kam chcete zazálohovat Vaše nastavení?"
+
+#~ msgid "Would you like to install a softcam?"
+#~ msgstr "Chcete nainstalovat softcam?"
+
+#
+#~ msgid "Yes, backup my settings!"
+#~ msgstr "Ano, zazálohuj moje nastavení!"
+
+#
+#~ msgid "Yes, perform a shutdown now."
+#~ msgstr "Ano, vypnout systém."
+
+#
+#~ msgid "Yes, restore the settings now"
+#~ msgstr "Ano, nyní obnovit nastavení"
+
+#
+#~ msgid "You have chosen to backup your settings. Please press OK to start the backup now."
+#~ msgstr "Zvolili jste zálohování Vašich nastavení. Prosím, stiskněte OK pro spuštění zálohování."
+
+#
+#~ msgid "You have chosen to create a new .NFI flasher bootable USB stick. This will repartition the USB stick and therefore all data on it will be erased."
+#~ msgstr "Zvolili jste vytvoření nového bootovacího USB zařízení. To způsobí, že na USB zařízení budou všechna předchozí data vymazána. "
+
+#
+#~ msgid "You have chosen to restore your settings. Enigma2 will restart after restore. Please press OK to start the restore now."
+#~ msgstr "Zvolili jste obnovení Vašich nastavení. Enigma2 se po obnově zrestartuje. Prosím, stiskněte OK pro spuštění obnovy."
+
+#~ msgid ""
+#~ "You need a PC connected to your receiver. If you need further instructions, please visit the website http://www.dm7025.de.\n"
+#~ "Your receiver will now be halted. After you have performed the update instructions from the website, your new firmware will ask you to restore your settings."
+#~ msgstr ""
+#~ "Potřebujete PC připojené k Vašemu přijímači. Pokud potřebujete další informace, navštivte stránku http://www.dm7025.de.\n"
+#~ "Váš přijímač bude nyní zastaven. Poté, co provedete aktualizaci pomocí instrukcí popsaných na zmíněné stránce, se Vás přijímač zeptá na obnovu nastavení."
+
+#
+#~ msgid "Your backup succeeded. We will now continue to explain the further upgrade process."
+#~ msgstr "Vaše záloha byla úspěšně provedena . Budeme pokračovat vysvětlením dalšího postupu aktualizace."
+
+#
+#~ msgid ""
+#~ "Your frontprocessor firmware must be upgraded.\n"
+#~ "Press OK to start upgrade."
+#~ msgstr ""
+#~ "Firmware Vašeho frontprocesoru musí být aktualizován.\n"
+#~ "Stiskněte OK pro aktualizaci."
+
+#~ msgid "Your receiver is shutting down. Please stand by..."
+#~ msgstr "Váš přijímač se vypíná. Prosím, počkejte..."
+
+#~ msgid "Your receiver will got to standby due to inactivity."
+#~ msgstr "Přijímač přešel do standby z důvodu neaktivity."
+
+#~ msgid "Your receiver will restart after pressing OK on your remote control."
+#~ msgstr "Váš přijímač bude restartován po stisknutí OK na dálkovém ovladači."
+
+#
+#~ msgid "continue"
+#~ msgstr "pokračovat"
+
+#~ msgid "currently installed image: %s"
+#~ msgstr "instalované image: %s"
