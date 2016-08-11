@@ -7,6 +7,12 @@ if ET8500
 dist_install_DATA = skin_display.xml
 SUBDIRS = LCDAnalogClock_1_Standby LCDAnalogClock_2_Standby LCDWeather_Standby LCDAnalogClock_3_Weather_Infobar
 endif
+if SF208
+SUBDIRS += display220
+endif
+if SF228
+SUBDIRS += display220
+endif
 if ET10000
 dist_install_DATA = skin_display.xml
 endif
