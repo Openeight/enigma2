@@ -54,8 +54,7 @@ AC_DEFINE_UNQUOTED(BOXTYPE,"$BOXTYPE",[box type])
 
 AM_CONDITIONAL(ET8500, test "$BOXTYPE" == et8500)
 AM_CONDITIONAL(ET10000, test "$BOXTYPE" == et10000)
-AM_CONDITIONAL(SF208, test "$BOXTYPE" == sf208)
-AM_CONDITIONAL(SF228, test "$BOXTYPE" == sf228)
+AM_CONDITIONAL(SF208_228, test "$BOXTYPE" == 7210s)
 
 AM_CONDITIONAL(DREAMBOX, test `echo "$BOXTYPE" | cut -b 1-2` == "dm")
 AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm500hd)
@@ -238,6 +237,7 @@ data/display/LCDAnalogClock_1_Standby/Makefile
 data/display/LCDAnalogClock_2_Standby/Makefile
 data/display/LCDWeather_Standby/Makefile
 data/display/LCDAnalogClock_3_Weather_Infobar/Makefile
+data/display/display220/Makefile
 data/skin_default/Makefile
 data/skin_default/menu/Makefile
 data/skin_default/icons/Makefile
