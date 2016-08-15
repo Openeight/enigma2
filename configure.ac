@@ -54,7 +54,6 @@ AC_DEFINE_UNQUOTED(BOXTYPE,"$BOXTYPE",[box type])
 
 AM_CONDITIONAL(ET8500, test "$BOXTYPE" == et8500)
 AM_CONDITIONAL(ET10000, test "$BOXTYPE" == et10000)
-AM_CONDITIONAL(SF208_228, test "$BOXTYPE" == 7210s)
 
 AM_CONDITIONAL(DREAMBOX, test `echo "$BOXTYPE" | cut -b 1-2` == "dm")
 AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm500hd)
@@ -95,6 +94,11 @@ if test x"$withcolorlcd" != xno ; then
 	AC_DEFINE(HAVE_COLORLCD, 1,[Define when using a 96x64 color display device])
 fi
 AM_CONDITIONAL(HAVE_COLORLCD, test x"$withcolorlcd" != xno)
+
+if test "$BOXTYPE" == 7210s ; then
+	AC_DEFINE(HAVE_COLORLCD220, 1,[Define when using a 220 color display device])
+fi
+AM_CONDITIONAL(HAVE_COLORLCD220, test "$BOXTYPE" == 7210s)
 
 if test `echo "$BOXTYPE" | cut -b 1-2` == "vu"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])

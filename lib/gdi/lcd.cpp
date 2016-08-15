@@ -280,7 +280,21 @@ void eDBoxLCD::update()
 			write(lcdfd, raw, _stride * height);
 		}
 		else
+		{
+#ifdef HAVE_COLORLCD220
+			//gggrrrrrbbbbbggg bit order from memory
+			//gggbbbbbrrrrrggg bit order to LCD
+			unsigned char l_buffer[_stride * res.height()];
+			for (int offset = 0; offset < ((_stride * res.height())>>2); offset ++)
+			{
+				unsigned int src = ((unsigned int*)_buffer)[offset];
+				((unsigned int*)l_buffer)[offset] = src & 0xE007E007 | (src & 0x1F001F00) >>5 | (src & 0x00F800F8) << 5;
+			}
+			write(lcdfd, l_buffer, _stride * res.height());
+#else
 			write(lcdfd, _buffer, _stride * res.height());
+#endif
+		}
 	}
 	else /* lcd_type == 1 */
 	{
