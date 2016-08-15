@@ -184,7 +184,7 @@ def InitUsageConfig():
 		h = abs(i / 3600)
 		h = ngettext("%d hour", "%d hours", h) % h
 		choicelist.append((str(i), _("Standby in ") + h))
-	config.usage.inactivity_timer = ConfigSelection(default = "10800", choices = choicelist)
+	config.usage.inactivity_timer = ConfigSelection(default = "0", choices = choicelist)
 	config.usage.inactivity_timer_deep_standby = ConfigSelection(default = "deep", choices = [ ("deep", _("Deep standby")), ("standby",  _("Standby"))] )
 	config.usage.inactivity_timer_blocktime = ConfigYesNo(default = False)
 	config.usage.inactivity_timer_blocktime_begin = ConfigClock(default = time.mktime((0, 0, 0, 18, 0, 0, 0, 0, 0)))
