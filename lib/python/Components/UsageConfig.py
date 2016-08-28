@@ -1,5 +1,5 @@
 from Components.Harddisk import harddiskmanager
-from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock, ConfigEnableDisable, ConfigSubDict, ConfigNothing
+from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock, ConfigEnableDisable, ConfigSubDict, ConfigNothing, ConfigDictionarySet
 from Tools.Directories import resolveFilename, SCOPE_HDD, defaultRecordingLocation
 from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent, eEPGCache
 from Components.NimManager import nimmanager
@@ -11,8 +11,6 @@ import time
 
 def InitUsageConfig():
 	config.usage = ConfigSubsection()
-	#config.usage.mainmenu_mode = ConfigSelection(default = "horz", choices = [("horz", _("Horizontal")), ("vert", _("Vertical"))]) 
-	config.usage.mainmenu_mode = ConfigSelection(default = "horzanim", choices = [("horzanim", _("Horizontal-animated")), ("horzicon", _("Horizontal-icons")), ("vert", _("Vertical-menu"))])
 	config.usage.showdish = ConfigYesNo(default = True)
 	config.misc.showrotorposition = ConfigSelection(default = "no", choices = [("no", _("no")), ("yes", _("yes")), ("withtext", _("with text")), ("tunername", _("with tuner name"))])
 	config.usage.multibouquet = ConfigYesNo(default = True)
@@ -74,6 +72,15 @@ def InitUsageConfig():
 	config.usage.volume_instead_of_channelselection = ConfigYesNo(default = False)
 	config.usage.channelselection_preview = ConfigYesNo(default = False)
 	config.usage.show_spinner = ConfigYesNo(default = True)
+	config.usage.menu_sort_weight = ConfigDictionarySet(default = { "mainmenu" : {"submenu" : {} }})
+	config.usage.menu_sort_mode = ConfigSelection(default = "default", choices = [
+		("a_z", _("alphabetical")),
+		("default", _("Default")),
+		("user", _("user defined")),])
+	config.usage.menu_path = ConfigSelection(default = "off", choices = [
+		("off", _("Disabled")),
+		("small", _("Small")),
+		("large", _("Large")),])
 	config.usage.enable_tt_caching = ConfigYesNo(default = True)
 	choicelist = []
 	for i in (10, 30):
@@ -182,6 +189,20 @@ def InitUsageConfig():
 	config.usage.inactivity_timer_blocktime_extra = ConfigYesNo(default = False)
 	config.usage.inactivity_timer_blocktime_extra_begin = ConfigClock(default = time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
 	config.usage.inactivity_timer_blocktime_extra_end = ConfigClock(default = time.mktime((0, 0, 0, 9, 0, 0, 0, 0, 0)))
+	config.usage.inactivity_timer_blocktime_by_weekdays = ConfigYesNo(default = False)
+	config.usage.inactivity_timer_blocktime_day = ConfigSubDict()
+	config.usage.inactivity_timer_blocktime_begin_day = ConfigSubDict()
+	config.usage.inactivity_timer_blocktime_end_day = ConfigSubDict()
+	config.usage.inactivity_timer_blocktime_extra_day = ConfigSubDict()
+	config.usage.inactivity_timer_blocktime_extra_begin_day = ConfigSubDict()
+	config.usage.inactivity_timer_blocktime_extra_end_day = ConfigSubDict()
+	for i in range(7):
+		config.usage.inactivity_timer_blocktime_day[i] = ConfigYesNo(default = False)
+		config.usage.inactivity_timer_blocktime_begin_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 18, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_end_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 23, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_extra_day[i] = ConfigYesNo(default = False)
+		config.usage.inactivity_timer_blocktime_extra_begin_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_extra_end_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 9, 0, 0, 0, 0, 0)))
 
 	choicelist = [("0", _("Disabled")),("event_standby", _("Standby after current event"))]
 	for i in range(900, 7201, 900):
@@ -466,6 +487,15 @@ def InitUsageConfig():
 			open(SystemInfo["HasBypassEdidChecking"], "w").write(configElement.value)
 		config.av.bypassEdidChecking = ConfigSelection(default = "00000000", choices = [ ("00000001", _("Yes")), ("00000000", _("No"))] )
 		config.av.bypassEdidChecking.addNotifier(setHasBypassEdidChecking)
+
+	if SystemInfo["HaveColorspace"]:
+		def setHaveColorspace(configElement):
+			open(SystemInfo["HaveColorspace"], "w").write(configElement.value)
+		if SystemInfo["HaveColorspaceSimple"]:
+			config.av.hdmicolorspace = ConfigSelection(default = "Edid(Auto)", choices={"Edid(Auto)": _("Auto"), "Hdmi_Rgb": _("RGB")})
+		else:
+			config.av.hdmicolorspace = ConfigSelection(default = "auto", choices={"auto": _("auto"), "rgb": _("rgb"), "420": _("420"), "422": _("422"), "444": _("444")})
+		config.av.hdmicolorspace.addNotifier(setHaveColorspace)
 
 	config.subtitles = ConfigSubsection()
 	config.subtitles.ttx_subtitle_colors = ConfigSelection(default = "1", choices = [

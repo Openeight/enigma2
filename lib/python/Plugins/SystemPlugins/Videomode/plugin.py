@@ -17,6 +17,7 @@ class VideoSetup(Screen, ConfigListScreen):
 		# for the skin: first try VideoSetup, then Setup, this allows individual skinning
 		self.skinName = ["VideoSetup", "Setup" ]
 		self.setup_title = _("A/V settings")
+		self.setTitle(self.setup_title)
 		self.hw = hw
 		self.onChangedEntry = [ ]
 
@@ -114,9 +115,10 @@ class VideoSetup(Screen, ConfigListScreen):
 
 		if not isinstance(config.av.scaler_sharpness, ConfigNothing):
 			self.list.append(getConfigListEntry(_("Scaler sharpness"), config.av.scaler_sharpness, _("Configure the sharpness of the video scaling.")))
-
 		if SystemInfo["HasBypassEdidChecking"]:
 			self.list.append(getConfigListEntry(_("Bypass HDMI EDID checking"), config.av.bypassEdidChecking, _("Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs.")))
+		if SystemInfo["HaveColorspace"]:
+			self.list.append(getConfigListEntry(_("HDMI Colorspace"), config.av.hdmicolorspace, _("This option allows you can config the Colorspace from Auto to RGB")))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)

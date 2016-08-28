@@ -105,9 +105,6 @@ class Setup(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, list, session = session, on_change = self.changedEntry)
 
 		self.changedEntry()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
 		self.setTitle(_(self.setup_title))
 
 	def addItems(self, list, parentNode):

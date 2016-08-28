@@ -95,14 +95,13 @@ class PluginBrowserSummary(Screen):
 class PluginBrowser(Screen, ProtectedScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _("Plugin Browser"))
+		self.setTitle(_("Plugin browser"))
 		ProtectedScreen.__init__(self)
 
 		self.firsttime = True
 
-		self["red"] = Label(_("Remove plugins"))
-		self["green"] = Label(_("Download plugins"))
-
+		self["key_red"] = self["red"] = Label(_("Remove plugins"))
+		self["key_green"] = self["green"] = Label(_("Download plugins"))
 		self.list = []
 		self["list"] = PluginList(self.list)
 		self["list"].list.sort()
@@ -315,8 +314,7 @@ class PluginDownloadBrowser(Screen):
 		self.container.appClosed.append(self.runFinished)
 		self.container.dataAvail.append(self.dataAvail)
 		self.onLayoutFinish.append(self.startRun)
-		self.onShown.append(self.setWindowTitle)
-
+		self.setTitle(self.type == self.DOWNLOAD and _("Downloadable new plugins") or _("Remove plugins"))
 		self.list = []
 		self["list"] = PluginList(self.list)
 		self.pluginlist = []
@@ -328,12 +326,7 @@ class PluginDownloadBrowser(Screen):
 		self.check_bootlogo = False
 		self.install_settings_name = ''
 		self.remove_settings_name = ''
-
-		if self.type == self.DOWNLOAD:
-			self["text"] = Label(_("Downloading plugin information. Please wait..."))
-		elif self.type == self.REMOVE:
-			self["text"] = Label(_("Getting plugin information. Please wait..."))
-
+		self["text"] = Label(self.type == self.DOWNLOAD and _("Downloading plugin information. Please wait...") or _("Getting plugin information. Please wait..."))
 		self.run = 0
 		self.remainingdata = ""
 		self["actions"] = ActionMap(["WizardActions"],

@@ -105,7 +105,7 @@ class InstallWizard(Screen, ConfigListScreen):
 			if config.misc.installwizard.hasnetwork.value:
 				self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (updating packages)'), IpkgComponent.CMD_UPDATE)
 		elif self.index == self.STATE_CHOISE_CHANNELLIST and self.enabled.value:
-			self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (downloading channel list)'), IpkgComponent.CMD_REMOVE, {'package': 'enigma2-plugin-settings-henksat-' + self.channellist_type.value})
+			self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (downloading channel list)'), IpkgComponent.CMD_REMOVE, {'package': 'enigma2-plugin-settings-hans-' + self.channellist_type.value})
 		elif self.index == self.STATE_CHOISE_SOFTCAM and self.enabled.value:
 			self.session.open(InstallWizardIpkgUpdater, self.index, _('Please wait (downloading softcam)'), IpkgComponent.CMD_INSTALL, {'package': 'enigma2-plugin-softcams-' + self.softcam_type.value})
 		return

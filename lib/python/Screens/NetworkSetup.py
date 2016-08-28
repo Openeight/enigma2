@@ -327,7 +327,7 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 	def __init__(self, session, networkinfo, essid=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		Screen.setTitle(self, _("Adapter settings"))
+		self.setTitle(_("Network setup"))
 		self.session = session
 		if isinstance(networkinfo, (list, tuple)):
 			self.iface = networkinfo[0]
@@ -394,7 +394,6 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 		self["HelpWindow"].hide()
 
 	def layoutFinished(self):
-		self.setTitle(_("Network setup"))
 		self["DNS1"].setText(self.primaryDNS.getText())
 		self["DNS2"].setText(self.secondaryDNS.getText())
 		if self.ipConfigEntry.getText() is not None:
@@ -689,7 +688,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 	def __init__(self, session,iface):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		Screen.setTitle(self, _("Network Setup"))
+		self.setTitle(_("Network configuration"))
 		self.session = session
 		self.iface = iface
 		self.restartLanRef = None
@@ -831,7 +830,6 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		return PluginBrowserSummary
 
 	def layoutFinished(self):
-		self.setTitle(_("Network configuration"))
 		idx = 0
 		self["menulist"].moveToIndex(idx)
 		self.loadDescription()
@@ -1027,6 +1025,7 @@ class NetworkAdapterTest(Screen):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Network Test"))
 		self.iface = iface
+		self.setTitle(_("Network test: ") + iNetwork.getFriendlyAdapterName(self.iface))
 		self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
 		self.setLabels()
 		self.onClose.append(self.cleanup)
@@ -1293,7 +1292,6 @@ class NetworkAdapterTest(Screen):
 		self.nextStepTimer.stop()
 
 	def layoutFinished(self):
-		self.setTitle(_("Network test: ") + iNetwork.getFriendlyAdapterName(self.iface) )
 		self["shortcutsyellow"].setEnabled(False)
 		self["AdapterInfo_OK"].hide()
 		self["NetworkInfo_Check"].hide()
