@@ -73,7 +73,7 @@ def InitUsageConfig():
 	config.usage.channelselection_preview = ConfigYesNo(default = False)
 	config.usage.show_spinner = ConfigYesNo(default = True)
 	config.usage.menu_sort_weight = ConfigDictionarySet(default = { "mainmenu" : {"submenu" : {} }})
-	config.usage.menu_sort_mode = ConfigSelection(default = "default", choices = [
+	config.usage.menu_sort_mode = ConfigSelection(default = "user", choices = [
 		("a_z", _("alphabetical")),
 		("default", _("Default")),
 		("user", _("user defined")),])
