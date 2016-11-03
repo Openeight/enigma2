@@ -181,10 +181,10 @@ class ModelPic(Screen):
                         model = "sf108.jpg"
                 elif getBoxType() in ('sf3038'):
                         model = "sf3038.jpg"
-                elif getBoxType() in ('et6x00', 'et6000'):
-                        model = "et6x00.jpg"
-                elif getBoxType() in ('et6500'):
-                        model = "et6500.jpg"
+                elif getBoxType() in ('sf128'):
+                        model = "sf128.jpg"
+                elif getBoxType() in ('sf138'):
+                        model = "sf138.jpg"
                 elif getBoxType() in ('et7000'):
                         model = "et7000.jpg"
                 elif getBoxType() in ('et7500'):
