@@ -30,12 +30,11 @@ class About(Screen):
 
 		AboutText = _("Model: %s %s") % (getMachineBrand(), getMachineName()) + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
-		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"                             
-                if path.exists('/proc/stb/info/chipset'):
+		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
+		if path.exists('/proc/stb/info/chipset'):
 			AboutText += _("Chipset: %s") % about.getChipSetString() + "\n"
-                AboutText += _("CPU: %s") % about.getCPUString() + "\n"
-		AboutText += _("Cores: %s") % about.getCpuCoresString() + "\n"
-                AboutText += _("Version: %s") % getImageVersion() + "\n"
+		AboutText += _("CPU: %s") % about.getCPUString() + "\n"
+		AboutText += _("Version: %s") % getImageVersion() + "\n"
 		AboutText += _("Build: %s") % getImageBuild() + "\n"
 		if path.exists('/proc/stb/info/release') and getBoxType() in ('et7000', 'et7500', 'et8500'):
 			realdriverdate = open("/proc/stb/info/release", 'r')
@@ -50,7 +49,7 @@ class About(Screen):
 			day = string[6:8]
 			driversdate = '-'.join((year, month, day))
 			AboutText += _("Drivers: %s") % driversdate + "\n"
-                EnigmaVersion = "Enigma: " + about.getEnigmaVersionString()
+		EnigmaVersion = "Enigma: " + about.getEnigmaVersionString()
 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
 		AboutText += EnigmaVersion + "\n"
 		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
@@ -79,19 +78,19 @@ class About(Screen):
 		AboutText += _("Skin Name: %s") % config.skin.primary_skin.value[0:-9] + _("  (%s x %s)") % (skinWidth, skinHeight) + "\n"
 
 		if path.exists('/etc/enigma2/EtRcType'):
-		        rfp = open('/etc/enigma2/EtRcType', "r")
-		        Remote = rfp.read()
+			rfp = open('/etc/enigma2/EtRcType', "r")
+			Remote = rfp.read()
 			rfp.close
-                        AboutText += _("Remote control type") + _(": ") + Remote + "\n"
-                else:
-                        AboutText += _("Remote control type") + _(": ") + iRcTypeControl.getBoxType() 
-                        
-                if path.exists('/proc/stb/ir/rc/type'):
-		        fp = open('/proc/stb/ir/rc/type', "r")
-		        RcID = fp.read()
+			AboutText += _("Remote control type") + _(": ") + Remote + "\n"
+		else:
+			AboutText += _("Remote control type") + _(": ") + iRcTypeControl.getBoxType() + "\n"
+
+		if path.exists('/proc/stb/ir/rc/type'):
+			fp = open('/proc/stb/ir/rc/type', "r")
+			RcID = fp.read()
 			fp.close
-                        AboutText += _("Remote control ID") + _(": ") + RcID 
-		
+			AboutText += _("Remote control ID") + _(": ") + RcID
+
 		self["TunerHeader"] = StaticText(_("Detected NIMs:"))
 		AboutText += "\n" + _("Detected NIMs:") + "\n"
 

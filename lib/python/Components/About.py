@@ -46,20 +46,31 @@ def getChipSetString():
 
 def getCPUString():
 	try:
-		file = open('/proc/cpuinfo', 'r')
-		lines = file.readlines()
-		for x in lines:
-			splitted = x.split(': ')
-			if len(splitted) > 1:
-				splitted[1] = splitted[1].replace('\n','')
-				if splitted[0].startswith("system type"):
-					system = splitted[1].split(' ')[0]
-				elif splitted[0].startswith("Processor"):
-					system = splitted[1].split(' ')[0]
-		file.close()
-		return system
-	except IOError:
-		return "unavailable"
+		cpu_count = 0
+		cpu_speed = 0
+		for line in open("/proc/cpuinfo").readlines():
+			line = [x.strip() for x in line.strip().split(":")]
+			if line[0] in ("system type", "model name"):
+				processor = line[1].split()[0]
+			elif line[0] == "cpu MHz":
+				cpu_speed = "%1.0f" % float(line[1])
+			elif line[0] == "processor":
+				cpu_count += 1
+		if not cpu_speed:
+			try:
+				cpu_speed = int(open("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq").read()) / 1000
+			except:
+				try:
+					import binascii
+					cpu_speed = int(int(binascii.hexlify(open('/sys/firmware/devicetree/base/cpus/cpu@0/clock-frequency', 'rb').read()), 16) / 100000000) * 100
+				except:
+					cpu_speed = "-"
+		if os.path.isfile('/proc/stb/fp/temp_sensor_avs'):
+			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n','')
+			return "%s %s MHz (%s) %s°C" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature)
+		return "%s %s MHz (%s)" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count)
+	except:
+		return _("undefined")
 
 def getCpuCoresString():
 	try:
