@@ -163,54 +163,54 @@ class ModelPic(Screen):
 		self["key_red"] = Button(_(" "))
 		self["key_yellow"] = Button(_(" "))
 		self["key_blue"] = Button(_("%s ") % (getMachineName()) + _("Info"))
-		
-                self["model"] = Label(_("%s %s") % (getMachineBrand(), getMachineName())) 
-		self["boxpic"] = Pixmap()
-                self.onFirstExecBegin.append(self.poster_resize)
 
-                self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
+		self["model"] = Label(_("%s %s") % (getMachineBrand(), getMachineName()))
+		self["boxpic"] = Pixmap()
+		self.onFirstExecBegin.append(self.poster_resize)
+
+		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
 				"blue": self.close
-			}, -2)		              
+			}, -2)
 		
-        def poster_resize(self):
-                if getBoxType() in ('sf108'):
-                        model = "sf108.jpg"
-                elif getBoxType() in ('sf3038'):
-                        model = "sf3038.jpg"
-                elif getBoxType() in ('sf128'):
-                        model = "sf128.jpg"
-                elif getBoxType() in ('sf138'):
-                        model = "sf138.jpg"
-                elif getBoxType() in ('et7000'):
-                        model = "et7000.jpg"
-                elif getBoxType() in ('et7500'):
-                        model = "et7500.jpg"
-                elif getBoxType() in ('et8000'):
-                        model = "et8000.jpg"
-                elif getBoxType() in ('et8500', 'et8500s'):
-                        model = "et8500.jpg"
-                elif getBoxType() in ('et9000', 'et9x00', 'et9200', 'et9500'):
-                        model = "et9x00.jpg"
-                elif getBoxType() in ('et10000'):
-                        model = "et10000.jpg"
-                else:
-                        model = None
-                        
-                poster_path = "/usr/share/enigma2/%s" % model        
-                self["boxpic"].hide()
-                sc = AVSwitch().getFramebufferScale()
-                self.picload = ePicLoad()
-                size = self["boxpic"].instance.size()
-                self.picload.setPara((size.width(), size.height(), sc[0], sc[1], False, 1, "#00000000"))
-                if self.picload.startDecode(poster_path, 0, 0, False) == 0:
-                        ptr = self.picload.getData()
-                        if ptr != None:
-                                self["boxpic"].instance.setPixmap(ptr)
-                                self["boxpic"].show()                                	
-                
+	def poster_resize(self):
+		if getBoxType() in ('sf108'):
+			model = "sf108.png"
+		elif getBoxType() in ('sf3038'):
+			model = "sf3038.png"
+		elif getBoxType() in ('sf128'):
+			model = "sf128.png"
+		elif getBoxType() in ('sf138'):
+			model = "sf138.png"
+		elif getBoxType() in ('sf208'):
+			model = "sf208.png"
+		elif getBoxType() in ('sf228'):
+			model = "sf228.png"
+		elif getBoxType() in ('sf98'):
+			model = "sf98.png"
+		elif getBoxType() in ('et8500', 'et8500s'):
+			model = "et8500.jpg"
+		elif getBoxType() in ('et9000', 'et9x00', 'et9200', 'et9500'):
+			model = "et9x00.jpg"
+		elif getBoxType() in ('et10000'):
+			model = "et10000.jpg"
+		else:
+			model = None
+
+		poster_path = "/usr/share/enigma2/%s" % model
+		self["boxpic"].hide()
+		sc = AVSwitch().getFramebufferScale()
+		self.picload = ePicLoad()
+		size = self["boxpic"].instance.size()
+		self.picload.setPara((size.width(), size.height(), sc[0], sc[1], False, 1, "#00000000"))
+		if self.picload.startDecode(poster_path, 0, 0, False) == 0:
+			ptr = self.picload.getData()
+			if ptr != None:
+				self["boxpic"].instance.setPixmap(ptr)
+				self["boxpic"].show()
+
 class TranslationInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
