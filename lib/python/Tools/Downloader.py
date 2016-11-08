@@ -39,7 +39,10 @@ class downloadWithProgress:
 		if hasattr(client, '_parse'):
 			scheme, host, port, path = client._parse(url)
 		else:
-			from twisted.web.client import _URI
+			try:
+				from twisted.web.client import _URI
+			except ImportError:
+				from twisted.web.client import URI
 			uri = _URI.fromBytes(url)
 			scheme = uri.scheme
 			host = uri.host
