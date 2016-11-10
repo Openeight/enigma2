@@ -98,7 +98,7 @@ class ImageBackup(Screen):
 		return True
 		
 	def quit(self):
-		self.close()	
+		self.close()
 		
 	def red(self):
 		if self.check_hdd():
@@ -127,7 +127,7 @@ class ImageBackup(Screen):
 					for file in listdir("/media/" + dir):
 						if file.find("backupstick") > -1:
 							print "USB-DEVICE found on: /media/%s" % dir
-							return "/media/" + dir						
+							return "/media/" + dir
 			break
 		return "XX"
 
@@ -137,8 +137,11 @@ class ImageBackup(Screen):
 		self.START = time()
 		self.DATE = strftime("%Y%m%d_%H%M", localtime(self.START))
 		self.IMAGEVERSION = self.imageInfo() #strftime("%Y%m%d", localtime(self.START))
-		if self.ROOTFSTYPE == "ubi":
+		if "ubi" in self.ROOTFSTYPE.split():
 			self.MKFS = "/usr/sbin/mkfs.ubifs"
+		elif "tar.bz2" in self.ROOTFSTYPE.split():
+			self.MKFS = "/bin/tar"
+			self.BZIP2 = "/usr/bin/bzip2"
 		else:
 			self.MKFS = "/usr/sbin/mkfs.jffs2"
 		self.UBINIZE = "/usr/sbin/ubinize"
@@ -171,6 +174,9 @@ class ImageBackup(Screen):
 		if self.ROOTFSTYPE == "ubi":
 			self.message += _("because of the used filesystem the back-up\n")
 			self.message += _("will take about 3-12 minutes for this system\n")
+		elif "tar.bz2" in self.ROOTFSTYPE.split():
+			self.message += _("because of the used filesystem the back-up\n")
+			self.message += _("will take about 1-4 minutes for this system\n")
 		else:
 			self.message += _("this will take between 2 and 9 minutes\n")
 		self.message += "\n_________________________________________________\n\n"
@@ -188,6 +194,11 @@ class ImageBackup(Screen):
 		if self.ROOTFSTYPE == "jffs2":
 			cmd1 = "%s --root=/tmp/bi/root --faketime --output=%s/root.jffs2 %s" % (self.MKFS, self.WORKDIR, self.JFFS2OPTIONS)
 			cmd2 = None
+			cmd3 = None
+		elif "tar.bz2" in self.ROOTFSTYPE.split():
+			cmd1 = "%s -cf %s/root.tar -C /tmp/bi/root --exclude=/var/nmbd/* ." % (self.MKFS, self.WORKDIR)
+			cmd2 = "%s %s/root.tar" % (self.BZIP2, self.WORKDIR)
+			cmd3 = None
 		else:
 			f = open("%s/ubinize.cfg" %self.WORKDIR, "w")
 			f.write("[ubifs]\n")
@@ -210,31 +221,38 @@ class ImageBackup(Screen):
 		cmdlist.append(cmd1)
 		if cmd2:
 			cmdlist.append(cmd2)
+		if cmd3:
 			cmdlist.append(cmd3)
 		cmdlist.append("chmod 644 %s/root.%s" %(self.WORKDIR, self.ROOTFSTYPE))
 		cmdlist.append('echo " "')
 		cmdlist.append('echo "Create: kerneldump"')
 		cmdlist.append('echo " "')
-		cmdlist.append("nanddump -a -f %s/vmlinux.gz /dev/%s" % (self.WORKDIR, self.MTDKERNEL))
+		if "mmcblk0" in self.MTDKERNEL:
+			cmdlist.append("dd if=/dev/%s of=%s/%s" % (self.MTDKERNEL ,self.WORKDIR, self.KERNELBIN))
+		else:
+			cmdlist.append("nanddump -a -f %s/vmlinux.gz /dev/%s" % (self.WORKDIR, self.MTDKERNEL))
 		cmdlist.append('echo " "')
-		cmdlist.append('echo "Check: kerneldump"')
+		if "mmcblk0" not in self.MTDKERNEL:
+			cmdlist.append('echo "Check: kerneldump"')
 		cmdlist.append("sync")
 				
 		self.session.open(Console, title = self.TITLE, cmdlist = cmdlist, finishedCallback = self.doFullBackupCB, closeOnSuccess = True)
 
 	def doFullBackupCB(self):
-		ret = commands.getoutput(' gzip -d %s/vmlinux.gz -c > /tmp/vmlinux.bin' % self.WORKDIR)
-		if ret:
-			text = "Kernel dump error\n"
-			text += "Please Flash your Kernel new and Backup again"
-			system('rm -rf /tmp/vmlinux.bin')
-			self.session.open(MessageBox, _(text), type = MessageBox.TYPE_ERROR)
-			return
+		if "mmcblk0" not in self.MTDKERNEL:
+			ret = commands.getoutput(' gzip -d %s/vmlinux.gz -c > /tmp/vmlinux.bin' % self.WORKDIR)
+			if ret:
+				text = "Kernel dump error\n"
+				text += "Please Flash your Kernel new and Backup again"
+				system('rm -rf /tmp/vmlinux.bin')
+				self.session.open(MessageBox, _(text), type = MessageBox.TYPE_ERROR)
+				return
 
 		cmdlist = []
 		cmdlist.append(self.message)
-		cmdlist.append('echo "Kernel dump OK"')
-		cmdlist.append("rm -rf /tmp/vmlinux.bin")
+		if "mmcblk0" not in self.MTDKERNEL:
+			cmdlist.append('echo "Kernel dump OK"')
+			cmdlist.append("rm -rf /tmp/vmlinux.bin")
 		cmdlist.append('echo "_________________________________________________"')
 		cmdlist.append('echo "Almost there... "')
 		cmdlist.append('echo "Now building the USB-Image"')
@@ -250,7 +268,10 @@ class ImageBackup(Screen):
 		f.close()
 
 		system('mv %s/root.%s %s/%s' %(self.WORKDIR, self.ROOTFSTYPE, self.MAINDEST, self.ROOTFSBIN))
-		system('mv %s/vmlinux.gz %s/%s' %(self.WORKDIR, self.MAINDEST, self.KERNELBIN))
+		if "mmcblk0" not in self.MTDKERNEL:
+			system('mv %s/vmlinux.gz %s/%s' %(self.WORKDIR, self.MAINDEST, self.KERNELBIN))
+		else:
+			system('mv %s/%s %s/%s' %(self.WORKDIR, self.KERNELBIN, self.MAINDEST, self.KERNELBIN))
 		cmdlist.append('echo "rename this file to "force" to force an update without confirmation" > %s/noforce' %self.MAINDEST)
 		cmdlist.append('cp -r %s %s' % (self.MAINDEST, self.EXTRA))
 
