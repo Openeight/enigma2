@@ -302,133 +302,78 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 
 class RemoteControlType(Screen, ConfigListScreen):
 	rcList = [
-			("4", "DMM normal"),
-			("13", "ET-4000"),
-			("7", "ET-5000 / ET-6000"), 
-			("5", "ET-9000"), 
-			("11", "ET-9200"), 
-			("9", "ET-6500"), 
-			("9 ", "ET-9500"),
-			("17", "ET-8500"),
-			("16", "ET-7000 / ET-7500"), 
-			("9  ", "ET-8000 / ET-10000"),
+			("0", _("Default")),
+			("11", _("et9200/9500/6500")),
+			("13", _("et4000")),
+			("7", _("et5000/6000")),
+			("9", _("et8000/et10000")),
+			("4", _("DMM normal")),
+			("5", _("et9000/et9100")),
+			("6", _("DMM advanced")),
+			("14", _("xp1000")),
+			("8", _("VU+")),
+			("18", _("F1/F3/F4")),
+			("16", _("HD1100/HD1200/HD1265/et7x00/et8500/et7000mini")),
+			("19", _("HD2400")),
+			("20", _("Zgemma Star S/2S/H1/H2")),
+			("21", _("SF4008/Zgemma H.S/H.2S/H.2H/H5")),
 		]
 
 	defaultRcList = [
 			("et4000", 13),
 			("et5000", 7),
 			("et6000", 7),
-			("et6500", 9),
+			("et6500", 11),
+			("et8000", 9),
+			("et9000", 5),
+			("et9100", 5),
+			("et9200", 11),
+			("et9500", 11),
+			("et10000", 9),
+			("formuler1", 18),
+			("formuler3", 18),
+			("formuler4", 18),
+			("xp1000", 14),
+			("hd1200", 16),
+			("hd1265", 16),
+			("hd1100", 16),
+			("hd2400", 19),
 			("et7000", 16),
 			("et7500", 16),
-			("et8000", 9),
-			("et8500", 17),
-			("et9000", 5),
-			("et9200", 11),
-			("et9500", 9),
-			("et10000", 9),
+			("et8500", 16),
+			("sh1", 20),
+			("h3", 21),
+			("h5", 21),
+			("et7000mini", 16),
+			("sf4008", 21),
 		]
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-                self.skinName = ["RemoteControlType", "Setup" ]
-                self.onChangedEntry = [ ]
+		self.skinName = ["RemoteControlType", "Setup" ]
 
-                self["actions"] = ActionMap(["SetupActions"],
+		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"cancel": self.keyCancel,
 			"save": self.keySave,
 		}, -1)
-                
+
 		self["key_green"] = StaticText(_("Save"))
 		self["key_red"] = StaticText(_("Cancel"))
 
-		self["remote"] = Pixmap()
-                self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.ChangedEntry)
-                        
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = self.session)
+
 		rctype = config.plugins.remotecontroltype.rctype.value
 		self.rctype = ConfigSelection(choices = self.rcList, default = str(rctype))
 		self.list.append(getConfigListEntry(_("Remote control type"), self.rctype))
 		self["config"].list = self.list
+
 		self.defaultRcType = None
 		self.getDefaultRcType()
 
 		
-        def ChangedEntry(self):               
-                self.et4000 = "/usr/share/enigma2/rc_models/et4x00/rc.png"
-		self.et6000 = "/usr/share/enigma2/rc_models/et6x00/rc.png"
-		self.et6500 = "/usr/share/enigma2/rc_models/et6500/rc.png"
-		self.et9000 = "/usr/share/enigma2/rc_models/et9x00/rc.png"
-		self.et9500 = "/usr/share/enigma2/rc_models/et9500/rc.png"
-		self.et7000 = "/usr/share/enigma2/rc_models/et7x00/rc.png"
-		self.et8000 = "/usr/share/enigma2/rc_models/et8000/rc.png"
-		self.dmm = "/usr/share/enigma2/skin_default/rc.png"
-
-		if not fileExists('/etc/enigma2/EtRcType'):
-			action = ' > /etc/enigma2/EtRcType'
-			os.system(action)
-			file = open("/etc/enigma2/EtRcType", "w")
-			file.write(getBoxType())
-			file.close
-		file = open("/etc/enigma2/EtRcType", "w")
-                print type(self.rctype.value)
-                print self.rctype.value
-                if config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 13:
-                        file.write('et4000')
-                        file.close()
-                        rc = self.et4000
-                        self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 7:
-		        file.write('et6000')
-                        file.close()
-                        rc = self.et6000
-		        self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 5:
-		        file.write('et9000')
-                        file.close()
-                        rc = self.et9000
-		        self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 11:
-		        file.write('et9200')
-                        file.close()
-                        rc = self.et9000
-		        self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 17:
-		        file.write('et8500')
-                        file.close()
-                        rc = self.et8000
-		        self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and int(self.rctype.value) == 16:
-		        file.write('et7000')
-                        file.close()
-                        rc = self.et7000
-		        self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9':
-		        file.write('et6500')
-                        file.close()
-                        rc = self.et6500
-                        self["remote"].instance.setPixmapFromFile(rc)                        
-                elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9 ':
-                        file.write('et9500')
-                        file.close()
-                        rc = self.et9500
-                        self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '9  ':
-		        file.write('et8000')
-                        file.close()
-                        rc = self.et8000
-                        self["remote"].instance.setPixmapFromFile(rc)
-                elif config.plugins.remotecontroltype.rctype.value and self.rctype.value == '4':
-		        file.write('dmm')
-                        file.close()
-                        rc = self.dmm
-                        self["remote"].instance.setPixmapFromFile(rc)
-                else:
-                        self["remote"].hide
-                        file.close()
-			
-        def getDefaultRcType(self):
+	def getDefaultRcType(self):
 		data = iRcTypeControl.getBoxType()
 		for x in self.defaultRcList:
 			if x[0] in data:
