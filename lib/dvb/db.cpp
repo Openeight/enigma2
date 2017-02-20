@@ -1155,8 +1155,8 @@ PyObject *eDVBDB::readSatellites(ePyObject sat_list, ePyObject sat_dict, ePyObje
 				pilot = eDVBFrontendParametersSatellite::Pilot_Unknown;
 				rolloff = eDVBFrontendParametersSatellite::RollOff_alpha_0_35;
 				is_id = NO_STREAM_ID_FILTER;
-				pls_code = eDVBFrontendParametersSatellite::PLS_Root;
-				pls_mode = 0;
+				pls_code = 1;
+				pls_mode = eDVBFrontendParametersSatellite::PLS_Root;
 				tsid = -1;
 				onid = -1;
 
