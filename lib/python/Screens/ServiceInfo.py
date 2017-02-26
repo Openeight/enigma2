@@ -195,15 +195,22 @@ class ServiceInfo(Screen):
 			else:
 				tuner = (_("NIM & Type"), chr(ord('A') + frontendData["tuner_number"]) + " - " + frontendData["tuner_type"], TYPE_TEXT)
 			if frontendDataOrg["tuner_type"] == "DVB-S":
-				return (tuner,
-					(_("System & Modulation"), frontendData["system"] + " " + frontendData["modulation"], TYPE_TEXT),
-					(_("Orbital position"), frontendData["orbital_position"], TYPE_VALUE_DEC),
-					(_("Frequency & Polarization"), "%s MHz" % (frontendData["frequency"] / 1000) + " - " + frontendData["polarization"], TYPE_TEXT),
-					(_("Symbol rate & FEC"), "%s KSymb/s" % (frontendData["symbol_rate"] / 1000) + " - " + frontendData["fec_inner"], TYPE_TEXT),
-					(_("Inversion, Pilot & Roll-off"), frontendData["inversion"] + " - " + str(frontendData.get("pilot", None)) + " - " + str(frontendData.get("rolloff", None)), TYPE_TEXT)
-					(_("Input Stream ID"), frontendData.get("is_id", 0), TYPE_VALUE_DEC),
-					(_("PLS Mode"), frontendData.get("pls_mode", None), TYPE_TEXT),
-					(_("PLS Code"), frontendData.get("pls_code", 0), TYPE_VALUE_DEC))
+				if frontendData.get("is_id", -1) == -1: # not multistream
+					return (tuner,
+						(_("System & Modulation"), frontendData["system"] + " " + frontendData["modulation"], TYPE_TEXT),
+						(_("Orbital position"), frontendData["orbital_position"], TYPE_VALUE_DEC),
+						(_("Frequency & Polarization"), "%s MHz" % (frontendData["frequency"] / 1000) + " - " + frontendData["polarization"], TYPE_TEXT),
+						(_("Symbol rate & FEC"), "%s KSymb/s" % (frontendData["symbol_rate"] / 1000) + " - " + frontendData["fec_inner"], TYPE_TEXT),
+						(_("Inversion, Pilot & Roll-off"), frontendData["inversion"] + " - " + str(frontendData.get("pilot", None)) + " - " + str(frontendData.get("rolloff", None)), TYPE_TEXT))
+				else: # multistream
+					return (tuner,
+						(_("System & Modulation"), "%s %s" % (frontendData["system"], frontendData["modulation"]), TYPE_TEXT),
+						(_("Orbital position"), "%s" % frontendData["orbital_position"], TYPE_TEXT),
+						(_("Frequency & Polarization"), "%s - %s" % (frontendData.get("frequency", 0), frontendData["polarization"]), TYPE_TEXT),
+						(_("Symbol rate & FEC"), "%s - %s" % (frontendData.get("symbol_rate", 0), frontendData["fec_inner"]), TYPE_TEXT),
+						(_("Input Stream ID"), "%s" % (frontendData.get("is_id", -1)), TYPE_TEXT),
+						(_("PLS Mode & PLS Code"), "%s - %s" % (frontendData["pls_mode"], frontendData["pls_code"]), TYPE_TEXT),
+						(_("Inversion, Pilot & Roll-off"), "%s - %s - %s" % (frontendData["inversion"], frontendData.get("pilot", None), str(frontendData.get("rolloff", None))), TYPE_TEXT))
 			elif frontendDataOrg["tuner_type"] == "DVB-C":
 				return (tuner,
 					(_("Modulation"), frontendData["modulation"], TYPE_TEXT),
