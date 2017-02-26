@@ -145,7 +145,7 @@ class ServiceInfo(Screen):
 				fillList = [(_("Service name"), name, TYPE_TEXT),
 					(_("Videocodec, size & format"), resolution, TYPE_TEXT),
 					(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
-					(_("Namespace"), self.getServiceInfoValue(iServiceInformation.sNamespace), TYPE_VALUE_HEX, 8)),
+					(_("Namespace"), self.getServiceInfoValue(iServiceInformation.sNamespace), TYPE_VALUE_HEX, 8),
 					(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
 			else:
 				if ":/" in refstr:
