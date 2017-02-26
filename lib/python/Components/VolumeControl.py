@@ -13,9 +13,10 @@ class VolumeControl:
 	a corresponding dialog"""
 	def __init__(self, session):
 		global globalActionMap
-		globalActionMap.actions["volumeUp"]=self.volUp
-		globalActionMap.actions["volumeDown"]=self.volDown
-		globalActionMap.actions["volumeMute"]=self.volMute
+		globalActionMap.actions["volumeUp"] = self.volUp
+		globalActionMap.actions["volumeDown"] = self.volDown
+		globalActionMap.actions["volumeMute"] = self.volMute
+		globalActionMap.actions["volumeMuteLong"] = self.volMuteLong
 
 		assert not VolumeControl.instance, "only one VolumeControl instance is allowed!"
 		VolumeControl.instance = self
@@ -69,12 +70,6 @@ class VolumeControl:
 
 	def volHide(self):
 		self.volumeDialog.hide()
-		self.muteDialog.hide()
-
-	def showMute(self):
-		if self.volctrl.isMuted():
-			self.muteDialog.show()
-			self.hideVolTimer.start(3000, True)
 
 	def volMute(self, showMuteSymbol=True, force=False):
 		vol = self.volctrl.getVolume()
@@ -82,11 +77,11 @@ class VolumeControl:
 			self.volctrl.volumeToggleMute()
 			if self.volctrl.isMuted():
 				if showMuteSymbol:
-					self.showMute()
-					self.volumeDialog.hide()
+					self.muteDialog.show()
 				self.volumeDialog.setValue(0)
 			else:
 				self.muteDialog.hide()
 				self.volumeDialog.setValue(vol)
-				self.volumeDialog.show()
-				self.hideVolTimer.start(3000, True)
+
+	def volMuteLong(self):
+		self.muteDialog.hide()
