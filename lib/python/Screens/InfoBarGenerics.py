@@ -209,8 +209,8 @@ class InfoBarScreenSaver:
 			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
 
 class HideVBILine(Screen):
-	skin = """<screen position="0,0" size="%s,%s" backgroundColor="0" flags="wfNoBorder"/>""" % (getDesktop(0).size().width() * 2/3, getDesktop(0).size().height() / 360 + 1)
 	def __init__(self, session):
+		self.skin = """<screen position="0,0" size="%s,%s" flags="wfNoBorder" zPosition="1"/>""" % (getDesktop(0).size().width(), getDesktop(0).size().height() / 360 + 1)
 		Screen.__init__(self, session)
 
 class SecondInfoBar(Screen):
@@ -398,19 +398,19 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.startHideTimer()
 
 	def checkHideVBI(self):
-			service = self.session.nav.getCurrentlyPlayingServiceReference()
-			servicepath = service and service.getPath()
-			if servicepath and servicepath.startswith("/"):
-				if service.toString().startswith("1:"):
-					info = eServiceCenter.getInstance().info(service)
-					service = info and info.getInfoString(service, iServiceInformation.sServiceref)
-					FLAG_HIDE_VBI = 512
-					return service and eDVBDB.getInstance().getFlag(eServiceReference(service)) & FLAG_HIDE_VBI and True
-				else:
-					return ".hidvbi." in servicepath.lower()
-			service = self.session.nav.getCurrentService()
-			info = service and service.info()
-			return info and info.getInfo(iServiceInformation.sHideVBI)
+		service = self.session.nav.getCurrentlyPlayingServiceReference()
+		servicepath = service and service.getPath()
+		if servicepath and servicepath.startswith("/"):
+			if service.toString().startswith("1:"):
+				info = eServiceCenter.getInstance().info(service)
+				service = info and info.getInfoString(service, iServiceInformation.sServiceref)
+				FLAG_HIDE_VBI = 512
+				return service and eDVBDB.getInstance().getFlag(eServiceReference(service)) & FLAG_HIDE_VBI and True
+			else:
+				return ".hidvbi." in servicepath.lower()
+		service = self.session.nav.getCurrentService()
+		info = service and service.info()
+		return info and info.getInfo(iServiceInformation.sHideVBI)
 
 	def showHideVBI(self):
 		if self.checkHideVBI():
