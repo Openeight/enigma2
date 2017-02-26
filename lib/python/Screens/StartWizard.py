@@ -10,6 +10,7 @@ except:
 from Components.Pixmap import Pixmap, MovingPixmap, MultiPixmap
 from Components.config import config, ConfigBoolean, configfile, ConfigSubsection
 from LanguageSelection import LanguageWizard
+import os
 
 config.misc.firstrun = ConfigBoolean(default = True)
 config.misc.languageselected = ConfigBoolean(default = True)
