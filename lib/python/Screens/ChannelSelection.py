@@ -1403,7 +1403,7 @@ class ChannelSelectionBase(Screen):
 
 	def getServiceName(self, ref):
 		str = self.removeModeStr(ServiceReference(ref).getServiceName())
-		if 'User - bouquets' in str:
+		if str in ("Bouquets (Radio)" , "Bouquets (TV)", "User - bouquets"):
 			return _("User - bouquets")
 		if not str:
 			pathstr = ref.getPath()
@@ -2517,7 +2517,8 @@ class SimpleChannelSelection(ChannelSelectionBase, SelectionEventInfo):
 				"keyTV": self.setModeTv,
 			})
 		self.bouquet_mark_edit = OFF
-		self.title = title
+		if isinstance(title, str):
+			self.maintitle = title
 		self.currentBouquet = currentBouquet
 		self.returnBouquet = returnBouquet
 		self.setService = setService

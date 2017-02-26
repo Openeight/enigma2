@@ -13,6 +13,8 @@
 
 #include <sstream>
 
+#include "absdiff.h"
+
 #ifndef I2C_SLAVE_FORCE
 #define I2C_SLAVE_FORCE	0x0706
 #endif
@@ -356,8 +358,8 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 				diff = 1<<27;
 			else
 			{
-				diff = abs(sat.frequency - osat.frequency);
-				diff += abs(sat.symbol_rate - osat.symbol_rate);
+				diff = absdiff(sat.frequency, osat.frequency);
+				diff += absdiff(sat.symbol_rate, osat.symbol_rate);
 			}
 			return 0;
 		}
@@ -375,8 +377,8 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 				diff = 1 << 27;
 			else
 			{
-				diff = abs(cable.frequency - ocable.frequency);
-				diff += abs(cable.symbol_rate - ocable.symbol_rate);
+				diff = absdiff(cable.frequency, ocable.frequency);
+				diff += absdiff(cable.symbol_rate, ocable.symbol_rate);
 			}
 			return 0;
 		}
@@ -418,7 +420,7 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 			else if (oterrestrial.system != terrestrial.system)
 				diff = 1 << 30;
 			else
-				diff = abs(terrestrial.frequency - oterrestrial.frequency) / 1000;
+				diff = absdiff(terrestrial.frequency, oterrestrial.frequency) / 1000;
 			return 0;
 		}
 		case iDVBFrontend::feATSC:
@@ -433,7 +435,7 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 				diff = 1 << 29;
 			else
 			{
-				diff = abs(atsc.frequency - oatsc.frequency);
+				diff = absdiff(atsc.frequency, oatsc.frequency);
 			}
 			return 0;
 		}
@@ -467,8 +469,8 @@ RESULT eDVBFrontendParameters::getHash(unsigned long &hash) const
 		}
 		case iDVBFrontend::feATSC:
 		{
-			hash = 0xDDDD0000;
-			hash |= (atsc.frequency/1000)&0xFFFF;
+			hash = atsc.system == eDVBFrontendParametersATSC::System_ATSC ? 0xEEEE0000 : 0xFFFF0000;
+			hash |= (atsc.frequency/1000000)&0xFFFF;
 			return 0;
 		}
 		default:
@@ -526,8 +528,8 @@ int eDVBFrontend::PriorityOrder=0;
 int eDVBFrontend::PreferredFrontendIndex = -1;
 
 eDVBFrontend::eDVBFrontend(const char *devicenodename, int fe, int &ok, bool simulate, eDVBFrontend *simulate_fe)
-	:m_simulate(simulate), m_enabled(false), m_fbc(false), m_simulate_fe(simulate_fe), m_dvbid(fe), m_slotid(fe)
-	,m_fd(-1), m_dvbversion(0), m_rotor_mode(false), m_need_rotor_workaround(false)
+	:m_simulate(simulate), m_enabled(false), m_fbc(false), m_simulate_fe(simulate_fe), m_type(-1), m_dvbid(fe), m_slotid(fe)
+	,m_fd(-1), m_dvbversion(0), m_rotor_mode(false), m_need_rotor_workaround(false), m_multitype(false)
 	,m_state(stateClosed), m_timeout(0), m_tuneTimer(0)
 {
 	char filename[64];
@@ -666,8 +668,9 @@ int eDVBFrontend::openFrontend()
 #endif
 						break;
 					}
-					case FE_ATSC:	// placeholder to prevent warning
+					case FE_ATSC:
 					{
+						m_delsys[SYS_ATSC] = true;
 						break;
 					}
 				}
@@ -686,6 +689,11 @@ int eDVBFrontend::openFrontend()
 		fe_info.frequency_min = 900000;
 		fe_info.frequency_max = 2200000;
 	}
+
+	m_multitype = m_delsys[SYS_DVBS] && (m_delsys[SYS_DVBT] || m_delsys[SYS_DVBC_ANNEX_A]);
+
+	if (!m_multitype)
+		m_type = feSatellite;
 
 	setTone(iDVBFrontend::toneOff);
 	setVoltage(iDVBFrontend::voltageOff);
@@ -849,6 +857,8 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	int sat_max = 1600; // for stv0288 / bsbe2
 	int ret = 0x12345678;
 	int ter_max = 2900;
+	int atsc_max = 4200;
+
 	if (!strcmp(m_description, "AVL2108")) // ET9000
 	{
 		ret = (int)(snr / 40.5);
@@ -1084,6 +1094,19 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = (snr * 2000) / 0xFFFF;
 		sat_max = 2000;
 	}
+	else if(!strcmp(m_description, "WinTV HVR-850") || !strcmp(m_description, "Hauppauge"))
+	{
+		eDVBFrontendParametersATSC parm;
+		oparm.getATSC(parm);
+		switch (parm.modulation)
+		{
+		case eDVBFrontendParametersATSC::Modulation_QAM256: atsc_max = 4000; break;
+		case eDVBFrontendParametersATSC::Modulation_QAM64: atsc_max = 2900; break;
+		case eDVBFrontendParametersATSC::Modulation_VSB_8: atsc_max = 2700; break;
+		default: break;
+		}
+		ret = snr * 10;
+	}
 
 	signalqualitydb = ret;
 	if (ret == 0x12345678) // no snr db calculation avail.. return untouched snr value..
@@ -1106,7 +1129,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 			signalquality = (ret >= ter_max ? 65536 : ret * 65536 / ter_max);
 			break;
 		case feATSC: // we assume a max of 42db here
-			signalquality = (ret >= 4200 ? 65536 : ret * 65536 / 4200);
+			signalquality = (ret >= atsc_max ? 65536 : ret * 65536 / atsc_max);
 			break;
 		}
 	}
@@ -2220,6 +2243,11 @@ RESULT eDVBFrontend::tune(const iDVBFrontendParameters &where)
 		goto tune_error;
 	}
 
+	if (m_type == feSatellite && type != feSatellite)
+		setTone(iDVBFrontend::toneOff);
+	else if (type == feSatellite && m_type != feSatellite)
+		setDeliverySystem("DVB-S");
+
 	if (!m_simulate)
 		m_sn->stop();
 
@@ -2324,6 +2352,11 @@ RESULT eDVBFrontend::tune(const iDVBFrontendParameters &where)
 
 	if (!m_simulate)
 	{
+		if(m_type != type)
+		{
+			eDebug("[eDVBFrontend] tune setting type to %d from %d", type, m_type);
+			m_type = type;
+		}
 		m_tuneTimer->start(0,true);
 		m_tuning = 1;
 		if (m_state != stateTuning)
@@ -2389,6 +2422,11 @@ RESULT eDVBFrontend::setTone(int t)
 	fe_sec_tone_mode_t tone;
 	if (m_simulate)
 		return 0;
+	if (m_type != feSatellite)
+	{
+		eDebug("[eDVBFrontend] sendTone allowed only in feSatellite (%d)", m_type);
+		return 0;
+	}
 	m_data[CUR_TONE]=t;
 	switch (t)
 	{
@@ -2409,6 +2447,11 @@ RESULT eDVBFrontend::sendDiseqc(const eDVBDiseqcCommand &diseqc)
 	struct dvb_diseqc_master_cmd cmd;
 	if (m_simulate)
 		return 0;
+	if (m_type != feSatellite)
+	{
+		eDebug("[eDVBFrontend] sendDiseqc allowed only in feSatellite (%d)", m_type);
+		return 0;
+	}
 	memcpy(cmd.msg, diseqc.data, diseqc.len);
 	cmd.msg_len = diseqc.len;
 	if (::ioctl(m_fd, FE_DISEQC_SEND_MASTER_CMD, &cmd))
@@ -2421,6 +2464,11 @@ RESULT eDVBFrontend::sendToneburst(int burst)
 	fe_sec_mini_cmd_t cmd;
 	if (m_simulate)
 		return 0;
+	if (m_type != feSatellite)
+	{
+		eDebug("[eDVBFrontend] sendToneburst allowed only in feSatellite (%d)", m_type);
+		return 0;
+	}
 	if (burst == eDVBSatelliteDiseqcParameters::B)
 		cmd = SEC_MINI_B;
 	else
@@ -2483,8 +2531,8 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
 		{
 			return 0;
 		}
-		can_handle_dvbs = supportsDeliverySystem(SYS_DVBS, true);
-		can_handle_dvbs2 = supportsDeliverySystem(SYS_DVBS2, true);
+		can_handle_dvbs = supportsDeliverySystem(SYS_DVBS, !m_multitype);
+		can_handle_dvbs2 = supportsDeliverySystem(SYS_DVBS2, !m_multitype);
 		if (parm.system == eDVBFrontendParametersSatellite::System_DVB_S2 && !can_handle_dvbs2)
 		{
 			return 0;
@@ -2511,15 +2559,15 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
 #if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 6
 		if (m_dvbversion >= DVB_VERSION(5, 6))
 		{
-			can_handle_dvbc_annex_a = supportsDeliverySystem(SYS_DVBC_ANNEX_A, true);
-			can_handle_dvbc_annex_c = supportsDeliverySystem(SYS_DVBC_ANNEX_C, true);
+			can_handle_dvbc_annex_a = supportsDeliverySystem(SYS_DVBC_ANNEX_A, !m_multitype);
+			can_handle_dvbc_annex_c = supportsDeliverySystem(SYS_DVBC_ANNEX_C, !m_multitype);
 		}
 		else
 		{
-			can_handle_dvbc_annex_a = can_handle_dvbc_annex_c = supportsDeliverySystem(SYS_DVBC_ANNEX_A, true); /* new value for SYS_DVB_ANNEX_AC */
+			can_handle_dvbc_annex_a = can_handle_dvbc_annex_c = supportsDeliverySystem(SYS_DVBC_ANNEX_A, !m_multitype); /* new value for SYS_DVB_ANNEX_AC */
 		}
 #else
-		can_handle_dvbc_annex_a = can_handle_dvbc_annex_c = supportsDeliverySystem(SYS_DVBC_ANNEX_AC, true);
+		can_handle_dvbc_annex_a = can_handle_dvbc_annex_c = supportsDeliverySystem(SYS_DVBC_ANNEX_AC, !m_multitype);
 #endif
 		if (parm.system == eDVBFrontendParametersCable::System_DVB_C_ANNEX_A && !can_handle_dvbc_annex_a)
 		{
@@ -2535,8 +2583,8 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
 	{
 		eDVBFrontendParametersTerrestrial parm;
 		bool can_handle_dvbt, can_handle_dvbt2;
-		can_handle_dvbt = supportsDeliverySystem(SYS_DVBT, true);
-		can_handle_dvbt2 = supportsDeliverySystem(SYS_DVBT2, true);
+		can_handle_dvbt = supportsDeliverySystem(SYS_DVBT, !m_multitype);
+		can_handle_dvbt2 = supportsDeliverySystem(SYS_DVBT2, !m_multitype);
 		if (feparm->getDVBT(parm) < 0)
 		{
 			return 0;
@@ -2564,9 +2612,13 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
 	{
 		eDVBFrontendParametersATSC parm;
 		bool can_handle_atsc, can_handle_dvbc_annex_b;
-		can_handle_dvbc_annex_b = supportsDeliverySystem(SYS_DVBC_ANNEX_B, true);
-		can_handle_atsc = supportsDeliverySystem(SYS_ATSC, true);
+		can_handle_dvbc_annex_b = supportsDeliverySystem(SYS_DVBC_ANNEX_B, !m_multitype);
+		can_handle_atsc = supportsDeliverySystem(SYS_ATSC, !m_multitype);
 		if (feparm->getATSC(parm) < 0)
+		{
+			return 0;
+		}
+		if (!can_handle_atsc && !can_handle_dvbc_annex_b)
 		{
 			return 0;
 		}
@@ -2621,10 +2673,16 @@ bool eDVBFrontend::setDeliverySystem(const char *type)
 {
 	struct dtv_property p[1];
 	struct dtv_properties cmdseq;
+	int fetype;
 
 	if (m_fd < 0)
 	{
 		eDebug("[eDVBFrontend] setDeliverySystem cannot change delivery system with closed frontend");
+		return false;
+	}
+
+	if (m_simulate)
+	{
 		return false;
 	}
 
@@ -2636,26 +2694,32 @@ bool eDVBFrontend::setDeliverySystem(const char *type)
 	if (!strcmp(type, "DVB-S2"))
 	{
 		p[0].u.data = SYS_DVBS2;
+		fetype = feSatellite;
 	}
 	else if (!strcmp(type, "DVB-S"))
 	{
 		p[0].u.data = SYS_DVBS;
+		fetype = feSatellite;
 	}
 	else if (!strcmp(type, "DVB-T2"))
 	{
 		p[0].u.data = SYS_DVBT2;
+		fetype = feTerrestrial;
 	}
 	else if (!strcmp(type, "DVB-T"))
 	{
 		p[0].u.data = SYS_DVBT;
+		fetype = feTerrestrial;
 	}
 	else if (!strcmp(type, "DVB-C"))
 	{
 		p[0].u.data = SYS_DVBC_ANNEX_A;
+		fetype = feCable;
 	}
 	else if (!strcmp(type, "ATSC"))
 	{
 		p[0].u.data = SYS_ATSC;
+		fetype = feATSC;
 	}
 	else
 	{
@@ -2669,6 +2733,8 @@ bool eDVBFrontend::setDeliverySystem(const char *type)
 		return false;
 	}
 
+	eDebug("[eDVBFrontend] setDeliverySystem setting type to %d from %d", fetype, m_type);
+	m_type = fetype;
 	eDebug("[eDVBFrontend] setDeliverySystem succefully changed delivery system to %s", type);
 	return true;
 }
