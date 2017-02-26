@@ -39,10 +39,10 @@ class ServiceInfo(Converter, object):
 				"HasTelext": (self.HAS_TELETEXT, (iPlayableService.evUpdatedInfo,)),
 				"IsMultichannel": (self.IS_MULTICHANNEL, (iPlayableService.evUpdatedInfo,)),
 				"IsCrypted": (self.IS_CRYPTED, (iPlayableService.evUpdatedInfo,)),
-				"IsWidescreen": (self.IS_WIDESCREEN, (iPlayableService.evVideoSizeChanged,iPlayableService.evStart,)),
+				"IsWidescreen": (self.IS_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
 				"SubservicesAvailable": (self.SUBSERVICES_AVAILABLE, (iPlayableService.evUpdatedEventInfo,)),
-				"VideoWidth": (self.XRES, (iPlayableService.evVideoSizeChanged,iPlayableService.evStart,)),
-				"VideoHeight": (self.YRES, (iPlayableService.evVideoSizeChanged,iPlayableService.evStart,)),
+				"VideoWidth": (self.XRES, (iPlayableService.evVideoSizeChanged,)),
+				"VideoHeight": (self.YRES, (iPlayableService.evVideoSizeChanged,)),
 				"AudioPid": (self.APID, (iPlayableService.evUpdatedInfo,)),
 				"VideoPid": (self.VPID, (iPlayableService.evUpdatedInfo,)),
 				"PcrPid": (self.PCRPID, (iPlayableService.evUpdatedInfo,)),
@@ -58,11 +58,11 @@ class ServiceInfo(Converter, object):
 				"SubtitlesAvailable": (self.SUBTITLES_AVAILABLE, (iPlayableService.evUpdatedInfo,)),
 				"Editmode": (self.EDITMODE, (iPlayableService.evUpdatedInfo,)),
 				"IsStream": (self.IS_STREAM, (iPlayableService.evUpdatedInfo,)),
-				"IsSD": (self.IS_SD, (iPlayableService.evVideoSizeChanged,iPlayableService.evStart,)),
-				"IsHD": (self.IS_HD, (iPlayableService.evVideoSizeChanged,iPlayableService.evStart,)),
-				"IsSDAndWidescreen": (self.IS_SD_AND_WIDESCREEN, (iPlayableService.evVideoSizeChanged,iPlayableService.evStart,)),
-				"IsSDAndNotWidescreen": (self.IS_SD_AND_NOT_WIDESCREEN, (iPlayableService.evVideoSizeChanged,iPlayableService.evStart,)),
-				"Is4K": (self.IS_4K, (iPlayableService.evVideoSizeChanged,iPlayableService.evStart,)),
+				"IsSD": (self.IS_SD, (iPlayableService.evVideoSizeChanged,)),
+				"IsHD": (self.IS_HD, (iPlayableService.evVideoSizeChanged,)),
+				"IsSDAndWidescreen": (self.IS_SD_AND_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
+				"IsSDAndNotWidescreen": (self.IS_SD_AND_NOT_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
+				"Is4K": (self.IS_4K, (iPlayableService.evVideoSizeChanged,)),
 			}[type]
 
 	def getServiceInfoString(self, info, what, convert = lambda x: "%d" % x):
@@ -127,7 +127,7 @@ class ServiceInfo(Converter, object):
 		elif self.type == self.IS_SD_AND_NOT_WIDESCREEN:
 			return info.getInfo(iServiceInformation.sVideoHeight) < 720 and info.getInfo(iServiceInformation.sAspect) not in WIDESCREEN
 		elif self.type == self.IS_4K:
-			return info.getInfo(iServiceInformation.sVideoHeight) >= 2160
+			return info.getInfo(iServiceInformation.sVideoHeight) >= 2100
 		return False
 
 	boolean = property(getBoolean)

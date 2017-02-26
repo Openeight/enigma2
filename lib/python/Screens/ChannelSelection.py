@@ -130,14 +130,14 @@ class ChannelContextMenu(Screen):
 				"red": self.playMain,
 				"menu": self.openSetup,
 				"0": self.showServiceInformations,
-				"1":self.setStartupService,
-				"2":self.unsetStartupService,
+				"1": self.setStartupService,
+				"2": self.unsetStartupService,
 				"3": self.addServiceToBouquetOrAlternative,
 				"4": self.findCurrentlyPlayed,
 				"5": self.renameEntry,
 				"6": self.removeEntry,
 				"7": self.toggleMoveModeSelect,
-				"8": self.showMarkerInputBox,
+				"8": self.unhideParentalServices,
 				"9": self.bouquetMarkStart
 			})
 		menu = [ ]
