@@ -115,6 +115,7 @@ if test `echo "$BOXTYPE" | cut -b 1-7` == "mbmicro"; then
 	AC_DEFINE(FORCE_ADVANCED_REMOTE, 1,[define to fixup the input device identification when the remote control is actually an 'advanced' remote (with play/forward/rewind keys)])
 	AC_DEFINE(VUPLUS_RC_WORKAROUND, 1, [workaround for problem with vuplus event/rc driver])
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
+fi
 
 if test `echo "$BOXTYPE" | cut -b 1-2` == "vu"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
@@ -128,6 +129,7 @@ AC_ARG_WITH(libsdl,
 if test "$with_libsdl" = "yes"; then
 	PKG_CHECK_MODULES(LIBSDL, sdl)
 fi
+AM_CONDITIONAL(HAVE_LIBSDL, test "$with_libsdl" = "yes")
 
 if test "$BOXTYPE" == "et8500" -o "$BOXTYPE" == "et7x00"; then
 	AC_DEFINE(FORCE_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
@@ -137,8 +139,6 @@ if test "$BOXTYPE" == "et7x00"; then
 	AC_DEFINE(KEY_F1_TO_KEY_F2, 1,[define when rc sends a KEY_F1 event for its KEY_F2 key])
 fi
 	
-AM_CONDITIONAL(HAVE_LIBSDL, test "$with_libsdl" = "yes")
-
 AC_ARG_WITH(libxine,
 	AS_HELP_STRING([--with-libxine],[use libxine, yes or no]),
 	[with_libxine=$withval],[with_libxine=no])
