@@ -273,9 +273,9 @@ class CommitInfo(Screen):
 
 		self.project = 0
 		self.projects = [
-			("enigma2", "enigma2"),
-			("OctagonEightSD", "OctagonEightSD"),
-			("OctagonEightFHD", "OctagonEightFHD"),
+			("https://api.github.com/repos/Openeight/enigma2/commits", "enigma2"),
+			("https://api.github.com/repos/Openeight/OctagonEightSD/commits", "OctagonEightSD"),
+			("https://api.github.com/repos/Openeight/OctagonEightFHD/commits", "OctagonEightFHD"),
 		]
 		self.cachedProjects = {}
 		self.Timer = eTimer()
@@ -283,7 +283,7 @@ class CommitInfo(Screen):
 		self.Timer.start(50, True)
 
 	def readGithubCommitLogs(self):
-		url = 'https://api.github.com/repos/Openeight/%s/commits' % self.projects[self.project][0]
+		url = self.projects[self.project][0]
 		commitlog = ""
 		from datetime import datetime
 		from json import loads
@@ -507,7 +507,9 @@ class Troubleshoot(Screen):
 
 	def getLogFilesList(self):
 		import glob
-		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile("/home/root/enigma2_crash.log") and ["/home/root/enigma2_crash.log"] or [])
+		home_root = "/home/root/enigma2_crash.log"
+		tmp = "/tmp/enigma2_crash.log"
+		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile(home_root) and [home_root] or []) + (os.path.isfile(tmp) and [tmp] or [])
 
 	def updateOptions(self):
 		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]

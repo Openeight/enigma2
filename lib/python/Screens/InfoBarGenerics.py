@@ -2059,7 +2059,6 @@ class InfoBarExtensions:
 
 	def __init__(self):
 		self.list = []
-
 		self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions",
 			{
 				"extensions": (self.showExtensionSelection, _("view extensions...")),
@@ -2100,7 +2099,8 @@ class InfoBarExtensions:
 		self.extensionKeys = {}
 		for x in self.list:
 			if x[0] == self.EXTENSION_SINGLE:
-				self.updateExtension(x[1], x[2])
+				if x[1][2]():
+					self.updateExtension(x[1], x[2])
 			else:
 				for y in x[1]():
 					self.updateExtension(y[0], y[1])
@@ -2122,7 +2122,6 @@ class InfoBarExtensions:
 				else:
 					extensionsList.remove(extension)
 		list.extend([(x[0](), x) for x in extensionsList])
-
 		keys += [""] * len(extensionsList)
 		self.session.openWithCallback(self.extensionCallback, ChoiceBox, title=_("Please choose an extension..."), list=list, keys=keys, skin_name="ExtensionsList", reorderConfig="extension_order", windowTitle=_("Extensions menu"))
 
