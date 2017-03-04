@@ -122,6 +122,7 @@ class Language:
 			return 'ISO-8859-15'
 
 	def addCallback(self, callback):
-		self.callbacks.append(callback)
+		if callback:
+			self.callbacks.append(callback)
 
 language = Language()
