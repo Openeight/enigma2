@@ -155,6 +155,9 @@ class About(Screen):
 	def showModelPic(self):
 		self.session.open(ModelPic)
 
+	def showTroubleshoot(self):
+		self.session.open(Troubleshoot)
+
 class ModelPic(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -211,9 +214,6 @@ class ModelPic(Screen):
 			if ptr != None:
 				self["boxpic"].instance.setPixmap(ptr)
 				self["boxpic"].show()
-
-	def showTroubleshoot(self):
-		self.session.open(Troubleshoot)
 
 class TranslationInfo(Screen):
 	def __init__(self, session):
