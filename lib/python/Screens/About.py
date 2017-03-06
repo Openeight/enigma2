@@ -131,10 +131,11 @@ class About(Screen):
 		self["key_yellow"] = Button(_("Memory Info"))
 		self["key_blue"] = Button(_("%s ") % getMachineName() + _("picture"))
 
-		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
+		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions", "ChannelSelectEPGActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
+				"info": self.showTranslationInfo,
 				"red": self.showCommits,
 				"green": self.showTroubleshoot,
 				"yellow": self.showMemoryInfo,
