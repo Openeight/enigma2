@@ -167,6 +167,7 @@ def getHotkeyFunctions():
 	hotkeyFunctions.append((_("Toggle HDMI In"), "Infobar/HDMIIn", "InfoBar"))
 	if SystemInfo["LcdLiveTV"]:
 		hotkeyFunctions.append((_("Toggle LCD LiveTV"), "Infobar/ToggleLCDLiveTV", "InfoBar"))
+	hotkeyFunctions.append((_("Toggle dashed flickering line for this service"), "Infobar/ToggleHideVBI", "InfoBar"))
 	hotkeyFunctions.append((_("Do nothing"), "Void", "InfoBar"))
 	hotkeyFunctions.append((_("HotKey Setup"), "Module/Screens.Hotkey/HotkeySetup", "Setup"))
 	hotkeyFunctions.append((_("Software update"), "Module/Screens.SoftwareUpdate/UpdatePlugin", "Setup"))
@@ -239,7 +240,6 @@ class HotkeySetup(Screen):
 			"0": self.keyNumberGlobal
 		})
 		self["HotkeyButtonActions"] = hotkeyActionMap(["HotkeyActions"], dict((x[1], self.hotkeyGlobal) for x in self.hotkeys))
-		self.longkeyPressed = False
 		self.onLayoutFinish.append(self.__layoutFinished)
 		self.onExecBegin.append(self.getFunctions)
 
@@ -247,18 +247,13 @@ class HotkeySetup(Screen):
 		self["choosen"].selectionEnabled(0)
 
 	def hotkeyGlobal(self, key):
-		if self.longkeyPressed:
-			self.longkeyPressed = False
-		else:
-			index = 0
-			for x in self.list[:config.misc.hotkey.additional_keys.value and len(self.hotkeys) or 10]:
-				if key == x[0][1]:
-					self["list"].moveToIndex(index)
-					if key.endswith("_long"):
-						self.longkeyPressed = True
-					break
-				index += 1
-			self.getFunctions()
+		index = 0
+		for x in self.list[:config.misc.hotkey.additional_keys.value and len(self.hotkeys) or 10]:
+			if key == x[0][1]:
+				self["list"].moveToIndex(index)
+				break
+			index += 1
+		self.getFunctions()
 
 	def keyOk(self):
 		self.session.openWithCallback(self.HotkeySetupSelectCallback, HotkeySetupSelect, self["list"].l.getCurrentSelection())
@@ -497,10 +492,6 @@ class InfoBarHotkey():
 		self.hotkeys = getHotkeys()
 		self["HotkeyButtonActions"] = helpableHotkeyActionMap(self, "HotkeyActions",
 			dict((x[1],(self.hotkeyGlobal, boundFunction(self.getHelpText, x[1]))) for x in self.hotkeys), -10)
-		self.onExecBegin.append(self.clearLongkeyPressed)
-
-	def clearLongkeyPressed(self):
-		self.longkeyPressed = False
 
 	def getKeyFunctions(self, key):
 		if key in ("play", "playpause", "Stop", "stop", "pause", "rewind", "next", "previous", "fastforward", "skip_back", "skip_forward") and (self.__class__.__name__ == "MoviePlayer" or hasattr(self, "timeshiftActivated") and self.timeshiftActivated()):
@@ -528,18 +519,14 @@ class InfoBarHotkey():
 			return _("Hotkey") + " " + tuple(x[0] for x in self.hotkeys if x[1] == key)[0]
 
 	def hotkeyGlobal(self, key):
-		if self.longkeyPressed:
-			self.longkeyPressed = False
+		selected = self.getKeyFunctions(key)
+		if not selected:
+			return 0
+		elif len(selected) == 1:
+			return self.execHotkey(selected[0])
 		else:
-			selected = self.getKeyFunctions(key)
-			if not selected:
-				return 0
-			elif len(selected) == 1:
-				self.longkeyPressed = key.endswith("_long")
-				return self.execHotkey(selected[0])
-			else:
-				key = tuple(x[0] for x in self.hotkeys if x[1] == key)[0]
-				self.session.openWithCallback(self.execHotkey, ChoiceBox, _("Hotkey") + " " + key, selected)
+			key = tuple(x[0] for x in self.hotkeys if x[1] == key)[0]
+			self.session.openWithCallback(self.execHotkey, ChoiceBox, _("Hotkey") + " " + key, selected)
 
 	def execHotkey(self, selected):
 		if selected:

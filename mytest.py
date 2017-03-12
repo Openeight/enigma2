@@ -14,6 +14,11 @@ enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
 from traceback import print_exc
+
+profile("SetupDevices")
+import Components.SetupDevices
+Components.SetupDevices.InitSetupDevices()
+
 profile("SimpleSummary")
 from Screens import InfoBar
 from Screens.SimpleSummary import SimpleSummary
@@ -333,31 +338,26 @@ class PowerKey:
 
 	def __init__(self, session):
 		self.session = session
-		globalActionMap.actions["power_up"]=self.powerup
-		globalActionMap.actions["power_long"]=self.powerlong
-		globalActionMap.actions["deepstandby"]=self.shutdown # frontpanel long power button press
-		globalActionMap.actions["discrete_off"]=self.standby
-		self.longkeyPressed = False
-
-	def MenuClosed(self, *val):
-		self.session.infobar = None
+		globalActionMap.actions["power_down"] = lambda *args: None
+		globalActionMap.actions["power_up"] = self.powerup
+		globalActionMap.actions["power_long"] = self.powerlong
+		globalActionMap.actions["deepstandby"] = self.shutdown # frontpanel long power button press
+		globalActionMap.actions["discrete_off"] = self.standby
 
 	def shutdown(self):
 		print "PowerOff - Now!"
 		if not Screens.Standby.inTryQuitMainloop and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND:
 			self.session.open(Screens.Standby.TryQuitMainloop, 1)
 
-	def powerlong(self):
-		if Screens.Standby.inTryQuitMainloop or (self.session.current_dialog and not self.session.current_dialog.ALLOW_SUSPEND):
-			return
-		self.doAction(config.misc.hotkey.power_long.value, True)
+	def powerup(self):
+		self.doAction(config.misc.hotkey.power.value)
 
-	def doAction(self, selected, longkey=False):
-		if self.longkeyPressed:
-			self.longkeyPressed = False
-		elif selected and self.session.infobar:
-			if longkey:
-				self.longkeyPressed = True
+	def powerlong(self):
+		if not(Screens.Standby.inTryQuitMainloop or (self.session.current_dialog and not self.session.current_dialog.ALLOW_SUSPEND)):
+			self.doAction(config.misc.hotkey.power_long.value)
+
+	def doAction(self, selected):
+		if selected:
 			selected = selected.split("/")
 			if selected[0] == "Module":
 				try:
@@ -373,11 +373,7 @@ class PowerKey:
 					if y is not None:
 						id = y.get("val")
 						if id and id == selected[1]:
-							menu_screen = self.session.openWithCallback(self.MenuClosed, MainMenu, x)
-							return
-
-	def powerup(self):
-		self.doAction(config.misc.hotkey.power.value)
+							self.session.open(MainMenu, x)
 
 	def standby(self):
 		if not Screens.Standby.inStandby and self.session.current_dialog and self.session.current_dialog.ALLOW_SUSPEND and self.session.in_exec:
@@ -560,10 +556,6 @@ profile("InputDevice")
 import Components.InputDevice
 Components.InputDevice.InitInputDevices()
 import Components.InputHotplug
-
-profile("SetupDevices")
-import Components.SetupDevices
-Components.SetupDevices.InitSetupDevices()
 
 profile("AVSwitch")
 import Components.AVSwitch

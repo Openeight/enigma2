@@ -46,7 +46,8 @@ import os, unicodedata
 profile("ChannelSelection.py after imports")
 
 FLAG_SERVICE_NEW_FOUND = 64
-FLAG_IS_DEDICATED_3D = 128 #define in lib/dvb/idvb.h as dxNewFound = 64 and dxIsDedicated3D = 128
+FLAG_IS_DEDICATED_3D = 128
+FLAG_HIDE_VBI = 512 #define in lib/dvb/idvb.h as dxNewFound = 64 and dxIsDedicated3D = 128
 
 class BouquetSelector(Screen):
 	def __init__(self, session, bouquets, selectedFunc, enableWrapAround=True):
@@ -129,14 +130,14 @@ class ChannelContextMenu(Screen):
 				"red": self.playMain,
 				"menu": self.openSetup,
 				"0": self.showServiceInformations,
-				"1":self.setStartupService,
-				"2":self.unsetStartupService,
+				"1": self.setStartupService,
+				"2": self.unsetStartupService,
 				"3": self.addServiceToBouquetOrAlternative,
 				"4": self.findCurrentlyPlayed,
 				"5": self.renameEntry,
 				"6": self.removeEntry,
 				"7": self.toggleMoveModeSelect,
-				"8": self.showMarkerInputBox,
+				"8": self.unhideParentalServices,
 				"9": self.bouquetMarkStart
 			})
 		menu = [ ]
@@ -181,6 +182,11 @@ class ChannelContextMenu(Screen):
 							append_when_current_valid(current, menu, (_("Unmark service as dedicated 3D service"), self.removeDedicated3DFlag), level=0)
 						else:
 							append_when_current_valid(current, menu, (_("Mark service as dedicated 3D service"), self.addDedicated3DFlag), level=0)
+					if not (current_sel_path):
+						if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_HIDE_VBI:
+							append_when_current_valid(current, menu, (_("Uncover dashed flickering line for this service"), self.removeHideVBIFlag), level=0)
+						else:
+							append_when_current_valid(current, menu, (_("Cover dashed flickering line for this service"), self.addHideVBIFlag), level=0)
 					if haveBouquets:
 						bouquets = self.csel.getBouquetList()
 						if bouquets is None:
@@ -293,6 +299,18 @@ class ChannelContextMenu(Screen):
 		eDVBDB.getInstance().removeFlag(eServiceReference(self.csel.getCurrentSelection().toString()), FLAG_IS_DEDICATED_3D)
 		eDVBDB.getInstance().reloadBouquets()
 		self.set3DMode(False)
+		self.close()
+
+	def addHideVBIFlag(self):
+		eDVBDB.getInstance().addFlag(eServiceReference(self.csel.getCurrentSelection().toString()), FLAG_HIDE_VBI)
+		eDVBDB.getInstance().reloadBouquets()
+		Screens.InfoBar.InfoBar.instance.showHideVBI()
+		self.close()
+
+	def removeHideVBIFlag(self):
+		eDVBDB.getInstance().removeFlag(eServiceReference(self.csel.getCurrentSelection().toString()), FLAG_HIDE_VBI)
+		eDVBDB.getInstance().reloadBouquets()
+		Screens.InfoBar.InfoBar.instance.showHideVBI()
 		self.close()
 
 	def isProtected(self):
@@ -642,7 +660,6 @@ class ChannelSelectionEPG(InfoBarHotkey):
 		self["ChannelSelectEPGActions"] = hotkeyActionMap(["ChannelSelectEPGActions"], dict((x[1], self.hotkeyGlobal) for x in self.hotkeys))
 		self.eventViewEPG = self.start_bouquet = self.epg_bouquet = None
 		self.currentSavedPath = []
-		self.onExecBegin.append(self.clearLongkeyPressed)
 
 	def getKeyFunctions(self, key):
 		selection = eval("config.misc.hotkey." + key + ".value.split(',')")
@@ -1386,7 +1403,7 @@ class ChannelSelectionBase(Screen):
 
 	def getServiceName(self, ref):
 		str = self.removeModeStr(ServiceReference(ref).getServiceName())
-		if 'User - bouquets' in str:
+		if 'bouquets' in str.lower():
 			return _("User - bouquets")
 		if not str:
 			pathstr = ref.getPath()
@@ -1797,17 +1814,17 @@ class ChannelSelectionBase(Screen):
 
 	def gotoCurrentServiceOrProvider(self, ref):
 		str = ref.toString()
+		playingref = self.session.nav.getCurrentlyPlayingServiceReference()
 		if _("Providers") in str:
 			service = self.session.nav.getCurrentService()
 			if service:
 				info = service.info()
-				if info:
+				if info and playingref:
 					provider = info.getInfoString(iServiceInformation.sProvider)
-					op = int(self.session.nav.getCurrentlyPlayingServiceOrGroup().toString().split(':')[6][:-4] or "0",16)
-					refstr = '1:7:0:0:0:0:0:0:0:0:(provider == \"%s\") && (satellitePosition == %s) && %s ORDER BY name:%s' % (provider, op, self.service_types[self.service_types.rfind(':')+1:],provider)
+					op = int(playingref.toString().split(':')[6][:-4] or "0",16)
+					refstr = '1:7:0:0:0:0:0:0:0:0:(provider == \"%s\") && (satellitePosition == %s) && %s ORDER BY name:%s' % (provider, op, self.service_types[self.service_types.rfind(':')+1:], provider)
 					self.setCurrentSelection(eServiceReference(refstr))
 		elif not self.isBasePathEqual(self.bouquet_root) or self.bouquet_mark_edit == EDIT_ALTERNATIVES:
-			playingref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			if playingref:
 				self.setCurrentSelectionAlternative(playingref)
 
@@ -2500,7 +2517,8 @@ class SimpleChannelSelection(ChannelSelectionBase, SelectionEventInfo):
 				"keyTV": self.setModeTv,
 			})
 		self.bouquet_mark_edit = OFF
-		self.title = title
+		if isinstance(title, str):
+			self.maintitle = title
 		self.currentBouquet = currentBouquet
 		self.returnBouquet = returnBouquet
 		self.setService = setService

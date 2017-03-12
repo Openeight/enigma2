@@ -1199,7 +1199,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def itemSelectedCheckTimeshiftCallback(self, ext, path, answer):
 		if answer:
-			if ext == '.iso' and BlurayPlayer is not None:
+			if ext in (".iso", ".img", ".nrg") and BlurayPlayer is not None:
 				try:
 					from Plugins.Extensions.BlurayPlayer import blurayinfo
 					if blurayinfo.isBluray(path) == 1:
@@ -1665,9 +1665,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				# if path ends in '/', p is blank.
 				p = os.path.split(p[0])
 			name = p[1]
+			self.extension = ""
 		else:
 			info = item[1]
 			name = info.getName(item[0])
+			name, self.extension = os.path.splitext(name)
+
 		from Screens.VirtualKeyBoard import VirtualKeyBoard
 		self.session.openWithCallback(self.renameCallback, VirtualKeyBoard,
 			title = _("Rename"),
@@ -1692,7 +1695,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def renameCallback(self, name):
 		if not name:
 			return
-		name = name.strip()
+		name = "".join((name.strip(), self.extension))
 		item = self.getCurrentSelection()
 		if item and item[0]:
 			try:

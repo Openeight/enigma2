@@ -4,6 +4,7 @@ dist_install_DATA = \
 	ad.png \
 	ae.png \
 	bg.png \
+	cn.png \
 	cz.png \
 	de.png \
 	dk.png \
@@ -13,8 +14,10 @@ dist_install_DATA = \
 	fi.png \
 	fr.png \
 	gr.png \
+	hk.png \
 	hr.png \
 	hu.png \
+	id.png \
 	il.png \
 	ir.png \
 	is.png \

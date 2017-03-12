@@ -172,7 +172,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.rename_repeat = rename_repeat
 		self.conflict_detection = conflict_detection
 		self.setAdvancedPriorityFrontend = None
-		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"]:
+		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"] or SystemInfo["ATSC_priority_tuner_available"]:
 			rec_ref = self.service_ref and self.service_ref.ref
 			str_service = rec_ref and rec_ref.toString()
 			if str_service and '%3a//' not in str_service and not str_service.rsplit(":", 1)[1].startswith("/"):
@@ -181,10 +181,16 @@ class RecordTimerEntry(timer.TimerEntry, object):
 					if SystemInfo["DVB-T_priority_tuner_available"] and config.usage.recording_frontend_priority_dvbt.value != "-2":
 						if config.usage.recording_frontend_priority_dvbt.value != config.usage.frontend_priority.value:
 							self.setAdvancedPriorityFrontend = config.usage.recording_frontend_priority_dvbt.value
+					if SystemInfo["ATSC_priority_tuner_available"] and config.usage.recording_frontend_priority_atsc.value != "-2":
+						if config.usage.recording_frontend_priority_atsc.value != config.usage.frontend_priority.value:
+							self.setAdvancedPriorityFrontend = config.usage.recording_frontend_priority_atsc.value
 				elif type_service == 0xFFFF:
 					if SystemInfo["DVB-C_priority_tuner_available"] and config.usage.recording_frontend_priority_dvbc.value != "-2":
 						if config.usage.recording_frontend_priority_dvbc.value != config.usage.frontend_priority.value:
 							self.setAdvancedPriorityFrontend = config.usage.recording_frontend_priority_dvbc.value
+					if SystemInfo["ATSC_priority_tuner_available"] and config.usage.recording_frontend_priority_atsc.value != "-2":
+						if config.usage.recording_frontend_priority_atsc.value != config.usage.frontend_priority.value:
+							self.setAdvancedPriorityFrontend = config.usage.recording_frontend_priority_atsc.value
 				else:
 					if SystemInfo["DVB-S_priority_tuner_available"] and config.usage.recording_frontend_priority_dvbs.value != "-2":
 						if config.usage.recording_frontend_priority_dvbs.value != config.usage.frontend_priority.value:
@@ -740,7 +746,10 @@ class RecordTimer(timer.Timer):
 				self.cleanupDisabled()
 				# Remove old timers as set in config
 				self.cleanupDaily(config.recording.keep_timers.value)
-				insort(self.processed_timers, w)
+				# If we want to keep done timers, re-insert in the active list
+				if config.recording.keep_timers.value > 0 and w not in self.processed_timers:
+					insort(self.processed_timers, w)
+
 		self.stateChanged(w)
 
 	def checkWrongRunningTimers(self):
@@ -1267,8 +1276,9 @@ class RecordTimer(timer.Timer):
 			for x in self.timer_list:
 				if x.setAutoincreaseEnd():
 					self.timeChanged(x)
-		# now the timer should be in the processed_timers list. remove it from there.
-		self.processed_timers.remove(entry)
+		if entry in self.processed_timers:
+			# now the timer should be in the processed_timers list. remove it from there.
+			self.processed_timers.remove(entry)
 		self.saveTimer()
 
 	def shutdown(self):

@@ -1182,7 +1182,7 @@ class PluginDetails(Screen, PackageInfoHandler):
 		self.skin_path = plugin_path
 		self.language = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
 		self.attributes = None
-		PackageInfoHandler.__init__(self, self.statusCallback, blocking = False)
+		PackageInfoHandler.__init__(self, self.statusCallback)
 		self.directory = resolveFilename(SCOPE_METADIR)
 		if packagedata:
 			self.pluginname = packagedata[0]
@@ -1832,9 +1832,7 @@ class PacketManager(Screen, NumericalTextInput):
 	def exit(self):
 		self.ipkg.stop()
 		if self.Console is not None:
-			if len(self.Console.appContainers):
-				for name in self.Console.appContainers.keys():
-					self.Console.kill(name)
+			self.Console.killAll()
 		rcinput = eRCInput.getInstance()
 		rcinput.setKeyboardMode(rcinput.kmNone)
 		self.close()

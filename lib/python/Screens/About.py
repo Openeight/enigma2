@@ -1,4 +1,5 @@
 from Screen import Screen
+from Screens.MessageBox import MessageBox
 from Components.config import config
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
@@ -20,13 +21,13 @@ from Components.AVSwitch import AVSwitch
 from os import path
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
-import skin
+import skin, os
 
 class About(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("About"))
-		hddsplit, = skin.parameters.get("AboutHddSplit", (0,))
+		hddsplit = skin.parameters.get("AboutHddSplit", 0)
 
 		AboutText = _("Model: %s %s") % (getMachineBrand(), getMachineName()) + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
@@ -68,7 +69,7 @@ class About(Screen):
 		if fp_version is None:
 			fp_version = ""
 		else:
-			fp_version = _("Frontprocessor version: %d") % fp_version
+			fp_version = _("Frontprocessor version: %s") % fp_version
 			AboutText += fp_version + "\n"
 
 		self["FPVersion"] = StaticText(fp_version)
@@ -125,17 +126,18 @@ class About(Screen):
 			AboutText += "\n" + x[0] + ": " + x[1]
 
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
-		self["key_green"] = Button(_("Translations"))
+		self["key_green"] = Button(_("Troubleshoot"))
 		self["key_red"] = Button(_("Latest Commits"))
 		self["key_yellow"] = Button(_("Memory Info"))
 		self["key_blue"] = Button(_("%s ") % getMachineName() + _("picture"))
 
-		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
+		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions", "ChannelSelectEPGActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
+				"info": self.showTranslationInfo,
 				"red": self.showCommits,
-				"green": self.showTranslationInfo,
+				"green": self.showTroubleshoot,
 				"yellow": self.showMemoryInfo,
 				"blue": self.showModelPic,
 				"up": self["AboutScrollLabel"].pageUp,
@@ -153,6 +155,9 @@ class About(Screen):
 		
 	def showModelPic(self):
 		self.session.open(ModelPic)
+
+	def showTroubleshoot(self):
+		self.session.open(Troubleshoot)
 
 class ModelPic(Screen):
 	def __init__(self, session):
@@ -271,9 +276,9 @@ class CommitInfo(Screen):
 
 		self.project = 0
 		self.projects = [
-			("enigma2", "enigma2"),
-			("OctagonEightSD", "OctagonEightSD"),
-			("OctagonEightFHD", "OctagonEightFHD"),
+			("https://api.github.com/repos/Openeight/enigma2/commits", "enigma2"),
+			("https://api.github.com/repos/Openeight/OctagonEightSD/commits", "OctagonEightSD"),
+			("https://api.github.com/repos/Openeight/OctagonEightFHD/commits", "OctagonEightFHD"),
 		]
 		self.cachedProjects = {}
 		self.Timer = eTimer()
@@ -281,7 +286,7 @@ class CommitInfo(Screen):
 		self.Timer.start(50, True)
 
 	def readGithubCommitLogs(self):
-		url = 'https://api.github.com/repos/Openeight/%s/commits' % self.projects[self.project][0]
+		url = self.projects[self.project][0]
 		commitlog = ""
 		from datetime import datetime
 		from json import loads
@@ -290,7 +295,13 @@ class CommitInfo(Screen):
 			commitlog += 80 * '-' + '\n'
 			commitlog += url.split('/')[-2] + '\n'
 			commitlog += 80 * '-' + '\n'
-			for c in loads(urlopen(url, timeout=5).read()):
+			try:
+				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
+				from ssl import _create_unverified_context
+				log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
+			except:
+				log = loads(urlopen(url, timeout=5).read())
+			for c in log:
 				creator = c['commit']['author']['name']
 				title = c['commit']['message']
 				date = datetime.strptime(c['commit']['committer']['date'], '%Y-%m-%dT%H:%M:%SZ').strftime('%x %X')
@@ -406,3 +417,118 @@ class MemoryInfoSkinParams(HTMLComponent, GUIComponent):
 		return GUIComponent.applySkin(self, desktop, screen)
 
 	GUI_WIDGET = eLabel
+
+class Troubleshoot(Screen):
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.setTitle(_("Troubleshoot"))
+		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
+		self["key_red"] = Button()
+		self["key_green"] = Button()
+
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"],
+			{
+				"cancel": self.close,
+				"up": self["AboutScrollLabel"].pageUp,
+				"down": self["AboutScrollLabel"].pageDown,
+				"left": self.left,
+				"right": self.right,
+				"red": self.red,
+				"green": self.green,
+			})
+
+		self.container = eConsoleAppContainer()
+		self.container.appClosed.append(self.appClosed)
+		self.container.dataAvail.append(self.dataAvail)
+		self.commandIndex = 0
+		self.updateOptions()
+		self.onLayoutFinish.append(self.run_console)
+
+	def left(self):
+		self.commandIndex = (self.commandIndex - 1) % len(self.commands)
+		self.updateKeys()
+		self.run_console()
+
+	def right(self):
+		self.commandIndex = (self.commandIndex + 1) % len(self.commands)
+		self.updateKeys()
+		self.run_console()
+
+	def red(self):
+		if self.commandIndex >= self.numberOfCommands:
+			self.session.openWithCallback(self.removeAllLogfiles, MessageBox, _("Do you want to remove all the crahs logfiles"), default=False)
+		else:
+			self.close()
+
+	def green(self):
+		if self.commandIndex >= self.numberOfCommands:
+			try:
+				os.remove(self.commands[self.commandIndex][4:])
+			except:
+				pass
+			self.updateOptions()
+		self.run_console()
+
+	def removeAllLogfiles(self, answer):
+		if answer:
+			for fileName in self.getLogFilesList():
+				try:
+					os.remove(fileName)
+				except:
+					pass
+			self.updateOptions()
+			self.run_console()
+
+	def appClosed(self, retval):
+		if retval:
+			self["AboutScrollLabel"].setText(_("Some error occured - Please try later"))
+
+	def dataAvail(self, data):
+		self["AboutScrollLabel"].appendText(data)
+
+	def run_console(self):
+		self["AboutScrollLabel"].setText("")
+		self.setTitle("%s - %s" % (_("Troubleshoot"), self.titles[self.commandIndex]))
+		command = self.commands[self.commandIndex]
+		if command.startswith("cat "):
+			try:
+				self["AboutScrollLabel"].setText(open(command[4:], "r").read())
+			except:
+				self["AboutScrollLabel"].setText(_("Logfile does not exist anymore"))
+		else:
+			try:
+				if self.container.execute(command):
+					raise Exception, "failed to execute: ", command
+			except Exception, e:
+				self["AboutScrollLabel"].setText("%s\n%s" % (_("Some error occured - Please try later"), e))
+
+	def cancel(self):
+		self.container.appClosed.remove(self.appClosed)
+		self.container.dataAvail.remove(self.dataAvail)
+		self.container = None
+		self.close()
+
+	def getLogFilesList(self):
+		import glob
+		home_root = "/home/root/enigma2_crash.log"
+		tmp = "/tmp/enigma2_crash.log"
+		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile(home_root) and [home_root] or []) + (os.path.isfile(tmp) and [tmp] or [])
+
+	def updateOptions(self):
+		self.titles = ["dmesg", "ifconfig", "df", "top", "ps"]
+		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps"]
+		self.numberOfCommands = len(self.commands)
+		fileNames = self.getLogFilesList()
+		if fileNames:
+			totalNumberOfLogfiles = len(fileNames)
+			logfileCounter = 1
+			for fileName in reversed(fileNames):
+				self.titles.append("logfile %s (%s/%s)" % (fileName, logfileCounter, totalNumberOfLogfiles))
+				self.commands.append("cat %s" % (fileName))
+				logfileCounter += 1
+		self.commandIndex = min(len(self.commands) - 1, self.commandIndex)
+		self.updateKeys()
+
+	def updateKeys(self):
+		self["key_red"].setText(_("Cancel") if self.commandIndex < self.numberOfCommands else _("Remove all logfiles"))
+		self["key_green"].setText(_("Refresh") if self.commandIndex < self.numberOfCommands else _("Remove this logfile"))
