@@ -81,6 +81,11 @@ void eDVBServicePMTHandler::channelStateChanged(iDVBChannel *channel)
 						eDebug("[eDVBServicePMTHandler] create cached caPMT");
 						eDVBCAHandler::getInstance()->handlePMT(m_reference, m_service);
 					}
+					else if (m_ca_servicePtr && (m_service->m_flags & eDVBService::dxIsScrambledPMT))
+					{
+						eDebug("[eDVBServicePMTHandler] create caPMT to descramble PMT");
+						eDVBCAHandler::getInstance()->handlePMT(m_reference, m_service);
+					}
 				}
 			}
 
@@ -344,7 +349,7 @@ void eDVBServicePMTHandler::getAITApplications(std::map<int, std::string> &aitli
 	}
 }
 
-void eDVBServicePMTHandler::getCaIds(std::vector<int> &caids, std::vector<int> &ecmpids)
+void eDVBServicePMTHandler::getCaIds(std::vector<int> &caids, std::vector<int> &ecmpids, std::vector<std::string> &ecmdatabytes)
 {
 	program prog;
 
@@ -354,6 +359,7 @@ void eDVBServicePMTHandler::getCaIds(std::vector<int> &caids, std::vector<int> &
 		{
 			caids.push_back(it->caid);
 			ecmpids.push_back(it->capid);
+			ecmdatabytes.push_back(it->databytes);
 		}
 	}
 }
@@ -701,6 +707,7 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 			program::capid_pair pair;
 			pair.caid = *it;
 			pair.capid = -1; // not known yet
+			pair.databytes.clear();
 			program.caids.push_back(pair);
 		}
 	}

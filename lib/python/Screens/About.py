@@ -95,7 +95,7 @@ class About(Screen):
 		self["TunerHeader"] = StaticText(_("Detected NIMs:"))
 		AboutText += "\n" + _("Detected NIMs:") + "\n"
 
-		nims = nimmanager.nimList(showFBCTuners=False)
+		nims = nimmanager.nimListCompressed()
 		for count in range(len(nims)):
 			if count < 4:
 				self["Tuner" + str(count)] = StaticText(nims[count])
@@ -273,6 +273,12 @@ class CommitInfo(Screen):
 			})
 
 		self["key_red"] = Button(_("Cancel"))
+
+		# get the branch to display from the Enigma version
+		try:
+			branch = "?sha=" + about.getEnigmaVersionString().split("-")[-1]
+		except:
+			branch = ""
 
 		self.project = 0
 		self.projects = [

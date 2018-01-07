@@ -120,7 +120,21 @@ class VirtualKeyBoard(Screen):
 		self.buildVirtualKeyBoard()
 
 	def setLang(self):
-		if self.lang == 'cs_CZ':
+		if self.lang == 'ar_AE':
+			self.keys_list = [
+				[u"EXIT", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"BACKSPACE"],
+				[u"ض", u"ص", u"ث", u"ق", u"ف", u"غ", u"ع", u"ه", u"خ", u"ح", u"ج", u"د"],
+				[u"ش", u"س", u"ي", u"ب", u"ل", u"ا", u"ت", u"ن", u"م", u"ك", u"ط", u"#"],
+				[u"ئ", u"ء", u"ؤ", u"ر", u"لا", u"ى", u"ة", u"و", u"ز", "ظ", u"ذ", u"CLEAR"],
+				[u"SHIFT", u"SPACE", u"+", u"-", u"*", u"/", u".", u",", u"@", u"%", u"&", u"OK"]]
+			self.shiftkeys_list = [
+				[u"EXIT", u"!", u'"', u"§", u"$", u"^", u"<", u">", u"(", u")", u"=", u"BACKSPACE"],
+				[u"َ", u"ً", u"ُ", u"ٌ", u"لإ", u"إ", u"‘", u"÷", u"×", u"؛", u"<", u">"],
+				[u"ِ", u"ٍ", u"]", u"[", u"لأ", u"أ", u"ـ", u"،", u"/", u":", u"~", u"'"],
+				[u"ْ", u"}", u"{", u"لآ", u"آ", u"’", u",", u".", u"؟", u":", u"_", u"CLEAR"],
+				[u"SHIFT", u"SPACE", u"?", u"\\", u"=", u"ّ", u"~", u"OK"]]
+			self.nextLang = 'cs_CZ'
+		elif self.lang == 'cs_CZ':
 			self.keys_list = [
 				[u"EXIT", u"1", u"2", u"3", u"4", u"5", u"6", u"7", u"8", u"9", u"0", u"BACKSPACE"],
 				[u"q", u"w", u"e", u"r", u"t", u"z", u"u", u"i", u"o", u"p", u"ú", u"+"],
@@ -316,9 +330,8 @@ class VirtualKeyBoard(Screen):
 				[u">", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u";", u":", u"_", u"CLEAR"],
 				[u"SHIFT", u"SPACE", u"OK", u"LEFT", u"RIGHT", u"~"]]
 			self.lang = 'en_EN'
-			self.nextLang = 'cs_CZ'
+			self.nextLang = 'ar_AE'
 		self["country"].setText(self.lang)
-		self.max_key=47+len(self.keys_list[4])
 
 	def virtualKeyBoardEntryComponent(self, keys):
 		w, h = skin.parameters.get("VirtualKeyboard",(45, 45))
@@ -342,8 +355,11 @@ class VirtualKeyBoard(Screen):
 	def buildVirtualKeyBoard(self):
 		self.previousSelectedKey = None
 		self.list = []
+		self.max_key = 0
 		for keys in self.shiftMode and self.shiftkeys_list or self.keys_list:
 			self.list.append(self.virtualKeyBoardEntryComponent(keys))
+			self.max_key += len(keys)
+		self.max_key -= 1
 		self.markSelectedKey()
 
 	def markSelectedKey(self):
@@ -351,7 +367,11 @@ class VirtualKeyBoard(Screen):
 		if self.previousSelectedKey is not None:
 			self.list[self.previousSelectedKey /12] = self.list[self.previousSelectedKey /12][:-1]
 		width = self.key_sel.size().width()
-		x = self.list[self.selectedKey/12][self.selectedKey % 12 + 1][1]
+		try:
+			x = self.list[self.selectedKey/12][self.selectedKey % 12 + 1][1]
+		except IndexError:
+			self.selectedKey = self.max_key
+			x = self.list[self.selectedKey/12][self.selectedKey % 12 + 1][1]
 		self.list[self.selectedKey / 12].append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(width, h), png=self.key_sel))
 		self.previousSelectedKey = self.selectedKey
 		self["list"].setList(self.list)

@@ -147,8 +147,9 @@ class Dish(Screen):
 			self.hide()
 
 	def __serviceTunedIn(self):
-		self.pmt_timeout = self.close_timeout
-		self.timeoutTimer.start(500, False)
+		if self.close_timeout is not None:
+			self.pmt_timeout = self.close_timeout
+			self.timeoutTimer.start(500, False)
 
 	def testIsTuned(self):
 		if self.pmt_timeout >= 0:
@@ -226,7 +227,7 @@ class Dish(Screen):
 
 	def OrbToStr(self, orbpos):
 		if orbpos == INVALID_POSITION:
-			return "N/A"
+			return _("N/A")
 		if orbpos > 1800:
 			orbpos = 3600 - orbpos
 			return "%d.%d°W" % (orbpos/10, orbpos%10)

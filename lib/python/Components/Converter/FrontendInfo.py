@@ -33,6 +33,7 @@ class FrontendInfo(Converter, object):
 			type = type.split(",")
 			self.space_for_tuners = len(type) > 1 and int(type[1]) or 10
 			self.space_for_tuners_with_spaces = len(type) > 2 and int(type[2]) or 6
+			self.show_all_non_link_tuners = True if len(type) <= 3 else type[3] == "True"
 		elif type == "USE_TUNERS_STRING":
 			self.type = self.USE_TUNERS_STRING
 		else:
@@ -48,14 +49,14 @@ class FrontendInfo(Converter, object):
 			if count is not None:
 				return str(count)
 			else:
-				return "N/A"
+				return _("N/A")
 		elif self.type == self.AGC:
 			percent = self.source.agc
 		elif (self.type == self.SNR and not swapsnr) or (self.type == self.SNRdB and swapsnr):
 			percent = self.source.snr
 		elif self.type  == self.SNR or self.type == self.SNRdB:
 			if self.source.snr_db is not None:
-				return "%3.01f dB" % (self.source.snr_db / 100.0)
+				return _("%3.01f dB") % (self.source.snr_db / 100.0)
 			elif self.source.snr is not None: #fallback to normal SNR...
 				percent = self.source.snr
 		elif self.type == self.TUNER_TYPE:
@@ -68,7 +69,7 @@ class FrontendInfo(Converter, object):
 						color = "\c0000??00"
 					elif self.source.tuner_mask & 1 << n.slot:
 						color = "\c00????00"
-					elif len(nimmanager.nim_slots) <= self.space_for_tuners:
+					elif len(nimmanager.nim_slots) <= self.space_for_tuners or self.show_all_non_link_tuners and not (n.isFBCLink() or n.internally_connectable):
 						color = "\c007?7?7?"
 					else:
 						continue
@@ -91,7 +92,7 @@ class FrontendInfo(Converter, object):
 					string += color + chr(ord("A")+n.slot)
 			return string
 		if percent is None:
-			return "N/A"
+			return _("N/A")
 		return "%d %%" % (percent * 100 / 65535)
 
 	@cached
