@@ -361,6 +361,18 @@ def InitUsageConfig():
 		config.usage.standbyLED = ConfigYesNo(default = True)
 		config.usage.standbyLED.addNotifier(standbyLEDChanged)
 
+	if SystemInfo["PowerOffDisplay"]:
+		def powerOffDisplayChanged(configElement):
+			open(SystemInfo["PowerOffDisplay"], "w").write(configElement.value and "1" or "0")
+		config.usage.powerOffDisplay = ConfigYesNo(default = True)
+		config.usage.powerOffDisplay.addNotifier(powerOffDisplayChanged)
+
+	if SystemInfo["LCDshow_symbols"]:
+		def lcdShowSymbols(configElement):
+			open(SystemInfo["LCDshow_symbols"], "w").write(configElement.value and "1" or "0")
+		config.usage.lcd_show_symbols = ConfigYesNo(default = True)
+		config.usage.lcd_show_symbols.addNotifier(lcdShowSymbols)
+
 	if SystemInfo["WakeOnLAN"]:
 		def wakeOnLANChanged(configElement):
 			if "fp" in SystemInfo["WakeOnLAN"]:
@@ -529,6 +541,12 @@ def InitUsageConfig():
 			open(SystemInfo["HasHDMIpreemphasis"], "w").write(configElement.value)
 		config.av.hdmipreemphasis = ConfigSelection(default = "off", choices = [ ("on", _("Yes")), ("off", _("No"))] )
 		config.av.hdmipreemphasis.addNotifier(setHDMIpreemphasis)
+
+	if SystemInfo["HasColorimetry"]:
+		def setColorimetry(configElement):
+			open(SystemInfo["HasColorimetry"], "w").write(configElement.value)
+		config.av.hdmicolorimetry = ConfigSelection(default = "auto", choices = [("auto", _("Auto")), ("bt2020ncl", _("BT 2020 NCL")), ("bt2020cl", _("BT 2020 CL")), ("bt709", _("BT 709"))])
+		config.av.hdmicolorimetry.addNotifier(setColorimetry)
 
 	config.subtitles = ConfigSubsection()
 	config.subtitles.ttx_subtitle_colors = ConfigSelection(default = "1", choices = [

@@ -251,18 +251,6 @@ self.condition = nimmanager.somethingConnected() and not config.misc.installwiza
 				<listentry caption="Yes, do another manual scan now" step="manualscan" />
 			</list>
 		</step>
-	<!--	<step id="softcam">
-			<condition>
-self.condition = config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
-			</condition>
-			<text value="Would you like to install a softcam?" />
-			<config screen="InstallWizard" module="InstallWizard" args="2" type="ConfigList" />
-			<code>
-self.clearSelectedKeys()
-self.selectKey("LEFT")
-self.selectKey("RIGHT")
-			</code>
-		</step>-->
 		<step id="end" laststep="true">
 			<condition>
 self.condition = self.isLastWizard

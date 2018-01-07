@@ -18,6 +18,12 @@ def getImageVersionString():
 		pass
 	return _("unavailable")
 
+def getFlashDateString():
+	try:
+		return time.strftime(_("%Y-%m-%d %H:%M"), time.strptime(open("/etc/version").read().strip(), '%Y%m%d%H%M'))
+	except:
+		return _("unknown")
+
 def getEnigmaVersionString():
 	import enigma
 	enigma_version = enigma.getEnigmaVersionString()
@@ -69,7 +75,10 @@ def getCPUString():
 		if os.path.isfile('/proc/stb/fp/temp_sensor_avs'):
 			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n','')
 		if os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
-			temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip())/1000
+			try:
+				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip())/1000
+			except:
+				pass
 		if temperature:
 			return "%s %s MHz (%s) %s°C" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature)
 		return "%s %s MHz (%s)" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count)

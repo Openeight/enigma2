@@ -5,7 +5,7 @@ from Tools.BoundFunction import boundFunction
 from Components.Sources.StaticText import StaticText
 from Components.ActionMap import HelpableActionMap, ActionMap, NumberActionMap
 from Components.Label import Label
-from Components.config import config, ConfigSubsection, ConfigSelection, ConfigSubList, getConfigListEntry, KEY_LEFT, KEY_RIGHT, KEY_0, ConfigNothing, ConfigPIN, ConfigText, ConfigYesNo, NoSave
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigSubList, getConfigListEntry, KEY_LEFT, KEY_RIGHT, KEY_0, ConfigNothing, ConfigPIN, ConfigYesNo, NoSave
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.SystemInfo import SystemInfo
 from enigma import eTimer, eDVBCI_UI, eDVBCIInterfaces, eEnv

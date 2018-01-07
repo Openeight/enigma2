@@ -15,6 +15,7 @@ dist_pkgdata_DATA = \
 	startwizard.xml \
 	freesat.t1 \
 	freesat.t2 \
+	iso-639-3.pck \
 	timezone.xml \
 	unicable.xml
 

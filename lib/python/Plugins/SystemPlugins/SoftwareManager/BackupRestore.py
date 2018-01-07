@@ -9,16 +9,14 @@ from Components.Sources.StaticText import StaticText
 from Components.MenuList import MenuList
 from Components.Sources.List import List
 from Components.Button import Button
-from Components.config import getConfigListEntry, configfile, ConfigSelection, ConfigSubsection, ConfigText, ConfigLocations
-from Components.config import config
-from Components.ConfigList import ConfigList,ConfigListScreen
+from Components.config import config, configfile, ConfigSubsection, ConfigText, ConfigLocations
+from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.FileList import MultiFileSelectList
 from Components.Network import iNetwork
-from Plugins.Plugin import PluginDescriptor
-from enigma import eTimer, eEnv, eConsoleAppContainer, eEPGCache
+from enigma import eEnv, eConsoleAppContainer, eEPGCache
 from Tools.Directories import *
-from os import popen, path, makedirs, listdir, access, stat, rename, remove, W_OK, R_OK
-from time import gmtime, strftime, localtime
+from os import popen, path, makedirs, listdir, stat, rename, remove
+from time import strftime
 from datetime import datetime
 from boxbranding import getBoxType, getMachineBrand, getMachineName, getImageVersion, getImageDistro
 

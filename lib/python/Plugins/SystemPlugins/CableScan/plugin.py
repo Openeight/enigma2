@@ -5,7 +5,6 @@ from Plugins.Plugin import PluginDescriptor
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager
-from Components.MenuList import MenuList
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry, ConfigFloat
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
@@ -244,8 +243,11 @@ class CableScanAutoScreen(CableScanScreen):
 Session = None
 CableScanAutoStartTimer = eTimer()
 
+def getNimList():
+	return [x for x in nimmanager.getNimListOfType("DVB-C") if config.Nims[x].configMode.value != "nothing"]
+
 def CableScanMain(session, **kwargs):
-	nimlist = nimmanager.getNimListOfType("DVB-C")
+	nimlist = getNimList()
 	if nimlist:
 		Session.open(CableScanScreen, nimlist)
 	else:
@@ -259,7 +261,7 @@ def restartScanAutoStartTimer(reply=False):
 		CableScanAutoStartTimer.startLongTimer(3600)
 
 def CableScanAuto():
-	nimlist = nimmanager.getNimListOfType("DVB-C")
+	nimlist = getNimList()
 	if nimlist:
 		if Session.nav.RecordTimer.isRecording():
 			restartScanAutoStartTimer()
