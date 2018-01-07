@@ -25,3 +25,5 @@ else
 SUBDIRS += display
 endif
 
+iso-639-3.pck: $(srcdir)/iso-639-3.tab
+	python $(srcdir)/convert-iso-639-3.py $< $@
