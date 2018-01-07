@@ -20,7 +20,7 @@ from Components.Label import Label, MultiColorLabel
 from Components.ScrollLabel import ScrollLabel
 from Components.Pixmap import Pixmap, MultiPixmap
 from Components.MenuList import MenuList
-from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigIP, ConfigText, ConfigPassword, ConfigSelection, getConfigListEntry, ConfigNumber, ConfigLocations, NoSave, ConfigBoolean
+from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigIP, ConfigText, ConfigPassword, ConfigSelection, getConfigListEntry, ConfigNumber, ConfigLocations, NoSave
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.FileList import MultiFileSelectList
@@ -497,9 +497,9 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_NETWORKSETUP):
 				callFnc = p.__call__["ifaceSupported"](self.iface)
 				if callFnc is not None:
-					if p.__call__.has_key("WlanPluginEntry"): # internally used only for WLAN Plugin
+					if "WlanPluginEntry" in p.__call__: # internally used only for WLAN Plugin
 						self.extended = callFnc
-						if p.__call__.has_key("configStrings"):
+						if "configStrings" in p.__call__:
 							self.configStrings = p.__call__["configStrings"]
 						isExistBcmWifi = os.path.exists("/tmp/bcm/" + self.iface)
 						if not isExistBcmWifi:
@@ -556,7 +556,7 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 				self.close('cancel')
 
 	def keySaveConfirm(self, ret = False):
-		if ret == True:
+		if ret:
 			num_configured_if = len(iNetwork.getConfiguredAdapters())
 			if num_configured_if >= 1:
 				if self.iface in iNetwork.getConfiguredAdapters():
@@ -584,7 +584,7 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 			self.applyConfig(True)
 
 	def applyConfig(self, ret = False):
-		if ret == True:
+		if ret:
 			self.applyConfigRef = None
 			iNetwork.setAdapterAttribute(self.iface, "up", self.activateInterfaceEntry.value)
 			iNetwork.setAdapterAttribute(self.iface, "dhcp", self.dhcpConfigEntry.value)
@@ -894,16 +894,16 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			callFnc = p.__call__["ifaceSupported"](self.iface)
 			if callFnc is not None:
 				self.extended = callFnc
-				if p.__call__.has_key("WlanPluginEntry"): # internally used only for WLAN Plugin
+				if "WlanPluginEntry" in p.__call__: # internally used only for WLAN Plugin
 					menu.append((_("Scan wireless networks"), "scanwlan"))
 					if iNetwork.getAdapterAttribute(self.iface, "up"):
 						menu.append((_("Show WLAN status"), "wlanstatus"))
 				else:
-					if p.__call__.has_key("menuEntryName"):
+					if "menuEntryName" in p.__call__:
 						menuEntryName = p.__call__["menuEntryName"](self.iface)
 					else:
 						menuEntryName = _('Extended setup...')
-					if p.__call__.has_key("menuEntryDescription"):
+					if "menuEntryDescription" in p.__call__:
 						menuEntryDescription = p.__call__["menuEntryDescription"](self.iface)
 					else:
 						menuEntryDescription = _('Extended network setup plugin...')
@@ -947,7 +947,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			self.updateStatusbar()
 
 	def restartLan(self, ret = False):
-		if ret == True:
+		if ret:
 			iNetwork.restartNetwork(self.restartLanDataAvail)
 			self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type = MessageBox.TYPE_INFO, enable_input = False)
 

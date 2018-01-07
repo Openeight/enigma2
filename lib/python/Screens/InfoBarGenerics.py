@@ -11,7 +11,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.Boolean import Boolean
 from Components.config import config, ConfigBoolean, ConfigClock, ConfigText
 from Components.SystemInfo import SystemInfo
-from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath, ConfigSelection
+from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath
 from Components.VolumeControl import VolumeControl
 from Components.Sources.StaticText import StaticText
 from EpgSelection import EPGSelection
@@ -319,7 +319,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.hide()
 
 	def hidePipOnExitCallback(self, answer):
-		if answer == True:
+		if answer:
 			self.showPiP()
 
 	def connectShowHideNotifier(self, fnc):
@@ -390,13 +390,13 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.hideTimer.stop()
 
 	def lockShow(self):
-		self.__locked = self.__locked + 1
+		self.__locked += 1
 		if self.execing:
 			self.show()
 			self.hideTimer.stop()
 
 	def unlockShow(self):
-		self.__locked = self.__locked - 1
+		self.__locked -= 1
 		if self.execing:
 			self.startHideTimer()
 
@@ -494,7 +494,7 @@ class NumberZap(Screen):
 
 	def keyNumberGlobal(self, number):
 		self.startTimer(repeat=True)
-		self.numberString = self.numberString + str(number)
+		self.numberString += str(number)
 		self["number"].text = self["number_summary"].text = self.numberString
 
 		self.handleServiceName()
@@ -572,7 +572,7 @@ class InfoBarNumberZap:
 			elif len(self.servicelist.history) > 1:
 				self.checkTimeshiftRunning(self.recallPrevService)
 		else:
-			if self.has_key("TimeshiftActions") and self.timeshiftEnabled():
+			if "TimeshiftActions" in self and self.timeshiftEnabled():
 				ts = self.getTimeshift()
 				if ts and ts.isTimeshiftActive():
 					return
@@ -2080,13 +2080,12 @@ class InfoBarExtensions:
 
 	def updateExtension(self, extension, key = None):
 		self.extensionsList.append(extension)
-		if key is not None:
-			if self.extensionKeys.has_key(key):
-				key = None
+		if key is not None and key in self.extensionKeys:
+			key = None
 
 		if key is None:
 			for x in self.availableKeys:
-				if not self.extensionKeys.has_key(x):
+				if x not in self.extensionKeys:
 					key = x
 					break
 
@@ -2111,7 +2110,7 @@ class InfoBarExtensions:
 		keys = []
 		list = []
 		for x in self.availableKeys:
-			if self.extensionKeys.has_key(x):
+			if x in self.extensionKeys:
 				entry = self.extensionKeys[x]
 				extension = self.extensionsList[entry]
 				if extension[2]():
@@ -2190,7 +2189,7 @@ class InfoBarPiP:
 				{
 					"activatePiP": (self.activePiP, self.activePiPName),
 				})
-			if (self.allowPiP):
+			if self.allowPiP:
 				self.addExtension((self.getShowHideName, self.showPiP, lambda: True), "blue")
 				self.addExtension((self.getMoveName, self.movePiP, self.pipShown), "green")
 				self.addExtension((self.getSwapName, self.swapPiP, self.pipShown), "yellow")
@@ -2322,7 +2321,7 @@ class InfoBarPiP:
 		elif "stop" == use:
 			self.showPiP()
 
-from RecordTimer import parseEvent, RecordTimerEntry
+from RecordTimer import parseEvent
 
 class InfoBarInstantRecord:
 	"""Instant Record - handles the instantRecord action in order to
@@ -2638,8 +2637,6 @@ class InfoBarInstantRecord:
 		else:
 			return 0
 
-from Tools.ISO639 import LanguageCodes
-
 class InfoBarAudioSelection:
 	def __init__(self):
 		self["AudioSelectionAction"] = HelpableActionMap(self, "InfobarAudioSelectionActions",
@@ -2903,14 +2900,14 @@ class InfoBarNotifications:
 			del notifications[0]
 			cb = n[0]
 
-			if n[3].has_key("onSessionOpenCallback"):
+			if "onSessionOpenCallback" in n[3]:
 				n[3]["onSessionOpenCallback"]()
 				del n[3]["onSessionOpenCallback"]
 
 			if cb:
 				dlg = self.session.openWithCallback(cb, n[1], *n[2], **n[3])
 			elif not Notifications.current_notifications and n[4] == "ZapError":
-				if n[3].has_key("timeout"):
+				if "timeout" in n[3]:
 					del n[3]["timeout"]
 				n[3]["enable_input"] = False
 				dlg = self.session.instantiateDialog(n[1], *n[2], **n[3])

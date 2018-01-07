@@ -1,19 +1,15 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Components.FileList import FileEntryComponent, FileList
 from Components.ConfigList import ConfigListScreen
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Button import Button
+from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.config import config, ConfigElement, ConfigSubsection, ConfigSelection, ConfigSubList, getConfigListEntry, KEY_LEFT, KEY_RIGHT, KEY_OK
-from Components.ConfigList import ConfigList
-from Components.Pixmap import Pixmap
+from Components.config import ConfigElement, ConfigSelection, getConfigListEntry, KEY_OK
 from Components.ScrollLabel import ScrollLabel
 from Tools.GetEcmInfo import GetEcmInfo
 
 import os
 from Tools.camcontrol import CamControl
-from enigma import eTimer, eDVBCI_UI, eListboxPythonStringContent, eListboxPythonConfigContent
+from enigma import eTimer
 
 class ConfigAction(ConfigElement):
 	def __init__(self, action, *args):
@@ -93,11 +89,14 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self["info"].setText("".join(ecmInfo))
 
 	def ppanelShortcut(self):
+		ppanelFileName = '/etc/ppanels/' + self.softcams.value + '.xml'
 		if "oscam" in self.softcams.value.lower() and os.path.isfile('/usr/lib/enigma2/python/Plugins/Extensions/OscamStatus/plugin.py'):
 			from Plugins.Extensions.OscamStatus.plugin import OscamStatus
 			self.session.open(OscamStatus)
-		ppanelFileName = '/etc/ppanels/' + self.softcams.value + '.xml'
-		if os.path.isfile(ppanelFileName) and os.path.isfile('/usr/lib/enigma2/python/Plugins/Extensions/PPanel/plugin.py'):
+		elif "cccam" in self.softcams.value.lower() and os.path.isfile('/usr/lib/enigma2/python/Plugins/Extensions/CCcamInfo/plugin.py'):
+			from Plugins.Extensions.CCcamInfo.plugin import CCcamInfoMain
+			self.session.open(CCcamInfoMain)
+		elif os.path.isfile(ppanelFileName) and os.path.isfile('/usr/lib/enigma2/python/Plugins/Extensions/PPanel/plugin.py'):
 			from Plugins.Extensions.PPanel.ppanel import PPanel
 			self.session.open(PPanel, name = self.softcams.value + ' PPanel', node = None, filename = ppanelFileName, deletenode = None)
 		else:
@@ -123,9 +122,8 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self.cardserver.command('stop')
 		if "s" in self.what:
 			self.softcam.command('stop')
-		self.oldref = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.session.nav.stopService()
-		# Delay a second to give 'em a chance to stop
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.doStart)
 		self.activityTimer.start(1000, False)
@@ -142,8 +140,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 		if self.mbox:
 			self.mbox.close()
 		self.close()
-		self.session.nav.playService(self.oldref)
-		del self.oldref
+		self.session.nav.playService(self.oldref, adjust=False)
 
 	def restartCardServer(self):
 		if hasattr(self, 'cardservers'):

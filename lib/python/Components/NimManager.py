@@ -17,7 +17,6 @@ from enigma import eDVBSatelliteEquipmentControl as secClass, \
 from time import localtime, mktime
 from datetime import datetime
 
-from Tools import Directories
 import xml.etree.cElementTree
 
 config.unicable = ConfigSubsection()
@@ -44,10 +43,10 @@ class SecConfigure:
 		#simple defaults
 		sec.addLNB()
 		tunermask = 1 << slotid
-		if self.equal.has_key(slotid):
+		if slotid in self.equal:
 			for slot in self.equal[slotid]:
 				tunermask |= (1 << slot)
-		if self.linked.has_key(slotid):
+		if slotid in self.linked:
 			for slot in self.linked[slotid]:
 				tunermask |= (1 << slot)
 		sec.setLNBSatCRformat(0)
@@ -77,7 +76,7 @@ class SecConfigure:
 				sec.setVoltageMode(switchParam._14V)
 				sec.setToneMode(switchParam.OFF)
 		elif 3 <= diseqcmode < 5: # diseqc 1.2
-			if self.satposdepends.has_key(slotid):
+			if slotid in self.satposdepends:
 				for slot in self.satposdepends[slotid]:
 					tunermask |= (1 << slot)
 			sec.setLatitude(latitude)
@@ -122,7 +121,7 @@ class SecConfigure:
 
 	def getRoot(self, slotid, connto):
 		visited = []
-		while (self.NimManager.getNimConfig(connto).configMode.value in ("satposdepends", "equal", "loopthrough")):
+		while self.NimManager.getNimConfig(connto).configMode.value in ("satposdepends", "equal", "loopthrough"):
 			connto = int(self.NimManager.getNimConfig(connto).connectedTo.value)
 			if connto in visited: # prevent endless loop
 				return slotid
@@ -159,19 +158,19 @@ class SecConfigure:
 				# this is stored in the *value* (not index!) of the config list
 				if nim.configMode.value == "equal":
 					connto = self.getRoot(x, int(nim.connectedTo.value))
-					if not self.equal.has_key(connto):
+					if connto not in self.equal:
 						self.equal[connto] = []
 					self.equal[connto].append(x)
 				elif nim.configMode.value == "loopthrough":
 					self.linkNIMs(sec, x, int(nim.connectedTo.value))
 					connto = self.getRoot(x, int(nim.connectedTo.value))
-					if not self.linked.has_key(connto):
+					if connto not in self.linked:
 						self.linked[connto] = []
 					self.linked[connto].append(x)
 				elif nim.configMode.value == "satposdepends":
 					self.setSatposDepends(sec, x, int(nim.connectedTo.value))
 					connto = self.getRoot(x, int(nim.connectedTo.value))
-					if not self.satposdepends.has_key(connto):
+					if connto not in self.satposdepends:
 						self.satposdepends[connto] = []
 					self.satposdepends[connto].append(x)
 
@@ -232,7 +231,7 @@ class SecConfigure:
 							if nim.powerMeasurement.value:
 								useInputPower=True
 								turn_speed_dict = { "fast": rotorParam.FAST, "slow": rotorParam.SLOW }
-								if turn_speed_dict.has_key(nim.turningSpeed.value):
+								if nim.turningSpeed.value in turn_speed_dict:
 									turning_speed = turn_speed_dict[nim.turningSpeed.value]
 								else:
 									beg_time = localtime(nim.fastTurningBegin.value)
@@ -256,11 +255,11 @@ class SecConfigure:
 	def updateAdvanced(self, sec, slotid):
 		try:
 			if config.Nims[slotid].advanced.unicableconnected is not None:
-				if config.Nims[slotid].advanced.unicableconnected.value == True:
+				if config.Nims[slotid].advanced.unicableconnected.value:
 					config.Nims[slotid].advanced.unicableconnectedTo.save_forced = True
 					self.linkNIMs(sec, slotid, int(config.Nims[slotid].advanced.unicableconnectedTo.value))
 					connto = self.getRoot(slotid, int(config.Nims[slotid].advanced.unicableconnectedTo.value))
-					if not self.linked.has_key(connto):
+					if connto not in self.linked:
 						self.linked[connto] = []
 					self.linked[connto].append(slotid)
 				else:
@@ -307,10 +306,10 @@ class SecConfigure:
 					sec.setLNBNum(x)
 
 				tunermask = 1 << slotid
-				if self.equal.has_key(slotid):
+				if slotid in self.equal:
 					for slot in self.equal[slotid]:
 						tunermask |= (1 << slot)
-				if self.linked.has_key(slotid):
+				if slotid in self.linked:
 					for slot in self.linked[slotid]:
 						tunermask |= (1 << slot)
 
@@ -356,7 +355,7 @@ class SecConfigure:
 				elif dm == "1_2":
 					sec.setDiSEqCMode(diseqcParam.V1_2)
 
-					if self.satposdepends.has_key(slotid):
+					if slotid in self.satposdepends:
 						for slot in self.satposdepends[slotid]:
 							tunermask |= (1 << slot)
 
@@ -377,7 +376,7 @@ class SecConfigure:
 						"BA": diseqcParam.BA,
 						"BB": diseqcParam.BB }
 
-					if c.has_key(cdc):
+					if cdc in c:
 						sec.setCommittedCommand(c[cdc])
 					else:
 						sec.setCommittedCommand(long(cdc))
@@ -429,7 +428,7 @@ class SecConfigure:
 						sec.setUseInputpower(True)
 						sec.setInputpowerDelta(currLnb.powerThreshold.value)
 						turn_speed_dict = { "fast": rotorParam.FAST, "slow": rotorParam.SLOW }
-						if turn_speed_dict.has_key(currLnb.turningSpeed.value):
+						if currLnb.turningSpeed.value in turn_speed_dict:
 							turning_speed = turn_speed_dict[currLnb.turningSpeed.value]
 						else:
 							beg_time = localtime(currLnb.fastTurningBegin.value)
@@ -647,7 +646,7 @@ class NimManager:
 		return self.sec.getConfiguredSats()
 
 	def getTransponders(self, pos):
-		if self.transponders.has_key(pos):
+		if pos in self.transponders:
 			return self.transponders[pos]
 		else:
 			return []
@@ -786,21 +785,21 @@ class NimManager:
 		nimfile.close()
 
 		for id, entry in entries.items():
-			if not (entry.has_key("name") and entry.has_key("type")):
+			if not ("name" in entry and "type" in entry):
 				entry["name"] =  _("N/A")
 				entry["type"] = None
-			if not (entry.has_key("i2c")):
+			if "i2c" not in entry:
 				entry["i2c"] = None
-			if not (entry.has_key("has_outputs")):
+			if "has_outputs" not in entry:
 				entry["has_outputs"] = True
-			if entry.has_key("frontend_device"): # check if internally connectable
+			if "frontend_device" in entry: # check if internally connectable
 				if os.path.exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]):
 					entry["internally_connectable"] = entry["frontend_device"] - 1
 				else:
 					entry["internally_connectable"] = None
 			else:
 				entry["frontend_device"] = entry["internally_connectable"] = None
-			if not (entry.has_key("multi_type")):
+			if "multi_type" not in entry:
 				entry["multi_type"] = {}
 			self.nim_slots.append(NIM(slot = id, description = entry["name"], type = entry["type"], has_outputs = entry["has_outputs"], internally_connectable = entry["internally_connectable"], multi_type = entry["multi_type"], frontend_id = entry["frontend_device"], i2c = entry["i2c"], is_empty = entry["isempty"]))
 
@@ -865,7 +864,7 @@ class NimManager:
 		for testnim in slots[:]:
 			for nim in self.getNimListOfType("DVB-S", slotid):
 				nimConfig = self.getNimConfig(nim)
-				if nimConfig.content.items.has_key("configMode") and nimConfig.configMode.value == "loopthrough" and int(nimConfig.connectedTo.value) == testnim:
+				if "configMode" in nimConfig.content.items and nimConfig.configMode.value == "loopthrough" and int(nimConfig.connectedTo.value) == testnim:
 					slots.remove(testnim)
 					break
 		slots.sort()
@@ -928,7 +927,7 @@ class NimManager:
 	# returns True if something is configured to be connected to this nim
 	# if slotid == -1, returns if something is connected to ANY nim
 	def somethingConnected(self, slotid = -1):
-		if (slotid == -1):
+		if slotid == -1:
 			connected = False
 			for id in range(self.getSlotCount()):
 				if self.somethingConnected(id):
@@ -1155,8 +1154,8 @@ def InitNimManager(nimmgr, update_slots = []):
 		("cut", "DiSEqC 1.0, DiSEqC 1.1, toneburst"), ("tcu", "toneburst, DiSEqC 1.0, DiSEqC 1.1"),
 		("uct", "DiSEqC 1.1, DiSEqC 1.0, toneburst"), ("tuc", "toneburst, DiSEqC 1.1, DiSEqC 1.0")]
 	advanced_lnb_diseqc_repeat_choices = [("none", _("None")), ("one", _("One")), ("two", _("Two")), ("three", _("Three"))]
-	advanced_lnb_fast_turning_btime = mktime(datetime(1970, 1, 1, 7, 0).timetuple());
-	advanced_lnb_fast_turning_etime = mktime(datetime(1970, 1, 1, 19, 0).timetuple());
+	advanced_lnb_fast_turning_btime = mktime(datetime(1970, 1, 1, 7, 0).timetuple())
+	advanced_lnb_fast_turning_etime = mktime(datetime(1970, 1, 1, 19, 0).timetuple())
 
 	def configLOFChanged(configElement):
 		if configElement.value == "unicable":
@@ -1556,7 +1555,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			createATSCConfig(nim, x)
 		else:
 			empty_slots += 1
-			nim.configMode = ConfigSelection(choices = { "nothing": _("disabled") }, default="nothing");
+			nim.configMode = ConfigSelection(choices = { "nothing": _("disabled") }, default="nothing")
 			if slot.type is not None:
 				print "[InitNimManager] pls add support for this frontend type!", slot.type
 

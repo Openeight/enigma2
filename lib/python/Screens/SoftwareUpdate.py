@@ -7,7 +7,7 @@ from Screens.TextBox import TextBox
 from Screens.About import CommitInfo
 from Components.config import config
 from Components.About import about
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ActionMap import ActionMap
 from Components.Ipkg import IpkgComponent
 from Components.Sources.StaticText import StaticText
 from Components.Slider import Slider
@@ -169,7 +169,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		if event == IpkgComponent.EVENT_DOWNLOAD:
 			self.status.setText(_("Downloading"))
 		elif event == IpkgComponent.EVENT_UPGRADE:
-			if self.sliderPackages.has_key(param):
+			if param in self.sliderPackages:
 				self.slider.setValue(self.sliderPackages[param])
 			self.package.setText(param)
 			self.status.setText(_("Upgrading") + ": %s/%s" % (self.packages, self.total_packages))
