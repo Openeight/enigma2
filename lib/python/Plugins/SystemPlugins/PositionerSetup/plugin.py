@@ -1485,7 +1485,7 @@ class TunerScreen(ConfigListScreen, Screen):
 
 	def updateTransponders(self):
 		if len(self.tuning.sat.choices):
-			transponderlist = nimmanager.getTransponders(int(self.tuning.sat.value))
+			transponderlist = nimmanager.getTransponders(int(self.tuning.sat.value), self.feid)
 			tps = []
 			for transponder in transponderlist:
 				tps.append(self.transponderToString(transponder, scale = 1000))
@@ -1498,7 +1498,7 @@ class TunerScreen(ConfigListScreen, Screen):
 		ConfigListScreen.keyRight(self)
 
 	def keyGo(self):
-		returnvalue = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		returnvalue = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 1)
 		satpos = int(self.tuning.sat.value)
 		if self.tuning.type.value == "manual_transponder":
 			if self.scan_sat.system.value == eDVBFrontendParametersSatellite.System_DVB_S2:

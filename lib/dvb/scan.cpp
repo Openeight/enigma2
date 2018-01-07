@@ -42,7 +42,7 @@ eDVBScan::eDVBScan(iDVBChannel *channel, bool usePAT, bool debug)
 {
 	if (m_channel->getDemux(m_demux))
 		SCAN_eDebug("[eDVBScan] failed to allocate demux!");
-	m_channel->connectStateChange(slot(*this, &eDVBScan::stateChange), m_stateChanged_connection);
+	m_channel->connectStateChange(sigc::mem_fun(*this, &eDVBScan::stateChange), m_stateChanged_connection);
 }
 
 eDVBScan::~eDVBScan()
@@ -988,9 +988,9 @@ void eDVBScan::channelDone()
 			if( m_chid_current )
 				tsonid = ( m_chid_current.transport_stream_id.get() << 16 )
 					| m_chid_current.original_network_id.get();
-			service->m_service_name = convertDVBUTF8(sname,0,tsonid,0);
+			service->m_service_name = convertDVBUTF8(sname,-1,tsonid,0);
 			service->genSortName();
-			service->m_provider_name = convertDVBUTF8(pname,0,tsonid,0);
+			service->m_provider_name = convertDVBUTF8(pname,-1,tsonid,0);
 		}
 
 		if (!(m_flags & scanOnlyFree) || !m_pmt_in_progress->second.scrambled) {
@@ -1388,10 +1388,10 @@ RESULT eDVBScan::processSDT(eDVBNamespace dvbnamespace, const ServiceDescription
 
 					ref.setServiceType(servicetype);
 					int tsonid=(sdt.getTransportStreamId() << 16) | sdt.getOriginalNetworkId();
-					service->m_service_name = convertDVBUTF8(d.getServiceName(),0,tsonid,0);
+					service->m_service_name = convertDVBUTF8(d.getServiceName(),-1,tsonid,0);
 					service->genSortName();
 
-					service->m_provider_name = convertDVBUTF8(d.getServiceProviderName(),0,tsonid,0);
+					service->m_provider_name = convertDVBUTF8(d.getServiceProviderName(),-1,tsonid,0);
 					SCAN_eDebug("[eDVBScan]   name '%s', provider_name '%s'", service->m_service_name.c_str(), service->m_provider_name.c_str());
 					break;
 				}
@@ -1542,7 +1542,7 @@ RESULT eDVBScan::processVCT(eDVBNamespace dvbnamespace, const VirtualChannelTabl
 	return 0;
 }
 
-RESULT eDVBScan::connectEvent(const Slot1<void,int> &event, ePtr<eConnection> &connection)
+RESULT eDVBScan::connectEvent(const sigc::slot1<void,int> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection(this, m_event.connect(event));
 	return 0;

@@ -244,6 +244,11 @@ bool eDVBAdapterLinux::isusb(int nr)
 {
 	char devicename[256];
 	snprintf(devicename, sizeof(devicename), "/sys/class/dvb/dvb%d.frontend0/device/ep_00", nr);
+	if (::access(devicename, X_OK) >= 0)
+	{
+		return true;
+	}
+	snprintf(devicename, sizeof(devicename), "/sys/class/dvb/dvb%d.frontend0/device/ep_84", nr);
 	return ::access(devicename, X_OK) >= 0;
 }
 
@@ -1270,7 +1275,7 @@ RESULT eDVBResourceManager::removeChannel(eDVBChannel *ch)
 	return -ENOENT;
 }
 
-RESULT eDVBResourceManager::connectChannelAdded(const Slot1<void,eDVBChannel*> &channelAdded, ePtr<eConnection> &connection)
+RESULT eDVBResourceManager::connectChannelAdded(const sigc::slot1<void,eDVBChannel*> &channelAdded, ePtr<eConnection> &connection)
 {
 	connection = new eConnection((eDVBResourceManager*)this, m_channelAdded.connect(channelAdded));
 	return 0;
@@ -1534,7 +1539,7 @@ eDVBChannel::eDVBChannel(eDVBResourceManager *mgr, eDVBAllocatedFrontend *fronte
 	m_skipmode_n = m_skipmode_m = m_skipmode_frames = 0;
 
 	if (m_frontend)
-		m_frontend->get().connectStateChange(slot(*this, &eDVBChannel::frontendStateChanged), m_conn_frontendStateChanged);
+		m_frontend->get().connectStateChange(sigc::mem_fun(*this, &eDVBChannel::frontendStateChanged), m_conn_frontendStateChanged);
 }
 
 eDVBChannel::~eDVBChannel()
@@ -2003,13 +2008,13 @@ RESULT eDVBChannel::setChannel(const eDVBChannelID &channelid, ePtr<iDVBFrontend
 	return 0;
 }
 
-RESULT eDVBChannel::connectStateChange(const Slot1<void,iDVBChannel*> &stateChange, ePtr<eConnection> &connection)
+RESULT eDVBChannel::connectStateChange(const sigc::slot1<void,iDVBChannel*> &stateChange, ePtr<eConnection> &connection)
 {
 	connection = new eConnection((iDVBChannel*)this, m_stateChanged.connect(stateChange));
 	return 0;
 }
 
-RESULT eDVBChannel::connectEvent(const Slot2<void,iDVBChannel*,int> &event, ePtr<eConnection> &connection)
+RESULT eDVBChannel::connectEvent(const sigc::slot2<void,iDVBChannel*,int> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection((iDVBChannel*)this, m_event.connect(event));
 	return 0;
@@ -2208,7 +2213,7 @@ void eDVBChannel::setCueSheet(eCueSheet *cuesheet)
 	m_conn_cueSheetEvent = 0;
 	m_cue = cuesheet;
 	if (m_cue)
-		m_cue->connectEvent(slot(*this, &eDVBChannel::cueSheetEvent), m_conn_cueSheetEvent);
+		m_cue->connectEvent(sigc::mem_fun(*this, &eDVBChannel::cueSheetEvent), m_conn_cueSheetEvent);
 }
 
 void eDVBChannel::setOfflineDecodeMode(int parityswitchdelay)
@@ -2333,7 +2338,7 @@ void eCueSheet::setDecodingDemux(iDVBDemux *demux, iTSMPEGDecoder *decoder)
 	m_decoder = decoder;
 }
 
-RESULT eCueSheet::connectEvent(const Slot1<void,int> &event, ePtr<eConnection> &connection)
+RESULT eCueSheet::connectEvent(const sigc::slot1<void,int> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection(this, m_event.connect(event));
 	return 0;

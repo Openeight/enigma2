@@ -1381,9 +1381,7 @@ void eDVBFrontend::getTransponderData(ePtr<iDVBTransponderData> &dest, bool orig
 			p[cmdseq.num++].cmd = DTV_INNER_FEC;
 			p[cmdseq.num++].cmd = DTV_ROLLOFF;
 			p[cmdseq.num++].cmd = DTV_PILOT;
-#if defined DTV_STREAM_ID
 			p[cmdseq.num++].cmd = DTV_STREAM_ID;
-#endif
 		}
 		else if (type == feCable)
 		{
@@ -1398,9 +1396,7 @@ void eDVBFrontend::getTransponderData(ePtr<iDVBTransponderData> &dest, bool orig
 			p[cmdseq.num++].cmd = DTV_TRANSMISSION_MODE;
 			p[cmdseq.num++].cmd = DTV_GUARD_INTERVAL;
 			p[cmdseq.num++].cmd = DTV_HIERARCHY;
-#if defined DTV_STREAM_ID
 			p[cmdseq.num++].cmd = DTV_STREAM_ID;
-#endif
 		}
 		else if (type == feATSC)
 		{
@@ -1985,9 +1981,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 			{
 				p[cmdseq.num].cmd = DTV_ROLLOFF, p[cmdseq.num].u.data = rolloff, cmdseq.num++;
 				p[cmdseq.num].cmd = DTV_PILOT, p[cmdseq.num].u.data = pilot, cmdseq.num++;
-#if defined DTV_STREAM_ID
 				p[cmdseq.num].cmd = DTV_STREAM_ID, p[cmdseq.num].u.data = parm.is_id | (parm.pls_code << 8) | (parm.pls_mode << 26), cmdseq.num++;
-#endif
 			}
 		}
 		else if (type == iDVBFrontend::feCable)
@@ -2451,7 +2445,7 @@ tune_error:
 	return res;
 }
 
-RESULT eDVBFrontend::connectStateChange(const Slot1<void,iDVBFrontend*> &stateChange, ePtr<eConnection> &connection)
+RESULT eDVBFrontend::connectStateChange(const sigc::slot1<void,iDVBFrontend*> &stateChange, ePtr<eConnection> &connection)
 {
 	connection = new eConnection(this, m_stateChanged.connect(stateChange));
 	return 0;
@@ -2618,7 +2612,7 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
 			return 0;
 		}
 		bool multistream = (parm.is_id != NO_STREAM_ID_FILTER || (parm.pls_code & 0x3FFFF) != 1 ||
-			(parm.pls_mode & 3) != eDVBFrontendParametersSatellite::PLS_Root);
+					(parm.pls_mode & 3) != eDVBFrontendParametersSatellite::PLS_Root);
 		eDebug("[eDVBFrontend] isCompatibleWith system %d is_id %d pls_code %d pls_mode %d is_multistream %d",
 			parm.system, parm.is_id, parm.pls_code, parm.pls_mode, is_multistream());
 		if (parm.system == eDVBFrontendParametersSatellite::System_DVB_S2 && multistream && !is_multistream())

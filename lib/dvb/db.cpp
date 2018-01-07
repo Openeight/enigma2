@@ -410,14 +410,12 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, int version)
 				rolloff=eDVBFrontendParametersSatellite::RollOff_alpha_0_35,
 				pilot=eDVBFrontendParametersSatellite::Pilot_Unknown,
 				is_id = NO_STREAM_ID_FILTER,
-				pls_mode = eDVBFrontendParametersSatellite::PLS_Root,
-				pls_code = 1;
-
+				pls_code = 1,
+				pls_mode = eDVBFrontendParametersSatellite::PLS_Root;
 			sscanf(line+2, "%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d",
 				&frequency, &symbol_rate, &polarisation, &fec, &orbital_position,
 				&inversion, &flags, &system, &modulation, &rolloff, &pilot,
 				&is_id, &pls_code, &pls_mode);
-
 			sat.frequency = frequency;
 			sat.symbol_rate = symbol_rate;
 			sat.polarisation = polarisation;
@@ -722,7 +720,7 @@ void eDVBDB::saveServicelist(const char *file)
 		fprintf(g, "eDVB services /5/\n");
 		fprintf(g, "# Transponders: t:dvb_namespace:transport_stream_id:original_network_id,FEPARMS\n");
 		fprintf(g, "#     DVBS  FEPARMS:   s:frequency:symbol_rate:polarisation:fec:orbital_position:inversion:flags\n");
-		fprintf(g, "#     DVBS2 FEPARMS:   s:frequency:symbol_rate:polarisation:fec:orbital_position:inversion:flags:system:modulation:rolloff:pilot\n");
+		fprintf(g, "#     DVBS2 FEPARMS:   s:frequency:symbol_rate:polarisation:fec:orbital_position:inversion:flags:system:modulation:rolloff:pilot[,MIS/PLS:is_id:pls_code:pls_mode]\n");
 		fprintf(g, "#     DVBT  FEPARMS:   t:frequency:bandwidth:code_rate_HP:code_rate_LP:modulation:transmission_mode:guard_interval:hierarchy:inversion:flags:system:plp_id\n");
 		fprintf(g, "#     DVBC  FEPARMS:   c:frequency:symbol_rate:inversion:modulation:fec_inner:flags:system\n");
 		fprintf(g, "#     ATSC  FEPARMS:   a:frequency:inversion:modulation:flags:system\n");
@@ -772,6 +770,7 @@ void eDVBDB::saveServicelist(const char *file)
 					if (g)
 						fprintf(g, ",MIS/PLS:%d:%d:%d", sat.is_id, sat.pls_code & 0x3FFFF, sat.pls_mode & 3);
 				}
+
 			}
 			fprintf(f, "\n");
 			if (g)
