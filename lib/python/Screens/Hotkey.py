@@ -91,6 +91,8 @@ def getHotkeys():
 		("Power" + " " + _("long"), "power_long", "Menu/shutdown"),
 		("HDMIin", "HDMIin", "Infobar/HDMIIn"),
 		("HDMIin" + " " + _("long"), "HDMIin_long", ""),
+		("Media", "media", ""),
+		("Media" + " " + _("long"), "media_long", ""),
 		("Favorites", "favorites", "Infobar/openFavouritesList"),
 		("Favorites" + " " + _("long"), "favorites_long", "")]
 
