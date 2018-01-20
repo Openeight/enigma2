@@ -8,8 +8,11 @@ except:
 	OverscanWizard = None
 
 from Components.Pixmap import Pixmap
+from Components.ScrollLabel import ScrollLabel
 from Components.config import config, ConfigBoolean, configfile
 from LanguageSelection import LanguageWizard
+from enigma import eConsoleAppContainer
+
 import os
 
 config.misc.firstrun = ConfigBoolean(default = True)
