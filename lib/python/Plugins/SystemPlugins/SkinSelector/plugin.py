@@ -129,10 +129,10 @@ def SkinSelMain(session, **kwargs):
 	session.open(SkinSelector)
 
 def SkinSelSetup(menuid, **kwargs):
-	if menuid == "system":
+	# only show in the menu when set to intermediate or higher
+	if menuid == "video" and config.usage.setup_level.index >= 1:
 		return [(_("Skin"), SkinSelMain, "skin_selector", None)]
-	else:
-		return []
+	return []
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name="Skin", description= _("Select your Skin"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=SkinSelSetup)

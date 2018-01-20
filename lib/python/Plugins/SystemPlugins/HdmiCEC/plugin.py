@@ -138,7 +138,8 @@ def main(session, **kwargs):
 	session.open(HdmiCECSetupScreen)
 
 def startSetup(menuid):
-	if menuid == "system":
+	# only show in the menu when set to intermediate or higher
+	if menuid == "video" and config.usage.setup_level.index >= 1:
 		return [(_("HDMI-CEC setup"), main, "hdmi_cec_setup", 0)]
 	return []
 
