@@ -176,7 +176,7 @@ class SettingsC(Screen):
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
                 self.cur = config.usage.show_second_infobar.value
                 txt = " " 
-                if self.cur is -1:
+                if self.cur is "":
                         txt = _("Current Second-infobar setting is None.\nHere you can change it.")
                 else:
                         txt = _("Current Second-infobar setting is Show.\nHere you can change it.")
@@ -200,7 +200,7 @@ class SettingsC(Screen):
                         self.close()
                         
     def ShowSI(self):
-          if self.cur is not -1:
+          if self.cur is not "":
                 self.session.open(MessageBox, _("Current Second-infobar setting is Show !"), type = MessageBox.TYPE_INFO,timeout = 10 )
           else:
                 config.usage.show_second_infobar.value = int(0)
@@ -209,10 +209,10 @@ class SettingsC(Screen):
 #    	        self.session.open(TryQuitMainloop, 3)
 
     def RemSI(self):
-          if self.cur is -1:
+          if self.cur is "":
                 self.session.open(MessageBox, _("Current Second-infobar setting is None !"), type = MessageBox.TYPE_INFO,timeout = 10 )
           else:
-                config.usage.show_second_infobar.value = -1
+                config.usage.show_second_infobar.value = ""
     	        config.usage.show_second_infobar.save()
 #    	        self.session.open(TryQuitMainloop, 3)
 

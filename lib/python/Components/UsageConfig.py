@@ -15,7 +15,7 @@ def InitUsageConfig():
 	config.misc.showrotorposition = ConfigSelection(default = "no", choices = [("no", _("no")), ("yes", _("yes")), ("withtext", _("with text")), ("tunername", _("with tuner name"))])
 	config.usage.multibouquet = ConfigYesNo(default = True)
 
-	config.usage.alternative_number_mode = ConfigYesNo(default = True)
+	config.usage.alternative_number_mode = ConfigYesNo(default = False)
 	def alternativeNumberModeChange(configElement):
 		eDVBDB.getInstance().setNumberingMode(configElement.value)
 		refreshServiceList()
@@ -62,7 +62,7 @@ def InitUsageConfig():
 	config.usage.show_infobar_on_zap = ConfigYesNo(default = True)
 	config.usage.show_infobar_on_skip = ConfigYesNo(default = True)
 	config.usage.show_infobar_on_event_change = ConfigYesNo(default = False)
-	config.usage.show_second_infobar = ConfigSelection(default = "5", choices = [("-1", _("None"))] + choicelist + [("EPG",_("EPG"))])
+	config.usage.show_second_infobar = ConfigSelection(default = "5", choices = [("", _("None"))] + choicelist + [("EPG",_("EPG"))])
 	config.usage.show_simple_second_infobar = ConfigYesNo(default = False)
 	config.usage.infobar_frontend_source = ConfigSelection(default = "settings", choices = [("settings", _("Settings")), ("tuner", _("Tuner"))])
 	config.usage.oldstyle_zap_controls = ConfigYesNo(default = False)
