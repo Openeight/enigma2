@@ -382,6 +382,12 @@ def InitUsageConfig():
 		config.usage.wakeOnLAN = ConfigYesNo(default = False)
 		config.usage.wakeOnLAN.addNotifier(wakeOnLANChanged)
 
+	if SystemInfo["hasXcoreVFD"]:
+		def set12to8characterVFD(configElement):
+			open(SystemInfo["hasXcoreVFD"], "w").write(not configElement.value and "1" or "0")
+		config.usage.toggle12to8characterVFD = ConfigYesNo(default = False)
+		config.usage.toggle12to8characterVFD.addNotifier(set12to8characterVFD)
+
 	config.epg = ConfigSubsection()
 	config.epg.eit = ConfigYesNo(default = True)
 	config.epg.mhw = ConfigYesNo(default = False)
@@ -609,8 +615,8 @@ def InitUsageConfig():
 		("eus baq", _("Basque")),
 		("bul", _("Bulgarian")),
 		("hrv", _("Croatian")),
-		("chn sgp", _("Simplified Chinese")),
-		("twn hkn",_("Traditional Chinese")),
+		("chn sgp", _("Chinese - Simplified")),
+		("twn hkn",_("Chinese - Traditional")),
 		("ces cze", _("Czech")),
 		("dan", _("Danish")),
 		("dut ndl nld", _("Dutch")),
@@ -627,9 +633,9 @@ def InitUsageConfig():
 		("lit", _("Lithuanian")),
 		("ltz", _("Luxembourgish")),
 		("nor", _("Norwegian")),
+		("fas per fa pes", _("Persian")),
 		("pol", _("Polish")),
-		("por dub Dub DUB ud1", _("Portuguese")),
-		("fas per", _("Persian")),
+		("por dub Dub DUB ud1", _("Portuguese")),		
 		("ron rum", _("Romanian")),
 		("rus", _("Russian")),
 		("srp", _("Serbian")),

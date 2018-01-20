@@ -18,6 +18,11 @@ def countFrontpanelLEDs():
 		number_of_leds += 1
 	return number_of_leds
 
+def hassoftcaminstalled():
+	from Tools.camcontrol import CamControl
+	return len(CamControl('softcam').getList()) > 1
+
+SystemInfo["HasSoftcamInstalled"] = hassoftcaminstalled()
 SystemInfo["NumVideoDecoders"] = getNumVideoDecoders()
 SystemInfo["PIPAvailable"] = SystemInfo["NumVideoDecoders"] > 1
 SystemInfo["CanMeasureFrontendInputPower"] = eDVBResourceManager.getInstance().canMeasureFrontendInputPower()
@@ -52,7 +57,7 @@ SystemInfo["HasBypassEdidChecking"] = fileCheck("/proc/stb/hdmi/bypass_edid_chec
 SystemInfo["HasColorspace"] = fileCheck("/proc/stb/video/hdmi_colorspace")
 SystemInfo["HasColorspaceSimple"] = SystemInfo["HasColorspace"] and HardwareInfo().get_device_model() in "vusolo4k"
 SystemInfo["HasMultichannelPCM"] = fileCheck("/proc/stb/audio/multichannel_pcm")
-SystemInfo["HasMMC"] = HardwareInfo().get_device_model() in ('vusolo4k', 'vuuno4k', 'vuultimo4k', 'hd51', 'hd52', 'vs1500', 'et11000', 'sf4008')
+SystemInfo["HasMMC"] = HardwareInfo().get_device_model() in ('vusolo4k', 'vuuno4k', 'vuultimo4k', 'hd51', 'hd52', 'vs1500', 'et11000', 'h7', 'sf4008')
 SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
 SystemInfo["CanDoTranscodeAndPIP"] = HardwareInfo().get_device_model() in "vusolo4k"
 SystemInfo["HasColordepth"] = fileCheck("/proc/stb/video/hdmi_colordepth")
@@ -66,3 +71,4 @@ SystemInfo["Has3DSurround"] = fileExists("/proc/stb/audio/3d_surround_choices") 
 SystemInfo["Has3DSpeaker"] = fileExists("/proc/stb/audio/3d_surround_speaker_position_choices") and fileCheck("/proc/stb/audio/3d_surround_speaker_position")
 SystemInfo["Has3DSurroundSpeaker"] = fileExists("/proc/stb/audio/3dsurround_choices") and fileCheck("/proc/stb/audio/3dsurround")
 SystemInfo["Has3DSurroundSoftLimiter"] = fileExists("/proc/stb/audio/3dsurround_softlimiter_choices") and fileCheck("/proc/stb/audio/3dsurround_softlimiter")
+SystemInfo["hasXcoreVFD"] = HardwareInfo().get_device_model() in ('osmega','spycat4k','spycat4kmini','spycat4kcombo') and fileCheck("/sys/module/brcmstb_%s/parameters/pt6302_cgram" % HardwareInfo().get_device_model())

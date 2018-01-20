@@ -17,6 +17,7 @@ class InstallWizard(Screen, ConfigListScreen):
 
 	STATE_UPDATE = 0
 	STATE_CHOISE_CHANNELLIST = 1
+	INSTALL_PLUGINS = 2
 
 	def __init__(self, session, args = None):
 		Screen.__init__(self, session)
@@ -48,6 +49,9 @@ class InstallWizard(Screen, ConfigListScreen):
 			modes = {"openeight": "openeight(German List)", "19e-23e": "Astra 1 Astra 3", "19e-23e-28e": "Astra 1 Astra 2 Astra 3", "13e-19e-23e-28e": "Astra 1 Astra 2 Astra 3 Hotbird"}
 			self.channellist_type = ConfigSelection(choices = modes, default = "openeight")
 			self.createMenu()
+		elif self.index == self.INSTALL_PLUGINS:
+			self.enabled = ConfigYesNo(default = True)
+			self.createMenu()
 
 	def checkNetworkCB(self, data):
 		if data < 3:
@@ -75,6 +79,8 @@ class InstallWizard(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Install channel list"), self.enabled))
 			if self.enabled.value:
 				self.list.append(getConfigListEntry(_("Channel list type"), self.channellist_type))
+		elif self.index == self.INSTALL_PLUGINS:
+			self.list.append(getConfigListEntry(_("Do you want to install plugins"), self.enabled))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
