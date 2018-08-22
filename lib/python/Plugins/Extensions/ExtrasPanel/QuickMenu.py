@@ -88,7 +88,7 @@ def Check_Softcam():
 
 
 class QuickMenu(Screen):
-	skin = '\n\t\t<screen name="QuickMenu" position="center,center" size="1180,600" backgroundColor="black" flags="wfBorder">\n\t\t<widget name="list" position="21,32" size="370,420" backgroundColor="black" itemHeight="60" transparent="1" />\n\t\t<widget name="sublist" position="410,32" size="300,420" backgroundColor="black" itemHeight="60" />\n\t\t<eLabel position="400,30" size="2,420" backgroundColor="darkgrey" zPosition="3" />\n\t\t<widget source="session.VideoPicture" render="Pig" position="720,30" size="450,300" backgroundColor="transparent" zPosition="1" />\n\t\t<widget name="description" position="22,455" size="1150,100" zPosition="1" font="Regular;22" halign="center" valign="center" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_red" position="20,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_green" position="325,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_yellow" position="630,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" valign="center" />\n\t\t<widget name="key_blue" position="935,571" size="234,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<eLabel name="new eLabel" position="21,567" size="300,3" zPosition="3" backgroundColor="red" />\n\t\t<eLabel name="new eLabel" position="325,567" size="300,3" zPosition="3" backgroundColor="green" />\n\t\t<eLabel name="new eLabel" position="630,567" size="300,3" zPosition="3" backgroundColor="yellow" />\n\t\t<eLabel name="new eLabel" position="935,567" size="234,3" zPosition="3" backgroundColor="blue" />\n\t\t</screen> '
+	skin = '\n\t\t<screen name="QuickMenu" position="center,center" size="1180,600" backgroundColor="black" flags="wfBorder">\n\t\t<widget name="list" position="21,32" size="370,420" backgroundColor="black" itemHeight="60" transparent="1" />\n\t\t<widget name="sublist" position="410,32" size="300,420" backgroundColor="black" itemHeight="60" />\n\t\t<eLabel position="400,30" size="2,420" backgroundColor="#666666" zPosition="3" />\n\t\t<widget source="session.VideoPicture" render="Pig" position="720,30" size="450,300" backgroundColor="transparent" zPosition="1" />\n\t\t<widget name="description" position="22,455" size="1150,100" zPosition="1" font="Regular;22" halign="center" valign="center" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_red" position="20,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_green" position="325,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_yellow" position="630,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" valign="center" />\n\t\t<widget name="key_blue" position="935,571" size="234,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<eLabel name="new eLabel" position="21,567" size="300,3" zPosition="3" backgroundColor="red" />\n\t\t<eLabel name="new eLabel" position="325,567" size="300,3" zPosition="3" backgroundColor="green" />\n\t\t<eLabel name="new eLabel" position="630,567" size="300,3" zPosition="3" backgroundColor="yellow" />\n\t\t<eLabel name="new eLabel" position="935,567" size="234,3" zPosition="3" backgroundColor="blue" />\n\t\t</screen> '
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -543,9 +543,15 @@ def QuickMenuEntryComponent(name, description, long_description = None, width = 
 		width *= 1.5
 		return [_(name),
 		MultiContentEntryText(pos=(90, 5), size=(width-90, 38), font=0, text = _(name)),
-		MultiContentEntryText(pos=(90, 38), size=(width-90, 30), font=1, text = _(description)),
+		MultiContentEntryText(pos=(90, 35), size=(width-90, 30), font=1, text = _(description)),
 		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), png = png),
 		_(long_description)]
+    elif sz_w > 720:
+        return [_(name),
+         MultiContentEntryText(pos=(90, 5), size=(width - 90, 38), font=0, text=_(name)),
+         MultiContentEntryText(pos=(90, 32), size=(width - 90, 30), font=1, text=_(description)),
+         MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), png=png),
+         _(long_description)]
 	else:
 		return [_(name),
 		MultiContentEntryText(pos=(60, 3), size=(width-60, 25), font=0, text = _(name)),
@@ -560,8 +566,13 @@ def QuickSubMenuEntryComponent(name, description, long_description = None, width
 		width *= 1.5
 		return [_(name),
 		MultiContentEntryText(pos=(15, 5), size=(width-15, 38), font=0, text = _(name)),
-		MultiContentEntryText(pos=(15, 38), size=(width-15, 30), font=1, text = _(description)),
+		MultiContentEntryText(pos=(15, 35), size=(width-15, 30), font=1, text = _(description)),
 		_(long_description)]
+    elif sz_w > 720:
+        return [_(name),
+         MultiContentEntryText(pos=(15, 5), size=(width - 15, 38), font=0, text=_(name)),
+         MultiContentEntryText(pos=(15, 32), size=(width - 15, 30), font=1, text=_(description)),
+         _(long_description)]
 	else:
 		return [_(name),
 		MultiContentEntryText(pos=(10, 3), size=(width-10, 25), font=0, text = _(name)),
