@@ -251,7 +251,7 @@ class QuickMenu(Screen):
 
 	def Qavsetup(self):
 		self.sublist = []
-		self.sublist.append(QuickSubMenuEntryComponent('AV Settings', _('Setup Videomode'), _('Setup your Video Mode, Video Output and other Video Settings.')))# doesn't work in openEight
+		self.sublist.append(QuickSubMenuEntryComponent('AV Settings', _('Setup Videomode'), _('Setup your Video Mode, Video Output and other Video Settings.')))
 		if AUDIOSYNC == True:
 			self.sublist.append(QuickSubMenuEntryComponent('Audio Sync', _('Setup Audio Sync'), _('Setup Audio Sync settings')))
 		self.sublist.append(QuickSubMenuEntryComponent('Auto Language', _('Auto Language Selection'), _('Select your Language for Audio/Subtitles')))
@@ -546,12 +546,12 @@ def QuickMenuEntryComponent(name, description, long_description = None, width = 
 		MultiContentEntryText(pos=(90, 35), size=(width-90, 30), font=1, text = _(description)),
 		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), png = png),
 		_(long_description)]
-    elif sz_w > 720:
-        return [_(name),
-         MultiContentEntryText(pos=(90, 5), size=(width - 90, 38), font=0, text=_(name)),
-         MultiContentEntryText(pos=(90, 32), size=(width - 90, 30), font=1, text=_(description)),
-         MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), png=png),
-         _(long_description)]
+	elif sz_w > 720:
+		return [_(name),
+		MultiContentEntryText(pos=(90, 5), size=(width - 90, 38), font=0, text=_(name)),
+		MultiContentEntryText(pos=(90, 32), size=(width - 90, 30), font=1, text=_(description)),
+		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), png=png),
+		_(long_description)]
 	else:
 		return [_(name),
 		MultiContentEntryText(pos=(60, 3), size=(width-60, 25), font=0, text = _(name)),
@@ -568,11 +568,11 @@ def QuickSubMenuEntryComponent(name, description, long_description = None, width
 		MultiContentEntryText(pos=(15, 5), size=(width-15, 38), font=0, text = _(name)),
 		MultiContentEntryText(pos=(15, 35), size=(width-15, 30), font=1, text = _(description)),
 		_(long_description)]
-    elif sz_w > 720:
-        return [_(name),
-         MultiContentEntryText(pos=(15, 5), size=(width - 15, 38), font=0, text=_(name)),
-         MultiContentEntryText(pos=(15, 32), size=(width - 15, 30), font=1, text=_(description)),
-         _(long_description)]
+	elif sz_w > 720:
+		return [_(name),
+		MultiContentEntryText(pos=(15, 5), size=(width - 15, 38), font=0, text=_(name)),
+		MultiContentEntryText(pos=(15, 32), size=(width - 15, 30), font=1, text=_(description)),
+		_(long_description)]
 	else:
 		return [_(name),
 		MultiContentEntryText(pos=(10, 3), size=(width-10, 25), font=0, text = _(name)),
