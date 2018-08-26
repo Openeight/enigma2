@@ -65,6 +65,16 @@ if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/PositionerSetup/pl
 	POSSETUP = True
 else:
 	POSSETUP = False
+if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/FastScan/plugin.pyo"):
+	from Plugins.SystemPlugins.FastScan.plugin import FastScanMain
+	FASTSCAN = True
+else:
+	FASTSCAN = False
+if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/CableScan/plugin.pyo"):
+	from Plugins.SystemPlugins.CableScan.plugin import CableScanScreen
+	CABLESCAN = True
+else:
+	CABLESCAN = False
 
 def isFileSystemSupported(filesystem):
 	try:
@@ -266,6 +276,10 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Positioner Setup', _('Setup rotor'), _('Setup your positioner for your satellite system')))
 		self.sublist.append(QuickSubMenuEntryComponent('Automatic Scan', _('Service Searching Automatically'), _('Automatic scan for services')))
 		self.sublist.append(QuickSubMenuEntryComponent('Manual Scan', _('Service Searching Manually'), _('Manual scan for services')))
+		if FASTSCAN == True:
+			self.sublist.append(QuickSubMenuEntryComponent("Fast Scan",_("Fast Scan Service Searching"),_("Use Fast Scan to search for services")))
+		if CABLESCAN == True:
+			self.sublist.append(QuickSubMenuEntryComponent("Cable Scan",_("Cable Service Searching"),_("Scan for cable services")))
 		self.sublist.append(QuickSubMenuEntryComponent('Sat Finder', _('Search Sats'), _('Search Sats, check signal and lock')))
 		self['sublist'].l.setList(self.sublist)
 
@@ -406,6 +420,10 @@ class QuickMenu(Screen):
 			self.session.open(ScanSimple)
 		elif item[0] == _('Manual Scan'):
 			self.session.open(ScanSetup)
+		elif item[0] == _("Fast Scan"):
+			FastScanMain(self.session)
+		elif item[0] == _("Cable Scan"):
+			self.session.open(CableScanScreen)
 		elif item[0] == _('Sat Finder'):
 			self.SatfinderMain()
 		elif item[0] == _('Software Update'):
