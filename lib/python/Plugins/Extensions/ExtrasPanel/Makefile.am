@@ -9,4 +9,5 @@ dist_install_DATA = sundtekinstall.sh \
 
 install-data-hook:
 	@chmod +x $(DESTDIR)$(installdir)/sundtekinstall.sh
+	@chmod +x $(DESTDIR)$(installdir)/dvbdate
 
