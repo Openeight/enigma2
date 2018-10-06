@@ -560,14 +560,14 @@ def QuickMenuEntryComponent(name, description, long_description = None, width = 
 	if sz_w and sz_w == 1920:
 		width *= 1.5
 		return [_(name),
-		MultiContentEntryText(pos=(90, 5), size=(width-90, 38), font=0, text = _(name)),
-		MultiContentEntryText(pos=(90, 35), size=(width-90, 30), font=1, text = _(description)),
+		MultiContentEntryText(pos=(90, 2), size=(width-90, 40), font=0, text = _(name)),
+		MultiContentEntryText(pos=(90, 42), size=(width-90, 30), font=1, text = _(description)),
 		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), png = png),
 		_(long_description)]
 	elif sz_w > 720:
 		return [_(name),
-		MultiContentEntryText(pos=(90, 5), size=(width - 90, 38), font=0, text=_(name)),
-		MultiContentEntryText(pos=(90, 32), size=(width - 90, 30), font=1, text=_(description)),
+		MultiContentEntryText(pos=(80, 2), size=(width - 90, 38), font=0, text=_(name)),
+		MultiContentEntryText(pos=(80, 32), size=(width - 90, 30), font=1, text=_(description)),
 		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), png=png),
 		_(long_description)]
 	else:
@@ -583,12 +583,12 @@ def QuickSubMenuEntryComponent(name, description, long_description = None, width
 	if sz_w and sz_w == 1920:
 		width *= 1.5
 		return [_(name),
-		MultiContentEntryText(pos=(15, 5), size=(width-15, 38), font=0, text = _(name)),
-		MultiContentEntryText(pos=(15, 35), size=(width-15, 30), font=1, text = _(description)),
+		MultiContentEntryText(pos=(15, 2), size=(width-15, 40), font=0, text = _(name)),
+		MultiContentEntryText(pos=(15, 42), size=(width-15, 30), font=1, text = _(description)),
 		_(long_description)]
 	elif sz_w > 720:
 		return [_(name),
-		MultiContentEntryText(pos=(15, 5), size=(width - 15, 38), font=0, text=_(name)),
+		MultiContentEntryText(pos=(15, 2), size=(width - 15, 40), font=0, text=_(name)),
 		MultiContentEntryText(pos=(15, 32), size=(width - 15, 30), font=1, text=_(description)),
 		_(long_description)]
 	else:
@@ -604,13 +604,13 @@ class QuickMenuList(MenuList):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		sz_w = getDesktop(0).size().width()
 		if sz_w and sz_w == 1920:
-			self.l.setFont(0, gFont("Regular", 30))
+			self.l.setFont(0, gFont("Regular", 32))
 			self.l.setFont(1, gFont("Regular", 24))
-			self.l.setItemHeight(75)
+			self.l.setItemHeight(78)
 		else:
-			self.l.setFont(0, gFont("Regular", 20))
+			self.l.setFont(0, gFont("Regular", 24))
 			self.l.setFont(1, gFont("Regular", 16))
-			self.l.setItemHeight(50)
+			self.l.setItemHeight(55)
 
 
 class QuickMenuSubList(MenuList):
@@ -619,13 +619,13 @@ class QuickMenuSubList(MenuList):
 		MenuList.__init__(self, sublist, enableWrapAround, eListboxPythonMultiContent)
 		sz_w = getDesktop(0).size().width()
 		if sz_w and sz_w == 1920:
-			self.l.setFont(0, gFont("Regular", 30))
+			self.l.setFont(0, gFont("Regular", 32))
 			self.l.setFont(1, gFont("Regular", 24))
-			self.l.setItemHeight(75)
+			self.l.setItemHeight(78)
 		else:
-			self.l.setFont(0, gFont("Regular", 20))
+			self.l.setFont(0, gFont("Regular", 24))
 			self.l.setFont(1, gFont("Regular", 16))
-			self.l.setItemHeight(50)
+			self.l.setItemHeight(55)
 
 
 class QuickMenuDevices(Screen):
