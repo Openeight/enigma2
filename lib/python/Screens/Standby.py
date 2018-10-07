@@ -13,12 +13,15 @@ from Components.SystemInfo import SystemInfo
 from GlobalActions import globalActionMap
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference
 from Tools.HardwareInfo import HardwareInfo
+from boxbranding import getBoxType
 
 inStandby = None
 
 class Standby(Screen):
 	def Power(self):
 		print "[Standby] leave standby"
+		if (getBoxType() in ('sf8008')):
+			open("/proc/stb/hdmi/output", "w").write("on")
 		self.close(True)
 
 	def setMute(self):
@@ -102,6 +105,9 @@ class Standby(Screen):
 				wakeup_time = int(gotoWakeupTime - time())
 				if wakeup_time > 0:
 					self.standbyWakeupTimer.startLongTimer(wakeup_time)
+
+		if (getBoxType() in ('sf8008')):
+			open("/proc/stb/hdmi/output", "w").write("off")
 
 		self.onFirstExecBegin.append(self.__onFirstExecBegin)
 		self.onClose.append(self.__onClose)
