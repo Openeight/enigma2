@@ -17,7 +17,7 @@ from Tools.Downloader import downloadWithProgress
 import urllib2
 import os
 import shutil
-from boxbranding import getImageDistro, getMachineBrand, getMachineName, getBoxType, getMachineKernelFile, getMachineRootFile
+from boxbranding import getImageDistro, getMachineBrand, getMachineName, getBoxType, getMachineKernelFile, getMachineRootFile, getMachineBuild, getMachineMtdKernel, getMachineMtdRoot
 distro = getImageDistro()
 ROOTFSBIN = getMachineRootFile()
 KERNELBIN = getMachineKernelFile()
@@ -339,14 +339,20 @@ class doFlashImage(Screen):
 			text = _("Flashing: ")
 			if self.simulate:
 				text += _("Simulate (no write)")
-				cmd = "%s -n -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp)
+				if getMachineBuild() in ("sf8008"):
+					cmd = "%s -n -r%s -k%s %s > /dev/null 2>&1" % (ofgwritePath, getMachineMtdRoot(), getMachineMtdKernel(), flashTmp)
+				else:
+					cmd = "%s -n -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp)
 				self.close()
 				message = "echo -e '\n"
 				message += _('Show only found image and mtd partitions.\n')
 				message += "'"
 			else:
 				text += _("root and kernel")
-				cmd = "%s -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp)
+				if getMachineBuild() in ("sf8008"):
+					cmd = "%s -r%s -k%s %s > /dev/null 2>&1" % (ofgwritePath, getMachineMtdRoot(), getMachineMtdKernel(), flashTmp)
+				else:
+					cmd = "%s -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp)
 				message = "echo -e '\n"
 				message += _('ofgwrite will stop enigma2 now to run the flash.\n')
 				message += _('Your STB will freeze during the flashing process.\n')
