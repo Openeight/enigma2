@@ -32,10 +32,12 @@ from Plugins.Extensions.ExtrasPanel.MountManager import DevicesMountPanel
 from Plugins.Extensions.ExtrasPanel.SoftcamPanel import *
 from Plugins.Extensions.ExtrasPanel.plugin import ShowSoftcamPanelExtensions
 from Plugins.Extensions.ExtrasPanel.SoftwarePanel import SoftwarePanel
+from Plugins.Extensions.ExtrasPanel.sundtek import SundtekControlCenter
 from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
 from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
 from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin, SoftwareManagerSetup
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getOldBackupPath, getBackupFilename
+from Plugins.SystemPlugins.HdmiCEC.plugin import HdmiCECSetupScreen
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from os import path, listdir
@@ -50,6 +52,16 @@ if path.exists('/usr/lib/enigma2/python/Plugins/Extensions/AudioSync'):
 	AUDIOSYNC = True
 else:
 	AUDIOSYNC = False
+if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/AutomaticVolumeAdjustment'):
+	from Plugins.SystemPlugins.AutomaticVolumeAdjustment.AutomaticVolumeAdjustmentSetup import AutomaticVolumeAdjustmentConfigScreen
+	AUTVOLADJ = True
+else:
+	AUTVOLADJ = False
+if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/VideoTune/VideoFinetune.pyo"):
+	from Plugins.SystemPlugins.VideoTune.VideoFinetune import VideoFinetune
+	VIDTUNE = True
+else:
+	VIDTUNE = False
 if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/VideoEnhancement/plugin.pyo'):
 	from Plugins.SystemPlugins.VideoEnhancement.plugin import VideoEnhancementSetup
 	VIDEOENH = True
@@ -71,10 +83,20 @@ if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/FastScan/plugin.py
 else:
 	FASTSCAN = False
 if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/CableScan/plugin.pyo"):
-	from Plugins.SystemPlugins.CableScan.plugin import CableScanScreen
+	from Plugins.SystemPlugins.CableScan.plugin import CableScanMain
 	CABLESCAN = True
 else:
 	CABLESCAN = False
+if path.exists("/usr/lib/enigma2/python/Plugins/PLi/SoftcamSetup/Sc.pyo"):
+	from Plugins.PLi.SoftcamSetup.Sc import ScSetupScreen
+	SC = True
+else:
+	SC = False
+if path.exists("/usr/lib/enigma2/python/Plugins/Extensions/CCcamInfo/plugin.pyo"):
+	from Plugins.Extensions.CCcamInfo.plugin import EcmInfoConfigMenu
+	ECMINFOSETUP = True
+else:
+	ECMINFOSETUP = False
 
 def isFileSystemSupported(filesystem):
 	try:
@@ -216,6 +238,10 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Recording settings', _('Recording Setup'), _('Setup your recording config')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording paths', _('Recording paths Setup'), _('Setup your recording paths config')))
 		self.sublist.append(QuickSubMenuEntryComponent('EPG settings', _('EPG Setup'), _('Setup your EPG config')))
+		if SC:
+			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info Sc",_("Sc Ecm Info setup"),_("Setup Ecm Info of the Softcam Manager")))
+		if ECMINFOSETUP:
+			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info",_("Ecm Info setup"),_("Setup Ecm Info of the CCcamInfo plugin")))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qnetwork(self):
@@ -264,9 +290,14 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('AV Settings', _('Setup Videomode'), _('Setup your Video Mode, Video Output and other Video Settings.')))
 		if AUDIOSYNC == True:
 			self.sublist.append(QuickSubMenuEntryComponent('Audio Sync', _('Setup Audio Sync'), _('Setup Audio Sync settings')))
+		if AUTVOLADJ == True:
+			self.sublist.append(QuickSubMenuEntryComponent('Automatic Volume Adjustment', _('Automatic Volume Adjustment settings'), _('Setup for Automatic Volume Adjustment between MPEG and AC3/DTS')))
 		self.sublist.append(QuickSubMenuEntryComponent('Auto Language', _('Auto Language Selection'), _('Select your Language for Audio/Subtitles')))
+		if VIDTUNE == True:
+			self.sublist.append(QuickSubMenuEntryComponent("Testscreens",_("Test screens for your TV"),_("Tune your TV for the best result")))
 		if os.path.exists('/proc/stb/vmpeg/0/pep_apply') and VIDEOENH == True:
 			self.sublist.append(QuickSubMenuEntryComponent('VideoEnhancement', _('VideoEnhancement Setup'), _('VideoEnhancement Setup.')))
+		self.sublist.append(QuickSubMenuEntryComponent("Hdmi CEC",_("HDMI-CEC setup"),_("Setup your HDMI communication and preferences")))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qtuner(self):
@@ -274,6 +305,7 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Tuner Configuration', _('Setup tuner(s)'), _('Setup each tuner for your satellite system')))
 		if POSSETUP == True:
 			self.sublist.append(QuickSubMenuEntryComponent('Positioner Setup', _('Setup rotor'), _('Setup your positioner for your satellite system')))
+		self.sublist.append(QuickSubMenuEntryComponent("Sundtek Control Center",_("Sundtek tuner Setup"),_("Configure your Sundtek tuner(s) or check/update the drivers")))
 		self.sublist.append(QuickSubMenuEntryComponent('Automatic Scan', _('Service Searching Automatically'), _('Automatic scan for services')))
 		self.sublist.append(QuickSubMenuEntryComponent('Manual Scan', _('Service Searching Manually'), _('Manual scan for services')))
 		if FASTSCAN == True:
@@ -392,6 +424,10 @@ class QuickMenu(Screen):
 			self.openSetup('recording')
 		elif item[0] == _('EPG settings'):
 			self.openSetup('epgsettings')
+		elif item[0] == _("Ecm Info Sc"):
+			self.session.open(ScSetupScreen)
+		elif item[0] == _("Ecm Info"):
+			self.session.open(EcmInfoConfigMenu)
 		elif item[0] == _('Mount Manager'):
 			self.session.open(AutoMountManager, None, plugin_path_networkbrowser)
 		elif item[0] == _('Network Browser'):
@@ -408,14 +444,22 @@ class QuickMenu(Screen):
 			videoSetupMain(self.session)
 		elif item[0] == _('Auto Language'):
 			self.openSetup('autolanguagesetup')
+		elif item[0] == _('Automatic Volume Adjustment'):
+			self.session.open(AutomaticVolumeAdjustmentConfigScreen)
 		elif item[0] == _('Audio Sync'):
 			self.session.open(AC3LipSyncSetup, plugin_path_audiosync)
+		elif item[0] == _("Testscreens"):
+			self.session.open(VideoFinetune)
 		elif item[0] == _('VideoEnhancement'):
 			self.session.open(VideoEnhancementSetup)
+		elif item[0] == _("Hdmi CEC"):
+			self.session.open(HdmiCECSetupScreen)
 		elif item[0] == _('Tuner Configuration'):
 			self.session.open(NimSelection)
 		elif item[0] == _('Positioner Setup'):
 			self.PositionerMain()
+		elif item[0] == _("Sundtek Control Center"):
+			self.session.open(SundtekControlCenter)
 		elif item[0] == _('Automatic Scan'):
 			self.session.open(ScanSimple)
 		elif item[0] == _('Manual Scan'):
@@ -423,7 +467,7 @@ class QuickMenu(Screen):
 		elif item[0] == _("Fast Scan"):
 			FastScanMain(self.session)
 		elif item[0] == _("Cable Scan"):
-			self.session.open(CableScanScreen)
+			CableScanMain(self.session)
 		elif item[0] == _('Sat Finder'):
 			self.SatfinderMain()
 		elif item[0] == _('Software Update'):
