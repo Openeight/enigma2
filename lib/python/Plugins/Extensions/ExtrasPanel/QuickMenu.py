@@ -453,7 +453,10 @@ class QuickMenu(Screen):
 		elif item[0] == _('VideoEnhancement'):
 			self.session.open(VideoEnhancementSetup)
 		elif item[0] == _("Hdmi CEC"):
-			self.session.open(HdmiCECSetupScreen)
+		     if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/HdmiCEC/plugin.pyo"):
+		        self.session.open(HdmiCECSetupScreen)
+		     else:
+			self.session.open(MessageBox, _('Sorry,\nHdmi CEC is not available for this box at the moment.'), MessageBox.TYPE_INFO, timeout=10)
 		elif item[0] == _('Tuner Configuration'):
 			self.session.open(NimSelection)
 		elif item[0] == _('Positioner Setup'):
