@@ -203,6 +203,16 @@ if test x"$with_alsacard" != xno ; then
 	AC_DEFINE_UNQUOTED(ALSA_CARD, "$withval",[Defines which alsa card to use])
 fi
 
+AC_ARG_WITH(7segment,
+	AC_HELP_STRING([--with-7segment], [use ascii based lcd, yes or no]),
+	[[with7segment=$withval]],
+	[[with7segment=no]]
+)
+if test x"$with7segment" != xno ; then
+	AC_DEFINE(HAVE_7SEGMENT, 1,[Define when using an ascii based lcd device])
+fi
+AM_CONDITIONAL(HAVE_7SEGMENT, test x"$with7segment" != xno)
+
 AC_ARG_WITH(alsamixer,
 	AC_HELP_STRING([--with-alsamixer=mixername], [use alsa 'mixername' for volume control, e.g. Master]),
 	[[with_alsamixer=$withval]],
@@ -261,6 +271,7 @@ data/extensions/Makefile
 data/keymaps/Makefile
 data/hw_info/Makefile
 data/display/Makefile
+data/7segment/Makefile
 data/display/LCDAnalogClock_1_Standby/Makefile
 data/display/LCDAnalogClock_2_Standby/Makefile
 data/display/LCDWeather_Standby/Makefile
