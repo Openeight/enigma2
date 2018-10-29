@@ -146,7 +146,11 @@ fi
 if test "$BOXTYPE" == "et7x00"; then
 	AC_DEFINE(KEY_F1_TO_KEY_F2, 1,[define when rc sends a KEY_F1 event for its KEY_F2 key])
 fi
-	
+
+if test "$BOXTYPE" == "sf8008"; then
+	AC_DEFINE(HAVE_HISILICON, 1,[define add HISILICON chip])
+fi
+
 AC_ARG_WITH(libxine,
 	AS_HELP_STRING([--with-libxine],[use libxine, yes or no]),
 	[with_libxine=$withval],[with_libxine=no])

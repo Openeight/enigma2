@@ -1209,6 +1209,9 @@ RESULT eTSMPEGDecoder::showSinglePic(const char *filename)
 				m_video_clip_fd = open("/dev/dvb/adapter0/video0", O_WRONLY);
 			if (m_video_clip_fd >= 0)
 			{
+#if HAVE_HISILICON
+				finishShowSinglePic();
+#endif
 				bool seq_end_avail = false;
 				size_t pos=0;
 				unsigned char pes_header[] = { 0x00, 0x00, 0x01, 0xE0, 0x00, 0x00, 0x80, 0x80, 0x05, 0x21, 0x00, 0x01, 0x00, 0x01 };
@@ -1223,8 +1226,13 @@ RESULT eTSMPEGDecoder::showSinglePic(const char *filename)
 				else
 					streamtype = VIDEO_STREAMTYPE_MPEG2;
 
+#if HAVE_HISILICON
+				if (ioctl(m_video_clip_fd, VIDEO_SELECT_SOURCE, 0xff) < 0)
+					eDebug("[eTSMPEGDecoder] VIDEO_SELECT_SOURCE MEMORY failed: %m");
+#else
 				if (ioctl(m_video_clip_fd, VIDEO_SELECT_SOURCE, VIDEO_SOURCE_MEMORY) < 0)
 					eDebug("[eTSMPEGDecoder] VIDEO_SELECT_SOURCE MEMORY failed: %m");
+#endif
 				if (ioctl(m_video_clip_fd, VIDEO_SET_STREAMTYPE, streamtype) < 0)
 					eDebug("[eTSMPEGDecoder] VIDEO_SET_STREAMTYPE failed: %m");
 				if (ioctl(m_video_clip_fd, VIDEO_PLAY) < 0)
@@ -1243,7 +1251,9 @@ RESULT eTSMPEGDecoder::showSinglePic(const char *filename)
 				if (!seq_end_avail)
 					write(m_video_clip_fd, seq_end, sizeof(seq_end));
 				writeAll(m_video_clip_fd, stuffing, 8192);
+#if !HAVE_HISILICON
 				m_showSinglePicTimer->start(150, true);
+#endif
 			}
 			close(f);
 		}
