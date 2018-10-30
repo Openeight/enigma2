@@ -36,20 +36,6 @@ class About(Screen):
 			AboutText += _("Chipset: %s") % about.getChipSetString() + "\n"
 		AboutText += _("CPU: %s") % about.getCPUString() + "\n"
 		AboutText += _("Version: %s") % getImageVersion() + "\n"
-		if SystemInfo["canMultiBoot"]:
-			image = GetCurrentImage()
-			bootmode = ""
-			part = ""
-			if SystemInfo["canMode12"]:
-				bootmode = "bootmode = %s" %GetCurrentImageMode()
-			if SystemInfo["HasHiSi"]:
-				if image != 0:
-					part = "%s%s" %(SystemInfo["canMultiBoot"][2], image*2)
-					image += 1
-				else:
-					part = "MMC"
-					image += 1
-			AboutText += _("Image Slot:\t%s") % "STARTUP_" + str(image) + " " + part + " " + bootmode + "\n"
 		AboutText += _("Build: %s") % getImageBuild() + "\n"
 		if path.exists('/proc/stb/info/release') and getBoxType() in ('et7000', 'et7500', 'et8500'):
 			realdriverdate = open("/proc/stb/info/release", 'r')
@@ -297,8 +283,8 @@ class CommitInfo(Screen):
 		self.project = 0
 		self.projects = [
 			("https://api.github.com/repos/Openeight/enigma2/commits", "enigma2"),
-			("https://api.github.com/repos/Openeight/SmartLiteFHD/commits", "SmartLiteFHD"),
-			("https://api.github.com/repos/Openeight/SmartLiteSD/commits", "SmartLiteSD"),
+			("https://api.github.com/repos/Openeight/OctagonEightSD/commits", "OctagonEightSD"),
+			("https://api.github.com/repos/Openeight/OctagonEightFHD/commits", "OctagonEightFHD"),
 		]
 		self.cachedProjects = {}
 		self.Timer = eTimer()
