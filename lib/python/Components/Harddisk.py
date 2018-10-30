@@ -2,14 +2,26 @@ import os
 import time
 from Tools.CList import CList
 from SystemInfo import SystemInfo
+from boxbranding import getBoxType, getMachineBuild
 from Components.Console import Console
 import Task
+import re
+
 
 def readFile(filename):
 	file = open(filename)
 	data = file.read().strip()
 	file.close()
 	return data
+	
+def getextdevices(ext):
+	cmd ='blkid -t TYPE=%s -o device'%ext
+	extdevices = os.popen(cmd).read().replace('\n', ',').rstrip(",")
+	if extdevices == "":
+		return None
+	else:
+		extdevices = [x.strip() for x in extdevices.split(",")]
+		return extdevices	
 
 def getProcMounts():
 	try:
@@ -633,7 +645,17 @@ class HarddiskManager:
 		devpath = "/sys/block/" + blockdev
 		error = False
 		removable = False
+		BLACKLIST=[]
+		if getMachineBuild() in ('u51','u52','u53','u5','u5pvr','vuzero4k','et1x000','vuuno4k','vuuno4kse','vuultimo4k','vusolo4k','hd51','hd52','sf4008','dm900','dm7080','dm820', 'gb7252', 'dags7252', 'vs1500','h7','8100s','et13000','sf5008','sf8008'):
+			BLACKLIST=["mmcblk0"]
+		elif getMachineBuild() in ('xc7439'):
+			BLACKLIST=["mmcblk1"]
+
 		blacklisted = False
+		if blockdev[:7] in BLACKLIST:
+			blacklisted = True
+		if blockdev.startswith("mmcblk") and (re.search(r"mmcblk\dboot", blockdev) or re.search(r"mmcblk\drpmb", blockdev)):
+			blacklisted = True
 		is_cdrom = False
 		partitions = []
 		try:

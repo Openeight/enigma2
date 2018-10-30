@@ -3,7 +3,7 @@ from os import path
 from enigma import eDVBResourceManager, Misc_Options
 from Tools.Directories import fileExists, fileCheck, pathExists
 from Tools.HardwareInfo import HardwareInfo
-from boxbranding import getBoxType, getDisplayType
+from boxbranding import getBoxType, getDisplayType, getMachineBuild
 
 SystemInfo = {}
 
@@ -60,6 +60,7 @@ SystemInfo["HasColorspace"] = fileCheck("/proc/stb/video/hdmi_colorspace")
 SystemInfo["HasColorspaceSimple"] = SystemInfo["HasColorspace"] and HardwareInfo().get_device_model() in "vusolo4k"
 SystemInfo["HasMultichannelPCM"] = fileCheck("/proc/stb/audio/multichannel_pcm")
 SystemInfo["HasMMC"] = HardwareInfo().get_device_model() in ('vusolo4k', 'vuuno4k', 'vuultimo4k', 'hd51', 'hd52', 'vs1500', 'et11000', 'h7', 'sf4008', 'sf8008')
+SystemInfo["HaveMultiBootDS"] = fileCheck("/boot/STARTUP") and getMachineBuild() in ('cc1','sf8008') and fileCheck("/dev/sda") 
 SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
 SystemInfo["CanDoTranscodeAndPIP"] = HardwareInfo().get_device_model() in "vusolo4k"
 SystemInfo["HasColordepth"] = fileCheck("/proc/stb/video/hdmi_colordepth")

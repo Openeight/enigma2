@@ -36,6 +36,40 @@ class About(Screen):
 			AboutText += _("Chipset: %s") % about.getChipSetString() + "\n"
 		AboutText += _("CPU: %s") % about.getCPUString() + "\n"
 		AboutText += _("Version: %s") % getImageVersion() + "\n"
+				imagestarted = ""
+		bootname = ''
+		if path.exists('/boot/bootname'):
+			f = open('/boot/bootname', 'r')
+			bootname = f.readline().split('=')[1]
+			f.close()
+		if getMachineBuild() in ('cc1','sf8008'):
+			if path.exists('/boot/STARTUP'):
+				f = open('/boot/STARTUP', 'r')
+				f.seek(5)
+				image = f.read(4)
+				if image == "emmc":
+					image = "1"
+				elif image == "usb0":
+					f.seek(13)
+					image = f.read(1)
+					if image == "1":
+						image = "2"
+					elif image == "3":
+						image = "3"
+					elif image == "5":
+						image = "4"
+					elif image == "7":
+						image = "5"
+				f.close()
+				if bootname: bootname = "   (%s)" %bootname 
+				AboutText += _("Selected Image:\t\t%s") % "STARTUP_" + image + bootname + "\n"
+		if path.exists('/boot/STARTUP'):
+			f = open('/boot/STARTUP', 'r')
+			f.seek(22)
+			image = f.read(1)
+			f.close()
+			if bootname: bootname = "   (%s)" %bootname
+			AboutText += _("Image started:\t%s") % "STARTUP_" + image + bootname + "\n"
 		AboutText += _("Build: %s") % getImageBuild() + "\n"
 		if path.exists('/proc/stb/info/release') and getBoxType() in ('et7000', 'et7500', 'et8500'):
 			realdriverdate = open("/proc/stb/info/release", 'r')
