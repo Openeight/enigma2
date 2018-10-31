@@ -317,8 +317,8 @@ class CommitInfo(Screen):
 		self.project = 0
 		self.projects = [
 			("https://api.github.com/repos/Openeight/enigma2/commits", "enigma2"),
-			("https://api.github.com/repos/Openeight/OctagonEightSD/commits", "OctagonEightSD"),
-			("https://api.github.com/repos/Openeight/OctagonEightFHD/commits", "OctagonEightFHD"),
+			("https://api.github.com/repos/Openeight/SmartLiteFHD/commits", "SmartLiteFHD"),
+			("https://api.github.com/repos/Openeight/SmartLiteSD/commits", "SmartLiteSD"),
 		]
 		self.cachedProjects = {}
 		self.Timer = eTimer()
