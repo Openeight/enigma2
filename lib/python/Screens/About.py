@@ -36,7 +36,7 @@ class About(Screen):
 			AboutText += _("Chipset: %s") % about.getChipSetString() + "\n"
 		AboutText += _("CPU: %s") % about.getCPUString() + "\n"
 		AboutText += _("Version: %s") % getImageVersion() + "\n"
-				imagestarted = ""
+		imagestarted = ""
 		bootname = ''
 		if path.exists('/boot/bootname'):
 			f = open('/boot/bootname', 'r')
