@@ -490,7 +490,15 @@ class Network:
 		self.activateInterfaceConsole.killAll()
 
 	def checkforInterface(self, iface):
-		return self.getAdapterAttribute(iface, 'up')
+		if self.getAdapterAttribute(iface, 'up') is True:
+			return True
+		else:
+			ret = os.system("ifconfig " + iface + " up")
+			os.system("ifconfig " + iface + " down")
+			if ret == 0:
+				return True
+			else:
+				return False
 
 	def checkDNSLookup(self,statecallback):
 		self.DnsState = 0
