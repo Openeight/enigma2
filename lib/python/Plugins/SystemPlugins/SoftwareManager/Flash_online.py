@@ -1,11 +1,11 @@
 from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
-from Components.Button import Button
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Components.FileList import FileList
 from Components.Task import Task, Job, job_manager, Condition
 from Components.Sources.StaticText import StaticText
+from Components.SystemInfo import SystemInfo
 from Screens.Console import Console
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
@@ -14,6 +14,7 @@ from Screens.Console import Console
 from Screens.HelpMenu import HelpableScreen
 from Screens.TaskView import JobView
 from Tools.Downloader import downloadWithProgress
+from enigma import fbClass
 import urllib2
 import os
 import shutil
@@ -45,23 +46,32 @@ class FlashOnline(Screen):
 		<ePixmap position="140,360" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,360" zPosition="1" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 		<ePixmap position="420,360" zPosition="1" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="140,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" position="280,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" position="420,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_red" render="Label" position="0,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_green" render="Label" position="140,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_yellow" render="Label" position="280,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_blue" render="Label" position="420,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="info-online" position="10,30" zPosition="1" size="450,100" font="Regular;20" halign="left" valign="top" transparent="1" />
 		<widget name="info-local" position="10,150" zPosition="1" size="450,200" font="Regular;20" halign="left" valign="top" transparent="1" />
 	</screen>"""
-		
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
 
+		self.selection = 0
+		self.list = self.list_files("/boot")
+		self.MTDKERNEL = getMachineMtdKernel()
+		self.MTDROOTFS = getMachineMtdRoot()
+
 		Screen.setTitle(self, _("Flash On the Fly"))
-		self["key_yellow"] = Button("Local")
-		self["key_green"] = Button("Online")
-		self["key_red"] = Button(_("Exit"))
-		self["key_blue"] = Button("")
+		if SystemInfo["HaveMultiBoot"]:
+			self["key_yellow"] = StaticText(_("STARTUP"))
+			self.read_current_multiboot()
+		else:
+			self["key_yellow"] = StaticText("")
+		self["key_green"] = StaticText(_("Online"))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_blue"] = StaticText(_("Local"))
 		self["info-local"] = Label(_("Local = Flash an image from local path /hdd/images"))
 		self["info-online"] = Label(_("Online = Download an image and flash it"))
 		
@@ -73,6 +83,10 @@ class FlashOnline(Screen):
 			"red": self.quit,
 			"cancel": self.quit,
 		}, -2)
+		if SystemInfo["HaveMultiBoot"]:
+			self.multi = self.read_startup("/boot/" + self.list[self.selection]).split(".",1)[1].split(" ",1)[0]
+			self.multi = self.multi[-1:]
+			print "[Flash Online] MULTI:",self.multi
 
 	def check_hdd(self):
 		if not os.path.exists("/media/hdd"):
@@ -106,19 +120,66 @@ class FlashOnline(Screen):
 		self.close()
 		
 	def blue(self):
-		pass
+		if self.check_hdd():
+			self.session.open(doFlashImage, online = False, list=self.list[self.selection], mtdkernel=self.MTDKERNEL, mtdrootfs=self.MTDROOTFS)
+		else:
+			self.close()
 
 	def green(self):
 		if self.check_hdd():
-			self.session.open(doFlashImage, online = True)
+			self.session.open(doFlashImage, online = True, list=self.list[self.selection], mtdkernel=self.MTDKERNEL, mtdrootfs=self.MTDROOTFS)
 		else:
 			self.close()
 
 	def yellow(self):
-		if self.check_hdd():
-			self.session.open(doFlashImage, online = False)
+		if SystemInfo["HaveMultiBoot"]:
+			self.selection = self.selection + 1
+			if self.selection == len(self.list):
+				self.selection = 0
+			self["key_yellow"].setText(_(self.list[self.selection]))
+			self.read_current_multiboot()
+
+	def read_current_multiboot(self):
+		if getMachineBuild() in ("cc1","sf8008"):
+			if self.list[self.selection] == "Recovery":
+				cmdline = self.read_startup("/boot/STARTUP").split("=",1)[1].split(" ",1)[0]
+			else:
+				cmdline = self.read_startup("/boot/" + self.list[self.selection]).split("=",1)[1].split(" ",1)[0]
+		cmdline = cmdline.lstrip("/dev/")
+		self.MTDROOTFS = cmdline
+		self.MTDKERNEL = cmdline[:-1] + str(int(cmdline[-1:]) -1)
+		print "[Flash Online] kernel device: ",self.MTDKERNEL
+		print "[Flash Online] rootfsdevice: ",self.MTDROOTFS
+
+	def read_startup(self, FILE):
+		file = FILE
+		with open(file, 'r') as myfile:
+			data=myfile.read().replace('\n', '')
+		myfile.close()
+		return data
+
+	def find_rootfs_dev(self, file):
+		startup_content = self.read_startup("/boot/" + file)
+		return startup_content[startup_content.find("root=")+5:].split()[0]
+
+	def list_files(self, PATH):
+		files = []
+		if SystemInfo["HaveMultiBoot"]:
+			path = PATH
+			if getMachineBuild() in ("cc1","sf8008"):
+				for name in os.listdir(path):
+					if name != 'bootname' and os.path.isfile(os.path.join(path, name)):
+						try:
+							cmdline = self.find_rootfs_dev(name)
+						except IndexError:
+							continue
+						cmdline_startup = self.find_rootfs_dev("STARTUP")
+						if (cmdline != cmdline_startup) and (name != "STARTUP"):
+							files.append(name)
+				files.insert(0,"STARTUP")
 		else:
-			self.close()
+			files = "None"
+		return files
 
 class doFlashImage(Screen):
 	skin = """
@@ -127,32 +188,36 @@ class doFlashImage(Screen):
 		<ePixmap position="140,460" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,460" zPosition="1" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
 		<ePixmap position="420,460" zPosition="1" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" position="0,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" position="140,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" position="280,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" position="420,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="imageList" position="10,10" zPosition="1" size="520,450" font="Regular;20" scrollbarMode="showOnDemand" transparent="1" />
+		<widget source="key_red" render="Label" position="0,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_green" render="Label" position="140,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_yellow" render="Label" position="280,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="key_blue" render="Label" position="420,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="imageList" position="10,10" zPosition="1" size="450,450" font="Regular;20" scrollbarMode="showOnDemand" transparent="1" />
 	</screen>"""
 		
-	def __init__(self, session, online ):
+	def __init__(self, session, online, list=None, mtdkernel=None, mtdrootfs=None ):
 		Screen.__init__(self, session)
 		self.session = session
 
 		Screen.setTitle(self, _("Flash On the fly (select an image)"))
-		self["key_green"] = Button(_("Flash"))
-		self["key_red"] = Button(_("Exit"))
-		self["key_blue"] = Button("")
-		self["key_yellow"] = Button("")
+		self["key_green"] = StaticText(_("Flash"))
+		self["key_red"] = StaticText(_("Exit"))
+		self["key_blue"] = StaticText("")
+		self["key_yellow"] = StaticText("")
 		self.filename = None
 		self.imagelist = []
 		self.simulate = False
 		self.Online = online
+		self.List = list
+		self.MTDKERNEL = mtdkernel
+		self.MTDROOTFS = mtdrootfs
 		self.imagePath = imagePath
 		self.feedurl = feedurl_openeight
 		self.feed = "openeight"
 		self["imageList"] = MenuList(self.imagelist)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
 		{
+			"ok": self.green,
 			"green": self.green,
 			"yellow": self.yellow,
 			"red": self.quit,
@@ -163,8 +228,10 @@ class doFlashImage(Screen):
 
 		
 	def quit(self):
+		if self.simulate or self.List not in ("STARTUP","cmdline.txt"):
+			fbClass.getInstance().unlock()
 		self.close()
-		
+
 	def blue(self):
 		if self.Online:
 			if self.feed == "atv":
@@ -186,43 +253,77 @@ class doFlashImage(Screen):
 				os.remove(self.imagePath + "/" + self.filename)
 			self.imagelist.remove(self.filename)
 			self["imageList"].l.setList(self.imagelist)
-		
+
 	def box(self):
 		box = getBoxType()
 		machinename = getMachineName()
 		return box
 
-	def green(self, ret = None):
-		sel = self["imageList"].l.getCurrentSelection()
-		if sel == None:
+	def getSel(self):
+		self.sel = self["imageList"].l.getCurrentSelection()
+		if self.sel == None:
 			print"Nothing to select !!"
-			return
-		file_name = self.imagePath + "/" + sel
-		self.filename = file_name
-		self.sel = sel
-		box = self.box()
-		self.hide()
+			return False
+		self.filename = self.imagePath + "/" + self.sel
+		return self.checkTrafficLight()
+
+	def greenCB(self, ret = None):
 		if self.Online:
-			if self.feed == "openeight":
-				url = self.feedurl + "/images/" + box + "/" + sel
+			if ret:
+				from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen
+				self.session.openWithCallback(self.startInstallOnline,BackupScreen, runBackup = True)
 			else:
-				url = self.feedurl + "/" + box + "/" + sel
-			print "[Flash Online] Download image: >%s<" % url
-			try:
-				u = urllib2.urlopen(url)
-				f = open(file_name, 'wb')
-				f.close()
-				job = ImageDownloadJob(url, file_name, sel)
-				job.afterEvent = "close"
-				job_manager.AddJob(job)
-				job_manager.failed_jobs = []
-				self.session.openWithCallback(self.ImageDownloadCB, JobView, job, backgroundable = False, afterEventChangeable = False)
-			except urllib2.URLError as e:
-				print "[Flash Online] Download failed !!\n%s" % e
-				self.session.openWithCallback(self.ImageDownloadCB, MessageBox, _("Download Failed !!" + "\n%s" % e), type = MessageBox.TYPE_ERROR)
-				self.close()
+				self.startInstallOnline()
 		else:
-			self.session.openWithCallback(self.startInstallLocal, MessageBox, _("Do you want to backup your settings now?"), default=False)
+			self.startInstallLocal(ret)
+
+	def green(self):
+		if self.getSel():
+			self.hide()
+			self.session.openWithCallback(self.greenCB, MessageBox, _("Do you want to backup your settings now?"), default=True)
+
+	def checkTrafficLight(self):
+		import time
+		if not self.Online or not time.strftime('%Y%m%d') in self.filename:
+			return True
+
+		try:
+			url = "http://feed.openeight.de/status"
+			d = urllib2.urlopen(url)
+			tmpStatus = d.read()
+		except:
+			tmpStatus = _("Unknown")
+
+		if '0' in tmpStatus:
+			return True
+		else:
+			if '1' in tmpStatus:
+				tmpStatus = _("yellow")
+			elif '2' in tmpStatus:
+				tmpStatus = _("red")
+			self.session.open(MessageBox, _("Traffic light state is '%s' - please use a another image.") %tmpStatus.upper(), type = MessageBox.TYPE_ERROR)
+			return False
+
+	def startInstallOnline(self, ret = None):
+		box = self.box()
+		if self.feed == "openeight":
+			url = self.feedurl + "/images/" + box + "/" + self.sel
+		else:
+			url = self.feedurl + "/" + box + "/" + self.sel
+		print "[Flash Online] Download image: >%s<" % url
+		try:
+			u = urllib2.urlopen(url)
+			f = open(self.filename, 'wb')
+			f.close()
+			job = ImageDownloadJob(url, self.filename, self.sel)
+			job.afterEvent = "close"
+			job_manager.AddJob(job)
+			job_manager.failed_jobs = []
+			self.session.openWithCallback(self.ImageDownloadCB, JobView, job, backgroundable = False, afterEventChangeable = False)
+		except urllib2.URLError as e:
+			print "[Flash Online] Download failed !!\n%s" % e
+			self.session.openWithCallback(self.ImageDownloadCB, MessageBox, _("Download Failed !!" + "\n%s" % e), type = MessageBox.TYPE_ERROR)
+			self.close()
 
 	def ImageDownloadCB(self, ret):
 		if ret:
@@ -291,31 +392,34 @@ class doFlashImage(Screen):
 			if answer[1] != "abort":
 				if restoreSettings:
 					try:
-						os.system('mkdir -p /media/hdd/images/config')
-						os.system('touch /media/hdd/images/config/settings')
+						if not os.path.exists('/media/hdd/images/config'):
+							os.makedirs('/media/hdd/images/config')
+						open('/media/hdd/images/config/settings','w').close()
 					except:
 						print "postFlashActionCallback: failed to create /media/hdd/images/config/settings"
 				else:
 					if os.path.exists('/media/hdd/images/config/settings'):
-						os.system('rm -f /media/hdd/images/config/settings')
+						os.unlink('/media/hdd/images/config/settings')
 				if restoreAllPlugins:
 					try:
-						os.system('mkdir -p /media/hdd/images/config')
-						os.system('touch /media/hdd/images/config/plugins')
+						if not os.path.exists('/media/hdd/images/config'):
+							os.makedirs('/media/hdd/images/config')
+						open('/media/hdd/images/config/plugins','w').close()
 					except:
 						print "postFlashActionCallback: failed to create /media/hdd/images/config/plugins"
 				else:
 					if os.path.exists('/media/hdd/images/config/plugins'):
-						os.system('rm -f /media/hdd/images/config/plugins')
+						os.unlink('/media/hdd/images/config/plugins')
 				if restoreSettingsnoPlugin:
 					try:
-						os.system('mkdir -p /media/hdd/images/config')
-						os.system('touch /media/hdd/images/config/noplugins')
+						if not os.path.exists('/media/hdd/images/config'):
+							os.makedirs('/media/hdd/images/config')
+						open('/media/hdd/images/config/noplugins','w').close()
 					except:
 						print "postFlashActionCallback: failed to create /media/hdd/images/config/noplugins"
 				else:
 					if os.path.exists('/media/hdd/images/config/noplugins'):
-						os.system('rm -f /media/hdd/images/config/noplugins')
+						os.unlink('/media/hdd/images/config/noplugins')
 				if self.flashWithPostFlashActionMode == 'online':
 					self.unzip_image(self.filename, flashPath)
 				else:
@@ -335,31 +439,41 @@ class doFlashImage(Screen):
 
 	def Start_Flashing(self):
 		print "Start Flashing"
+		cmdlist = []
 		if os.path.exists(ofgwritePath):
 			text = _("Flashing: ")
 			if self.simulate:
 				text += _("Simulate (no write)")
-				if getMachineBuild() in ("sf8008"):
-					cmd = "%s -n -r%s -k%s %s > /dev/null 2>&1" % (ofgwritePath, getMachineMtdRoot(), getMachineMtdKernel(), flashTmp)
+				if SystemInfo["HaveMultiBoot"]:
+					cmdlist.append("%s -n -r%s -k%s %s > /dev/null 2>&1" % (ofgwritePath, self.MTDROOTFS, self.MTDKERNEL, flashTmp))
 				else:
-					cmd = "%s -n -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp)
+					cmdlist.append("%s -n -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp))
 				self.close()
 				message = "echo -e '\n"
 				message += _('Show only found image and mtd partitions.\n')
 				message += "'"
 			else:
 				text += _("root and kernel")
-				if getMachineBuild() in ("sf8008"):
-					cmd = "%s -r%s -k%s %s > /dev/null 2>&1" % (ofgwritePath, getMachineMtdRoot(), getMachineMtdKernel(), flashTmp)
+				if SystemInfo["HaveMultiBoot"]:
+					cmdlist.append("%s -r%s -k%s %s > /dev/null 2>&1" % (ofgwritePath, self.MTDROOTFS, self.MTDKERNEL, flashTmp))
 				else:
-					cmd = "%s -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp)
+					cmdlist.append("%s -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp))
 				message = "echo -e '\n"
-				message += _('ofgwrite will stop enigma2 now to run the flash.\n')
-				message += _('Your STB will freeze during the flashing process.\n')
-				message += _('Please: DO NOT reboot your STB and turn off the power.\n')
-				message += _('The image or kernel will be flashing and auto booted in few minutes.\n')
+				if self.List not in ("STARTUP","cmdline.txt") and SystemInfo["HaveMultiBoot"]:
+					message += _('ofgwrite flashing ready.\n')
+					message += _('please press exit to go back to the menu.\n')
+				else:
+					message += _('ofgwrite will stop enigma2 now to run the flash.\n')
+					message += _('Your STB will freeze during the flashing process.\n')
+					message += _('Please: DO NOT reboot your STB and turn off the power.\n')
+					message += _('The image or kernel will be flashing and auto booted in few minutes.\n')
 				message += "'"
-			self.session.open(Console, text,[message, cmd])
+				cmdlist.append(message)
+			self.session.open(Console, title = text, cmdlist = cmdlist, finishedCallback = self.quit, closeOnSuccess = False)
+			if not self.simulate:
+				fbClass.getInstance().lock()
+			if self.List not in ("STARTUP","cmdline.txt"):
+				self.close()
 
 	def prepair_flashtmp(self, tmpPath):
 		if os.path.exists(flashTmp):
@@ -387,9 +501,8 @@ class doFlashImage(Screen):
 	def yellow(self):
 		if not self.Online:
 			self.session.openWithCallback(self.DeviceBrowserClosed, DeviceBrowser, None, matchingPattern="^.*\.(zip|bin|jffs2|img)", showDirectories=True, showMountpoints=True, inhibitMounts=["/autofs/sr0/"])
-		else:
-			from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen
-			self.session.openWithCallback(self.green,BackupScreen, runBackup = True)
+		elif self.getSel():
+			self.greenCB(True)
 
 	def startInstallLocal(self, ret = None):
 		if ret:
