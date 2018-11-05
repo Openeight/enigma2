@@ -329,14 +329,23 @@ class OscamInfo:
 			return "%s not found" % self.ecminfo
 
 class oscMenuList(MenuList):
-	def __init__(self, list, itemH = 25):
+	def __init__(self, list, itemH = 25):# the Item Heigt id defiend here, and used later. (next note)
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-		self.l.setItemHeight(itemH)
-		self.l.setFont(0, gFont("Regular", 18))
-		self.l.setFont(1, gFont("Regular", 16))
-		self.clientFont = gFont("Regular", 14)
-		self.l.setFont(2, self.clientFont)
-		self.l.setFont(3, gFont("Regular", 12))
+		sz_w = getDesktop(0).size().width()
+		if sz_w and sz_w == 1920:
+			self.l.setItemHeight(50)# instead of (itemH), you can also us a number like (45)
+			self.l.setFont(0, gFont("Regular", 32))
+			self.l.setFont(1, gFont("Regular", 30))
+			self.clientFont = gFont("Regular", 28)
+			self.l.setFont(2, self.clientFont)
+			self.l.setFont(3, gFont("Regular", 26))
+		else:
+			self.l.setItemHeight(itemH)
+			self.l.setFont(0, gFont("Regular", 18))
+			self.l.setFont(1, gFont("Regular", 16))
+			self.clientFont = gFont("Regular", 14)
+			self.l.setFont(2, self.clientFont)
+			self.l.setFont(3, gFont("Regular", 12))
 
 class OscamInfoMenu(Screen):
 	skin = """
@@ -483,18 +492,35 @@ class OscamInfoMenu(Screen):
 		for x in mlist:
 			res = [ x ]
 			if x.startswith("--"):
-				png = LoadPixmap("/usr/share/enigma2/skin_default/div-h.png")
-				if png is not None:
-					res.append((eListboxPythonMultiContent.TYPE_PIXMAP, 10,0,360, 2, png))
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 45, 3, 800, 25, 0, RT_HALIGN_LEFT, x[2:]))
+				sz_w = getDesktop(0).size().width()
+				if sz_w and sz_w == 1920:
+					png = LoadPixmap("/usr/share/enigma2/skin_default/div-h.png")
+					if png is not None:
+						res.append((eListboxPythonMultiContent.TYPE_PIXMAP, 10,0,360, 2, png))
+						res.append((eListboxPythonMultiContent.TYPE_TEXT, 50, 2, 800, 50, 0, RT_HALIGN_LEFT, x[2:]))
+						png2 = LoadPixmap("/usr/share/enigma2/skin_default/buttons/key_" + keys[y] + ".png")
+						if png2 is not None:
+							res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 10, 40, 40, png2))
+				else:
+					png = LoadPixmap("/usr/share/enigma2/skin_default/div-h.png")
+					if png is not None:
+						res.append((eListboxPythonMultiContent.TYPE_PIXMAP, 10,0,360, 2, png))
+						res.append((eListboxPythonMultiContent.TYPE_TEXT, 45, 3, 800, 25, 0, RT_HALIGN_LEFT, x[2:]))
+						png2 = LoadPixmap("/usr/share/enigma2/skin_default/buttons/key_" + keys[y] + ".png")
+						if png2 is not None:
+							res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 3, 35, 25, png2))
+			else:
+				sz_w = getDesktop(0).size().width()
+				if sz_w and sz_w == 1920:
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 50, 02, 800, 50, 0, RT_HALIGN_LEFT, x))
 					png2 = LoadPixmap("/usr/share/enigma2/skin_default/buttons/key_" + keys[y] + ".png")
 					if png2 is not None:
-						res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 3, 35, 25, png2))
-			else:
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, 45, 00, 800, 25, 0, RT_HALIGN_LEFT, x))
-				png2 = LoadPixmap("/usr/share/enigma2/skin_default/buttons/key_" + keys[y] + ".png")
-				if png2 is not None:
-					res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 0, 35, 25, png2))
+						res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 10, 40, 40, png2))
+				else:
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 45, 00, 800, 25, 0, RT_HALIGN_LEFT, x))
+					png2 = LoadPixmap("/usr/share/enigma2/skin_default/buttons/key_" + keys[y] + ".png")
+					if png2 is not None:
+						res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 5, 0, 35, 25, png2))
 			menuentries.append(res)
 			if y < len(keys) - 1:
 				y += 1
@@ -529,12 +555,21 @@ class oscECMInfo(Screen, OscamInfo):
 		if config.oscaminfo.autoupdate.getValue():
 			self.loop.stop()
 		self.close()
+
 	def buildListEntry(self, listentry):
-		return [
-			None,
-			(eListboxPythonMultiContent.TYPE_TEXT, 10, 10, 300, 30, 0, RT_HALIGN_LEFT, listentry[0]),
-			(eListboxPythonMultiContent.TYPE_TEXT, 300, 10, 300, 30, 0, RT_HALIGN_LEFT, listentry[1])
-			]
+		sz_w = getDesktop(0).size().width()
+		if sz_w and sz_w == 1920:
+			return [
+				None,
+				(eListboxPythonMultiContent.TYPE_TEXT, 10, 1, 300, 50, 0, RT_HALIGN_LEFT, listentry[0]),
+				(eListboxPythonMultiContent.TYPE_TEXT, 300, 1, 800, 50, 0, RT_HALIGN_LEFT, listentry[1])
+				]
+		else:			
+			return [
+				None,
+				(eListboxPythonMultiContent.TYPE_TEXT, 10, 10, 300, 30, 0, RT_HALIGN_LEFT, listentry[0]),
+				(eListboxPythonMultiContent.TYPE_TEXT, 300, 10, 300, 30, 0, RT_HALIGN_LEFT, listentry[1])
+				]
 
 	def showData(self):
 		data = self.getECMInfo(self.ecminfo)
@@ -543,7 +578,7 @@ class oscECMInfo(Screen, OscamInfo):
 		y = 0
 		for i in data:
 			out.append(self.buildListEntry(i))
-		self["output"].l.setItemHeight(35)
+		self["output"].l.setItemHeight(42)
 		self["output"].l.setList(out)
 		self["output"].selectionEnabled(True)
 
