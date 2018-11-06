@@ -97,6 +97,12 @@ if path.exists("/usr/lib/enigma2/python/Plugins/Extensions/CCcamInfo/plugin.pyo"
 	ECMINFOSETUP = True
 else:
 	ECMINFOSETUP = False
+if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoResolution/plugin.pyo"):
+	from Plugins.SystemPlugins.AutoResolution.plugin import autoresSetup
+	AUTORES = True
+else:
+	AUTORES = False
+
 
 def isFileSystemSupported(filesystem):
 	try:
@@ -124,7 +130,7 @@ class QuickMenu(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _('Quick Menu O8'))
+		Screen.setTitle(self, _('QuickMenu') + ' - OpenEight')
 		self['key_red'] = Label(_('Exit'))
 		self['key_green'] = Label(_('System Info'))
 		self['key_yellow'] = Label(_('Devices'))
@@ -220,7 +226,7 @@ class QuickMenu(Screen):
 		self.list.append(QuickMenuEntryComponent('System', _('System Setup'), _('Setup your System')))
 		self.list.append(QuickMenuEntryComponent('Mounts', _('Mount Setup'), _('Setup your mounts for network')))
 		self.list.append(QuickMenuEntryComponent('Network', _('Setup your local network'), _('Setup your local network. For Wlan you need to boot with a USB-Wlan stick')))
-		self.list.append(QuickMenuEntryComponent('AV Setup', _('Setup Videomode'), _('Setup your Video Mode, Video Output and other Video Settings')))
+		self.list.append(QuickMenuEntryComponent('AV Setup', _('Setup Videomode'), _('Setup your Video Mode, Video Output and other Video Settings.')))
 		self.list.append(QuickMenuEntryComponent('Tuner Setup', _('Setup Tuner'), _('Setup your Tuner and search for channels')))
 		self.list.append(QuickMenuEntryComponent('Plugins', _('Download plugins'), _('Shows available pluigns. Here you can download and install them')))
 		self.list.append(QuickMenuEntryComponent('Harddisk', _('Harddisk Setup'), _('Setup your Harddisk')))
@@ -287,7 +293,9 @@ class QuickMenu(Screen):
 
 	def Qavsetup(self):
 		self.sublist = []
-		self.sublist.append(QuickSubMenuEntryComponent('AV Settings', _('Setup Videomode'), _('Setup your Video Mode, Video Output and other Video Settings.')))
+		self.sublist.append(QuickSubMenuEntryComponent('AV Settings', _('Setup Videomode'), _('Setup your Video Mode, Video Output and other Video Settings')))
+		if AUTORES == True:
+			self.sublist.append(QuickSubMenuEntryComponent('Auto Resolution', _('Auto Resolution switch'), _('Setup your preferences for the automatic resolution switch')))
 		if AUDIOSYNC == True:
 			self.sublist.append(QuickSubMenuEntryComponent('Audio Sync', _('Setup Audio Sync'), _('Setup Audio Sync settings')))
 		if AUTVOLADJ == True:
@@ -442,6 +450,8 @@ class QuickMenu(Screen):
 			self.session.open(ShowSoftcamPackages)
 		elif item[0] == _('AV Settings'):
 			videoSetupMain(self.session)
+		elif item[0] == _('Auto Resolution'):
+			autoresSetup(self.session)
 		elif item[0] == _('Auto Language'):
 			self.openSetup('autolanguagesetup')
 		elif item[0] == _('Automatic Volume Adjustment'):
@@ -568,15 +578,7 @@ class QuickMenu(Screen):
 				self.session.open(MessageBox, _('No tuner is configured for use with a diseqc positioner!'), MessageBox.TYPE_ERROR)
 
 	def SatfinderMain(self):
-		nims = nimmanager.getNimListOfType('DVB-S')
-		nimList = []
-		for x in nims:
-			if nimmanager.getNimConfig(x).configMode.getValue() not in ('loopthrough', 'satposdepends', 'nothing'):
-				nimList.append(x)
-
-		if len(nimList) == 0:
-			self.session.open(MessageBox, _('No satellite frontend found!!'), MessageBox.TYPE_ERROR)
-		elif len(NavigationInstance.instance.getRecordings()) > 0:
+		if len(NavigationInstance.instance.getRecordings()) > 0:
 			self.session.open(MessageBox, _('A recording is currently running. Please stop the recording before trying to start the satfinder.'), MessageBox.TYPE_ERROR)
 		else:
 			self.session.open(Satfinder)
