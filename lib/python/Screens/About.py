@@ -217,6 +217,8 @@ class ModelPic(Screen):
 	def poster_resize(self):
 		if getBoxType() in ('sf108'):
 			model = "sf108.png"
+		elif getBoxType() in ('sf8008'):
+			model = "sf8008.png"
 		elif getBoxType() in ('sf4008'):
 			model = "sf4008.png"
 		elif getBoxType() in ('sf3038'):
