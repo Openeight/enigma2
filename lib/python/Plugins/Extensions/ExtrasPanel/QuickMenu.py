@@ -224,7 +224,7 @@ class QuickMenu(Screen):
 		if Check_Softcam():
 			self.list.append(QuickMenuEntryComponent('Softcam', _('Start/stop/select cam'), _('Start/stop/select your cam, You need to install first a softcam')))
 		self.list.append(QuickMenuEntryComponent('System', _('System Setup'), _('Setup your System')))
-		self.list.append(QuickMenuEntryComponent('Mounts', _('Mount Setup'), _('Setup your mounts for network')))
+		self.list.append(QuickMenuEntryComponent('Mounts', _('Mount Setup'), _('Setup your mounts for network and storage devices')))
 		self.list.append(QuickMenuEntryComponent('Network', _('Setup your local network'), _('Setup your local network. For Wlan you need to boot with a USB-Wlan stick')))
 		self.list.append(QuickMenuEntryComponent('AV Setup', _('Setup Videomode'), _('Setup your Video Mode, Video Output and other Video Settings.')))
 		self.list.append(QuickMenuEntryComponent('Tuner Setup', _('Setup Tuner'), _('Setup your Tuner and search for channels')))
