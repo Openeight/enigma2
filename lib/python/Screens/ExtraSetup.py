@@ -13,15 +13,7 @@ from Components.ActionMap import ActionMap
 class ExtraSetup(Screen):
     def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = "Settings"
-                title = "Install Skin Settings"
-                self.setTitle(title)
-        	self["list"] = MenuList([])
-		self["info"] = Label()
-                self["actions"] = ActionMap(["OkCancelActions"], {"cancel": self.close}, -1)
-                txt = _("")
-                self["info"].setText(txt)
-                self.onShown.append(self.startSession)
+		self.onShown.append(self.startSession)
 
     def startSession(self):
                 try:
