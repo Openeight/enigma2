@@ -37,7 +37,6 @@ from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
 from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
 from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin, SoftwareManagerSetup
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getOldBackupPath, getBackupFilename
-from Plugins.SystemPlugins.HdmiCEC.plugin import HdmiCECSetupScreen
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from os import path, listdir
@@ -46,6 +45,8 @@ from re import search
 import NavigationInstance
 import os.path
 plugin_path_networkbrowser = eEnv.resolve('${libdir}/enigma2/python/Plugins/SystemPlugins/NetworkBrowser')
+if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/HdmiCEC/plugin.pyo"):
+	from Plugins.SystemPlugins.HdmiCEC.plugin import HdmiCECSetupScreen
 if path.exists('/usr/lib/enigma2/python/Plugins/Extensions/AudioSync'):
 	from Plugins.Extensions.AudioSync.AC3setup import AC3LipSyncSetup
 	plugin_path_audiosync = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/AudioSync')
