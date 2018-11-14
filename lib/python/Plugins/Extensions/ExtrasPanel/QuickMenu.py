@@ -37,8 +37,7 @@ from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
 from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
 from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin, SoftwareManagerSetup
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getOldBackupPath, getBackupFilename
-if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/HdmiCEC/plugin.pyo"):
-	from Plugins.SystemPlugins.HdmiCEC.plugin import HdmiCECSetupScreen
+from Plugins.SystemPlugins.HdmiCEC.plugin import HdmiCECSetupScreen
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from os import path, listdir
