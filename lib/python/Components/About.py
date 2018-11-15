@@ -26,8 +26,8 @@ def getFlashDateString():
 
 def getEnigmaVersionString():
 	import enigma
-	enigma_version = enigma.getEnigmaVersionString()
-	if '-(no branch)' in enigma_version:
+	enigma_version = " ".join(enigma.getEnigmaVersionString().rsplit("-", 1)).title()
+	if ' (no branch)' in enigma_version:
 		enigma_version = enigma_version [:-12]
 	return enigma_version
 
@@ -49,6 +49,15 @@ def getChipSetString():
 		return chipset
 	except IOError:
 		return "unavailable"
+
+def getHardwareTypeString():
+	return HardwareInfo().get_device_string()
+
+def getImageTypeString():
+	try:
+		return open("/etc/issue").readlines()[-2].capitalize().strip()[:-6]
+	except:
+		return _("undefined")
 
 def getCPUString():
 	try:
@@ -105,15 +114,6 @@ def getCpuCoresString():
 		return cores
 	except IOError:
 		return "unavailable"
-
-def getHardwareTypeString():
-	return HardwareInfo().get_device_string()
-
-def getImageTypeString():
-	try:
-		return open("/etc/issue").readlines()[-2].capitalize().strip()[:-6]
-	except:
-		return _("undefined")
 
 def getPythonVersionString():
 	try:

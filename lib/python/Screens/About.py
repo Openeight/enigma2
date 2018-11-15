@@ -99,6 +99,8 @@ class About(Screen):
 
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n" + "\n"
 
+		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
+
 		fp_version = getFPVersion()
 		if fp_version is None:
 			fp_version = ""
