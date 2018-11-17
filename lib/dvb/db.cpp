@@ -15,6 +15,7 @@
 #include <dvbsi++/descriptor_tag.h>
 #include <dvbsi++/service_descriptor.h>
 #include <dvbsi++/satellite_delivery_system_descriptor.h>
+#include <dvbsi++/s2_satellite_delivery_system_descriptor.h>
 #include <dirent.h>
 
 DEFINE_REF(eDVBService);
@@ -2031,6 +2032,21 @@ bool eDVBDB::isCrypted(const eServiceReference &ref)
 		if (it != m_services.end())
 		{
 			return it->second->isCrypted();
+		}
+	}
+	return false;
+}
+
+bool eDVBDB::hasCAID(const eServiceReference &ref, unsigned int caid)
+{
+	if (ref.type == eServiceReference::idDVB)
+	{
+		eServiceReferenceDVB &service = (eServiceReferenceDVB&)ref;
+		std::map<eServiceReferenceDVB, ePtr<eDVBService> >::iterator it(m_services.find(service));
+		if (it != m_services.end())
+		{
+			return std::find(it->second->m_ca.begin(), it->second->m_ca.end(),
+				(uint16_t)caid) != it->second->m_ca.end();
 		}
 	}
 	return false;

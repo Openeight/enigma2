@@ -3,6 +3,7 @@
 #include <dvbsi++/descriptor_tag.h>
 #include <dvbsi++/service_descriptor.h>
 #include <dvbsi++/satellite_delivery_system_descriptor.h>
+#include <dvbsi++/s2_satellite_delivery_system_descriptor.h>
 #include <dvbsi++/terrestrial_delivery_system_descriptor.h>
 #include <dvbsi++/t2_delivery_system_descriptor.h>
 #include <dvbsi++/cable_delivery_system_descriptor.h>
@@ -53,12 +54,6 @@ eDVBScan::~eDVBScan()
 
 int eDVBScan::isValidONIDTSID(int orbital_position, eOriginalNetworkID onid, eTransportStreamID tsid)
 {
-	/*
-	 * Assume cable and terrestrial ONIDs/TSIDs are always valid,
-	 * don't check them against the satellite blacklist.
-	 */
-	if (orbital_position == 0xFFFF || orbital_position == 0xEEEE) return 1;
-
 	int ret;
 	switch (onid.get())
 	{
@@ -125,9 +120,19 @@ int eDVBScan::isValidONIDTSID(int orbital_position, eOriginalNetworkID onid, eTr
 
 eDVBNamespace eDVBScan::buildNamespace(eOriginalNetworkID onid, eTransportStreamID tsid, unsigned long hash)
 {
-		// on valid ONIDs, ignore frequency ("sub network") part
-	if (eConfigManager::getConfigBoolValue("config.usage.subnetwork", true)
-		&& isValidONIDTSID((hash >> 16) & 0xFFFF, onid, tsid))
+	int orb_pos = (hash >> 16) & 0xFFFF;
+	if (orb_pos == 0xFFFF) // cable
+	{
+		if (eConfigManager::getConfigBoolValue("config.usage.subnetwork_cable", true))
+			hash &= ~0xFFFF;
+	}
+	else if (orb_pos == 0xEEEE) // terrestrial
+	{
+		if (eConfigManager::getConfigBoolValue("config.usage.subnetwork_terrestrial", true))
+			hash &= ~0xFFFF;
+	}
+	else if (eConfigManager::getConfigBoolValue("config.usage.subnetwork", true)
+		&& isValidONIDTSID(orb_pos, onid, tsid)) // on valid ONIDs, ignore frequency ("sub network") part
 		hash &= ~0xFFFF;
 	return eDVBNamespace(hash);
 }
@@ -758,6 +763,26 @@ void eDVBScan::channelDone()
 
 						addChannelToScan(feparm);
 						break;
+					}
+					case S2_SATELLITE_DELIVERY_SYSTEM_DESCRIPTOR:
+					{
+						eDebug("[eDVBScan] S2_SATELLITE_DELIVERY_SYSTEM_DESCRIPTOR found");
+						if (system != iDVBFrontend::feSatellite)
+							break; // when current locked transponder is no satellite transponder ignore this descriptor
+						S2SatelliteDeliverySystemDescriptor &d = (S2SatelliteDeliverySystemDescriptor&)**desc;
+						ePtr<eDVBFrontendParameters> feparm = new eDVBFrontendParameters;
+						eDVBFrontendParametersSatellite sat;
+						sat.set(d);
+
+						eDVBFrontendParametersSatellite p;
+						m_ch_current->getDVBS(p);
+
+						if (p.is_id != sat.is_id || p.pls_mode != sat.pls_code || p.pls_code != sat.pls_code)
+						{
+							p.set(d); //set multistream descriptor to current tuned data
+							feparm->setDVBS(p);
+							addChannelToScan(feparm);
+						}
 					}
 					case SATELLITE_DELIVERY_SYSTEM_DESCRIPTOR:
 					{

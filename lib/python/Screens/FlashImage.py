@@ -1,10 +1,11 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
 from Components.ActionMap import ActionMap
 from Components.Console import Console
+from Components.Harddisk import getNonNetworkMediaMounts
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
@@ -29,16 +30,11 @@ class SelectImage(Screen):
 		self.setIndex = 0
 		self.expanded = []
 		self.setTitle(_("Select Image"))
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button()
-		self["key_yellow"] = Button()
-		self["key_blue"] = Button()
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText()
+		self["key_yellow"] = StaticText()
+		self["key_blue"] = StaticText()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image list - Please wait...")), "Waiter"))])
-		self["h_red"] = Pixmap()
-		self["h_green"] = Pixmap()
-		self["h_green"].hide()
-		self["h_yellow"] = Pixmap()
-		self["h_yellow"].hide()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -85,8 +81,8 @@ class SelectImage(Screen):
 					pass
 			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
 
-			for media in ['/media/%s' % x for x in os.listdir('/media')]:
-				if not os.path.islink(media) and not(SystemInfo['HasMMC'] and "/mmc" in media):
+			for media in getNonNetworkMediaMounts():
+				if not(SystemInfo['HasMMC'] and "/mmc" in media):
 					getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
 					if "downloaded_images" in os.listdir(media):
 						media = "%s/downloaded_images" % media
@@ -145,16 +141,12 @@ class SelectImage(Screen):
 	def selectionChanged(self):
 		currentSelected = self["list"].l.getCurrentSelection()
 		if "://" in currentSelected[0][1] or currentSelected[0][1] in ["Expander", "Waiter"]:
-			self["h_yellow"].hide()
 			self["key_yellow"].setText("")
 		else:
-			self["h_yellow"].show()
 			self["key_yellow"].setText(_("Delete image"))
 		if currentSelected[0][1] == "Waiter":
-			self["h_green"].hide()
 			self["key_green"].setText("")
 		else:
-			self["h_green"].show()
 			self["key_green"].setText((_("Compress") if currentSelected[0][0] in self.expanded else _("Expand")) if currentSelected[0][1] == "Expander" else _("Flash Image"))
 
 	def keyLeft(self):
@@ -204,6 +196,7 @@ class FlashImage(Screen):
 		self.delay = eTimer()
 		self.delay.callback.append(self.confirmation)
 		self.delay.start(0, True)
+		self.hide()
 
 	def confirmation(self):
 		recordings = self.session.nav.getRecordings()
@@ -250,10 +243,10 @@ class FlashImage(Screen):
 
 			def findmedia(destination):
 				def avail(path):
-					if os.path.isdir(path) and not os.path.islink(path) and not(SystemInfo["HasMMC"] and '/mmc' in path):
+					if not(SystemInfo["HasMMC"] and '/mmc' in path):
 						statvfs = os.statvfs(path)
 						return (statvfs.f_bavail * statvfs.f_frsize) / (1 << 20) >= 500 and path
-				for path in [destination] + ['/media/%s' % x for x in os.listdir('/media')]:
+				for path in [destination] + getNonNetworkMediaMounts():
 					if avail(path):
 						return path
 
@@ -295,6 +288,7 @@ class FlashImage(Screen):
 			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n%s") % reval, type=MessageBox.TYPE_ERROR, simple=True)
 		
 	def startDownload(self, reply=True):
+		self.show()
 		if reply:
 			if "://" in self.source:
 				from Tools.Downloader import downloadWithProgress
@@ -370,11 +364,9 @@ class MultibootSelection(SelectImage):
 		self.imagesList = None
 		self.expanded = []
 		self.setTitle(_("Select Multiboot"))
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Reboot"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Reboot"))
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image slots - Please wait...")), "Waiter"))])
-		self["h_red"] = Pixmap()
-		self["h_green"] = Pixmap()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
