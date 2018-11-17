@@ -7,7 +7,6 @@ from Plugins.Plugin import PluginDescriptor
 
 from Components.Sources.FrontendStatus import FrontendStatus
 from Components.ActionMap import ActionMap
-from Components.Label import Label
 from Components.NimManager import nimmanager, getConfigSatlist
 from Components.config import config, ConfigSelection, getConfigListEntry
 from Components.TuneTest import Tuner
@@ -15,6 +14,8 @@ from Tools.Transponder import getChannelNumber, channel2frequency
 from Tools.BoundFunction import boundFunction
 
 class Satfinder(ScanSetup, ServiceScan):
+	"""Inherits StaticText [key_red] and [key_green] properties from ScanSetup"""
+
 	def __init__(self, session):
 		self.initcomplete = False
 		service = session and session.nav.getCurrentService()
@@ -41,7 +42,6 @@ class Satfinder(ScanSetup, ServiceScan):
 		ScanSetup.__init__(self, session)
 		self.setTitle(_("Signal finder"))
 		self["Frontend"] = FrontendStatus(frontend_source = lambda : self.frontend, update_interval = 100)
-		self["key_red"] = Label(_("Exit"))
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -116,7 +116,7 @@ class Satfinder(ScanSetup, ServiceScan):
 				self.is_id_memory = self.scan_sat.is_id.value
 				self.pls_mode_memory = self.scan_sat.pls_mode.value
 				self.pls_code_memory = self.scan_sat.pls_code.value
-				self.scan_sat.is_id.value = self.NO_STREAM_ID_FILTER
+				self.scan_sat.is_id.value = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
 				self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Gold
 				self.scan_sat.pls_code.value = 0
 			self.createSetup()
@@ -169,7 +169,7 @@ class Satfinder(ScanSetup, ServiceScan):
 							self.list.append(getConfigListEntry(_('PLS Mode'), self.scan_sat.pls_mode))
 							self.list.append(getConfigListEntry(_('PLS Code'), self.scan_sat.pls_code))
 					else:
-						self.scan_sat.is_id.value = self.NO_STREAM_ID_FILTER
+						self.scan_sat.is_id.value = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
 						self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Gold
 						self.scan_sat.pls_code.value = 0
 			elif self.tuning_type.value == "predefined_transponder":
