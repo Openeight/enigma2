@@ -14,8 +14,9 @@
 
 #include <linux/dvb/frontend.h>
 
-struct eDVBFrontendParametersSatellite
+class eDVBFrontendParametersSatellite
 {
+public:
 #ifndef SWIG
 	void set(const SatelliteDeliverySystemDescriptor  &);
 	void set(const S2SatelliteDeliverySystemDescriptor  &);
@@ -64,8 +65,9 @@ struct eDVBFrontendParametersSatellite
 };
 SWIG_ALLOW_OUTPUT_SIMPLE(eDVBFrontendParametersSatellite);
 
-struct eDVBFrontendParametersCable
+class eDVBFrontendParametersCable
 {
+public:
 #ifndef SWIG
 	void set(const CableDeliverySystemDescriptor  &);
 #endif
@@ -94,8 +96,9 @@ struct eDVBFrontendParametersCable
 };
 SWIG_ALLOW_OUTPUT_SIMPLE(eDVBFrontendParametersCable);
 
-struct eDVBFrontendParametersTerrestrial
+class eDVBFrontendParametersTerrestrial
 {
+public:
 #ifndef SWIG
 	void set(const TerrestrialDeliverySystemDescriptor  &);
 	void set(const T2DeliverySystemDescriptor &);
@@ -150,8 +153,9 @@ struct eDVBFrontendParametersTerrestrial
 };
 SWIG_ALLOW_OUTPUT_SIMPLE(eDVBFrontendParametersTerrestrial);
 
-struct eDVBFrontendParametersATSC
+class eDVBFrontendParametersATSC
 {
+public:
 	enum {
 		Inversion_Off, Inversion_On, Inversion_Unknown
 	};
