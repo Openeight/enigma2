@@ -67,6 +67,7 @@ class Harddisk:
 			self.type = DEVTYPE_DEVFS
 		else:
 			print "[Harddisk] Unable to determine structure of /dev"
+			self.type = -1
 			self.card = False
 
 		self.max_idle_time = 0

@@ -8,6 +8,7 @@ from Components.Label import Label
 from Components.MovieList import AUDIO_EXTENSIONS, MOVIE_EXTENSIONS, DVD_EXTENSIONS
 from Components.PluginComponent import plugins
 from Components.ServiceEventTracker import ServiceEventTracker
+from Components.ServiceList import refreshServiceList
 from Components.Sources.Boolean import Boolean
 from Components.config import config, ConfigBoolean, ConfigClock
 from Components.SystemInfo import SystemInfo
@@ -2108,6 +2109,7 @@ class InfoBarExtensions:
 
 	def __init__(self):
 		self.list = []
+		self.addExtension((lambda: _("Import channels from fallback tuner"), self.importChannels, lambda: config.usage.remote_fallback_extension_menu.value and config.usage.remote_fallback_import.value))
 		self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions",
 			{
 				"extensions": (self.showExtensionSelection, _("view extensions...")),
@@ -2123,6 +2125,10 @@ class InfoBarExtensions:
 					plugin(session=self.session)
 		except:
 			return
+
+	def importChannels(self):
+		from Components.ImportChannels import ImportChannels
+		ImportChannels()
 
 	def addExtension(self, extension, key = None, type = EXTENSION_SINGLE):
 		self.list.append((type, extension, key))
@@ -2942,17 +2948,28 @@ class InfoBarNotifications:
 			self.checkNotifications()
 
 	def checkNotifications(self):
+		Notifications.lock.acquire(True)
 		notifications = Notifications.notifications
-		if notifications:
-			n = notifications[0]
-
+		n = notifications and notifications[0]
+		if n:
 			del notifications[0]
+		Notifications.lock.release()
+		if n:
 			cb = n[0]
 
 			if "onSessionOpenCallback" in n[3]:
 				n[3]["onSessionOpenCallback"]()
 				del n[3]["onSessionOpenCallback"]
 
+			if n[4] and n[4].startswith("ChannelsImport"):
+				if "channels" in config.usage.remote_fallback_import.value:
+					eDVBDB.getInstance().reloadBouquets()
+					eDVBDB.getInstance().reloadServicelist()
+					refreshServiceList()
+				if "epg" in config.usage.remote_fallback_import.value:
+					eEPGCache.getInstance().load()
+				if not(n[4].endswith("NOK") and config.usage.remote_fallback_nok.value or config.usage.remote_fallback_ok.value):
+					return
 			if cb:
 				dlg = self.session.openWithCallback(cb, n[1], *n[2], **n[3])
 			elif not Notifications.current_notifications and n[4] == "ZapError":

@@ -1,6 +1,6 @@
 from Screen import Screen
 from Components.ActionMap import NumberActionMap
-from Components.config import config, ConfigNothing
+from Components.config import config, ConfigNothing, ConfigText, ConfigPassword
 from Components.Label import Label
 from Components.SystemInfo import SystemInfo
 from Components.ConfigList import ConfigListScreen
@@ -80,6 +80,7 @@ class Setup(ConfigListScreen, Screen):
 		self.skinName = ["setup_" + setup, "Setup" ]
 		self.list = []
 		self.setup = setup
+		self.force_update_list = False
 
 		#check for list.entries > 0 else self.close
 		self["key_red"] = StaticText(_("Cancel"))
@@ -95,6 +96,8 @@ class Setup(ConfigListScreen, Screen):
 
 		self.refill()
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		self["config"].onSelectionChanged.append(self.__onSelectionChanged)
+
 		self.setTitle(_(self.setup_title))
 
 	def addItems(self, parentNode):
@@ -115,7 +118,7 @@ class Setup(ConfigListScreen, Screen):
 					elif not SystemInfo.get(requires, False):
 						continue
 				configCondition = x.get("configcondition")
-				if configCondition and not eval(configCondition + ".value"):
+				if configCondition and not eval(configCondition):
 					continue
 
 				item_text = _(x.get("text", "??").encode("UTF-8"))
@@ -131,8 +134,19 @@ class Setup(ConfigListScreen, Screen):
 					self.list.append((item_text, item, item_description))
 
 	def changedEntry(self):
-		self.refill()
-		self["config"].setList(self.list)
+		if not(isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword)):
+			self.refill()
+			self["config"].setList(self.list)
+
+	def __onSelectionChanged(self):
+		if self.force_update_list:
+			self["config"].onSelectionChanged.remove(self.__onSelectionChanged)
+			self.refill()
+			self["config"].setList(self.list)
+			self["config"].onSelectionChanged.append(self.__onSelectionChanged)
+			self.force_update_list = False
+		if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+			self.force_update_list = True
 
 def getSetupTitle(id):
 	xmldata = setupdom.getroot()

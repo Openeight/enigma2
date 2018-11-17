@@ -259,6 +259,15 @@ def InitUsageConfig():
 	config.usage.remote_fallback_enabled = ConfigYesNo(default = False)
 	config.usage.remote_fallback = ConfigText(default = "", fixed_size = False)
 	config.usage.remote_fallback.addNotifier(remote_fallback_changed, immediate_feedback=False)
+	config.usage.remote_fallback_import_seperate = ConfigYesNo(default = False)
+	config.usage.remote_fallback_import_url = ConfigText(default = "", fixed_size = False)
+	config.usage.remote_fallback_import_url.addNotifier(remote_fallback_changed, immediate_feedback=False)
+	config.usage.remote_fallback_import = ConfigSelection(default = "", choices = [("", _("No")), ("channels", _("Channels only")), ("channels_epg", _("Channels and EPG")), ("epg", _("EPG only"))])
+	config.usage.remote_fallback_import_restart = ConfigYesNo(default = False)
+	config.usage.remote_fallback_import_standby = ConfigYesNo(default = False)
+	config.usage.remote_fallback_ok = ConfigYesNo(default = False)
+	config.usage.remote_fallback_nok = ConfigYesNo(default = False)
+	config.usage.remote_fallback_extension_menu = ConfigYesNo(default = False)
 
 	config.usage.show_timer_conflict_warning = ConfigYesNo(default = True)
 
