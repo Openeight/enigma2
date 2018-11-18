@@ -526,7 +526,7 @@ class DevicesMountPanel(Screen):
 				for line in f.readlines():
 					if '/media/hdd' in line:
 						f.close()
-						self.session.open(MessageBox, _("Cannot unmount from the previous device from /media/hdd.\nA record in progress, timeshift or some external tools (like samba, nfsd,transmission and etc) may cause this problem.\nPlease stop this actions/applications and try again!"), MessageBox.TYPE_ERROR)
+						self.session.open(MessageBox, _("Cannot unmount device /media/hdd.\nA record in progress, timeshift or some external tools (like samba, nfsd,transmission and etc) may cause this problem.\nPlease stop this actions/applications and try again!"), MessageBox.TYPE_ERROR)
 						return
 					else:
 						pass
@@ -1047,4 +1047,4 @@ def OpenSetup(session, **kwargs):
 	session.open(DevicesMountPanel)
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name = "Mount Manager", description = _("Manage you devices mountpoints"), where = PluginDescriptor.WHERE_MENU, fnc = StartSetup)]
+	return [PluginDescriptor(name = "Mount Manager", description = _("Manage your device mountpoints"), where = PluginDescriptor.WHERE_MENU, fnc = StartSetup)]
