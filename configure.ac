@@ -110,10 +110,16 @@ if test "$BOXTYPE" == 7210s ; then
 fi
 AM_CONDITIONAL(HAVE_COLORLCD220, test "$BOXTYPE" == 7210s)
 
+
 AC_ARG_WITH(7segment,
-	AC_HELP_STRING([--with-7segment], [use 7 segment lcd, yes or no]),
-	[[TEXTSKIN="7segment"]],
-	[[TEXTSKIN="default"]]
+	AC_HELP_STRING([--with-7segment], [use ascii based lcd, yes or no]),
+	[[with7segment=$withval]],
+	[[with7segment=no]]
+)
+if test x"$with7segment" != xno ; then
+	AC_DEFINE(HAVE_7SEGMENT, 1,[Define when using an ascii based lcd device])
+fi
+AM_CONDITIONAL(HAVE_7SEGMENT, test x"$with7segment" != xno)
 )
 AC_SUBST(TEXTSKIN)
 
