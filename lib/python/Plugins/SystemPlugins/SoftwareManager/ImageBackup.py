@@ -288,7 +288,7 @@ class ImageBackup(Screen):
 			self.message += _("will take about 30 minutes for this system\n")
 		else:
 			self.message += _("will take about 1-15 minutes for this system\n")
-		self.message += "\n_________________________________________________\n\n"
+		self.message += "_________________________________________________\n"
 		self.message += "'"
 
 		## PREPARING THE BUILDING ENVIRONMENT
@@ -573,9 +573,9 @@ class ImageBackup(Screen):
 			cmdlist.append('echo "' + _("Multiboot Image created on: %s") %self.MAINDEST + '"')
 			cmdlist.append('echo "' + _("and there is made an extra copy on:") + '"')
 			cmdlist.append('echo %s' %self.EXTRA)
-			cmdlist.append('echo "_________________________________________________\n"')
+			cmdlist.append('echo "_________________________________________________"')
 			cmdlist.append('echo " "')
-			cmdlist.append('echo "\n' + _("Please wait...almost ready! ") + '"')
+			cmdlist.append('echo "' + _("Please wait...almost ready! ") + '"')
 			cmdlist.append('echo " "')
 			cmdlist.append('echo "' + _("To restore the image:") + '"')
 			cmdlist.append('echo "' + _("Use OnlineFlash in SoftwareManager") + '"')
@@ -584,9 +584,9 @@ class ImageBackup(Screen):
 			cmdlist.append('echo "' + _("USB Image created on: %s") %self.MAINDEST + '"')
 			cmdlist.append('echo "' + _("and there is made an extra copy on:") + '"')
 			cmdlist.append('echo %s' %self.EXTRA)
-			cmdlist.append('echo "_________________________________________________\n"')
+			cmdlist.append('echo "_________________________________________________"')
 			cmdlist.append('echo " "')
-			cmdlist.append('echo "\n' + _("Please wait...almost ready! ") + '"')
+			cmdlist.append('echo "' + _("Please wait...almost ready! ") + '"')
 			cmdlist.append('echo " "')
 			cmdlist.append('echo "' + _("To restore the image:") + '"')
 			cmdlist.append('echo "' + _("Please check the manual of the receiver") + '"')
