@@ -16,7 +16,7 @@ from Screens.LanguageSelection import LanguageSelection
 from Screens.Satconfig import NimSelection
 from Screens.ScanSetup import ScanSimple, ScanSetup
 from Screens.Setup import Setup, getSetupTitle
-from Screens.HarddiskSetup import HarddiskSelection, HarddiskFsckSelection, HarddiskConvertExt4Selection
+from Screens.HarddiskSetup import HarddiskSelection, HarddiskFsckSelection
 from Screens.Ipkuninstall import Ipkuninstall
 from Screens.SkinSelector import SkinSelector, LcdSkinSelector
 from Screens.RecordPaths import RecordPathsSettings
@@ -351,8 +351,6 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Harddisk Setup', _('Harddisk Setup'), _('Setup your Harddisk')))
 		self.sublist.append(QuickSubMenuEntryComponent('Initialization', _('Format HDD'), _('Format your Harddisk')))
 		self.sublist.append(QuickSubMenuEntryComponent('Filesystem Check', _('Check HDD'), _('Filesystem check your Harddisk')))
-		if isFileSystemSupported('ext4'):
-			self.sublist.append(QuickSubMenuEntryComponent('Convert ext3 to ext4', _('Convert filesystem ext3 to ext4'), _('Convert filesystem ext3 to ext4.')))
 		self['sublist'].l.setList(self.sublist)
 
 	def ok(self):
@@ -534,8 +532,6 @@ class QuickMenu(Screen):
 			self.session.open(HarddiskSelection)
 		elif item[0] == _('Filesystem Check'):
 			self.session.open(HarddiskFsckSelection)
-		elif item[0] == _('Convert ext3 to ext4'):
-			self.session.open(HarddiskConvertExt4Selection)
 		return
 
 	def openSetup(self, dialog):
