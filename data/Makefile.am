@@ -20,13 +20,13 @@ dist_pkgdata_DATA = \
 	unicable.xml
 
 if HAVE_TEXTLCD
-dist_pkgdata_DATA += skin_text.xml
-else
-SUBDIRS += display
-endif
-
 if HAVE_7SEGMENT
 SUBDIRS += 7segment
+else
+dist_pkgdata_DATA += skin_text.xml
+endif
+else
+SUBDIRS += display
 endif
 
 iso-639-3.pck: $(srcdir)/iso-639-3.tab
