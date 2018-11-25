@@ -479,7 +479,7 @@ class ImageBackup(Screen):
 		if HaveGZkernel:
 			cmdlist.append('echo "' + _("Kernel dump OK") + '"')
 			cmdlist.append("rm -rf /tmp/vmlinux.bin")
-		cmdlist.append('echo "_________________________________________________\n"')
+			cmdlist.append('echo "_________________________________________________\n"')
 		cmdlist.append('echo "' + _("Almost there... ") + '"')
 		cmdlist.append('echo "' + _("Now building the USB-Image") + '"')
 
