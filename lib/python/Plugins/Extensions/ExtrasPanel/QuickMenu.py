@@ -47,6 +47,9 @@ import os.path
 plugin_path_networkbrowser = eEnv.resolve('${libdir}/enigma2/python/Plugins/SystemPlugins/NetworkBrowser')
 if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/HdmiCEC/plugin.pyo"):
 	from Plugins.SystemPlugins.HdmiCEC.plugin import HdmiCECSetupScreen
+	HDMICEC = True
+else:
+	HDMICEC = False
 if path.exists('/usr/lib/enigma2/python/Plugins/Extensions/AudioSync'):
 	from Plugins.Extensions.AudioSync.AC3setup import AC3LipSyncSetup
 	plugin_path_audiosync = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/AudioSync')
@@ -279,9 +282,9 @@ class QuickMenu(Screen):
 
 	def Qmount(self):
 		self.sublist = []
-		self.sublist.append(QuickSubMenuEntryComponent('Mount Manager', _('Manage network mounts'), _('Setup your network mounts')))
+		self.sublist.append(QuickSubMenuEntryComponent('Network Mount Manager', _('Manage network mounts'), _('Setup your network mounts')))
 		self.sublist.append(QuickSubMenuEntryComponent('Network Browser', _('Search for network shares'), _('Search for network shares.'))) 
-		self.sublist.append(QuickSubMenuEntryComponent('Device Manager', _('Mounts Devices'), _('Setup your Device mounts (USB, HDD, others...)')))
+		self.sublist.append(QuickSubMenuEntryComponent('Device Mount Manager', _('Mounts Devices'), _('Setup your Device mounts (USB, HDD, others...)')))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qsoftcam(self):
@@ -435,11 +438,11 @@ class QuickMenu(Screen):
 			self.session.open(ScSetupScreen)
 		elif item[0] == _("Ecm Info"):
 			self.session.open(EcmInfoConfigMenu)
-		elif item[0] == _('Mount Manager'):
+		elif item[0] == _('Network Mount Manager'):
 			self.session.open(AutoMountManager, None, plugin_path_networkbrowser)
 		elif item[0] == _('Network Browser'):
 			self.session.open(NetworkBrowser, None, plugin_path_networkbrowser)
-		elif item[0] == _('Device Manager'):
+		elif item[0] == _('Device Mount Manager'):
 			self.session.open(DevicesMountPanel)
 		elif item[0] == _('Softcam Panel'):
 			self.session.open(SoftcamPanel)
@@ -462,7 +465,7 @@ class QuickMenu(Screen):
 		elif item[0] == _('VideoEnhancement'):
 			self.session.open(VideoEnhancementSetup)
 		elif item[0] == _("Hdmi CEC"):
-		     if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/HdmiCEC/plugin.pyo"):
+		     if HDMICEC == True:
 		        self.session.open(HdmiCECSetupScreen)
 		     else:
 			self.session.open(MessageBox, _('Sorry,\nHdmi CEC is not available for this box at the moment.'), MessageBox.TYPE_INFO, timeout=10)
