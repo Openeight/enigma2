@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-02 19:09+0200\n"
-"PO-Revision-Date: 2018-11-26 22:01\n"
+"PO-Revision-Date: 2018-12-07 20:54\n"
 "Last-Translator: Smokey \n"
-"Language-Team: PLiteam <translators@openpli.org>\n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -147,10 +147,24 @@ msgstr ""
 
 msgid ""
 "\n"
+"Update to current sundtek driver version?"
+msgstr ""
+"\n"
+"Updaten naar de actuele versie van de Sundtek drivers?"
+
+msgid ""
+"\n"
 "View, install and remove available or installed packages."
 msgstr ""
 "\n"
 "Bekijk, installeer en verwijder beschikbare of geïnstalleerde pakketten."
+
+msgid ""
+"\n"
+"your driver version:\n"
+msgstr ""
+"\n"
+"Uw driver versie:\n"
 
 msgid ""
 "\n"
@@ -174,6 +188,24 @@ msgstr "     geen toestemming om op dit opslag medium te mogen schrijven"
 
 msgid "     wrong back-up destination "
 msgstr "     verkeerde back-up locatie"
+
+msgid "      Autostart"
+msgstr "      Autostart"
+
+msgid "      Driver autoupdate"
+msgstr "      Driver autoupdate"
+
+msgid "      Enable TV Server"
+msgstr "      TV-server inschakelen"
+
+msgid "      Hardware PID Filter"
+msgstr "      Hardware PID-Filter"
+
+msgid "      Loglevel"
+msgstr "      Logniveau"
+
+msgid "      vTuner acceleration for DM800"
+msgstr "      vTuner acceleratie voor DM800"
 
 msgid " (PiP)"
 msgstr "(PiP)"
@@ -301,6 +333,9 @@ msgstr "%s %s beschikbare schijfruimte"
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
 
+msgid "%s is already connected"
+msgstr "%s is al verbonden"
+
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s wordt niet langer gebruikt. Kan deze verwijderd worden?"
 
@@ -329,6 +364,15 @@ msgstr "(niet actief)"
 
 msgid "(show optional DVD audio menu)"
 msgstr "(optioneel DVD audio menu weergeven)"
+
+msgid "* Configuration support"
+msgstr "* Configuratie ondersteuning"
+
+msgid "* DVB Mode"
+msgstr "* DVB-mode"
+
+msgid "* Device"
+msgstr "* Apparaat"
 
 msgid "* Only available if more than one interface is active."
 msgstr "* Alleen beschikbaar indien meer dan één interface is geactiveerd."
@@ -480,6 +524,15 @@ msgstr ""
 
 msgid "A graphical EPG for all services of an specific bouquet"
 msgstr "Grafische EPG voor alle zenders uit een specifiek bouquet"
+
+msgid ""
+"A newer version of the sundtekcontrolcenter plugin is available.\n"
+"if you read this message, please notify the OpenEight Team at:\n"
+"https://octagon-forum.eu\nto update this embedded version."
+msgstr ""
+"Een nieuwere versie van de Sundtekcontrolcenter plugin is beschikbaar.\n"
+"als dit bericht verschijnt, rapporteer dit dan aub aan het OpenEight Team:\n"
+"https://octagon-forum.eu \nom deze ingebakken versie bij te werken."
 
 msgid ""
 "A record has been started:\n"
@@ -658,6 +711,9 @@ msgstr "Voeg een opname toe (stop na huidige uitzending)"
 msgid "Add service"
 msgstr "Voeg een zender toe"
 
+msgid "Add show plugin"
+msgstr "Voeg 'toon plugin' toe"
+
 msgid "Add timer"
 msgstr "Timer toevoegen"
 
@@ -796,9 +852,10 @@ msgid ""
 "receiver. Default: off."
 msgstr ""
 "Indien geactiveerd voegt u altijd ECM berichten aan opnames toe. Dit "
-"overschrijft individueel ingestelde timers. Dit maakt het mogelijk om opnames "
-"achteraf te decoderen, ook wel offline decoding genoemd, indien de ontvanger "
-"dit ondersteunt.\nStandaard staat deze optie uit."
+"overschrijft individueel ingestelde timers. Dit maakt het mogelijk om "
+"opnames achteraf te decoderen, ook wel offline decoding genoemd, indien de "
+"ontvanger dit ondersteunt.\n"
+"Standaard staat deze optie uit."
 
 msgid "An empty filename is illegal."
 msgstr "Een lege bestandsnaam is ongeldig."
@@ -913,7 +970,8 @@ msgid ""
 "Not highly recommend that you remove or edit the system entry!\n"
 msgstr ""
 "Attentie!\n"
-"Het is niet aan te raden om een systeem regel te verwijderen of te bewerken!\n"
+"Het is niet aan te raden om een systeem regel te verwijderen of te "
+"bewerken!\n"
 
 msgid "Audio"
 msgstr "Audio"
@@ -969,6 +1027,9 @@ msgstr "Automatische Resolutie schakelaar"
 msgid "Auto chapter split every ? minutes (0=never)"
 msgstr "Automatisch hoofdstuk splitsen elke ? min (0=nooit)"
 
+msgid "Auto checking new version driver/plugin"
+msgstr "Auto-controle nieuwere versie driver/plugin"
+
 msgid "Auto flesh"
 msgstr "Automatische huidskleurtint"
 
@@ -987,14 +1048,14 @@ msgstr "Automatisch scart schakelen"
 msgid "Automatic"
 msgstr "Automatisch"
 
+msgid "Automatic Scan"
+msgstr "Automatisch zoeken"
+
 msgid "Automatic Volume Adjustment"
 msgstr "Automatische Volume Aanpassing"
 
 msgid "Automatic Volume Adjustment settings"
 msgstr "Automatische Volume Aanpassing instellen"
-
-msgid "Automatic Scan"
-msgstr "Automatisch zoeken"
 
 msgid "Automatic scan"
 msgstr "Automatisch zoeken"
@@ -1047,6 +1108,9 @@ msgstr "Wissnelheid (achtergrondproces)"
 msgid "Backup Date: %s\n"
 msgstr "Backup Datum: %s\n"
 
+msgid "Backup Drivers to HDD"
+msgstr "Back-up drivers naar HDD"
+
 msgid "Backup Files"
 msgstr "Backup Bestanden"
 
@@ -1081,25 +1145,6 @@ msgstr ""
 msgid "Backup system settings"
 msgstr "Backup uw instellingen"
 
-msgid "Backup your current image"
-msgstr "Maak een Backup van uw Image"
-
-msgid ""
-"Backup your current image to HDD or USB. This will make a 1:1 copy of your box"
-msgstr ""
-"Backup het huidige image naar HDD of USB. Deze optie maakt een 1:1 kopie"
-" van uw box."
-
-msgid "Backup your current settings"
-msgstr "Maak een Backup van uw Instellingen."
-
-msgid ""
-"Backup your current settings. This includes E2-setup, channels, network and"
-" all selected files"
-msgstr ""
-"Maak een backup van uw huidige instellingen. Dit omvat Enigma2-instellingen,"
-" zenders, netwerk en alle geselecteerde bestanden."
-
 msgid "Backup your Image"
 msgstr "maak een Backup van uw Image"
 
@@ -1108,6 +1153,26 @@ msgstr "Maak een Backup van uw Image/Instellingen of Flash een nieuw Image"
 
 msgid "Backup your Settings"
 msgstr "Maak een Backup van uw Instellingen"
+
+msgid "Backup your current image"
+msgstr "Maak een Backup van uw Image"
+
+msgid ""
+"Backup your current image to HDD or USB. This will make a 1:1 copy of your "
+"box"
+msgstr ""
+"Backup het huidige image naar HDD of USB. Deze optie maakt een 1:1 kopie van "
+"uw box."
+
+msgid "Backup your current settings"
+msgstr "Maak een Backup van uw Instellingen."
+
+msgid ""
+"Backup your current settings. This includes E2-setup, channels, network and "
+"all selected files"
+msgstr ""
+"Maak een backup van uw huidige instellingen. Dit omvat Enigma2-instellingen, "
+"zenders, netwerk en alle geselecteerde bestanden."
 
 msgid "Band"
 msgstr "Band"
@@ -1171,6 +1236,9 @@ msgstr "Helderheid (Normaal)"
 
 msgid "Brightness (Standby)"
 msgstr "Helderheid (Standby)"
+
+msgid "Build date :"
+msgstr "Build datum:"
 
 msgid "Bulgarian"
 msgstr "Bulgaars"
@@ -1364,14 +1432,6 @@ msgstr "Hoofdstuk:"
 msgid "Check"
 msgstr "Controleer"
 
-msgid "Check:"
-msgstr "Controleer:"
-
-msgid ""
-"Check/Install online updates (you must have a working internet connection)"
-msgstr "Controleer/Installeer online updates.\n"
-"(De ontvanger moet verbonden zijn met internet.)"
-
 msgid "Check DVB Time"
 msgstr "Controleer DVB Tijd"
 
@@ -1398,11 +1458,29 @@ msgstr ""
 "Controleren en gelijk zetten aan de NTP-Server gaat niet, schakel 'Enigma 2 "
 "Tijd update' eerst uit !"
 
+msgid "Check for a newer version of the SundtekControlCenter"
+msgstr "Controleer op nieuwere versie van SundtekControlCenter"
+
+msgid ""
+"Check not possible. Please ensure that the Box is connected to the internet."
+msgstr ""
+"Controle niet mogelijk. Controleer of de ontvanger met het internet is "
+"verbonden."
+
 msgid "Check the internet connection"
 msgstr "Controleer of u een internetverbinding heeft"
 
 msgid "Check the internet connection again"
 msgstr "Controleer nogmaals of u een internetverbinding heeft"
+
+msgid ""
+"Check/Install online updates (you must have a working internet connection)"
+msgstr ""
+"Controleer/Installeer online updates.\n"
+"(De ontvanger moet verbonden zijn met internet.)"
+
+msgid "Check:"
+msgstr "Controleer:"
 
 msgid "Checking DVB Time..."
 msgstr "Controleer DVB Tijd..."
@@ -1586,12 +1664,6 @@ msgstr ""
 "\n"
 "U kunt kiezen tussen 'geen timeout' of van 1 tot 11 sec."
 
-msgid "Configure how many channels are shown in the selection list."
-msgstr ""
-"Met deze optie kunt u instellen hoeveel zenders er in een geopende "
-"zenderlijst getoond worden. Dit kunt u aanpassen aan de grootte van uw "
-"beeldscherm."
-
 msgid ""
 "Configure for how many minutes finished events should remain visible in the "
 "EPG. Useful when you need information about an event which has just "
@@ -1602,6 +1674,12 @@ msgstr ""
 "afgelopen is, of vertraagd is.\n"
 "\n"
 "U kunt kiezen tussen 0-120 min in stappen van 15 min."
+
+msgid "Configure how many channels are shown in the selection list."
+msgstr ""
+"Met deze optie kunt u instellen hoeveel zenders er in een geopende "
+"zenderlijst getoond worden. Dit kunt u aanpassen aan de grootte van uw "
+"beeldscherm."
 
 msgid "Configure how recording filenames are constructed."
 msgstr ""
@@ -2169,8 +2247,8 @@ msgid ""
 "alternative one by one regardless of the tuner type."
 msgstr ""
 "Configureer welk type tuner de voorkeur heeft indien een zender op "
-"verschillende tuners beschikbaar is. Kies 'Geen prioriteit' om één voor "
-"één alle alternatieven te proberen, onafhankelijk van het type tuner."
+"verschillende tuners beschikbaar is. Kies 'Geen prioriteit' om één voor één "
+"alle alternatieven te proberen, onafhankelijk van het type tuner."
 
 msgid ""
 "Configure which tuner will be preferred, when more than one tuner is "
@@ -2222,6 +2300,9 @@ msgstr "Verbonden satellieten"
 
 msgid "Connected to"
 msgstr "Verbonden met"
+
+msgid "Connect to TV Server IP"
+msgstr "Verbind met TV-server IP"
 
 msgid "Connected!"
 msgstr "Verbonden!"
@@ -2666,14 +2747,14 @@ msgstr "Gedetecteerde harde schijf:"
 msgid "Detected NIMs:"
 msgstr "Gedetecteerde tuners:"
 
-msgid "Devicename:"
-msgstr "Apparaatnaam:"
-
 msgid "Device Manager"
 msgstr "Beheer opslagmedia"
 
 msgid "Device Mount Manager"
 msgstr "Mount Beheer Opslagmedia"
+
+msgid "Devicename:"
+msgstr "Apparaatnaam:"
 
 msgid "Devices"
 msgstr "Opslag media"
@@ -2743,6 +2824,9 @@ msgstr "Picture In Picture uitschakelen"
 
 msgid "Disable background scanning"
 msgstr "Achtergrondscan uitschakelen"
+
+msgid "Disable the IP server"
+msgstr "Schakel de IP-server uit"
 
 msgid "Disable timer"
 msgstr "Timer uitschakelen"
@@ -2938,11 +3022,11 @@ msgstr "Plugins downloaden"
 msgid "Download Softcams"
 msgstr "Download Softcams"
 
-msgid "Download and install cam"
-msgstr "Softcams download and installeren"
-
 msgid "Download and install Plugins"
 msgstr "Plugins downloaden en installeren"
+
+msgid "Download and install cam"
+msgstr "Softcams download and installeren"
 
 msgid "Download plugins"
 msgstr "Downloaden"
@@ -3059,6 +3143,9 @@ msgstr "Elektronische Programma Gids"
 msgid "Enable"
 msgstr "Aan"
 
+msgid "Enable / Disable IP server"
+msgstr "Schakel de IP-server in/uit"
+
 msgid "Enable 'neutrino' style channel select controlling"
 msgstr "Activeer 'neutrino' stijl kanaal selectie"
 
@@ -3085,6 +3172,9 @@ msgstr "Zenderlijst via OK openen"
 
 msgid "Enable Swap at startup"
 msgstr "Activeer Swap bij opstarten"
+
+msgid "Enable Tuner %d"
+msgstr "Schakel Tuner %d in"
 
 msgid "Enable ViaSat EPG"
 msgstr "Viasat EPG inschakelen"
@@ -3129,6 +3219,9 @@ msgstr ""
 
 msgid "Enable teletext caching"
 msgstr "Teletext caching inschakelen"
+
+msgid "Enable the IP server"
+msgstr "Schakel de IP-server in"
 
 msgid "Enable volume control with arrow buttons"
 msgstr "Activeer volume regeling met de pijltoetsen"
@@ -3439,13 +3532,10 @@ msgstr "Snel Flashen"
 msgid "Flash On the fly (select an image)"
 msgstr "Snel Flashen (selecteer een image)"
 
-msgid "Flash on the fly your Receiver software."
-msgstr "Flash een image lokaal of Online."
-
-msgid "Flash Online a new image"
+msgid "Flash Online Image"
 msgstr "Flash een Image Online"
 
-msgid "Flash Online Image"
+msgid "Flash Online a new image"
 msgstr "Flash een Image Online"
 
 msgid "Flash and restore settings and all saved plugins"
@@ -3460,6 +3550,9 @@ msgstr ""
 
 msgid "Flash and start installation wizard"
 msgstr "Flash en start de installatie wizard"
+
+msgid "Flash on the fly your Receiver software."
+msgstr "Flash een image lokaal of Online."
 
 msgid "Flash on the fly your receiver."
 msgstr "Uw ontvanger snel flashen."
@@ -3725,16 +3818,17 @@ msgid "Here you can download, install or remove skins"
 msgstr "Hier kunt u skins downloaden, installeren of verwijderen"
 
 msgid ""
-"Here you can select which files should be added to backupfile."
-" (default: E2-setup, channels, network)"
+"Here you can select which files should be added to backupfile. (default: E2-"
+"setup, channels, network)"
 msgstr ""
-"Hier kunt u kiezen welke bestanden er toegevoegd moeten worden aan de"
-" Instellingen Backup. (standaard: Enigma2-instellingen, zenders, netwerk)"
+"Hier kunt u kiezen welke bestanden er toegevoegd moeten worden aan de "
+"Instellingen Backup. (standaard: Enigma2-instellingen, zenders, netwerk)"
 
 msgid "Here you can select which files should be updated with a online update"
 msgstr ""
-"Hier kunt u instellen of u configuratie bestanden wilt overschrijven, in welk"
-" menu u de optie 'Software Beheer' wilt zien, en 'epg cache backup' activeren."
+"Hier kunt u instellen of u configuratie bestanden wilt overschrijven, in "
+"welk menu u de optie 'Software Beheer' wilt zien, en 'epg cache backup' "
+"activeren."
 
 msgid "Hidden network"
 msgstr "Verborgen netwerk"
@@ -3816,6 +3910,12 @@ msgstr "Hongaars"
 
 msgid "IP address"
 msgstr "IP-adres"
+
+msgid "IP server is disabled"
+msgstr "IP-server is uitgeschakeld"
+
+msgid "IP server is enabled"
+msgstr "IP-server is ingeschakeld"
 
 msgid "IPK Installer"
 msgstr "IPK installeren"
@@ -4018,6 +4118,9 @@ msgstr "Installeer extensies."
 msgid "Install local extension"
 msgstr "Installeer lokale plugins"
 
+msgid "Install or Update sundtek Driver"
+msgstr "Installeer of update Sundtek driver"
+
 msgid "Install picons on"
 msgstr "Installeer picons op"
 
@@ -4216,6 +4319,9 @@ msgstr "Laatste upgrade: "
 
 msgid "Latest Commits"
 msgstr "Laatste Commits"
+
+msgid "Latest version is already installed"
+msgstr "Laatste versie is al geïnstalleerd"
 
 msgid "Latitude"
 msgstr "Breedtegraad"
@@ -4462,6 +4568,9 @@ msgstr "Geheugenindex"
 
 msgid "Menu"
 msgstr "Menu"
+
+msgid "Menu = call further functions..."
+msgstr "Menu = extra functies..."
 
 msgid "Message"
 msgstr "Bericht"
@@ -4830,8 +4939,14 @@ msgstr ""
 "\n"
 "\n"
 
+msgid "No backup file was found."
+msgstr "Geen back-up bestand gevonden"
+
 msgid "No backup needed"
 msgstr "Geen backup nodig"
+
+msgid "No backups found."
+msgstr "Geen back-up gevonden"
 
 msgid "No cable tuner found!"
 msgstr "Geen kabeltuner gevonden!"
@@ -4900,6 +5015,9 @@ msgstr "Geen zender / provider gekozen"
 
 msgid "No standby"
 msgstr "Geen standby"
+
+msgid "No stick found"
+msgstr "Geen stick gevonden"
 
 msgid "No suitable sat tuner found!"
 msgstr "Geen passende satelliettuner gevonden!"
@@ -5045,6 +5163,12 @@ msgstr ""
 "\n"
 "Plugin afsluiten."
 
+msgid "Not found folder '/media/hdd'."
+msgstr "Map '/media/hdd' niet gevonden."
+
+msgid "Not found network connection"
+msgstr "Geen netwerkverbinding gevonden"
+
 msgid "Nothing connected"
 msgstr "Niets aangesloten"
 
@@ -5093,9 +5217,6 @@ msgstr "OK/ groen = activeer instellingen"
 msgid "ONID"
 msgstr "ONID"
 
-msgid "Only on startup"
-msgstr "Alleen na opstarten"
-
 msgid "OSD 3D setup"
 msgstr "OSD 3D instellingen"
 
@@ -5141,14 +5262,17 @@ msgstr "Alleen plugins."
 msgid "Only free scan"
 msgstr "Alleen FTA zenders scannen"
 
+msgid "Only on startup"
+msgstr "Alleen na opstarten"
+
 msgid "Open service list"
 msgstr "Open de zenderlijst"
 
-msgid "Open the movie list"
-msgstr "Open de opnamelijst"
-
 msgid "Open the Plugin Browser"
 msgstr "Open de Plugin Browser"
+
+msgid "Open the movie list"
+msgstr "Open de opnamelijst"
 
 msgid "Orbital position"
 msgstr "Orbit positie"
@@ -5373,6 +5497,9 @@ msgstr "Verbind uw ontvanger aub met het internet"
 
 msgid "Please do not change any values unless you know what you are doing!"
 msgstr "Wijzig hier geen instellingen tenzij u precies weet wat u doet"
+
+msgid "Please enter IP:"
+msgstr "Geef IP in"
 
 msgid "Please enter a name for the new bouquet"
 msgstr "Voer de naam voor uw nieuwe bouquet in"
@@ -5783,11 +5910,11 @@ msgstr "Python versie: "
 msgid "Quick"
 msgstr "Snel"
 
-msgid "QuickMenu"
-msgstr "Snelmenu"
-
 msgid "Quick zap"
 msgstr "Snelzap"
+
+msgid "QuickMenu"
+msgstr "Snelmenu"
 
 msgid "RF output"
 msgstr "RF modulator"
@@ -5846,6 +5973,9 @@ msgstr "Reden: Geen antwoord"
 msgid "Reboot"
 msgstr "Herstarten"
 
+msgid "Reboot box"
+msgstr "Reboot ontvanger"
+
 msgid "Rec"
 msgstr "Rec"
 
@@ -5864,12 +5994,6 @@ msgstr "Opnames..."
 msgid "Recording"
 msgstr "Opname"
 
-msgid "Recording paths Setup"
-msgstr "Opname locaties instellen"
-
-msgid "Recording settings"
-msgstr "Opname"
-
 msgid "Recording Setup"
 msgstr "Opname instellingen"
 
@@ -5878,6 +6002,12 @@ msgstr "Opnemen bezig"
 
 msgid "Recording paths"
 msgstr "Opname locaties"
+
+msgid "Recording paths Setup"
+msgstr "Opname locaties instellen"
+
+msgid "Recording settings"
+msgstr "Opname"
 
 msgid "Recording type"
 msgstr "Opnamesoort"
@@ -5979,7 +6109,7 @@ msgid "Remove currently selected title"
 msgstr "Verwijder de huidig geselecteerde titel"
 
 msgid "Remove entry"
-msgstr "Verwijder regel"
+msgstr "Regel verwijderen"
 
 msgid "Remove items from trash can after (days)"
 msgstr "Verwijder opnames uit de prullenbak na X dagen"
@@ -6075,9 +6205,12 @@ msgstr "Resolutie"
 msgid "Restart"
 msgstr "Herstarten"
 
+msgid "Restart E2"
+msgstr "Herstart E2"
+
 msgid "Restart Enigma 2 for automatic NTP-Server check on startup (on/off) ?"
 msgstr ""
-"Enigma 2 herstarten voor automatische NTP-Server controle bij opstarten (on/"
+"Enigma2 herstarten voor automatische NTP-Server controle bij opstarten (on/"
 "off) ?"
 
 msgid ""
@@ -6138,6 +6271,9 @@ msgstr ""
 msgid "Restore"
 msgstr "Herstellen"
 
+msgid "Restore Drivers from HDD"
+msgstr "Herstel drivers vanaf HDD"
+
 msgid "Restore Plugins"
 msgstr "Herstel Plugins"
 
@@ -6156,15 +6292,21 @@ msgstr "Herstelt uw laatste Instellingen Backup"
 msgid "Restore system settings"
 msgstr "Herstel uw instellingen"
 
+msgid "Restore was canceled"
+msgstr "Herstel is afgebroken"
+
+msgid ""
+"Restore your settings back from a backup. After restore the box will restart "
+"to activate the new settings"
+msgstr ""
+"Herstel uw instellingen terug naar de laatste instellingen backup. Na "
+"herstel zal de box herstarten om de nieuwe instellingen te activeren."
+
 msgid "Restores your latest Settings Backup"
 msgstr "Herstelt uw laatste Instellingen Backup"
 
-msgid ""
-"Restore your settings back from a backup. After restore the box will restart"
-" to activate the new settings"
-msgstr ""
-"Herstel uw instellingen terug naar de laatste instellingen backup."
-" Na herstel zal de box herstarten om de nieuwe instellingen te activeren."
+msgid "Restoreing:  %s"
+msgstr "Herstelt:  %s"
 
 msgid "Restoring..."
 msgstr "Herstellen..."
@@ -6233,7 +6375,7 @@ msgid "Run how often ?"
 msgstr "Hoe vaak uitvoeren ?"
 
 msgid "Run mount -a"
-msgstr "Alle opslag apparaten koppelen. (mount -a)"
+msgstr "Alles koppelen. (mount -a)"
 
 msgid "Running Myrestore script, Please wait ..."
 msgstr "Het Myrestore script wordt nu uitgevoerd, Even geduld aub ..."
@@ -6305,8 +6447,14 @@ msgstr "Zaterdag"
 msgid "Save"
 msgstr "Opslaan"
 
+msgid "Save and start tuner"
+msgstr "Sla op en start tuner"
+
 msgid "Save playlist"
 msgstr "Sla de afspeellijst op"
+
+msgid "Save setup"
+msgstr "Sla instellingen op"
 
 msgid "Save timeshift file"
 msgstr "Sla de timeshiftopname op"
@@ -6338,8 +6486,14 @@ msgstr "Zoek %s band"
 msgid "Scan additional SR"
 msgstr "Zoek tevens op SR"
 
+msgid "Scan and connect to a TV Server"
+msgstr "Scan en verbind met een TV-server"
+
 msgid "Scan files..."
 msgstr "Zoek bestanden..."
+
+msgid "Scan for IPTV server addresses"
+msgstr "Scan voor IPTV-server adressen"
 
 msgid "Scan for cable services"
 msgstr "Hier kunt u naar kabel zenders zoeken."
@@ -6623,6 +6777,20 @@ msgstr "Servisch"
 msgid "Service"
 msgstr "Zender"
 
+msgid "Service Mode"
+msgstr "Service Modus"
+
+msgid ""
+"Service Mode starts a tunnel to the sundtek server. Please start service "
+"mode only if requested by sundtek support.\n"
+"\n"
+"Start Service Mode now?"
+msgstr ""
+"Servicemode opent een tunnel naar de Sundtek server. Doe dit alleen indien "
+"gevraagd door een medewerker van Sundtek service.\n"
+"\n"
+"Servicemode nu starten?"
+
 msgid "Service Searching Automatically"
 msgstr "Automatisch zenders zoeken"
 
@@ -6883,11 +7051,11 @@ msgstr "Mounts van opslagmedia instellen. (USB, HDD, andere...)"
 msgid "Setup your EPG config"
 msgstr "Hier kunt u de EPG instellingen aanpassen naar uw wensen."
 
-msgid "Setup your Harddisk"
-msgstr "Hier kunt u de harde schijf instellen."
-
 msgid "Setup your HDMI communication and preferences"
 msgstr "Stel uw HDMI communicatie en voorkeuren in."
+
+msgid "Setup your Harddisk"
+msgstr "Hier kunt u de harde schijf instellen."
 
 msgid "Setup your LCD"
 msgstr "Hier kunt u een ander Display Skin kiezen."
@@ -6897,6 +7065,12 @@ msgstr "Hier kunt u een ander Enigma2 Skin kiezen."
 
 msgid "Setup your System"
 msgstr "Hier kunt u de systeem instellingen beheren."
+
+msgid "Setup your Tuner and search for channels"
+msgstr "Hier kunt u de tuners instellen en zenders zoeken."
+
+msgid "Setup your User interface"
+msgstr "Hier kunt u de gebruikers instellingen aanpassen naar uw wensen."
 
 msgid "Setup your Video Mode, Video Output and other Video Settings"
 msgstr ""
@@ -6919,7 +7093,8 @@ msgstr ""
 "Voor WLAN moet er een USB WLAN Stick aanwezig zijn tijdens het opstarten."
 
 msgid "Setup your mounts for network and storage devices"
-msgstr "Hier kunt u de mounts voor netwerk verbindingen en opslag media instellen."
+msgstr ""
+"Hier kunt u de mounts voor netwerk verbindingen en opslag media instellen."
 
 msgid ""
 "Setup your network interface. If no Wlan stick is used, you only can select "
@@ -6949,60 +7124,6 @@ msgstr "Hier kunt u de opname locaties voor uw opnames instellen."
 msgid "Setup your satellite equipment"
 msgstr "Stel uw satellietapparatuur in"
 
-msgid "Setup your Tuner and search for channels"
-msgstr "Hier kunt u de tuners instellen en zenders zoeken."
-
-msgid "Setup your User interface"
-msgstr "Hier kunt u de gebruikers instellingen aanpassen naar uw wensen."
-
-msgid "Show picons in channel selection list"
-msgstr "Picons in kanalenlijst tonen"
-
-msgid "Shows Plugins Browser. Here you can setup installed Plugin"
-msgstr ""
-"Toont u de geïnstalleerde plugins. Ook kunt u plugins instellen."
-
-msgid "Shows available pluigns. Here you can download and install them"
-msgstr ""
-"Hier kunt u de plugins beheren, en nieuwe plugins downloaden/installeren/"
-"de-installeren."
-
-msgid "Shows available plugins. Here you can download and install them" 
-msgstr ""
-"Hier een online-lijst met beschikbare plugins. \n"
-"Via deze weg kunt u nieuwe plugins downloaden en installeren."
-
-msgid "Shows available softcams. Here you can download and install them"
-msgstr ""
-"Toon de beschikbare Softcams die online gedownload en geïnstalleerd kunnen "
-"worden."
-
-msgid "Start/stop/select cam"
-msgstr "Start/stop/selecteer Softcam"
-
-msgid "Start/stop/select your cam, You need to install first a softcam"
-msgstr "Hier kunt u de softcams installeren en beheren."
-
-msgid "System Setup"
-msgstr "Systeem instellingen"
-
-msgid "Tune your TV for the best result"
-msgstr ""
-"Met behulp van deze testbeelden kunt u het beeld van uw TV afregelen "
-"voor het beste resultaat."
-
-msgid "Tuner Configuration"
-msgstr "Tuner Configuratie"
-
-msgid "Tuner Setup"
-msgstr "Tuner"
-
-msgid "Update/Backup/Restore your box"
-msgstr "Update/Backup/Herstel uw box"
-
-msgid "Update/Backup your firmware, Backup/Restore settings"
-msgstr "Update/Backup uw firmware, en/of instellingen."
-
 msgid ""
 "Shall the USB stick wizard proceed and program the image file %s into flash "
 "memory?"
@@ -7015,6 +7136,9 @@ msgstr "Scherpte"
 
 msgid "Short filenames"
 msgstr "Korte bestandsnamen"
+
+msgid "Show /etc/sundtek.conf"
+msgstr "Toon /etc/sundtek.conf"
 
 msgid "Show CCcamInfo in Extensions Menu"
 msgstr "Toon CCcamInfo in de Extensies Lijst"
@@ -7186,6 +7310,9 @@ msgstr "Toon alleen gevonden image en mtd partities.\n"
 msgid "Show picons in channel list"
 msgstr "Toon de picons in de zenderlijst"
 
+msgid "Show picons in channel selection list"
+msgstr "Picons in kanalenlijst tonen"
+
 msgid "Show positioner movement"
 msgstr "Rotorbewegingen zichtbaar"
 
@@ -7237,8 +7364,29 @@ msgstr "TV weergave modus..."
 msgid "Show time elapsed as positive"
 msgstr "Toon Tijd Verstreken als positief"
 
+msgid "Show tuner informations"
+msgstr "Toon tunerinformatie"
+
 msgid "Show warning when timeshift is stopped"
 msgstr "Toon een waarschuwing indien de timeshift is gestopt"
+
+msgid "Shows Plugins Browser. Here you can setup installed Plugin"
+msgstr "Toont u de geïnstalleerde plugins. Ook kunt u plugins instellen."
+
+msgid "Shows available plugins. Here you can download and install them"
+msgstr ""
+"Hier een online-lijst met beschikbare plugins. \n"
+"Via deze weg kunt u nieuwe plugins downloaden en installeren."
+
+msgid "Shows available pluigns. Here you can download and install them"
+msgstr ""
+"Hier kunt u de plugins beheren, en nieuwe plugins downloaden/installeren/de-"
+"installeren."
+
+msgid "Shows available softcams. Here you can download and install them"
+msgstr ""
+"Toon de beschikbare Softcams die online gedownload en geïnstalleerd kunnen "
+"worden."
 
 msgid "Shows live tv or informations on LCD."
 msgstr "Toon Live TV of informatie op het LCD display."
@@ -7375,9 +7523,6 @@ msgstr "Kleine stapjes voorwaarts"
 msgid "Social/Political/Economics"
 msgstr "Sociaal/politiek/economie"
 
-msgid "Softcam-Panel Setup"
-msgstr "Softcam-Paneel Instellingen"
-
 msgid "SoftCam / CI"
 msgstr "Softcam / CI"
 
@@ -7386,6 +7531,9 @@ msgstr "Softcam Paneel"
 
 msgid "Softcam type"
 msgstr "Softcamtype"
+
+msgid "Softcam-Panel Setup"
+msgstr "Softcam-Paneel Instellingen"
 
 msgid "Software"
 msgstr "Software"
@@ -7417,6 +7565,13 @@ msgstr "Softwarebeheerinformatie"
 msgid "Some plugins are not available:\n"
 msgstr "Enkele plugins zijn niet beschikbaar:\n"
 
+msgid ""
+"Sorry,\n"
+"Hdmi CEC is not available for this box at the moment."
+msgstr ""
+"Sorry,\n"
+"Op dit moment is Hdmi CEC is niet beschikbaar voor deze ontvanger."
+
 msgid "Sorry, %s has not been installed!"
 msgstr "Sorry, %s is niet geïnstalleerd!"
 
@@ -7446,10 +7601,6 @@ msgid ""
 msgstr ""
 "Sorry, uw backup locatie is niet beschrijfbaar.\n"
 "Kies een andere locatie."
-
-msgid "Sorry,\nHdmi CEC is not available for this box at the moment."
-msgstr ""
-"Sorry,\nOp dit moment is Hdmi CEC is niet beschikbaar voor deze ontvanger."
 
 msgid "Sort"
 msgstr "Sorteren"
@@ -7592,6 +7743,12 @@ msgstr "Start de timeshift"
 
 msgid "Start with list screen"
 msgstr "Start met een zichtbare lijst"
+
+msgid "Start/stop/select cam"
+msgstr "Start/stop/selecteer Softcam"
+
+msgid "Start/stop/select your cam, You need to install first a softcam"
+msgstr "Hier kunt u de softcams installeren en beheren."
 
 msgid "Starting on"
 msgstr "Start op"
@@ -7745,15 +7902,22 @@ msgstr "Sundtek Controle Centrum"
 msgid "Sundtek Control-Center"
 msgstr "Sundtek Controle-Centrum"
 
-msgid "Sundtek tuner Setup"
-msgstr "Sundtek tuner instellen"
-
 msgid ""
 "Sundtek legal notice:\n"
 "This software comes without any warranty, use it at your own risk?"
 msgstr ""
 "Sundtek juridische kennisgeving:\n"
 "Deze software komt zonder garantie, wilt u het op eigen risico gebruiken?"
+
+msgid "Sundtek tuner Setup"
+msgstr "Sundtek tuner instellen"
+
+msgid ""
+"SundtekControlCenter successfully updated! You need to restart Enigma2. "
+"Restart now?"
+msgstr ""
+"SundtekControlCenter succesvol geüpdatet! U moet Enigma2 opnieuw starten. Nu "
+"herstarten?"
 
 msgid "Swap File not found. You have to create the file before to activate."
 msgstr ""
@@ -7834,6 +7998,9 @@ msgstr "Systeem Info"
 
 msgid "System Information..."
 msgstr "Systeem Informatie..."
+
+msgid "System Setup"
+msgstr "Systeem instellingen"
 
 msgid "SystemPlugin SkinSelector is not installed!"
 msgstr "SystemPlugin SkinSelector is niet geïnstalleerd!"
@@ -7946,6 +8113,9 @@ msgstr "De pincode is opgeslagen."
 
 msgid "The PIN codes you entered are different."
 msgstr "De ingevoerde pincodes zijn niet gelijk."
+
+msgid "The SundtekControlCenter is updated in background"
+msgstr "SundtekControlCenter is in de achtergrond geüpdatet"
 
 msgid ""
 "The USB stick was prepared to be bootable.\n"
@@ -8217,8 +8387,8 @@ msgid ""
 "you can change order and hide menu items via the blue button"
 msgstr ""
 "Met deze optie kunt u de menu items verbergenen of te sorteren.\n"
-"Indien u 'door u gedefinieerd' heeft gekozen, kunt u met de blauwe knop het"
-" sorteer en verberg menu activeren."
+"Indien u 'door u gedefinieerd' heeft gekozen, kunt u met de blauwe knop het "
+"sorteer en verberg menu activeren."
 
 msgid "This option allows you to power off the display."
 msgstr "Met deze optie kunt u het display aan/uit schakelen."
@@ -8525,6 +8695,9 @@ msgstr ""
 "Probeert gebruikte transponders op het kabelnetwerk te vinden. Een ogenblik "
 "aub..."
 
+msgid "Trying to connect to %s (push ok to continue)"
+msgstr "Probeert te verbinden met %s (druk op OK om door te gaan)"
+
 msgid "Trying to download a new packetlist. Please wait..."
 msgstr "Probeert een nieuwe pakketlijst te downloaden. Een ogenblik aub..."
 
@@ -8546,7 +8719,18 @@ msgstr "Afstemmen en focussen"
 msgid "Tune failed!"
 msgstr "Afstemmen mislukt!"
 
+msgid "Tune your TV for the best result"
+msgstr ""
+"Met behulp van deze testbeelden kunt u het beeld van uw TV afregelen voor "
+"het beste resultaat."
+
 msgid "Tuner"
+msgstr "Tuner"
+
+msgid "Tuner Configuration"
+msgstr "Tuner Configuratie"
+
+msgid "Tuner Setup"
 msgstr "Tuner"
 
 msgid "Tuner configuration"
@@ -8697,6 +8881,12 @@ msgstr "Update mislukt. Uw ontvanger heeft geen actieve internetaansluiting."
 msgid "Update has completed."
 msgstr "De update is gereed."
 
+msgid "Update/Backup your firmware, Backup/Restore settings"
+msgstr "Update/Backup uw firmware, en/of instellingen."
+
+msgid "Update/Backup/Restore your box"
+msgstr "Update/Backup/Herstel uw box"
+
 msgid "Updatefeed not available."
 msgstr "Updatefeed niet beschikbaar."
 
@@ -8794,20 +8984,20 @@ msgid "Use power measurement"
 msgstr "Meet stroomopname"
 
 msgid ""
-"Use the Softcam Panel to control your Cam. This let you start/stop/select"
-" a cam"
+"Use the Networkwizard to configure your Network. The wizard will help you to "
+"setup your network"
+msgstr "Gebruik de netwerk wizard om het netwerk in te stellen."
+
+msgid ""
+"Use the Softcam Panel to control your Cam. This let you start/stop/select a "
+"cam"
 msgstr ""
-"Gebruik het Softcam paneel om de gebruikte Softcam te beheren. Een Softcam"
-" te Starten/Stoppen/Kiezen."
+"Gebruik het Softcam paneel om de gebruikte Softcam te beheren. Een Softcam "
+"te Starten/Stoppen/Kiezen."
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr ""
 "Gebruik de netwerkwizard om de geselecteerde netwerkadapter te configureren"
-
-msgid ""
-"Use the Networkwizard to configure your Network. The wizard will help you to "
-"setup your network"
-msgstr "Gebruik de netwerk wizard om het netwerk in te stellen."
 
 msgid "Use the network wizard to configure your network\n"
 msgstr "Gebruik de netwerkwizard om uw netwerk in te stellen\n"
@@ -8903,15 +9093,6 @@ msgstr "Vertikaal-menu"
 msgid "Video PID"
 msgstr "Video PID"
 
-msgid "VideoEnhancement"
-msgstr "Videoverbetering"
-
-msgid "VideoEnhancement Setup"
-msgstr "Videoverbetering instellingen"
-
-msgid "VideoEnhancement Setup."
-msgstr "Videoverbetering instellingen."
-
 msgid "Video enhancement preview"
 msgstr "Videoverbetering preview"
 
@@ -8955,6 +9136,15 @@ msgstr "Video wizard"
 
 msgid "Video: %s fps"
 msgstr "Video: %s fps"
+
+msgid "VideoEnhancement"
+msgstr "Videoverbetering"
+
+msgid "VideoEnhancement Setup"
+msgstr "Videoverbetering instellingen"
+
+msgid "VideoEnhancement Setup."
+msgstr "Videoverbetering instellingen."
 
 msgid "VideoMode"
 msgstr "VideoModus"
@@ -9090,6 +9280,9 @@ msgstr "Activeer het signaal van TV"
 msgid "Wakeup type"
 msgstr "Type 'Wakeup'"
 
+msgid "Warning! Recording is currently running."
+msgstr "Waarschuwing! Er loopt momenteel een opname"
+
 msgid "Warning: no LNB; using factory defaults."
 msgstr "Waarschuwing: geen LNB; standaardwaardes worden gebruikt."
 
@@ -9182,37 +9375,6 @@ msgstr "Welke Dag van de week ?"
 
 msgid "What do you want to scan?"
 msgstr "Wat wilt u zoeken?"
-
-msgid ""
-"When enabled, always descramble receiving http streams. This takes up more "
-"resources (descrambling demuxers), only enable if necessary. Individual "
-"streams are always descrambled if 0x100 is added to the service type, "
-"regardless of this setting. Default off."
-msgstr ""
-"Indien geactiveerd, dan worden ontvangen http streams altijd gedecodeerd. "
-"Dit neemt wel meer bronnen in beslag (decodeer demuxers), dus activeer dit "
-"alleen indien dat noodzakelijk is. Individuele streams worden, ongeacht de "
-"instelling, altijd gedecodeerd indien 0x00 aan het servicetype is toegevoegd. "
-"De standaardwaarde is uit."
-
-msgid ""
-"When enabled, http streams are descrambled on the server side. The (remote) "
-"client receiver does not have to do descrambling. Default on."
-msgstr ""
-"Indien geactiveerd, dan worden http stream aan de serverzijde gedecodeerd. "
-"De client ontvanger hoeft dan niet te decoderen. De standaardwaarde is uit."
-
-msgid "When enabled, this setting has more weight than 'Preferred tuner'."
-msgstr ""
-"Indien geactiveerd, dan wordt er voorkeur gegeven aan deze optie boven de "
-"optie 'Voorkeurstuner'."
-
-msgid ""
-"When enabled, this setting has more weight than 'Preferred tuner for "
-"recordings'."
-msgstr ""
-"Indien geactiveerd, dan wordt de voorkeur gegeven aan deze optie boven de "
-"optie 'Voorkeurstuner voor opname's'."
 
 msgid ""
 "When enabled enigma2 will load unlinked userbouquets. This means that "
@@ -9359,6 +9521,18 @@ msgstr ""
 "Indien ingeschakeld, dan zal de gebruiker de optie worden getoond om de "
 "timeshift te stoppen of door te laten lopen."
 
+msgid ""
+"When enabled, always descramble receiving http streams. This takes up more "
+"resources (descrambling demuxers), only enable if necessary. Individual "
+"streams are always descrambled if 0x100 is added to the service type, "
+"regardless of this setting. Default off."
+msgstr ""
+"Indien geactiveerd, dan worden ontvangen http streams altijd gedecodeerd. "
+"Dit neemt wel meer bronnen in beslag (decodeer demuxers), dus activeer dit "
+"alleen indien dat noodzakelijk is. Individuele streams worden, ongeacht de "
+"instelling, altijd gedecodeerd indien 0x00 aan het servicetype is "
+"toegevoegd. De standaardwaarde is uit."
+
 msgid "When enabled, authentication is required to watch http streams."
 msgstr ""
 "Indien geactiveerd, dan dient u een wachtwoord in te vullen om http streams "
@@ -9458,6 +9632,13 @@ msgid ""
 msgstr ""
 "Indien geactiveerd, dan worden de http streams aan de serverzijde "
 "gedecodeerd. De cliënt-ontvanger hoeft deze dan niet meer te decoderen. "
+
+msgid ""
+"When enabled, http streams are descrambled on the server side. The (remote) "
+"client receiver does not have to do descrambling. Default on."
+msgstr ""
+"Indien geactiveerd, dan worden http stream aan de serverzijde gedecodeerd. "
+"De client ontvanger hoeft dan niet te decoderen. De standaardwaarde is uit."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr ""
@@ -9589,6 +9770,18 @@ msgid "When enabled, the receiver will select an AC3+ track (when available)."
 msgstr ""
 "Indien geactiveerd, dan selecteert de ontvanger een AC3+ spoor indien deze "
 "beschikbaar is."
+
+msgid ""
+"When enabled, this setting has more weight than 'Preferred tuner for "
+"recordings'."
+msgstr ""
+"Indien geactiveerd, dan wordt de voorkeur gegeven aan deze optie boven de "
+"optie 'Voorkeurstuner voor opname's'."
+
+msgid "When enabled, this setting has more weight than 'Preferred tuner'."
+msgstr ""
+"Indien geactiveerd, dan wordt er voorkeur gegeven aan deze optie boven de "
+"optie 'Voorkeurstuner'."
 
 msgid ""
 "When enabled, timeshift starts automatically in background after specified "
@@ -10321,6 +10514,9 @@ msgstr "ecm niet decoderen maar wel opnemen"
 msgid "done!"
 msgstr "gereed!"
 
+msgid "driver update available"
+msgstr "driver update beschikbaar"
+
 msgid "east"
 msgstr "oost"
 
@@ -10389,6 +10585,12 @@ msgstr "verlaat het netwerkadapter instellingenmenu"
 
 msgid "experimental film/video"
 msgstr "experimentele films / video"
+
+msgid "extension menu"
+msgstr "extensie menu"
+
+msgid "extension/scan menu"
+msgstr "extensie/scan menu"
 
 msgid "false"
 msgstr "incorrect"
@@ -10471,6 +10673,9 @@ msgstr "hoogte"
 msgid "help..."
 msgstr "Help..."
 
+msgid "hide"
+msgstr "verberg"
+
 msgid "horizontal"
 msgstr "horizontaal"
 
@@ -10506,6 +10711,9 @@ msgstr "vooruit naar volgende titel"
 
 msgid "languages"
 msgstr "talen"
+
+msgid "latest sundtek driver version:\n"
+msgstr "laatste Sundtek driver versie:\n"
 
 msgid "leave movie player..."
 msgstr "PVR afsluiten"
@@ -10664,6 +10872,9 @@ msgstr "Straks"
 msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Nu"
+
+msgid "nowhere"
+msgstr "nergens"
 
 msgid "of"
 msgstr "van"
@@ -10853,8 +11064,14 @@ msgstr "Bewaar laatste map bij het beëindigen"
 msgid "save playlist on exit"
 msgstr "Bewaar afspeellijst bij het beëindigen"
 
+msgid "scan menu"
+msgstr "scan-menu"
+
 msgid "scan state"
 msgstr "zoekstatus"
+
+msgid "scc update available"
+msgstr "scc update beschikbaar"
 
 msgid "science fiction/fantasy/horror"
 msgstr "science fiction / fantasie / horror"
@@ -10906,6 +11123,9 @@ msgstr "kanaal kiezen bij opstarten"
 
 msgid "setup PIN"
 msgstr "Stel pincode in"
+
+msgid "show"
+msgstr "toon"
 
 msgid "show DVD main menu"
 msgstr "DVD hoofdmenu weergeven"
@@ -11092,6 +11312,9 @@ msgstr "verticaal"
 
 msgid "via Network"
 msgstr "via Netwerk"
+
+msgid "www.sundtek.de unavailable"
+msgstr "www.sundtek.de niet beschikbaar"
 
 msgid "wait for ci..."
 msgstr "wacht op CI..."
