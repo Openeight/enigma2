@@ -89,7 +89,7 @@ from Plugins.Extensions.ExtrasPanel.MountManager import *
 from Plugins.Extensions.ExtrasPanel.SoftcamPanel import *
 from Plugins.Extensions.ExtrasPanel.CamStart import *
 from Plugins.Extensions.ExtrasPanel.CamCheck import *
-from Plugins.Extensions.ExtrasPanel.sundtek import *
+from Plugins.Extensions.ExtrasPanel.sundtek import SundtekControlCenter
 from Plugins.Extensions.ExtrasPanel.SwapManager import Swap, SwapAutostart
 from Plugins.Extensions.ExtrasPanel.SoftwarePanel import SoftwarePanel
 from Plugins.Extensions.ExtrasPanel.XTDVBNTPTime import *
@@ -124,7 +124,6 @@ def setDefaultKeymap():
 	config.usage.keymap.setValue(eEnv.resolve('${datadir}/enigma2/keymap.xml'))
 	config.save()
 
-
 def command(comandline, strip = 1):
 	comandline = comandline + ' >/tmp/command.txt'
 	os.system(comandline)
@@ -134,20 +133,17 @@ def command(comandline, strip = 1):
 		if strip == 1:
 			for line in file:
 				text = text + line.strip() + '\n'
-
 		else:
 			for line in file:
 				text = text + line
 				if text[-1:] != '\n':
 					text = text + '\n'
-
 		file.close()
 	if text[-1:] == '\n':
 		text = text[:-1]
 	comandline = text
 	os.system('rm /tmp/command.txt')
 	return comandline
-
 
 boxversion = getBoxType()
 machinename = getMachineName()
@@ -196,10 +192,8 @@ class ConfigPORT(ConfigSequence):
 	def __init__(self, default):
 		ConfigSequence.__init__(self, seperator='.', limits=[(1, 65535)], default=default)
 
-
 def main(session, **kwargs):
 	session.open(Extraspanel)
-
 
 def Apanel(menuid, **kwargs):
 	if menuid == 'mainmenu':
@@ -209,7 +203,6 @@ def Apanel(menuid, **kwargs):
 		  11)]
 	else:
 		return []
-
 
 def camstart(reason, **kwargs):
 	global timerInstance
@@ -221,7 +214,6 @@ def camstart(reason, **kwargs):
 		f.close()
 	except:
 		print '[Extras-Panel] failed to write /proc/stb/video/alpha'
-
 	try:
 		if config.softcam.camstartMode.getValue() == '0':
 			if timerInstance is None:
@@ -229,22 +221,32 @@ def camstart(reason, **kwargs):
 			timerInstance.startTimer()
 	except:
 		print '[Extras-Panel] failed to run CamStart'
-
 	return
-
 
 def qmenu(session, **kwargs):
 	from Plugins.Extensions.ExtrasPanel.QuickMenu import QuickMenu
 	session.open(QuickMenu)
 
+def sccmain(session, **kwargs):
+	session.open(SundtekControlCenter)
+
+def SundtekControlCenterStart(menuid):
+	if (config.plugins.SundtekControlCenter.display.value == "2" or config.plugins.SundtekControlCenter.display.value == "3") and (menuid == "scan" or menuid == "services_recordings"):
+		return [(_("Sundtek Control Center"), sccmain, "sundtek_control_center", 55)]
+	return [ ]
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=camstart),
-	 PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=DVBNTPautostart),
-	 PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=SwapAutostart),
-	 PluginDescriptor(name='Eight Panel', description='Eight panel GUI 12/11/2012', where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
-	 PluginDescriptor(name=_("Quick Menu"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=qmenu)]
-
+	list = [
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=camstart),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=DVBNTPautostart),
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=SwapAutostart),
+		PluginDescriptor(name='Eight Panel', description='Eight panel GUI 12/11/2012', where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
+		PluginDescriptor(name=_("Quick Menu"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=qmenu),
+		PluginDescriptor(name=_("sundtek control center"), description =_("installs the sundtek driver and runs related shellscripts"), where = PluginDescriptor.WHERE_MENU, fnc=SundtekControlCenterStart)
+		]
+	if config.plugins.SundtekControlCenter.display.value == "1" or config.plugins.SundtekControlCenter.display.value == "3":
+		list.append(PluginDescriptor(name=_("sundtek control center"), description =_("installs the sundtek driver and runs related shellscripts"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=sccmain))
+	return list
 
 MENU_SKIN = '<screen name="Extraspanel" position="center,center" size="500,370" title="Extra Panel" >\n\t<widget source="global.CurrentTime" render="Label" position="0, 340" size="500,24" font="Regular;20" foregroundColor="#FFFFFF" halign="right" transparent="1" zPosition="5">\n\t\t<convert type="ClockToText">>Format%H:%M:%S</convert>\n\t</widget>\n\t<eLabel backgroundColor="#56C856" position="0,330" size="500,1" zPosition="0" />\n\t<widget source="list" render="Listbox" position="10,25" size="500,280" scrollbarMode="showOnDemand" zPosition="1" transparent="1">\n                <convert type="TemplatedMultiContent">\n\t\t\t\t{"template": [\n\t\t\t\t\t\tMultiContentEntryText(pos = (0, 5), size = (520, 28), font=0, text = 0), # menu_entry\n\t\t\t\t\t\tMultiContentEntryText(pos = (0, 35), size = (520, 22), font=1, text = 2), # menu_entry_description\n\t\t\t\t\t],\n\t\t\t\t"fonts": [gFont("Regular",24),gFont("Regular",16)],\n\t\t\t\t"itemHeight": 70\n\t\t\t\t}\n\t \t</convert>\n        </widget>\n\t<widget name="label1" position="10,340" size="490,25" font="Regular;20" transparent="1" foregroundColor="#f2e000" halign="left" />\n</screen>'
 CONFIG_SKIN = '<screen position="center,center" size="600,440" title="PANEL Config" >\n\t<widget name="config" position="10,10" size="580,377" enableWrapAround="1" scrollbarMode="showOnDemand" />\n\t<widget name="labelExitsave" position="90,410" size="420,25" halign="center" font="Regular;20" transparent="1" foregroundColor="#f2e000" />\n</screen>'
