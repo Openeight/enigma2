@@ -1,12 +1,12 @@
 #!/bin/sh
 
-if [ -e "/tmp/sundtek_installer_development.sh" ]; then
+if [ -e "/tmp/sundtek_netinst.sh" ]; then
     #installer script already exits
     #so we remove it
-    rm /tmp/sundtek_installer_development.sh > /dev/null 2>&1
+    rm -rf /tmp/sundtek_netinst.sh
 fi
-    ## install development driver
+    ## install net-development driver
     cd /tmp
-    wget http://www.sundtek.de/media/sundtek_installer_development.sh
-    chmod 755 sundtek_installer_development.sh
-    /tmp/sundtek_installer_development.sh -easyvdr
+    wget http://sundtek.de/media/sundtek_netinst.sh
+    chmod 755 sundtek_netinst.sh
+    /tmp/sundtek_netinst.sh -keepalive -easyvdr
