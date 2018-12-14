@@ -47,7 +47,7 @@ class FastScanStatus(Screen):
 		self["scan_progress"] = ProgressBar()
 		self["scan_state"] = Label(_("scan state"))
 
-		if self.session.pipshown:
+		if hasattr(self.session, "pipshown") and self.session.pipshown:
 			from Screens.InfoBar import InfoBar
 			InfoBar.instance and hasattr(InfoBar.instance, "showPiP") and InfoBar.instance.showPiP()
 
@@ -125,12 +125,13 @@ class FastScanScreen(ConfigListScreen, Screen):
 		('TV Vlaanderen', (1, 910, True)),
 		('TéléSAT', (0, 920, True)),
 		('HD Austria', (0, 950, False)),
-		('Fast Scan Deutschland', (0, 960, False)),
+		('Diveo', (0, 960, False)),
 		('Skylink Czech Republic', (1, 30, False)),
 		('Skylink Slovak Republic', (1, 31, False)),
+		('KabelKiosk', (0, 970, False)),
 		('TéléSAT Astra3', (1, 920, True)),
 		('HD Austria Astra3', (1, 950, False)),
-		('Fast Scan Deutschland Astra3', (1, 960, False)),
+		('Diveo Astra3', (1, 960, False)),
 		('Canal Digitaal Astra 1', (0, 900, True)),
 		('TV Vlaanderen  Astra 1', (0, 910, True))]
 
@@ -179,6 +180,8 @@ class FastScanScreen(ConfigListScreen, Screen):
 		self.createSetup()
 		self.finished_cb = None
 		self["introduction"] = Label(_("Select your provider, and press OK to start the scan"))
+		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Save"))
 
 	def createSetup(self):
 		self.list = []
@@ -232,9 +235,9 @@ class FastScanScreen(ConfigListScreen, Screen):
 		transponderParameters.modulation = self.transponders[number][7]
 		transponderParameters.rolloff = self.transponders[number][8]
 		transponderParameters.pilot = self.transponders[number][9]
-		transponderParameters.is_id = -1
-		transponderParameters.pls_mode = eDVBFrontendParametersSatellite.PLS_Root
-		transponderParameters.pls_code = 1
+		transponderParameters.is_id = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
+		transponderParameters.pls_mode = eDVBFrontendParametersSatellite.PLS_Gold
+		transponderParameters.pls_code = 0
 		return transponderParameters
 
 	def startScan(self):
@@ -381,7 +384,7 @@ def FastScanStart(menuid, **kwargs):
 
 def Plugins(**kwargs):
 	if (nimmanager.hasNimType("DVB-S")):
-		return [PluginDescriptor(name=_("Fast Scan"), description="Scan Dutch/Belgian sat provider", where = PluginDescriptor.WHERE_MENU, fnc=FastScanStart),
+		return [PluginDescriptor(name=_("Fast Scan"), description="Scan M7 Brands, BE/NL/DE/AT/CZ", where = PluginDescriptor.WHERE_MENU, fnc=FastScanStart),
 			PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
 	else:
 		return []

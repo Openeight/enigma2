@@ -11,6 +11,9 @@ import time
 
 def InitUsageConfig():
 	config.usage = ConfigSubsection()
+	config.usage.subnetwork = ConfigYesNo(default = True)
+	config.usage.subnetwork_cable = ConfigYesNo(default = True)
+	config.usage.subnetwork_terrestrial = ConfigYesNo(default = True)
 	config.usage.showdish = ConfigYesNo(default = True)
 	config.misc.showrotorposition = ConfigSelection(default = "no", choices = [("no", _("no")), ("yes", _("yes")), ("withtext", _("with text")), ("tunername", _("with tuner name"))])
 	config.usage.multibouquet = ConfigYesNo(default = True)
@@ -100,7 +103,7 @@ def InitUsageConfig():
 		("standard", _("Standard")), ("swap", _("Swap PiP and main picture")),
 		("swapstop", _("Move PiP to main picture")), ("stop", _("Stop PiP")) ])
 	config.usage.pip_hideOnExit = ConfigSelection(default = "without popup", choices = [
-		("no", _("No")), ("popup", _("With popup")), ("without popup", _("Without popup")) ])
+		("no", _("no")), ("popup", _("With popup")), ("without popup", _("Without popup")) ])
 	choicelist = [("-1", _("Disabled")), ("0", _("No timeout"))]
 	for i in [60, 300, 600, 900, 1800, 2700, 3600]:
 		m = i/60
@@ -157,7 +160,7 @@ def InitUsageConfig():
 	config.usage.next_movie_msg = ConfigYesNo(default = True)
 	config.usage.last_movie_played = ConfigText()
 	config.usage.leave_movieplayer_onExit = ConfigSelection(default = "popup", choices = [
-		("no", _("No")), ("popup", _("With popup")), ("without popup", _("Without popup")), ("movielist", _("Return to movie list")) ])
+		("no", _("no")), ("popup", _("With popup")), ("without popup", _("Without popup")), ("movielist", _("Return to movie list")) ])
 
 	config.usage.setup_level = ConfigSelection(default = "expert", choices = [
 		("simple", _("Normal")),
@@ -165,13 +168,13 @@ def InitUsageConfig():
 		("expert", _("Expert")) ])
 
 	config.usage.startup_to_standby = ConfigSelection(default = "no", choices = [
-		("no", _("No")),
-		("yes", _("Yes")),
+		("no", _("no")),
+		("yes", _("yes")),
 		("except", _("No, except Wakeup timer")) ])
 
 	config.usage.wakeup_enabled = ConfigSelection(default = "no", choices = [
-		("no", _("No")),
-		("yes", _("Yes")),
+		("no", _("no")),
+		("yes", _("yes")),
 		("standby", _("Yes, only from standby")),
 		("deepstandby", _("Yes, only from deep standby")) ])
 	config.usage.wakeup_day = ConfigSubDict()
@@ -216,7 +219,7 @@ def InitUsageConfig():
 	config.usage.sleep_timer = ConfigSelection(default = "0", choices = choicelist)
 
 	choicelist = [("0", _("Disabled"))]
-	for i in [60, 300, 600] + range(900, 7201, 900):
+	for i in [300, 600] + range(900, 7201, 900):
 		m = abs(i / 60)
 		m = ngettext("%d minute", "%d minutes", m) % m
 		choicelist.append((str(i), _("after ") + m))
@@ -256,6 +259,15 @@ def InitUsageConfig():
 	config.usage.remote_fallback_enabled = ConfigYesNo(default = False)
 	config.usage.remote_fallback = ConfigText(default = "", fixed_size = False)
 	config.usage.remote_fallback.addNotifier(remote_fallback_changed, immediate_feedback=False)
+	config.usage.remote_fallback_import_seperate = ConfigYesNo(default = False)
+	config.usage.remote_fallback_import_url = ConfigText(default = "", fixed_size = False)
+	config.usage.remote_fallback_import_url.addNotifier(remote_fallback_changed, immediate_feedback=False)
+	config.usage.remote_fallback_import = ConfigSelection(default = "", choices = [("", _("No")), ("channels", _("Channels only")), ("channels_epg", _("Channels and EPG")), ("epg", _("EPG only"))])
+	config.usage.remote_fallback_import_restart = ConfigYesNo(default = False)
+	config.usage.remote_fallback_import_standby = ConfigYesNo(default = False)
+	config.usage.remote_fallback_ok = ConfigYesNo(default = False)
+	config.usage.remote_fallback_nok = ConfigYesNo(default = False)
+	config.usage.remote_fallback_extension_menu = ConfigYesNo(default = False)
 
 	config.usage.show_timer_conflict_warning = ConfigYesNo(default = True)
 
@@ -303,7 +315,7 @@ def InitUsageConfig():
 		('barright', _("Progress bar right")),
 		('percleft', _("Percentage left")),
 		('percright', _("Percentage right")),
-		('no', _("No")) ])
+		('no', _("no")) ])
 	config.usage.show_channel_numbers_in_servicelist = ConfigYesNo(default = True)
 	config.usage.show_event_progress_in_servicelist.addNotifier(refreshServiceList)
 	config.usage.show_channel_numbers_in_servicelist.addNotifier(refreshServiceList)
@@ -387,6 +399,12 @@ def InitUsageConfig():
 			open(SystemInfo["hasXcoreVFD"], "w").write(not configElement.value and "1" or "0")
 		config.usage.toggle12to8characterVFD = ConfigYesNo(default = False)
 		config.usage.toggle12to8characterVFD.addNotifier(set12to8characterVFD)
+
+	if SystemInfo["LcdLiveTVMode"]:
+		def setLcdLiveTVMode(configElement):
+			open(SystemInfo["LcdLiveTVMode"], "w").write(configElement.value)
+		config.usage.LcdLiveTVMode = ConfigSelection(default = "0", choices=[str(x) for x in range(0,9)])
+		config.usage.LcdLiveTVMode.addNotifier(setLcdLiveTVMode)
 
 	config.epg = ConfigSubsection()
 	config.epg.eit = ConfigYesNo(default = True)
@@ -491,10 +509,10 @@ def InitUsageConfig():
 	def updateEraseFlags(el):
 		eBackgroundFileEraser.getInstance().setEraseFlags(int(el.value))
 	config.misc.erase_speed = ConfigSelection(default="20", choices = [
-		("10", "10 MB/s"),
-		("20", "20 MB/s"),
-		("50", "50 MB/s"),
-		("100", "100 MB/s")])
+		("10", _("10 MB/s")),
+		("20", _("20 MB/s")),
+		("50", _("50 MB/s")),
+		("100", _("100 MB/s"))])
 	config.misc.erase_speed.addNotifier(updateEraseSpeed, immediate_feedback = False)
 	config.misc.erase_flags = ConfigSelection(default="1", choices = [
 		("0", _("Disable")),
@@ -512,19 +530,19 @@ def InitUsageConfig():
 	if SystemInfo["HasForceLNBOn"]:
 		def forceLNBPowerChanged(configElement):
 			open(SystemInfo["HasForceLNBOn"], "w").write(configElement.value)
-		config.misc.forceLnbPower = ConfigSelection(default = "on", choices = [ ("on", _("Yes")), ("off", _("No"))] )
+		config.misc.forceLnbPower = ConfigSelection(default = "on", choices = [ ("on", _("yes")), ("off", _("no"))] )
 		config.misc.forceLnbPower.addNotifier(forceLNBPowerChanged)
 
 	if SystemInfo["HasForceToneburst"]:
 		def forceToneBurstChanged(configElement):
 			open(SystemInfo["HasForceToneburst"], "w").write(configElement.value)
-		config.misc.forceToneBurst = ConfigSelection(default = "enable", choices = [ ("enable", _("Yes")), ("disable", _("No"))] )
+		config.misc.forceToneBurst = ConfigSelection(default = "enable", choices = [ ("enable", _("yes")), ("disable", _("no"))] )
 		config.misc.forceToneBurst.addNotifier(forceToneBurstChanged)
 
 	if SystemInfo["HasBypassEdidChecking"]:
 		def setHasBypassEdidChecking(configElement):
 			open(SystemInfo["HasBypassEdidChecking"], "w").write(configElement.value)
-		config.av.bypassEdidChecking = ConfigSelection(default = "00000000", choices = [ ("00000001", _("Yes")), ("00000000", _("No"))] )
+		config.av.bypassEdidChecking = ConfigSelection(default = "00000000", choices = [ ("00000001", _("yes")), ("00000000", _("no"))] )
 		config.av.bypassEdidChecking.addNotifier(setHasBypassEdidChecking)
 
 	if SystemInfo["HasColorspace"]:
@@ -545,7 +563,7 @@ def InitUsageConfig():
 	if SystemInfo["HasHDMIpreemphasis"]:
 		def setHDMIpreemphasis(configElement):
 			open(SystemInfo["HasHDMIpreemphasis"], "w").write(configElement.value)
-		config.av.hdmipreemphasis = ConfigSelection(default = "off", choices = [ ("on", _("Yes")), ("off", _("No"))] )
+		config.av.hdmipreemphasis = ConfigSelection(default = "off", choices = [ ("on", _("yes")), ("off", _("no"))] )
 		config.av.hdmipreemphasis.addNotifier(setHDMIpreemphasis)
 
 	if SystemInfo["HasColorimetry"]:
@@ -573,7 +591,7 @@ def InitUsageConfig():
 		if i == 0:
 			subtitle_delay_choicelist.append(("0", _("No delay")))
 		else:
-			subtitle_delay_choicelist.append((str(i), "%2.1f sec" % (i / 90000.)))
+			subtitle_delay_choicelist.append((str(i), _("%2.1f sec") % (i / 90000.)))
 	config.subtitles.subtitle_noPTSrecordingdelay = ConfigSelection(default = "315000", choices = subtitle_delay_choicelist)
 
 	config.subtitles.dvb_subtitles_yellow = ConfigYesNo(default = False)
@@ -628,6 +646,7 @@ def InitUsageConfig():
 		("ell gre", _("Greek")),
 		("heb", _("Hebrew")),
 		("hun", _("Hungarian")),
+		("ind", _("Indonesian")),
 		("ita", _("Italian")),
 		("lav", _("Latvian")),
 		("lit", _("Lithuanian")),
@@ -635,7 +654,7 @@ def InitUsageConfig():
 		("nor", _("Norwegian")),
 		("fas per fa pes", _("Persian")),
 		("pol", _("Polish")),
-		("por dub Dub DUB ud1", _("Portuguese")),		
+		("por dub Dub DUB ud1", _("Portuguese")),
 		("ron rum", _("Romanian")),
 		("rus", _("Russian")),
 		("srp", _("Serbian")),

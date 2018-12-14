@@ -1,4 +1,3 @@
-from HTMLComponent import HTMLComponent
 from GUIComponent import GUIComponent
 from skin import parseColor, parseFont
 
@@ -19,7 +18,7 @@ def refreshServiceList(configElement = None):
 		if servicelist:
 			servicelist.setMode()
 
-class ServiceList(HTMLComponent, GUIComponent):
+class ServiceList(GUIComponent):
 	MODE_NORMAL = 0
 	MODE_FAVOURITES = 1
 
@@ -374,3 +373,7 @@ class ServiceList(HTMLComponent, GUIComponent):
 		self.l.setCryptoIconMode(int(config.usage.crypto_icon_mode.value))
 		self.l.setRecordIndicatorMode(int(config.usage.record_indicator_mode.value))
 		self.l.setColumnWidth(int(config.usage.servicelist_column.value))
+
+	def selectionEnabled(self, enabled):
+		if self.instance is not None:
+			self.instance.setSelectionEnable(enabled)

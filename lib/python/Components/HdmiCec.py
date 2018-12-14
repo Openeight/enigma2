@@ -2,8 +2,11 @@ import struct, os, time
 from config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText, ConfigCECAddress, ConfigLocations, ConfigDirectory
 from enigma import eHdmiCEC, eActionMap
 from Tools.StbHardware import getFPWasTimerWakeup
+import NavigationInstance
 from enigma import eTimer
-from sys import maxint
+
+# sys.maxint on 64bit (2**63-1) fails with OverflowError on eActionMap.bindAction use 32bit value (2**31-1)
+maxint = 2147483647
 
 LOGPATH="/hdd/"
 LOGFILE="hdmicec.log"
@@ -115,8 +118,13 @@ class HdmiCec:
 		eActionMap.getInstance().bindAction('', -maxint - 1, self.keyEvent)
 		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
-		if config.hdmicec.enabled.value and config.hdmicec.handle_deepstandby_events.value and not getFPWasTimerWakeup():
-			self.onLeaveStandby()
+		if config.hdmicec.enabled.value:
+			if config.hdmicec.report_active_menu.value:
+				if config.hdmicec.report_active_source.value and NavigationInstance.instance and not NavigationInstance.instance.isRestartUI():
+					self.sendMessage(0, "sourceinactive")
+				self.sendMessage(0, "menuactive")
+			if config.hdmicec.handle_deepstandby_events.value and (not getFPWasTimerWakeup() or (config.usage.startup_to_standby.value == "no" and config.misc.prev_wakeup_time_type.value == 3)):
+				self.onLeaveStandby()
 
 	def getPhysicalAddress(self):
 		physicaladdress = eHdmiCEC.getInstance().getPhysicalAddress()

@@ -24,6 +24,16 @@ def getFlashDateString():
 	except:
 		return _("unknown")
 
+def getBuildDateString():
+	try:
+		from glob import glob
+		build = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/openpli-bootlogo.control")[0], "r") if x.startswith("Version:")][0]
+		if build.isdigit():
+			return  "%s-%s-%s" % (build[:4], build[4:6], build[6:])
+	except:
+		pass
+	return _("unknown")
+
 def getEnigmaVersionString():
 	import enigma
 	enigma_version = enigma.getEnigmaVersionString()
@@ -49,6 +59,16 @@ def getChipSetString():
 		return chipset
 	except IOError:
 		return "unavailable"
+
+def getHardwareTypeString():
+	return HardwareInfo().get_device_string()
+
+def getImageTypeString():
+	try:
+		image_type = open("/etc/issue").readlines()[-2].strip()[:-6]
+		return image_type.capitalize()
+	except:
+		return _("undefined")
 
 def getCPUString():
 	try:
@@ -105,15 +125,6 @@ def getCpuCoresString():
 		return cores
 	except IOError:
 		return "unavailable"
-
-def getHardwareTypeString():
-	return HardwareInfo().get_device_string()
-
-def getImageTypeString():
-	try:
-		return open("/etc/issue").readlines()[-2].capitalize().strip()[:-6]
-	except:
-		return _("undefined")
 
 def getPythonVersionString():
 	try:

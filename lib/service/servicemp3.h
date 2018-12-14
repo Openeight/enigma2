@@ -160,6 +160,8 @@ public:
 	RESULT keys(ePtr<iServiceKeys> &ptr) { ptr = 0; return -1; }
 	RESULT stream(ePtr<iStreamableService> &ptr) { ptr = 0; return -1; }
 
+	void setQpipMode(bool value, bool audio) { }
+
 		// iPausableService
 	RESULT pause();
 	RESULT unpause();
@@ -239,8 +241,9 @@ public:
 		containertype_t containertype;
 		bool is_video;
 		bool is_streaming;
+		bool is_hls;
 		sourceStream()
-			:audiotype(atUnknown), containertype(ctNone), is_video(FALSE), is_streaming(FALSE)
+			:audiotype(atUnknown), containertype(ctNone), is_video(FALSE), is_streaming(FALSE), is_hls(FALSE)
 		{
 		}
 	};
@@ -379,6 +382,7 @@ private:
 	std::string m_useragent;
 	std::string m_extra_headers;
 	RESULT trickSeek(gdouble ratio);
+	ePtr<iTSMPEGDecoder> m_decoder; // for showSinglePic when radio
 };
 
 #endif

@@ -118,6 +118,7 @@ eServiceFactoryMP3::eServiceFactoryMP3()
 		extensions.push_back("rmvb");
 		extensions.push_back("ogm");
 		extensions.push_back("ogv");
+		extensions.push_back("m3u8");
 		extensions.push_back("stream");
 		extensions.push_back("webm");
 		sc->addServiceFactory(eServiceFactoryMP3::id, this, extensions);
@@ -437,6 +438,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	m_decoder_time_valid_state = 0;
 	m_errorInfo.missing_codec = "";
 	audioSink = videoSink = NULL;
+	m_decoder = NULL;
 
 	CONNECT(m_subtitle_sync_timer->timeout, eServiceMP3::pushSubtitles);
 	CONNECT(m_pump.recv_msg, eServiceMP3::gstPoll);
@@ -519,6 +521,8 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		m_sourceinfo.containertype = ctMP4;
 		m_sourceinfo.audiotype = atAAC;
 	}
+	else if ( strcasecmp(ext, ".m3u8") == 0 )
+		m_sourceinfo.is_hls = TRUE;
 	else if ( strcasecmp(ext, ".mp3") == 0 )
 		m_sourceinfo.audiotype = atMP3;
 	else if ( strcasecmp(ext, ".wma") == 0 )
@@ -632,6 +636,8 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 			/* increase the default 2 second / 2 MB buffer limitations to 5s / 5MB */
 			g_object_set(G_OBJECT(m_gst_playbin), "buffer-duration", 5LL * GST_SECOND, NULL);
 			g_object_set(G_OBJECT(m_gst_playbin), "buffer-size", m_buffer_size, NULL);
+			if (m_sourceinfo.is_hls)
+				g_object_set(G_OBJECT(m_gst_playbin), "connection-speed", (guint64)(4495000LL), NULL);
 		}
 		g_object_set (G_OBJECT (m_gst_playbin), "flags", flags, NULL);
 		g_object_set (G_OBJECT (m_gst_playbin), "uri", uri, NULL);
@@ -711,6 +717,11 @@ eServiceMP3::~eServiceMP3()
 	}
 
 	stop();
+
+	if (m_decoder)
+	{
+		m_decoder = NULL;
+	}
 
 	if (m_stream_tags)
 		gst_tag_list_free(m_stream_tags);
@@ -1189,7 +1200,7 @@ RESULT eServiceMP3::getPlayPosition(pts_t &pts)
 #if GST_VERSION_MAJOR < 1
 	if (audioSink || videoSink)
 #else
-	if ((audioSink || videoSink) && !m_paused)
+	if ((audioSink || videoSink) && !m_paused && !m_sourceinfo.is_hls)
 #endif
 	{
 		g_signal_emit_by_name(videoSink ? videoSink : audioSink, "get-decoder-time", &pos);
@@ -1868,6 +1879,14 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 						loadCuesheet();
 					updateEpgCacheNowNext();
 
+					if (!videoSink || m_ref.getData(0) == 2) // show radio pic
+					{
+						bool showRadioBackground = eConfigManager::getConfigBoolValue("config.misc.showradiopic", true);
+						std::string radio_pic = eConfigManager::getConfigValue(showRadioBackground ? "config.misc.radiopic" : "config.misc.blackradiopic");
+						m_decoder = new eTSMPEGDecoder(NULL, 0);
+						m_decoder->showSinglePic(radio_pic.c_str());
+					}
+
 				}	break;
 				case GST_STATE_CHANGE_PAUSED_TO_PLAYING:
 				{
@@ -2265,7 +2284,7 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				 * (in which case the sink will not produce data while paused, so we won't
 				 * recover from an empty buffer)
 				 */
-				if (m_use_prefillbuffer && !m_is_live && --m_ignore_buffering_messages <= 0)
+				if (m_use_prefillbuffer && !m_is_live && !m_sourceinfo.is_hls && --m_ignore_buffering_messages <= 0)
 				{
 					if (m_bufferInfo.bufferPercent == 100)
 					{

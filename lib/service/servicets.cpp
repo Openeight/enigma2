@@ -111,15 +111,6 @@ eServiceTS::~eServiceTS()
 
 DEFINE_REF(eServiceTS);
 
-static size_t crop(char *buf)
-{
-	size_t len = strlen(buf) - 1;
-	while (len > 0 && (buf[len] == '\r' || buf[len] == '\n')) {
-		buf[len--] = '\0';
-	}
-	return len;
-}
-
 static int getline(char** pbuffer, size_t* pbufsize, int fd)
 {
 	size_t i = 0;
@@ -181,7 +172,7 @@ int eServiceTS::openHttpConnection(std::string url)
 
 	if (connect(fd, (sockaddr*)&addr, sizeof(addr)) == -1) {
 		std::string msg = "connect failed for: " + url;
-		eDebug(msg.c_str());
+		eDebug("[eServiceTS] %s", msg.c_str());
 		return -1;
 	}
 
@@ -303,7 +294,7 @@ void eServiceTS::recv_event(int evt)
 		bool wasnull = !m_audioInfo;
 		m_streamthread->getAudioInfo(m_audioInfo);
 		if (m_audioInfo)
-			eDebug("[servicets] %d audiostreams found", m_audioInfo->audioStreams.size());
+			eDebug("[servicets] %zu audiostreams found", m_audioInfo->audioStreams.size());
 		if (m_audioInfo && wasnull) {
 			int sel = getCurrentTrack();
 			if (sel < 0)

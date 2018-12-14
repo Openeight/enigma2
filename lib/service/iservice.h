@@ -161,6 +161,7 @@ public:
 		: type(type), flags(flags), path(path)
 	{
 		memset(data, 0, sizeof(data));
+		number = 0;
 	}
 	eServiceReference(const std::string &string);
 	std::string toString() const;
@@ -680,12 +681,12 @@ SWIG_TEMPLATE_TYPEDEF(ePtr<iCueSheet>, iCueSheetPtr);
 
 class PyList;
 
-class eDVBTeletextSubtitlePage;
-class eDVBSubtitlePage;
+struct eDVBTeletextSubtitlePage;
+struct eDVBSubtitlePage;
 struct ePangoSubtitlePage;
 class eRect;
-struct gRegion;
-struct gPixmap;
+class gRegion;
+class gPixmap;
 
 SWIG_IGNORE(iSubtitleUser);
 class iSubtitleUser
@@ -965,6 +966,7 @@ public:
 	virtual SWIG_VOID(RESULT) stream(ePtr<iStreamableService> &SWIG_OUTPUT)=0;
 	virtual SWIG_VOID(RESULT) streamed(ePtr<iStreamedService> &SWIG_OUTPUT)=0;
 	virtual SWIG_VOID(RESULT) keys(ePtr<iServiceKeys> &SWIG_OUTPUT)=0;
+	virtual void setQpipMode(bool value, bool audio)=0;
 };
 SWIG_TEMPLATE_TYPEDEF(ePtr<iPlayableService>, iPlayableServicePtr);
 

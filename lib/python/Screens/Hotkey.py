@@ -1,5 +1,5 @@
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.SystemInfo import SystemInfo
 from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo
@@ -11,6 +11,7 @@ from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
 from ServiceReference import ServiceReference
 from enigma import eServiceReference
+from Components.Pixmap import Pixmap
 import os
 
 def getHotkeys():
@@ -43,6 +44,7 @@ def getHotkeys():
 		("Info (EPG)", "info", "Infobar/openEventView"),
 		("Info (EPG)" + " " + _("long"), "info_long", "Infobar/showEventInfoPlugins"),
 		("List/Fav/PVR", "list", ""),
+		("List/Fav/PVR" + " " + _("long"), "list_long", "Plugins/Extensions/Kodi/1"),
 		("Back/Recall", "back", ""),
 		("Back/Recall" + " " + _("long"), "back_long", ""),
 		("End", "end", ""),
@@ -94,7 +96,9 @@ def getHotkeys():
 		("Media", "media", ""),
 		("Media" + " " + _("long"), "media_long", ""),
 		("Favorites", "favorites", "Infobar/openFavouritesList"),
-		("Favorites" + " " + _("long"), "favorites_long", "")]
+		("Favorites" + " " + _("long"), "favorites_long", ""),
+		("WWW Portal", "www", ""),
+		("WWW Portal" + " " + _("long"), "www_long", "")]
 
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
@@ -221,21 +225,19 @@ class HotkeySetup(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.setTitle(_("Hotkey Setup"))
-		self["key_red"] = Button(_("Exit"))
-		self["key_green"] = Button(_("Toggle Extra Keys"))
+		self["key_red"] = StaticText(_("Exit"))
 		self.list = []
 		self.hotkeys = getHotkeys()
 		self.hotkeyFunctions = getHotkeyFunctions()
 		for x in self.hotkeys:
 			self.list.append(ChoiceEntryComponent('',(x[0], x[1])))
-		self["list"] = ChoiceList(list=self.list[:config.misc.hotkey.additional_keys.value and len(self.hotkeys) or 10], selection = 0)
+		self["list"] = ChoiceList(list=self.list)
 		self["choosen"] = ChoiceList(list=[])
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MenuActions"],
 		{
 			"ok": self.keyOk,
 			"cancel": self.close,
 			"red": self.close,
-			"green": self.toggleAdditionalKeys,
 			"up": self.keyUp,
 			"down": self.keyDown,
 			"left": self.keyLeft,
@@ -255,7 +257,7 @@ class HotkeySetup(Screen):
 
 	def hotkeyGlobal(self, key):
 		index = 0
-		for x in self.list[:config.misc.hotkey.additional_keys.value and len(self.hotkeys) or 10]:
+		for x in self.list:
 			if key == x[0][1]:
 				self["list"].moveToIndex(index)
 				break
@@ -296,11 +298,6 @@ class HotkeySetup(Screen):
 	def keyNumberGlobal(self, number):
 		self.session.openWithCallback(self.setDefaultHotkey, MessageBox, _("Set all hotkey to default?"), MessageBox.TYPE_YESNO)
 
-	def toggleAdditionalKeys(self):
-		config.misc.hotkey.additional_keys.value = not config.misc.hotkey.additional_keys.value
-		config.misc.hotkey.additional_keys.save()
-		self["list"].setList(self.list[:config.misc.hotkey.additional_keys.value and len(self.hotkeys) or 10])
-
 	def getFunctions(self):
 		key = self["list"].l.getCurrentSelection()[0][1]
 		if key:
@@ -322,9 +319,12 @@ class HotkeySetupSelect(Screen):
 		self.session = session
 		self.key = key
 		self.setTitle(_("Hotkey Setup") + " " + key[0][0])
-		self["key_red"] = Button(_("Cancel"))
-		self["key_green"] = Button(_("Save"))
-		self["key_yellow"] = Button(_("Remove and order"))
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText("")
+		self["h_prev"] = Pixmap()
+		self["h_next"] = Pixmap()
+
 		self.mode = "list"
 		self.hotkeyFunctions = getHotkeyFunctions()
 		self.config = eval("config.misc.hotkey." + key[0][1])
@@ -340,6 +340,8 @@ class HotkeySetupSelect(Screen):
 				if function:
 					self.selected.append(ChoiceEntryComponent('',((function[0][0]), function[0][1])))
 		self.prevselected = self.selected[:]
+		if self.prevselected:
+			self["key_yellow"].setText(_("Edit selection"))
 		self["choosen"] = ChoiceList(list=self.selected, selection=0)
 		self["list"] = ChoiceList(list=self.getFunctionList(), selection=0)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -363,6 +365,9 @@ class HotkeySetupSelect(Screen):
 			"moveDown": self.moveDown,
 			"menu": boundFunction(self.close, True),
 		}, -1)
+
+		self.showPrevNext()
+
 		self.onLayoutFinish.append(self.__layoutFinished)
 
 	def __layoutFinished(self):
@@ -392,12 +397,29 @@ class HotkeySetupSelect(Screen):
 			self.mode = "choosen"
 			self["choosen"].selectionEnabled(1)
 			self["list"].selectionEnabled(0)
-			self["key_yellow"].setText(_("Select Function"))
+			self["key_yellow"].setText(_("Select function"))
+			if len(self.selected) > 1:
+				self.showPrevNext(True)
 		elif self.mode == "choosen":
 			self.mode = "list"
 			self["choosen"].selectionEnabled(0)
 			self["list"].selectionEnabled(1)
-			self["key_yellow"].setText(_("Remove and order"))
+			self.toggleText()
+
+	def toggleText(self):
+		if self.selected:
+			self["key_yellow"].setText(_("Edit selection"))
+		else:
+			self["key_yellow"].setText("")
+		self.showPrevNext()
+
+	def showPrevNext(self, show=False):
+		if show:
+			self["h_prev"].show()
+			self["h_next"].show()
+		else:
+			self["h_prev"].hide()
+			self["h_next"].hide()
 
 	def keyOk(self):
 		if self.mode == "list":
@@ -420,10 +442,14 @@ class HotkeySetupSelect(Screen):
 						self.session.openWithCallback(self.zaptoCallback, SimpleChannelSelection, _("Hotkey zap") + " " + self.key[0][0], currentBouquet=True)
 					else:
 						self.selected.append(currentSelected[:2])
+			self.toggleText()
 		elif self.selected:
 			self.selected.remove(self["choosen"].l.getCurrentSelection())
 			if not self.selected:
 				self.toggleMode()
+				self.toggleText()
+		if len(self.selected) < 2:
+			self.showPrevNext()
 		self["choosen"].setList(self.selected)
 
 	def zaptoCallback(self, *args):
@@ -612,9 +638,13 @@ class InfoBarHotkey():
 					self.session.open(PPanel, name=selected[1] + ' PPanel', node=None, filename=ppanelFileName, deletenode=None)
 			elif selected[0] == "Shellscript":
 				command = '/usr/script/' + selected[1] + ".sh"
-				if os.path.isfile(command) and os.path.isdir('/usr/lib/enigma2/python/Plugins/Extensions/PPanel'):
-					from Plugins.Extensions.PPanel.ppanel import Execute
-					self.session.open(Execute, selected[1] + " shellscript", None, command)
+				if os.path.isfile(command):
+					if ".hidden." in command:
+						from enigma import eConsoleAppContainer
+						eConsoleAppContainer().execute(command)
+					else:
+						from Screens.Console import Console
+						self.session.open(Console, selected[1] + " shellscript", command, closeOnSuccess=selected[1].startswith('!'), showStartStopText=False)
 			elif selected[0] == "Menu":
 				from Screens.Menu import MainMenu, mdom
 				root = mdom.getroot()

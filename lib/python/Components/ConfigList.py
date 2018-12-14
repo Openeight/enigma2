@@ -1,4 +1,3 @@
-from HTMLComponent import HTMLComponent
 from GUIComponent import GUIComponent
 from config import KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_0, KEY_DELETE, KEY_BACKSPACE, KEY_OK, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT, KEY_NUMBERS, ConfigElement, ConfigText, ConfigPassword
 from Components.ActionMap import NumberActionMap, ActionMap
@@ -7,7 +6,7 @@ from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 import skin
 
-class ConfigList(HTMLComponent, GUIComponent, object):
+class ConfigList(GUIComponent, object):
 	def __init__(self, list, session = None):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonConfigContent()
@@ -167,6 +166,8 @@ class ConfigListScreen:
 		if not self.handleInputHelpers in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.handleInputHelpers)
 
+		self.onClose.append(self.HideHelp)
+
 	def createSummary(self):
 		self.setup_title = self.getTitle()
 		from Screens.Setup import SetupSummary
@@ -211,13 +212,31 @@ class ConfigListScreen:
 				self["VKeyIcon"].boolean = False
 
 	def KeyText(self):
+		self.HideHelp()
 		from Screens.VirtualKeyBoard import VirtualKeyBoard
 		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
+
+	def HideHelp(self):
+		try:
+			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+				if self["config"].getCurrent()[1].help_window.instance is not None:
+					self["config"].getCurrent()[1].help_window.hide()
+		except:
+			pass
+
+	def ShowHelp(self):
+		try:
+			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+				if self["config"].getCurrent()[1].help_window.instance is not None:
+					self["config"].getCurrent()[1].help_window.show()
+		except:
+			pass
 
 	def VirtualKeyBoardCallback(self, callback = None):
 		if callback is not None and len(callback):
 			self["config"].getCurrent()[1].setValue(callback)
 			self["config"].invalidate(self["config"].getCurrent())
+		self.ShowHelp()
 
 	def keyOK(self):
 		self["config"].handleKey(KEY_OK)
@@ -290,6 +309,7 @@ class ConfigListScreen:
 
 	def cancelConfirm(self, result):
 		if not result:
+			self.ShowHelp()
 			return
 
 		for x in self["config"].list:
@@ -298,6 +318,7 @@ class ConfigListScreen:
 
 	def closeMenuList(self, recursive = False):
 		if self["config"].isChanged():
+			self.HideHelp()
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
 		else:
 			self.close(recursive)

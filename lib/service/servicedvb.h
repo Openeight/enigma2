@@ -33,7 +33,7 @@ private:
 	RESULT lookupService(ePtr<eDVBService> &ptr, const eServiceReference &ref);
 };
 
-class eBouquet;
+struct eBouquet;
 
 class eDVBServiceList: public iListableService, public iMutableServiceList
 {
@@ -195,6 +195,7 @@ public:
 		// iStreamableService
 	RESULT stream(ePtr<iStreamableService> &ptr);
 	ePtr<iStreamData> getStreamingData();
+	void setQpipMode(bool value, bool audio);
 
 protected:
 	friend class eServiceFactoryDVB;

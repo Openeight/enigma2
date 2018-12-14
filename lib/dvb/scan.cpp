@@ -3,6 +3,7 @@
 #include <dvbsi++/descriptor_tag.h>
 #include <dvbsi++/service_descriptor.h>
 #include <dvbsi++/satellite_delivery_system_descriptor.h>
+#include <dvbsi++/s2_satellite_delivery_system_descriptor.h>
 #include <dvbsi++/terrestrial_delivery_system_descriptor.h>
 #include <dvbsi++/t2_delivery_system_descriptor.h>
 #include <dvbsi++/cable_delivery_system_descriptor.h>
@@ -10,6 +11,7 @@
 #include <dvbsi++/registration_descriptor.h>
 #include <dvbsi++/extension_descriptor.h>
 #include <dvbsi++/frequency_list_descriptor.h>
+#include <lib/base/nconfig.h> // access to python config
 #include <lib/dvb/specs.h>
 #include <lib/dvb/esection.h>
 #include <lib/dvb/scan.h>
@@ -22,6 +24,7 @@
 #include <lib/dvb/dvb.h>
 #include <lib/dvb/db.h>
 #include <errno.h>
+#include "absdiff.h"
 
 #define SCAN_eDebug(x...) do { if (m_scan_debug) eDebug(x); } while(0)
 #define SCAN_eDebugNoNewLineStart(x...) do { if (m_scan_debug) eDebugNoNewLineStart(x); } while(0)
@@ -51,12 +54,6 @@ eDVBScan::~eDVBScan()
 
 int eDVBScan::isValidONIDTSID(int orbital_position, eOriginalNetworkID onid, eTransportStreamID tsid)
 {
-	/*
-	 * Assume cable and terrestrial ONIDs/TSIDs are always valid,
-	 * don't check them against the satellite blacklist.
-	 */
-	if (orbital_position == 0xFFFF || orbital_position == 0xEEEE) return 1;
-
 	int ret;
 	switch (onid.get())
 	{
@@ -77,14 +74,14 @@ int eDVBScan::isValidONIDTSID(int orbital_position, eOriginalNetworkID onid, eTr
 		ret = tsid != 0x4321;
 		break;
 	case 0x0002:
-		ret = abs(orbital_position-282) < 6 && tsid != 2019;
+		ret = absdiff(orbital_position, 282) < 6 && tsid != 2019;
 		// 12070H and 10936V have same tsid/onid.. but even the same services are provided
 		break;
 	case 0x2000:
 		ret = tsid != 0x1000;
 		break;
 	case 0x5E: // Sirius 4.8E 12322V and 12226H
-		ret = abs(orbital_position-48) < 3 && tsid != 1;
+		ret = absdiff(orbital_position, 48) < 3 && tsid != 1;
 		break;
 	case 0x0070: // Eutelsat W7 36.0E 12174L and 12284R have same ONID/TSID (0x0070/0x0008)
 		ret = orbital_position != 360 || tsid != 0x0008;
@@ -103,7 +100,7 @@ int eDVBScan::isValidONIDTSID(int orbital_position, eOriginalNetworkID onid, eTr
 		ret = (orbital_position != 685 && orbital_position != 3560) || tsid != 1;
 		break;
 	case 70: // Thor 0.8W 11862H 12341V
-		ret = abs(orbital_position-3592) < 3 && tsid != 46;
+		ret = absdiff(orbital_position, 3592) < 3 && tsid != 46;
 		break;
 	case 32: // NSS 806 (40.5W) 4059R, 3774L
 		ret = orbital_position != 3195 || tsid != 21;
@@ -123,8 +120,19 @@ int eDVBScan::isValidONIDTSID(int orbital_position, eOriginalNetworkID onid, eTr
 
 eDVBNamespace eDVBScan::buildNamespace(eOriginalNetworkID onid, eTransportStreamID tsid, unsigned long hash)
 {
-		// on valid ONIDs, ignore frequency ("sub network") part
-	if (isValidONIDTSID((hash >> 16) & 0xFFFF, onid, tsid))
+	int orb_pos = (hash >> 16) & 0xFFFF;
+	if (orb_pos == 0xFFFF) // cable
+	{
+		if (eConfigManager::getConfigBoolValue("config.usage.subnetwork_cable", true))
+			hash &= ~0xFFFF;
+	}
+	else if (orb_pos == 0xEEEE) // terrestrial
+	{
+		if (eConfigManager::getConfigBoolValue("config.usage.subnetwork_terrestrial", true))
+			hash &= ~0xFFFF;
+	}
+	else if (eConfigManager::getConfigBoolValue("config.usage.subnetwork", true)
+		&& isValidONIDTSID(orb_pos, onid, tsid)) // on valid ONIDs, ignore frequency ("sub network") part
 		hash &= ~0xFFFF;
 	return eDVBNamespace(hash);
 }
@@ -307,8 +315,8 @@ RESULT eDVBScan::startFilter()
 				{
 					eDVBFrontendParametersCable parm;
 					m_ch_current->getDVBC(parm);
-					if ((tsid == 0x00d7 && abs(parm.frequency-618000) < 2000) ||
-						(tsid == 0x00d8 && abs(parm.frequency-626000) < 2000))
+					if ((tsid == 0x00d7 && absdiff(parm.frequency, 618000) < 2000) ||
+						(tsid == 0x00d8 && absdiff(parm.frequency, 626000) < 2000))
 						tsid = -1;
 				}
 			}
@@ -756,6 +764,26 @@ void eDVBScan::channelDone()
 						addChannelToScan(feparm);
 						break;
 					}
+					case S2_SATELLITE_DELIVERY_SYSTEM_DESCRIPTOR:
+					{
+						eDebug("[eDVBScan] S2_SATELLITE_DELIVERY_SYSTEM_DESCRIPTOR found");
+						if (system != iDVBFrontend::feSatellite)
+							break; // when current locked transponder is no satellite transponder ignore this descriptor
+						S2SatelliteDeliverySystemDescriptor &d = (S2SatelliteDeliverySystemDescriptor&)**desc;
+						ePtr<eDVBFrontendParameters> feparm = new eDVBFrontendParameters;
+						eDVBFrontendParametersSatellite sat;
+						sat.set(d);
+
+						eDVBFrontendParametersSatellite p;
+						m_ch_current->getDVBS(p);
+
+						if (p.is_id != sat.is_id || p.pls_mode != sat.pls_code || p.pls_code != sat.pls_code)
+						{
+							p.set(d); //set multistream descriptor to current tuned data
+							feparm->setDVBS(p);
+							addChannelToScan(feparm);
+						}
+					}
 					case SATELLITE_DELIVERY_SYSTEM_DESCRIPTOR:
 					{
 						if (system != iDVBFrontend::feSatellite)
@@ -772,10 +800,10 @@ void eDVBScan::channelDone()
 						eDVBFrontendParametersSatellite p;
 						m_ch_current->getDVBS(p);
 
-						if ( abs(p.orbital_position - sat.orbital_position) < 5 )
+						if ( absdiff(p.orbital_position, sat.orbital_position) < 5 )
 							sat.orbital_position = p.orbital_position;
 
-						if ( abs(abs(3600 - p.orbital_position) - sat.orbital_position) < 5 )
+						if ( absdiff(absdiff(3600, p.orbital_position), sat.orbital_position) < 5 )
 						{
 							SCAN_eDebug("[eDVBScan] found transponder with incorrect west/east flag ... correct this");
 							sat.orbital_position = p.orbital_position;
@@ -950,10 +978,10 @@ void eDVBScan::channelDone()
 					snprintf(pname, 255, "%s %s %d%c %d.%d°%c",
 						parm.system ? "DVB-S2" : "DVB-S",
 						parm.modulation == eDVBFrontendParametersSatellite::Modulation_Auto ? "AUTO" :
-							eDVBFrontendParametersSatellite::Modulation_QPSK ? "QPSK" :
-							eDVBFrontendParametersSatellite::Modulation_8PSK ? "8PSK" :
-							eDVBFrontendParametersSatellite::Modulation_QAM16 ? "QAM16" :
-							eDVBFrontendParametersSatellite::Modulation_16APSK ? "16APSK" : "32APSK",
+						parm.modulation == eDVBFrontendParametersSatellite::Modulation_QPSK ? "QPSK" :
+						parm.modulation == eDVBFrontendParametersSatellite::Modulation_8PSK ? "8PSK" :
+						parm.modulation == eDVBFrontendParametersSatellite::Modulation_QAM16 ? "QAM16" :
+						parm.modulation == eDVBFrontendParametersSatellite::Modulation_16APSK ? "16APSK" : "32APSK",
 						parm.frequency/1000,
 						parm.polarisation ? 'V' : 'H',
 						parm.orbital_position/10,

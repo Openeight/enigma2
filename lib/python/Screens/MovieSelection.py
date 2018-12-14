@@ -14,6 +14,7 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
 import Components.Harddisk
 from Components.UsageConfig import preferredTimerPath
+from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 from Plugins.Plugin import PluginDescriptor
 
@@ -273,7 +274,7 @@ class MovieBrowserConfiguration(ConfigListScreen,Screen):
 			getConfigListEntry(_("Show image items (.jpg, .gif, .bmp, .png)"), config.movielist.hide_images),
 			getConfigListEntry(_("Type"), cfg.listtype),
 			getConfigListEntry(_("Use individual settings for each directory"), config.movielist.settings_per_directory),
-			getConfigListEntry(_("Allow quit movieplayer with exit"), config.usage.leave_movieplayer_onExit),
+			getConfigListEntry(_("Allow quitting movieplayer with exit"), config.usage.leave_movieplayer_onExit),
 			getConfigListEntry(_("Behavior when a movie reaches the end"), config.usage.on_movie_eof),
 			getConfigListEntry(_("Stop service on return to movie list"), config.movielist.stop_service),
 			getConfigListEntry(_("Load length of movies in movie list"), config.usage.load_length_of_movies_in_moviellist),
@@ -422,6 +423,8 @@ class MovieContextMenu(Screen, ProtectedScreen):
 		append_to_menu(menu, (_("create directory"), csel.do_createdir), key="7")
 		append_to_menu(menu, (_("Sort by") + "...", csel.selectSortby))
 		append_to_menu(menu, (_("Network") + "...", csel.showNetworkSetup), key="yellow")
+		if csel.installedMovieManagerPlugin():
+			append_to_menu(menu, (_("Movie manager") + "...", csel.do_moviemanager))
 		append_to_menu(menu, (_("Settings") + "...", csel.configure), key="menu")
 
 		self["menu"] = ChoiceList(menu)
@@ -654,6 +657,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self["SeekActions"] = HelpableActionMap(self, "InfobarSeekActions",
 			{
 				"playpauseService": (self.preview, _("Preview")),
+				"unPauseService": (self.preview, _("Preview")),
 				"seekFwd": (sfwd, tFwd),
 				"seekFwdManual": (ssfwd, tFwd),
 				"seekBack": (sback, tBack),
@@ -729,6 +733,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				'movieoff': _("On end of movie"),
 				'movieoff_menu': _("On end of movie (as menu)")
 			}
+			if self.installedMovieManagerPlugin():
+				userDefinedActions['moviemanager'] = _("Movie manager")
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_MOVIELIST):
 				userDefinedActions['@' + p.name] = p.description
 			locations = []
@@ -1597,7 +1603,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		return True
 
 	def do_createdir(self):
-		from Screens.VirtualKeyBoard import VirtualKeyBoard
 		self.session.openWithCallback(self.createDirCallback, VirtualKeyBoard,
 			title = _("Please enter name of the new directory"),
 			text = "")
@@ -1645,7 +1650,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			if full_name == name: # split extensions for files without metafile
 				name, self.extension = os.path.splitext(name)
 
-		from Screens.VirtualKeyBoard import VirtualKeyBoard
 		self.session.openWithCallback(self.renameCallback, VirtualKeyBoard,
 			title = _("Rename"),
 			text = name)
@@ -2017,6 +2021,18 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		import NetworkSetup
 		self.session.open(NetworkSetup.NetworkAdapterSelection)
 
+	def can_moviemanager(self, item):
+		return True
+	def do_moviemanager(self):
+		from Plugins.Extensions.MovieManager.ui import MovieManager
+		self.session.open(MovieManager, self["list"])
+	def installedMovieManagerPlugin(self):
+		try:
+			from Plugins.Extensions.MovieManager.ui import MovieManager
+			return True
+		except Exception as e:
+			return False
+
 	def showActionFeedback(self, text):
 		if self.feedbackTimer is None:
 			self.feedbackTimer = eTimer()
@@ -2118,12 +2134,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		for index, item in enumerate(self["list"]):
 			if item:
 				item = item[0]
-				path = item.getPath()
 				if not item.flags & eServiceReference.mustDescent:
-					ext = os.path.splitext(path)[1].lower()
-					if ext in IMAGE_EXTENSIONS:
-						continue
-					else:
+					ext = os.path.splitext(item.getPath())[1].lower()
+					if ext not in IMAGE_EXTENSIONS:
 						items.append(item)
 
 playlist = []
+

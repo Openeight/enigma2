@@ -182,15 +182,6 @@ eServiceWebTS::~eServiceWebTS()
 
 DEFINE_REF(eServiceWebTS);
 
-static size_t crop(char *buf)
-{
-	size_t len = strlen(buf) - 1;
-	while (len > 0 && (buf[len] == '\r' || buf[len] == '\n')) {
-		buf[len--] = '\0';
-	}
-	return len;
-}
-
 static int getline(char** pbuffer, size_t* pbufsize, int fd)
 {
 	size_t i = 0;
@@ -254,7 +245,7 @@ int eServiceWebTS::openHttpConnection(std::string url)
 
 	if (connect(fd, (sockaddr*)&addr, sizeof(addr)) == -1) {
 		std::string msg = "connect failed for: " + url;
-		eDebug(msg.c_str());
+		eDebug("[eServiceWebTS] %s", msg.c_str());
 		return -1;
 	}
 
@@ -395,7 +386,7 @@ void eServiceWebTS::recv_event(int evt)
 		//if (m_audioInfo)
 		//	eDebug("[ServiceWebTS] %d audiostreams found", m_audioInfo->audioStreams.size());
 		if (m_audioInfo && wasnull) {
-			eDebug("[ServiceWebTS] %d audiostreams found", m_audioInfo->audioStreams.size());
+			eDebug("[ServiceWebTS] %zu audiostreams found", m_audioInfo->audioStreams.size());
 			int sel = getCurrentTrack();
 			if (sel < 0)
 				selectTrack(0);

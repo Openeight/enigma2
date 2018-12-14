@@ -99,6 +99,8 @@ class About(Screen):
 
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n" + "\n"
 
+		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
+
 		fp_version = getFPVersion()
 		if fp_version is None:
 			fp_version = ""
@@ -444,7 +446,7 @@ class MemoryInfo(Screen):
 		open("/proc/sys/vm/drop_caches", "w").write("3")
 		self.getMemoryInfo()
 
-class MemoryInfoSkinParams(HTMLComponent, GUIComponent):
+class MemoryInfoSkinParams(GUIComponent):
 	def __init__(self):
 		GUIComponent.__init__(self)
 		self.rows_in_column = 25
@@ -523,7 +525,7 @@ class Troubleshoot(Screen):
 
 	def appClosed(self, retval):
 		if retval:
-			self["AboutScrollLabel"].setText(_("Some error occured - Please try later"))
+			self["AboutScrollLabel"].setText(_("An error occurred - Please try again later"))
 
 	def dataAvail(self, data):
 		self["AboutScrollLabel"].appendText(data)
@@ -542,7 +544,7 @@ class Troubleshoot(Screen):
 				if self.container.execute(command):
 					raise Exception, "failed to execute: ", command
 			except Exception, e:
-				self["AboutScrollLabel"].setText("%s\n%s" % (_("Some error occured - Please try later"), e))
+				self["AboutScrollLabel"].setText("%s\n%s" % (_("An error occurred - Please try again later"), e))
 
 	def cancel(self):
 		self.container.appClosed.remove(self.appClosed)

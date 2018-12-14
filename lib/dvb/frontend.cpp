@@ -86,6 +86,22 @@ void eDVBDiseqcCommand::setCommandString(const char *str)
 	len = slen/2;
 }
 
+void eDVBFrontendParametersSatellite::set(const S2SatelliteDeliverySystemDescriptor &descriptor)
+{
+	if(descriptor.getScramblingSequenceSelector()) // EN 300 468 table 41
+	{
+		is_id = descriptor.getInputStreamIdentifier();
+		pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
+		pls_code = descriptor.getScramblingSequenceIndex();
+	}
+	else // default DVB-S2 physical layer scrambling sequence of index n = 0 is used
+	{
+		is_id = NO_STREAM_ID_FILTER;
+		pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
+		pls_code = 0;
+	}
+}
+
 void eDVBFrontendParametersSatellite::set(const SatelliteDeliverySystemDescriptor &descriptor)
 {
 	frequency    = descriptor.getFrequency() * 10;
@@ -111,8 +127,8 @@ void eDVBFrontendParametersSatellite::set(const SatelliteDeliverySystemDescripto
 	}
 	rolloff = descriptor.getRollOff();
 	is_id = NO_STREAM_ID_FILTER;
-	pls_mode = eDVBFrontendParametersSatellite::PLS_Root;
-	pls_code = 1;
+	pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
+	pls_code = 0;
 	if (system == System_DVB_S2)
 	{
 		eDebug("[eDVBFrontendParametersSatellite] SAT DVB-S2 freq %d, %s, pos %d, sr %d, fec %d, modulation %d, rolloff %d, is_id %d, pls_mode %d, pls_code %d",
@@ -339,7 +355,7 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 	{
 		case iDVBFrontend::feSatellite:
 		{
-			eDVBFrontendParametersSatellite osat;
+			eDVBFrontendParametersSatellite osat = {0};
 			if (parm->getDVBS(osat))
 				return -2;
 
@@ -366,7 +382,7 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 		}
 		case iDVBFrontend::feCable:
 		{
-			eDVBFrontendParametersCable ocable;
+			eDVBFrontendParametersCable ocable = {0};
 			if (parm->getDVBC(ocable))
 				return -2;
 
@@ -385,7 +401,7 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 		}
 		case iDVBFrontend::feTerrestrial:
 		{
-			eDVBFrontendParametersTerrestrial oterrestrial;
+			eDVBFrontendParametersTerrestrial oterrestrial = {0};
 			if (parm->getDVBT(oterrestrial))
 				return -2;
 
@@ -426,7 +442,7 @@ RESULT eDVBFrontendParameters::calculateDifference(const iDVBFrontendParameters 
 		}
 		case iDVBFrontend::feATSC:
 		{
-			eDVBFrontendParametersATSC oatsc;
+			eDVBFrontendParametersATSC oatsc = {0};
 			if (parm->getATSC(oatsc))
 				return -2;
 
@@ -861,7 +877,7 @@ static inline uint32_t fe_udiv(uint32_t a, uint32_t b)
 	return (a + b / 2) / b;
 }
 
-void eDVBFrontend::calculateSignalPercentage(int signalqualitydb, int &signalquality)
+int eDVBFrontend::calculateSignalPercentage(int signalqualitydb)
 {
 	int maxdb; // assume 100% as 2/3 of maximum dB
 	int type = -1;
@@ -892,8 +908,10 @@ void eDVBFrontend::calculateSignalPercentage(int signalqualitydb, int &signalqua
 			}
 			break;
 		}
+		default:
+			return 0;
 	}
-	signalquality = (signalqualitydb >= maxdb ? 65535 : signalqualitydb * 65535 / maxdb);
+	return signalqualitydb >= maxdb ? 65535 : (signalqualitydb * 65535 / maxdb);
 }
 
 void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &signalqualitydb)
@@ -922,7 +940,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "BCM4501 (internal)"))
 	{
-		eDVBFrontendParametersSatellite parm;
+		eDVBFrontendParametersSatellite parm = {0};
 		float SDS_SNRE = snr << 16;
 		float snr_in_db;
 		oparm.getDVBS(parm);
@@ -1035,7 +1053,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "Philips CU1216Mk3"))
 	{
-		eDVBFrontendParametersCable parm;
+		eDVBFrontendParametersCable parm = {0};
 		int mse = (~snr) & 0xFF;
 		oparm.getDVBC(parm);
 		switch (parm.modulation)
@@ -1058,26 +1076,23 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (snr * 240) >> 8;
 	}
-	else if (strstr(m_description, "BCM4506") || strstr(m_description, "BCM4505"))
+	else if (strstr(m_description, "BCM4506") || strstr(m_description, "BCM4505") || strstr(m_description, "BCM45208") || strstr(m_description, "BCM45308"))
 	{
 		ret = (snr * 100) >> 8;
+	}
+	else if (!strcmp(m_description, "ATBM781x"))
+	{
+		ret = snr*10;
 	}
 	else if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL2108)")) // VU+Ultimo/VU+Uno DVB-S2 NIM
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1600) + 0.2100) * 100);
 	}
-	else if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL6222)")) // VU+ DVB-S2 Dual NIM
+	else if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL6222)") || !strcmp(m_description, "Vuplus DVB-S NIM(AVL6211)") || !strcmp(m_description, "BCM7335 DVB-S2 NIM (internal)")) // VU+ DVB-S2 Dual NIM and VU+DUO DVB-S2 NIM
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1244) + 2.5079) * 100);
-		sat_max = 1490;
-	}
-	else if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL6211)")) // VU+ DVB-S2 Dual NIM
-	{
-		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1244) + 2.5079) * 100);
-	}
-	else if (!strcmp(m_description, "BCM7335 DVB-S2 NIM (internal)")) // VU+DUO DVB-S2 NIM
-	{
-		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1244) + 2.5079) * 100);
+		if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL6222)"))
+			sat_max = 1490;
 	}
 	else if (!strcmp(m_description, "BCM7346 (internal)")) // MaxDigital XP1000
 	{
@@ -1095,13 +1110,17 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.28) - 10.0) * 100);
 	}
+	else if (!strcmp(m_description, "DVB-S2 NIM(45208 FBC)"))
+	{
+		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1950) - 1.0000) * 100);
+	}
 	else if (!strcmp(m_description, "Genpix"))
 	{
 		ret = (int)((snr << 1) / 5);
 	}
 	else if (!strcmp(m_description, "CXD1981"))
 	{
-		eDVBFrontendParametersCable parm;
+		eDVBFrontendParametersCable parm = {0};
 		int mse = (~snr) & 0xFF;
 		oparm.getDVBC(parm);
 		switch (parm.modulation)
@@ -1125,7 +1144,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "Si216x"))
 	{
-		eDVBFrontendParametersTerrestrial parm;
+		eDVBFrontendParametersTerrestrial parm = {0};
 
 		oparm.getDVBT(parm);
 
@@ -1152,9 +1171,14 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = (snr * 2000) / 0xFFFF;
 		sat_max = 2000;
 	}
-	else if(!strcmp(m_description, "WinTV HVR-850") || !strcmp(m_description, "Hauppauge"))
+	else if (!strcmp(m_description, "Si21662"))
 	{
-		eDVBFrontendParametersATSC parm;
+		ret = (int)(snr / 46.8);
+		sat_max = 1620;
+	}
+	else if(!strcmp(m_description, "WinTV HVR-850") || !strcmp(m_description, "Hauppauge") || !strcmp(m_description, "LG Electronics LGDT3306A VSB/QAM Frontend"))
+	{
+		eDVBFrontendParametersATSC parm = {0};
 		oparm.getATSC(parm);
 		switch (parm.modulation)
 		{
@@ -1186,7 +1210,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = snr;
 	}
-	
+
 	signalqualitydb = ret;
 	if (ret == 0x12345678) // no snr db calculation avail.. return untouched snr value..
 	{
@@ -1216,6 +1240,9 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 
 int eDVBFrontend::readFrontendData(int type)
 {
+	char force_legacy_signal_stats[64];
+	sprintf(force_legacy_signal_stats, "config.Nims.%d.force_legacy_signal_stats", m_slotid);
+
 	switch(type)
 	{
 		case iFrontendInformation_ENUMS::bitErrorRate:
@@ -1249,7 +1276,7 @@ int eDVBFrontend::readFrontendData(int type)
 				int signalquality = 0;
 				int signalqualitydb = 0;
 #if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 10
-				if (m_dvbversion >= DVB_VERSION(5, 10) && !strstr(m_description, "FTM-4862 (Availink AVL6862)") && !strstr(m_description, "Sundtek"))
+				if (m_dvbversion >= DVB_VERSION(5, 10) && !eConfigManager::getConfigBoolValue(force_legacy_signal_stats, false))
 				{
 					dtv_property prop[1];
 					prop[0].cmd = DTV_STAT_CNR;
@@ -1283,7 +1310,7 @@ int eDVBFrontend::readFrontendData(int type)
 							if(!signalquality)
 							{
 								/* provide an estimated percentage when drivers lack this info */
-								calculateSignalPercentage(signalqualitydb, signalquality);
+								signalquality = calculateSignalPercentage(signalqualitydb);
 							}
 							return signalquality;
 						}
@@ -1311,7 +1338,7 @@ int eDVBFrontend::readFrontendData(int type)
 				if (!m_simulate)
 				{
 #if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 10
-					if (m_dvbversion >= DVB_VERSION(5, 10))
+					if (m_dvbversion >= DVB_VERSION(5, 10) && !eConfigManager::getConfigBoolValue(force_legacy_signal_stats, false))
 					{
 						dtv_property prop[1];
 						prop[0].cmd = DTV_STAT_SIGNAL_STRENGTH;
@@ -1931,7 +1958,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		p[cmdseq.num].cmd = DTV_CLEAR, cmdseq.num++;
 		if (type == iDVBFrontend::feSatellite)
 		{
-			eDVBFrontendParametersSatellite parm;
+			eDVBFrontendParametersSatellite parm = {0};
 			fe_rolloff_t rolloff = ROLLOFF_35;
 			fe_pilot_t pilot = PILOT_OFF;
 			fe_modulation_t modulation = QPSK;
@@ -2010,7 +2037,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		}
 		else if (type == iDVBFrontend::feCable)
 		{
-			eDVBFrontendParametersCable parm;
+			eDVBFrontendParametersCable parm = {0};
 			oparm.getDVBC(parm);
 
 			p[cmdseq.num].cmd = DTV_DELIVERY_SYSTEM;
@@ -2080,7 +2107,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		}
 		else if (type == iDVBFrontend::feTerrestrial)
 		{
-			eDVBFrontendParametersTerrestrial parm;
+			eDVBFrontendParametersTerrestrial parm = {0};
 			fe_delivery_system_t system = SYS_DVBT;
 			oparm.getDVBT(parm);
 			switch (parm.system)
@@ -2205,7 +2232,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		}
 		else if (type == iDVBFrontend::feATSC)
 		{
-			eDVBFrontendParametersATSC parm;
+			eDVBFrontendParametersATSC parm = {0};
 			oparm.getATSC(parm);
 			p[cmdseq.num].cmd = DTV_DELIVERY_SYSTEM;
 			switch (parm.system)
@@ -2635,8 +2662,8 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
 		{
 			return 0;
 		}
-		bool multistream = (parm.is_id != NO_STREAM_ID_FILTER || (parm.pls_code & 0x3FFFF) != 1 ||
-					(parm.pls_mode & 3) != eDVBFrontendParametersSatellite::PLS_Root);
+		bool multistream = (static_cast<unsigned int>(parm.is_id) != NO_STREAM_ID_FILTER || (parm.pls_code & 0x3FFFF) != 0 ||
+					(parm.pls_mode & 3) != eDVBFrontendParametersSatellite::PLS_Gold);
 		eDebug("[eDVBFrontend] isCompatibleWith system %d is_id %d pls_code %d pls_mode %d is_multistream %d",
 			parm.system, parm.is_id, parm.pls_code, parm.pls_mode, is_multistream());
 		if (parm.system == eDVBFrontendParametersSatellite::System_DVB_S2 && multistream && !is_multistream())
