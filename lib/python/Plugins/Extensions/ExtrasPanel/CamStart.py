@@ -6,28 +6,28 @@ import datetime
 config.softcam.actCam = ConfigText(visible_width = 200)
 config.softcam.restartRunning = ConfigYesNo(default=True)
 config.softcam.restartAttempts =  ConfigSelection(
-                    [
-                    ("0", _("0 (disabled)")),
-                    ("1", _("1")),
-                    ("3", _("3")),
-                    ("5", _("5 (default)")),
-                    ("10", _("10")),
-                    ], "5")
+					[
+					("0", _("0 (disabled)")),
+					("1", _("1")),
+					("3", _("3")),
+					("5", _("5 (default)")),
+					("10", _("10")),
+					], "5")
 config.softcam.restartTime = ConfigSelection(
-                    [
-                    ("5", _("5")),
-                    ("10", _("10 (default)")),
-                    ("20", _("20")),
-                    ("30", _("30")),
-                    ("60", _("60")),
-                    ("120", _("120")),
-                    ("240", _("240")),
-                    ], "10")
+					[
+					("5", _("5")),
+					("10", _("10 (default)")),
+					("20", _("20")),
+					("30", _("30")),
+					("60", _("60")),
+					("120", _("120")),
+					("240", _("240")),
+					], "10")
 config.softcam.camstartMode =  ConfigSelection(
-                    [
-                    ("0", _("Python Camstarter (default)")),
-                    ("1", _("Init.d")),
-                    ], "0")
+					[
+					("0", _("Python Camstarter (default)")),
+					("1", _("Init.d")),
+					], "0")
 
 def command(comandline, strip=1):
 	comandline = comandline + " >/tmp/command.txt"
