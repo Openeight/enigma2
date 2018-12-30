@@ -32,7 +32,7 @@ def getHotkeys():
 		("Rec", "rec", ""),
 		("Radio", "radio", ""),
 		("Radio" + " " + _("long"), "radio_long", ""),
-		("TV", "showTv", ""),
+		("TV", "showTv", "Infobar/toggleTvRadio"),
 		("TV" + " " + _("long"), "showTv_long", SystemInfo["LcdLiveTV"] and "Infobar/ToggleLCDLiveTV" or ""),
 		("TV2", "toggleTvRadio", ""),
 		("TV2" + " " + _("long"), "toggleTvRadio_long", SystemInfo["LcdLiveTV"] and "Infobar/ToggleLCDLiveTV" or ""),
