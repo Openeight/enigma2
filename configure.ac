@@ -140,6 +140,7 @@ fi
 
 if test "$BOXTYPE" == "sf8008"; then
 	AC_DEFINE(HAVE_HISILICON, 1,[define add HISILICON chip])
+	AC_DEFINE(CONFIG_HISILICON_FB, 1,[define add HISILICON framebuffer blit])
 fi
 
 AC_ARG_WITH(libxine,

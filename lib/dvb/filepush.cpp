@@ -102,7 +102,12 @@ void eFilePushThread::thread()
 				break;
 			}
 			if (errno == EINTR || errno == EBUSY || errno == EAGAIN)
+			{
+#if HAVE_HISILICON
+				usleep(100000);
+#endif
 				continue;
+			}
 			if (errno == EOVERFLOW)
 			{
 				eWarning("[eFilePushThread] OVERFLOW while playback?");
@@ -182,7 +187,12 @@ void eFilePushThread::thread()
 						break;
 					}
 					if (w < 0 && (errno == EINTR || errno == EAGAIN || errno == EBUSY))
+					{
+#if HAVE_HISILICON
+						usleep(100000);
+#endif
 						continue;
+					}
 					eDebug("[eFilePushThread] write: %m");
 					sendEvent(evtWriteError);
 					break;
