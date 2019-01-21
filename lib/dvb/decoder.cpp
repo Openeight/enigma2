@@ -1210,7 +1210,6 @@ RESULT eTSMPEGDecoder::showSinglePic(const char *filename)
 			if (m_video_clip_fd >= 0)
 			{
 #if HAVE_HISILICON
-			if (m_video_clip_fd >= 0)
 				finishShowSinglePic();
 #endif
 				bool seq_end_avail = false;
@@ -1252,7 +1251,7 @@ RESULT eTSMPEGDecoder::showSinglePic(const char *filename)
 				if (!seq_end_avail)
 					write(m_video_clip_fd, seq_end, sizeof(seq_end));
 				writeAll(m_video_clip_fd, stuffing, 8192);
-#if HAVE_HISILICON
+#if !HAVE_HISILICON
 				m_showSinglePicTimer->start(150, true);
 #endif
 			}
