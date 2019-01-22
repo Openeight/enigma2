@@ -77,6 +77,13 @@ def checkForRecordings():
 	rec_time = NavigationInstance.instance.RecordTimer.getNextTimerTime(isWakeup=True)
 	return rec_time > 0 and (rec_time - time()) < 360
 
+def createRecordTimerEntry(timer):
+	return RecordTimerEntry(timer.service_ref, timer.begin, timer.end, timer.name, timer.description,\
+		timer.eit, timer.disabled, timer.justplay, timer.afterEvent, dirname = timer.dirname,\
+		tags = timer.tags, descramble = timer.descramble, record_ecm = timer.record_ecm, always_zap = timer.always_zap,\
+		zap_wakeup = timer.zap_wakeup, rename_repeat = timer.rename_repeat, conflict_detection = timer.conflict_detection,\
+		pipzap = timer.pipzap)
+
 # please do not translate log messages
 class RecordTimerEntry(timer.TimerEntry, object):
 ######### the following static methods and members are only in use when the box is in (soft) standby
@@ -173,6 +180,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.record_ecm = record_ecm
 		self.rename_repeat = rename_repeat
 		self.conflict_detection = conflict_detection
+		self.external = False
 		self.setAdvancedPriorityFrontend = None
 		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"] or SystemInfo["ATSC_priority_tuner_available"]:
 			rec_ref = self.service_ref and self.service_ref.ref
@@ -743,6 +751,7 @@ class RecordTimer(timer.Timer):
 		timer.Timer.__init__(self)
 
 		self.Filename = Directories.resolveFilename(Directories.SCOPE_CONFIG, "timers.xml")
+		self.fallback_timer_list = []
 
 		try:
 			self.loadTimer()
@@ -1110,6 +1119,12 @@ class RecordTimer(timer.Timer):
 					is_editable = True
 		return time_match and is_editable
 
+	def setFallbackTimerList(self, list):
+		self.fallback_timer_list = [timer for timer in list if timer.state != 3]
+
+	def getAllTimersList(self):
+		return self.timer_list + self.fallback_timer_list
+
 	def isInTimer(self, eventid, begin, duration, service):
 		returnValue = None
 		type = 0
@@ -1120,7 +1135,7 @@ class RecordTimer(timer.Timer):
 		check_offset_time = not config.recording.margin_before.value and not config.recording.margin_after.value
 		end = begin + duration
 		refstr = ':'.join(service.split(':')[:11])
-		for x in self.timer_list:
+		for x in self.getAllTimersList():
 			if x.isAutoTimer == 1:
 				isAutoTimer = True
 			else:

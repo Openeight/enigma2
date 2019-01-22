@@ -224,6 +224,7 @@ def getHotkeyFunctions():
 	return hotkeyFunctions
 
 class HotkeySetup(Screen):
+	ALLOW_SUSPEND = False
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.session = session

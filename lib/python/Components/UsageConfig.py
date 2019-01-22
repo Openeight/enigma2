@@ -268,6 +268,7 @@ def InitUsageConfig():
 	config.usage.remote_fallback_ok = ConfigYesNo(default = False)
 	config.usage.remote_fallback_nok = ConfigYesNo(default = False)
 	config.usage.remote_fallback_extension_menu = ConfigYesNo(default = False)
+	config.usage.remote_fallback_external_timer = ConfigYesNo(default = False)
 
 	config.usage.show_timer_conflict_warning = ConfigYesNo(default = True)
 
@@ -405,6 +406,12 @@ def InitUsageConfig():
 			open(SystemInfo["LcdLiveTVMode"], "w").write(configElement.value)
 		config.usage.LcdLiveTVMode = ConfigSelection(default = "0", choices=[str(x) for x in range(0,9)])
 		config.usage.LcdLiveTVMode.addNotifier(setLcdLiveTVMode)
+
+	if SystemInfo["LcdLiveDecoder"]:
+		def setLcdLiveDecoder(configElement):
+			open(SystemInfo["LcdLiveDecoder"], "w").write(configElement.value)
+		config.usage.LcdLiveDecoder = ConfigSelection(default = "0", choices=[str(x) for x in range(0,4)])
+		config.usage.LcdLiveDecoder.addNotifier(setLcdLiveDecoder)
 
 	config.usage.boolean_graphic = ConfigYesNo(default=True)
 
