@@ -31,7 +31,7 @@ class InstallWizard(Screen, ConfigListScreen):
 			config.misc.installwizard.hasnetwork.value = False
 			config.misc.installwizard.ipkgloaded.value = False
 			modes = {0: " "}
-			self.enabled = ConfigSelection(choices = modes, default = 0, graphic = False)
+			self.enabled = ConfigSelection(choices = modes, default = 0)
 			self.adapters = [(iNetwork.getFriendlyAdapterName(x),x) for x in iNetwork.getAdapterList()]
 			is_found = False
 			for x in self.adapters:
@@ -46,7 +46,7 @@ class InstallWizard(Screen, ConfigListScreen):
 			if is_found is False:
 				self.createMenu()
 		elif self.index == self.STATE_CHOISE_CHANNELLIST:
-			self.enabled = ConfigYesNo(default = True)
+			self.enabled = ConfigYesNo(default = True, graphic = False)
 			modes = {"openeight": "openeight(German List)", "19e-23e": "Astra 1 Astra 3", "19e-23e-28e": "Astra 1 Astra 2 Astra 3", "13e-19e-23e-28e": "Astra 1 Astra 2 Astra 3 Hotbird"}
 			self.channellist_type = ConfigSelection(choices = modes, default = "openeight")
 			self.createMenu()

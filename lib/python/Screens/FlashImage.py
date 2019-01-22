@@ -14,7 +14,8 @@ from Tools.BoundFunction import boundFunction
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
 from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode
-import os, urllib2, json, time, zipfile
+import os, urllib2, json, time, zipfile, shutil
+
 from enigma import eTimer, eEPGCache
 
 def checkimagefiles(files):
@@ -70,7 +71,7 @@ class SelectImage(Screen):
 				except:
 					pass
 
-		model = HardwareInfo().get_device_model()
+		model = HardwareInfo().get_machine_name()
 
 		if not self.imagesList:
 			if not self.jsonlist:
@@ -128,7 +129,6 @@ class SelectImage(Screen):
 			os.remove(currentSelected)
 			currentSelected = ".".join([currentSelected[:-4], "unzipped"])
 			if os.path.isdir(currentSelected):
-				import shutil
 				shutil.rmtree(currentSelected)
 			self.setIndex = self["list"].getSelectedIndex()
 			self.imagesList = []
@@ -213,17 +213,11 @@ class FlashImage(Screen):
 		self.getImageList = None
 		choices = []
 		currentimageslot = GetCurrentImage()
-		for x in range(1,5):
-			if x in imagedict:
-				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagedict[x]['imagename']), (x, "with backup")))
-			else:
-				choices.append((_("slot%s - empty, with backup") % x, (x, "with backup")))
+		for x in range(1, SystemInfo["canMultiBoot"][1] + 1):
+			choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagedict[x]['imagename']), (x, "with backup")))
 		choices.append((_("No, do not flash image"), False))
-		for x in range(1,5):
-			if x in imagedict:
-				choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagedict[x]['imagename']), (x, "without backup")))
-			else:
-				choices.append((_("slot%s - empty, without backup") % x, (x, "without backup")))
+		for x in range(1, SystemInfo["canMultiBoot"][1] + 1):
+			choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagedict[x]['imagename']), (x, "without backup")))
 		self.session.openWithCallback(self.backupsettings, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 
 	def backupsettings(self, retval):
@@ -395,29 +389,40 @@ class MultibootSelection(SelectImage):
 	def getImagelistCallback(self, imagesdict):
 		list = []
 		currentimageslot = GetCurrentImage()
-		mode = SystemInfo["canMode12"] and GetCurrentImageMode() or 0
+		mode = GetCurrentImageMode() or 0
 		for x in sorted(imagesdict.keys()):
-			list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode == 1 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
-			if SystemInfo["canMode12"]:
-				list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
+			if imagesdict[x]["imagename"] != _("Empty slot"):
+				list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
+				if SystemInfo["canMode12"]:
+					list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
 		self["list"].setList(list)
 
 	def keyOk(self):
-		currentSelected = self["list"].l.getCurrentSelection()
-		slot = currentSelected[0][1]
-		if currentSelected[0][1] != "Waiter":
-			model = HardwareInfo().get_device_model()
+		self.currentSelected = self["list"].l.getCurrentSelection()
+		if self.currentSelected[0][1] != "Waiter":
+			self.container = Console()
+			if os.path.isdir('/tmp/startupmount'):
+				self.ContainterFallback()
+			else:
+				os.mkdir('/tmp/startupmount')
+				self.container.ePopen('mount /dev/mmcblk0p1 /tmp/startupmount', self.ContainterFallback)
+
+	def ContainterFallback(self, data=None, retval=None, extra_args=None):
+		self.container.killAll()
+		slot = self.currentSelected[0][1]
+		model = HardwareInfo().get_machine_name()
+		if 'coherent_poll=2M' in open("/proc/cmdline", "r").read():
+			#when Gigablue do something else... this needs to be improved later!!! It even looks that the GB method is better :)
+			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % slot, "/tmp/startupmount/STARTUP")
+		else:
 			if slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
 			else:
 				slot -= 12
 				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, SystemInfo["canMode12"], slot * 2 + 1, model)
-			for media in ['/media/%s' % x for x in os.listdir('/media') if x.startswith('mmc')]:
-				if 'STARTUP' in os.listdir(media):
-					open('%s/%s' % (media, 'STARTUP'), 'w').write(startupFileContents)
-					break
-			from Screens.Standby import TryQuitMainloop
-			self.session.open(TryQuitMainloop, 2)
+			open('/tmp/startupmount/STARTUP', 'w').write(startupFileContents)
+		from Screens.Standby import TryQuitMainloop
+		self.session.open(TryQuitMainloop, 2)
 
 	def selectionChanged(self):
 		pass
