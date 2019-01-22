@@ -104,7 +104,12 @@ class VideoSetup(Screen, ConfigListScreen):
 					self.list.append(getConfigListEntry(_("HDMI HDR Type"), config.av.hdmihdrtype, _("This option allows you to configure the HDR type.")))
 				if SystemInfo["HasHDMIpreemphasis"]:
 					self.list.append(getConfigListEntry(_("Use HDMI pre-emphasis"), config.av.hdmipreemphasis, _("This option can be useful for long HDMI cables.")))
-
+				if SystemInfo["HDRSupport"]:
+					self.list.append(getConfigListEntry(_("HLG support"), config.av.hlg_support,_("This option allows you to force the HLG modes for UHD")))
+					self.list.append(getConfigListEntry(_("HDR10 support"), config.av.hdr10_support,_("This option allows you to force the HDR10 modes for UHD")))
+					self.list.append(getConfigListEntry(_("Allow 12bit"), config.av.allow_12bit,_("This option allows you to enable or disable the 12 bit color mode")))
+					self.list.append(getConfigListEntry(_("Allow 10bit"), config.av.allow_10bit,_("This option allows you to enable or disable the 10 bit color mode")))
+					
 		if config.av.videoport.value == "Scart":
 			self.list.append(getConfigListEntry(_("Color format"), config.av.colorformat, _("Configure which color format should be used on the SCART output.")))
 			if level >= 1:
@@ -124,6 +129,16 @@ class VideoSetup(Screen, ConfigListScreen):
 				getConfigListEntry(_("General AC3 delay"), config.av.generalAC3delay, _("Configure the general audio delay of Dolby Digital sound tracks.")),
 				getConfigListEntry(_("General PCM delay"), config.av.generalPCMdelay, _("Configure the general audio delay of stereo sound tracks."))
 			))
+			if SystemInfo["CanDownmixDTSHD"]:
+				self.list.append(getConfigListEntry(_("DTS-HD downmix"), config.av.downmix_dtshd, _("Configure whether DTS-HD channel sound tracks should be downmixed or transcoded.")))
+			if SystemInfo["CanDownmixWMApro"]:
+				self.list.append(getConfigListEntry(_("WMA pro downmix"), config.av.downmix_wmapro, _("Configure whether WMA pro channel sound tracks should be downmixed or transcoded.")))
+			if SystemInfo["CanAC3plusTranscode"]:
+				self.list.append(getConfigListEntry(_("AC3 plus transcoding"), config.av.transcode_ac3plus, _("Configure whether AC3 plus sound tracks should be transcoded to AC3.")))
+			if SystemInfo["CanAACTranscode"]:
+				self.list.append(getConfigListEntry(_("AAC transcoding"), config.av.transcode_aac, _("Configure whether AAC sound tracks should be transcoded.")))
+			if SystemInfo["HDMIAudioSource"]:
+				self.list.append(getConfigListEntry(_("HDMI audio source"), config.av.hdmi_audio_source, _("Choose whether multi channel sound tracks should be convert to PCM or SPDIF.")))
 			if SystemInfo["HasMultichannelPCM"]:
 				self.list.append(getConfigListEntry(_("Multichannel PCM"), config.av.multichannel_pcm, _("Configure whether multi channel PCM sound should be enabled.")))
 			if SystemInfo["HasAutoVolume"] or SystemInfo["HasAutoVolumeLevel"]:
