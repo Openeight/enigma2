@@ -34,7 +34,7 @@ class SelectImage(Screen):
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText()
 		self["key_blue"] = StaticText()
-		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image list - Please wait...")), "Waiter"))])
+		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image list - Please wait...")), "Waiter"))])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -61,7 +61,7 @@ class SelectImage(Screen):
 	def getImagesList(self):
 
 		def getImages(path, files):
-			for file in [x for x in files if x.endswith('.zip') and model in x]:
+			for file in [x for x in files if os.path.splitext(x)[1] == ".zip" and model in x]:
 				try:
 					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
 						medium = path.split(os.sep)[-1]
@@ -83,11 +83,13 @@ class SelectImage(Screen):
 
 			for media in getNonNetworkMediaMounts():
 				if not(SystemInfo['HasMMC'] and "/mmc" in media):
-					getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
+					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
 					if "downloaded_images" in os.listdir(media):
-						media = "%s/downloaded_images" % media
+						media = os.path.join(media, "downloaded_images")
 						if os.path.isdir(media) and not os.path.islink(media) and not os.path.ismount(media):
-							getImages(media, ["%s/%s" % (media, x) for x in os.listdir(media) if x.endswith('.zip') and model in x])
+							getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
+							for dir in [dir for dir in [os.path.join(media, dir) for dir in os.listdir(media)] if os.path.isdir(dir) and os.path.splitext(dir)[1] == ".unzipped"]:
+								shutil.rmtree(dir)
 
 		list = []
 		for catagorie in reversed(sorted(self.imagesList.keys())):
@@ -188,6 +190,8 @@ class FlashImage(Screen):
 		{
 			"cancel": self.abort,
 			"red": self.abort,
+			"ok": self.ok,
+			"green": self.ok,
 		}, -1)
 
 		self.delay = eTimer()
@@ -248,9 +252,9 @@ class FlashImage(Screen):
 
 			if self.destination:
 
-				destination = "/".join([self.destination, 'downloaded_images'])
-				self.zippedimage = "://" in self.source and "/".join([destination, self.imagename]) or self.source
-				self.unzippedimage = "/".join([destination, '%s.unzipped' % self.imagename[:-4]])
+				destination = os.path.join(self.destination, 'downloaded_images')
+				self.zippedimage = "://" in self.source and os.path.join(destination, self.imagename) or self.source
+				self.unzippedimage = os.path.join(destination, '%s.unzipped' % self.imagename[:-4])
 
 				if os.path.isfile(destination):
 					os.remove(destination)
@@ -270,7 +274,7 @@ class FlashImage(Screen):
 				else:
 					self.startDownload()
 			else:
-				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please insert a media (e.g. USB stick) and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
+				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 		else:
 			self.abort()
 
@@ -310,6 +314,14 @@ class FlashImage(Screen):
 		self.unzip()
 
 	def unzip(self):
+		self["header"].setText(_("Unzipping Image"))
+		self["info"].setText("%s\n%s"% (self.imagename, _("Please wait")))
+		self["progress"].hide()
+		self.delay.callback.remove(self.confirmation)
+		self.delay.callback.append(self.doUnzip)
+		self.delay.start(0, True)
+
+	def doUnzip(self):
 		try:
 			zipfile.ZipFile(self.zippedimage, 'r').extractall(self.unzippedimage)
 			self.flashimage()
@@ -317,6 +329,7 @@ class FlashImage(Screen):
 			self.session.openWithCallback(self.abort, MessageBox, _("Error during unzipping image\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
 	def flashimage(self):
+		self["header"].setText(_("Flashing Image"))
 		def findimagefiles(path):
 			for path, subdirs, files in os.walk(path):
 				if not subdirs and files:
@@ -336,8 +349,7 @@ class FlashImage(Screen):
 		self.containerofgwrite = None
 		if retval == 0:
 			self["header"].setText(_("Flashing image succesfull"))
-			self["info"].setText(_("%s\nPress exit to close") % self.imagename)
-			self["progress"].hide()
+			self["info"].setText(_("%s\nPress ok for multiboot selection\nPress exit to close") % self.imagename)
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not succesfull\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
@@ -350,6 +362,12 @@ class FlashImage(Screen):
 			self.containerbackup.killAll()
 		self.close()
 
+	def ok(self):
+		if self["header"].text == _("Flashing image succesfull"):
+			self.session.openWithCallback(self.abort, MultibootSelection)
+		else:
+			return 0
+
 class MultibootSelection(SelectImage):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
@@ -360,7 +378,7 @@ class MultibootSelection(SelectImage):
 		self.setTitle(_("Select Multiboot"))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Reboot"))
-		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retreiving image slots - Please wait...")), "Waiter"))])
+		self["list"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image slots - Please wait...")), "Waiter"))])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{

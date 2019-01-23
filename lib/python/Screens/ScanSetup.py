@@ -124,7 +124,8 @@ terrestrial_autoscan_nimtype = {
 'SSH108' : 'ssh108_t2_scan',
 'TT3L10' : 'tt3l10_t2_scan',
 'TURBO' : 'vuplus_turbo_t',
-'TT2L08' : 'tt2l08_t2_scan'
+'TT2L08' : 'tt2l08_t2_scan',
+'BCM3466' : 'bcm3466'
 }
 
 def GetDeviceId(filter, nim_idx):
@@ -244,9 +245,9 @@ class CableTransponderSearchSupport:
 				if nim_name is not None and nim_name != "":
 					device_id = ""
 					nim_name = nim_name.split(' ')[-1][4:-1]
-					if nim_name == 'TT3L10':
+					if nim_name in ("TT3L10", "BCM3466"):
 						try:
-							device_id = GetDeviceId('TT3L10', nim_idx)
+							device_id = GetDeviceId(nim_name, nim_idx)
 							device_id = "--device=%s" % (device_id)
 						except Exception, err:
 							print "GetCommand ->", err
@@ -1545,8 +1546,11 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			pol_list = ['H','V','L','R']
 			fec_list = ['Auto','1/2','2/3','3/4','5/6','7/8','8/9','3/5','4/5','9/10','None']
 			tp_text = str(tp[1] / 1000) + " " + pol_list[tp[3]] + " " + str(tp[2] / 1000) + " " + fec_list[tp[4]]
-			if tp[10] > -1 and tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2:
-				tp_text = ("%s IS %d") % (tp_text, tp[10])
+			if tp[5] == eDVBFrontendParametersSatellite.System_DVB_S2:
+				if tp[10] > eDVBFrontendParametersSatellite.No_Stream_Id_Filter:
+					tp_text = ("%s MIS %d") % (tp_text, tp[10])
+				if tp[12] > 0:
+					tp_text = ("%s Gold %d") % (tp_text, tp[12])
 			return tp_text
 		return _("Invalid transponder data")
 

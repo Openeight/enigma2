@@ -317,6 +317,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("19", _("HD2400")),
 			("20", _("Zgemma Star S/2S/H1/H2")),
 			("21", _("SF4008/Zgemma H.S/H.2S/H.2H/H5")),
+			("25", _("Zgemma H9"))
 			("500", _("WWIO_BRE2ZE_TC")),
 			("501", _("OCTAGON_SFXXX8")),
 			("502", _("GIGABLUE Black")),
@@ -358,6 +359,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("h3", 21),
 			("h5", 21),
 			("h7", 21),
+			("h9", 25),
 			("et7000mini", 16),
 			("sf4008", 501),
 			("g100", 501),

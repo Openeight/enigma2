@@ -81,7 +81,6 @@
 		<item level="2" text="Show picons in display" description="Configure if service picons will be shown in display (when supported by the skin)." requires="HasFrontDisplayPicon">config.usage.show_picon_in_display</item>
 		<item level="2" text="Infobar frontend data source" description="Configure the source of the frontend data as shown on the infobars. 'Settings' is as stored on the settings. 'Tuner' is as reported by the tuner.">config.usage.infobar_frontend_source</item>
 		<item level="2" text="Show SNR percentage instead of dB value" description="By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead.">config.usage.swap_snr_on_osd</item>
-		<item level="2" text="Show EIT now/next in infobar" description="When enabled, display the EIT now/next eventdata in infobar. When disabled, display now/next eventdata from the EPG cache instead.">config.usage.show_eit_nownext</item>
 		<item level="2" text="Behavior of 0 key in PiP-mode" description="Configure the function of the '0' button do when PIP is active." requires="PIPAvailable">config.usage.pip_zero_button</item>
 		<item level="2" text="Close PiP on exit" description="When enabled the PiP can be closed by the exit button." requires="PIPAvailable">config.usage.pip_hideOnExit</item>
 		<item level="2" text="Remember last service in PiP" description="Configure if and how long the latest service in the PiP will be remembered." requires="PIPAvailable">config.usage.pip_last_service_timeout</item>
@@ -90,6 +89,7 @@
 		<item level="2" text="Show True/False as graphical switch" description="Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch.">config.usage.boolean_graphic</item>
 	</setup>
 	<setup key="epgsettings" title="EPG settings">
+		<item level="2" text="Show EIT now/next in infobar" description="When enabled, display the EIT now/next eventdata in infobar. When disabled, display now/next eventdata from the EPG cache instead.">config.usage.show_eit_nownext</item>
 		<item level="0" text="Enable EIT EPG" description="Use EIT EPG information when it is available.">config.epg.eit</item>
 		<item level="2" text="Enable MHW EPG" description="Use MHW EPG information when it is available.">config.epg.mhw</item>
 		<item level="1" text="Enable freesat EPG" description="Use FreeSat EPG information when it is available.">config.epg.freesat</item>
@@ -97,7 +97,7 @@
 		<item level="1" text="Enable Netmed EPG" description="Use Netmed EPG information when it is available.">config.epg.netmed</item>
 		<item level="1" text="Enable Virgin EPG" description="Use Virgin EPG information when it is available.">config.epg.virgin</item>
 		<item level="2" text="Maintain old EPG data for" description="Configure for how many minutes finished events should remain visible in the EPG. Useful when you need information about an event which has just finished, or has been delayed.">config.epg.histminutes</item>
-		<item level="2" text="EPG location" description="Choose the location where the EPG data will be stored when the receiver is shut down. The location must be available at boot time.">config.misc.epgcachepath</item>
+		<item level="2" text="Location EPG Cache file" description="Define the location of the EPG Cache file.">config.misc.epgcache_filename</item>
 	</setup>
 	<setup key="subtitlesetup" title="Subtitle settings">
 		<item level="0" text="Teletext subtitle color" description="Configure the color of the teletext subtitles.">config.subtitles.ttx_subtitle_colors</item>
@@ -232,5 +232,9 @@
 		<item text="Longitude" description="Configure the longitude of your location.">config.sat.diseqca</item>
 		<item text="Latitude" description="Configure the latitude of your location.">config.sat.diseqcb</item>
 		<item text="Use power measurement" description="When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)." >config.sat.diseqcc</item>
+	</setup>
+	<setup key="wizardsetup" title="Wizard setup">
+		<item level="0" text="Setup mode" description="Configure which access level to use for the configuration menu. Expert level gives access to all items.">config.usage.setup_level</item>
+		<item level="0" text="Alternative numbering mode" description="When enabled, channel numbering will start at '1' for each bouquet.">config.usage.alternative_number_mode</item>
 	</setup>
 </setupxml>

@@ -459,12 +459,6 @@ def InitUsageConfig():
 			d = os.path.normpath(p.mountpoint)
 			if p.mountpoint != '/':
 				hddchoices.append((p.mountpoint, d))
-	config.misc.epgcachepath = ConfigSelection(default = '/hdd', choices = hddchoices)
-	def EpgCacheChanged(configElement):
-		eEPGCache.getInstance().setCacheFile(config.misc.epgcachepath.value + "/epg.dat")
-		epgcache = eEPGCache.getInstance()
-		epgcache.save()
-	config.misc.epgcachepath.addNotifier(EpgCacheChanged, immediate_feedback = False)
 
 	def setHDDStandby(configElement):
 		for hdd in harddiskmanager.HDDList():

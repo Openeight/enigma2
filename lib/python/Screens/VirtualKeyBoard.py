@@ -326,7 +326,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"save": (self.save, _("Save any text changes and exit")),
 			"locale": (self.localeMenu, _("Select the virtual keyboard locale from a menu")),
 			"shift": (self.shiftClicked, _("Select the virtual keyboard shifted character set")),
-			"ok": (self.okClicked, _("Select the character or action under the virtual keyboard cursor")),
+			"select": (self.processSelect, _("Select the character or action under the virtual keyboard cursor")),
 			"up": (self.up, _("Move the virtual keyboard cursor up")),
 			"left": (self.left, _("Move the virtual keyboard cursor left")),
 			"right": (self.right, _("Move the virtual keyboard cursor right")),
@@ -353,7 +353,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 		self.lang = language.getLanguage()
 		self["prompt"] = Label(prompt)
-		self["text"] = Input(text=text, maxSize=maxSize, visible_width=visible_width, type=type, currPos=len(text), allMarked=allMarked)
+		self["text"] = Input(text=text, maxSize=maxSize, visible_width=visible_width, type=type, currPos=len(text.decode("utf-8", "ignore")), allMarked=allMarked)
 		self["list"] = VirtualKeyBoardList([])
 		self["mode"] = Label(_("INS"))
 		self["locale"] = Label(_("Locale") + ": " + self.lang)
@@ -434,6 +434,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[0][2][11] = u"\u00B4"
 		keyList[0][2][12] = u"\\"
 		keyList[0][3] = [u"SHIFT", u"]", u"z", u"x", u"c", u"v", u"b", u"n", u"m", u",", u".", u"-", u"{", u"SHIFT"]
+		keyList[0][-1].extend([u"www.", u".com", u".net", u".org", u".edu", u".nl", u".tv"])
 		keyList[1][0] = [u"\u00A7", u"!", u"\"", u"#", u"$", u"%", u"&", u"_", u"(", u")", u"'", u"?", u"~", u"BACKSPACE"]
 		keyList[1][1][11] = u"^"
 		keyList[1][1][12] = u"|"
@@ -442,10 +443,11 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[1][2][11] = u"`"
 		keyList[1][2][12] = u"\u00A6"
 		keyList[1][3] = [u"SHIFT", u"[", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u";", u":", u"=", u"}", u"SHIFT"]
+		keyList[1][-1].extend([u"www.", u".com", u".net", u".org", u".edu", u".nl", u".tv"])
 		keyList.append([
 			[u"\u00AC", u"\u00B9", u"\u00B2", u"\u00B3", u"\u00BC", u"\u00BD", u"\u00BE", u"\u00A3", u"{", u"}", u"$", u"\\", u"", u"BACKSPACE"],
 			[u"FIRST", u"", u"", u"\u20AC", u"\u00B6", u"", u"", u"", u"", u"", u"", u"", u"", u""],
-			[u"LAST", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"ENTER"],
+			[u"LAST", u"", u"\u00E1", u"\u00E9", u"\u00ED", u"\u00F3", u"\u00FA", u"\u00C1", u"\u00C9", u"\u00CD", u"\u00D3", u"\u00DA", u"", u"ENTER"],
 			[u"SHIFT", u"\u00A6", u"\u00AB", u"\u00BB", u"\u00A2", u"", u"", u"", u"\u00B5", u"", u"\u00B7", u"", u"", u"SHIFT"],
 			[u"EXIT", u"LOC", u"LEFT", u"RIGHT", u"ALL", u"CLR", u"SPACE"]
 		])
@@ -562,7 +564,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[0][1][13] = u"\u00A6"
 		keyList[0][2][12] = u"#"
 		keyList[0][3] = [u"SHIFT", u"\\", u"z", u"x", u"c", u"v", u"b", u"n", u"m", u",", u".", u"/", u"", u"SHIFT"]
-		keyList[0][-1].extend([u"\u00E1", u"\u00E9", u"\u00ED", u"\u00F3", u"\u00FA"])
+		# keyList[0][-1].extend([u"\u00E1", u"\u00E9", u"\u00ED", u"\u00F3", u"\u00FA"])  # English users don't use the accented characters.
 		keyList[1][0][0] = u"\u00AC"
 		keyList[1][0][2] = u"\""
 		keyList[1][0][3] = u"\u00A3"
@@ -570,12 +572,12 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[1][2][11] = u"@"
 		keyList[1][2][12] = u"~"
 		keyList[1][3] = [u"SHIFT", u"|", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u"<", u">", u"?", u"", u"SHIFT"]
-		keyList[1][-1].extend([u"\u00C1", u"\u00C9", u"\u00CD", u"\u00D3", u"\u00DA"])
+		# keyList[1][-1].extend([u"\u00C1", u"\u00C9", u"\u00CD", u"\u00D3", u"\u00DA"])  # English users don't use the accented characters.
 		return keyList
 
 	def smsGotChar(self):
 		if self.smsChar and self.selectAsciiKey(self.smsChar):
-			self.okClicked()
+			self.processSelect()
 
 	def setLocale(self):
 		self.language, self.location, self.keyList = self.locales.get(self.lang, [None, None, None])
@@ -640,7 +642,10 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.previousSelectedKey = self.selectedKey
 		self["list"].setList(self.list)
 
-	def okClicked(self):
+	def okClicked(self):  # Deprecated legacy interface to new processSelect used by YouTubeVirtualKeyBoard
+		self.processSelect()
+
+	def processSelect(self):
 		self.smsChar = None
 		text = self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth].encode("UTF-8")
 		if text == u"":
@@ -781,7 +786,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 	def keyGotAscii(self):
 		self.smsChar = None
 		if self.selectAsciiKey(str(unichr(getPrevAsciiCode()).encode("utf-8"))):
-			self.okClicked()
+			self.processSelect()
 
 	def selectAsciiKey(self, char):
 		if char == u" ":

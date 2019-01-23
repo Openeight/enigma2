@@ -42,6 +42,7 @@ class TimerEditList(Screen):
 		self["key_green"] = StaticText(_("Add"))
 		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText("")
+		self["key_info"] = StaticText("")
 
 		self["description"] = Label("")
 
@@ -93,7 +94,7 @@ class TimerEditList(Screen):
 		self.updateState()
 
 	def toggleDisabledState(self):
-		cur=self["timerlist"].getCurrent()
+		cur = self["timerlist"].getCurrent()
 		timer_changed = True
 		if cur:
 			t = cur
@@ -157,6 +158,10 @@ class TimerEditList(Screen):
 	def updateState(self):
 		cur = self["timerlist"].getCurrent()
 		if cur:
+			if cur.external:
+				self["key_info"].setText("")
+			else:
+				self["key_info"].setText(_("Info"))
 			text = cur.description
 			if not cur.conflict_detection:
 				text += _("\nConflict detection disabled!")
@@ -233,12 +238,14 @@ class TimerEditList(Screen):
 		self.updateState()
 
 	def showLog(self):
-		cur=self["timerlist"].getCurrent()
-		if cur:
+		cur = self["timerlist"].getCurrent()
+		if cur and not cur.external:
 			self.session.openWithCallback(self.finishedEdit, TimerLog, cur)
+		else:
+			return 0
 
 	def openEdit(self):
-		cur=self["timerlist"].getCurrent()
+		cur = self["timerlist"].getCurrent()
 		if cur:
 			self.session.openWithCallback(self.finishedEdit, TimerEntry, cur)
 
@@ -413,8 +420,10 @@ class TimerSanityConflict(Screen):
 
 	def showLog(self):
 		selected_timer = self["timerlist"].getCurrent()
-		if selected_timer:
+		if selected_timer and not selected_timer.external:
 			self.session.openWithCallback(self.editTimerCallBack, TimerLog, selected_timer)
+		else:
+			return 0
 
 	def editTimerCallBack(self, answer=None):
 		if answer and len(answer) > 1 and answer[0] is True:

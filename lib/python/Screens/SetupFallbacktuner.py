@@ -6,6 +6,7 @@ from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.config import config, configfile, ConfigSelection, ConfigIP, ConfigInteger, getConfigListEntry, ConfigBoolean
 from Components.ConfigList import ConfigListScreen
+from Components.ImportChannels import ImportChannels
 
 from enigma import getPeerStreamingBoxes
 
@@ -20,10 +21,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 
 		self["actions2"] = ActionMap(["SetupActions"],
 		{
-			"ok": self.keyGo,
+			"ok": self.run,
 			"menu": self.keyCancel,
 			"cancel": self.keyCancel,
-			"save": self.keyGo,
+			"save": self.run,
 		}, -2)
 
 		self["key_red"] = StaticText(_("Exit"))
@@ -37,7 +38,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self.force_update_list = False
 		self.createConfig()
 		self.createSetup()
-
+		self.remote_fallback_prev = config.usage.remote_fallback_import.value
 		self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
 
@@ -116,7 +117,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("Fallback remote receiver URL"),
 					config.usage.remote_fallback_import_url,
 					_("URL of fallback remote receiver")))
-		if config.usage.remote_fallback.value and config.usage.remote_fallback_import.value:
+		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value:
 			self.list.append(getConfigListEntry(_("Also import at reboot/restart enigma2"),
 				config.usage.remote_fallback_import_restart,
 				_("Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted")))
@@ -150,7 +151,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		if isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection):
 			self.createSetup()
 
-	def keyGo(self):
+	def run(self):
 		if self.avahiselect.value == "ip":
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,))
 		elif self.avahiselect.value != "url":
@@ -174,4 +175,6 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		config.usage.remote_fallback.save()
 		config.usage.remote_fallback_external_timer.save()
 		configfile.save()
+		if not self.remote_fallback_prev and config.usage.remote_fallback_import.value:
+			ImportChannels()
 		self.close(False)
