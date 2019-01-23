@@ -61,7 +61,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.keyBackgrounds = {
 			"EXIT": self.key_red_bg,
 			"OK": self.key_green_bg,
-			"SAVE": self.key_green_bg,
+			"ENTER": self.key_green_bg,
 			"LOC": self.key_yellow_bg,
 			"SHFT": self.key_blue_bg
 		}
@@ -252,6 +252,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"fi_FI": [_("Finnish"), _("Finland"), self.finnish(self.scandinavian)],
 			"fr_BE": [_("French"), _("Belgian"), self.belgian(self.french)],
 			"fr_FR": [_("French"), _("France"), self.french],
+			"de_CH": [_("German"), _("Switzerland"), self.swiss(self.german)],
 			"de_DE": [_("German"), _("Germany"), self.german],
 			"el_GR": [_("Greek (Modern)"), _("Greece"), [
 				[
@@ -323,7 +324,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 		self["actions"] = HelpableNumberActionMap(self, "VirtualKeyBoardActions", {
 			"cancel": (self.cancel, _("Cancel any text changes and exit")),
-			"save": (self.save, _("Save any text changes and exit")),
+			"save": (self.enter, _("Enter text and exit")),
 			"locale": (self.localeMenu, _("Select the virtual keyboard locale from a menu")),
 			"shift": (self.shiftClicked, _("Select the virtual keyboard shifted character set")),
 			"select": (self.processSelect, _("Select the character or action under the virtual keyboard cursor")),
@@ -360,7 +361,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self["language"] = Label(_("Language") + ": " + self.lang)
 		self["key_info"] = StaticText(_("INFO"))
 		self["key_red"] = StaticText(_("Exit"))
-		self["key_green"] = StaticText(_("Save"))
+		self["key_green"] = StaticText(_("Enter"))
 		self["key_yellow"] = StaticText(_("Select locale"))
 		self["key_blue"] = StaticText(self.shiftMsgs[1])
 		self["key_help"] = StaticText(_("HELP"))
@@ -545,6 +546,32 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[1][4].extend([u"\u00A3", u"$", u"\u20AC"])
 		return keyList
 
+	def swiss(self, base):
+		keyList = copy.deepcopy(base)
+		keyList[0][0][0] = u"\u00A7"
+		keyList[0][0][11] = u"'"
+		keyList[0][0][12] = u"^"
+		keyList[0][2][12] = u"$"
+		keyList[0][3][12] = u"\u20AC"
+		keyList[0][4][7] = u"\u00E0"
+		keyList[0][4][8] = u"\u00E8"
+		keyList[0][4][9] = u"\u00E9"
+		keyList[0][4].extend([u"@", u"!", u"\u00AC", u"\\"])
+		keyList[1][0][1] = u"+"
+		keyList[1][0][3] = u"*"
+		keyList[1][0][4] = u"\u00E7"
+		keyList[1][0][11] = u"?"
+		keyList[1][0][12] = u"`"
+		keyList[1][2][12] = u"\u00A3"
+		keyList[1][3][12] = u"\u00A2"
+		keyList[1][4][9] = u"\u00AC"
+		keyList[1][4][9] = u"\u00A6"
+		keyList[1][4][7] = u"\u00C0"
+		keyList[1][4][8] = u"\u00C8"
+		keyList[1][4][9] = u"\u00C9"
+		keyList[1][4].extend([u"#", u"|", u"\u00A6"])
+		return keyList
+
 	def ukranian(self, base):
 		keyList = copy.deepcopy(base)
 		keyList[0][1][12] = u"\u0457"
@@ -662,7 +689,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			self["text"].deleteAllChars()
 			self["text"].update()
 		elif text == u"ENTER":
-			self.save()
+			self.enter()
 		elif text == u"ESC":
 			self.cancel()
 		elif text == u"EXIT":
@@ -676,11 +703,11 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		elif text == u"LEFT":
 			self["text"].left()
 		elif text == u"OK":
-			self.save()
+			self.enter()
 		elif text == u"RIGHT":
 			self["text"].right()
-		elif text == u"SAVE":
-			self.save()
+		elif text == u"ENTER":
+			self.enter()
 		elif text == u"SHIFT":
 			self.shiftClicked()
 		elif text == u"Shift":
@@ -693,7 +720,10 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 	def cancel(self):
 		self.close(None)
 
-	def save(self):
+	def save(self):  # Deprecated legacy interface to new enter
+		self.enter()
+
+	def enter(self):
 		self.close(self["text"].getText())
 
 	def localeMenu(self):

@@ -17,7 +17,8 @@ dist_pkgdata_DATA = \
 	freesat.t2 \
 	iso-639-3.pck \
 	timezone.xml \
-	unicable.xml
+	unicable.xml \
+	groupedservices
 
 if HAVE_TEXTLCD
 if HAVE_7SEGMENT
