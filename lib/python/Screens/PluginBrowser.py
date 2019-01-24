@@ -593,22 +593,7 @@ class PluginDownloadBrowser(Screen):
 				self.startIpkgListInstalled()
 		elif self.run == 1 and self.type == self.DOWNLOAD:
 			self.run = 2
-<<<<<<< HEAD
 			self.startIpkgListAvailable()
-=======
-			from Components import opkg
-			pluginlist = []
-			self.pluginlist = pluginlist
-			for plugin in opkg.enumPlugins(self.PLUGIN_PREFIX):
-				if plugin[0] not in self.installedplugins:
-					pluginlist.append(plugin + (plugin[0][15:],))
-			if pluginlist:
-				pluginlist.sort()
-				self.updateList()
-				self["list"].instance.show()
-			else:
-				self["text"].setText(_("No new plugins found"))
->>>>>>> 5f7a8df82c83518487c5d54b44e0367e9e3b9968
 		else:
 			if len(self.pluginlist) > 0:
 				self.updateList()
