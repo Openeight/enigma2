@@ -42,7 +42,7 @@ class SkinError(Exception):
 
 dom_skins = [ ]
 
-def addSkin(name, scope = SCOPE_SKIN):
+def addSkin(name, scope = SCOPE_CURRENT_SKIN):
 	# read the skin
 	filename = resolveFilename(scope, name)
 	if fileExists(filename):
@@ -119,7 +119,6 @@ if addSkin(os.path.join('display', 'skin_display96.xml')):
 	# Color OLED
 	display_skin_id = 2
 addSkin('skin_text.xml')
-
 addSkin('skin_subtitles.xml')
 
 try:

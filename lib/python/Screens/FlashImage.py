@@ -1,5 +1,6 @@
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Screens.Standby import getReasons
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
@@ -24,8 +25,8 @@ class SelectImage(Screen):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
 		self.session = session
-		self.jsonlist = None
-		self.imagesList = None
+		self.jsonlist = {}
+		self.imagesList = {}
 		self.setIndex = 0
 		self.expanded = []
 		self.setTitle(_("Select Image"))
@@ -75,12 +76,14 @@ class SelectImage(Screen):
 		if not self.imagesList:
 			if not self.jsonlist:
 				try:
-					self.jsonlist = json.load(urllib2.urlopen('http://downloads.openpli.org/json/%s' % model))
+					self.jsonlist = dict(json.load(urllib2.urlopen('http://downloads.openpli.org/json/%s' % model)))
+					if config.usage.alternative_imagefeed.value:
+						self.jsonlist.update(dict(json.load(urllib2.urlopen('%s%s' % (config.usage.alternative_imagefeed.value, model)))))
 				except:
 					pass
-			self.imagesList = dict(self.jsonlist) if self.jsonlist else {}
+			self.imagesList = self.jsonlist
 
-			for media in ['/media/%s' % x for x in os.listdir('/media')] + ['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.exists('/media/net') else []:
+			for media in ['/media/%s' % x for x in os.listdir('/media')] + (['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []):
 				if not(SystemInfo['HasMMC'] and "/mmc" in media) and os.path.isdir(media):
 					getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
 					if "downloaded_images" in os.listdir(media):
@@ -127,14 +130,17 @@ class SelectImage(Screen):
 	def keyDelete(self):
 		currentSelected= self["list"].l.getCurrentSelection()[0][1]
 		if not("://" in currentSelected or currentSelected in ["Expander", "Waiter"]):
-			os.remove(currentSelected)
-			currentSelected = ".".join([currentSelected[:-4], "unzipped"])
-			if os.path.isdir(currentSelected):
-				shutil.rmtree(currentSelected)
-			self.setIndex = self["list"].getSelectedIndex()
-			self.imagesList = []
-			self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
-			self.delay.start(0, True)
+			try:
+				os.remove(currentSelected)
+				currentSelected = ".".join([currentSelected[:-4], "unzipped"])
+				if os.path.isdir(currentSelected):
+					shutil.rmtree(currentSelected)
+				self.setIndex = self["list"].getSelectedIndex()
+				self.imagesList = []
+				self["list"].setList([ChoiceEntryComponent('',((_("Refreshing image list - Please wait...")), "Waiter"))])
+				self.delay.start(0, True)
+			except:
+				self.session.open(MessageBox, _("Cannot delete downloaded image"), MessageBox.TYPE_ERROR, timeout=3)
 
 	def selectionChanged(self):
 		currentSelected = self["list"].l.getCurrentSelection()
@@ -185,6 +191,7 @@ class FlashImage(Screen):
 		self.downloader = None
 		self.source = source
 		self.imagename = imagename
+		self.reasons = getReasons(session)
 
 		self["header"] = Label(_("Backup settings"))
 		self["info"] = Label(_("Save settings and EPG data"))
@@ -206,11 +213,8 @@ class FlashImage(Screen):
 		self.hide()
 
 	def confirmation(self):
-		recordings = self.session.nav.getRecordings()
-		if not recordings:
-			next_rec_time = self.session.nav.RecordTimer.getNextRecordingTime()
-		if recordings or (next_rec_time > 0 and (next_rec_time - time.time()) < 360):
-			self.message = _("Recording(s) are in progress or coming up in few seconds!\nDo you still want to flash image\n%s?") % self.imagename
+		if self.reasons:
+			self.message = _("%s\nDo you still want to flash image\n%s?") % (self.reasons, self.imagename)
 		else:
 			self.message = _("Do you want to flash image\n%s") % self.imagename
 		if SystemInfo["canMultiBoot"]:
@@ -256,7 +260,7 @@ class FlashImage(Screen):
 					return (path, True)
 				mounts = []
 				devices = []
-				for path in ['/media/%s' % x for x in os.listdir('/media')] + ['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.exists('/media/net') else []:
+				for path in ['/media/%s' % x for x in os.listdir('/media')] + (['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []):
 					if checkIfDevice(path, diskstats):
 						devices.append((path, avail(path)))
 					else:
@@ -273,18 +277,20 @@ class FlashImage(Screen):
 				self.zippedimage = "://" in self.source and os.path.join(destination, self.imagename) or self.source
 				self.unzippedimage = os.path.join(destination, '%s.unzipped' % self.imagename[:-4])
 
-				if os.path.isfile(destination):
-					os.remove(destination)
-				if not os.path.isdir(destination):
-					os.mkdir(destination)
-
-				if doBackup:
-					if isDevice:
-						self.startBackupsettings(True)
+				try:
+					if os.path.isfile(destination):
+						os.remove(destination)
+					if not os.path.isdir(destination):
+						os.mkdir(destination)
+					if doBackup:
+						if isDevice:
+							self.startBackupsettings(True)
+						else:
+							self.session.openWithCallback(self.startBackupsettings, MessageBox, _("Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"), simple=True)
 					else:
-						self.session.openWithCallback(self.startBackupsettings, MessageBox, _("Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"), simple=True)
-				else:
-					self.startDownload()
+						self.startDownload()
+				except:
+					self.session.openWithCallback(self.abort, MessageBox, _("Could not some setup the required directories on the media (e.g. USB stick) - Please verify media and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 			else:
 				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 		else:

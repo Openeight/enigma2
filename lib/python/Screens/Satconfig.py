@@ -127,6 +127,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 		self.singleSatEntry = None
 		self.toneamplitude = None
 		self.scpc = None
+		self.t2mirawmode = None
 		self.forcelnbpower = None
 		self.forcetoneburst = None
 		self.terrestrialRegionsEntry = None
@@ -201,12 +202,9 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				if fileExists("/proc/stb/frontend/%d/use_scpc_optimized_search_range" % self.nim.slot):
 					self.scpc = getConfigListEntry(_("SCPC optimized search range"), self.nimConfig.scpcSearchRange, _("Your receiver can use SCPC optimized search range. Consult your receiver's manual for more information."))
 					self.list.append(self.scpc)
-				if SystemInfo["HasForceLNBOn"] and self.nim.isFBCRoot():
-					self.forcelnbpower = getConfigListEntry(_("Force LNB Power"), config.misc.forceLnbPower)
-					self.list.append(self.forcelnbpower)
-				if SystemInfo["HasForceToneburst"] and self.nim.isFBCRoot():
-					self.forcetoneburst = getConfigListEntry(_("Force ToneBurst"), config.misc.forceToneBurst)
-					self.list.append(self.forcetoneburst)
+				if fileExists("/proc/stb/frontend/%d/t2mirawmode" % self.nim.slot):
+					self.t2mirawmode = getConfigListEntry(_("T2MI RAW Mode"), self.nimConfig.t2miRawMode, _("With T2MI RAW mode disabled (default) we can use single T2MI PLP de-encapsulation. With T2MI RAW mode enabled we can use astra-sm to analyze T2MI"))
+					self.list.append(self.t2mirawmode)
 		elif self.nim.isCompatible("DVB-C"):
 			self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode, _("Select 'enabled' if this tuner has a signal cable connected, otherwise select 'nothing connected'."))
 			self.list.append(self.configMode)
@@ -326,7 +324,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			self.advancedLof, self.advancedPowerMeasurement, self.turningSpeed, self.advancedType, self.advancedSCR, self.advancedPosition, self.advancedFormat, self.advancedManufacturer,\
 			self.advancedUnicable, self.advancedConnected, self.toneburst, self.committedDiseqcCommand, self.uncommittedDiseqcCommand, self.singleSatEntry,	self.commandOrder,\
 			self.showAdditionalMotorOptions, self.cableScanType, self.multiType, self.cableConfigScanDetails, self.terrestrialCountriesEntry, self.cableCountriesEntry, \
-			self.toneamplitude, self.scpc, self.forcelnbpower, self.forcetoneburst):
+			self.toneamplitude, self.scpc, self.t2mirawmode, self.forcelnbpower, self.forcetoneburst):
 				self.createSetup()
 
 	def run(self):
@@ -345,6 +343,9 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.autoDiseqcRun(autodiseqc_ports)
 				return False
 		if self.have_advanced and self.nim.config_mode == "advanced":
+			# fillAdvancedList resets self.list so some entries like t2mirawmode removed
+			# saveAll will save any unsaved data before self.list entries are gone
+			self.saveAll()
 			self.fillAdvancedList()
 		for x in self.list:
 			if x in (self.turnFastEpochBegin, self.turnFastEpochEnd):
@@ -409,7 +410,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				else:
 					self.advancedManufacturer = getConfigListEntry(_("Manufacturer"), currLnb.unicableManufacturer, _("Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."))
 					self.advancedType = getConfigListEntry(_("Model"), currLnb.unicableProduct, _("Select the model number of your SCR device. If the model number is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."))
-					self.advancedSCR = getConfigListEntry(_("Channel"), currLnb.scrList, _("Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested tranponder to the tuner."))
+					self.advancedSCR = getConfigListEntry(_("Channel"), currLnb.scrList, _("Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."))
 					self.advancedPosition = getConfigListEntry(_("Position"), currLnb.positionNumber, _("Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."))
 					self.list.append(self.advancedManufacturer)
 					self.list.append(self.advancedType)
@@ -663,11 +664,6 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			# sanity check for empty sat list
 			if self.nimConfig.configMode.value != "satposdepends" and len(nimmanager.getSatListForNim(self.slotid)) < 1:
 				self.nimConfig.configMode.value = "nothing"
-			if self.nim.isFBCRoot():
-				if SystemInfo["HasForceLNBOn"]:
-					config.misc.forceLnbPower.save()
-				if SystemInfo["HasForceToneburst"]:
-					config.misc.forceToneBurst.save()
 		if self.isChanged():
 			for x in self["config"].list:
 				x[1].save()

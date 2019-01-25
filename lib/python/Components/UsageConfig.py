@@ -1,5 +1,5 @@
 from Components.Harddisk import harddiskmanager
-from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock, ConfigEnableDisable, ConfigSubDict, ConfigDictionarySet
+from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock, ConfigEnableDisable, ConfigSubDict, ConfigDictionarySet, ConfigPassword
 from Tools.Directories import defaultRecordingLocation
 from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent, eEPGCache
 from Components.NimManager import nimmanager
@@ -80,7 +80,7 @@ def InitUsageConfig():
 		("a_z", _("alphabetical")),
 		("default", _("Default")),
 		("user", _("user defined")),])
-	config.usage.menu_show_numbers = ConfigYesNo(default = False)
+	config.usage.menu_show_numbers = ConfigSelection(default = "no", choices = [("no", _("no")), ("menu&plugins", _("in menu and plugins")), ("menu", _("in menu only")), ("plugins", _("in plugins only"))])
 	config.usage.menu_path = ConfigSelection(default = "off", choices = [
 		("off", _("Disabled")),
 		("small", _("Small")),
@@ -269,6 +269,10 @@ def InitUsageConfig():
 	config.usage.remote_fallback_nok = ConfigYesNo(default = False)
 	config.usage.remote_fallback_extension_menu = ConfigYesNo(default = False)
 	config.usage.remote_fallback_external_timer = ConfigYesNo(default = False)
+	config.usage.remote_fallback_openwebif_customize = ConfigYesNo(default = False)
+	config.usage.remote_fallback_openwebif_userid = ConfigText(default = "root")
+	config.usage.remote_fallback_openwebif_password = ConfigPassword(default = "default")
+	config.usage.remote_fallback_openwebif_port = ConfigInteger(default=80, limits=(0,65535))
 
 	config.usage.show_timer_conflict_warning = ConfigYesNo(default = True)
 
@@ -375,6 +379,12 @@ def InitUsageConfig():
 		config.usage.standbyLED = ConfigYesNo(default = True)
 		config.usage.standbyLED.addNotifier(standbyLEDChanged)
 
+	if SystemInfo["SuspendLED"]:
+		def suspendLEDChanged(configElement):
+			open(SystemInfo["SuspendLED"], "w").write(configElement.value and "on" or "off")
+		config.usage.suspendLED = ConfigYesNo(default = True)
+		config.usage.suspendLED.addNotifier(suspendLEDChanged)
+
 	if SystemInfo["PowerOffDisplay"]:
 		def powerOffDisplayChanged(configElement):
 			open(SystemInfo["PowerOffDisplay"], "w").write(configElement.value and "1" or "0")
@@ -472,6 +482,7 @@ def InitUsageConfig():
 
 	config.usage.keymap = ConfigText(default = eEnv.resolve("${datadir}/enigma2/keymap.xml"))
 	config.usage.keytrans = ConfigText(default = eEnv.resolve("${datadir}/enigma2/keytranslation.xml"))
+	config.usage.alternative_imagefeed = ConfigText(default="")
 
 	config.seek = ConfigSubsection()
 	config.seek.selfdefined_13 = ConfigNumber(default=15)
@@ -530,18 +541,6 @@ def InitUsageConfig():
 		config.misc.zapmode = ConfigSelection(default = "mute", choices = [
 			("mute", _("Black screen")), ("hold", _("Hold screen")), ("mutetilllock", _("Black screen till locked")), ("holdtilllock", _("Hold till locked"))])
 		config.misc.zapmode.addNotifier(setZapmode, immediate_feedback = False)
-
-	if SystemInfo["HasForceLNBOn"]:
-		def forceLNBPowerChanged(configElement):
-			open(SystemInfo["HasForceLNBOn"], "w").write(configElement.value)
-		config.misc.forceLnbPower = ConfigSelection(default = "on", choices = [ ("on", _("yes")), ("off", _("no"))] )
-		config.misc.forceLnbPower.addNotifier(forceLNBPowerChanged)
-
-	if SystemInfo["HasForceToneburst"]:
-		def forceToneBurstChanged(configElement):
-			open(SystemInfo["HasForceToneburst"], "w").write(configElement.value)
-		config.misc.forceToneBurst = ConfigSelection(default = "enable", choices = [ ("enable", _("yes")), ("disable", _("no"))] )
-		config.misc.forceToneBurst.addNotifier(forceToneBurstChanged)
 
 	if SystemInfo["HasBypassEdidChecking"]:
 		def setHasBypassEdidChecking(configElement):

@@ -1316,3 +1316,11 @@ class RecordTimer(timer.Timer):
 
 	def shutdown(self):
 		self.saveTimer()
+
+	def cleanup(self):
+		timer.Timer.cleanup(self)
+		self.saveTimer()
+
+	def cleanupDaily(self, days):
+		timer.Timer.cleanupDaily(self, days)
+		self.saveTimer()
