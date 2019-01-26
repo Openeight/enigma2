@@ -1727,9 +1727,9 @@ class Config(ConfigSubsection):
 			if isinstance(val, dict):
 				self.pickle_this(name, val, result)
 			elif isinstance(val, tuple):
-				result += [name, '=', val[0], '\n']
+				result += [name, '=', str(val[0]), '\n']
 			else:
-				result += [name, '=', val, '\n']
+				result += [name, '=', str(val), '\n']
 
 	def pickle(self):
 		result = []
