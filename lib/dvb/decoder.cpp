@@ -1239,13 +1239,14 @@ RESULT eTSMPEGDecoder::showSinglePic(const char *filename)
 		{
 			struct stat s;
 			fstat(f, &s);
+#if HAVE_HISILICON
+			if (m_video_clip_fd >= 0)
+				finishShowSinglePic();
+#endif
 			if (m_video_clip_fd == -1)
 				m_video_clip_fd = open("/dev/dvb/adapter0/video0", O_WRONLY);
 			if (m_video_clip_fd >= 0)
 			{
-#if HAVE_HISILICON
-				finishShowSinglePic();
-#endif
 				bool seq_end_avail = false;
 				size_t pos=0;
 				unsigned char pes_header[] = { 0x00, 0x00, 0x01, 0xE0, 0x00, 0x00, 0x80, 0x80, 0x05, 0x21, 0x00, 0x01, 0x00, 0x01 };
