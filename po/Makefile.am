@@ -1,6 +1,6 @@
 dist_noinst_SCRIPTS = xml2po.py
 
-LANGS = ar bg ca cs da de el en es et fa fi fr fy he hk hr hu id is it ku lt lv nl nb nn pl pt pt_BR ro ru sk sl sr sv th tr uk zh
+LANGS = ar bg ca cs da de el en es et fa fi fr fy he hr hu id is it ku lt lv nl nb nn pl pt pt_BR ro ru sk sl sr sv th tr uk zh_CN zh_HK
 LANGMO = $(LANGS:=.mo)
 LANGPO = $(LANGS:=.po)
 
@@ -10,7 +10,7 @@ if UPDATE_PO
 # the TRANSLATORS: allows putting translation comments before the to-be-translated line.
 enigma2-py.pot: $(top_srcdir)/*.py $(top_srcdir)/lib/python/*/*.py $(top_srcdir)/lib/python/*/*/*.py $(top_srcdir)/lib/python/Plugins/*/*/*.py
 	$(XGETTEXT) --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d @PACKAGE_NAME@ -s -o $@ $^
-	sed --in-place $@ --expression=s/CHARSET/UTF-8/
+	$(SED) --in-place $@ --expression=s/CHARSET/UTF-8/
 
 enigma2-xml.pot: $(srcdir)/xml2po.py $(top_srcdir)/data/*.xml $(top_srcdir)/lib/python/Plugins/SystemPlugins/*/*.xml
 	$(PYTHON) $^ > $@
@@ -23,6 +23,7 @@ enigma2.pot: enigma2-py.pot enigma2-xml.pot
 %.po: enigma2.pot
 	if [ -f $@ ]; then \
 		$(MSGMERGE) --backup=none --no-wrap --no-location -s -U $@ $< && touch $@; \
+		$(MSGATTRIB) --no-wrap --no-obsolete $@ -o $@; \
 	else \
 		$(MSGINIT) -l $@ -o $@ -i $< --no-translator; \
 	fi

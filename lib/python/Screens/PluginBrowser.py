@@ -9,6 +9,8 @@ from Components.PluginComponent import plugins
 from Components.PluginList import *
 from Components.Label import Label
 from Components.Pixmap import Pixmap
+from Components.Language import language
+from Components.ServiceList import refreshServiceList
 from Components.Harddisk import harddiskmanager
 from Components.Sources.StaticText import StaticText
 from Components.SystemInfo import SystemInfo, hassoftcaminstalled
@@ -136,6 +138,11 @@ class PluginBrowser(Screen, ProtectedScreen):
 			"9": self.keyNumberGlobal,
 			"0": self.keyNumberGlobal
 		})
+		self["HelpActions"] = ActionMap(["HelpActions"],
+		{
+			"displayHelp": self.showHelp,
+		})
+		self.help = False
 
 		self.number = 0
 		self.nextNumberTimer = eTimer()
@@ -223,6 +230,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 	def run(self):
 		plugin = self["list"].l.getCurrentSelection()[0]
 		plugin(session=self.session)
+		self.help = False
 
 	def setDefaultList(self, answer):
 		if answer:
@@ -280,7 +288,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 			config.misc.pluginbrowser.plugin_order.value = ",".join(plugin_order)
 			config.misc.pluginbrowser.plugin_order.save()
 
-	def updateList(self):
+	def updateList(self, showHelp=False):
 		self.list = []
 		pluginlist = plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU)[:]
 		for x in config.misc.pluginbrowser.plugin_order.value.split(","):
@@ -289,7 +297,17 @@ class PluginBrowser(Screen, ProtectedScreen):
 				self.list.append(PluginEntryComponent(plugin[0], self.listWidth))
 				pluginlist.remove(plugin[0])
 		self.list = self.list + [PluginEntryComponent(plugin, self.listWidth) for plugin in pluginlist]
+		if config.usage.menu_show_numbers.value in ("menu&plugins", "plugins") or showHelp:
+			for x in enumerate(self.list):
+				tmp = list(x[1][1])
+				tmp[7] = "%s %s" % (x[0]+1, tmp[7])
+				x[1][1]=tuple(tmp)
 		self["list"].l.setList(self.list)
+
+	def showHelp(self):
+		if config.usage.menu_show_numbers.value not in ("menu&plugins", "plugins"):
+			self.help = not self.help
+			self.updateList(self.help)
 
 	def delete(self):
 		self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginDownloadBrowser, PluginDownloadBrowser.REMOVE)
@@ -427,6 +445,9 @@ class PluginDownloadBrowser(Screen):
 			self["text"].show()
 			eDVBDB.getInstance().reloadBouquets()
 			eDVBDB.getInstance().reloadServicelist()
+			from Components.ParentalControl import parentalControl
+			parentalControl.open()
+			refreshServiceList()
 		if self.check_softcams:
 			SystemInfo["HasSoftcamInstalled"] = hassoftcaminstalled()
 		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
@@ -501,15 +522,16 @@ class PluginDownloadBrowser(Screen):
 
 	def doRemove(self, callback, pkgname):
 		if pkgname.startswith('kernel-module-') or pkgname.startswith('enigma2-locale-'):
-			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_remove + Ipkg.opkgExtraDestinations() + " " + pkgname, "sync"], closeOnSuccess = True)
+			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_remove + Ipkg.opkgExtraDestinations() + " " + pkgname, "sync"], skin="Console_Pig", closeOnSuccess = True)
 		else:
-			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_remove + Ipkg.opkgExtraDestinations() + " " + self.PLUGIN_PREFIX + pkgname, "sync"], closeOnSuccess = True)
+			pkgname = self.PLUGIN_PREFIX + pkgname
+			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_remove + Ipkg.opkgExtraDestinations() + " " + pkgname, "sync"], skin="Console_Pig", closeOnSuccess = True)
 
 	def doInstall(self, callback, pkgname):
 		if pkgname.startswith('kernel-module-') or pkgname.startswith('enigma2-locale-'):
 			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_install + " " + pkgname, "sync"], closeOnSuccess = True)
 		else:
-			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_install + " " + self.PLUGIN_PREFIX + pkgname, "sync"], closeOnSuccess = True)
+			self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_install + " " + self.PLUGIN_PREFIX + pkgname, "sync"], skin="Console_Pig", closeOnSuccess = True)
 
 	def runSettingsRemove(self, val):
 		if val:

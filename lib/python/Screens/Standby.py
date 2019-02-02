@@ -12,7 +12,8 @@ from Components.ImportChannels import ImportChannels
 from Components.Harddisk import internalHDDNotSleeping
 from Components.SystemInfo import SystemInfo
 from GlobalActions import globalActionMap
-from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference
+from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer
+from Components.Sources.StreamService import StreamServiceList
 from Tools.HardwareInfo import HardwareInfo
 from boxbranding import getBoxType
 
@@ -211,37 +212,47 @@ class QuitMainloopScreen(Screen):
 			3: _("The user interface of your receiver is restarting"),
 			4: _("Your frontprocessor will be upgraded\nPlease wait until your receiver reboots\nThis may take a few minutes"),
 			5: _("The user interface of your receiver is restarting\ndue to an error in mytest.py"),
+			6: _("The user interface of your receiver is restarting in debug mode"),
 			42: _("Unattended upgrade in progress\nPlease wait until your receiver reboots\nThis may take a few minutes") }.get(retvalue)
 		self["text"] = Label(text)
 
 inTryQuitMainloop = False
 
+def getReasons(session):
+	recordings = session.nav.getRecordings()
+	jobs = len(job_manager.getPendingJobs())
+	reasons = []
+	next_rec_time = -1
+	if not recordings:
+		next_rec_time = session.nav.RecordTimer.getNextRecordingTime()
+	if recordings or (next_rec_time > 0 and (next_rec_time - time()) < 360):
+		reasons.append(_("Recording(s) are in progress or coming up in few seconds!"))
+	if jobs:
+		if jobs == 1:
+			job = job_manager.getPendingJobs()[0]
+			reasons.append("%s: %s (%d%%)" % (job.getStatustext(), job.name, int(100*job.progress/float(job.end))))
+		else:
+			reasons.append((ngettext("%d job is running in the background!", "%d jobs are running in the background!", jobs) % jobs))
+	if eStreamServer.getInstance().getConnectedClients() or StreamServiceList:
+			reasons.append(_("Client is streaming from this box!"))
+	if not reasons and internalHDDNotSleeping():
+			reasons.append(_("Harddisk is not in sleepmode it could be in use!"))
+	return "\n".join(reasons)
+
 class TryQuitMainloop(MessageBox):
 	def __init__(self, session, retvalue=1, timeout=-1, default_yes = False):
 		self.retval = retvalue
-		recordings = session.nav.getRecordings()
-		jobs = len(job_manager.getPendingJobs())
 		self.connected = False
-		reason = ""
-		next_rec_time = -1
-		if not recordings:
-			next_rec_time = session.nav.RecordTimer.getNextRecordingTime()
-		if recordings or (next_rec_time > 0 and (next_rec_time - time()) < 360):
-			reason = _("Recording(s) are in progress or coming up in few seconds!") + '\n'
-		if jobs:
-			if jobs == 1:
-				job = job_manager.getPendingJobs()[0]
-				reason += "%s: %s (%d%%)\n" % (job.getStatustext(), job.name, int(100*job.progress/float(job.end)))
-			else:
-				reason += (ngettext("%d job is running in the background!", "%d jobs are running in the background!", jobs) % jobs) + '\n'
+		reason = getReasons(session)
 		if reason:
 			text = { 1: _("Really shutdown now?"),
 				2: _("Really reboot now?"),
 				3: _("Really restart now?"),
 				4: _("Really upgrade the frontprocessor and reboot now?"),
+				6: _("Really restart in debug mode now?"),
 				42: _("Really upgrade your settop box and reboot now?") }.get(retvalue)
 			if text:
-				MessageBox.__init__(self, session, reason+text, type = MessageBox.TYPE_YESNO, timeout = timeout, default = default_yes)
+				MessageBox.__init__(self, session, "%s\n%s" % (reason, text), type = MessageBox.TYPE_YESNO, timeout = timeout, default = default_yes)
 				self.skinName = "MessageBoxSimple"
 				session.nav.record_event.append(self.getRecordEvent)
 				self.connected = True

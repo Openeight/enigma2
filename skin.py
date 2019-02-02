@@ -15,6 +15,7 @@ from Components.RcModel import rc_model
 from Components.SystemInfo import SystemInfo
 
 colorNames = {}
+switchPixmap = {}
 # Predefined fonts, typically used in built-in screens and for components like
 # the movie list and so.
 fonts = {
@@ -41,7 +42,7 @@ class SkinError(Exception):
 
 dom_skins = [ ]
 
-def addSkin(name, scope = SCOPE_SKIN):
+def addSkin(name, scope = SCOPE_CURRENT_SKIN):
 	# read the skin
 	filename = resolveFilename(scope, name)
 	if fileExists(filename):
@@ -118,7 +119,6 @@ if addSkin(os.path.join('display', 'skin_display96.xml')):
 	# Color OLED
 	display_skin_id = 2
 addSkin('skin_text.xml')
-
 addSkin('skin_subtitles.xml')
 
 try:
@@ -243,7 +243,20 @@ def parseColor(s):
 			raise SkinError("color '%s' must be #aarrggbb or valid named color" % s)
 	return gRGB(int(s[1:], 0x10))
 
-def collectAttributes(skinAttributes, node, context, skin_path_prefix=None, ignore=(), filenames=frozenset(("pixmap", "pointer", "seek_pointer", "backgroundPixmap", "selectionPixmap", "sliderPixmap", "scrollbarbackgroundPixmap"))):
+def parseParameter(s):
+	"""This function is responsible for parsing parameters in the skin, it can parse integers, floats, hex colors, hex integers and named colors."""
+	if s[0] == '#':
+		return int(s[1:], 16)
+	elif s[:2] == '0x':
+		return int(s, 16)
+	elif '.' in s:
+		return float(s)
+	elif s in colorNames:
+		return colorNames[s].argb()
+	else:
+		return int(s)
+
+def collectAttributes(skinAttributes, node, context, skin_path_prefix=None, ignore=(), filenames=frozenset(("pixmap", "pointer", "seek_pointer", "backgroundPixmap", "selectionPixmap", "sliderPixmap", "scrollbarSliderPicture", "scrollbarbackgroundPixmap", "scrollbarBackgroundPicture"))):
 	# walk all attributes
 	size = None
 	pos = None
@@ -251,7 +264,10 @@ def collectAttributes(skinAttributes, node, context, skin_path_prefix=None, igno
 	for attrib, value in node.items():
 		if attrib not in ignore:
 			if attrib in filenames:
-				value = resolveFilename(SCOPE_CURRENT_SKIN, value, path_prefix=skin_path_prefix)
+				if "pointer" in attrib:
+					value = "%s%s%s" % (resolveFilename(SCOPE_CURRENT_SKIN, value.split(":")[0], path_prefix=skin_path_prefix), ":", value.split(":")[1])
+				else:
+					value = resolveFilename(SCOPE_CURRENT_SKIN, value, path_prefix=skin_path_prefix)
 			# Bit of a hack this, really. When a window has a flag (e.g. wfNoBorder)
 			# it needs to be set at least before the size is set, in order for the
 			# window dimensions to be calculated correctly in all situations.
@@ -325,6 +341,8 @@ class AttributeParser:
 		self.guiObject.setText(_(value))
 	def font(self, value):
 		self.guiObject.setFont(parseFont(value, self.scaleTuple))
+	def secondfont(self, value):
+		self.guiObject.setSecondFont(parseFont(value, self.scaleTuple))
 	def zPosition(self, value):
 		self.guiObject.setZPosition(int(value))
 	def itemHeight(self, value):
@@ -342,6 +360,12 @@ class AttributeParser:
 		ptr = loadPixmap(value, self.desktop)
 		self.guiObject.setSliderPicture(ptr)
 	def scrollbarbackgroundPixmap(self, value):
+		ptr = loadPixmap(value, self.desktop)
+		self.guiObject.setScrollbarBackgroundPicture(ptr)
+	def scrollbarSliderPicture(self, value):	# for compability same as sliderPixmap
+		ptr = loadPixmap(value, self.desktop)
+		self.guiObject.setSliderPicture(ptr)
+	def scrollbarBackgroundPicture(self, value):	# for compability same as scrollbarbackgroundPixmap
 		ptr = loadPixmap(value, self.desktop)
 		self.guiObject.setScrollbarBackgroundPicture(ptr)
 	def alphatest(self, value):
@@ -412,6 +436,14 @@ class AttributeParser:
 		self.guiObject.setBorderColor(parseColor(value))
 	def borderWidth(self, value):
 		self.guiObject.setBorderWidth(int(value))
+	def scrollbarSliderBorderWidth(self, value):
+		self.guiObject.setScrollbarSliderBorderWidth(int(value))
+	def scrollbarWidth(self, value):
+		self.guiObject.setScrollbarWidth(int(value))
+	def scrollbarSliderBorderColor(self, value):
+		self.guiObject.setSliderBorderColor(parseColor(value))
+	def scrollbarSliderForegroundColor(self, value):
+		self.guiObject.setSliderForegroundColor(parseColor(value))
 	def scrollbarMode(self, value):
 		self.guiObject.setScrollbarMode(getattr(self.guiObject, value))
 		#	{ "showOnDemand": self.guiObject.showOnDemand,
@@ -538,6 +570,21 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 				print "[Skin] Loading include:", skinfile
 				loadSkin(skinfile)
 
+	for c in skin.findall('switchpixmap'):
+		for pixmap in c.findall('pixmap'):
+			get_attr = pixmap.attrib.get
+			name = get_attr('name')
+			if not name:
+				raise SkinError('[Skin] pixmap needs name attribute')
+			filename = get_attr('filename')
+			if not filename:
+				raise SkinError('[Skin] pixmap needs filename attribute')
+			resolved_png = resolveFilename(SCOPE_CURRENT_SKIN, filename, path_prefix=path_prefix)
+			if fileExists(resolved_png):
+				switchPixmap[name] = LoadPixmap(resolved_png, cached=True)
+			else:
+				raise SkinError('[Skin] switchpixmap pixmap filename="%s" (%s) not found' % (filename, resolved_png))
+
 	for c in skin.findall("colors"):
 		for color in c.findall("color"):
 			get_attr = color.attrib.get
@@ -572,6 +619,11 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 					resolved_font = skin_path
 			addFont(resolved_font, name, scale, is_replacement, render)
 			#print "Font: ", resolved_font, name, scale, is_replacement
+
+		fallbackFont = resolveFilename(SCOPE_FONTS, "fallback.font", path_prefix=path_prefix)
+		if fileExists(fallbackFont):
+			addFont(fallbackFont, "Fallback", 100, -1, 0)
+
 		for alias in c.findall("alias"):
 			get = alias.attrib.get
 			try:
@@ -591,7 +643,7 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 			try:
 				name = get("name")
 				value = get("value")
-				parameters[name] = "," in value and map(int, value.split(",")) or int(value)
+				parameters[name] = "," in value and map(parseParameter, value.split(",")) or parseParameter(value)
 			except Exception, ex:
 				print "[Skin] Bad parameter", ex
 

@@ -18,6 +18,7 @@ dist_install_DATA = \
 	folder.png \
 	fza.png \
 	hdd.png \
+	hdd24.png \
 	ico_mp_forward.png \
 	ico_mp_pause.png \
 	ico_mp_play.png \
@@ -55,6 +56,8 @@ dist_install_DATA = \
 	lock.png \
 	lockBouquet.png \
 	loop.png \
+	menu_off.png \
+	menu_on.png \
 	marker.png \
 	mp_buttons.png \
 	movie_play.png \
@@ -112,6 +115,7 @@ dist_install_DATA = \
 	repzaprecclock_pre.png \
 	repzaprecclock_prepost.png \
 	stream.png \
+	stream24.png \
 	scan-c.png \
 	scan-s.png \
 	scan-t.png \

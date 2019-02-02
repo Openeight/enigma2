@@ -8,10 +8,12 @@ except:
 	OverscanWizard = None
 
 from Components.Pixmap import Pixmap
+from Components.ProgressBar import ProgressBar
+from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.config import config, ConfigBoolean, configfile
 from LanguageSelection import LanguageWizard
-from enigma import eConsoleAppContainer
+from enigma import eConsoleAppContainer, eTimer
 
 import os
 

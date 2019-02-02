@@ -1,6 +1,10 @@
 #ifndef __dvb_frontend_h
 #define __dvb_frontend_h
 
+#ifndef DTV_SCRAMBLING_SEQUENCE_INDEX
+#define DTV_SCRAMBLING_SEQUENCE_INDEX 70
+#endif
+
 #include <map>
 #include <lib/dvb/idvb.h>
 #include <lib/dvb/frontendparms.h>
@@ -87,6 +91,7 @@ private:
 	int m_dvbversion;
 	bool m_rotor_mode;
 	bool m_need_rotor_workaround;
+	bool m_blindscan;
 	bool m_multitype;
 	std::map<fe_delivery_system_t, bool> m_delsys, m_delsys_whitelist;
 	std::string m_filename;
@@ -128,7 +133,7 @@ public:
 
 	int readInputpower();
 	RESULT getFrontendType(int &type);
-	RESULT tune(const iDVBFrontendParameters &where);
+	RESULT tune(const iDVBFrontendParameters &where, bool blindscan = false);
 	RESULT prepare_sat(const eDVBFrontendParametersSatellite &, unsigned int timeout);
 	RESULT prepare_cable(const eDVBFrontendParametersCable &);
 	RESULT prepare_terrestrial(const eDVBFrontendParametersTerrestrial &);
