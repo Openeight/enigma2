@@ -2961,7 +2961,7 @@ bool eDVBFrontend::setSlotInfo(int id, const char *descr, bool enabled, bool isD
 
 bool eDVBFrontend::is_multistream()
 {
-#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 8
+#if DVB_API_VERSION >= 5
 	return fe_info.caps & FE_CAN_MULTISTREAM;
 #else //if DVB_API_VERSION < 5
 	return 0;
@@ -3012,7 +3012,7 @@ std::string eDVBFrontend::getCapabilities()
 	if (fe_info.caps &  FE_CAN_8VSB)			ss << " FE_CAN_8VSB";
 	if (fe_info.caps &  FE_CAN_16VSB)			ss << " FE_CAN_16VSB";
 	if (fe_info.caps &  FE_HAS_EXTENDED_CAPS)		ss << " FE_HAS_EXTENDED_CAPS";
-#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 8
+#if DVB_API_VERSION >= 5
 	if (fe_info.caps &  FE_CAN_MULTISTREAM)			ss << " FE_CAN_MULTISTREAM";
 #endif
 	if (fe_info.caps &  FE_CAN_TURBO_FEC)			ss << " FE_CAN_TURBO_FEC";
