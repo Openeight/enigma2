@@ -20,7 +20,7 @@ import commands
 import datetime
 from boxbranding import getBoxType, getMachineBrand, getMachineName, getDriverDate, getImageVersion, getImageBuild, getBrandOEM, getMachineBuild, getImageFolder, getMachineUBINIZE, getMachineMKUBIFS, getMachineMtdKernel, getMachineMtdRoot, getMachineKernelFile, getMachineRootFile, getImageFileSystem
 
-VERSION = _("Version") + " 6.2 openATV"
+VERSION = _("Version") + " 6.3 openeight images"
 
 HaveGZkernel = True
 if getMachineBuild() in ('ustym4kpro','hd60','i55plus','osmio4k','sf8008','cc1','dags72604', 'u51','u52','u53','h9','vuzero4k','u5','u5pvr','sf5008','et13000','et1x000',"vuuno4k","vuuno4kse", "vuultimo4k", "vusolo4k", "spark", "spark7162", "hd51", "hd52", "sf4008", "dags7252", "gb7252", "vs1500","h7",'xc7439','8100s'):
@@ -477,9 +477,8 @@ class ImageBackup(Screen):
 		cmdlist = []
 		cmdlist.append(self.message)
 		if HaveGZkernel:
-			cmdlist.append('echo "' + _("Kernel dump OK") + '"')
+			cmdlist.append('echo "Kernel dump OK"')
 			cmdlist.append("rm -rf /tmp/vmlinux.bin")
-			cmdlist.append('echo "_________________________________________________\n"')
 		cmdlist.append('echo "' + _("Almost there... ") + '"')
 		cmdlist.append('echo "' + _("Now building the USB-Image") + '"')
 
