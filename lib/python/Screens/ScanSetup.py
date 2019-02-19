@@ -1568,7 +1568,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				self.scan_sat.pilot.value,           # 9
 				self.scan_sat.is_id.value,           # 10
 				self.scan_sat.pls_mode.value,        # 11
-				self.scan_sat.pls_code.value         # 12
+				self.scan_sat.pls_code.value,        # 12
 				t2mi_plp_id                          # 13
 				# tsid
 				# onid
