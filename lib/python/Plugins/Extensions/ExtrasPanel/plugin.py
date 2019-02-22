@@ -231,7 +231,7 @@ def sccmain(session, **kwargs):
 	session.open(SundtekControlCenter)
 
 def SundtekControlCenterStart(menuid):
-	if (config.plugins.SundtekControlCenter.display.value == "2" or config.plugins.SundtekControlCenter.display.value == "3") and (menuid == "ExtrasPanel" or menuid == "services_recordings"):
+	if (config.plugins.SundtekControlCenter.display.value == "2" or config.plugins.SundtekControlCenter.display.value == "3") and (menuid == "scan" or menuid == "services_recordings"):
 		return [(_("Sundtek Control Center"), sccmain, "sundtek_control_center", 55)]
 	return [ ]
 

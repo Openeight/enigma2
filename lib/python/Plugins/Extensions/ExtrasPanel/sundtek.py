@@ -81,7 +81,7 @@ for i in range(0,vtuner_nifs):
 	config.plugins.SundtekControlCenter.__dict__["devices_%d" % i] = ConfigNothing()
 	config.plugins.SundtekControlCenter.__dict__["dvbtransmission1_%d" % i] = ConfigNothing()
 
-config.plugins.SundtekControlCenter.display = ConfigSelection(default="2", choices = [("0", _("nowhere")),("1", _("extension menu")),("2", _("scan menu")),("3", _("extension/scan menu"))])
+config.plugins.SundtekControlCenter.display = ConfigSelection(default="1", choices = [("0", _("nowhere")),("1", _("extension menu")),("2", _("scan menu")),("3", _("extension/scan menu"))])
 config.plugins.SundtekControlCenter.scanNetwork = ConfigNothing()
 config.plugins.SundtekControlCenter.networkIp = ConfigText(default="0.0.0.0", visible_width = 50, fixed_size = False)
 config.plugins.SundtekControlCenter.sunconf = ConfigSubsection()
