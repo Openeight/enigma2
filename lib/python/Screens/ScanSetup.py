@@ -874,7 +874,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Gold
 				self.scan_sat.pls_code.value = eDVBFrontendParametersSatellite.PLS_Default_Gold_Code
 			self.createSetup()
-		elif cur == self.t2mi_Entry:
+		elif self.scan_type.value == "single_transponder" and cur == self.t2mi_Entry:
 			if self.scan_sat.t2mi.value == "on":
 				if self.t2mi_pid_memory == 0:
 					self.t2mi_pid_memory = 4096;
