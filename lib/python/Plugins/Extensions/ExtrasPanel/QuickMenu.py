@@ -91,6 +91,11 @@ if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/CableScan/plugin.p
 	CABLESCAN = True
 else:
 	CABLESCAN = False
+if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/TerrestrialScan/plugin.pyo"):
+	from Plugins.SystemPlugins.TerrestrialScan.plugin import TerrestrialScanMain
+	TERRESTSCAN = True
+else:
+	TERRESTSCAN = False
 if path.exists("/usr/lib/enigma2/python/Plugins/PLi/SoftcamSetup/Sc.pyo"):
 	from Plugins.PLi.SoftcamSetup.Sc import ScSetupScreen
 	SC = True
@@ -324,6 +329,8 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent("Fast Scan",_("Fast Scan Service Searching"),_("Use Fast Scan to search for services")))
 		if CABLESCAN == True:
 			self.sublist.append(QuickSubMenuEntryComponent("Cable Scan",_("Cable Service Searching"),_("Scan for cable services")))
+		if TERRESTSCAN == True:
+			self.sublist.append(QuickSubMenuEntryComponent("Terrestrial Scan",_("Terrestrial Service Searching"),_("Scan for terrestrial services")))
 		self.sublist.append(QuickSubMenuEntryComponent('Sat Finder', _('Search Sats'), _('Search Sats, check signal and lock')))
 		self['sublist'].l.setList(self.sublist)
 
@@ -483,6 +490,8 @@ class QuickMenu(Screen):
 			FastScanMain(self.session)
 		elif item[0] == _("Cable Scan"):
 			CableScanMain(self.session)
+		elif item[0] == _("Terrestrial Scan"):
+			TerrestrialScanMain(self.session)
 		elif item[0] == _('Sat Finder'):
 			self.SatfinderMain()
 		elif item[0] == _('Software Update'):
