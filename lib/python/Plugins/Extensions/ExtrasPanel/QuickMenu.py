@@ -86,6 +86,11 @@ if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/FastScan/plugin.py
 	FASTSCAN = True
 else:
 	FASTSCAN = False
+if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/Blindscan/plugin.pyo"):
+	from Plugins.SystemPlugins.Blindscan.plugin import BlindscanMain
+	BLINDSCAN = True
+else:
+	BLINDSCAN = False
 if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/CableScan/plugin.pyo"):
 	from Plugins.SystemPlugins.CableScan.plugin import CableScanMain
 	CABLESCAN = True
@@ -327,6 +332,8 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Manual Scan', _('Service Searching Manually'), _('Manual scan for services')))
 		if FASTSCAN == True:
 			self.sublist.append(QuickSubMenuEntryComponent("Fast Scan",_("Fast Scan Service Searching"),_("Use Fast Scan to search for services")))
+		if BLINDSCAN == True:
+			self.sublist.append(QuickSubMenuEntryComponent("Blind Scan",_("Blindscan Service Searching"),_("Scan for satellite services")))
 		if CABLESCAN == True:
 			self.sublist.append(QuickSubMenuEntryComponent("Cable Scan",_("Cable Service Searching"),_("Scan for cable services")))
 		if TERRESTSCAN == True:
@@ -488,6 +495,8 @@ class QuickMenu(Screen):
 			self.session.open(ScanSetup)
 		elif item[0] == _("Fast Scan"):
 			FastScanMain(self.session)
+		elif item[0] == _("Blind Scan"):
+			BlindscanMain(self.session)
 		elif item[0] == _("Cable Scan"):
 			CableScanMain(self.session)
 		elif item[0] == _("Terrestrial Scan"):
