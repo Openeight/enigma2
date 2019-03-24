@@ -697,6 +697,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			self.list.append(self.typeOfScanEntry)
 
 		self.scan_networkScan.value = False
+		self.t2mi_Entry = getConfigListEntry(_('T2MI'), self.scan_sat.t2mi)
 		if self.DVB_type.value == "DVB-S":
 			if self.scan_type.value == "single_transponder":
 				self.updateSatList()
@@ -730,7 +731,6 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 						self.scan_sat.is_id.value = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
 						self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Gold
 						self.scan_sat.pls_code.value = eDVBFrontendParametersSatellite.PLS_Default_Gold_Code
-					self.t2mi_Entry = getConfigListEntry(_('T2MI'), self.scan_sat.t2mi)
 					self.list.append(self.t2mi_Entry)
 					if self.scan_sat.t2mi.value == "on":
 						self.list.append(getConfigListEntry( _('T2MI PID'), self.scan_sat.t2mi_pid))
