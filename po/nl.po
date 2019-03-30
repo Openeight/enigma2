@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-02 19:09+0200\n"
-"PO-Revision-Date: 2019-03-29 20:57\n"
+"PO-Revision-Date: 2019-03-30 13:31\n"
 "Last-Translator: Smokey \n"
 "Language-Team: OpenEight-Smokey\n"
 "Language: nl\n"
@@ -2263,8 +2263,8 @@ msgid ""
 "alternative one by one regardless of the tuner type."
 msgstr ""
 "Configureer welk type tuner de voorkeur heeft indien een zender op "
-"verschillende tuners beschikbaar is. Kies 'Geen prioriteit' om één voor één "
-"alle alternatieven te proberen, onafhankelijk van het type tuner."
+"verschillende tuners beschikbaar is. Kies 'Geen prioriteit' om één voor "
+"één alle alternatieven te proberen, onafhankelijk van het type tuner."
 
 msgid ""
 "Configure which tuner will be preferred, when more than one tuner is "
@@ -2682,6 +2682,9 @@ msgstr "Standaard opnamelocatie"
 
 msgid "Default settings"
 msgstr "Standaard instellingen"
+
+msgid "Define the location of the EPG Cache file."
+msgstr "Geef de plaats van het EPG cache bestand aan."
 
 msgid "Delay before key repeat starts:"
 msgstr "Wachttijd voor toetsherhaling begint:"
@@ -3260,6 +3263,12 @@ msgstr "Teletext caching inschakelen"
 msgid "Enable the IP server"
 msgstr "Schakel de IP-server in"
 
+msgid "Enable to display all true/false, yes/no, on/off and enable/disable set "
+"up options as a graphical switch."
+msgstr ""
+"Indien geactiveerd, zullen de setup keuzes correct/incorrect, ja/nee, aan/uit"
+" en activeer/deactiveer weergegeven worden als een grafische schakelaar."
+
 msgid "Enable volume control with arrow buttons"
 msgstr "Activeer volume regeling met de pijltoetsen"
 
@@ -3649,6 +3658,9 @@ msgstr "Volumetoetsen doorsturen"
 
 msgid "Frame size in full view"
 msgstr "Framegrootte in vol beeld"
+
+msgid "FreeSpace"
+msgstr "Vrije Ruimte"
 
 msgid "Free Space"
 msgstr "Vrije Ruimte"
@@ -4073,6 +4085,9 @@ msgstr "Inactiviteits Sleeptimer"
 
 msgid "Include AIT in http streams"
 msgstr "Neem AIT op in http streams"
+
+msgid "Include CI assignment"
+msgstr "Voeg CI-toewijzing toe"
 
 msgid "Include ECM in http streams"
 msgstr "Neem ECM op in http streams"
@@ -4531,6 +4546,9 @@ msgstr "Lokaal netwerk"
 msgid "Location"
 msgstr "Locatie"
 
+msgid "Location EPG Cache file"
+msgstr "Locatie van het EPG cache bestand"
+
 msgid "Location for instant recordings"
 msgstr "Opnamelocatie directe opnames"
 
@@ -4641,6 +4659,9 @@ msgstr "Dit medium is geen beschrijfbare DVD!"
 
 msgid "Medium is not empty!"
 msgstr "Medium is niet leeg!"
+
+msgid "MemInfo"
+msgstr "Geheugen Info"
 
 msgid "Memory"
 msgstr "Geheugen"
@@ -4794,6 +4815,9 @@ msgstr "Multi-EPG bouquet selectie"
 
 msgid "Multiboot Image created on: %s"
 msgstr "Multiboot Image gecreëerd op: %s"
+
+msgid "MultiBoot Selector"
+msgstr "MultiBoot Selectie"
 
 msgid "Multimedia"
 msgstr "Multimedia"
@@ -6340,6 +6364,9 @@ msgstr "Herstart Netwerk Adapter"
 msgid "Restart enigma"
 msgstr "Herstart enigma"
 
+msgid "Restart enigma in debug mode"
+msgstr "Herstart enigma in debug modus"
+
 msgid "Restart network"
 msgstr "Netwerk herstarten"
 
@@ -6727,6 +6754,9 @@ msgstr "Kies CommitInfo Log"
 msgid "Select Enigma2 Skin"
 msgstr "Selecteer een Enigma2 skin"
 
+msgid "Select Files/folders to backup..."
+msgstr "Kies bestanden/mappen voor de backup..."
+
 msgid "Select HDD"
 msgstr "Kies harde schijf"
 
@@ -6956,6 +6986,9 @@ msgstr ""
 
 msgid "Services"
 msgstr "Kanalen"
+
+msgid "Set CI assignment for detection of available services."
+msgstr "Kies CI toekenning om de beschikbare zenders te detecteren."
 
 msgid "Set DVB Time"
 msgstr "Stel DVB tijd in"
@@ -8575,7 +8608,8 @@ msgstr ""
 "sorteer en verberg menu activeren."
 
 msgid "This option allows you to alphabetically sort setup menu entries."
-msgstr "Deze optie biedt de mogelijkheid om setup-items alfabetisch te sorteren."
+msgstr ""
+"Deze optie biedt de mogelijkheid om setup-items alfabetisch te sorteren."
 
 msgid "This option allows you to power off the display."
 msgstr "Met deze optie kunt u het display aan/uit schakelen."
@@ -9846,8 +9880,11 @@ msgstr ""
 "gedetecteerd indien deze stopt met draaien. (indien door de tuner "
 "ondersteund)"
 
-msgid "When enabled, number markers will be hiden."
-msgstr "Indien geactiveerd, dan zullen de kanaalnummers niet worden getoond."
+msgid "When enabled, number markers will be hidden."
+msgstr ""
+"Indien geactiveerd, dan zullen de kanaalnummers van lege kanalen niet in de "
+"zenderlijst worden getoond.\n\nDeze optie is alleen van toepassing op een "
+"zenderlijst of bouquet, gemaakt met de 'fastscan' en/of 'kabelscan optie'."
 
 msgid "When enabled, reformat subtitles to match the width of the screen."
 msgstr ""
