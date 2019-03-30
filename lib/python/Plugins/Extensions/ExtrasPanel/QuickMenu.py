@@ -629,7 +629,7 @@ def QuickMenuEntryComponent(name, description, long_description = None, width = 
 		return [_(name),
 		MultiContentEntryText(pos=(90, 2), size=(width-90, 40), font=0, text = _(name)),
 		MultiContentEntryText(pos=(90, 42), size=(width-90, 30), font=1, text = _(description)),
-		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), png = png),
+		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), flags = BT_SCALE, png = png),
 		_(long_description)]
 	elif sz_w > 720:
 		return [_(name),
