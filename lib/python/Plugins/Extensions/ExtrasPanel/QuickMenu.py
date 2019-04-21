@@ -102,7 +102,7 @@ if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/TerrestrialScan/pl
 else:
 	TERRESTSCAN = False
 if path.exists("/usr/lib/enigma2/python/Plugins/PLi/SoftcamSetup/Sc.pyo"):
-	from Plugins.PLi.SoftcamSetup.Sc import ScSetupScreen
+	from Plugins.PLi.SoftcamSetup.Sc import ScNewSelection, ScSetupScreen
 	SC = True
 else:
 	SC = False
@@ -117,7 +117,6 @@ if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoResolution/plu
 else:
 	AUTORES = False
 
-
 def isFileSystemSupported(filesystem):
 	try:
 		for fs in open('/proc/filesystems', 'r'):
@@ -128,7 +127,6 @@ def isFileSystemSupported(filesystem):
 	except Exception as ex:
 		print '[Harddisk] Failed to read /proc/filesystems:', ex
 
-
 def Check_Softcam():
 	found = False
 	for x in listdir('/etc'):
@@ -138,6 +136,14 @@ def Check_Softcam():
 
 	return found
 
+def Softcam_Check():
+	found = False
+	for x in os.listdir('/etc/init.d'):
+		if x.find('softcam.') > -1 and x != 'softcam.None':
+			found = True
+			break
+
+	return found
 
 class QuickMenu(Screen):
 	skin = '\n\t\t<screen name="QuickMenu" position="center,center" size="1180,600" backgroundColor="black" flags="wfBorder">\n\t\t<widget name="list" position="21,32" size="370,420" backgroundColor="black" itemHeight="60" transparent="1" />\n\t\t<widget name="sublist" position="410,32" size="300,420" backgroundColor="black" itemHeight="60" />\n\t\t<eLabel position="400,30" size="2,420" backgroundColor="#666666" zPosition="3" />\n\t\t<widget source="session.VideoPicture" render="Pig" position="720,30" size="450,300" backgroundColor="transparent" zPosition="1" />\n\t\t<widget name="description" position="22,455" size="1150,100" zPosition="1" font="Regular;22" halign="center" valign="center" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_red" position="20,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_green" position="325,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_yellow" position="630,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" valign="center" />\n\t\t<widget name="key_blue" position="935,571" size="234,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<eLabel name="new eLabel" position="21,567" size="300,3" zPosition="3" backgroundColor="red" />\n\t\t<eLabel name="new eLabel" position="325,567" size="300,3" zPosition="3" backgroundColor="green" />\n\t\t<eLabel name="new eLabel" position="630,567" size="300,3" zPosition="3" backgroundColor="yellow" />\n\t\t<eLabel name="new eLabel" position="935,567" size="234,3" zPosition="3" backgroundColor="blue" />\n\t\t</screen> '
@@ -235,7 +241,7 @@ class QuickMenu(Screen):
 		self.list = []
 		self.oldlist = []
 		self.list.append(QuickMenuEntryComponent('Software Manager', _('Update/Backup/Restore your box'), _('Update/Backup your firmware, Backup/Restore settings')))
-		if Check_Softcam():
+		if Check_Softcam() or (Softcam_Check() and SC):
 			self.list.append(QuickMenuEntryComponent('Softcam', _('Start/stop/select cam'), _('Start/stop/select your cam, You need to install first a softcam')))
 		self.list.append(QuickMenuEntryComponent('System', _('System Setup'), _('Setup your System')))
 		self.list.append(QuickMenuEntryComponent('Mounts', _('Mount Setup'), _('Setup your mounts for network and storage devices')))
@@ -258,10 +264,6 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Recording settings', _('Recording Setup'), _('Setup your recording config')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording paths', _('Recording paths Setup'), _('Setup your recording paths config')))
 		self.sublist.append(QuickSubMenuEntryComponent('EPG settings', _('EPG Setup'), _('Setup your EPG config')))
-		if SC:
-			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info Sc",_("Sc Ecm Info setup"),_("Setup Ecm Info of the Softcam Manager")))
-		if ECMINFOSETUP:
-			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info",_("Ecm Info setup"),_("Setup Ecm Info of the CCcamInfo plugin")))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qnetwork(self):
@@ -302,7 +304,13 @@ class QuickMenu(Screen):
 		if Check_Softcam():
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam Panel', _('Control your Softcams'), _('Use the Softcam Panel to control your Cam. This let you start/stop/select a cam')))
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Panel Setup',_('Softcam-Panel Setup'),_('Softcam-Panel Setup')))
-		self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them')))
+		if path.exists('/sys/module/brcmstb_nand'):
+			self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them')))
+		if Softcam_Check():
+			self.sublist.append(QuickSubMenuEntryComponent('Cam Setup', _('Cam Setup'), _('Select and control your Cam. This let you start/stop/select a cam')))
+			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info Sc",_("Sc Ecm Info setup"),_("Setup Ecm Info of the Softcam Manager")))
+		if ECMINFOSETUP:
+			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info",_("Ecm Info setup"),_("Setup Ecm Info of the CCcamInfo plugin")))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qavsetup(self):
@@ -448,10 +456,6 @@ class QuickMenu(Screen):
 			self.openSetup('recording')
 		elif item[0] == _('EPG settings'):
 			self.openSetup('epgsettings')
-		elif item[0] == _("Ecm Info Sc"):
-			self.session.open(ScSetupScreen)
-		elif item[0] == _("Ecm Info"):
-			self.session.open(EcmInfoConfigMenu)
 		elif item[0] == _('Network Mount Manager'):
 			self.session.open(AutoMountManager, None, plugin_path_networkbrowser)
 		elif item[0] == _('Network Browser'):
@@ -464,6 +468,12 @@ class QuickMenu(Screen):
 			self.session.open(ShowSoftcamPanelExtensions)
 		elif item[0] == _('Download Softcams'):
 			self.session.open(ShowSoftcamPackages)
+		elif item[0] == _('Cam Setup'):
+			self.session.open(ScNewSelection)
+		elif item[0] == _("Ecm Info Sc"):
+			self.session.open(ScSetupScreen)
+		elif item[0] == _("Ecm Info"):
+			self.session.open(EcmInfoConfigMenu)
 		elif item[0] == _('AV Settings'):
 			videoSetupMain(self.session)
 		elif item[0] == _('Auto Resolution'):
