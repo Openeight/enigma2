@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-02 19:09+0200\n"
-"PO-Revision-Date: 2019-04-21 19:03\n"
+"PO-Revision-Date: 2019-04-21 22:48\n"
 "Last-Translator: Smokey \n"
 "Language-Team: OpenEight-Smokey\n"
 "Language: nl\n"
@@ -837,6 +837,15 @@ msgstr "Bijna klaar... "
 msgid "Alpha"
 msgstr "Transparantie"
 
+msgid "Also import at reboot/restart enigma2"
+msgstr "Importeer ook na een reboot/herstart van enigma2"
+
+msgid "Also import from the extension menu"
+msgstr "Maak de import ook mogelijk via het extensie-menu"
+
+msgid "Also import when box is leaving standby"
+msgstr "Importeer ook indien de box vanuit standby opstart"
+
 msgid "Also on standby"
 msgstr "ook na standby"
 
@@ -1441,6 +1450,12 @@ msgstr "Zender:"
 
 msgid "Channellist menu"
 msgstr "Zenderlijstmenu"
+
+msgid "Channels and EPG"
+msgstr "Zenders + EPG"
+
+msgid "Channels only"
+msgstr "Alléén de zenders"
 
 msgid "Chap."
 msgstr "Hfdst."
@@ -2554,6 +2569,9 @@ msgstr "Aangepaste skiptijd voor de '7'/'9'-toetsen"
 msgid "Customize"
 msgstr "Diverse instellingen"
 
+msgid "Customize OpenWebIF settings for fallback tuner"
+msgstr "Pas de instellingen van de fallback tuner aan in de OpenWebif"
+
 msgid "Customize channel list cursor behavior"
 msgstr "Pas het gedrag van de zenderlijst cursor aan"
 
@@ -2765,6 +2783,13 @@ msgstr "Beschrijving"
 
 msgid "Deselect"
 msgstr "Deselecteer"
+
+msgid "Destination of fallback remote receiver"
+msgstr ""
+"Hier geeft u de locatie van de Fallback (externe) tuner aan. U kunt kiezen uit"
+" een voorgedefiniïerde in het netwerk aanwezige receiver of een zelf in te "
+"voeren IP adres of URL. In twee gevallen dient u een poortnummer in te geven. "
+"Dit wordt duidelijk aangegeven."
 
 msgid "Details for plugin: "
 msgstr "Plugin details:"
@@ -3119,6 +3144,9 @@ msgstr "EPG taalselectie 2"
 msgid "EPG location"
 msgstr "EPG locatie"
 
+msgid "EPG only"
+msgstr "Alléén de EPG"
+
 msgid "EPG selection"
 msgstr "EPG selectie"
 
@@ -3248,6 +3276,9 @@ msgstr "Activeer de 'fallback remote receiver'"
 msgid "Enable freesat EPG"
 msgstr "Freesat EPG inschakelen"
 
+msgid "Enable import timer from fallback tuner"
+msgstr "Activeer de import van timers van de Fallback tuner"
+
 msgid "Enable multiple bouquets"
 msgstr "Zenders in meerdere bouquetten toestaan"
 
@@ -3331,8 +3362,14 @@ msgstr "Enigma 2 hertarten is afgebroken door de gebruiker !"
 msgid "Enigma2 skin selector"
 msgstr "Enigma2 skinkeuze"
 
+msgid "Enter IP address"
+msgstr "Voer een IP adres in"
+
 msgid "Enter PIN"
 msgstr "Voer de pincode in"
+
+msgid "Enter URL"
+msgstr "Voer een URL in"
 
 msgid "Enter an URL where alternative images could be listed for FlashImage"
 msgstr "Hier kunt u een URL opgeven waar alternatieve images t.b.v. Flashimage "
@@ -3528,8 +3565,23 @@ msgstr "Mislukt"
 msgid "Failed to write /tmp/positionersetup.log: "
 msgstr "Kan niet naar /tmp/positionersetup.log schrijven: "
 
+msgid "Fallback remote receiver"
+msgstr "Fallback externe tuner"
+
+msgid "Fallback remote receiver IP"
+msgstr "IP adres van de Fallback tuner"
+
+msgid "Fallback remote receiver Port"
+msgstr "Ingave van de poort van de Fallback tuner"
+
 msgid "Fallback remote receiver URL"
-msgstr "URL van de 'fallback remote receiver'"
+msgstr "URL (http) van de Fallback ontvanger"
+
+msgid "Fallback remote receiver setup"
+msgstr "Fallback remote tuner instellingen"
+
+msgid "Fallback tuner setup"
+msgstr "Fallback tuner instellingen"
 
 msgid "Fan %d"
 msgstr "Fan %d"
@@ -3745,6 +3797,9 @@ msgid ""
 msgstr ""
 "De gebruikersinterface moet herstart worden om\n"
 "de nieuwe skin te activeren. Nu herstarten?"
+
+msgid "GUI Settings"
+msgstr "GUI Instellingen"
 
 msgid "Gateway"
 msgstr "Gateway"
@@ -4007,6 +4062,12 @@ msgstr "INACTIEF"
 msgid "IP address"
 msgstr "IP-adres"
 
+msgid "IP of fallback remote receiver"
+msgstr ""
+"Indien u bij de voorgaande optie heeft gekozen voor 'IP adres', dan kunt u nu "
+"een specifiek IP adres ingeven waarop de Fallback tuner in het netwerk te "
+"vinden is."
+
 msgid "IP server is disabled"
 msgstr "IP-server is uitgeschakeld"
 
@@ -4095,6 +4156,32 @@ msgstr "Image: "
 
 msgid "Immediate shutdown"
 msgstr "Direct uitschakelen"
+
+msgid ""
+"Import channels and/or EPG from remote receiver URL when receiver is booted"
+msgstr ""
+"Met deze optie geeft u aan wat u wilt importeren vanaf de externe ontvanger na"
+" een herstart.\n\nU kunt kiezen uit niets, alléén de zenders, zenders + "
+"EPG of alléén de EPG."
+
+msgid "Import channels and/or EPG from remote receiver URL also when the "
+"receiver is getting out of standby"
+msgstr "Indien geactiveerd, dan importeert u de zenders en/of de EPG vanaf de "
+"externe ontvanger als de ontvanger uit standby komt?"
+
+msgid "Import channels and/or EPG from remote receiver URL when receiver or "
+"enigma2 is restarted"
+msgstr "Indien geactiveerd, dan importeert u de zenders en/of de EPG vanaf de "
+"externe ontvanger als de ontvanger of enigma2 is herstart."
+
+msgid "Import channels from fallback tuner"
+msgstr "Importeer de zenders vanaf de Fallback tuner"
+
+msgid "Import from remote receiver URL"
+msgstr "Importeer div. data vanaf een externe ontvanger"
+
+msgid "Import remote receiver URL"
+msgstr "Importeer externe tuner URL"
 
 msgid ""
 "In order to record a timer, the TV was switched to the recording service!\n"
@@ -4616,6 +4703,11 @@ msgstr "Hoofdmenu modus"
 
 msgid "Maintain old EPG data for"
 msgstr "Oude EPG data bewaren voor"
+
+msgid "Make it possible to manually initiate the channels import and/or EPG via"
+" the extension menu"
+msgstr "Activeer de mogelijkheid om handmatig de import van zenders en/of EPG "
+"via het extensie-menu te doen."
 
 msgid "Make this mark an 'in' point"
 msgstr "Markeer dit als 'in' punt"
@@ -5865,6 +5957,9 @@ msgstr "Polarisatie"
 msgid "Polish"
 msgstr "Pools"
 
+msgid "Port"
+msgstr "Poort"
+
 msgid "Port A"
 msgstr "Poort A"
 
@@ -5876,6 +5971,11 @@ msgstr "Poort C"
 
 msgid "Port D"
 msgstr "Poort D"
+
+msgid "Port of fallback remote receiver"
+msgstr ""
+"Indien bij 'Fallback tuner' (optie 3) gekozen is voor een separaat IP adres, "
+"dan kunt u hier de gebruikte poort van de Fallback tuner ingeven."
 
 msgid "Portuguese"
 msgstr "Portugees"
@@ -6557,6 +6657,9 @@ msgstr "SNR:"
 msgid "SSID:"
 msgstr "SSID:"
 
+msgid "Same as stream"
+msgstr "Identiek aan de stream"
+
 msgid "Same resolution as skin"
 msgstr "Identiek aan de skin resolutie"
 
@@ -7057,6 +7160,15 @@ msgstr ""
 "Systeem tijd handmatig instellen gaat niet, schakel 'Enigma 2 Tijd update' "
 "eerst uit !"
 
+msgid "Set the User ID of the OpenWebif from your fallback tuner"
+msgstr "Voer het gebruikers ID van de OpenWebif in vanaf de fallback tuner."
+
+msgid "Set the password of the OpenWebif from your fallback tuner"
+msgstr "Stel het wachtwoord van de OpenWebif in vanaf de fallback tuner"
+
+msgid "Set the port of the OpenWebif from your fallback tuner"
+msgstr "Stel de poort van de OpenWebif in vanaf de fallback tuner."
+
 msgid "Set the scrolling speed of text on the front display."
 msgstr "Stel de scroll snelheid in van de text op het display."
 
@@ -7483,6 +7595,23 @@ msgstr "Laat de opnamelengte zien in opnamelijst"
 
 msgid "Show multi channel EPG"
 msgstr "Toon de meerkanaals EPG"
+
+msgid "Show notification when import channels and/or EPG from remote receiver "
+"URL did not complete"
+msgstr "Indien geactiveerd, dan wordt er een melding weergegeven indien de "
+"import van zenders en/of EPG vanaf de externe ontvanger niet (compleet) gelukt"
+" is."
+
+msgid "Show notification when import channels and/or EPG from remote receiver "
+"URL is completed"
+msgstr "Indien geactiveerd, dan wordt er een melding weergegeven indien de "
+"import van zenders en/of EPG vanaf de externe ontvanger geslaagd is."
+
+msgid "Show notification when import channels was not successful"
+msgstr "Toon een melding indien de import is mislukt"
+
+msgid "Show notification when import channels was successful"
+msgstr "Toon een melding indien de import is gelukt"
 
 msgid "Show only found image and mtd partitions.\n"
 msgstr "Toon alleen gevonden image en mtd partities.\n"
@@ -9294,6 +9423,9 @@ msgstr "Gebruik de prullenbak in de opnamelijst"
 msgid "Used service scan type"
 msgstr "Gebruikte zoekmethode"
 
+msgid "User ID"
+msgstr "Gebruikers ID"
+
 msgid "User - bouquets"
 msgstr "Gebruiker - bouquets"
 
@@ -9679,6 +9811,10 @@ msgstr ""
 "Indien geactiveerd, zullen de links, rechts, CH+/-, B+/-, P+/- toetsen "
 "volgens de 'neutrino' stijl reageren in plaats van de enigma2 stijl"
 
+msgid "When enabled the timer from the fallback tuner is imported"
+msgstr ""
+"Indien geactiveerd, dan wordt de timer van de Fallback tuner geimporteerd"
+
 msgid ""
 "When enabled then when you select a new channel in the channel selection the "
 "channel selection will not close. It will only close when you select the "
@@ -9694,6 +9830,11 @@ msgid ""
 msgstr ""
 "Indien geactiveerd, dan kunt u het volume regelen met de pijltoetsen in "
 "plaats van het openen van de kanaal selectie."
+
+msgid "When enabled you can customize the OpenWebIf settings for the fallback "
+"tuner"
+msgstr "Indien geactiveerd, dan kunt u de Fallback instellingen in de "
+"Webinterface wijzigen."
 
 msgid ""
 "When enabled you can specify a timeframe to ignore the shutdown timer when "
