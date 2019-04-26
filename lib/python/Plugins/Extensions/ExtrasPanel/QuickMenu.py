@@ -18,6 +18,7 @@ from Screens.ScanSetup import ScanSimple, ScanSetup
 from Screens.Setup import Setup, getSetupTitle
 from Screens.HarddiskSetup import HarddiskSelection, HarddiskFsckSelection
 from Screens.Ipkuninstall import Ipkuninstall
+from Screens.SetupFallbacktuner import SetupFallbacktuner
 from Screens.SkinSelector import SkinSelector, LcdSkinSelector
 from Screens.RecordPaths import RecordPathsSettings
 from Plugins.SystemPlugins.Videomode.plugin import videoSetupMain
@@ -338,6 +339,7 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent("Sundtek Control Center",_("Sundtek tuner Setup"),_("Configure your Sundtek tuner(s) or check/update the drivers")))
 		self.sublist.append(QuickSubMenuEntryComponent('Automatic Scan', _('Service Searching Automatically'), _('Automatic scan for services')))
 		self.sublist.append(QuickSubMenuEntryComponent('Manual Scan', _('Service Searching Manually'), _('Manual scan for services')))
+		self.sublist.append(QuickSubMenuEntryComponent('Fallback remote receiver setup', _('Setup for fallback remote receiver(s)'), _('Enable and setup your fallback remote receiver(s)')))
 		if FASTSCAN == True:
 			self.sublist.append(QuickSubMenuEntryComponent("Fast Scan",_("Fast Scan Service Searching"),_("Use Fast Scan to search for services")))
 		if BLINDSCAN == True:
@@ -503,6 +505,8 @@ class QuickMenu(Screen):
 			self.session.open(ScanSimple)
 		elif item[0] == _('Manual Scan'):
 			self.session.open(ScanSetup)
+		elif item[0] == _("Fallback remote receiver setup"):
+			self.session.open(SetupFallbacktuner)
 		elif item[0] == _("Fast Scan"):
 			FastScanMain(self.session)
 		elif item[0] == _("Blind Scan"):
