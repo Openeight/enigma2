@@ -45,7 +45,7 @@ inEXTRASPanel = None
 config.softcam = ConfigSubsection()
 config.softcam.actCam = ConfigText(visible_width=200)
 config.softcam.actCam2 = ConfigText(visible_width=200)
-config.softcam.waittime = ConfigSelection([('0', _("don't wait'")),
+config.softcam.waittime = ConfigSelection([('0', _("don't wait")),
  ('1', _('1 second')),
  ('5', _('5 seconds')),
  ('10', _('10 seconds')),
