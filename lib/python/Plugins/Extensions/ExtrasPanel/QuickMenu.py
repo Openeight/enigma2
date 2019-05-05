@@ -107,6 +107,11 @@ if path.exists("/usr/lib/enigma2/python/Plugins/PLi/SoftcamSetup/Sc.pyo"):
 	SC = True
 else:
 	SC = False
+if path.exists("/usr/lib/enigma2/python/Screens/SoftcamSetup.pyo"):
+	from Screens.SoftcamSetup import SoftcamSetup
+	SSC = True
+else:
+	SSC = False
 if path.exists("/usr/lib/enigma2/python/Plugins/Extensions/CCcamInfo/plugin.pyo"):
 	from Plugins.Extensions.CCcamInfo.plugin import EcmInfoConfigMenu
 	ECMINFOSETUP = True
@@ -307,9 +312,11 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Panel Setup',_('Softcam-Panel Setup'),_('Softcam-Panel Setup')))
 		if path.exists('/sys/module/brcmstb_nand'):
 			self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them')))
-		if Softcam_Check():
+		if Softcam_Check() and SC:
 			self.sublist.append(QuickSubMenuEntryComponent('Cam Setup', _('Cam Setup'), _('Select and control your Cam. This let you start/stop/select a cam')))
 			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info Sc",_("Sc Ecm Info setup"),_("Setup Ecm Info of the Softcam Manager")))
+		if Softcam_Check() and SSC:
+			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Setup', _('Softcam Setup'), _('Select and control your Cam. Here you can start/stop/select a cam\nand see ecm info')))
 		if ECMINFOSETUP:
 			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info",_("Ecm Info setup"),_("Setup Ecm Info of the CCcamInfo plugin")))
 		self['sublist'].l.setList(self.sublist)
@@ -474,6 +481,8 @@ class QuickMenu(Screen):
 			self.session.open(ScNewSelection)
 		elif item[0] == _("Ecm Info Sc"):
 			self.session.open(ScSetupScreen)
+		elif item[0] == _('Softcam-Setup'):
+			self.session.open(SoftcamSetup)
 		elif item[0] == _("Ecm Info"):
 			self.session.open(EcmInfoConfigMenu)
 		elif item[0] == _('AV Settings'):
