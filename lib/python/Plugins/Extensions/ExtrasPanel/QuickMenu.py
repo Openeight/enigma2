@@ -97,6 +97,11 @@ if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/CableScan/plugin.p
 	CABLESCAN = True
 else:
 	CABLESCAN = False
+if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/MisPlsLcnScan/plugin.pyo"):
+	from Plugins.SystemPlugins.MisPlsLcnScan.plugin import MisPlsLcnScanMain
+	MISPLSLCNSCAN = True
+else:
+	MISPLSLCNSCAN = False
 if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/TerrestrialScan/plugin.pyo"):
 	from Plugins.SystemPlugins.TerrestrialScan.plugin import TerrestrialScanMain
 	TERRESTSCAN = True
@@ -247,7 +252,7 @@ class QuickMenu(Screen):
 		self.list = []
 		self.oldlist = []
 		self.list.append(QuickMenuEntryComponent('Software Manager', _('Update/Backup/Restore your box'), _('Update/Backup your firmware, Backup/Restore settings')))
-		if Check_Softcam() or (Softcam_Check() and SC):
+		if Check_Softcam() or (Softcam_Check() and SC) or (Softcam_Check() and SCC):
 			self.list.append(QuickMenuEntryComponent('Softcam', _('Start/stop/select cam'), _('Start/stop/select your cam, You need to install first a softcam')))
 		self.list.append(QuickMenuEntryComponent('System', _('System Setup'), _('Setup your System')))
 		self.list.append(QuickMenuEntryComponent('Mounts', _('Mount Setup'), _('Setup your mounts for network and storage devices')))
@@ -310,13 +315,12 @@ class QuickMenu(Screen):
 		if Check_Softcam():
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam Panel', _('Control your Softcams'), _('Use the Softcam Panel to control your Cam. This let you start/stop/select a cam')))
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Panel Setup',_('Softcam-Panel Setup'),_('Softcam-Panel Setup')))
-		if path.exists('/sys/module/brcmstb_nand'):
 			self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them')))
 		if Softcam_Check() and SC:
 			self.sublist.append(QuickSubMenuEntryComponent('Cam Setup', _('Cam Setup'), _('Select and control your Cam. This let you start/stop/select a cam')))
 			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info Sc",_("Sc Ecm Info setup"),_("Setup Ecm Info of the Softcam Manager")))
 		if Softcam_Check() and SSC:
-			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Setup', _('Softcam Setup'), _('Select and control your Cam. Here you can start/stop/select a cam\nand see ecm info')))
+			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Setup', _('Softcam Setup'), _('Select and control your Softcam. Here you can start/stop/select a softcam, and see ecm info')))
 		if ECMINFOSETUP:
 			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info",_("Ecm Info setup"),_("Setup Ecm Info of the CCcamInfo plugin")))
 		self['sublist'].l.setList(self.sublist)
@@ -353,6 +357,8 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent("Blind Scan",_("Blindscan Service Searching"),_("Scan for satellite services")))
 		if CABLESCAN == True:
 			self.sublist.append(QuickSubMenuEntryComponent("Cable Scan",_("Cable Service Searching"),_("Scan for cable services")))
+		if MISPLSLCNSCAN == True:
+			self.sublist.append(QuickSubMenuEntryComponent("MIS/PLS LCN Scan",_("MIS/PLS LCN Service Searching"),_("Scan for MIS/PLS LCN services")))
 		if TERRESTSCAN == True:
 			self.sublist.append(QuickSubMenuEntryComponent("Terrestrial Scan",_("Terrestrial Service Searching"),_("Scan for terrestrial services")))
 		self.sublist.append(QuickSubMenuEntryComponent('Sat Finder', _('Search Sats'), _('Search Sats, check signal and lock')))
@@ -522,6 +528,8 @@ class QuickMenu(Screen):
 			BlindscanMain(self.session)
 		elif item[0] == _("Cable Scan"):
 			CableScanMain(self.session)
+		elif item[0] == _("MIS/PLS LCN Scan"):
+			MisPlsLcnScanMain(self.session)
 		elif item[0] == _("Terrestrial Scan"):
 			TerrestrialScanMain(self.session)
 		elif item[0] == _('Sat Finder'):
