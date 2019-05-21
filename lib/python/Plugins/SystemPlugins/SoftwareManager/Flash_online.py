@@ -301,7 +301,7 @@ class doFlashImage(Screen):
 				tmpStatus = _("yellow")
 			elif '2' in tmpStatus:
 				tmpStatus = _("red")
-			self.session.open(MessageBox, _("Traffic light state is '%s' - please use a another image.") %tmpStatus.upper(), type = MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Traffic light state is '%s' - please use an another image.") %tmpStatus.upper(), type = MessageBox.TYPE_ERROR)
 			return False
 
 	def startInstallOnline(self, ret = None):
@@ -322,7 +322,7 @@ class doFlashImage(Screen):
 			self.session.openWithCallback(self.ImageDownloadCB, JobView, job, backgroundable = False, afterEventChangeable = False)
 		except urllib2.URLError as e:
 			print "[Flash Online] Download failed !!\n%s" % e
-			self.session.openWithCallback(self.ImageDownloadCB, MessageBox, _("Download Failed !!" + "\n%s" % e), type = MessageBox.TYPE_ERROR)
+			self.session.openWithCallback(self.ImageDownloadCB, MessageBox, _("Download Failed !!") + "\n%s" % e, type = MessageBox.TYPE_ERROR)
 			self.close()
 
 	def ImageDownloadCB(self, ret):
@@ -604,7 +604,7 @@ class doFlashImage(Screen):
 
 class ImageDownloadJob(Job):
 	def __init__(self, url, filename, file):
-		Job.__init__(self, _("Downloading %s" %file))
+		Job.__init__(self, _("Downloading %s") %file)
 		ImageDownloadTask(self, url, filename)
 
 class DownloaderPostcondition(Condition):
@@ -643,7 +643,7 @@ class ImageDownloadTask(Task):
 	def download_progress(self, recvbytes, totalbytes):
 		if ( recvbytes - self.last_recvbytes  ) > 10000: # anti-flicker
 			self.progress = int(100*(float(recvbytes)/float(totalbytes)))
-			self.name = _("Downloading") + ' ' + "%d of %d kBytes" % (recvbytes/1024, totalbytes/1024)
+			self.name = _("Downloading") + ' ' + _("%d of %d kBytes") % (recvbytes/1024, totalbytes/1024)
 			self.last_recvbytes = recvbytes
 
 	def download_failed(self, failure_instance=None, error_message=""):
