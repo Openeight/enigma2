@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-02 19:09+0200\n"
-"PO-Revision-Date: 2019-05-21 23:42\n"
+"PO-Revision-Date: 2019-05-25 21:02\n"
 "Last-Translator: Smokey \n"
 "Language-Team: OpenEight-Smokey\n"
 "Language: nl\n"
@@ -235,6 +235,11 @@ msgstr "(hoger dan elke van rotor 'auto')"
 
 msgid " (lower than any auto)"
 msgstr "(lager dan elke 'auto')"
+
+msgid " Not Started !!\n\nCam binname must be in the start command line"
+"\nCheck your emu config file"
+msgstr " Niet Gestart !!\n\nCam bin-naam ontbreekt in de start commando regel"
+"\nControleer uw emu configuratie bestand"
 
 msgid " extensions."
 msgstr "plugins."
@@ -2472,6 +2477,9 @@ msgstr "Kon niet opnemen vanwege conflicterende timer %s"
 msgid "Could not record due to invalid service %s"
 msgstr "Kon niet opnemen vanwege een ongeldige service %s"
 
+msgid "Cover dashed flickering line for this service"
+msgstr "Verberg voor deze zender de flikkerende lijn bovenin het beeld"
+
 msgid "Create"
 msgstr "Creëer"
 
@@ -2495,6 +2503,9 @@ msgstr "Maakt bestandssysteem"
 
 msgid "Creating partition"
 msgstr "Maakt een partitie"
+
+msgid "Creating start scripts and starting the cam"
+msgstr "Start scripts aanmaken en cam starten"
 
 msgid "Croatian"
 msgstr "Kroatisch"
@@ -3882,6 +3893,9 @@ msgstr "Haal de laatste experimentele image"
 msgid "Get latest release image"
 msgstr "Haal de laatste release image"
 
+msgid "Getting Softcam list. Please wait..."
+msgstr "Softcam lijst ophalen. Even Geduld..."
+
 msgid "Getting plugin information. Please wait..."
 msgstr "Gegevens worden opgehaald. Een ogenblik geduld aub..."
 
@@ -4361,8 +4375,17 @@ msgstr "Invoer apparaten"
 msgid "Install"
 msgstr "Installeer"
 
+msgid "Install Failed !!"
+msgstr "Installatie Mislukt !!"
+
+msgid "Install Finished."
+msgstr "Installatie Klaar."
+
 msgid "Install Plugins"
 msgstr "Installeer Plugins"
+
+msgid "Install Softcams"
+msgstr "Installeer Softcams"
 
 msgid "Install Wizard:"
 msgstr "Installatie Wizard:"
@@ -5231,8 +5254,14 @@ msgstr ""
 "\n"
 "Plugin afsluiten."
 
+msgid "No Cam started !!\n\nCam 1 must be different from Cam 2"
+msgstr "Geen Cam gestart !!\n\nCam 1 moet verschillen van Cam 2"
+
 msgid "No Connection"
 msgstr "Geen verbinding"
+
+msgid "No ECM info"
+msgstr "Geen ECM info"
 
 msgid "No HDD found or HDD not initialized!"
 msgstr "Geen harde schijf gevonden of de harde schijf is niet geïnitialiseerd!"
@@ -5301,6 +5330,9 @@ msgstr "Geen netwerkverbinding beschikbaar"
 
 msgid "No networks found"
 msgstr "Geen netwerken gevonden"
+
+msgid "No new ECM info"
+msgstr "Geen nieuwe ECM info"
 
 msgid "No new plugins found"
 msgstr "Geen nieuwe plugins gevonden"
@@ -5634,6 +5666,9 @@ msgstr "PLP ID"
 
 msgid "PMT PID"
 msgstr "PMT PID"
+
+msgid "Package list"
+msgstr "Pakket lijst"
 
 msgid "Package list update"
 msgstr "Pakketlijst vernieuwen"
@@ -6984,6 +7019,12 @@ msgstr "Kies Backup Bestanden"
 msgid "Select CAId"
 msgstr "Selecteer CAId"
 
+msgid "Select Cam 1"
+msgstr "Selecteer Cam 1"
+
+msgid "Select Cam 2"
+msgstr "Selecteer Cam 2"
+
 msgid "Select Cam for %s"
 msgstr "Kies Cam voor %s"
 
@@ -7989,6 +8030,9 @@ msgstr "Softcam / CI"
 msgid "Softcam Panel"
 msgstr "Softcam Paneel"
 
+msgid "Softcam Panel V2.0"
+msgstr "Softcam Paneel V2.0"
+
 msgid "Softcam Setup"
 msgstr "Softcam Instellingen"
 
@@ -8244,6 +8288,12 @@ msgstr "Start/stop/selecteer Softcam"
 
 msgid "Start/stop/select your cam, You need to install first a softcam"
 msgstr "Hier kunt u de softcams installeren en beheren."
+
+msgid "Starting Cam 1: "
+msgstr "Starten Cam 1: "
+
+msgid "Starting Cam 2: "
+msgstr "Starten Cam 2: "
 
 msgid "Starting on"
 msgstr "Start op"
@@ -9393,6 +9443,9 @@ msgstr ""
 "Wacht aub tot de ontvanger opnieuw opstart\n"
 "Dit kan een paar minuten in beslag nemen."
 
+msgid "Uncover dashed flickering line for this service"
+msgstr "Deactiveer de optie 'verberg de flikkerende lijn' voor dit kanaal"
+
 msgid "Undo install"
 msgstr "Installatie ongedaan maken"
 
@@ -9838,10 +9891,13 @@ msgid "Wait please while scanning..."
 msgstr "Even geduld tot het zoeken klaar is..."
 
 msgid "Wait time before start Cam 2"
-msgstr "Wachttijd voordat Cam 2 gestart word"
+msgstr "Wachttijd voordat Cam 2 wordt gestart"
 
 msgid "Waiting"
 msgstr "Wacht..."
+
+msgid "Waiting..."
+msgstr "Wachten..."
 
 msgid "Waiting for mount"
 msgstr "Wachten op de mount"
@@ -10926,6 +10982,12 @@ msgstr "start zodadelijk"
 msgid "activate network adapter configuration"
 msgstr "start de netwerkadapter configuratie"
 
+msgid "active CAM 1: "
+msgstr "actieve CAM 1: "
+
+msgid "active CAM 2: "
+msgstr "actieve CAM 2: "
+
 msgid "add alternatives"
 msgstr "Alternatieven toevoegen"
 
@@ -11294,6 +11356,9 @@ msgstr "bestandnaam"
 msgid "film/cinema"
 msgstr "Film / Bioscoop"
 
+msgid "find currently played service"
+msgstr "Zoek de zender die momenteel speelt"
+
 msgid "fine arts"
 msgstr "fijne kunst"
 
@@ -11531,8 +11596,17 @@ msgstr "nee"
 msgid "no CAId selected"
 msgstr "Geen CAId geselecteerd"
 
+msgid "no CAM 1 active"
+msgstr "geen CAM 1 actief"
+
+msgid "no CAM 2 active"
+msgstr "geen CAM 2 actief"
+
 msgid "no CI slots found"
 msgstr "Geen CI slots gevonden"
+
+msgid "no cam"
+msgstr "geen cam"
 
 msgid "no module found"
 msgstr "Geen module gevonden"
