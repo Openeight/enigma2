@@ -207,6 +207,36 @@ def InitLcd():
 		def setLEDblinkingtime(configElement):
 			ilcd.setLEDBlinkingTime(configElement.value)
 
+		def setLedPowerColor(configElement):
+			f = open("/proc/stb/fp/ledpowercolor", "w")
+			f.write(configElement.value)
+			f.close()
+
+		def setLedStandbyColor(configElement):
+			f = open("/proc/stb/fp/ledstandbycolor", "w")
+			f.write(configElement.value)
+			f.close()
+
+		def setLedSuspendColor(configElement):
+			f = open("/proc/stb/fp/ledsuspendledcolor", "w")
+			f.write(configElement.value)
+			f.close()
+
+		def setPower4x7On(configElement):
+			f = open("/proc/stb/fp/power4x7on", "w")
+			f.write(configElement.value)
+			f.close()
+
+		def setPower4x7Standby(configElement):
+			f = open("/proc/stb/fp/power4x7standby", "w")
+			f.write(configElement.value)
+			f.close()
+
+		def setPower4x7Suspend(configElement):
+			f = open("/proc/stb/fp/power4x7suspend", "w")
+			f.write(configElement.value)
+			f.close()
+
 		standby_default = 5
 
 		ilcd = LCD()
@@ -232,6 +262,30 @@ def InitLcd():
 
 		config.lcd.flip = ConfigYesNo(default=False)
 		config.lcd.flip.addNotifier(setLCDflipped)
+
+		if fileExists("/proc/stb/fp/ledpowercolor"):
+			config.lcd.ledpowercolor = ConfigSelection(default = "1", choices = [("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			config.lcd.ledpowercolor.addNotifier(setLedPowerColor)
+
+		if fileExists("/proc/stb/fp/ledstandbycolor"):
+			config.lcd.ledstandbycolor = ConfigSelection(default = "3", choices = [("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			config.lcd.ledstandbycolor.addNotifier(setLedStandbyColor)
+
+		if fileExists("/proc/stb/fp/ledsuspendledcolor"):
+			config.lcd.ledsuspendcolor = ConfigSelection(default = "2", choices = [("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			config.lcd.ledsuspendcolor.addNotifier(setLedSuspendColor)
+
+		if fileExists("/proc/stb/fp/power4x7on"):
+			config.lcd.power4x7on = ConfigSelection(default = "on", choices = [("off", _("Off")), ("on", _("On"))])
+			config.lcd.power4x7on.addNotifier(setPower4x7On)
+
+		if fileExists("/proc/stb/fp/power4x7standby"):
+			config.lcd.power4x7standby = ConfigSelection(default = "off", choices = [("off", _("Off")), ("on", _("On"))])
+			config.lcd.power4x7standby.addNotifier(setPower4x7Standby)
+
+		if fileExists("/proc/stb/fp/power4x7suspend"):
+			config.lcd.power4x7suspend = ConfigSelection(default = "off", choices = [("off", _("Off")), ("on", _("On"))])
+			config.lcd.power4x7suspend.addNotifier(setPower4x7Suspend)
 
 		if fileExists("/proc/stb/lcd/scroll_delay"):
 			config.lcd.scrollspeed = ConfigSlider(default = 150, increment = 10, limits = (0, 500))
