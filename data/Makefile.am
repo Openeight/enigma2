@@ -20,12 +20,11 @@ dist_pkgdata_DATA = \
 	unicable.xml \
 	groupedservices
 
-if HAVE_TEXTLCD
-if HAVE_7SEGMENT
+ifdef $(HAVE_7SEGMENT)
 SUBDIRS += 7segment
 else
+ifdef $(HAVE_TEXTLCD)
 dist_pkgdata_DATA += skin_text.xml
-endif
 else
 SUBDIRS += display
 endif
