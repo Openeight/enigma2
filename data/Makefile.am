@@ -20,13 +20,14 @@ dist_pkgdata_DATA = \
 	unicable.xml \
 	groupedservices
 
-ifdef $(HAVE_7SEGMENT)
+if HAVE_7SEGMENT
 SUBDIRS += 7segment
 else
-ifdef $(HAVE_TEXTLCD)
+if HAVE_TEXTLCD
 dist_pkgdata_DATA += skin_text.xml
 else
 SUBDIRS += display
+endif
 endif
 
 iso-639-3.pck: $(srcdir)/iso-639-3.tab
