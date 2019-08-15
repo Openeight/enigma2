@@ -28,10 +28,10 @@ languages=($(gawk ' BEGIN { FS=" " }
 #
 
 printf "Creating temporary file enigma2-py.pot\n"
-find -s -X .. -name "*.py" -exec xgettext --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d enigma2 -s -o enigma2-py.pot {} \+
-gsed --in-place enigma2-py.pot --expression=s/CHARSET/UTF-8/
+find .. -name "*.py" -exec xgettext --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d enigma2 -s -o enigma2-py.pot {} \+
+sed --in-place enigma2-py.pot --expression=s/CHARSET/UTF-8/
 printf "Creating temporary file enigma2-xml.pot\n"
-find -s -X .. -name "*.xml" -exec python xml2po.py {} \+ > enigma2-xml.pot
+find .. -name "*.xml" -exec python xml2po.py {} \+ > enigma2-xml.pot
 printf "Merging pot files to create: enigma2.pot\n"
 cat enigma2-py.pot enigma2-xml.pot | msguniq --no-wrap --no-location -o enigma2.pot -
 OLDIFS=$IFS
@@ -48,7 +48,7 @@ for lang in "${languages[@]}" ; do
 		msgfmt -o $lang.mo $lang.po; \
 	fi
 done
-rm enigma2-py.pot enigma2-xml.pot enigma2.pot
+rm enigma2-py.pot enigma2-xml.pot
 IFS=$OLDIFS
 printf "Po files update/creation from script finished!\n"
 
