@@ -161,7 +161,7 @@ class XTDVBNTPTime(Screen):
 				XTDVBNTPTime.NetworkConnectionAvailable = True
 				self.session.openWithCallback(self.autostartntpcheck, MessageBox, _('Restart Enigma 2 for automatic NTP-Server check on startup (on/off) ?'), MessageBox.TYPE_YESNO)
 			else:
-				self.session.open(MessageBox, _('Change NTP-Server autostart not not possible:\n\nNetwork status: Unreachable !'), MessageBox.TYPE_ERROR)
+				self.session.open(MessageBox, _('Change NTP-Server autostart not possible:\n\nNetwork status: Unreachable !'), MessageBox.TYPE_ERROR)
 
 	def autostartntpcheck(self, answer):
 		if answer is False:
