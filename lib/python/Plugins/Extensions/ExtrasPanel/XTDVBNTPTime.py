@@ -291,7 +291,7 @@ class XTDVBNTPTime(Screen):
 				self.container.appClosed.append(self.finishedntp)
 				self.container.execute('ntpdate de.pool.ntp.org tick.fh-augsburg.de time2.one4vision.de')
 			else:
-				self.session.open(MessageBox, _('NTP check not not possible:\n\nNetwork status: Unreachable !'), MessageBox.TYPE_ERROR)
+				self.session.open(MessageBox, _('NTP check not possible:\n\nNetwork status: Unreachable !'), MessageBox.TYPE_ERROR)
 
 	def finishedntp(self, retval):
 		timenow = strftime('%Y:%m:%d %H:%M', localtime())
@@ -363,7 +363,7 @@ class NTPStartup(Screen):
 				self.container.appClosed.append(self.finishedntpauto)
 				self.container.execute('ntpdate de.pool.ntp.org tick.fh-augsburg.de time2.one4vision.de')
 			else:
-				self.session.open(MessageBox, _('NTP check not not possible:\n\nNetwork status: Unreachable !'), MessageBox.TYPE_ERROR)
+				self.session.open(MessageBox, _('NTP check not possible:\n\nNetwork status: Unreachable !'), MessageBox.TYPE_ERROR)
 
 	def finishedntpauto(self, retval):
 		if config.plugins.dvbntptime.showntpmessage.value:
