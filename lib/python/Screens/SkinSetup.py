@@ -104,7 +104,7 @@ class SettingsA(Screen):
                         from Plugins.SystemPlugins.SkinSelector.plugin import SkinSelector
                         self.session.open(SkinSelector)
                 except:
-                        self.session.open(MessageBox, _("SystemPlugins SkinSelector is not installed !"), MessageBox.TYPE_ERROR, timeout = 10)
+                        self.session.open(MessageBox, _("SystemPlugin SkinSelector is not installed !"), MessageBox.TYPE_ERROR, timeout = 10)
                         self.close()
 
 
