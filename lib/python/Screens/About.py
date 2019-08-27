@@ -401,7 +401,7 @@ class MemoryInfo(Screen):
 
 		self["params"] = MemoryInfoSkinParams()
 
-		self['info'] = Label(_("This info is for developers only.\nFor a normal users it is not relevant.\nDon't panic please when you see values being displayed that you think look suspicious!"))
+		self['info'] = Label(_("This info is for developers only.\nFor a normal user it is not relevant.\nDon't panic please when you see values being displayed that you think look suspicious!"))
 
 		Typ = _("%s  ") % (getMachineName())
 		self.setTitle(Typ + "[" + (_("Memory Info"))+ "]")
