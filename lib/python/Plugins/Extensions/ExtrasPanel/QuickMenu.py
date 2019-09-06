@@ -26,6 +26,7 @@ from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.Satfinder.plugin import Satfinder
 from Plugins.SystemPlugins.NetworkBrowser.MountManager import AutoMountManager
 from Plugins.SystemPlugins.NetworkBrowser.NetworkBrowser import NetworkBrowser
+from Plugins.SystemPlugins.NetworkBrowser.AutoMount import AutoMount
 from Plugins.SystemPlugins.NetworkWizard.NetworkWizard import NetworkWizard
 from Plugins.Extensions.ExtrasPanel.RestartNetwork import RestartNetwork
 from Plugins.Extensions.ExtrasPanel.plugin import Extraspanel
@@ -46,7 +47,7 @@ from re import search
 import NavigationInstance
 import os.path
 plugin_path_networkbrowser = eEnv.resolve('${libdir}/enigma2/python/Plugins/SystemPlugins/NetworkBrowser')
-if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/HdmiCEC/plugin.pyo"):
+if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/HdmiCEC/plugin.pyo'):
 	from Plugins.SystemPlugins.HdmiCEC.plugin import HdmiCECSetupScreen
 	HDMICEC = True
 else:
@@ -62,7 +63,7 @@ if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/AutomaticVolumeAdj
 	AUTVOLADJ = True
 else:
 	AUTVOLADJ = False
-if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/VideoTune/VideoFinetune.pyo"):
+if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/VideoTune/VideoFinetune.pyo'):
 	from Plugins.SystemPlugins.VideoTune.VideoFinetune import VideoFinetune
 	VIDTUNE = True
 else:
@@ -82,47 +83,47 @@ if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/PositionerSetup/pl
 	POSSETUP = True
 else:
 	POSSETUP = False
-if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/FastScan/plugin.pyo"):
+if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/FastScan/plugin.pyo'):
 	from Plugins.SystemPlugins.FastScan.plugin import FastScanMain
 	FASTSCAN = True
 else:
 	FASTSCAN = False
-if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/Blindscan/plugin.pyo"):
+if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/Blindscan/plugin.pyo'):
 	from Plugins.SystemPlugins.Blindscan.plugin import BlindscanMain
 	BLINDSCAN = True
 else:
 	BLINDSCAN = False
-if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/CableScan/plugin.pyo"):
+if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/CableScan/plugin.pyo'):
 	from Plugins.SystemPlugins.CableScan.plugin import CableScanMain
 	CABLESCAN = True
 else:
 	CABLESCAN = False
-if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/MisPlsLcnScan/plugin.pyo"):
+if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/MisPlsLcnScan/plugin.pyo'):
 	from Plugins.SystemPlugins.MisPlsLcnScan.plugin import MisPlsLcnScanMain
 	MISPLSLCNSCAN = True
 else:
 	MISPLSLCNSCAN = False
-if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/TerrestrialScan/plugin.pyo"):
+if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/TerrestrialScan/plugin.pyo'):
 	from Plugins.SystemPlugins.TerrestrialScan.plugin import TerrestrialScanMain
 	TERRESTSCAN = True
 else:
 	TERRESTSCAN = False
-if path.exists("/usr/lib/enigma2/python/Plugins/PLi/SoftcamSetup/Sc.pyo"):
+if path.exists('/usr/lib/enigma2/python/Plugins/PLi/SoftcamSetup/Sc.pyo'):
 	from Plugins.PLi.SoftcamSetup.Sc import ScNewSelection, ScSetupScreen
 	SC = True
 else:
 	SC = False
-if path.exists("/usr/lib/enigma2/python/Screens/SoftcamSetup.pyo"):
+if path.exists('/usr/lib/enigma2/python/Screens/SoftcamSetup.pyo'):
 	from Screens.SoftcamSetup import SoftcamSetup
 	SSC = True
 else:
 	SSC = False
-if path.exists("/usr/lib/enigma2/python/Plugins/Extensions/CCcamInfo/plugin.pyo"):
+if path.exists('/usr/lib/enigma2/python/Plugins/Extensions/CCcamInfo/plugin.pyo'):
 	from Plugins.Extensions.CCcamInfo.plugin import EcmInfoConfigMenu
 	ECMINFOSETUP = True
 else:
 	ECMINFOSETUP = False
-if path.exists("/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoResolution/plugin.pyo"):
+if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoResolution/plugin.pyo'):
 	from Plugins.SystemPlugins.AutoResolution.plugin import autoresSetup
 	AUTORES = True
 else:
@@ -269,12 +270,13 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('User interface', _('User interface Setup'), _('Setup your User interface.')))
 		if SystemInfo['FrontpanelDisplay'] and SystemInfo['Display']:
 			self.sublist.append(QuickSubMenuEntryComponent('Display Settings', _('Display Setup'), _('Setup your display.')))
-		if os.path.exists("/usr/share/enigma2/display"):
+		if os.path.exists('/usr/share/enigma2/display'):
 			self.sublist.append(QuickSubMenuEntryComponent('LCD Skin Setup', _('Skin Setup'), _('Setup your LCD.')))
-		self.sublist.append(QuickSubMenuEntryComponent("Skin Setup",_("Select Enigma2 Skin"),_("Setup your Skin.")))
+		self.sublist.append(QuickSubMenuEntryComponent('Skin Setup',_('Select Enigma2 Skin'),_('Setup your Skin.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording settings', _('Recording Setup'), _('Setup your recording config.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording paths', _('Recording paths Setup'), _('Setup your recording paths config.')))
 		self.sublist.append(QuickSubMenuEntryComponent('EPG settings', _('EPG Setup'), _('Setup your EPG config.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Language', _('Language selection'), _('Choose the language of the user interface and plugins.')))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qnetwork(self):
@@ -306,6 +308,7 @@ class QuickMenu(Screen):
 	def Qmount(self):
 		self.sublist = []
 		self.sublist.append(QuickSubMenuEntryComponent('Network Mount Manager', _('Manage network mounts'), _('Setup your network mounts.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Mount again',_('Mount your network shares again'),_('Attempt to recover lost mounts (in background).')))
 		self.sublist.append(QuickSubMenuEntryComponent('Network Browser', _('Search for network shares'), _('Search for network shares.'))) 
 		self.sublist.append(QuickSubMenuEntryComponent('Device Mount Manager', _('Mounts Devices'), _('Setup your Device mounts (USB, HDD, others...)')))
 		self['sublist'].l.setList(self.sublist)
@@ -318,11 +321,11 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them.')))
 		if Softcam_Check() and SC:
 			self.sublist.append(QuickSubMenuEntryComponent('Cam Setup', _('Cam Setup'), _('Select and control your Cam. This let you start/stop/select a cam.')))
-			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info Sc",_("Sc Ecm Info setup"),_("Setup Ecm Info of the Softcam Manager.")))
+			self.sublist.append(QuickSubMenuEntryComponent('Ecm Info Sc',_('Sc Ecm Info setup'),_('Setup Ecm Info of the Softcam Manager.')))
 		if Softcam_Check() and SSC:
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Setup', _('Softcam Setup'), _('Select and control your Softcam. Here you can start/stop/select a softcam, and see ecm info.')))
 		if ECMINFOSETUP:
-			self.sublist.append(QuickSubMenuEntryComponent("Ecm Info",_("Ecm Info setup"),_("Setup Ecm Info of the CCcamInfo plugin.")))
+			self.sublist.append(QuickSubMenuEntryComponent('Ecm Info',_('Ecm Info setup'),_('Setup Ecm Info of the CCcamInfo plugin.')))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qavsetup(self):
@@ -336,10 +339,10 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Automatic Volume Adjustment', _('Automatic Volume Adjustment settings'), _('Setup for Automatic Volume Adjustment between MPEG and AC3/DTS.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Auto Language', _('Auto Language Selection'), _('Select your Language for Audio/Subtitles.')))
 		if VIDTUNE == True:
-			self.sublist.append(QuickSubMenuEntryComponent("Testscreens",_("Test screens for your TV"),_("Tune your TV for the best result.")))
+			self.sublist.append(QuickSubMenuEntryComponent('Testscreens',_('Test screens for your TV'),_('Tune your TV for the best result.')))
 		if os.path.exists('/proc/stb/vmpeg/0/pep_apply') and VIDEOENH == True:
 			self.sublist.append(QuickSubMenuEntryComponent('VideoEnhancement', _('VideoEnhancement Setup'), _('VideoEnhancement Setup.')))
-		self.sublist.append(QuickSubMenuEntryComponent("Hdmi CEC",_("HDMI-CEC setup"),_("Setup your HDMI communication and preferences.")))
+		self.sublist.append(QuickSubMenuEntryComponent('Hdmi CEC',_('HDMI-CEC setup'),_('Setup your HDMI communication and preferences.')))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qtuner(self):
@@ -347,20 +350,20 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Tuner Configuration', _('Setup tuner(s)'), _('Setup each tuner for your satellite system.')))
 		if POSSETUP == True:
 			self.sublist.append(QuickSubMenuEntryComponent('Positioner Setup', _('Setup rotor'), _('Setup your positioner for your satellite system.')))
-		self.sublist.append(QuickSubMenuEntryComponent("Sundtek Control Center",_("Sundtek tuner Setup"),_("Configure your Sundtek tuner(s) or check/update the drivers.")))
+		self.sublist.append(QuickSubMenuEntryComponent('Sundtek Control Center',_('Sundtek tuner Setup'),_('Configure your Sundtek tuner(s) or check/update the drivers.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Automatic Scan', _('Service Searching Automatically'), _('Automatic scan for services.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Manual Scan', _('Service Searching Manually'), _('Manual scan for services.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Fallback remote receiver setup', _('Setup for fallback remote receiver(s)'), _('Enable and setup your fallback remote receiver(s).')))
 		if FASTSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent("Fast Scan",_("Fast Scan Service Searching"),_("Use Fast Scan to search for services.")))
+			self.sublist.append(QuickSubMenuEntryComponent('Fast Scan',_('Fast Scan Service Searching'),_('Use Fast Scan to search for services.')))
 		if BLINDSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent("Blind Scan",_("Blindscan Service Searching"),_("Scan for satellite services.")))
+			self.sublist.append(QuickSubMenuEntryComponent('Blind Scan',_('Blindscan Service Searching'),_('Scan for satellite services.')))
 		if CABLESCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent("Cable Scan",_("Cable Service Searching"),_("Scan for cable services.")))
+			self.sublist.append(QuickSubMenuEntryComponent('Cable Scan',_('Cable Service Searching'),_('Scan for cable services.')))
 		if MISPLSLCNSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent("MIS/PLS LCN Scan",_("MIS/PLS LCN Service Searching"),_("Scan for MIS/PLS LCN services.")))
+			self.sublist.append(QuickSubMenuEntryComponent('MIS/PLS LCN Scan',_('MIS/PLS LCN Service Searching'),_('Scan for MIS/PLS LCN services.')))
 		if TERRESTSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent("Terrestrial Scan",_("Terrestrial Service Searching"),_("Scan for terrestrial services.")))
+			self.sublist.append(QuickSubMenuEntryComponent('Terrestrial Scan',_('Terrestrial Service Searching'),_('Scan for terrestrial services.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Sat Finder', _('Search Sats'), _('Search Sats, check signal and lock.')))
 		self['sublist'].l.setList(self.sublist)
 
@@ -461,18 +464,23 @@ class QuickMenu(Screen):
 			self.openSetup('lcd')
 		elif item[0] == _('LCD Skin Setup'):
 			self.session.open(LcdSkinSelector)
-		elif item[0] == _("Skin Setup"):
+		elif item[0] == _('Skin Setup'):
 			self.session.open(SkinSelector)
 		elif item[0] == _('User interface'):
 			self.openSetup('userinterface')
-		elif item[0] == _("Recording paths"):
+		elif item[0] == _('Recording paths'):
 			self.session.open(RecordPathsSettings)
 		elif item[0] == _('Recording settings'):
 			self.openSetup('recording')
 		elif item[0] == _('EPG settings'):
 			self.openSetup('epgsettings')
+		elif item[0] == _('Language'):
+			self.session.open(LanguageSelection)
 		elif item[0] == _('Network Mount Manager'):
 			self.session.open(AutoMountManager, None, plugin_path_networkbrowser)
+		elif item[0] == _('Mount again'):
+			AutoMount()
+			self.session.open(MessageBox, _('Network Shares are Mounted again.'), MessageBox.TYPE_INFO, timeout=3)
 		elif item[0] == _('Network Browser'):
 			self.session.open(NetworkBrowser, None, plugin_path_networkbrowser)
 		elif item[0] == _('Device Mount Manager'):
@@ -485,11 +493,11 @@ class QuickMenu(Screen):
 			self.session.open(ShowSoftcamPackages)
 		elif item[0] == _('Cam Setup'):
 			self.session.open(ScNewSelection)
-		elif item[0] == _("Ecm Info Sc"):
+		elif item[0] == _('Ecm Info Sc'):
 			self.session.open(ScSetupScreen)
 		elif item[0] == _('Softcam-Setup'):
 			self.session.open(SoftcamSetup)
-		elif item[0] == _("Ecm Info"):
+		elif item[0] == _('Ecm Info'):
 			self.session.open(EcmInfoConfigMenu)
 		elif item[0] == _('AV Settings'):
 			videoSetupMain(self.session)
@@ -501,11 +509,11 @@ class QuickMenu(Screen):
 			self.session.open(AutomaticVolumeAdjustmentConfigScreen)
 		elif item[0] == _('Audio Sync'):
 			self.session.open(AC3LipSyncSetup, plugin_path_audiosync)
-		elif item[0] == _("Testscreens"):
+		elif item[0] == _('Testscreens'):
 			self.session.open(VideoFinetune)
 		elif item[0] == _('VideoEnhancement'):
 			self.session.open(VideoEnhancementSetup)
-		elif item[0] == _("Hdmi CEC"):
+		elif item[0] == _('Hdmi CEC'):
 			if HDMICEC == True:
 				self.session.open(HdmiCECSetupScreen)
 			else:
@@ -514,23 +522,23 @@ class QuickMenu(Screen):
 			self.session.open(NimSelection)
 		elif item[0] == _('Positioner Setup'):
 			self.PositionerMain()
-		elif item[0] == _("Sundtek Control Center"):
+		elif item[0] == _('Sundtek Control Center'):
 			self.session.open(SundtekControlCenter)
 		elif item[0] == _('Automatic Scan'):
 			self.session.open(ScanSimple)
 		elif item[0] == _('Manual Scan'):
 			self.session.open(ScanSetup)
-		elif item[0] == _("Fallback remote receiver setup"):
+		elif item[0] == _('Fallback remote receiver setup'):
 			self.session.open(SetupFallbacktuner)
-		elif item[0] == _("Fast Scan"):
+		elif item[0] == _('Fast Scan'):
 			FastScanMain(self.session)
-		elif item[0] == _("Blind Scan"):
+		elif item[0] == _('Blind Scan'):
 			BlindscanMain(self.session)
-		elif item[0] == _("Cable Scan"):
+		elif item[0] == _('Cable Scan'):
 			CableScanMain(self.session)
-		elif item[0] == _("MIS/PLS LCN Scan"):
+		elif item[0] == _('MIS/PLS LCN Scan'):
 			MisPlsLcnScanMain(self.session)
-		elif item[0] == _("Terrestrial Scan"):
+		elif item[0] == _('Terrestrial Scan'):
 			TerrestrialScanMain(self.session)
 		elif item[0] == _('Sat Finder'):
 			self.SatfinderMain()
