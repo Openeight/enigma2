@@ -21,6 +21,8 @@ from Screens.Ipkuninstall import Ipkuninstall
 from Screens.SetupFallbacktuner import SetupFallbacktuner
 from Screens.SkinSelector import SkinSelector, LcdSkinSelector
 from Screens.RecordPaths import RecordPathsSettings
+from Screens.CCcamInfo import CCcamInfoMain
+from Screens.OScamInfo import OscamInfoMenu
 from Plugins.SystemPlugins.Videomode.plugin import videoSetupMain
 from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.Satfinder.plugin import Satfinder
@@ -326,6 +328,9 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Setup', _('Softcam Setup'), _('Select and control your Softcam. Here you can start/stop/select a softcam, and see ecm info.')))
 		if ECMINFOSETUP:
 			self.sublist.append(QuickSubMenuEntryComponent('Ecm Info',_('Ecm Info setup'),_('Setup Ecm Info of the CCcamInfo plugin.')))
+		if Check_Softcam() or Softcam_Check():
+			self.sublist.append(QuickSubMenuEntryComponent("CCcam Info",_("Check your CCcam"),_("This plugin shows you the status of your CCcam.")))
+			self.sublist.append(QuickSubMenuEntryComponent("OScam Info",_("Check your OScam"),_("This plugin shows you the status of your OScam.")))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qavsetup(self):
@@ -499,6 +504,10 @@ class QuickMenu(Screen):
 			self.session.open(SoftcamSetup)
 		elif item[0] == _('Ecm Info'):
 			self.session.open(EcmInfoConfigMenu)
+		elif item[0] == _("CCcam Info"):
+			self.session.open(CCcamInfoMain)
+		elif item[0] == _("OScam Info"):
+			self.session.open(OscamInfoMenu)
 		elif item[0] == _('AV Settings'):
 			videoSetupMain(self.session)
 		elif item[0] == _('Auto Resolution'):
