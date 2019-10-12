@@ -23,6 +23,7 @@ from Screens.SkinSelector import SkinSelector, LcdSkinSelector
 from Screens.RecordPaths import RecordPathsSettings
 from Screens.CCcamInfo import CCcamInfoMain
 from Screens.OScamInfo import OscamInfoMenu
+from Screens.Hotkey import HotkeySetup
 from Plugins.SystemPlugins.Videomode.plugin import videoSetupMain
 from Plugins.Plugin import PluginDescriptor
 from Plugins.SystemPlugins.Satfinder.plugin import Satfinder
@@ -277,6 +278,7 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Skin Setup',_('Select Enigma2 Skin'),_('Setup your Skin.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording settings', _('Recording Setup'), _('Setup your recording config.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording paths', _('Recording paths Setup'), _('Setup your recording paths config.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Hotkey', _('Hotkey Setup'), _('Adjust the functions of your remote cotrol buttons.')))
 		self.sublist.append(QuickSubMenuEntryComponent('EPG settings', _('EPG Setup'), _('Setup your EPG config.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Language', _('Language selection'), _('Choose the language of the user interface and plugins.')))
 		self['sublist'].l.setList(self.sublist)
@@ -477,6 +479,8 @@ class QuickMenu(Screen):
 			self.session.open(RecordPathsSettings)
 		elif item[0] == _('Recording settings'):
 			self.openSetup('recording')
+		elif item[0] == _('Hotkey'):
+			self.session.open(HotkeySetup)
 		elif item[0] == _('EPG settings'):
 			self.openSetup('epgsettings')
 		elif item[0] == _('Language'):
