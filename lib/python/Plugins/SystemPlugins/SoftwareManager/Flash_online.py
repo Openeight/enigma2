@@ -18,7 +18,7 @@ from enigma import fbClass
 import urllib2
 import os
 import shutil
-from boxbranding import getImageDistro, getMachineBrand, getMachineName, getBoxType, getMachineKernelFile, getMachineRootFile, getMachineBuild, getMachineMtdKernel, getMachineMtdRoot
+from boxbranding import getImageDistro, getMachineBrand, getMachineName, getBoxType, getMachineKernelFile, getMachineRootFile, getMachineBuild, getMachineMtdKernel, getMachineMtdRoot, getMachineMake
 distro = getImageDistro()
 ROOTFSBIN = getMachineRootFile()
 KERNELBIN = getMachineKernelFile()
@@ -255,7 +255,8 @@ class doFlashImage(Screen):
 			self["imageList"].l.setList(self.imagelist)
 
 	def box(self):
-		box = getBoxType()
+		# getBoxType don't work as solo sf8008 reports as sf8008s and images are called sf8008
+		box = getMachineMake()
 		machinename = getMachineName()
 		return box
 
