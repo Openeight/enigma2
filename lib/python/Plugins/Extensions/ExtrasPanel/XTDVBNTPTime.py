@@ -1,5 +1,6 @@
 from stat import ST_MTIME
 from time import *
+from Screens.InputBox import *
 from Plugins.Extensions.ExtrasPanel.plugin import *
 from os import path
 
@@ -443,7 +444,7 @@ class ChangeTimeWizzard(Screen):
 					maxmonth = 28
 				else:
 					maxmonth = 27
-			if int(newyear) < 2010 or int(newyear) > 2015 or (len(newyear) < 4) is True:
+			if int(newyear) < 2015 or int(newyear) > 2025 or (len(newyear) < 4) is True:
 				self.skipChangeTime(_('Invalid year %s !') % newyear)
 			elif int(newmonth) < 0 or int(newmonth) > 12 or (len(newmonth) < 2) is True:
 				self.skipChangeTime(_('Invalid month %s !') % newmonth)
