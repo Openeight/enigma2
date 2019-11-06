@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-15 18:57+0200\n"
+"POT-Creation-Date: 2019-11-06 17:02+0100\n"
 "PO-Revision-Date: 2011-04-12 22:26+0200\n"
 "Last-Translator: Jose Juan <jzapater@gmail.com>\n"
 "Language-Team: none\n"
@@ -1277,6 +1277,11 @@ msgstr ""
 msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
 msgstr "Ajuste la configuración del color de forma que todas las sombras de los colores se distingan, pero que estén tan saturadas como sea posible. Si está contento con el resultado, pulse OK para cerrar el ajuste de video fino, o use una tecla numérica para seleccionar otras pantallas de test."
 
+#
+#, fuzzy
+msgid "Adjust the functions of your remote cotrol buttons."
+msgstr "Pulse OK en el mando a distancia para continuar."
+
 msgid "Advanced"
 msgstr ""
 
@@ -1490,9 +1495,6 @@ msgstr ""
 msgid "Anguilla"
 msgstr ""
 
-msgid "Answer is none"
-msgstr ""
-
 msgid "Antarctica"
 msgstr ""
 
@@ -1623,6 +1625,9 @@ msgid "At beginning"
 msgstr "Comenzar desde el inicio"
 
 msgid "At end"
+msgstr ""
+
+msgid "Attempt to recover lost mounts (in background)."
 msgstr ""
 
 msgid ""
@@ -1797,8 +1802,10 @@ msgstr "Búsqueda automática"
 msgid "Automatic scan"
 msgstr "Búsqueda automática"
 
-msgid "Automatic scan for services"
-msgstr ""
+#
+#, fuzzy
+msgid "Automatic scan for services."
+msgstr "Búsqueda automática"
 
 msgid "Automatically start timeshift after"
 msgstr ""
@@ -1946,13 +1953,13 @@ msgstr ""
 msgid "Backup your current image"
 msgstr ""
 
-msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box"
+msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr ""
 
 msgid "Backup your current settings"
 msgstr ""
 
-msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files"
+msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
 msgstr ""
 
 msgid "Backup/Flash"
@@ -2388,20 +2395,7 @@ msgstr ""
 msgid "Change Language"
 msgstr "Idioma"
 
-msgid ""
-"Change NTP-Server autostart not not possible:\n"
-"\n"
-"Network status: Unreachable !"
-msgstr ""
-
 msgid "Change PIN"
-msgstr ""
-
-#, python-format
-msgid ""
-"Change Systemtime was canceled:\n"
-"\n"
-"%s"
 msgstr ""
 
 #
@@ -2509,24 +2503,7 @@ msgstr "Capítulo:"
 msgid "Check"
 msgstr "Checkear"
 
-msgid "Check DVB Time"
-msgstr ""
-
 msgid "Check HDD"
-msgstr ""
-
-msgid ""
-"Check Network status.\n"
-"Please wait..."
-msgstr ""
-
-msgid "Check and set DVB Time"
-msgstr ""
-
-msgid "Check and set with NTP-Server"
-msgstr ""
-
-msgid "Check and set with NTP-Server not useful,switch off Enigma 2 Timeupdate first !"
 msgstr ""
 
 msgid "Check for a newer version of the SundtekControlCenter"
@@ -2541,16 +2518,19 @@ msgstr ""
 msgid "Check the internet connection again"
 msgstr ""
 
-msgid "Check/Install online updates (you must have a working internet connection)"
+msgid "Check your CCcam"
+msgstr ""
+
+msgid "Check your OScam"
+msgstr ""
+
+msgid "Check/Install online updates (you must have a working internet connection)."
 msgstr ""
 
 #
 #, fuzzy
 msgid "Check:"
 msgstr "Checkear"
-
-msgid "Checking DVB Time..."
-msgstr ""
 
 msgid "Checking Feeds"
 msgstr ""
@@ -2605,6 +2585,9 @@ msgid "Choose bouquet"
 msgstr ""
 
 msgid "Choose the files to backup"
+msgstr ""
+
+msgid "Choose the language of the user interface and plugins."
 msgstr ""
 
 msgid "Choose which tuner to configure."
@@ -2751,9 +2734,6 @@ msgstr ""
 #, fuzzy
 msgid "Compact flash"
 msgstr "Compact Flash"
-
-msgid "Compare the system time with a central time server and set the new system time."
-msgstr ""
 
 #
 msgid "Complete"
@@ -3128,7 +3108,7 @@ msgstr ""
 msgid "Configure your Network"
 msgstr ""
 
-msgid "Configure your Sundtek tuner(s) or check/update the drivers"
+msgid "Configure your Sundtek tuner(s) or check/update the drivers."
 msgstr ""
 
 #
@@ -3496,7 +3476,7 @@ msgstr ""
 msgid "Customize channel list cursor behavior"
 msgstr ""
 
-msgid "Customize enigma2 personal settings"
+msgid "Customize enigma2 personal settings."
 msgstr ""
 
 #
@@ -3553,37 +3533,7 @@ msgstr "DVD DOBLE CAPA"
 msgid "DVB CI Delay"
 msgstr ""
 
-msgid "DVB NTP Time menu"
-msgstr ""
-
 msgid "DVB Subtitles PID & lang"
-msgstr ""
-
-msgid "DVB Time check autostart"
-msgstr ""
-
-#, python-format
-msgid ""
-"DVB Time check results:\n"
-"%s"
-msgstr ""
-
-#, python-format
-msgid ""
-"DVB Time setting aborted:\n"
-"\n"
-"%s"
-msgstr ""
-
-msgid ""
-"DVB Time update running.\n"
-"Please wait..."
-msgstr ""
-
-#, python-format
-msgid ""
-"DVB Time updating to %s\n"
-"successfully done."
 msgstr ""
 
 msgid "DVB subtitle black transparency"
@@ -3604,9 +3554,6 @@ msgid "DVB-C ANNEX B"
 msgstr ""
 
 msgid "DVB-C ANNEX C"
-msgstr ""
-
-msgid "DVB-NTP-Time"
 msgstr ""
 
 #
@@ -3774,7 +3721,7 @@ msgstr ""
 msgid "Delete Plugins"
 msgstr ""
 
-msgid "Delete and unstall Plugins. This will remove the Plugin from your box"
+msgid "Delete and unstall Plugins. This will remove the Plugin from your box."
 msgstr ""
 
 #
@@ -4557,7 +4504,7 @@ msgstr ""
 msgid "Enable Wake On LAN"
 msgstr ""
 
-msgid "Enable and setup your fallback remote receiver(s)"
+msgid "Enable and setup your fallback remote receiver(s)."
 msgstr ""
 
 msgid "Enable auto cable scan"
@@ -4662,15 +4609,6 @@ msgstr "Inglés"
 
 #, python-format
 msgid "Enigma (re)starts: %d\n"
-msgstr ""
-
-msgid "Enigma 2 Time update"
-msgstr ""
-
-msgid "Enigma 2 must be restarted to set the new Systemtime ?"
-msgstr ""
-
-msgid "Enigma 2 restart abort by user !"
 msgstr ""
 
 #
@@ -5212,8 +5150,9 @@ msgstr ""
 msgid "Filesystem check"
 msgstr "Chequear sistema de ficheros"
 
-msgid "Filesystem check your Harddisk"
-msgstr ""
+#, fuzzy
+msgid "Filesystem check your Harddisk."
+msgstr "Chequear sistema de ficheros"
 
 msgid "Final position at"
 msgstr ""
@@ -5325,12 +5264,6 @@ msgstr ""
 msgid "Force legacy signal stats"
 msgstr ""
 
-msgid "Forced set DVB Time"
-msgstr ""
-
-msgid "Forced set DVB Time not useful,switch off Enigma 2 Timeupdate first !"
-msgstr ""
-
 #
 msgid "Format"
 msgstr "Formato"
@@ -5338,7 +5271,7 @@ msgstr "Formato"
 msgid "Format HDD"
 msgstr ""
 
-msgid "Format your Harddisk"
+msgid "Format your Harddisk."
 msgstr ""
 
 msgid "Forward volume keys"
@@ -5394,11 +5327,6 @@ msgstr "Frecuencia"
 #, fuzzy
 msgid "Frequency & Channel"
 msgstr "Bandas de frecuencia"
-
-#
-#, fuzzy
-msgid "Frequency & Polarization"
-msgstr "Polarización"
 
 #
 msgid "Frequency bands"
@@ -5809,10 +5737,10 @@ msgstr ""
 msgid "Here you can download, install or remove skins"
 msgstr ""
 
-msgid "Here you can select which files should be added to backupfile. (default: E2-setup, channels, network)"
+msgid "Here you can select which files should be added to backupfile. (default: E2-setup, channels, network)."
 msgstr ""
 
-msgid "Here you can select which files should be updated with a online update"
+msgid "Here you can select which files should be updated with a online update."
 msgstr ""
 
 msgid "Hidden network"
@@ -6406,40 +6334,17 @@ msgstr ""
 msgid "Interval between keys when repeating:"
 msgstr ""
 
-#, python-format
-msgid "Invalid day %s !"
-msgstr ""
-
 #
 #, python-format
 msgid "Invalid directory selected: %s"
 msgstr "Directorio seleccionado inválido: %s"
-
-msgid "Invalid format !"
-msgstr ""
-
-#, python-format
-msgid "Invalid hour %s !"
-msgstr ""
 
 #
 #, fuzzy
 msgid "Invalid location"
 msgstr "Localización inválida"
 
-#, python-format
-msgid "Invalid minute %s !"
-msgstr ""
-
-#, python-format
-msgid "Invalid month %s !"
-msgstr ""
-
 msgid "Invalid transponder data"
-msgstr ""
-
-#, python-format
-msgid "Invalid year %s !"
 msgstr ""
 
 #
@@ -7059,8 +6964,10 @@ msgstr ""
 msgid "Manual scan"
 msgstr "Búsqueda Manual"
 
-msgid "Manual scan for services"
-msgstr ""
+#
+#, fuzzy
+msgid "Manual scan for services."
+msgstr "Intercambiar Canales"
 
 #
 msgid "Manual transponder"
@@ -7310,6 +7217,9 @@ msgstr ""
 msgid "Mount Setup"
 msgstr ""
 
+msgid "Mount again"
+msgstr ""
+
 msgid "Mount all device from the fstab"
 msgstr ""
 
@@ -7330,6 +7240,11 @@ msgstr ""
 
 msgid "Mount point:"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Mount your network shares again"
+msgstr "Configurar su red de nuevo"
 
 msgid "Mount-Manager..."
 msgstr ""
@@ -7537,30 +7452,6 @@ msgstr ""
 msgid "NOW"
 msgstr "AHORA"
 
-#, python-format
-msgid ""
-"NTP Time check successfully.\n"
-"System time set to %s finished."
-msgstr ""
-
-msgid ""
-"NTP check not not possible:\n"
-"\n"
-"Network status: Unreachable !"
-msgstr ""
-
-msgid "NTP-Server autostart"
-msgstr ""
-
-msgid "NTP-Server autostart is enabled,please switch off first !"
-msgstr ""
-
-#, python-format
-msgid ""
-"NTP-Server check and system time update\n"
-"to %s successfully done."
-msgstr ""
-
 #
 msgid "NTSC"
 msgstr "NTSC"
@@ -7644,6 +7535,9 @@ msgstr ""
 msgid "Network Services"
 msgstr ""
 
+msgid "Network Shares are Mounted again."
+msgstr ""
+
 msgid "Network Test"
 msgstr ""
 
@@ -7723,9 +7617,6 @@ msgid "New Zealand"
 msgstr ""
 
 msgid "New profile: "
-msgstr ""
-
-msgid "New time string too short !"
 msgstr ""
 
 msgid "News Current Affairs"
@@ -7877,9 +7768,6 @@ msgid "No networks found"
 msgstr "No he encontrado redes"
 
 msgid "No new ECM info"
-msgstr ""
-
-msgid "No new time input !"
 msgstr ""
 
 msgid "No packages were upgraded yet. So you can check your network and try again."
@@ -8149,9 +8037,6 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
-msgid "OK will set new time and restart Enigma 2 !"
-msgstr ""
-
 msgid "OK/ green = activate settings"
 msgstr ""
 
@@ -8171,6 +8056,11 @@ msgstr "Configurar OSD"
 
 msgid "OSD transparency"
 msgstr ""
+
+#
+#, fuzzy
+msgid "OScam Info"
+msgstr "Info"
 
 msgid "OVR"
 msgstr ""
@@ -8613,9 +8503,6 @@ msgstr ""
 msgid "Play recorded movies..."
 msgstr "Reproducir películas grabadas..."
 
-msgid "Please Enter new Systemtime:"
-msgstr ""
-
 msgid "Please Flash your Kernel new and Backup again"
 msgstr ""
 
@@ -8718,8 +8605,10 @@ msgstr ""
 msgid "Please enter the old PIN code"
 msgstr "Por favor, introduca el PIN anterior"
 
-msgid "Please enter the your personal feed URL"
-msgstr ""
+#
+#, fuzzy
+msgid "Please enter your personal feed URL"
+msgstr "Por favor, introduzca un nombre de fichero nuevo"
 
 #
 msgid "Please follow the instructions on the TV"
@@ -9492,12 +9381,6 @@ msgstr ""
 msgid "Really use and mount %s as HDD ?"
 msgstr ""
 
-msgid "Reason: Abort by User !"
-msgstr ""
-
-msgid "Reason: Answer is none"
-msgstr ""
-
 #
 msgid "Reboot"
 msgstr "Reiniciar"
@@ -9867,17 +9750,6 @@ msgstr ""
 msgid "Restart E2"
 msgstr "Reiniciar"
 
-msgid "Restart Enigma 2 for automatic NTP-Server check on startup (on/off) ?"
-msgstr ""
-
-msgid "Restart Enigma 2 to display DVB Time check results on startup (on/off) ?"
-msgstr ""
-
-msgid ""
-"Restart Enigma 2 to switch on/off Enigma 2 Timeupdate on startup ?\n"
-"ATTENTION: When you switch off,all automatic time updates are disabled !!!"
-msgstr ""
-
 #
 msgid "Restart GUI now?"
 msgstr "¿Reiniciar el GUI ahora?"
@@ -9905,8 +9777,10 @@ msgstr ""
 msgid "Restart network"
 msgstr "Reiniciar Red"
 
-msgid "Restart network and remount connections"
-msgstr ""
+#
+#, fuzzy
+msgid "Restart network and remount connections."
+msgstr "Reiniciar Red"
 
 #
 #, fuzzy
@@ -9928,16 +9802,6 @@ msgstr ""
 #
 msgid "Restart your network connection and interfaces.\n"
 msgstr "Reiniciar su conexión y dispositivos de red.\n"
-
-msgid ""
-"Restarting Enigma 2 to switch on/off\n"
-"the NTP message on startup ?"
-msgstr ""
-
-msgid ""
-"Restarting Enigma 2 to switch on/off display\n"
-"the DVB Time in the Mainmenu ?"
-msgstr ""
 
 #
 msgid "Restore"
@@ -9981,7 +9845,7 @@ msgstr "Configuración del sistema de restauración"
 msgid "Restore was canceled"
 msgstr ""
 
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings"
+msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
 msgstr ""
 
 #
@@ -10389,27 +10253,33 @@ msgstr "Escanear Ficheros..."
 msgid "Scan for IPTV server addresses"
 msgstr ""
 
-msgid "Scan for MIS/PLS LCN services"
-msgstr ""
+#
+#, fuzzy
+msgid "Scan for MIS/PLS LCN services."
+msgstr "Intercambiar Canales"
 
 #
 #, fuzzy
-msgid "Scan for cable services"
+msgid "Scan for cable services."
 msgstr "Intercambiar Canales"
 
 msgid "Scan for installed .ipk packages, and uninstall a package."
 msgstr ""
 
-msgid "Scan for local extensions and install them"
+#
+#, fuzzy
+msgid "Scan for local extensions and install them."
 msgstr ""
+"\n"
+"Busca extensiones locales e instálalas."
 
 #, fuzzy
-msgid "Scan for satellite services"
+msgid "Scan for satellite services."
 msgstr "Equipo satélite"
 
 #
 #, fuzzy
-msgid "Scan for terrestrial services"
+msgid "Scan for terrestrial services."
 msgstr "Proveedor terrestre"
 
 msgid "Scan options"
@@ -10461,7 +10331,7 @@ msgstr ""
 msgid "Search Sats"
 msgstr ""
 
-msgid "Search Sats, check signal and lock"
+msgid "Search Sats, check signal and lock."
 msgstr ""
 
 #
@@ -10679,10 +10549,10 @@ msgstr ""
 msgid "Select all"
 msgstr ""
 
-msgid "Select and control your Cam. This let you start/stop/select a cam"
+msgid "Select and control your Cam. This let you start/stop/select a cam."
 msgstr ""
 
-msgid "Select and control your Softcam. Here you can start/stop/select a softcam, and see ecm info"
+msgid "Select and control your Softcam. Here you can start/stop/select a softcam, and see ecm info."
 msgstr ""
 
 #
@@ -10901,7 +10771,7 @@ msgstr "Seleccione red inalámbrica"
 msgid "Select your ATSC provider."
 msgstr "Seleccione proveedor a añadir..."
 
-msgid "Select your Language for Audio/Subtitles"
+msgid "Select your Language for Audio/Subtitles."
 msgstr ""
 
 msgid "Select your Skin"
@@ -11105,12 +10975,6 @@ msgstr "Canales"
 msgid "Set CI assignment for detection of available services."
 msgstr ""
 
-msgid "Set DVB Time"
-msgstr ""
-
-msgid "Set DVB Time not useful,switch off Enigma 2 Timeupdate first !"
-msgstr ""
-
 msgid "Set PIN"
 msgstr ""
 
@@ -11168,12 +11032,6 @@ msgstr ""
 msgid "Set startup service"
 msgstr ""
 
-msgid "Set system time manually"
-msgstr ""
-
-msgid "Set system time manually not useful,switch off Enigma 2 Timeupdate first !"
-msgstr ""
-
 msgid "Set the User ID of the OpenWebif from your fallback tuner"
 msgstr ""
 
@@ -11213,17 +11071,6 @@ msgstr ""
 msgid "Set voltage and 22KHz"
 msgstr "Poner Voltaje y 22kHz"
 
-msgid ""
-"Setting DVB Time with forced option.\n"
-"When finished Enigma 2 restarts automatically !\n"
-"Please wait..."
-msgstr ""
-
-msgid ""
-"Setting the DVB Time forced is only needed if the check shows a time difference of more then 30 min.\n"
-"ATTENTION: With forced option make an Enigma 2 restart at the finish !"
-msgstr ""
-
 #
 msgid "Settings"
 msgstr "Parámetros"
@@ -11249,10 +11096,10 @@ msgstr ""
 msgid "Setup Audio/Video"
 msgstr "Modo configuración"
 
-msgid "Setup Ecm Info of the CCcamInfo plugin"
+msgid "Setup Ecm Info of the CCcamInfo plugin."
 msgstr ""
 
-msgid "Setup Ecm Info of the Softcam Manager"
+msgid "Setup Ecm Info of the Softcam Manager."
 msgstr ""
 
 msgid "Setup Enigma2"
@@ -11285,7 +11132,7 @@ msgstr ""
 msgid "Setup Plugin filter"
 msgstr ""
 
-msgid "Setup Plugin filter. Here you can select which Plugins are showed in the PluginBrowser"
+msgid "Setup Plugin filter. Here you can select which Plugins are showed in the PluginBrowser."
 msgstr ""
 
 msgid "Setup SABnzbd"
@@ -11303,10 +11150,11 @@ msgstr ""
 msgid "Setup Videomode"
 msgstr ""
 
-msgid "Setup each tuner for your satellite system"
-msgstr ""
+#, fuzzy
+msgid "Setup each tuner for your satellite system."
+msgstr "Equipo satélite"
 
-msgid "Setup for Automatic Volume Adjustment between MPEG and AC3/DTS"
+msgid "Setup for Automatic Volume Adjustment between MPEG and AC3/DTS."
 msgstr ""
 
 msgid "Setup for fallback remote receiver(s)"
@@ -11328,7 +11176,7 @@ msgstr ""
 msgid "Setup mode"
 msgstr "Modo configuración"
 
-msgid "Setup network. Here you can setup DHCP, IP, DNS"
+msgid "Setup network. Here you can setup DHCP, IP, DNS."
 msgstr ""
 
 msgid "Setup rotor"
@@ -11343,69 +11191,88 @@ msgstr ""
 msgid "Setup your Device mounts (USB, HDD, others...)"
 msgstr ""
 
-msgid "Setup your EPG config"
+msgid "Setup your EPG config."
 msgstr ""
 
-msgid "Setup your HDMI communication and preferences"
-msgstr ""
-
-msgid "Setup your Harddisk"
-msgstr ""
-
-msgid "Setup your LCD"
-msgstr ""
-
-msgid "Setup your Skin"
-msgstr ""
-
-msgid "Setup your System"
-msgstr ""
-
-msgid "Setup your Tuner and search for channels"
+msgid "Setup your HDMI communication and preferences."
 msgstr ""
 
 #
 #, fuzzy
-msgid "Setup your User interface"
+msgid "Setup your Harddisk(s)."
+msgstr "Disco duro"
+
+#
+#, fuzzy
+msgid "Setup your Harddisk."
+msgstr "Disco duro"
+
+msgid "Setup your LCD."
+msgstr ""
+
+#
+#, fuzzy
+msgid "Setup your Skin."
 msgstr "Interface en uso"
 
-msgid "Setup your Video Mode, Video Output and other Video Settings"
-msgstr ""
+#
+#, fuzzy
+msgid "Setup your System."
+msgstr "Interface en uso"
+
+#
+#, fuzzy
+msgid "Setup your Tuner and search for channels."
+msgstr "Interface en uso"
+
+#
+#, fuzzy
+msgid "Setup your User interface."
+msgstr "Interface en uso"
 
 msgid "Setup your Video Mode, Video Output and other Video Settings."
 msgstr ""
 
-msgid "Setup your display"
+msgid "Setup your Video Mode, Video Output, Audio and Language Settings."
 msgstr ""
+
+#
+#, fuzzy
+msgid "Setup your display."
+msgstr "Disco duro"
 
 msgid "Setup your local network"
 msgstr ""
 
-msgid "Setup your local network. For Wlan you need to boot with a USB-Wlan stick"
+msgid "Setup your local network. For Wlan you need to boot with a USB-Wlan stick."
 msgstr ""
 
-msgid "Setup your mounts for network and storage devices"
+msgid "Setup your mounts for network and storage devices."
 msgstr ""
 
-msgid "Setup your network interface. If no Wlan stick is used, you only can select Lan"
+msgid "Setup your network interface. If no Wlan stick is used, you only can select Lan."
 msgstr ""
 
-msgid "Setup your network mounts"
-msgstr ""
+#
+#, fuzzy
+msgid "Setup your network mounts."
+msgstr "Interface en uso"
 
 msgid "Setup your positioner"
 msgstr ""
 
-msgid "Setup your positioner for your satellite system"
+msgid "Setup your positioner for your satellite system."
 msgstr ""
 
-msgid "Setup your preferences for the automatic resolution switch"
+msgid "Setup your preferences for the automatic resolution switch."
 msgstr ""
 
-msgid "Setup your recording config"
-msgstr ""
+#
+#, fuzzy
+msgid "Setup your recording config."
+msgstr "Ruta de la grabación"
 
-msgid "Setup your recording paths config"
+msgid "Setup your recording paths config."
 msgstr ""
 
 #, fuzzy
@@ -11486,9 +11353,6 @@ msgid "Show Log"
 msgstr ""
 
 msgid "Show Media playback Remaining/Elapsed as"
-msgstr ""
-
-msgid "Show NTP message on startup"
 msgstr ""
 
 msgid "Show OscamInfo in Extensions Menu"
@@ -11747,16 +11611,16 @@ msgstr ""
 msgid "Show/hide window"
 msgstr ""
 
-msgid "Shows Plugins Browser. Here you can setup installed Plugin"
+msgid "Shows Plugins Browser. Here you can setup installed Plugins."
 msgstr ""
 
-msgid "Shows available plugins. Here you can download and install them"
+msgid "Shows available Plugins. Here you can download and install them."
 msgstr ""
 
-msgid "Shows available pluigns. Here you can download and install them"
+msgid "Shows available plugins. Here you can download and install them."
 msgstr ""
 
-msgid "Shows available softcams. Here you can download and install them"
+msgid "Shows available softcams. Here you can download and install them."
 msgstr ""
 
 msgid "Shows live tv or informations on LCD."
@@ -11995,6 +11859,11 @@ msgstr ""
 
 #
 #, fuzzy
+msgid "Softcam-Panel Setup."
+msgstr "Software"
+
+#
+#, fuzzy
 msgid "Softcam-Setup"
 msgstr "Software"
 
@@ -12059,11 +11928,6 @@ msgid "Sorry no backups found!"
 msgstr ""
 
 msgid "Sorry uShare Config is Missing"
-msgstr ""
-
-msgid ""
-"Sorry,\n"
-"DVB Time Check is not available for this box at the moment."
 msgstr ""
 
 msgid ""
@@ -12310,7 +12174,7 @@ msgstr ""
 msgid "Start/stop/select cam"
 msgstr ""
 
-msgid "Start/stop/select your cam, You need to install first a softcam"
+msgid "Start/stop/select your cam, You need to install first a softcam."
 msgstr ""
 
 msgid "Starting Cam 1: "
@@ -12755,8 +12619,10 @@ msgstr ""
 msgid "System: "
 msgstr ""
 
-msgid "SystemPlugins SkinSelector is not installed !"
-msgstr ""
+#
+#, fuzzy
+msgid "SystemPlugin SkinSelector is not installed !"
+msgstr "Lo siento, pero MediaScanner no está instalado!"
 
 msgid "T2MI"
 msgstr ""
@@ -12916,11 +12782,6 @@ msgid ""
 msgstr ""
 "Gracias por usar el asistente.\n"
 "Pulse OK para continuar."
-
-msgid ""
-"That makes no sense when turned off the auto start from the NTP-Server.\n"
-"Please switch on the autostart first !"
-msgstr ""
 
 #, python-format
 msgid "The %d min remaining before the end of the event."
@@ -13191,7 +13052,7 @@ msgstr ""
 
 msgid ""
 "This info is for developers only.\n"
-"For a normal users it is not relevant.\n"
+"For a normal user it is not relevant.\n"
 "Don't panic please when you see values being displayed that you think look suspicious!"
 msgstr ""
 
@@ -13294,12 +13155,6 @@ msgstr ""
 msgid "This option can be useful for long HDMI cables."
 msgstr ""
 
-msgid "This option is to check manually if there is a time difference between current system time and the transponder time."
-msgstr ""
-
-msgid "This option is to set the system time manually with the remote control."
-msgstr ""
-
 msgid "This option set the level of surpression of mosquito noise (Mosquito Noise is random aliasing as a result of strong compression). Obviously this goes at the cost of picture details."
 msgstr ""
 
@@ -13324,9 +13179,6 @@ msgstr ""
 msgid "This option sets the surpression of false digital contours, that are the result of a limited number of discrete values."
 msgstr ""
 
-msgid "This option sets the time from the current transponder as system time."
-msgstr ""
-
 msgid "This option sets up the picture sharpness, used when the picture is being upscaled."
 msgstr ""
 
@@ -13337,6 +13189,12 @@ msgstr "Este plugin está instalado."
 #
 msgid "This plugin is not installed."
 msgstr "Este plugin no está instalado."
+
+msgid "This plugin shows you the status of your CCcam."
+msgstr ""
+
+msgid "This plugin shows you the status of your OScam."
+msgstr ""
 
 #
 msgid "This plugin will be installed."
@@ -13758,7 +13616,7 @@ msgstr "Sintonizador"
 msgid "Tune failed!"
 msgstr "¡Falló la sintonización!"
 
-msgid "Tune your TV for the best result"
+msgid "Tune your TV for the best result."
 msgstr ""
 
 #
@@ -14034,7 +13892,7 @@ msgstr ""
 msgid "Update interval (in seconds)"
 msgstr ""
 
-msgid "Update/Backup your firmware, Backup/Restore settings"
+msgid "Update/Backup your firmware, Backup/Restore settings."
 msgstr ""
 
 msgid "Update/Backup/Restore your box"
@@ -14092,8 +13950,10 @@ msgstr "Usar DHCP"
 msgid "Use EIT EPG information when it is available."
 msgstr ""
 
-msgid "Use Fast Scan to search for services"
-msgstr ""
+#
+#, fuzzy
+msgid "Use Fast Scan to search for services."
+msgstr "Pulse OK para seleccionar un Proveedor."
 
 msgid "Use FreeSat EPG information when it is available."
 msgstr ""
@@ -14170,10 +14030,11 @@ msgstr ""
 msgid "Use power measurement"
 msgstr "Usar medida de potencia"
 
-msgid "Use the Networkwizard to configure your Network. The wizard will help you to setup your network"
-msgstr ""
+#, fuzzy
+msgid "Use the Networkwizard to configure your Network. The wizard will help you to setup your network."
+msgstr "Use el Asistente de Red para configurar el adaptador de red seleccionado"
 
-msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam"
+msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam."
 msgstr ""
 
 #, fuzzy
@@ -15103,9 +14964,6 @@ msgstr "Restaurar backups"
 msgid "Yesterday"
 msgstr ""
 
-msgid "You PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr ""
-
 #, python-format
 msgid ""
 "You already have a bootlogo installed,\n"
@@ -15237,6 +15095,9 @@ msgstr ""
 msgid ""
 "Your %s %s will be restarted after the removal of service\n"
 "Do you want to remove now ?"
+msgstr ""
+
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 msgid "Your STB will freeze during the flashing process.\n"
@@ -16966,11 +16827,6 @@ msgstr ""
 
 msgid "successful"
 msgstr ""
-
-#
-#, fuzzy
-msgid "sundtek control center"
-msgstr "Tipo de control de adultos"
 
 msgid "sw"
 msgstr ""
