@@ -1,8 +1,8 @@
 #################################################################################
-# FULL BACKUP UYILITY FOR ENIGMA2, SUPPORTS THE MODELS OE-A 4.3     			#
-#	                         						                            #
-#					MAKES A FULLBACK-UP READY FOR FLASHING.						#
-#																				#
+#         FULL BACKUP UYILITY FOR ENIGMA2, SUPPORTS THE MODELS OE-A 4.3         #
+#                                                                               #
+#                    MAKES A FULLBACK-UP READY FOR FLASHING.                    #
+#                                                                               #
 #################################################################################
 from enigma import getEnigmaVersionString
 from Screens.Screen import Screen
@@ -512,7 +512,8 @@ class ImageBackup(Screen):
 		elif self.MODEL in ('viperslim','evoslimse','evoslimt2c', "novaip" , "zgemmai55" , "sf98", "xpeedlxpro",'evoslim','vipert2c'):
 			cmdlist.append('echo "This file forces the update." > %s/force' %self.MAINDEST)
 		else:
-			cmdlist.append('echo "rename this file to "force" to force an update without confirmation" > %s/noforce' %self.MAINDEST)
+			if not self.MACHINEBUILD  in ("sf8008"):
+				cmdlist.append('echo "rename this file to "force" to force an update without confirmation" > %s/noforce' %self.MAINDEST)
 
 		if self.MODEL in ("gbquad4k","gbue4k"):
 			system('mv %s/boot.bin %s/boot.bin' %(self.WORKDIR, self.MAINDEST))
@@ -569,8 +570,8 @@ class ImageBackup(Screen):
 
 		if SystemInfo["HaveMultiBoot"] and not self.list[self.selection] == "Recovery":
 			cmdlist.append('echo "_________________________________________________\n"')
-			cmdlist.append('echo "' + _("Multiboot Image created on: %s") %self.MAINDEST + '"')
-			cmdlist.append('echo "' + _("and there is made an extra copy on:") + '"')
+			cmdlist.append('echo "' + _("Multiboot Image created at: %s") %self.MAINDEST + '"')
+			cmdlist.append('echo "' + _("and there is made an extra copy at:") + '"')
 			cmdlist.append('echo %s' %self.EXTRA)
 			cmdlist.append('echo "_________________________________________________"')
 			cmdlist.append('echo " "')
@@ -580,16 +581,20 @@ class ImageBackup(Screen):
 			cmdlist.append('echo "' + _("Use OnlineFlash in SoftwareManager") + '"')
 		elif file_found:
 			cmdlist.append('echo "_________________________________________________\n"')
-			cmdlist.append('echo "' + _("USB Image created on: %s") %self.MAINDEST + '"')
-			cmdlist.append('echo "' + _("and there is made an extra copy on:") + '"')
+			cmdlist.append('echo "' + _("USB Image created at: %s") %self.MAINDEST + '"')
+			cmdlist.append('echo "' + _("and there is made an extra copy at:") + '"')
 			cmdlist.append('echo %s' %self.EXTRA)
 			cmdlist.append('echo "_________________________________________________"')
 			cmdlist.append('echo " "')
 			cmdlist.append('echo "' + _("Please wait...almost ready! ") + '"')
 			cmdlist.append('echo " "')
+			cmdlist.append('echo "' + _("Rename the file \'noforce\' in the folder %s") %self.MODEL + '"')
+			cmdlist.append('echo "' + _("to \'force\' to flash this image without confirmation") + '"')
+			cmdlist.append('echo " "')
 			cmdlist.append('echo "' + _("To restore the image:") + '"')
 			cmdlist.append('echo "' + _("Please check the manual of the receiver") + '"')
 			cmdlist.append('echo "' + _("on how to restore the image") + '"')
+			cmdlist.append('echo "' + _("or use OnlineFlash in SoftwareManager") + '"')
 		else:
 			cmdlist.append('echo "_________________________________________________\n"')
 			cmdlist.append('echo "' + _("Image creation failed - ") + '"')
@@ -613,9 +618,11 @@ class ImageBackup(Screen):
 				cmdlist.append('echo "' + _("flash drive. ") + '"')
 				cmdlist.append('echo "' + _("This only takes about 1 or 2 minutes") + '"')
 				cmdlist.append('echo " "')
-
 				cmdlist.append('mkdir -p %s/%s' % (self.TARGET, self.IMAGEFOLDER))
-				cmdlist.append('cp -r %s %s/' % (self.MAINDEST, self.TARGET))
+				if self.MACHINEBUILD in ("sf8008"):
+					cmdlist.append('cp -r %s %s/octagon/' % (self.MAINDEST, self.TARGET))
+				else:
+					cmdlist.append('cp -r %s %s/' % (self.MAINDEST, self.TARGET))
 				if self.MACHINEBUILD in ("h9","i55plus"):
 					cmdlist.append('cp -f /usr/share/fastboot.bin %s/fastboot.bin' %(self.TARGET))
 					cmdlist.append('cp -f /usr/share/bootargs.bin %s/bootargs.bin' %(self.TARGET))
@@ -631,7 +638,7 @@ class ImageBackup(Screen):
 		END = time()
 		DIFF = int(END - self.START)
 		TIMELAP = str(datetime.timedelta(seconds=DIFF))
-		cmdlist.append('echo "' + _("Time required for this process: %s") %TIMELAP + '\n"')
+		cmdlist.append('echo "\n' + _("Time required for this process: %s") %TIMELAP + '\n"')
 
 		self.session.open(Console, title = self.TITLE, cmdlist = cmdlist, closeOnSuccess = False)
 
