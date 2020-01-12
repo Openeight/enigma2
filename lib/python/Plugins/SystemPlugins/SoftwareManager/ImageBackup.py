@@ -588,7 +588,7 @@ class ImageBackup(Screen):
 			cmdlist.append('echo " "')
 			cmdlist.append('echo "' + _("Please wait...almost ready! ") + '"')
 			cmdlist.append('echo " "')
-			cmdlist.append('echo "' + _("Rename the file \'noforce\' in the folder %s") %self.MODEL + '"')
+			cmdlist.append('echo "' + _("Rename the file \'noforce\' in the folder %s") %self.IMAGEFOLDER + '"')
 			cmdlist.append('echo "' + _("to \'force\' to flash this image without confirmation") + '"')
 			cmdlist.append('echo " "')
 			cmdlist.append('echo "' + _("To restore the image:") + '"')
