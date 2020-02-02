@@ -6,9 +6,11 @@ from Tools.Directories import fileExists, fileCheck, pathExists, fileHas, resolv
 from Tools.HardwareInfo import HardwareInfo
 from boxbranding import getBoxType, getDisplayType, getMachineBuild
 
-import os, re, glob
+import os, re
 
 SystemInfo = {}
+
+from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots
 
 def getNumVideoDecoders():
 	number_of_video_decoders = 0
@@ -31,41 +33,6 @@ def getBootdevice():
 	while dev and not fileExists('/sys/block/' + dev):
 	    dev = dev[:-1]
 	return dev
-
-def getMultibootStartupDevice():
-	for device in ('/dev/block/by-name/bootoptions', '/dev/block/by-name/bootoptions', "/dev/mmcblk1p1" if model in ('osmio4k', 'osmio4kplus', 'osmini4k') else "/dev/mmcblk0p1"):
-		if os.path.exists(device):
-			return device
-
-def getparam(line, param):
-	return line.rsplit('%s=' % param, 1)[1].split(' ', 1)[0]
-
-def getMultibootslots():
-	bootslots = {}
-	if SystemInfo["MultibootStartupDevice"]:
-		TMP_MOUNT = '/tmp/bootcheck'
-		if not os.path.isdir(TMP_MOUNT):
-			os.mkdir(TMP_MOUNT)
-		Console().ePopen('mount %s %s' % (SystemInfo["MultibootStartupDevice"], TMP_MOUNT))
-		for file in glob.glob('%s/STARTUP_*' % TMP_MOUNT):
-			slotnumber = file.rsplit('_', 3 if 'BOXMODE' in file else 1)[1]
-			if slotnumber.isdigit() and slotnumber not in bootslots:
-				slot = {}
-				for line in open(file).readlines():
-					if 'root=' in line:
-						device = getparam(line, 'root')
-						if os.path.exists(device):
-							slot['device'] = device
-							slot['startupfile'] = os.path.basename(file).split('_BOXMODE')[0]
-							if 'rootsubdir' in line:
-								slot['rootsubdir'] = getparam(line, 'rootsubdir')
-						break
-				if slot:
-					bootslots[int(slotnumber)] = slot
-		Console().ePopen('umount %s' % TMP_MOUNT)
-		if not os.path.ismount(TMP_MOUNT):
-			os.rmdir(TMP_MOUNT)
-	return bootslots
 
 # parse the boot commandline
 cmdline = open("/proc/cmdline", "r").read()
@@ -163,7 +130,7 @@ SystemInfo["Has3DSurroundSpeaker"] = fileExists("/proc/stb/audio/3dsurround_choi
 SystemInfo["Has3DSurroundSoftLimiter"] = fileExists("/proc/stb/audio/3dsurround_softlimiter_choices") and fileCheck("/proc/stb/audio/3dsurround_softlimiter")
 SystemInfo["hasXcoreVFD"] = model in ('osmega','spycat4k','spycat4kmini','spycat4kcombo') and fileCheck("/sys/module/brcmstb_%s/parameters/pt6302_cgram" % model)
 SystemInfo["HasOfflineDecoding"] = model not in ('osmini', 'osminiplus', 'et7000mini', 'et11000', 'mbmicro', 'mbtwinplus', 'mbmicrov2', 'et7000', 'et8500')
-SystemInfo["MultibootStartupDevice"] = getMultibootStartupDevice()
+SystemInfo["MultibootStartupDevice"] = getMultibootStartupDevice(model)
 SystemInfo["canMultiBoot"] = getMultibootslots()
 SystemInfo["HaveMultiBootHD"] = fileCheck("/boot/STARTUP") and getMachineBuild() in ('hd51','vs1500','h7','ceryon7252')
 SystemInfo["HaveMultiBootXC"] = fileCheck("/boot/cmdline.txt")
