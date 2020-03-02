@@ -152,7 +152,7 @@ class PositionerSetup(Screen):
 		# True means we dont like that the normal sec stuff sends commands to the rotor!
 		self.tuner = Tuner(self.frontend, ignore_rotor = True)
 
-		tp = ( cur.get("frequency", 0),
+		tp = ( cur.get("frequency", 0) / 1000,
 			cur.get("symbol_rate", 0) / 1000,
 			cur.get("polarization", eDVBFrontendParametersSatellite.Polarisation_Horizontal),
 			cur.get("fec_inner", eDVBFrontendParametersSatellite.FEC_Auto),
@@ -871,7 +871,7 @@ class PositionerSetup(Screen):
 		frequency_text = ""
 		frequency = transponderdata.get("frequency")
 		if frequency:
-			frequency_text = str(frequency / 1000.0) + polarization_text
+			frequency_text = str(frequency / 1000) + polarization_text
 		self["frequency_value"].setText(frequency_text)
 		symbolrate_text = ""
 		symbolrate = transponderdata.get("symbol_rate")
@@ -1337,7 +1337,7 @@ class TunerScreen(ConfigListScreen, Screen):
 		defaultSat = {
 			"orbpos": 192,
 			"system": eDVBFrontendParametersSatellite.System_DVB_S,
-			"frequency": 11836000,
+			"frequency": 11836,
 			"inversion": eDVBFrontendParametersSatellite.Inversion_Unknown,
 			"symbolrate": 27500,
 			"polarization": eDVBFrontendParametersSatellite.Polarisation_Horizontal,
@@ -1350,7 +1350,7 @@ class TunerScreen(ConfigListScreen, Screen):
 		if frontendData is not None:
 			ttype = frontendData.get("tuner_type", "UNKNOWN")
 			defaultSat["system"] = frontendData.get("system", eDVBFrontendParametersSatellite.System_DVB_S)
-			defaultSat["frequency"] = frontendData.get("frequency", 0)
+			defaultSat["frequency"] = frontendData.get("frequency", 0) / 1000
 			defaultSat["inversion"] = frontendData.get("inversion", eDVBFrontendParametersSatellite.Inversion_Unknown)
 			defaultSat["symbolrate"] = frontendData.get("symbol_rate", 0) / 1000
 			defaultSat["polarization"] = frontendData.get("polarization", eDVBFrontendParametersSatellite.Polarisation_Horizontal)
@@ -1371,7 +1371,7 @@ class TunerScreen(ConfigListScreen, Screen):
 		self.scan_sat.system = ConfigSelection(default = defaultSat["system"], choices = [
 			(eDVBFrontendParametersSatellite.System_DVB_S, _("DVB-S")),
 			(eDVBFrontendParametersSatellite.System_DVB_S2, _("DVB-S2"))])
-		self.scan_sat.frequency = ConfigFloat(default = [defaultSat["frequency"] / 1000, defaultSat["frequency"] % 1000], limits = [(1, 99999), (0,999)]) 
+		self.scan_sat.frequency = ConfigInteger(default = defaultSat["frequency"], limits = (1, 99999))
 		self.scan_sat.inversion = ConfigSelection(default = defaultSat["inversion"], choices = [
 			(eDVBFrontendParametersSatellite.Inversion_Off, _("Off")),
 			(eDVBFrontendParametersSatellite.Inversion_On, _("On")),
@@ -1433,7 +1433,7 @@ class TunerScreen(ConfigListScreen, Screen):
 		self.t2mi_plp_memory = self.scan_sat.t2mi_plp.value
 
 	def initialSetup(self):
-		currtp = self.transponderToString([None, self.scan_sat.frequency.floatint, self.scan_sat.symbolrate.value, self.scan_sat.polarization.value])
+		currtp = self.transponderToString([None, self.scan_sat.frequency.value, self.scan_sat.symbolrate.value, self.scan_sat.polarization.value])
 		if currtp in self.tuning.transponder.choices:
 			self.tuning.type.value = "predefined_transponder"
 		else:
@@ -1476,7 +1476,7 @@ class TunerScreen(ConfigListScreen, Screen):
 					self.list.append(getConfigListEntry( _('T2MI PLP ID'), self.scan_sat.t2mi_plp))
 		else: # "predefined_transponder"
 			self.list.append(getConfigListEntry(_("Transponder"), self.tuning.transponder))
-			currtp = self.transponderToString([None, self.scan_sat.frequency.floatint, self.scan_sat.symbolrate.value, self.scan_sat.polarization.value])
+			currtp = self.transponderToString([None, self.scan_sat.frequency.value, self.scan_sat.symbolrate.value, self.scan_sat.polarization.value])
 			self.tuning.transponder.setValue(currtp)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
@@ -1547,7 +1547,7 @@ class TunerScreen(ConfigListScreen, Screen):
 				t2mi_plp_id = eDVBFrontendParametersSatellite.No_T2MI_PLP_Id
 
 			returnvalue = (
-				self.scan_sat.frequency.floatint,
+				self.scan_sat.frequency.value,
 				self.scan_sat.symbolrate.value,
 				self.scan_sat.polarization.value,
 				fec,
@@ -1563,7 +1563,7 @@ class TunerScreen(ConfigListScreen, Screen):
 				t2mi_plp_id)
 		elif self.tuning.type.value == "predefined_transponder":
 			transponder = nimmanager.getTransponders(satpos)[self.tuning.transponder.index]
-			returnvalue = (transponder[1], transponder[2] / 1000,
+			returnvalue = (transponder[1] / 1000, transponder[2] / 1000,
 				transponder[3], transponder[4], 2, satpos, transponder[5], transponder[6], transponder[8], transponder[9], transponder[10], transponder[11], transponder[12], transponder[13])
 		self.close(returnvalue)
 
