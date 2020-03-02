@@ -26,7 +26,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 	sat_frequencies = [
 		# astra 192 zdf
 		(
-			11953000,
+			11953,
 			27500,
 			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
 			eDVBFrontendParametersSatellite.FEC_3_4,
@@ -46,7 +46,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 
 		# astra 235 astra ses
 		(
-			12168000,
+			12168,
 			27500,
 			eDVBFrontendParametersSatellite.Polarisation_Vertical,
 			eDVBFrontendParametersSatellite.FEC_3_4,
@@ -66,7 +66,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 
 		# astra 282 EPG background audio
 		(
-			11778000,
+			11778,
 			27500,
 			eDVBFrontendParametersSatellite.Polarisation_Vertical,
 			eDVBFrontendParametersSatellite.FEC_2_3,
@@ -86,7 +86,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 
 		# hotbird 130 rai
 		(
-			10992000,
+			10992,
 			27500,
 			eDVBFrontendParametersSatellite.Polarisation_Vertical,
 			eDVBFrontendParametersSatellite.FEC_2_3,
@@ -106,7 +106,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 
  		# eutelsat 160 hrt
  		(
-			10721000,
+ 			10721,
  			27500,
  			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
  			eDVBFrontendParametersSatellite.FEC_3_4,
@@ -126,7 +126,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
  
 		# thor  3592 CT24
 		(
-			12072000,
+			12072,
 			28000,
 			eDVBFrontendParametersSatellite.Polarisation_Vertical,
 			eDVBFrontendParametersSatellite.FEC_7_8,
@@ -146,7 +146,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 
 		# hispasat 300 tsa
 		(
-			10890000,
+			10890,
 			27500,
 			eDVBFrontendParametersSatellite.Polarisation_Vertical,
 			eDVBFrontendParametersSatellite.FEC_3_4,
