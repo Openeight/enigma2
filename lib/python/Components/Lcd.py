@@ -280,11 +280,11 @@ def InitLcd():
 			config.lcd.power4x7on.addNotifier(setPower4x7On)
 
 		if fileExists("/proc/stb/fp/power4x7standby"):
-			config.lcd.power4x7standby = ConfigSelection(default = "off", choices = [("off", _("Off")), ("on", _("On"))])
+			config.lcd.power4x7standby = ConfigSelection(default = "on", choices = [("off", _("Off")), ("on", _("On"))])
 			config.lcd.power4x7standby.addNotifier(setPower4x7Standby)
 
 		if fileExists("/proc/stb/fp/power4x7suspend"):
-			config.lcd.power4x7suspend = ConfigSelection(default = "off", choices = [("off", _("Off")), ("on", _("On"))])
+			config.lcd.power4x7suspend = ConfigSelection(default = "on", choices = [("off", _("Off")), ("on", _("On"))])
 			config.lcd.power4x7suspend.addNotifier(setPower4x7Suspend)
 
 		if fileExists("/proc/stb/lcd/scroll_delay"):
