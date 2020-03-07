@@ -8,8 +8,8 @@ from enigma import eTimer
 
 class MessageBox(Screen):
 	TYPE_YESNO = 0
-	TYPE_WARNING = 1
-	TYPE_INFO = 2
+	TYPE_INFO = 1
+	TYPE_WARNING = 2
 	TYPE_ERROR = 3
 	TYPE_MESSAGE = 4
 
