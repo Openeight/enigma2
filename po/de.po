@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 17:02+0100\n"
+"POT-Creation-Date: 2020-03-12 20:07+0100\n"
 "PO-Revision-Date: 2019-08-24 19:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: OpenEight <https://octagon-forum.eu>\n"
@@ -1996,11 +1996,12 @@ msgstr ""
 msgid "Bus: "
 msgstr "Bus:"
 
+#, fuzzy
+msgid "By OpenEight Image Team"
+msgstr "Von openATV Image Team"
+
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "Standardmässig wird SNR in Dezibel angezeigt (falls vom Tuner unterstütztDiese Einstellung erzwingt die Darstellung von SNR in Prozent."
-
-msgid "By openATV Image Team"
-msgstr "Von openATV Image Team"
 
 msgid "Bypass HDMI EDID checking"
 msgstr ""
@@ -3552,7 +3553,7 @@ msgid "Dialing:"
 msgstr "Wählen:"
 
 msgid "Did you see all eight arrow heads?"
-msgstr ""
+msgstr "Konnten Sie alle acht Pfeilspitzen sehen?"
 
 msgid "Digital contour removal"
 msgstr "Entfernen digitaler Konturen"
@@ -3750,7 +3751,6 @@ msgid ""
 "%s"
 msgstr "Wollen Sie das Image nach %s herunterladen?"
 
-#, fuzzy
 msgid "Do you want to install Plugins?"
 msgstr "Möchten Sie eine Kanalliste hinzufügen?"
 
@@ -3766,7 +3766,6 @@ msgstr "Wollen Sie die DVD im Laufwerk abspielen?"
 msgid "Do you want to preview this DVD before burning?"
 msgstr "Wollen Sie vor dem Brennen eine Vorschau der DVD ansehen?"
 
-#, fuzzy
 msgid "Do you want to quit the overscan wizard?"
 msgstr "Sind Sie sicher, dass Sie diesen Assistenten verlassen möchten?"
 
@@ -4080,15 +4079,14 @@ msgstr "'Neutrino'-Style Umschaltsteuerung aktivieren"
 msgid "Enable / Disable IP server"
 msgstr ""
 
-msgid "Enable 5V for active antenna"
+
 msgstr "5V für aktive Antenne"
 
 msgid "Enable EIT EPG"
 msgstr "Aktiviere EIT EPG"
 
-#, fuzzy
 msgid "Enable HDMI-CEC"
-msgstr "Aktiviere EIT EPG"
+msgstr "Aktiviere HDMI-CEC"
 
 msgid "Enable MHW EPG"
 msgstr "Aktiviere MHW EPG"
@@ -4596,7 +4594,8 @@ msgid ""
 "Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
 "\n"
 "Do you really want to proceed?"
-msgstr "Durch Zurücksetzen auf die Werkseinstellungen wird die Standardkonfiguration Ihres Receivers wiederhergestellt. Alle Benutzerdaten, einschließlich Systemeinstellungen, Tunerkonfiguration, Blumensträuße, Dienste und Plugins, werden GELÖSCHT. Aufzeichnungen und andere Dateien, die auf Festplatten und USB-Medien gespeichert sind, bleiben erhalten. Nach Abschluss wird das System automatisch neu gestartet!\n"
+msgstr ""
+"Durch Zurücksetzen auf die Werkseinstellungen wird die Standardkonfiguration Ihres Receivers wiederhergestellt. Alle Benutzerdaten, einschließlich Systemeinstellungen, Tunerkonfiguration, Blumensträuße, Dienste und Plugins, werden GELÖSCHT. Aufzeichnungen und andere Dateien, die auf Festplatten und USB-Medien gespeichert sind, bleiben erhalten. Nach Abschluss wird das System automatisch neu gestartet!\n"
 "\n"
 "Möchten Sie wirklich fortfahren?"
 
@@ -4865,6 +4864,10 @@ msgstr "Frequenz"
 #, fuzzy
 msgid "Frequency & Channel"
 msgstr "Frequenz oder Kanal verwenden"
+
+#, fuzzy
+msgid "Frequency & Polarization"
+msgstr "Polarisation"
 
 msgid "Frequency bands"
 msgstr "Frequenzbänder"
@@ -5530,7 +5533,6 @@ msgstr ""
 msgid "Import channels from fallback tuner"
 msgstr ""
 
-#, fuzzy
 msgid "Import from remote receiver URL"
 msgstr "Tuner eines anderen Receivers benutzen (URL)"
 
@@ -6710,7 +6712,7 @@ msgid "Multiboot"
 msgstr "Multisat"
 
 #, python-format
-msgid "Multiboot Image created on: %s"
+msgid "Multiboot Image created at: %s"
 msgstr ""
 
 #, fuzzy
@@ -7148,9 +7150,8 @@ msgstr ""
 "Keine funktionierende WLAN-Verbindung gefunden.\n"
 "Bitte prüfen Sie, ob Sie ein kompatibles WLAN-Gerät angeschlossen haben oder aktivieren Sie die LAN-Verbindung."
 
-#, fuzzy
 msgid "No, I do not want to install plugins"
-msgstr "Nein, keine Plugins wiederherstellen"
+msgstr "Nein, ich will keine Plugins installieren"
 
 msgid "No, but restart from begin"
 msgstr "Nein, aber von Anfang an neu beginnen"
@@ -7467,9 +7468,8 @@ msgstr "Ausgabe"
 msgid "Overall progress:"
 msgstr ""
 
-#, fuzzy
 msgid "Overscan wizard"
-msgstr "Netzwerkassistent"
+msgstr "Overscan Assistent"
 
 msgid "Overwrite configuration files during software upgrade?"
 msgstr "Konfigurationsdateien beim Software-Update überschreiben?"
@@ -7742,7 +7742,7 @@ msgstr ""
 "Drücken Sie OK zum Fortfahren"
 
 msgid "Please configure the fallback tuner setup?"
-msgstr ""
+msgstr "Die Reserve-Tuner-Einstellung konfigurieren?"
 
 msgid ""
 "Please configure your internet connection by filling out the required values.\n"
@@ -7918,7 +7918,7 @@ msgid "Please set up tuner R"
 msgstr "Einstellungen für Tuner A."
 
 msgid "Please setup the following basic configs!"
-msgstr ""
+msgstr "Bitte nehmen Sie die folgende Grund-Konfiguration vor!"
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -8702,6 +8702,10 @@ msgstr "Umbenennen fehlgeschlagen!"
 msgid "Rename name and description for new events"
 msgstr "Namen und Beschreibung neuer Events ändern"
 
+#, python-format
+msgid "Rename the file 'noforce' in the folder %s"
+msgstr ""
+
 msgid "Rename to:"
 msgstr "Umbenennen in:"
 
@@ -8812,14 +8816,12 @@ msgstr "Karten-Server beziehen"
 msgid "Restart enigma"
 msgstr "Benutzeroberfläche neu starten"
 
-#, fuzzy
 msgid "Restart enigma in debug mode"
 msgstr "Enigma im Debug-Modus neu starten"
 
 msgid "Restart network"
 msgstr "Netzwerk neu starten"
 
-#, fuzzy
 msgid "Restart network and remount connections."
 msgstr "Netzwerk neu starten und Verbindungen wieder einhängen"
 
@@ -11283,13 +11285,13 @@ msgstr ""
 msgid "Switch config"
 msgstr "Switch Konfiguration"
 
-msgid "Switch off the display during Standby Mode"
+msgid "Switch the display on or off during Standby Mode"
 msgstr ""
 
-msgid "Switch off the display during Suspend Mode"
+msgid "Switch the display on or off during Suspend Mode"
 msgstr ""
 
-msgid "Switch off the display during operation"
+msgid "Switch the display on or off during operation"
 msgstr ""
 
 msgid "Switch to TV mode"
@@ -11574,6 +11576,11 @@ msgid ""
 "\n"
 "Menu->Installation->System->Audio/Video->Overscan wizard"
 msgstr ""
+"Der Overscan-Assistent wurde abgeschlossen.\n"
+"\n"
+"Hinweis: Sie können den Overscan-Assistenten jederzeit später über starten\n"
+"\n"
+"Menü-> Installation-> System-> Audio / Video-> Overscan-Assistent"
 
 msgid ""
 "The overscan wizard helps you to setup your TV in the correct way.\n"
@@ -11589,6 +11596,18 @@ msgid ""
 "\n"
 "Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"
 msgstr ""
+"Der Overscan-Assistent hilft Ihnen, Ihren Fernseher richtig einzurichten.\n"
+"\n"
+"Bei den meisten Fernsehgeräten ist die werksseitige Standardeinstellung für das Überscan aktiviert. Dies bedeutet, dass Sie immer ein \"gezoomtes\" Bild anstelle von echtem HD sehen und Teile der Benutzerschnittstelle (Skin) möglicherweise unsichtbar sind.\n"
+"\n"
+"Der gelbe Bereich bedeutet, dass ein Randbereich von 5% eines Full-HD-Bildes nicht sichtbar ist.\n"
+"Der grüne Bereich bedeutet, dass ein Randbereich von 10% eines Full-HD-Bildes nicht sichtbar ist.\n"
+"\n"
+"Mit anderen Worten, wenn die gelbe Box alle vier Seiten Ihres Bildschirms berührt, haben Sie mindestens 5% Overscan auf allen Seiten.\n"
+"\n"
+"Wenn Sie die Tipps aller acht Pfeilspitzen sehen, ist Ihr Overscan deaktiviert.\n"
+"\n"
+"Testmuster von TigerDave - www.tigerdave.com/ht_menu.htm"
 
 #, python-format
 msgid "The path %s already exists."
@@ -12410,9 +12429,9 @@ msgstr ""
 "Das dauert zwischen 4 und 15 Minuten, je nach verwendetem Dateisystem und ist vollautomatisch.\n"
 "Stellen Sie sicher, dass Sie zuerst ein USB-Speichermedium angeschlossen haben, bevor sie USB auswählen."
 
-#, python-format
-msgid "USB Image created on: %s"
-msgstr ""
+#, fuzzy, python-format
+msgid "USB Image created at: %s"
+msgstr "Letztes Update:\t%s"
 
 msgid "USB stick"
 msgstr "USB-Stick"
@@ -13502,9 +13521,8 @@ msgstr "Ja, diesen Film im Filmordner speichern"
 msgid "Yes to all"
 msgstr "Ja, zu allen"
 
-#, fuzzy
 msgid "Yes, I do want to install plugins"
-msgstr "Sie können dieses Plugin installieren."
+msgstr "Ja, ich will Plugins installieren"
 
 msgid "Yes, always"
 msgstr "Ja, immer"
@@ -13992,7 +14010,7 @@ msgstr "und wähle nächsten Kanal"
 msgid "and select previous channel"
 msgstr "und wähle vorherigen Kanal"
 
-msgid "and there is made an extra copy on:"
+msgid "and there is made an extra copy at:"
 msgstr ""
 
 msgid "are you sure to cancel all changes"
@@ -14829,6 +14847,10 @@ msgstr ""
 msgid "options mount file system (default): "
 msgstr ""
 
+#, fuzzy
+msgid "or use OnlineFlash in SoftwareManager"
+msgstr "Software Manager"
+
 msgid "original"
 msgstr "Original"
 
@@ -15297,6 +15319,9 @@ msgstr "Diese Aufnahme"
 
 msgid "this service is protected by a parental control pin"
 msgstr "Dieser Kanal ist durch einen Jugendschutz-PIN-Code geschützt."
+
+msgid "to 'force' to flash this image without confirmation"
+msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "Schalte zwischen Zeit-, Kapitel-, Ton- und Untertitel-Info um"
