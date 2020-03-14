@@ -49,6 +49,7 @@ from time import sleep
 from re import search
 import NavigationInstance
 import os.path
+import fstabViewer
 plugin_path_networkbrowser = eEnv.resolve('${libdir}/enigma2/python/Plugins/SystemPlugins/NetworkBrowser')
 if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/HdmiCEC/plugin.pyo'):
 	from Plugins.SystemPlugins.HdmiCEC.plugin import HdmiCECSetupScreen
@@ -315,6 +316,7 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Mount again',_('Mount your network shares again'),_('Attempt to recover lost mounts (in background).')))
 		self.sublist.append(QuickSubMenuEntryComponent('Network Browser', _('Search for network shares'), _('Search for network shares.'))) 
 		self.sublist.append(QuickSubMenuEntryComponent('Device Mount Manager', _('Mounts Devices'), _('Setup your Device mounts (USB, HDD, others...)')))
+		self.sublist.append(QuickSubMenuEntryComponent("fstab Editor",_("View or edit fstab"),_("View or Edit your device mounts in etc/fstab.")))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qsoftcam(self):
@@ -494,6 +496,8 @@ class QuickMenu(Screen):
 			self.session.open(NetworkBrowser, None, plugin_path_networkbrowser)
 		elif item[0] == _('Device Mount Manager'):
 			self.session.open(DevicesMountPanel)
+		elif item[0] == _("fstab Editor"):
+			self.session.open(fstabViewer.fstabViewerScreen)
 		elif item[0] == _('Softcam Panel'):
 			self.session.open(SoftcamPanel)
 		elif item[0] == _('Softcam-Panel Setup'):
