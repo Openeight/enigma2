@@ -36,6 +36,16 @@ elif screenwidth and screenwidth > 1920:
 elif screenwidth and screenwidth > 1024:
 	sizeH = screenwidth - 100
 	HDSKIN = False
+
+actski = resolveFilename(SCOPE_ACTIVE_SKIN)
+png = (actski + "div-h.png")
+divpng = (actski + "skin_default/div-h.png")
+if fileExists(png):
+	DIVH = png
+elif fileExists(divpng):
+	DIVH = divpng
+else:
+	DIVH = "/usr/share/enigma2/skin_default/div-h.png"
 ###global
 
 class OscamInfo:
@@ -495,9 +505,7 @@ class OscamInfoMenu(Screen):
 		for t in mlist:
 			res = [ t ]
 			if t.startswith("--"):
-				png = resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png")
-				if fileExists(png):
-					png = LoadPixmap(png)
+				png = LoadPixmap(DIVH)
 				if png is not None:
 					x, y, w, h = skin.parameters.get("ChoicelistDash",(0, 2*f, 800*f, 2*f))
 					res.append((eListboxPythonMultiContent.TYPE_PIXMAP, x, y, w, h, png))
@@ -583,12 +591,13 @@ class oscInfo(Screen, OscamInfo):
 		self.itemheight = 25
 		self.sizeLH = sizeH - 2
 		self.skin = """<screen position="center,center" size="%d, %d" title="Client Info" >""" % (sizeH, ysize)
+		png = DIVH
 		button_width = int(sizeH / 4)
 		for k, v in enumerate(["red", "green", "yellow", "blue"]):
 			xpos = k * button_width
 			self.skin += """<ePixmap name="%s" position="%d,%d" size="35,25" pixmap="/usr/share/enigma2/skin_default/buttons/key_%s.png" zPosition="1" transparent="1" alphatest="on" />""" % (v, xpos, ypos, v)
 			self.skin += """<widget source="key_%s" render="Label" position="%d,%d" size="%d,%d" font="Regular;18" zPosition="1" valign="center" transparent="1" />""" % (v, xpos + 40, ypos, button_width, 22)
-		self.skin +="""<ePixmap name="divh" position="0,37" size="%d,2" pixmap="/usr/share/enigma2/skin_default/div-h.png" transparent="1" alphatest="on" />""" % sizeH
+		self.skin +="""<ePixmap name="divh" position="0,37" size="%d,2" pixmap="%s" transparent="1" alphatest="on" />""" % (sizeH, png)
 		self.skin +="""<widget name="output" position="10,45" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % ( self.sizeLH, ysize - 30)
 		self.skin += """</screen>"""
 		Screen.__init__(self, session)
@@ -733,9 +742,7 @@ class oscInfo(Screen, OscamInfo):
 			res.append( (eListboxPythonMultiContent.TYPE_TEXT, xpos, ypos*f, xsize, self.itemheight*f, useFont, RT_HALIGN_LEFT, i, int(colour, 16)) )
 			x += 1
 		if heading:
-			png = resolveFilename(SCOPE_ACTIVE_SKIN, "div-h.png")
-			if fileExists(png):
-				png = LoadPixmap(png)
+			png = LoadPixmap(DIVH)
 			if png is not None:
 				res.append( (eListboxPythonMultiContent.TYPE_PIXMAP, 0, (self.itemheight-2)*f, self.sizeLH, 2*f, png))
 		return res
