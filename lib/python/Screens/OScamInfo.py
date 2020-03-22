@@ -715,8 +715,8 @@ class oscInfo(Screen, OscamInfo):
 			self.startPos = [ 10, 110, 240, 340, 490, 570 ]
 			useFont = 3
 		else:
-			self.fieldsize = [ 150*f, 150*f, 150*f, 300*f, 150*f, 200*f ]
-			self.startPos = [ 50*f, 200*f, 350*f, 500*f, 800*f, 950*f ]
+			self.fieldsize = [ 150*f, 170*f, 120*f, 300*f, 150*f, 200*f ]
+			self.startPos = [ 50*f, 200*f, 380*f, 500*f, 800*f, 950*f ]
 			useFont = 2
 
 		ypos = 2
