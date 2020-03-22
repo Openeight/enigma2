@@ -55,23 +55,24 @@ def command(comandline, strip=1):
 #		if self.instance is not None:
 #			self.instance.moveSelectionTo(idx)
 
-SOFTCAM_SKIN = """<screen name="SoftcamPanel" position="center,center" size="500,450" title="Softcam Panel">
+SOFTCAM_SKIN = """<screen name="SoftcamPanel" position="center,center" size="580,450" title="Softcam Panel">
 	<eLabel font="Regular;22" position="10,10" size="185,25" text="Softcam Selection:" />
-	<widget font="Regular;18" name="camcount" position="420,10" size="60,25" />
-	<widget name="config" position="10,100" size="400,100" />
-	<eLabel backgroundColor="red" position="10,60" size="120,3" zPosition="0" />
-	<eLabel backgroundColor="green" position="130,60" size="120,3" zPosition="0" />
-	<eLabel backgroundColor="yellow" position="250,60" size="120,3" zPosition="0" />
-	<eLabel backgroundColor="blue" position="370,60" size="120,3" zPosition="0" />
-	<widget font="Regular;16" halign="center" name="key_red" position="10,62" size="120,35" transparent="1" valign="center" zPosition="2" />
-	<widget font="Regular;16" halign="center" name="key_green" position="130,62" size="120,35" transparent="1" valign="center" zPosition="2" />
-	<widget font="Regular;16" halign="center" name="key_yellow" position="250,62" size="120,35" transparent="1" valign="center" zPosition="2" />
-	<widget font="Regular;16" halign="center" name="key_blue" position="370,62" size="120,35" transparent="1" valign="center" zPosition="2" />
-	<eLabel backgroundColor="#56C856" position="0,199" size="500,1" zPosition="0" />
-	<widget font="Regular;16" name="actifcam" position="10,205" size="220,32" />
-	<widget font="Regular;16" name="actifcam2" position="250,205" size="220,32" />
-	<eLabel backgroundColor="#56C856" position="0,225" size="500,1" zPosition="0" />
-	<widget font="Regular;16" name="ecminfo" position="10,235" size="480,300" />
+	<widget font="Regular;18" name="camcount" position="460,10" size="60,25" />
+	<widget name="config" position="50,100" size="400,100" />
+	<eLabel backgroundColor="red" position="50,60" size="120,3" zPosition="0" />
+	<eLabel backgroundColor="green" position="170,60" size="120,3" zPosition="0" />
+	<eLabel backgroundColor="yellow" position="290,60" size="120,3" zPosition="0" />
+	<eLabel backgroundColor="blue" position="410,60" size="120,3" zPosition="0" />
+	<widget font="Regular;16" halign="center" name="key_red" position="50,62" size="120,35" transparent="1" valign="center" zPosition="2" />
+	<widget font="Regular;16" halign="center" name="key_green" position="170,62" size="120,35" transparent="1" valign="center" zPosition="2" />
+	<widget font="Regular;16" halign="center" name="key_yellow" position="290,62" size="120,35" transparent="1" valign="center" zPosition="2" />
+	<widget font="Regular;16" halign="center" name="key_blue" position="410,62" size="120,35" transparent="1" valign="center" zPosition="2" />
+	<eLabel backgroundColor="#56C856" position="0,199" size="580,1" zPosition="0" />
+	<widget font="Regular;15" name="actifcam" position="3,203" size="283,32" />
+	<eLabel backgroundColor="#56C856" position="287,199" size="2,26" zPosition="0"/>
+	<widget font="Regular;15" name="actifcam2" position="293,203" size="282,32" />
+	<eLabel backgroundColor="#56C856" position="0,225" size="580,1" zPosition="0" />
+	<widget font="Regular;15" name="ecminfo" position="10,235" size="500,300" />
 </screen>"""
 
 
