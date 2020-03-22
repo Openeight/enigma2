@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-12 20:07+0100\n"
-"PO-Revision-Date: 2020-03-21 18:14+0100\n"
+"PO-Revision-Date: 2020-03-22 19:36+0100\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: OpenEight <https://octagon-forum.eu>\n"
 "Language: de\n"
@@ -94,11 +94,12 @@ msgstr ""
 "\n"
 "Drücken Sie OK, um fortzufahren."
 
-#, fuzzy
 msgid ""
 "\n"
 "Press OK or Exit to abort!"
-msgstr "Zum Starten der Suche OK drücken."
+msgstr ""
+"\n"
+"Zum Beenden Taste OK oder Exit drücken !"
 
 msgid ""
 "\n"
@@ -1536,6 +1537,9 @@ msgstr ""
 msgid "Audio"
 msgstr "Ton"
 
+msgid "AudioSelection"
+msgstr "Ton-Auswahl"
+
 msgid "Audio / Video"
 msgstr "Audio / Video"
 
@@ -1801,7 +1805,7 @@ msgid "Backup your Image"
 msgstr "Sicherung des Image"
 
 msgid "Backup your Image/Settings or Flash a new Image"
-msgstr "Sicherung des/der Image/Einstellungen oder ein neues Image flashen"
+msgstr "Sicherung des/der Image/Einstellungen oder neues Image flashen"
 
 msgid "Backup your Settings"
 msgstr "Sicherung der Einstellungen"
@@ -2078,6 +2082,9 @@ msgstr "CH"
 #, python-format
 msgid "CH%s"
 msgstr ""
+
+msgid "CI (Common Interface) Setup"
+msgstr "CI (Common Interface) Einstellungen"
 
 msgid "CI assignment"
 msgstr "CI-Zuweisung"
@@ -3239,7 +3246,7 @@ msgid "DMM normal"
 msgstr "Normal"
 
 msgid "DTS downmix"
-msgstr ""
+msgstr "DTS Downmix"
 
 msgid "DUAL LAYER DVD"
 msgstr "Doppelschicht DVD (DUAL LAYER)"
@@ -3675,7 +3682,7 @@ msgid "Do not show file extensions for registered multimedia files."
 msgstr ""
 
 msgid "Do nothing"
-msgstr "Nichts machen"
+msgstr "Nein"
 
 msgid ""
 "Do you really want to check the filesystem?\n"
@@ -4188,10 +4195,10 @@ msgid "End time"
 msgstr "Endzeit"
 
 msgid "End time to ignore inactivity sleeptimer"
-msgstr "Endzeit zum Ignorieren des inaktiven Ausschalt-Timers"
+msgstr "Endzeit zum Ignorieren des Inaktivitäts-Ausschalt-Timers"
 
 msgid "End time to ignore shutdown in standby"
-msgstr "Endzeit zum Ignorieren des Abschaltens in den Standby"
+msgstr "Endzeit kein Wechsel vom Standby in den Deep-Standby"
 
 msgid "English"
 msgstr "Englisch"
@@ -4516,13 +4523,13 @@ msgid "Extra Setup"
 msgstr "Extra Einstellungen"
 
 msgid "Extra end time to ignore inactivity sleeptimer"
-msgstr ""
+msgstr "Zusätzliche Endzeit, um den Inaktivitäts-Ausschalt-Timer zu ignorieren"
 
 msgid "Extra motor options"
 msgstr "Extra Motor Optionen"
 
 msgid "Extra start time to ignore inactivity sleeptimer"
-msgstr ""
+msgstr "Zusätzliche Startzeit, um den Inaktivitäts-Ausschalt-Timer zu ignorieren"
 
 msgid "F"
 msgstr ""
@@ -4877,7 +4884,7 @@ msgid "Ftpd service type: Vsftpd server"
 msgstr "Ftpd Service-Typ: Vsftpd Server"
 
 msgid "Full Image Backup "
-msgstr "Voll-Backup Image"
+msgstr "Voll-Backup Image "
 
 #, python-format
 msgid "Full back-up on %s"
@@ -5120,7 +5127,7 @@ msgid ""
 "HDD = Do you want to make a USB-back-up image on HDD? \n"
 "This only takes 1 or 10 minutes and is fully automatic."
 msgstr ""
-"HDD = Wollen Sie ein USB-Backup-Image auf der Festplatte erstellen ?\n"
+"HDD = Möchten Sie eine komplette Image-Sicherung auf der Festplatte erstellen ?\n"
 "Das dauert nur 2 bis 10 Minuten und erfolgt vollautomatisch."
 
 msgid "HDMI"
@@ -5906,7 +5913,7 @@ msgid "Kernel: %s"
 msgstr "Kernel Version: %s"
 
 msgid "Key Events"
-msgstr ""
+msgstr "Schlüsselereignisse"
 
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -6599,16 +6606,16 @@ msgid "Move the text buffer cursor to the last character"
 msgstr ""
 
 msgid "Move the virtual keyboard cursor down"
-msgstr ""
+msgstr "Den Curser nach unten bewegen"
 
 msgid "Move the virtual keyboard cursor left"
-msgstr ""
+msgstr "Den Curser nach links bewegen"
 
 msgid "Move the virtual keyboard cursor right"
-msgstr ""
+msgstr "Den Curser nach rechts bewegen"
 
 msgid "Move the virtual keyboard cursor up"
-msgstr ""
+msgstr "Den Curser nach oben bewegen"
 
 msgid "Move to position X"
 msgstr "Drehe zur Position X"
@@ -6668,7 +6675,7 @@ msgid "Multi Quick Button"
 msgstr "Multi Quick Button"
 
 msgid "Multi channel downmix"
-msgstr ""
+msgstr "Multi-Kanal Downmix"
 
 msgid "Multi-EPG bouquet selection"
 msgstr "Multi-EPG Bouquet Auswahl"
@@ -7250,7 +7257,7 @@ msgid "Now"
 msgstr "Jetzt"
 
 msgid "Now building the USB-Image"
-msgstr ""
+msgstr "Erstelle USB-Image.."
 
 msgid "Now playing"
 msgstr "Wiedergabe läuft"
@@ -7692,9 +7699,8 @@ msgstr "Bitte haben Sie Geduld, es wird ein Backup erstellt,\n"
 msgid "Please change recording endtime"
 msgstr "Bitte Aufnahmeendzeit ändern"
 
-#, fuzzy
 msgid "Please check the manual of the receiver"
-msgstr "Bitte den Namen des neuen Verzeichnisses eingeben"
+msgstr "Bitte in die Bedienungsanleitung Ihres Receivers schauen"
 
 msgid "Please choose CCcam-Reader"
 msgstr "Bitte wählen Sie CCcam-Reader"
@@ -7919,7 +7925,7 @@ msgid "Please wait while scanning is in progress..."
 msgstr "Bitte warten Sie, der Suchvorgang läuft."
 
 msgid "Please wait while we check your installed plugins..."
-msgstr ""
+msgstr "Bitte warten, es werden die installierten Plugins geprüft..."
 
 msgid "Please wait while we configure your network..."
 msgstr "Bitte warten Sie, das Netzwerk wird konfiguriert."
@@ -7936,17 +7942,14 @@ msgstr "Bitte warten Sie, das Netzwerk wird neu gestartet."
 msgid "Please wait whilst feeds state is checked."
 msgstr "Bitte warten, der Zustand des Feeds wird überprüft."
 
-#, fuzzy
 msgid "Please wait, restarting cardserver."
-msgstr "Bitte warten (Paketupdates)..."
+msgstr "Bitte warten, Kartenserver startet neu..."
 
-#, fuzzy
 msgid "Please wait, restarting softcam and cardserver."
-msgstr "Bitte warten (softcam wird heruntergeladen)..."
+msgstr "Bitte warten, Softcam und Kartenserver starten neu..."
 
-#, fuzzy
 msgid "Please wait, restarting softcam."
-msgstr "Bitte warten (softcam wird heruntergeladen)..."
+msgstr "Bitte warten, Softcam startet neu..."
 
 msgid "Please wait..."
 msgstr "Bitte warten..."
@@ -7954,9 +7957,8 @@ msgstr "Bitte warten..."
 msgid "Please wait... Loading list..."
 msgstr "Bitte warten... Liste wird geladen..."
 
-#, fuzzy
 msgid "Please wait...almost ready! "
-msgstr "Bitte warten..."
+msgstr "Fast fertig ! Bitte warten..."
 
 msgid "Please: DO NOT reboot your STB and turn off the power.\n"
 msgstr "Bitte: NICHT NEU STARTEN oder die STB ausschalten.\n"
@@ -9596,7 +9598,7 @@ msgid "Select the User Band to be assigned to this tuner. This is an index into 
 msgstr ""
 
 msgid "Select the character or action under the virtual keyboard cursor"
-msgstr ""
+msgstr "Wählen Sie das Zeichen oder die Aktion für den Cursor aus"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr ""
@@ -9644,7 +9646,7 @@ msgid "Select the type of Single Cable Reception device you are using."
 msgstr ""
 
 msgid "Select the virtual keyboard locale from a menu"
-msgstr ""
+msgstr "Wählen Sie das Gebietsschema der virtuellen Tastatur aus einem Menü"
 
 msgid "Select the virtual keyboard shifted character set"
 msgstr ""
@@ -9856,7 +9858,7 @@ msgid "Set all hotkey to default?"
 msgstr ""
 
 msgid "Set blocktimes by weekday"
-msgstr ""
+msgstr "Setze Blockzeiten nach Wochentag"
 
 msgid "Set default"
 msgstr "Standard festlegen"
@@ -10812,10 +10814,10 @@ msgid "Special 2"
 msgstr "Seriennummer"
 
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
-msgstr ""
+msgstr "Extra-Zeitbereich in dem der Inaktivitäts-Ausschalt-Timer ignoriert wird"
 
 msgid "Specify if you want to set the blocktimes separately by weekday"
-msgstr ""
+msgstr "Blockzeiten getrennt nach Wochentag festlegen"
 
 msgid "Specify the end time to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Geben Sie die Endzeit ein, wann der Ausschalttimer ignoriert werden soll, wenn der Receiver im Standby-Modus ist."
@@ -10825,21 +10827,25 @@ msgstr "Geben Sie die Endzeit ein, bis wann der Inaktivitäts-Sleeptimer ignorie
 
 msgid "Specify the extra end time until the inactivity sleeptimer should be ignored"
 msgstr ""
+"Extra-Endzeit bis wann der\n"
+"Inaktivitäts-Ausschalt-Timer ignoriert wird"
 
 msgid "Specify the extra start time when the inactivity sleeptimer should be ignored"
 msgstr ""
+"Extra-Startzeit ab wann der\n"
+"Inaktivitäts-Ausschalt-Timer ignoriert wird"
 
 msgid "Specify the start time to ignore the shutdown timer when the receiver is in standby mode"
-msgstr "Geben Sie die Startzeit ein, wann der Ausschalttimer ignoriert werden soll, wenn der Receiver im Standby-Modus ist"
+msgstr "Startzeit um den Ausschalt-Timer zu ignorieren, wenn sich der Receiver im Standby-Modus befindet"
 
 msgid "Specify the start time when the inactivity sleeptimer should be ignored"
 msgstr "Geben Sie die Anfangszeit ein, ab wann der Inaktivitäts-Sleeptimer ignoriert werden soll."
 
 msgid "Specify timeframe to ignore inactivity sleeptimer"
-msgstr "Geben Sie den Zeitbereich ein, in dem der Inaktivitäts- Ausschaltimer ignoriert werden soll"
+msgstr "Zeitbereich in dem der Inaktivitäts-Ausschalt-Timer ignoriert wird"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
-msgstr "Zeitbereich in dem nicht in den Standby gewechselt wird"
+msgstr "Zeitbereich in dem nicht vom Standby in den Deep-Standby gewechselt wird"
 
 msgid "Specify whether receiver should go to deep or normal standby"
 msgstr ""
@@ -10915,10 +10921,10 @@ msgid "Start time"
 msgstr "Startzeit"
 
 msgid "Start time to ignore inactivity sleeptimer"
-msgstr "Startzeit zum Ignorieren des inaktiven Ausschalt-Timers"
+msgstr "Startzeit zum Ignorieren des Inaktivitäts-Ausschalt-Timers"
 
 msgid "Start time to ignore shutdown in standby"
-msgstr "Startzeit zum Ignorieren des Abschaltens in den Standby"
+msgstr "Startzeit kein Wechsel vom Standby in den Deep-Standby"
 
 msgid "Start timeshift"
 msgstr "Timeshift starten"
@@ -12019,7 +12025,7 @@ msgstr ""
 
 #, python-format
 msgid "Time required for this process: %s"
-msgstr ""
+msgstr "Zeit für den gesamten Vorgang: %s"
 
 msgid "Time scale"
 msgstr "Zeitskala"
@@ -12105,12 +12111,17 @@ msgstr "Für ein Backup direkt auf dem USB-Stick, MUSS der USB-Stick\n"
 
 msgid "To restore the image:"
 msgstr ""
+"Um das Image wiederherzustellen, schauen Sie bitte\n"
+"in die Bedienungsanleitung Ihres Receivers,"
 
 msgid "To subtitle selection"
 msgstr "Zur Untertitel Auswahl"
 
 msgid "Today"
 msgstr "Heute"
+
+msgid "Toggle HDMI In"
+msgstr "Toggle HDMI IN"
 
 msgid "Toggle LCD LiveTV"
 msgstr ""
@@ -12365,9 +12376,11 @@ msgid ""
 "This will take between 3 and 15 minutes depending on the used filesystem and is fully automatic.\n"
 "Make sure you first insert a USB flash drive before you select USB."
 msgstr ""
-"USB = Wollen Sie eine Sicherung auf USB machen?\n"
-"Das dauert zwischen 4 und 15 Minuten, je nach verwendetem Dateisystem und ist vollautomatisch.\n"
-"Stellen Sie sicher, dass Sie zuerst ein USB-Speichermedium angeschlossen haben, bevor sie USB auswählen."
+"USB = Möchten Sie eine komplette Image-Sicherung auf USB erstellen ?\n"
+"Das dauert zwischen 4 und 15 Minuten, je nach verwendetem Dateisystem\n"
+"und erfolgt vollautomatisch.\n"
+"Stellen Sie sicher, dass ein USB-Speichermedium angeschlossen ist\n"
+"bevor Sie USB wählen."
 
 msgid "USB Image created at: %s"
 msgstr "Letztes Update:\t%s"
@@ -12585,7 +12598,9 @@ msgid "Use Netmed EPG information when it is available."
 msgstr "Verwende Netmed EPG Information, falls vorhanden."
 
 msgid "Use OnlineFlash in SoftwareManager"
-msgstr "Software Manager"
+msgstr ""
+"oder verwenden Sie Online Flash in der\n"
+"Softwareverwaltung"
 
 msgid "Use TV remote control"
 msgstr "Fernbedienungsbefehle des Fernsehers weiterleiten"
@@ -12916,13 +12931,14 @@ msgstr ""
 msgid "Virgin Islands (U.S.)"
 msgstr ""
 
-#, fuzzy
 msgid "Virtual KeyBoard Functions"
+msgstr "Virtuelle Tastatur Funktionen"
+
+msgid "Virtual KeyBoard"
 msgstr "Virtuelle Tastatur"
 
-#, fuzzy
 msgid "Virtual KeyBoard Text:"
-msgstr "Virtuelle Tastatur"
+msgstr "Virtuelle Tastatur Text:"
 
 msgid "Virtual keyboard"
 msgstr "Virtuelle Tastatur"
@@ -14293,7 +14309,7 @@ msgid "extensions"
 msgstr "Erweiterungen"
 
 msgid "extra wide"
-msgstr ""
+msgstr "Extra breit"
 
 msgid "failed"
 msgstr ""
@@ -14777,9 +14793,10 @@ msgstr ""
 msgid "options mount file system (default): "
 msgstr "Optionen Mount-Dateisystem (Standard)"
 
-#, fuzzy
 msgid "or use OnlineFlash in SoftwareManager"
-msgstr "Software Manager"
+msgstr ""
+"oder verwenden Sie Online Flash in der\n"
+"Softwareverwaltung"
 
 msgid "original"
 msgstr "Original"
@@ -15371,9 +15388,8 @@ msgstr "Breit"
 msgid "width"
 msgstr "Breite"
 
-#, fuzzy
 msgid "will take about 1-15 minutes for this system\n"
-msgstr "etwa 3-12 Minuten für dieses System benötigen\n"
+msgstr "etwa 1-15 Minuten für dieses System benötigen\n"
 
 #, fuzzy
 msgid "will take about 30 minutes for this system\n"
