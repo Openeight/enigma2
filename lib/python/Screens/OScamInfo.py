@@ -545,7 +545,7 @@ class oscECMInfo(Screen, OscamInfo):
 		if config.oscaminfo.autoupdate.value:
 			self.loop = eTimer()
 			self.loop.callback.append(self.showData)
-			timeout = config.oscaminfo.intervall.value * 1000
+			timeout = config.oscaminfo.intervall.getValue() * 1000
 			self.loop.start(timeout, False)
 		self["actions"] = ActionMap(["OkCancelActions"],
 					{
@@ -624,7 +624,7 @@ class oscInfo(Screen, OscamInfo):
 		if config.oscaminfo.autoupdate.value:
 			self.loop = eTimer()
 			self.loop.callback.append(self.showData)
-			timeout = config.oscaminfo.intervall.value * 1000
+			timeout = config.oscaminfo.intervall.getValue() * 1000
 			self.loop.start(timeout, False)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"],
 					{
