@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-12 20:07+0100\n"
-"PO-Revision-Date: 2020-03-23 22:01+0100\n"
+"PO-Revision-Date: 2020-03-25 00:57+0100\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: OpenEight <https://octagon-forum.eu>\n"
 "Language: de\n"
@@ -127,7 +127,7 @@ msgid ""
 "Scan for local extensions and install them."
 msgstr ""
 "\n"
-"Nach lokalen Erweiterungen suchen und diese installieren"
+"Nach lokalen Erweiterungen suchen und diese installieren."
 
 msgid ""
 "\n"
@@ -158,10 +158,13 @@ msgid ""
 "View, install and remove available or installed packages."
 msgstr ""
 "\n"
-"Anzeigen, Installieren und Entfernen verfügbarer oder installierter Pakete"
+"Anzeigen, Installieren und Entfernen verfügbarer oder installierter Pakete."
 
 msgid "View or edit fstab"
-msgstr "Zeige oder bearbeite die fstab"
+msgstr "Zeige oder bearbeite die /etc/fstab"
+
+msgid "View or Edit your device mounts in etc/fstab."
+msgstr "Geräte Einhängepunkte (Mounts) in der /etc/fstab anzeigen oder bearbeiten."
 
 msgid ""
 "\n"
@@ -1203,9 +1206,8 @@ msgstr "3D Einstellungen"
 msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
 msgstr "Verändern Sie die Farbeinstellungen, sodass Sie alle Farbabstufungen voneinander unterscheiden können, diese aber so gesättigt wie möglich dargestellt werden. Wenn Sie mit dem Ergebnis zufrieden sind, drücken Sie OK, um die Feineinstellungen zu beenden. Mit den Zahlentasten können Sie weitere Testbilder auswählen."
 
-#, fuzzy
 msgid "Adjust the functions of your remote cotrol buttons."
-msgstr "OK drücken zum Fortfahren."
+msgstr "Tastenfunktionen der Fernbedienung anpassen."
 
 msgid "Advanced"
 msgstr "Erweitert"
@@ -1365,7 +1367,7 @@ msgid "Always include ECM in recordings"
 msgstr "Speichere immer ECM Daten in Aufnahmen"
 
 msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
-msgstr ""
+msgstr "Bei 'Ja' setzt diese Funktion die Timer Einstellung außer Kraft. Aufzeichnungen werden immer verschlüsselt gespeichert und nachträglich entschlüsselt, wenn die Hardware diese Funktion unterstützt. Standard ist 'Nein'."
 
 msgid "American Samoa"
 msgstr "Amerikanisch-Samoa"
@@ -1526,6 +1528,8 @@ msgid ""
 "Attention!\n"
 "Not highly recommend that you remove or edit the system entry!\n"
 msgstr ""
+"Achtung !\n"
+"Es ist nicht empfehlenswert den System Eintrag zu bearbeiten oder zu entfernen !\n"
 
 msgid "Attention, this is repeated timer!\n"
 msgstr "Achtung, dies ist ein sich wiederholender Timer!\n"
@@ -1678,9 +1682,8 @@ msgstr "Automatische Suche"
 msgid "Automatic scan"
 msgstr "Automatische Suche"
 
-#, fuzzy
 msgid "Automatic scan for services."
-msgstr "Automatische Suche nach Kanälen"
+msgstr "Automatische Suche nach Kanälen."
 
 msgid "Automatically start timeshift after"
 msgstr "Automatischer Timeshift-Start nach"
@@ -1720,13 +1723,13 @@ msgid "BER:"
 msgstr "BER:"
 
 msgid "BT 2020 CL"
-msgstr ""
+msgstr "BT 2020 CL"
 
 msgid "BT 2020 NCL"
-msgstr ""
+msgstr "BT 2020 NCL"
 
 msgid "BT 709"
-msgstr ""
+msgstr "BT 709"
 
 msgid "Back"
 msgstr "Zurück"
@@ -1816,9 +1819,8 @@ msgstr "Sicherung der Einstellungen"
 msgid "Backup your current image"
 msgstr "Sicherung des aktuellen Image"
 
-#, fuzzy
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
-msgstr "Sicherung des aktuellen Image auf Festplatte oder USB. Es wird eine 1:1-Kopie des Image erstellt"
+msgstr "Sicherung des aktuellen Images auf Festplatte oder USB. Es wird eine 1:1-Kopie des Image erstellt."
 
 msgid "Backup your current settings"
 msgstr "Sicherung der aktuellen Einstellungen"
@@ -1973,7 +1975,7 @@ msgstr "Brunei Darussalam"
 
 #, python-format
 msgid "Buffering %d%%"
-msgstr ""
+msgstr "Pufferung %d%%"
 
 msgid "Build date :"
 msgstr "Erstellungsdatum :"
@@ -1990,7 +1992,7 @@ msgid "Bulgarian"
 msgstr "Bulgarisch"
 
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina Faso"
 
 msgid "Burn DVD"
 msgstr "Brenne DVD"
@@ -2006,7 +2008,7 @@ msgid "Burn to DVD"
 msgstr "Auf DVD brennen"
 
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 msgid "Bus: "
 msgstr "Bus:"
@@ -2092,7 +2094,7 @@ msgid "CI assignment"
 msgstr "CI-Zuweisung"
 
 msgid "CI slot: "
-msgstr ""
+msgstr "CI Steckplatz: "
 
 #, python-format
 msgid "CPU: %s"
@@ -2115,7 +2117,7 @@ msgid "Cable Service Searching"
 msgstr "Kanal Suche"
 
 msgid "Cabo Verde"
-msgstr ""
+msgstr "Cabo Verde"
 
 msgid "Cache thumbnails"
 msgstr "Vorschaubilder zwischenspeichern"
@@ -2145,7 +2147,7 @@ msgid "Can be used for different fps between external subtitles and video."
 msgstr "Kann für unterschiedliche fps-Werte zwischen externen Untertiteln und dem Video verwendet werden."
 
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
-msgstr ""
+msgstr "Für das Backup wurde nur eine Netzwerkfestplatte gefunden, daher ist ein automatischer Restore der Einstellungen nach dem Flash nicht möglich. Alternativ kann nach dem Flash die Netzwerkfestplatte erneut eingebunden und dann die Box auf Werkseinstellungen zurückgesetzt werden um Autorestore zu nutzen."
 
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr "Kann Partition nicht aushängen. Bitte sicherstellen, dass diese nicht für Auslagerungsdatei oder Aufnahme/Timeshift-Pfade genutzt wird !"
@@ -2186,6 +2188,9 @@ msgid ""
 "A record in progress, timeshift or some external tools (like samba, nfsd,transmission and etc) may cause this problem.\n"
 "Please stop this actions/applications and try again!"
 msgstr ""
+"Gerät /media/hdd kann nicht ausgehangen (umountet) werden.\n"
+"Entweder es läuft gerade eine Aufnahme/Timeshift oder irgendwelche externen Programme (wie z.b: samba, nfsd, usw..) verursachen das Problem.\n"
+"Aktion(en) stoppen und erneut versuchen !"
 
 msgid "Capabilities: "
 msgstr "Fähigkeiten: "
@@ -2227,11 +2232,10 @@ msgid "Central African Republic"
 msgstr "Zentralafrikanische Republik"
 
 msgid "Chad"
-msgstr ""
+msgstr "Chad"
 
-#, fuzzy
 msgid "Change Language"
-msgstr "Sprache"
+msgstr "Sprache wechseln"
 
 msgid "Change PIN"
 msgstr "PIN wechseln"
@@ -2320,10 +2324,10 @@ msgid "Check HDD"
 msgstr "Prüfen der Festplatte"
 
 msgid "Check for a newer version of the SundtekControlCenter"
-msgstr ""
+msgstr "Auf neue Version des Sundtek Kontroll Zentrums prüfen"
 
 msgid "Check not possible. Please ensure that the Box is connected to the internet."
-msgstr ""
+msgstr "Prüfen nicht möglich. Bitte sicherstellen das die Box mit dem Internet verbunden ist."
 
 msgid "Check the internet connection"
 msgstr "Überprüfe die Internet-Verbindung"
@@ -2359,6 +2363,8 @@ msgid ""
 "Checking tuner %s\n"
 "DiSEqC port %s for %s"
 msgstr ""
+"Prüfe Tuner %s\n"
+"DiSEqC Port %s für %s"
 
 msgid "Children/Youth"
 msgstr "Kinder/Jugend"
@@ -2370,10 +2376,10 @@ msgid "China"
 msgstr "China"
 
 msgid "Chinese - Simplified"
-msgstr ""
+msgstr "Chinesisch vereinfacht"
 
 msgid "Chinese - Traditional"
-msgstr ""
+msgstr "Chinesisch traditionell"
 
 #, python-format
 msgid "Chipset: %s"
@@ -2393,19 +2399,19 @@ msgid "Choose Tuner"
 msgstr "Wählen Sie den Tuner"
 
 msgid "Choose bouquet"
-msgstr ""
+msgstr "Favoritenliste auswählen"
 
 msgid "Choose the files to backup"
 msgstr "Wählen Sie die zu sichernden Dateien"
 
 msgid "Choose the language of the user interface and plugins."
-msgstr ""
+msgstr "Sprache der Benutzeroberfläche und Plugins wählen."
 
 msgid "Choose which tuner to configure."
 msgstr "Wählen Sie den Tuner aus."
 
 msgid "Christmas Island"
-msgstr ""
+msgstr "Weihnachtsinsel"
 
 msgid "Circular LNB"
 msgstr "Zirkuläres LNB"
@@ -2435,7 +2441,7 @@ msgid "Clear playlist"
 msgstr "Wiedergabeliste leeren"
 
 msgid "Client is streaming from this box!"
-msgstr ""
+msgstr "Ein Client streamt von der Box !"
 
 msgid "Clients"
 msgstr "Clients"
@@ -2444,10 +2450,10 @@ msgid "Clone TV screen to LCD"
 msgstr "TV Bild zum LCD spiegeln"
 
 msgid "Clone TV screen to LCD mode"
-msgstr ""
+msgstr "TV-Bildschirm im LCD-Modus nachbilden"
 
 msgid "Clone selected entry"
-msgstr ""
+msgstr "Gewählten Eintrag nachbilden"
 
 msgid "Close"
 msgstr "Schließen"
@@ -2456,16 +2462,16 @@ msgid "Close PiP on exit"
 msgstr "Schließe PiP mit Exit"
 
 msgid "Close plugin"
-msgstr ""
+msgstr "Plugin wählen"
 
 msgid "Close title selection"
 msgstr "Titelauswahl schließen"
 
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Kokosinseln"
 
 msgid "Code R. LP-HP & Guard Int."
-msgstr ""
+msgstr "Code R. LP-HP & Guard Int."
 
 msgid "Code rate HP"
 msgstr "Empfangsrate HP"
@@ -2487,7 +2493,7 @@ msgid "Color format"
 msgstr "Farbformat"
 
 msgid "Combo"
-msgstr ""
+msgstr "Kombination"
 
 msgid "Command To Run"
 msgstr "Komando zum Ausführen"
@@ -2518,7 +2524,7 @@ msgid "Communication"
 msgstr "Kommunikation"
 
 msgid "Comoros"
-msgstr ""
+msgstr "Komoren"
 
 msgid "Compact flash"
 msgstr "Compact Flash"
@@ -2575,7 +2581,7 @@ msgid "Configure for how many minutes finished events should remain visible in t
 msgstr "Konfigurieren Sie wie viele Minuten eine abgeschlossene Sendung in der EPG sichtbar bleiben soll. Nützlich wenn Sie Informationen zu einer Sendung benötigen, die bereits abgeschlossen war bzw. eine Sendung länger dauerte."
 
 msgid "Configure how many channels are shown in the selection list."
-msgstr ""
+msgstr "Konfigurieren Sie wie viele Sender in der Kanalauswahlliste angezeigt werden sollen."
 
 msgid "Configure how recording filenames are constructed."
 msgstr "Aufnahme-Dateiname konfigurieren"
@@ -2596,20 +2602,19 @@ msgid "Configure if and how wide columns will be shown in the channel selection 
 msgstr "Konfiguriert, ob und wie breit Spalten in der Kanalauswahlliste angezeigt werden."
 
 msgid "Configure if behind the subtitles a background is shown."
-msgstr ""
+msgstr "Konfiguration, ob bei Untertitel ein Hintergrund angezeigt werden soll."
 
-#, fuzzy
 msgid "Configure if service picons will be shown in display (when supported by the skin)."
-msgstr "Falls aktiviert, werden Picons in der Kanalauswahlliste angezeigt."
+msgstr "Konfigurieren Sie, ob Service-Picons im Display angezeigt werden (wenn dies vom Skin unterstützt wird)."
 
 msgid "Configure if service picons will be shown in the channel selection list."
 msgstr "Falls aktiviert, werden Picons in der Kanalauswahlliste angezeigt."
 
 msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
-msgstr ""
+msgstr "Konfigurieren Sie ob die HDMI-EDID Überprüfung übersprungen werden soll, da dies womöglich Probleme mit einigen TVs löst."
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
-msgstr ""
+msgstr "Konfiguration ob Untertitel zwischen normal, kursiv, fett, und fettkursiv wechseln sollen."
 
 msgid "Configure interface"
 msgstr "Netzwerkkarte konfigurieren"
@@ -2674,7 +2679,7 @@ msgid "Configure the cursor behaviour in the channel selection list. When openin
 msgstr "Konfiguriert das Verhalten des Cursors in Kanalauswahllisten. Beim Öffnen von Kanalauswahllisten kann der Cursor auf dem aktuellen Sender bleiben oder bereits den oberen/unteren Kanal markieren (oben/unten kann dabei nach Wunsch invertiert werden)."
 
 msgid "Configure the duration in hours the receiver should go to (deep)standby when the receiver is not controlled."
-msgstr ""
+msgstr "Konfigurieren Sie den Zeitraum in Stunden, nach dem der Receiver in den (Deep)Standby-Modus wechseln soll, wenn dieser nicht mehr gesteuert wird."
 
 msgid "Configure the duration in minutes for the screensaver."
 msgstr "Konfiguriert die Dauer in Minuten bis zum Start des Screensavers"
@@ -2828,7 +2833,7 @@ msgid "Configure the way in which the receiver changes channels."
 msgstr "Anpassung des Vorganges bei Kanalwechsel"
 
 msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
-msgstr ""
+msgstr "Konfigurieren Sie diesen Tuner mit einfachen oder erweiterten Optionen, oder schleifen Sie ihn zu einem anderen Tuner durch, oder kopieren Sie eine Konfiguration von einem anderen Tuner oder deaktivieren Sie sie."
 
 msgid "Configure where completed timers show up in the timer list."
 msgstr "Position beendeter Timer in der Timerliste"
@@ -2847,7 +2852,7 @@ msgid "Configure whether or not an icon should be shown when your motorized dish
 msgstr "Anzeige eines Hinweissymbols bei Bewegung der motorisierten Antennenschüssel"
 
 msgid "Configure whether or not the rotor position will be displayed on infobar"
-msgstr ""
+msgstr "Konfigurieren Sie ob die Rotor-Position in der Infobar angezeigt werden soll oder nicht"
 
 msgid "Configure which access level to use for the configuration menu. Expert level gives access to all items."
 msgstr "Zugriff-Level des Konfigurationsmenüs einstellen. Expertenlevel erlaubt den Zugriff auf alle Elemente."
@@ -2869,7 +2874,7 @@ msgid "Configure your Network"
 msgstr "Netzwerk konfigurieren"
 
 msgid "Configure your Sundtek tuner(s) or check/update the drivers."
-msgstr ""
+msgstr "Konfiguration des/der Sundtek Tuner oder Treiber prüfen/aktualisieren."
 
 msgid "Configure your internal LAN"
 msgstr "Internes Netzwerk konfigurieren"
@@ -2891,19 +2896,19 @@ msgid "Configuring"
 msgstr "Konfiguriere"
 
 msgid "Conflict not resolved!"
-msgstr ""
+msgstr "Konflikt nicht behoben !"
 
 msgid "Congo"
-msgstr ""
+msgstr "Kongo"
 
 msgid "Congo (Democratic Republic of the)"
-msgstr ""
+msgstr "Demokratische Republik Kongo"
 
 msgid "Connect"
 msgstr "Verbinden"
 
 msgid "Connect to TV Server IP"
-msgstr ""
+msgstr "Verbinde zu TV Server IP"
 
 msgid "Connect to a wireless network"
 msgstr "Mit Funk-Netzwerk verbinden"
@@ -2922,7 +2927,7 @@ msgid "Connected to"
 msgstr "Verbunden mit"
 
 msgid "Connected transcoding, limit - no PiP!"
-msgstr ""
+msgstr "Angeschlossene Transkodierung, Limit - kein PiP !"
 
 msgid "Connected!"
 msgstr "Verbunden!"
@@ -2931,17 +2936,17 @@ msgid "Connected: "
 msgstr "Verbunden: "
 
 msgid "Console"
-msgstr ""
+msgstr "Konsole"
 
 #, fuzzy
 msgid "Constellation & FFT mode"
 msgstr "Konstellation"
 
 msgid "Consult your SCR device spec sheet for this information."
-msgstr ""
+msgstr "Weitere Informationen finden Sie in Ihrem Unicable/SCR-Gerätespezifikationsblatt."
 
 msgid "Consult your motor's spec sheet for this information, or leave the default setting."
-msgstr ""
+msgstr "Konsultieren Sie das Datenblatt Ihres Motors für diese Information oder belassen Sie die Standardeinstellung."
 
 msgid "Content"
 msgstr "Inhalt"
@@ -2971,7 +2976,7 @@ msgid "Control your Softcams"
 msgstr "Kontrollieren die Softcams"
 
 msgid "Cook Islands"
-msgstr ""
+msgstr "Cookinseln"
 
 msgid "Copy"
 msgstr "Kopieren"
@@ -2988,16 +2993,16 @@ msgid "Cores: %s"
 msgstr "Kerne: %s"
 
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Elfenbeinküste"
 
 msgid "Could not find installed channel list."
 msgstr "Programmierte Kanalliste konnte nicht gefunden werden."
 
 msgid "Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"
-msgstr ""
+msgstr "Es konnte kein geeignetes Medium gefunden werden. Bitte entfernen Sie einige heruntergeladene Images oder legen Sie ein Medium (z. B. USB-Stick) mit ausreichend freiem Speicherplatz ein und versuchen Sie es erneut !"
 
 msgid "Could not load medium! No disc inserted?"
 msgstr "Konnte das Medium nicht laden! Keine DVD eingelegt?"
@@ -3046,14 +3051,14 @@ msgid "Create new folder and exit"
 msgstr "Neuen Ordner erstellen und beenden"
 
 msgid "Create separate radio userbouquet"
-msgstr ""
+msgstr "Erzeuge separates Radiobouquet"
 
 msgid "Create:"
 msgstr "Erstellen"
 
 #, python-format
 msgid "Create: Recovery Fullbackup %s"
-msgstr ""
+msgstr "Erstelle: Full-Backup für Wiederherstellung %s"
 
 #, python-format
 msgid "Creating directory %s failed."
@@ -3082,10 +3087,10 @@ msgid "Cron-Manager..."
 msgstr "Cron-Manager..."
 
 msgid "Cuba"
-msgstr ""
+msgstr "Kuba"
 
 msgid "Curacao"
-msgstr ""
+msgstr "Curacao"
 
 msgid "Current CEC address"
 msgstr "Aktuelle CEC-Adresse"
@@ -3141,6 +3146,9 @@ msgid ""
 "Current event is over.\n"
 "Select an option to save the timeshift file."
 msgstr ""
+"Die aktuelle Sendung ist zu Ende.\n"
+"\"\n"
+"Wählen Sie eine Option um die Timeshift-Datei zu speichern."
 
 #, python-format
 msgid "Current mode: %s \n"
@@ -3167,7 +3175,7 @@ msgstr ""
 "Dies kann hier geändert werden."
 
 msgid "Current rotor position: "
-msgstr ""
+msgstr "Aktuelle Rotor Position: "
 
 msgid "Current settings:"
 msgstr "Aktuelle Einstellungen:"
@@ -3206,7 +3214,7 @@ msgid "Customize channel list cursor behavior"
 msgstr "Cursor-Verhalten in Kanalliste einstellen"
 
 msgid "Customize enigma2 personal settings."
-msgstr "Anpassen der persönlichen enigma2 Einstellungen"
+msgstr "Anpassen der persönlichen Enigma2 Einstellungen."
 
 msgid "Cut"
 msgstr "Schneiden"
@@ -3218,7 +3226,7 @@ msgid "Cutlist editor..."
 msgstr "Schnitteditor..."
 
 msgid "Cyprus"
-msgstr ""
+msgstr "Zypern"
 
 msgid "Czech"
 msgstr "Tschechisch"
@@ -3343,7 +3351,7 @@ msgid "Default (Timeshift)"
 msgstr "Standard (Timeshift)"
 
 msgid "Default Services Scanner"
-msgstr ""
+msgstr "Standardsender-Suchlauf"
 
 msgid "Default movie location"
 msgstr "Standard Filmlisten Ort"
@@ -3360,10 +3368,10 @@ msgid "Deflating %s to /"
 msgstr "Entlleeren %s nach /"
 
 msgid "Delay after change voltage before switch command"
-msgstr ""
+msgstr "Pause nach Spannungsänderung vor Schalt-Kommando"
 
 msgid "Delay after continuous tone disable before diseqc"
-msgstr ""
+msgstr "Pause nach ausschalten vom kontinuierlichen Tonsignal vor Diseqc-Kommando"
 
 msgid "Delay after diseqc peripherial poweron command"
 msgstr ""
@@ -3423,9 +3431,8 @@ msgstr "Löschen %s?"
 msgid "Delete Plugins"
 msgstr "Plugins löschen"
 
-#, fuzzy
 msgid "Delete and unstall Plugins. This will remove the Plugin from your box."
-msgstr "Löschen und deinstallieren von Plugins. Entfernen des Plugin von der Box"
+msgstr "Deinstallieren/Löschen von Plugins."
 
 msgid "Delete entry"
 msgstr "Eintrag löschen"
@@ -3805,9 +3812,8 @@ msgstr "Wollen Sie die Einstellungen wiederherstellen?"
 msgid "Do you want to resume this playback?"
 msgstr "Möchten Sie die Wiedergabe an der letzten Stelle fortsetzen?"
 
-#, fuzzy
 msgid "Do you want to select a different skin?"
-msgstr "Wollen Sie jetzt neu starten?"
+msgstr "Möchten Sie einen anderen Skin auswählen ?"
 
 #, python-format
 msgid "Do you want to update your %s %s?"
@@ -4015,7 +4021,7 @@ msgid "Edit chapters of current title"
 msgstr "Kapitel des ausgewählten Titels schneiden"
 
 msgid "Edit fstab"
-msgstr ""
+msgstr "/etc/fstab bearbeiten"
 
 msgid "Edit selection"
 msgstr "Auswahl editieren"
@@ -4595,7 +4601,7 @@ msgid "Failed"
 msgstr "Fehlgeschlagen"
 
 msgid "Failed to read /etc/fstab! Restore fstab.backup or edit the file manually."
-msgstr ""
+msgstr "/etc/fstab lesen gescheitert ! fstab Sicherung wiederherstellen oder fstab manuell editieren."
 
 msgid "Failed to write /tmp/positionersetup.log: "
 msgstr "Fehler beim Schreiben: /tmp/positionersetup.log"
@@ -4800,9 +4806,8 @@ msgstr "Formatieren"
 msgid "Format HDD"
 msgstr "Festplatte formatieren"
 
-#, fuzzy
 msgid "Format your Harddisk."
-msgstr "Formatiere die Festplatte"
+msgstr "Formatieren der Festplatte(n)."
 
 msgid "Forward volume keys"
 msgstr "Lautstärketasten weiterleiten"
@@ -5201,7 +5206,7 @@ msgid "Harddisk Setup"
 msgstr "Festplatten Einstellungen"
 
 msgid "Harddisk is not in sleepmode it could be in use!"
-msgstr ""
+msgstr "Festplatte ist nicht im Ruhemodus, sie ist möglicherweise in Verwendung !"
 
 msgid "Hdmi CEC"
 msgstr ""
@@ -5988,7 +5993,7 @@ msgid "Label for device"
 msgstr ""
 
 msgid "Language"
-msgstr "Sprache"
+msgstr "Sprach Auswahl"
 
 msgid "Language selection"
 msgstr "Sprachauswahl"
@@ -6312,9 +6317,8 @@ msgstr "Manuelle Konfiguration"
 msgid "Manual scan"
 msgstr "Manuelle Suche"
 
-#, fuzzy
 msgid "Manual scan for services."
-msgstr "Manuelle Suche nach Kanälen"
+msgstr "Manuelle Suche nach Kanälen."
 
 msgid "Manual transponder"
 msgstr "Manueller Transponder"
@@ -6527,25 +6531,26 @@ msgid "Mount Manager"
 msgstr "Mount Manager"
 
 msgid "Mount Manager - edit label/fstab"
-msgstr ""
+msgstr "Mount Manager - Label/fstab bearbeiten"
 
 msgid "Mount Setup"
 msgstr "Mount Einstellungen"
 
-#, fuzzy
 msgid "Mount again"
-msgstr "Mount Manager"
+msgstr "Erneut einhängen"
 
 msgid "Mount all device from the fstab"
-msgstr ""
+msgstr "Alle Geräte in der /etc/fstab einhängen (mounten)"
 
 msgid ""
 "Mount current device failed!\n"
 "Maybe this device is not spelled out in the fstab?"
 msgstr ""
+"Aktuelles Gerät einhängen (mounten) misslungen !\n"
+"Möglicherweise steht das Gerät nicht/falsch in der /etc/fstab ?"
 
 msgid "Mount current device from the fstab"
-msgstr ""
+msgstr "Aktuelles Gerät aus /etc/fstab einhängen (mounten)"
 
 #, python-format
 msgid "Mount current device to %s"
@@ -6823,7 +6828,7 @@ msgid "Network Test"
 msgstr "Netzwerk Test"
 
 msgid "Network Wizard"
-msgstr "Netzwerk Wizard"
+msgstr "Netzwerk Assistent"
 
 msgid "Network configuration"
 msgstr "Netzwerk Konfiguration"
@@ -8266,7 +8271,7 @@ msgid "Protect on epg age"
 msgstr "Schütze EPG-Alter"
 
 msgid "Protect plugin browser"
-msgstr "Plugin-Browser schützen"
+msgstr "Plugin Browser schützen"
 
 msgid "Protect services"
 msgstr "Kanäle schützen"
@@ -8470,7 +8475,7 @@ msgid "Recording"
 msgstr "Aufnahme"
 
 msgid "Recording Setup"
-msgstr "Aufnahme Einstellungen"
+msgstr "Aufnahme Einstellungen konfigurieren"
 
 msgid "Recording in progress"
 msgstr "Aktive Aufnahmen"
@@ -8821,19 +8826,19 @@ msgid "Restore Wizard"
 msgstr "Wiederherstellungsassistent"
 
 msgid "Restore backup fstab"
-msgstr ""
+msgstr "/etc/fstab Sicherung wiederherstellen"
 
 msgid "Restore backups"
 msgstr "Einstellungen wiederherstellen"
 
 msgid "Restore default fstab"
-msgstr ""
+msgstr "Die Standard /etc/fstab wiederherstellen"
 
 msgid "Restore fstab"
-msgstr ""
+msgstr "/etc/fstab wiederherstellen"
 
 msgid "Restore fstab.backup"
-msgstr ""
+msgstr "fstab Sicherung wiederherstellen"
 
 msgid "Restore settings from a backup"
 msgstr "Wiederherstellen der Einstellungen einer Sicherung"
@@ -9139,7 +9144,7 @@ msgid "Save changes"
 msgstr "Kanal wählen"
 
 msgid "Save mount in fstab"
-msgstr ""
+msgstr "Einhängepunkt (Mount) in /etc/fstab speichern"
 
 msgid "Save playlist"
 msgstr "Wiedergabeliste speichern"
@@ -9227,17 +9232,13 @@ msgid "Scan for cable services."
 msgstr "Kabelsender löschen"
 
 msgid "Scan for installed .ipk packages, and uninstall a package."
-msgstr ""
+msgstr "Nach installierten *.ipk Pakete suchen, und diese deinstallieren."
 
-#, fuzzy
 msgid "Scan for local extensions and install them."
-msgstr ""
-"\n"
-"Nach lokalen Erweiterungen suchen und diese installieren"
+msgstr "Nach lokalen Erweiterungen suchen und diese installieren."
 
-#, fuzzy
 msgid "Scan for satellite services."
-msgstr "Satelliten-Ausrüstung"
+msgstr "Komplettes Frequenzspektrum eines Satelliten ohne Eingabe von Frequenzen, Symbolraten oder Verwendung von Voreinstellungen durchsuchen."
 
 #, fuzzy
 msgid "Scan for terrestrial services."
@@ -9288,9 +9289,8 @@ msgstr "Scroll-Geschwindigkeit"
 msgid "Search Sats"
 msgstr "Satelliten Suche und Pegelanzeige"
 
-#, fuzzy
 msgid "Search Sats, check signal and lock."
-msgstr "Suchen Sats, Signal prüfen und abschließen"
+msgstr "Suche nach Satelliten, Signal prüfen (Pegelanzeige)."
 
 msgid "Search east"
 msgstr "Östlich suchen"
@@ -9298,9 +9298,8 @@ msgstr "Östlich suchen"
 msgid "Search for network shares"
 msgstr "Suche nach Netzwerkfreigaben"
 
-#, fuzzy
 msgid "Search for network shares."
-msgstr "Suche nach Netzwerkfreigaben"
+msgstr "Suche nach Netzwerkfreigaben."
 
 msgid "Search west"
 msgstr "Westlich suchen"
@@ -9665,9 +9664,8 @@ msgstr "Wählen Sie ein Funk-Netzwerk aus"
 msgid "Select your ATSC provider."
 msgstr "Wählen Sie einen Provider zum Hinzufügen"
 
-#, fuzzy
 msgid "Select your Language for Audio/Subtitles."
-msgstr "Wählen die Sprache für Audio/Untertitel"
+msgstr "Wähle die Sprache für Audio / Untertitel."
 
 msgid "Select your Skin"
 msgstr "Skin Auswahl"
@@ -9983,9 +9981,8 @@ msgstr "OpenVPN Einstellungen"
 msgid "Setup Plugin filter"
 msgstr "Plugin Filter Einstellungen"
 
-#, fuzzy
 msgid "Setup Plugin filter. Here you can select which Plugins are showed in the PluginBrowser."
-msgstr "Plugin Filter Einstellungen. Hier können Sie auswählen, welche Plugins im PluginBrowser angezeigte werden"
+msgstr "Hier können Sie auswählen, welche Erweiterungen im Plugin Browser angezeigt werden."
 
 msgid "Setup SABnzbd"
 msgstr "SABnzbd Einstellungen"
@@ -10003,7 +10000,7 @@ msgid "Setup Videomode"
 msgstr "Videomodus Konfiguration"
 
 msgid "Setup each tuner for your satellite system."
-msgstr "Richte jeden Tuner für die Satelliten-Anlage ein"
+msgstr "Den/Die Tuner für die Satelliten-Anlage einrichten."
 
 msgid "Setup for Automatic Volume Adjustment between MPEG and AC3/DTS."
 msgstr ""
@@ -10038,12 +10035,11 @@ msgstr "uShare Einstellungen"
 msgid "Setup your Device mounts (USB, HDD, others...)"
 msgstr "Einstellungen für das Einhängen von Geräten (USB, HDD, andere...)"
 
-#, fuzzy
 msgid "Setup your EPG config."
-msgstr "Einstellungen für die EPG Konfiguration"
+msgstr "EPG Einstellungen konfigurieren."
 
 msgid "Setup your HDMI communication and preferences."
-msgstr ""
+msgstr "HDMI Verbindungen und Vorlieben einstellen."
 
 msgid "Setup your Harddisk(s)."
 msgstr "Konfiguration der Festplatte(n)"
@@ -10051,22 +10047,20 @@ msgstr "Konfiguration der Festplatte(n)"
 msgid "Setup your Harddisk."
 msgstr "Konfiguration der Festplatte."
 
-#, fuzzy
 msgid "Setup your LCD."
-msgstr "Einstellungen für das LCD"
+msgstr "Einstellen des LCDs."
 
 msgid "Setup your Skin."
 msgstr "Skin Einstellungen."
 
 msgid "Setup your System."
-msgstr "Stellen Sie Ihr System ein."
+msgstr "Konfigurieren Sie Ihr System."
 
 msgid "Setup your Tuner and search for channels."
 msgstr "Einstellungen Tuner und Kanalsuche."
 
-#, fuzzy
 msgid "Setup your User interface."
-msgstr "Schnittstellen Einstellungen"
+msgstr "Die Benutzeroberfläche konfigurieren."
 
 msgid "Setup your Video Mode, Video Output and other Video Settings."
 msgstr "Einstellungen Video Modus, Video Ausgang und andere Video-Einstellungen."
@@ -10074,9 +10068,8 @@ msgstr "Einstellungen Video Modus, Video Ausgang und andere Video-Einstellungen.
 msgid "Setup your Video Mode, Video Output, Audio and Language Settings."
 msgstr "Einstellungen Video Modus, Video Ausgang, Audio sowie Sprach Einstellungen."
 
-#, fuzzy
 msgid "Setup your display."
-msgstr "Einstellungen für das Display"
+msgstr "Display konfigurieren."
 
 msgid "Setup your local network"
 msgstr "Einstellungen für das lokale Netzwerk"
@@ -10087,13 +10080,11 @@ msgstr "Konfiguration des Netzwerks. Für WLAN muss ein USB WLAN Stick angeschlo
 msgid "Setup your mounts for network and storage devices."
 msgstr "Konfiguration der Netzwerklaufwerke und der Speichergeräte."
 
-#, fuzzy
 msgid "Setup your network interface. If no Wlan stick is used, you only can select Lan."
-msgstr "Einstellungen für die Netzwerkschnittstelle. Wenn kein WLAN-Stick verwendet wird, können Sie nur Lan wählen"
+msgstr "Konfiguration der Netzwerk Schnittstelle. Wenn kein WLAN-Stick verwendet wird, können Sie nur LAN wählen."
 
-#, fuzzy
 msgid "Setup your network mounts."
-msgstr "Einstellungen für Netzwerkfreigaben"
+msgstr "Konfiguration der Netzwerk Freigaben."
 
 msgid "Setup your positioner"
 msgstr "Einstellung des Rotors"
@@ -10103,15 +10094,13 @@ msgid "Setup your positioner for your satellite system."
 msgstr "Einstellungen für den Stellungsregler Ihrer Satelliten-Anlage"
 
 msgid "Setup your preferences for the automatic resolution switch."
-msgstr ""
+msgstr "Konfiguration der bevorzugten Einstellungen für die Auto-Auflösung."
 
-#, fuzzy
 msgid "Setup your recording config."
-msgstr "Einstellungen für die Aufnahmekonfiguration"
+msgstr "Konfigurieren Sie Ihre Aufnahmeeinstellungen."
 
-#, fuzzy
 msgid "Setup your recording paths config."
-msgstr "Einstellungen für die Aufnahmekonfiguration"
+msgstr "Pfade für die Aufnahmen einstellen."
 
 msgid "Setup your satellite equipment"
 msgstr "Satelliten-Ausrüstung"
@@ -10419,16 +10408,11 @@ msgstr "Zeige eine Warning beim Stoppen des Timeshifts"
 msgid "Show/hide window"
 msgstr ""
 
-#, fuzzy
 msgid "Shows Plugins Browser. Here you can setup installed Plugins."
-msgstr "Zeigt den PluginBrowser. Hier können installierte Plugins konfiguriert werden"
+msgstr "Zeigt den Plugin Browser (Erweiterungen). Hier können die installierten Plugins konfiguriert werden."
 
-msgid "Shows available Plugins. Here you can download and install them."
-msgstr "Zeige verfügbare Erweiterungen, zum Downloaden und Installieren."
-
-#, fuzzy
 msgid "Shows available plugins. Here you can download and install them."
-msgstr "Zeigt verfügbare Plugins. Hier können sie heruntergeladen und installiert werden."
+msgstr "Zeige verfügbare Erweiterungen, zum Downloaden und Installieren."
 
 #, fuzzy
 msgid "Shows available softcams. Here you can download and install them."
@@ -10518,7 +10502,7 @@ msgid "Size: "
 msgstr "Größe:"
 
 msgid "Skin"
-msgstr "Skin"
+msgstr "Skin Auswahl"
 
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "Skin Auflösung: %s (%sx%s)\n"
@@ -11127,10 +11111,10 @@ msgid "Sundtek"
 msgstr "Sonntag"
 
 msgid "Sundtek Control Center"
-msgstr "Sundtek Control Center"
+msgstr "Sundtek Kontroll Zentrum"
 
 msgid "Sundtek Control-Center"
-msgstr "Sundtek Control-Center"
+msgstr "Sundtek Kontroll-Zentrum"
 
 #, fuzzy
 msgid ""
@@ -11573,9 +11557,8 @@ msgstr "Der Status des aktuellen Image kann nicht überprüft werden, da %s nich
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
 msgstr "Die Timer-Datei (timers.xml) ist defekt und konnte nicht geladen werden."
 
-#, fuzzy
 msgid "The user interface of the receiver will now restart to select the selected skin"
-msgstr "Die Benutzeroberfläche des Receivers wird neu gestartet"
+msgstr "Die Benutzeroberfläche des Receivers wird für den ausgewählten Skin neu gestartet"
 
 msgid "The user interface of your receiver is restarting"
 msgstr "Die Benutzeroberfläche des Receivers wird neu gestartet"
@@ -11704,7 +11687,7 @@ msgid "This allows you to show weblinks modules in downloads"
 msgstr "Dies ermöglicht Ihnen Weblinks Module in Downloads anzuzeigen."
 
 msgid "This entry already exists in the fstab!"
-msgstr ""
+msgstr "Dieser Eintrag existiert bereits in der /etc/fstab !"
 
 #, python-format
 msgid "This field allows you to search an additional symbol rate up to %s."
@@ -12246,7 +12229,7 @@ msgid "Tune failed!"
 msgstr "Tunen fehlgeschlagen!"
 
 msgid "Tune your TV for the best result."
-msgstr ""
+msgstr "Abstimmen des TVs für beste Ergebnisse."
 
 msgid "Tuner"
 msgstr "Tuner"
@@ -12362,7 +12345,7 @@ msgid "USB stick"
 msgstr "USB-Stick"
 
 msgid "USB: "
-msgstr ""
+msgstr "USB: "
 
 msgid "Uganda"
 msgstr ""
@@ -12535,7 +12518,7 @@ msgid "Uruguay"
 msgstr ""
 
 msgid "Usage Setup"
-msgstr "Benutzereinstellungen"
+msgstr "Anpassungseinstellungen"
 
 msgid "Use"
 msgstr "Benutzen"
@@ -13518,6 +13501,8 @@ msgid ""
 "You can select with yellow the OnlineFlash Image\n"
 " or select Recovery to create a USB Disk Image for clean Install."
 msgstr ""
+"Sie können mit 'Gelb' das OnlineFlash Image auswählen\n"
+"oder wählen Sie 'Recovery', um ein USB-Image für eine saubere Installation zu erstellen."
 
 msgid "You can set how will be finished movieplayer with 'Exit' button."
 msgstr ""
@@ -14041,7 +14026,7 @@ msgid "circular right"
 msgstr "Rechts-zirkular"
 
 msgid "clip overscan / letterbox borders"
-msgstr ""
+msgstr "Clip \\\"Overscan\\\" / Letterbox Grenzen"
 
 msgid "close share view"
 msgstr "Freigaben-Ansicht schließen"
@@ -14069,7 +14054,7 @@ msgstr ""
 "\n"
 
 msgid "controlled by HDMI"
-msgstr ""
+msgstr "gesteuert über HDMI"
 
 msgid "cooking"
 msgstr "Kochen"
@@ -14357,10 +14342,10 @@ msgid "from"
 msgstr "von"
 
 msgid "fstab restored!"
-msgstr ""
+msgstr "/etc/fstab wiederhergestellt !"
 
 msgid "fstab-Editor"
-msgstr ""
+msgstr "fstab Editor"
 
 msgid "further education"
 msgstr "Weiterbildung"
