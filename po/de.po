@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-12 20:07+0100\n"
-"PO-Revision-Date: 2020-03-26 01:47+0100\n"
+"PO-Revision-Date: 2020-03-27 03:47+0100\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: OpenEight <https://octagon-forum.eu>\n"
 "Language: de\n"
@@ -99,7 +99,7 @@ msgid ""
 "Press OK or Exit to abort!"
 msgstr ""
 "\n"
-"Zum Beenden Taste OK oder Exit drücken !"
+"Zum Schließen Taste OK oder Exit drücken !"
 
 msgid ""
 "\n"
@@ -498,12 +498,15 @@ msgstr "%k:%M %e/%m"
 msgid "%s"
 msgstr ": %s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%s\n"
 "Do you still want to flash image\n"
 "%s?"
-msgstr "Wollen Sie das Image nach %s herunterladen?"
+msgstr ""
+"%s\n"
+"Möchten Sie das Image flashen ?\n"
+"%s ?"
 
 #, python-format
 msgid ""
@@ -1703,9 +1706,8 @@ msgstr "Automatischer Start:"
 msgid "Available format variables"
 msgstr "Verfügbare Formatierungsvariablen"
 
-#, fuzzy
 msgid "Available locales are:"
-msgstr "Verfügbare Freigaben:"
+msgstr "Vorhandene Sprachen:"
 
 msgid "Available shares:"
 msgstr "Verfügbare Freigaben:"
@@ -2860,7 +2862,7 @@ msgid "Configure your Network"
 msgstr "Netzwerk konfigurieren"
 
 msgid "Configure your Sundtek tuner(s) or check/update the drivers."
-msgstr "Konfiguration des/der Sundtek Tuner oder Treiber prüfen/aktualisieren."
+msgstr "Konfiguration der/des Sundtek Tuner, oder Treiber prüfen/aktualisieren."
 
 msgid "Configure your internal LAN"
 msgstr "Internes Netzwerk konfigurieren"
@@ -3663,7 +3665,7 @@ msgid "Do not change"
 msgstr "Nicht ändern"
 
 msgid "Do not flash image"
-msgstr ""
+msgstr "Abbrechen"
 
 msgid "Do not record"
 msgstr "Nicht aufnehmen"
@@ -3739,11 +3741,13 @@ msgstr "Möchten Sie Ihre Einstellungen sichern ?"
 msgid "Do you want to burn this collection to DVD medium?"
 msgstr "Soll diese Zusammenstellung auf DVD gebrannt werden?"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Do you want to flash image\n"
 "%s"
-msgstr "Wollen Sie das Image nach %s herunterladen?"
+msgstr ""
+"Möchten Sie das Image flashen ?\n"
+"%s"
 
 msgid "Do you want to install Plugins?"
 msgstr "Möchten Sie eine Kanalliste hinzufügen?"
@@ -4253,10 +4257,10 @@ msgid "Enter your current longitude. This is the number of degrees you are from 
 msgstr ""
 
 msgid "Enter your high band local oscillator frequency. For more information consult the spec sheet of your LNB."
-msgstr ""
+msgstr "Geben Sie Ihre lokale High-Band-Oszillatorfrequenz ein. Weitere Informationen finden Sie im Datenblatt Ihres LNB."
 
 msgid "Enter your low band local oscillator frequency. For more information consult the spec sheet of your LNB."
-msgstr ""
+msgstr "Geben Sie Ihre lokale Low-Band-Oszillatorfrequenz ein. Weitere Informationen finden Sie im Datenblatt Ihres LNB."
 
 msgid "Entitlements"
 msgstr "Berechtigungen"
@@ -4678,7 +4682,7 @@ msgid "Filesystem check"
 msgstr "Dateisystemüberprüfung"
 
 msgid "Filesystem check your Harddisk."
-msgstr "Dateisystem Überprüfung der Festplatte."
+msgstr "Dateisystem Überprüfung der Festplatte(n)."
 
 msgid "Final position at"
 msgstr "Endposition auf"
@@ -4711,11 +4715,10 @@ msgid "Fixed"
 msgstr "Fixiert"
 
 msgid "Flash"
-msgstr "Flash"
+msgstr "Flashen"
 
-#, fuzzy
 msgid "Flash Image"
-msgstr "Online Image flashen"
+msgstr "Flashe Image"
 
 msgid "Flash On the Fly"
 msgstr "Aus dem laufenden Betrieb flashen"
@@ -4733,33 +4736,33 @@ msgid "Flash Online a new image"
 msgstr "Online ein neues Image flashen"
 
 msgid "Flash and restore settings and all saved plugins"
-msgstr ""
+msgstr "Flashen + Einstellungen sowie Plugins wiederherstellen"
 
 msgid "Flash and restore settings and no plugins"
-msgstr ""
+msgstr "Flashen + Einstellungen wiederherstellen, keine Plugins"
 
 msgid "Flash and restore settings and selected plugins (ask user)"
-msgstr ""
+msgstr "Flashen + Einstellungen wiederherstellen, Plugins abfragen"
 
 msgid "Flash and start installation wizard"
-msgstr ""
+msgstr "Flashen + Installations-Assistent starten"
 
 msgid "Flash on the fly your Receiver software."
 msgstr "Receiver Software im laufenden Betrieb des Receivers flashen."
 
-#, fuzzy
 msgid "Flashing Image"
-msgstr "Online Image flashen"
+msgstr "Flashe Image"
 
-#, fuzzy
 msgid "Flashing image succesfull"
-msgstr "Paket erfolgreich installiert"
+msgstr "Image Flash erfolgreich"
 
 #, python-format
 msgid ""
 "Flashing image was not succesfull\n"
 "%s"
 msgstr ""
+"Image flashen gescheitert\n"
+"%s"
 
 msgid "Flashing: "
 msgstr "Flashen: "
@@ -5213,8 +5216,8 @@ msgstr "Dateien zum Sichern auswählen (Standard: E2-Einstellungen, Kanäle, Net
 
 msgid "Here you can select which files should be updated with a online update."
 msgstr ""
-"Hier können Sie auswählen,\n"
-"welche Dateien mit einem Online-Update aktualisiert werden sollen."
+"Hier können Sie wählen,\n"
+"welche Dateien bei einem Online-Update aktualisiert werden sollen."
 
 msgid "Hidden network"
 msgstr "Verstecktes Netzwerk"
@@ -5367,7 +5370,7 @@ msgid "IPK Installer"
 msgstr "IPK Installer"
 
 msgid "IPK Uninstaller"
-msgstr "IPK-Deinstalieren"
+msgstr "IPK-Deinstallieren"
 
 msgid "IPK-install Manager"
 msgstr "IPK-Install Manager"
@@ -5650,7 +5653,7 @@ msgid "Install"
 msgstr "Installiere"
 
 msgid "Install / Info"
-msgstr ""
+msgstr "Installation / Info"
 
 msgid "Install Failed !!"
 msgstr "Installieren fehlgeschlagen!"
@@ -5677,7 +5680,7 @@ msgid "Install lcd picons on"
 msgstr "LCD Picons installieren auf"
 
 msgid "Install local extension"
-msgstr "Installiere Lokale Erweiterungen"
+msgstr "Installiere lokale Erweiterungen"
 
 msgid "Install or Update sundtek Driver"
 msgstr "Sundtek Treiber installieren/aktualisieren"
@@ -5959,7 +5962,7 @@ msgid "Label"
 msgstr "Kennzeichen"
 
 msgid "Label for device"
-msgstr ""
+msgstr "Label für Gerät"
 
 msgid "Language"
 msgstr "Sprach Auswahl"
@@ -6127,9 +6130,8 @@ msgstr "Wiedergabeliste laden"
 msgid "Load unlinked userbouquets"
 msgstr "Lade nicht verbundene Favoritenlisten"
 
-#, fuzzy
 msgid "Local"
-msgstr "Lokale Box"
+msgstr "Lokal"
 
 msgid "Local = Flash an image from local path /hdd/images"
 msgstr "Lokal = Flashe ein Image vom lokalen Pfad / hdd /images"
@@ -6140,9 +6142,8 @@ msgstr "Lokale Box"
 msgid "Local network"
 msgstr "Lokales Netzwerk"
 
-#, fuzzy
 msgid "Locale"
-msgstr "Lokale Box"
+msgstr "Sprache"
 
 msgid "Location"
 msgstr "Zielverzeichnis"
@@ -7109,9 +7110,8 @@ msgstr "Nein, ich will keine Plugins installieren"
 msgid "No, but restart from begin"
 msgstr "Nein, aber von Anfang an neu beginnen"
 
-#, fuzzy
 msgid "No, do not flash image"
-msgstr "Nein, keine Einstellungen wiederherstellen"
+msgstr "Nein, kein Image flashen"
 
 msgid "No, except Wakeup timer"
 msgstr ""
@@ -7309,9 +7309,8 @@ msgstr ""
 msgid "One"
 msgstr "Eins"
 
-#, fuzzy
 msgid "Online"
-msgstr "Online flashen"
+msgstr "Online"
 
 msgid "Online = Download an image and flash it"
 msgstr "Online = Herunterladen eines Image und anschließendes flashen"
@@ -7662,7 +7661,7 @@ msgid "Play recorded movies..."
 msgstr "Aufgenommene Filme abspielen..."
 
 msgid "Please Flash your Kernel new and Backup again"
-msgstr ""
+msgstr "Bitte den Kernel neu flashen und Backup wiederholen"
 
 msgid "Please add titles to the compilation."
 msgstr "Bitte fügen Sie Titel zur Ihrer Zusammenstellung hinzu."
@@ -7829,6 +7828,10 @@ msgid ""
 "Please select what to do after flashing the image:\n"
 "(In addition, if it exists, a local script will be executed as well at /media/hdd/images/config/myrestore.sh)"
 msgstr ""
+"Wählen Sie, was nach dem Flashen geschehen soll:\n"
+"Wenn ein Script\n"
+"/media/hdd/images/config/myrestore.sh\n"
+"vorhanden ist, wird es ausgeführt."
 
 msgid "Please set up tuner A"
 msgstr "Einstellungen für Tuner A."
@@ -8296,9 +8299,8 @@ msgstr ""
 msgid "Qatar"
 msgstr ""
 
-#, fuzzy
 msgid "Question"
-msgstr "Auflösung"
+msgstr "Frage !"
 
 msgid "Quick"
 msgstr "Schnell"
@@ -8392,7 +8394,7 @@ msgid "Really restart now?"
 msgstr "Wollen Sie trotzdem neu starten?"
 
 msgid "Really save in fstab mount by UUID:\n"
-msgstr ""
+msgstr "Wirklich in der fstab mit UUID mounten ?\n"
 
 msgid "Really shutdown now?"
 msgstr "Wollen Sie trotzdem ausschalten?"
@@ -8486,7 +8488,7 @@ msgid "Reenter PIN"
 msgstr "PIN Eingabe wiederholen"
 
 msgid "Reflash recommended!"
-msgstr ""
+msgstr "Neu flashen empfohlen !"
 
 msgid "Refresh"
 msgstr "Aktualisieren"
@@ -8822,7 +8824,7 @@ msgstr ""
 "%s"
 
 msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr "Wiederherstellen der Einstellungen von einer Sicherung. Nach der Wiederherstellung wird die Box neu gestartet, um die neuen Einstellungen zu aktivieren."
+msgstr "Wiederherstellen der Einstellungen aus einer Sicherung. Nach der Wiederherstellung wird die Box neu gestartet, um die neuen Einstellungen zu aktivieren."
 
 msgid "Restoreing:  %s"
 msgstr "Wiederherstellen der Einstellungen"
@@ -8929,7 +8931,7 @@ msgid "Run how often ?"
 msgstr "Wie oft durchführen?"
 
 msgid "Run mount -a"
-msgstr ""
+msgstr "Alle Geräte in fstab einhängen (mounten)"
 
 msgid "Running"
 msgstr "Läuft"
@@ -9201,7 +9203,7 @@ msgid "Scan for cable services."
 msgstr "Kabelsender löschen"
 
 msgid "Scan for installed .ipk packages, and uninstall a package."
-msgstr "Nach installierten *.ipk Pakete suchen, und diese deinstallieren."
+msgstr "Nach installierten *.ipk Paketen suchen, und diese deinstallieren."
 
 msgid "Scan for local extensions and install them."
 msgstr "Nach lokalen Erweiterungen suchen und diese installieren."
@@ -9502,9 +9504,8 @@ msgstr "Eingabegerät auswählen."
 msgid "Select interface"
 msgstr "Netzwerkkarte auswählen"
 
-#, fuzzy
 msgid "Select locale"
-msgstr "Pfad auswählen"
+msgstr "Sprache wählen"
 
 msgid "Select location"
 msgstr "Pfad auswählen"
@@ -10662,7 +10663,7 @@ msgid "Sorry, no physical devices that supports SWAP attached. Can't create Swap
 msgstr "Es sind keine physischen Geräte, die SWAP unterstützen angeschlossen. Kann Swapfile nicht auf Netzwerk oder FAT32 Dateisystemen erstellen."
 
 msgid "Sorry, no settings backups found!"
-msgstr "Keine Sicherungskopie der Einstellungen gefunden!"
+msgstr "Keine Sicherungskopie der Einstellungen gefunden !"
 
 msgid "Sorry, this tuner is in use."
 msgstr ""
@@ -11577,7 +11578,7 @@ msgid "There are no updates available."
 msgstr "Es sind keine Updates verfügbar."
 
 msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
+msgstr "Es wurde ein gültiges USB-Flashlaufwerk am "
 
 msgid "There is no [webif] section in oscam.conf"
 msgstr "Es gibt keine [webif] Sektion in der oscam.conf"
@@ -14260,7 +14261,7 @@ msgid "fitness & health"
 msgstr "Fitness & Gesundheit"
 
 msgid "flash drive. "
-msgstr ""
+msgstr "Flash-Laufwerk."
 
 msgid "flat alphabetic"
 msgstr "Aufnahmen alphabetisch sortieren"
@@ -15173,7 +15174,7 @@ msgid "this service is protected by a parental control pin"
 msgstr "Dieser Kanal ist durch einen Jugendschutz-PIN Code geschützt."
 
 msgid "to 'force' to flash this image without confirmation"
-msgstr ""
+msgstr "um das Image flashen 'zu erzwingen' ohne Bestätigung"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "Schalte zwischen Zeit-, Kapitel-, Ton- und Untertitel-Info um"
