@@ -9,7 +9,7 @@ from Components.config import config
 from Components.AVSwitch import AVSwitch
 from Components.Console import Console
 from Components.ImportChannels import ImportChannels
-from Components.Harddisk import internalHDDNotSleeping
+from Tools.Directories import mediafilesInUse
 from Components.SystemInfo import SystemInfo
 from GlobalActions import globalActionMap
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer
@@ -172,7 +172,7 @@ class Standby(Screen):
 							duration += 24*3600
 						self.standbyTimeoutTimer.startLongTimer(duration)
 						return
-		if self.session.screen["TunerInfo"].tuner_use_mask or internalHDDNotSleeping():
+		if self.session.screen["TunerInfo"].tuner_use_mask or mediafilesInUse(self.session):
 			self.standbyTimeoutTimer.startLongTimer(600)
 		else:
 			from RecordTimer import RecordTimerEntry
@@ -218,7 +218,7 @@ class QuitMainloopScreen(Screen):
 
 inTryQuitMainloop = False
 
-def getReasons(session):
+def getReasons(session, retvalue=1):
 	recordings = session.nav.getRecordings()
 	jobs = len(job_manager.getPendingJobs())
 	reasons = []
@@ -235,32 +235,33 @@ def getReasons(session):
 			reasons.append((ngettext("%d job is running in the background!", "%d jobs are running in the background!", jobs) % jobs))
 	if eStreamServer.getInstance().getConnectedClients() or StreamServiceList:
 			reasons.append(_("Client is streaming from this box!"))
-	if not reasons and internalHDDNotSleeping():
-			reasons.append(_("Harddisk is not in sleepmode it could be in use!"))
+	if not reasons and mediafilesInUse(session) and retvalue in (1, 2, 4, 42):
+			reasons.append(_("A file from media is in use!"))
 	return "\n".join(reasons)
 
 class TryQuitMainloop(MessageBox):
-	def __init__(self, session, retvalue=1, timeout=-1, default_yes = False):
+	def __init__(self, session, retvalue=1, timeout=-1, default_yes=False, check_reasons=True):
 		self.retval = retvalue
 		self.connected = False
-		reason = getReasons(session)
-		if reason and not(reason == _("Harddisk is not in sleepmode it could be in use!") and retvalue in (3, 6, 42)):
+		reason = check_reasons and getReasons(session, retvalue)
+		if reason:
 			text = { 1: _("Really shutdown now?"),
 				2: _("Really reboot now?"),
 				3: _("Really restart now?"),
 				4: _("Really upgrade the frontprocessor and reboot now?"),
 				6: _("Really restart in debug mode now?"),
-				42: _("Really upgrade your settop box and reboot now?") }.get(retvalue, _("Invalid reason"))
-			MessageBox.__init__(self, session, "%s\n%s" % (reason, text), type = MessageBox.TYPE_YESNO, timeout = timeout, default = default_yes)
-			self.skinName = "MessageBoxSimple"
-			session.nav.record_event.append(self.getRecordEvent)
-			self.connected = True
-			self.onShow.append(self.__onShow)
-			self.onHide.append(self.__onHide)
-		else:
-			self.skin = """<screen position="0,0" size="0,0"/>"""
-			Screen.__init__(self, session)
-			self.close(True)
+				42: _("Really upgrade your settop box and reboot now?") }.get(retvalue, None)
+			if text:
+				MessageBox.__init__(self, session, "%s\n%s" % (reason, text), type=MessageBox.TYPE_YESNO, timeout=timeout, default=default_yes)
+				self.skinName = "MessageBoxSimple"
+				session.nav.record_event.append(self.getRecordEvent)
+				self.connected = True
+				self.onShow.append(self.__onShow)
+				self.onHide.append(self.__onHide)
+				return
+		self.skin = """<screen position="0,0" size="0,0"/>"""
+		Screen.__init__(self, session)
+		self.close(True)
 
 	def getRecordEvent(self, recservice, event):
 		if event == iRecordableService.evEnd:
