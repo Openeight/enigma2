@@ -373,6 +373,27 @@ def InitUsageConfig():
 	config.usage.show_update_disclaimer = ConfigYesNo(default = True)
 	config.usage.pic_resolution = ConfigSelection(default=None, choices=[(None, _("Same resolution as skin")), ("(720, 576)","720x576"), ("(1280, 720)", "1280x720"), ("(1920, 1080)", "1920x1080")][:SystemInfo["HasFullHDSkinSupport"] and 4 or 3])
 
+	if SystemInfo["Fan"]:
+		choicelist = [('off', _("Off")), ('on', _("On")), ('auto', _("Auto"))]
+		if os.path.exists("/proc/stb/fp/fan_choices"):
+			choicelist = [x for x in choicelist if x[0] in open("/proc/stb/fp/fan_choices", "r").read().strip().split(" ")]
+		config.usage.fan = ConfigSelection(choicelist)
+		def fanChanged(configElement):
+			open(SystemInfo["Fan"], "w").write(configElement.value)
+		config.usage.fan.addNotifier(fanChanged)
+
+	if SystemInfo["FanPWM"]:
+		def fanSpeedChanged(configElement):
+			open(SystemInfo["FanPWM"], "w").write(hex(configElement.value)[2:])
+		config.usage.fanspeed = ConfigSlider(default=127, increment=8, limits=(0, 255))
+		config.usage.fanspeed.addNotifier(fanSpeedChanged)
+
+	if SystemInfo["PowerLED"]:
+		def powerLEDChanged(configElement):
+			open(SystemInfo["PowerLED"], "w").write(configElement.value and "on" or "off")
+		config.usage.powerLED = ConfigYesNo(default = True)
+		config.usage.powerLED.addNotifier(powerLEDChanged)
+
 	if SystemInfo["StandbyLED"]:
 		def standbyLEDChanged(configElement):
 			open(SystemInfo["StandbyLED"], "w").write(configElement.value and "on" or "off")
@@ -482,7 +503,7 @@ def InitUsageConfig():
 
 	config.usage.keymap = ConfigText(default = eEnv.resolve("${datadir}/enigma2/keymap.xml"))
 	config.usage.keytrans = ConfigText(default = eEnv.resolve("${datadir}/enigma2/keytranslation.xml"))
-	config.usage.alternative_imagefeed = ConfigText(default="")
+	config.usage.alternative_imagefeed = ConfigText(default="", fixed_size=False)
 
 	config.seek = ConfigSubsection()
 	config.seek.selfdefined_13 = ConfigNumber(default=15)
