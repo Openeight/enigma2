@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2 OPLi-3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 17:02+0100\n"
-"PO-Revision-Date: 2020-03-29 18:05+0100\n"
+"PO-Revision-Date: 2020-03-29 23:55+0100\n"
 "Last-Translator: esmos\n"
 "Language-Team: esmos\n"
 "Language: tr\n"
@@ -51,6 +51,8 @@ msgid ""
 "\n"
 "Conflict detection disabled!"
 msgstr ""
+"\n"
+"Çatışma tespiti devre dışı!"
 
 msgid ""
 "\n"
@@ -184,13 +186,13 @@ msgid "      vTuner acceleration for DM800"
 msgstr "     OCTAGON için vTuner hızlandırma"
 
 msgid "     no space left on back-up device"
-msgstr ""
+msgstr "    yedekleme cihazında boş alan kalmadı"
 
 msgid "     no writing permission on back-up device"
-msgstr ""
+msgstr "    yedekleme cihazında yazma izni yok"
 
 msgid "     wrong back-up destination "
-msgstr ""
+msgstr "    yanlış yedekleme hedefi "
 
 #, python-format
 msgid "  (%s x %s)"
@@ -534,16 +536,16 @@ msgid "%s:%s"
 msgstr ""
 
 msgid "( All readers)"
-msgstr ""
+msgstr "( Tüm okuyucular)"
 
 msgid "(Show only reader:"
-msgstr ""
+msgstr "(Yalnızca okuyucuyu göster:"
 
 msgid "(VU+ type)"
 msgstr ""
 
 msgid "(ZAP as PiP)"
-msgstr ""
+msgstr "(RiR olarak ZAP)"
 
 msgid "(ZAP)"
 msgstr "(ZAP)"
@@ -556,14 +558,13 @@ msgid "(empty)"
 msgstr "(boş)"
 
 msgid "(not activated)"
-msgstr ""
+msgstr "(etkin değil)"
 
 msgid "(show optional DVD audio menu)"
 msgstr "(opsiyonel DVD ses menüsünü göster)"
 
-#, fuzzy
 msgid "(unknown)"
-msgstr "bilinmiyor"
+msgstr "(bilinmiyor)"
 
 msgid "* Configuration support"
 msgstr "* Yapılandırma desteği"
@@ -864,10 +865,10 @@ msgid "A"
 msgstr "A"
 
 msgid "A background update check is in progress, please wait a few minutes and try again."
-msgstr ""
+msgstr "Bir arka plan güncelleme kontrolü devam ediyor, lütfen birkaç dakika bekleyip tekrar deneyin."
 
 msgid "A backup has been detected."
-msgstr ""
+msgstr "Bir yedekleme algılandı."
 
 #, python-format
 msgid ""
@@ -899,9 +900,8 @@ msgstr ""
 "Kayıt süresi dolmuş. Alıcı kapatılacak\n"
 "Şimdi Kapatılsın mı?"
 
-#, fuzzy
 msgid "A graphical EPG for all services of a specific bouquet"
-msgstr "Belirtilen buketteki tüm kanallar için görsel EPG"
+msgstr "Belirli bir buketin tüm hizmetleri için grafiksel bir EPG"
 
 msgid ""
 "A newer version of the sundtekcontrolcenter plugin is available.\n"
@@ -918,9 +918,8 @@ msgstr ""
 "Kayıt başlatıldı:\n"
 "%s"
 
-#, fuzzy
 msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
-msgstr "Bir kayıt şu anda çalışıyor. Tarama yapmayı denemeden önce Kaydı durdurunuz."
+msgstr "Seçilen tunerde şu anda bir kayıt çalışıyor. Lütfen farklı bir tuner seçin veya kaydı durdurun ve tekrar deneyin."
 
 msgid ""
 "A recording is currently running.\n"
@@ -936,7 +935,7 @@ msgid "A recording is currently running. Please stop the recording before trying
 msgstr "Bir kayıt şu anda çalışıyor. Tarama yapmayı denemeden önce Kaydı durdurunuz."
 
 msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
-msgstr ""
+msgstr "Şu anda bir kayıt çalışıyor. DiSEqC testine başlamadan önce lütfen kaydı durdurun."
 
 msgid "A recording is currently running. Please stop the recording before trying to start the satfinder."
 msgstr "Kayıt devam ediyor. Lütfen uydu arayıcıyı başlatmadan önce kaydı durdurun."
@@ -13977,7 +13976,7 @@ msgid "education/science/factual topics (general)"
 msgstr "eğitim / bilim / gerçeklere dayanan konular (genel)"
 
 msgid "embedded"
-msgstr ""
+msgstr "gömülü"
 
 msgid "empty"
 msgstr "boş"
@@ -13992,7 +13991,7 @@ msgid "enable favourite edit"
 msgstr "Favori düzenlemeyi aç"
 
 msgid "enable intro screen"
-msgstr ""
+msgstr "giriş ekranını etkinleştir"
 
 msgid "enable move mode"
 msgstr "Taşıma kipini aç"
@@ -14022,7 +14021,7 @@ msgid "entertainment (6-14 year old)"
 msgstr "eğlence (10-16 yaş arası)"
 
 msgid "epg cache backup"
-msgstr ""
+msgstr "epg önbellek yedekleme"
 
 msgid "equal to"
 msgstr "eşittir"
@@ -14031,10 +14030,10 @@ msgid "equestrian"
 msgstr "binicilik"
 
 msgid "error starting scanning"
-msgstr ""
+msgstr "taramaya başlama hatası"
 
 msgid "error while scanning"
-msgstr ""
+msgstr "tarama sırasında hata"
 
 msgid "ese"
 msgstr ""
@@ -14082,10 +14081,10 @@ msgid "extensions"
 msgstr "eklentiler"
 
 msgid "extra wide"
-msgstr ""
+msgstr "ekstra geniş"
 
 msgid "failed"
-msgstr ""
+msgstr "başarısız oldu"
 
 msgid "false"
 msgstr "yanlış"
@@ -14094,7 +14093,7 @@ msgid "fashion"
 msgstr "moda"
 
 msgid "fast"
-msgstr ""
+msgstr "hızlı"
 
 msgid "feed status"
 msgstr "besleme durumu"
@@ -14159,10 +14158,10 @@ msgid "from"
 msgstr "itibaren"
 
 msgid "fstab restored!"
-msgstr ""
+msgstr "fstab geri yüklendi!"
 
 msgid "fstab-Editor"
-msgstr ""
+msgstr "fstab-Editör"
 
 msgid "further education"
 msgstr "ileri eğitim"
@@ -14201,7 +14200,7 @@ msgid "help..."
 msgstr "Yardım..."
 
 msgid "hide"
-msgstr ""
+msgstr "sakla"
 
 msgid "hops:"
 msgstr ""
@@ -14350,7 +14349,6 @@ msgstr "tıp / fizyoloji / psikoloji"
 msgid "menu"
 msgstr "menu"
 
-#, fuzzy
 msgid "min"
 msgstr "dakika"
 
@@ -14358,7 +14356,7 @@ msgid "mins"
 msgstr "dakika"
 
 msgid "minute"
-msgstr ""
+msgstr "dakika"
 
 msgid "minutes"
 msgstr "dakika"
@@ -14575,7 +14573,7 @@ msgid "pass num (0 - fsck off): "
 msgstr ""
 
 msgid "pausing"
-msgstr ""
+msgstr "duraklatma"
 
 msgid "performing arts"
 msgstr "sahne sanatları"
