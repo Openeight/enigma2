@@ -27,6 +27,7 @@ class OverscanTestScreen(Screen):
 			"5": self.keyNumber,
 			"7": self.keyNumber,
 			"8": self.keyNumber,
+			"9": self.keyNumber,
 			"ok": self.ok,
 			"cancel": self.cancel
 		})
@@ -65,6 +66,7 @@ class FullHDTestScreen(OverscanTestScreen):
 			"5": self.keyNumber,
 			"6": self.keyNumber,
 			"8": self.keyNumber,
+			"9": self.keyNumber,
 			"ok": self.ok,
 			"cancel": self.cancel
 		})
@@ -93,6 +95,8 @@ class FullUHDTestScreen(OverscanTestScreen):
 			"5": self.keyNumber,
 			"6": self.keyNumber,
 			"7": self.keyNumber,
+			"8": self.keyNumber,
+			"9": self.keyNumber,
 			"ok": self.ok,
 			"cancel": self.cancel
 		})
@@ -139,6 +143,7 @@ class VideoFinetune(Screen):
 			"6": self.keyNumber,
 			"7": self.keyNumber,
 			"8": self.keyNumber,
+			"9": self.keyNumber,
 			"ok": self.callNext,
 			"cancel": self.close,
 		})
@@ -151,7 +156,7 @@ class VideoFinetune(Screen):
 		open("/proc/stb/fb/dst_height", "w").write(self.height)
 
 	def keyNumber(self, key):
-		(self.testpic_brightness, self.testpic_contrast, self.testpic_colors, self.testpic_filter, self.testpic_gamma, self.testpic_overscan, self.testpic_fullhd, self.testpic_uhd)[key-1]()
+		(self.testpic_brightness, self.testpic_contrast, self.testpic_colors, self.testpic_filter, self.testpic_gamma, self.testpic_overscan, self.testpic_fullhd, self.testpic_uhd, self.testpic_pixels)[key-1]()
 
 	def callNext(self):
 		if self.next:
@@ -367,25 +372,30 @@ class VideoFinetune(Screen):
 		c.flush()
 
 	def testpic_overscan(self):
-		self.next = SystemInfo["HasFullHDSkinSupport"] and self.testpic_fullhd or self.testpic_brightness
+		self.next = SystemInfo["HasFullHDSkinSupport"] and self.testpic_fullhd or self.testpic_pixels
 		self.hide()
 		self.session.openWithCallback(self.testpicCallback, OverscanTestScreen)
 
 	def testpic_fullhd(self):
 		if SystemInfo["HasFullHDSkinSupport"]:
-			self.next = self.hasUHD and self.testpic_uhd or self.testpic_brightness
+			self.next = self.hasUHD and self.testpic_uhd or self.testpic_pixels
 			self.hide()
 			self.session.openWithCallback(self.testpicCallback, FullHDTestScreen)
 		else:
-			return 0
+			self.testpic_pixels()
 
 	def testpic_uhd(self):
 		if self.hasUHD:
-			self.next = self.testpic_brightness
+			self.next = self.testpic_pixels
 			self.hide()
 			self.session.openWithCallback(self.testpicCallback, FullUHDTestScreen)
 		else:
-			return 0
+			self.testpic_pixels()
+
+	def testpic_pixels(self):
+		self.next = self.testpic_brightness
+		self.hide()
+		self.session.openWithCallback(self.testpicCallback, PixelsTestScreen)
 
 	def testpicCallback(self, key):
 		if key:
@@ -395,3 +405,86 @@ class VideoFinetune(Screen):
 				self.keyNumber(key)
 		else:
 			self.close()
+
+class PixelsTestScreen(Screen):
+	skin = """
+		<screen position="fill">
+			<widget source="Canvas" render="Canvas" position="fill" zPosition="2"/>
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+
+		self["Canvas"] = CanvasSource()
+		self.fontsize = getDesktop(0).size().height() == 1080 and 30 or 20
+		self.xres, self.yres = getDesktop(0).size().width(), getDesktop(0).size().height()
+
+		self["actions"] = NumberActionMap(["InputActions", "OkCancelActions", "ColorActions"],
+		{
+			"1": self.keyNumber,
+			"2": self.keyNumber,
+			"3": self.keyNumber,
+			"4": self.keyNumber,
+			"5": self.keyNumber,
+			"6": self.keyNumber,
+			"7": self.keyNumber,
+			"8": self.keyNumber,
+			"red": self.togglered,
+			"green": self.togglegreen,
+			"yellow": self.intro,
+			"blue": self.toggleblue,
+			"ok": self.ok,
+			"cancel": self.cancel,
+			"left": self.left,
+			"right": self.right,
+		})
+		self.intro()
+
+	def intro(self):
+		c = self["Canvas"]
+		c.fill(0, 0, self.xres, self.yres, RGB(0,0,0))
+		c.writeText(self.xres / 10, self.yres / 6 - self.fontsize * 2, self.xres * 3 / 5, 40, RGB(255,128,255), RGB(0,0,0), gFont("Regular", self.fontsize * 2),
+			_("Pixels\n"))
+		c.writeText(self.xres / 10, self.yres / 6, self.xres / 2, self.yres * 4 / 6, RGB(255,255,255), RGB(0,0,0), gFont("Regular", self.fontsize),
+			_("Can be used to test defect pixels on TV screen.\n\n"
+			"Available color test screens:\n\n"
+			"red\ngreen\nblue\nwhite\nblack\ncyan\nmagenta\nyellow\n\n"
+			"Screens change with left/right buttons or use red, green, blue to toggle.\n"
+			"Yellow for returning back to this intro"),
+			RT_WRAP)
+		c.flush()
+		self.color = 8
+
+	def left(self):
+		self.setArea((7, 2, 4, 0, 8, 3, 5, 1, 6)[self.color])
+
+	def right(self):
+		self.setArea((3, 7, 1, 5, 2, 6, 8, 0, 4)[self.color])
+
+	def togglered(self):
+		self.setArea(self.color ^ 4)
+
+	def togglegreen(self):
+		self.setArea(self.color ^ 2)
+
+	def toggleblue(self):
+		self.setArea(self.color ^ 1)
+
+	def setArea(self, color):
+		if color == 8:
+			self.intro()
+		else:
+			self.color = color & 7
+			self.show()
+			c = self["Canvas"]
+			c.fill(0, 0, self.xres, self.yres, RGB(color & 4 and 255, color & 2 and 255, color & 1 and 255))
+			c.flush()
+
+	def ok(self):
+		self.close(True)
+
+	def cancel(self):
+		self.close(False)
+
+	def keyNumber(self, key):
+		self.close(key)

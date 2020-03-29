@@ -65,10 +65,11 @@
 	<map context="VirtualKeyBoardActions">
 		<key id="KEY_RED" mapto="cancel" flags="m" />
 		<key id="KEY_GREEN" mapto="save" flags="m" />
-		<key id="KEY_YELLOW" mapto="locale" flags="m" />
-		<key id="KEY_BLUE" mapto="shift" flags="m" />
+		<key id="KEY_YELLOW" mapto="shift" flags="m" />
+		<key id="KEY_BLUE" mapto="capsLock" flags="m" />
 		<key id="KEY_EXIT" mapto="cancel" flags="m" />
 		<key id="KEY_OK" mapto="select" flags="m" />
+		<key id="KEY_TEXT" mapto="locale" flags="m" />
 		<key id="KEY_UP" mapto="up" flags="mr" />
 		<key id="KEY_PREVIOUS" mapto="backspace" flags="mr" />
 		<key id="KEY_REWIND" mapto="first" flags="mr" />
@@ -855,6 +856,8 @@
 		<key id="KEY_HOMEPAGE" mapto="homepage_long" flags="l"/>
 		<key id="KEY_EJECTCD" mapto="ejectcd" flags="b"/>
 		<key id="KEY_EJECTCD" mapto="ejectcd_long" flags="l"/>
+		<key id="KEY_VOD" mapto="vod" flags="b"/>
+		<key id="KEY_VOD" mapto="vod_long" flags="l"/>
 	</map>
 	<map context="CCcamInfoActions">
 		<key id="KEY_1" mapto="1" flags="m"/>

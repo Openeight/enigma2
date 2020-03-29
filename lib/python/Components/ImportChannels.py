@@ -24,17 +24,17 @@ class ImportChannels():
 			self.thread = threading.Thread(target=self.threaded_function, name="ChannelsImport")
 			self.thread.start()
 
-	def getUrl(self, url):
+	def getUrl(self, url, timeout=5):
 		request = urllib2.Request(url)
 		if self.header:
 			request.add_header("Authorization", self.header)
-		return urllib2.urlopen(request, timeout=5)
+		return urllib2.urlopen(request, timeout=timeout)
 
 	def threaded_function(self):
 		if "epg" in config.usage.remote_fallback_import.value:
 			print "Writing epg.dat file on sever box"
 			try:
-				self.getUrl("%s/web/saveepg" % self.url).read()
+				self.getUrl("%s/web/saveepg" % self.url, timeout=30).read()
 			except:
 				self.ImportChannelsDone(False, _("Error when writing epg.dat on server"))
 				return
@@ -66,9 +66,7 @@ class ImportChannels():
 			print "[Import Channels] reading dir"
 			try:
 				files = [file for file in loads(self.getUrl("%s/file?dir=/etc/enigma2" % self.url).read())["files"] if os.path.basename(file).startswith(settingfiles)]
-				count = 0
 				for file in files:
-					count += 1
 					file = file.encode("UTF-8")
 					print "[Import Channels] Downloading %s" % file
 					destination = "/tmp/tmp"
@@ -90,10 +88,10 @@ class ImportChannels():
 			for file in files:
 				shutil.move("/tmp/tmp/%s" % file, "/etc/enigma2/%s" % file)
 			os.rmdir("/tmp/tmp")
-		self.ImportChannelsDone(True)
+		self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[config.usage.remote_fallback_import.value])
 
-	def ImportChannelsDone(self, flag, errorstring=None):
+	def ImportChannelsDone(self, flag, message=None):
 		if flag:
-			Notifications.AddNotificationWithID("ChannelsImportOK", MessageBox, _("Channels from fallback tuner imported"), type=MessageBox.TYPE_INFO, timeout=5)
+			Notifications.AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s imported from fallback tuner") % message, type=MessageBox.TYPE_INFO, timeout=5)
 		else:
-			Notifications.AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Channels from fallback tuner failed %s") % errorstring, type=MessageBox.TYPE_ERROR, timeout=5)
+			Notifications.AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Import from fallback tuner failed, %s") % message, type=MessageBox.TYPE_ERROR, timeout=5)
