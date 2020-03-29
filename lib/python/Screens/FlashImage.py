@@ -289,7 +289,7 @@ class FlashImage(Screen):
 					else:
 						self.startDownload()
 				except:
-					self.session.openWithCallback(self.abort, MessageBox, _("Could not some setup the required directories on the media (e.g. USB stick) - Please verify media and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
+					self.session.openWithCallback(self.abort, MessageBox, _("Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 			else:
 				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 		else:
@@ -439,11 +439,14 @@ class MultibootSelection(SelectImage):
 		list = []
 		currentimageslot = GetCurrentImage()
 		mode = GetCurrentImageMode() or 0
-		for x in sorted(imagesdict.keys()):
-			if imagesdict[x]["imagename"] != _("Empty slot"):
-				list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
-				if SystemInfo["canMode12"]:
-					list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
+		if imagesdict:
+			for x in sorted(imagesdict.keys()):
+				if imagesdict[x]["imagename"] != _("Empty slot"):
+					list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
+					if SystemInfo["canMode12"]:
+						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
+		else:
+			list.append(ChoiceEntryComponent('',((_("No images found")), "Waiter")))
 		self["list"].setList(list)
 
 	def keyOk(self):
@@ -453,8 +456,15 @@ class MultibootSelection(SelectImage):
 			if os.path.isdir('/tmp/startupmount'):
 				self.ContainterFallback()
 			else:
-				os.mkdir('/tmp/startupmount')
-				self.container.ePopen('mount /dev/%sp1 /tmp/startupmount' % SystemInfo["canMultiBoot"][2], self.ContainterFallback)
+				if os.path.islink("/dev/block/by-name/bootoptions"):
+					os.mkdir('/tmp/startupmount')
+					self.container.ePopen('mount /dev/block/by-name/bootoptions /tmp/startupmount', self.ContainterFallback)
+				elif os.path.islink("/dev/block/by-name/boot"):
+					os.mkdir('/tmp/startupmount')
+					self.container.ePopen('mount /dev/block/by-name/boot /tmp/startupmount', self.ContainterFallback)
+				else:
+					os.mkdir('/tmp/startupmount')
+					self.container.ePopen('mount /dev/%sp1 /tmp/startupmount' % SystemInfo["canMultiBoot"][2], self.ContainterFallback)
 
 	def ContainterFallback(self, data=None, retval=None, extra_args=None):
 		self.container.killAll()
@@ -462,6 +472,14 @@ class MultibootSelection(SelectImage):
 		model = HardwareInfo().get_machine_name()
 		if SystemInfo["canMultiBoot"][3]:
 			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % slot, "/tmp/startupmount/STARTUP")
+		elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4_BOXMODE_12"):
+			if slot < 12:
+				shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_1" % slot, "/tmp/startupmount/STARTUP")
+			else:
+				slot -= 12
+				shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_12" % slot, "/tmp/startupmount/STARTUP")
+		elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4"):
+			shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s" % slot, "/tmp/startupmount/STARTUP")
 		else:
 			if slot < 12:
 				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)

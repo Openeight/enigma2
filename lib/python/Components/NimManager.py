@@ -612,6 +612,10 @@ class NIM(object):
 			multistream = True
 		return multistream
 
+	def isT2MI(self):
+		# Check if t2mi feature exists using procfs due to missing FE_CAN_T2MI in DVB API
+		return os.path.exists("/proc/stb/frontend/%d/t2mi" % self.frontend_id)
+
 	def supportsBlindScan(self):
 		return self.supports_blind_scan
 
@@ -1565,7 +1569,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			print "[InitNimManager] enable combined tuner type(s) %s" % tunersEnabled
 			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[slot_id].frontend_id, tunersEnabled)
 			if nim.configMode.value == 'nothing':
-				nim.configMode.value = nim.configMode.default = "simple" if "DVB-S" in tunersEnabled else "enabled"
+				nim.configMode.value = nim.configMode.default = "simple" if slot.canBeCompatible("DVB-S") else "enabled"
 		else:
 			print "[InitNimManager] disable combined tuner"
 			eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[slot_id].frontend_id, "UNDEFINED")

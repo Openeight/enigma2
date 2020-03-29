@@ -79,7 +79,6 @@ class AutoInstallWizard(Screen):
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
 		self.package = None
-		self.counter = 0
 
 		import glob
 		mac_address = open('/sys/class/net/eth0/address', 'r').readline().strip().replace(":", "")
@@ -90,18 +89,18 @@ class AutoInstallWizard(Screen):
 		for autoinstallfile in autoinstallfiles:
 			self.packages = [package.strip() for package in open(autoinstallfile).readlines()]
 			if self.packages:
+				self.number_of_packages = len(self.packages)
 				# make sure we have a valid package list before attempting to restore packages
 				self.container.execute("opkg update")
 				return
 		self.abort()
 
 	def run_console(self):
-		self["progress"].setValue(100 * self.counter/(len(self.packages) + self.counter))
+		self["progress"].setValue(100 * (self.number_of_packages - len(self.packages))/self.number_of_packages)
 		try:
 			open("/proc/progress", "w").write(str(self["progress"].value))
 		except IOError:
 			pass
-		self.counter += 1
 		self.package = self.packages.pop(0)
 		self["header"].setText(_("%s%% Autoinstalling %s") % (self["progress"].value, self.package))
 		try:
