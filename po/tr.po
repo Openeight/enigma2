@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2 OPLi-3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 17:02+0100\n"
-"PO-Revision-Date: 2020-03-29 23:55+0100\n"
+"PO-Revision-Date: 2020-03-31 19:25+0100\n"
 "Last-Translator: esmos\n"
 "Language-Team: esmos\n"
 "Language: tr\n"
@@ -198,9 +198,11 @@ msgstr "    yanlış yedekleme hedefi "
 msgid "  (%s x %s)"
 msgstr ""
 
-#, fuzzy
+msgid "Configure your network settings, and press OK to start the scan"
+msgstr "Ağ ayarlarınızı yapın, ve taramayı başlatmak için OK tuşuna basın"
+
 msgid " (0 - all networks)"
-msgstr "Yerel ağ"
+msgstr " (0 - tüm ağlar)"
 
 #, python-format
 msgid " (Channel %s)"
@@ -2782,7 +2784,7 @@ msgid "Configure whether or not an icon should be shown when your motorized dish
 msgstr "Motorlu çanak hareket halindeyken bir simge gösterilmesinin gereken olup olmadığını yapılandırın."
 
 msgid "Configure whether or not the rotor position will be displayed on infobar"
-msgstr ""
+msgstr "Bilgi çubuğunda rotor konumunun görüntülenip görüntülenmeyeceğini yapılandırın"
 
 msgid "Configure which access level to use for the configuration menu. Expert level gives access to all items."
 msgstr "Hangi erişim seviyesinde yapılandırma menüsü ayarlansın. Uzman düzeyinde tüm öğelere erişim sağlanır."
@@ -2793,18 +2795,17 @@ msgstr "SCART çıkışında kullanılması gereken renk formatını yapılandı
 msgid "Configure which tuner for recordings will be preferred, when more than one tuner is available."
 msgstr "Birden fazla tuner mevcut olduğunda, tercih edilecek kayıtlar için hangi radyo yapılandırın."
 
-#, fuzzy
 msgid "Configure which tuner type will be preferred, when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one regardless of the tuner type."
-msgstr "Tercih edilen tuner tipini yapılandırın, değişik tunerlerde aynı servis kullanıldığında."
+msgstr "Aynı hizmet farklı tuner türlerinde kullanılabilir olduğunda, hangi tuner türünün tercih edileceğini yapılandırın. Tuner türünden bağımsız olarak her bir alternatifi tek tek denemek için 'öncelik yok' seçeneğini belirleyin."
 
 msgid "Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites."
 msgstr "Birden fazla tuner varken, tercih edilen tuneri yapılandırın. 'Otomatik' olarak ayarlanırsa, sistem kanal/uydu en küçük numaralı tunere öncelik verecektir."
 
 msgid "Configure your Network"
-msgstr ""
+msgstr "Ağınızı yapılandırın"
 
 msgid "Configure your Sundtek tuner(s) or check/update the drivers."
-msgstr ""
+msgstr "Sundtek Tuner (ler) inizi yapılandırın/sürücüleri kontrol edin/güncelleyin."
 
 msgid "Configure your internal LAN"
 msgstr "Yerel ağ ayarlarınızı yapılandırın"
@@ -2812,9 +2813,8 @@ msgstr "Yerel ağ ayarlarınızı yapılandırın"
 msgid "Configure your network again"
 msgstr "Kablosuz ağınızı yeniden yapılandırın"
 
-#, fuzzy
 msgid "Configure your network settings and press OK to scan"
-msgstr "Ağ ayarlarınızı yapılandırmak ve taramayı başlatmak için OK tuşuna basın"
+msgstr "Ağ ayarlarınızı yapın ve taramayı başlatmak için OK tuşuna basın"
 
 msgid "Configure your wireless LAN again"
 msgstr "Kablosuz ağ ayarlarınızı yeniden yapılandırın"
@@ -2826,10 +2826,10 @@ msgid "Configuring"
 msgstr "Ayarlanıyor"
 
 msgid "Conflict not resolved!"
-msgstr ""
+msgstr "Çatışma çözülmedi!"
 
 msgid "Congo"
-msgstr ""
+msgstr "Kongo"
 
 msgid "Congo (Democratic Republic of the)"
 msgstr ""
@@ -6064,14 +6064,13 @@ msgid "Local = Flash an image from local path /hdd/images"
 msgstr "Lokal = Yerel yoldan yazılımı yükle /hdd/images"
 
 msgid "Local box"
-msgstr ""
+msgstr "Lokal box"
 
 msgid "Local network"
 msgstr "Yerel ağ"
 
-#, fuzzy
 msgid "Locale"
-msgstr "Yerel ağ"
+msgstr "Yerel"
 
 msgid "Location"
 msgstr "Konum"
@@ -6089,10 +6088,10 @@ msgid "Lock:"
 msgstr "Kilitli:"
 
 msgid "Log results to /tmp"
-msgstr ""
+msgstr "Sonuçları şuraya kaydet /tmp"
 
 msgid "Logfile does not exist anymore"
-msgstr ""
+msgstr "Log dosyası artık mevcut değil"
 
 msgid "Long filenames"
 msgstr "Uzun dosya adı"
@@ -6103,12 +6102,11 @@ msgstr "Tuşa uzun basarak"
 msgid "Longitude"
 msgstr "Boylam"
 
-#, fuzzy
 msgid "Loop through from"
-msgstr "döngü için"
+msgstr "Üzerinden döngü"
 
 msgid "Lower case"
-msgstr ""
+msgstr "Küçük harf"
 
 #, fuzzy
 msgid "Luxembourg"
@@ -8048,16 +8046,14 @@ msgstr "%s detayları için OK tuşuna basın"
 msgid "Press OK to scan"
 msgstr "Arama için OK'a basın"
 
-#, fuzzy
 msgid "Press OK to select a group of satellites to configure in one block."
-msgstr "Uyduları seçmek için OK tuşuna basın"
+msgstr "Bir blokta yapılandırılacak bir grup uydu seçmek için OK tuşuna basın."
 
 msgid "Press OK to select a provider."
 msgstr "Bir sağlayıcı seçmek için OK tuşuna basın."
 
-#, fuzzy
 msgid "Press OK to select a service."
-msgstr "Bir sağlayıcı seçmek için OK tuşuna basın."
+msgstr "Bir servis seçmek için OK tuşuna basın."
 
 msgid "Press OK to select satellites"
 msgstr "Uyduları seçmek için OK tuşuna basın"
@@ -8072,7 +8068,7 @@ msgid "Press OK to toggle the selection."
 msgstr "Seçiminde geçiş yapmak için OK tuşuna basın."
 
 msgid "Press OK, save and exit..."
-msgstr ""
+msgstr "OK'ye basın, kaydedin ve çıkın ..."
 
 msgid "Press yellow to set this interface as default interface."
 msgstr "Bu arayüzü varsayılan arayüz olarak atamak için sarı tuşa basın."
@@ -8103,16 +8099,16 @@ msgid "Priority"
 msgstr "Öncelik"
 
 msgid "Probable causes could be"
-msgstr ""
+msgstr "Muhtemel nedenler olabilir"
 
 msgid "Process"
 msgstr "İşlemler"
 
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 msgid "Profile: Local box"
-msgstr ""
+msgstr "Profil: Yerel (Lokal) kutu"
 
 msgid "Progress"
 msgstr "İlerleme"
@@ -8124,7 +8120,7 @@ msgid "Progress bar right"
 msgstr "Sağ ilerleme çubuğu"
 
 msgid "Progress:"
-msgstr ""
+msgstr "İlerleme:"
 
 msgid "Properties of current title"
 msgstr "Mevcut başlığın özellikleri"
@@ -11258,18 +11254,17 @@ msgstr "Karasal"
 msgid "Terrestrial Scan"
 msgstr "Karasal arama (DVB-T/T2)"
 
-#, fuzzy
 msgid "Terrestrial Service Searching"
-msgstr "Kanal aranıyor"
+msgstr "Karasal Kanal aranıyor"
 
 msgid "Test DiSEqC settings"
 msgstr "DiSEqC ayarlarınızı test edin"
 
 msgid "Test mode"
-msgstr "Test kipi"
+msgstr "Test modu"
 
 msgid "Test screens for your TV"
-msgstr ""
+msgstr "TV'niz için test ekranları"
 
 #, python-format
 msgid "Test the network configuration of your %s %s.\n"
