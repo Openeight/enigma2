@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 17:02+0100\n"
+"POT-Creation-Date: 2020-03-31 19:28+0200\n"
 "PO-Revision-Date: 2020-03-14 13:48+0100\n"
 "Last-Translator: Smokey\n"
 "Language-Team: OpenEight <https://octagon-forum.eu>\n"
@@ -528,6 +528,10 @@ msgstr "%s %s"
 #, python-format
 msgid "%s %s free disk space"
 msgstr "%s %s beschikbare schijfruimte"
+
+#, fuzzy, python-format
+msgid "%s ( %s Cards )"
+msgstr "%s (%s)\n"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -1982,11 +1986,11 @@ msgstr "Burundi"
 msgid "Bus: "
 msgstr "Bus: "
 
-msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
-msgstr "Standaard wordt de signaalwaarde getoond in procenten. Deze instelling wijzigt de waarde van de  weergave in dB. Dit werkt alleen indien dit door de tuner wordt ondersteund."
-
 msgid "By OpenEight Image Team"
 msgstr "By OpenEight Image Team"
+
+msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
+msgstr "Standaard wordt de signaalwaarde getoond in procenten. Deze instelling wijzigt de waarde van de  weergave in dB. Dit werkt alleen indien dit door de tuner wordt ondersteund."
 
 msgid "Bypass HDMI EDID checking"
 msgstr "Sla de HDMI EDID controle over"
@@ -1999,6 +2003,9 @@ msgstr "C-Band"
 
 msgid "CAID"
 msgstr "CAID"
+
+msgid "CAID:SrvID"
+msgstr ""
 
 msgid "CCcam Client Info"
 msgstr "CCcam Cliënt info"
@@ -2407,6 +2414,10 @@ msgstr "Log wissen"
 
 msgid "Clear playlist"
 msgstr "Afspeellijst leeg maken"
+
+#, python-format
+msgid "Client Info ( Oscam-Version: %s )"
+msgstr ""
 
 msgid "Client is streaming from this box!"
 msgstr "Cliënt streamt momenteel van deze box!"
@@ -4022,9 +4033,6 @@ msgstr "Verwijder niet geconfigureerde satellieten"
 msgid "Dump frequency:"
 msgstr "Dump Frequentie:"
 
-msgid "Duration:"
-msgstr "Looptijd:"
-
 msgid "Dutch"
 msgstr "Nederlands"
 
@@ -4963,6 +4971,10 @@ msgstr "Frequentie"
 msgid "Frequency & Channel"
 msgstr "Frequentie & Kanaal"
 
+#, fuzzy
+msgid "Frequency & Polarization"
+msgstr "Polarisatie"
+
 msgid "Frequency bands"
 msgstr "Frequentiebanden"
 
@@ -5380,6 +5392,10 @@ msgstr "Honduras"
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
+#, fuzzy
+msgid "Hops"
+msgstr "Hops:"
+
 msgid "Hops:"
 msgstr "Hops:"
 
@@ -5466,9 +5482,6 @@ msgstr "IP-server is uitgeschakeld"
 
 msgid "IP server is enabled"
 msgstr "IP-server is ingeschakeld"
-
-msgid "IP-Address"
-msgstr "IP-Adres"
 
 msgid "IP:"
 msgstr "IP:"
@@ -6270,6 +6283,9 @@ msgstr "Lock verhouding"
 
 msgid "Lock:"
 msgstr "Lock:"
+
+msgid "Log"
+msgstr ""
 
 msgid "Log results to /tmp"
 msgstr "Log resultaten naar /tmp"
@@ -7091,15 +7107,6 @@ msgstr "Geen vrije index beschikbaar"
 msgid "No free tuner!"
 msgstr "Geen vrije tuner!"
 
-msgid "No httpport defined in oscam.conf. This value is required!"
-msgstr "Geen httpport vastgelegd in oscam.conf. Die waarde is vereist!"
-
-msgid "No httppwd defined in oscam.conf"
-msgstr "Geen httppwd vastgelegd in oscam.conf"
-
-msgid "No httpuser defined in oscam.conf"
-msgstr "Geen httpuser vastgelegd in oscam.conf"
-
 msgid "No network connection available."
 msgstr "Geen netwerkverbinding beschikbaar."
 
@@ -7497,6 +7504,10 @@ msgstr "Oscam Info - Configuratie"
 msgid "Oscam Info - Main Menu"
 msgstr "Oscam Info - Hoofd Menu"
 
+#, python-format
+msgid "Oscam Log ( Oscam-Version: %s )"
+msgstr ""
+
 msgid "OscamInfo"
 msgstr "OscamInfo"
 
@@ -7538,6 +7549,10 @@ msgstr "PGS Bestand"
 
 msgid "PGS file"
 msgstr "PGS bestand"
+
+#, fuzzy
+msgid "PID"
+msgstr "PDC"
 
 msgid "PIN code needed"
 msgstr "Pincode benodigd"
@@ -8711,6 +8726,7 @@ msgstr "Hernoemen mislukt!"
 msgid "Rename name and description for new events"
 msgstr "Hernoem de naam + de omschrijving voor nieuwe programma's"
 
+#, python-format
 msgid "Rename the file 'noforce' in the folder %s"
 msgstr "Hernoem het bestand 'noforce' in de map %s"
 
@@ -8787,6 +8803,10 @@ msgstr "Herstel videoverbetering-instellingen naar de standaard?"
 
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "Herstel videoverbetering-instellingen naar de laatste configuratie?"
+
+#, fuzzy
+msgid "Reshare"
+msgstr "Reshare:"
 
 msgid "Reshare:"
 msgstr "Reshare:"
@@ -9738,6 +9758,14 @@ msgstr "Serie Nummer"
 
 msgid "Serv.Name"
 msgstr "Zender Naam"
+
+#, python-format
+msgid "Server Info ( Oscam-Version: %s )"
+msgstr ""
+
+#, fuzzy
+msgid "Server:"
+msgstr "Servers:"
 
 msgid "Servers"
 msgstr "Servers"
@@ -11607,9 +11635,6 @@ msgstr "Er zijn momenteel geen updates beschikbaar."
 
 msgid "There is a valid USB-flash drive detected in one "
 msgstr "Er is een geldige USB-stick gedetecteerd in één "
-
-msgid "There is no [webif] section in oscam.conf"
-msgstr "Er is geen [webif] sectie in oscam.conf"
 
 msgid "There is no signal to lock on !"
 msgstr "Er is geen signaal om te locken !"
@@ -14266,9 +14291,6 @@ msgstr "snel"
 msgid "feed status"
 msgstr "feedstatus"
 
-msgid "file oscam.conf could not be found"
-msgstr "bestand oscam.conf niet gevonden"
-
 msgid "file system type (auto): "
 msgstr "bestand systeem type (auto): "
 
@@ -14322,6 +14344,10 @@ msgstr "vrij"
 
 msgid "from"
 msgstr "van"
+
+#, fuzzy
+msgid "fstab Editor"
+msgstr "fstab-Editor"
 
 msgid "fstab restored!"
 msgstr "fstab hersteld!"
@@ -14566,6 +14592,9 @@ msgstr "muziek / ballet / dans (algemeen)"
 msgid "musical/opera"
 msgstr "musical / opera"
 
+msgid "n/a"
+msgstr ""
+
 msgid "nature/animals/environment"
 msgstr "natuur / dieren / milieu"
 
@@ -14732,6 +14761,10 @@ msgstr "origineel"
 
 msgid "original language"
 msgstr "orginele taal"
+
+#, fuzzy
+msgid "oscam webif disabled"
+msgstr "forceren gedeactiveerd"
 
 msgid "pass"
 msgstr "passage"

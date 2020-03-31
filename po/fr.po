@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 17:02+0100\n"
+"POT-Creation-Date: 2020-03-31 19:28+0200\n"
 "PO-Revision-Date: 2015-11-01 21:14+0100\n"
 "Last-Translator: Pr2 <dummy@dummy.com>\n"
 "Language-Team: french\n"
@@ -517,6 +517,10 @@ msgstr "%s %s"
 #, python-format
 msgid "%s %s free disk space"
 msgstr "%s %s espace disque libre"
+
+#, fuzzy, python-format
+msgid "%s ( %s Cards )"
+msgstr "%s (%s)\n"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -2000,11 +2004,12 @@ msgstr ""
 msgid "Bus: "
 msgstr "Bus: "
 
+#, fuzzy
+msgid "By OpenEight Image Team"
+msgstr "Par l’équipe de openATV"
+
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "Par défaut, le SNR sera affiché en dB (quand supporté par le tuner). Si activé, le SNR sera affiché en pourcentage."
-
-msgid "By openATV Image Team"
-msgstr "Par l’équipe de openATV"
 
 msgid "Bypass HDMI EDID checking"
 msgstr ""
@@ -2017,6 +2022,9 @@ msgstr "Bande C"
 
 msgid "CAID"
 msgstr "CAID"
+
+msgid "CAID:SrvID"
+msgstr ""
 
 msgid "CCcam Client Info"
 msgstr "Info client CCcam"
@@ -2429,6 +2437,10 @@ msgstr "Effacer le log"
 
 msgid "Clear playlist"
 msgstr "Effacer liste de lecture"
+
+#, python-format
+msgid "Client Info ( Oscam-Version: %s )"
+msgstr ""
 
 msgid "Client is streaming from this box!"
 msgstr ""
@@ -4898,6 +4910,10 @@ msgstr "Fréquence"
 msgid "Frequency & Channel"
 msgstr "Utiliser fréquence ou chaîne"
 
+#, fuzzy
+msgid "Frequency & Polarization"
+msgstr "Polarisation"
+
 msgid "Frequency bands"
 msgstr "Bandes fréquence"
 
@@ -5329,6 +5345,10 @@ msgstr ""
 msgid "Hong Kong"
 msgstr ""
 
+#, fuzzy
+msgid "Hops"
+msgstr "Hops:"
+
 msgid "Hops:"
 msgstr "Hops:"
 
@@ -5425,9 +5445,6 @@ msgstr ""
 
 msgid "IP server is enabled"
 msgstr ""
-
-msgid "IP-Address"
-msgstr "Adresse IP"
 
 msgid "IP:"
 msgstr "IP:"
@@ -6236,6 +6253,9 @@ msgstr "Verrouiller rapport"
 msgid "Lock:"
 msgstr "Verrouiller :"
 
+msgid "Log"
+msgstr ""
+
 msgid "Log results to /tmp"
 msgstr ""
 
@@ -6745,7 +6765,7 @@ msgid "Multiboot"
 msgstr "Multisat"
 
 #, python-format
-msgid "Multiboot Image created on: %s"
+msgid "Multiboot Image created at: %s"
 msgstr ""
 
 #, fuzzy
@@ -7073,15 +7093,6 @@ msgstr "Aucun index libre disponible"
 
 msgid "No free tuner!"
 msgstr "Aucun tuner de libre"
-
-msgid "No httpport defined in oscam.conf. This value is required!"
-msgstr "Pas de httport défini dans oscam.conf. Cette valeur est requise!"
-
-msgid "No httppwd defined in oscam.conf"
-msgstr "Pas de httppwd défini dans oscam.conf"
-
-msgid "No httpuser defined in oscam.conf"
-msgstr "Pas de httpuser défini dans oscam.conf"
 
 msgid "No network connection available."
 msgstr "Aucune connexion réseau disponible."
@@ -7485,6 +7496,10 @@ msgstr "Configuration Oscam Info"
 msgid "Oscam Info - Main Menu"
 msgstr "Menu principal d’Oscam Info"
 
+#, python-format
+msgid "Oscam Log ( Oscam-Version: %s )"
+msgstr ""
+
 msgid "OscamInfo"
 msgstr "OscamInfo"
 
@@ -7529,6 +7544,10 @@ msgstr ""
 #, fuzzy
 msgid "PGS file"
 msgstr "%d fichier"
+
+#, fuzzy
+msgid "PID"
+msgstr "PDC"
 
 msgid "PIN code needed"
 msgstr "Code Pin requis"
@@ -8743,6 +8762,10 @@ msgstr "Le renommage a échoué!"
 msgid "Rename name and description for new events"
 msgstr "Renommer le nom et le description pour les nouveaux événements"
 
+#, python-format
+msgid "Rename the file 'noforce' in the folder %s"
+msgstr ""
+
 msgid "Rename to:"
 msgstr "Renommé en:"
 
@@ -8817,6 +8840,10 @@ msgstr "Réinitialiser les paramètres d'amélioration vidéo aux valeurs par d�
 
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "Réinitialiser les paramètres d'amélioration vidéo sur votre dernière configuration ?"
+
+#, fuzzy
+msgid "Reshare"
+msgstr "Repartage:"
 
 msgid "Reshare:"
 msgstr "Repartage:"
@@ -9810,6 +9837,14 @@ msgstr "No de série"
 
 msgid "Serv.Name"
 msgstr "Nom Serv."
+
+#, python-format
+msgid "Server Info ( Oscam-Version: %s )"
+msgstr ""
+
+#, fuzzy
+msgid "Server:"
+msgstr "Serveurs:"
 
 msgid "Servers"
 msgstr "Serveurs"
@@ -11327,14 +11362,16 @@ msgstr ""
 msgid "Switch config"
 msgstr "Permutter configuration"
 
-msgid "Switch off the display during Standby Mode"
+#, fuzzy
+msgid "Switch the display on or off during Standby Mode"
+msgstr "Cette option vous permet de désactvier l’affichage."
+
+msgid "Switch the display on or off during Suspend Mode"
 msgstr ""
 
-msgid "Switch off the display during Suspend Mode"
-msgstr ""
-
-msgid "Switch off the display during operation"
-msgstr ""
+#, fuzzy
+msgid "Switch the display on or off during operation"
+msgstr "Cette option vous permet de désactvier l’affichage."
 
 msgid "Switch to TV mode"
 msgstr ""
@@ -11729,9 +11766,6 @@ msgstr "Il n'y a pas de mise à jour disponible."
 
 msgid "There is a valid USB-flash drive detected in one "
 msgstr ""
-
-msgid "There is no [webif] section in oscam.conf"
-msgstr "Il n’y a pas de section [webif] dans oscam.conf"
 
 msgid "There is no signal to lock on !"
 msgstr "Il n'y a aucun signal à vérouiller !"
@@ -12469,9 +12503,9 @@ msgstr ""
 "Cela prendra entre 4 et 15 minutes selon le système de fichiers utilisé et est entièrement automatique.\n"
 "Assurez-vous d’avoir d’abord inséré une clé usb avant de sélectionner USB."
 
-#, python-format
-msgid "USB Image created on: %s"
-msgstr ""
+#, fuzzy, python-format
+msgid "USB Image created at: %s"
+msgstr "Dernière mise à jour:\t%s"
 
 msgid "USB stick"
 msgstr "Clé USB"
@@ -13011,6 +13045,14 @@ msgstr "Voir liste extensions logiciels disponibles."
 
 msgid "View list of available system extensions"
 msgstr "Voir liste extensions des systèmes disponibles."
+
+#, fuzzy
+msgid "View or Edit your device mounts in etc/fstab."
+msgstr "Gérer vos points de montages"
+
+#, fuzzy
+msgid "View or edit fstab"
+msgstr "Restaurer fstab"
 
 msgid "View photos..."
 msgstr "Voir Photos..."
@@ -14056,7 +14098,7 @@ msgstr "et sélectionne la chaîne suivante"
 msgid "and select previous channel"
 msgstr "et sélectionne la chaîne précédente"
 
-msgid "and there is made an extra copy on:"
+msgid "and there is made an extra copy at:"
 msgstr ""
 
 msgid "are you sure to cancel all changes"
@@ -14426,9 +14468,6 @@ msgstr "rapide"
 msgid "feed status"
 msgstr "Statut du feed"
 
-msgid "file oscam.conf could not be found"
-msgstr "fichier oscam.conf ne peut pas être utilisé"
-
 msgid "file system type (auto): "
 msgstr "type de système de fichier (auto): "
 
@@ -14484,6 +14523,10 @@ msgstr "Libre"
 
 msgid "from"
 msgstr "de"
+
+#, fuzzy
+msgid "fstab Editor"
+msgstr "Editeur-fstab"
 
 msgid "fstab restored!"
 msgstr "fstab restauré!"
@@ -14733,6 +14776,9 @@ msgstr "Musique/Ballet/Danse (général)"
 msgid "musical/opera"
 msgstr "Musical/Opéra"
 
+msgid "n/a"
+msgstr ""
+
 msgid "nature/animals/environment"
 msgstr "Nature/Animaux/Environnement"
 
@@ -14893,11 +14939,19 @@ msgstr ""
 msgid "options mount file system (default): "
 msgstr "options de montage du système de fichier (par défaut): "
 
+#, fuzzy
+msgid "or use OnlineFlash in SoftwareManager"
+msgstr "Gestionnaire logiciel"
+
 msgid "original"
 msgstr "Original"
 
 msgid "original language"
 msgstr "Langue Originale"
+
+#, fuzzy
+msgid "oscam webif disabled"
+msgstr "Désactivé"
 
 msgid "pass"
 msgstr "Passe"
@@ -15361,6 +15415,9 @@ msgstr "Cet enregistrement"
 
 msgid "this service is protected by a parental control pin"
 msgstr "Ce service est protégé par un pin contrôle parental"
+
+msgid "to 'force' to flash this image without confirmation"
+msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "Commuter temps, chapitre, audio, info sous-titres"

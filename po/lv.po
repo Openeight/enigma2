@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 17:02+0100\n"
+"POT-Creation-Date: 2020-03-31 19:28+0200\n"
 "PO-Revision-Date: 2014-11-12 00:49+0200\n"
 "Last-Translator: Tapat <taapat@gmail.com>\n"
 "Language-Team: Taapat <taapat@gmail.com>\n"
@@ -515,6 +515,10 @@ msgstr ""
 #, python-format
 msgid "%s %s free disk space"
 msgstr "%s %s brīva vieta uz diska"
+
+#, fuzzy, python-format
+msgid "%s ( %s Cards )"
+msgstr "%s (%s)\n"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -1984,11 +1988,11 @@ msgstr ""
 msgid "Bus: "
 msgstr "Kopne: "
 
+msgid "By OpenEight Image Team"
+msgstr ""
+
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "Pēc noklusējuma SNR tiek attēlots dB (ja atļauj uztvērējs). Šis iestatījums ieslēgs SNR attēlošanu procentos."
-
-msgid "By openATV Image Team"
-msgstr ""
 
 msgid "Bypass HDMI EDID checking"
 msgstr ""
@@ -2000,6 +2004,9 @@ msgid "C-Band"
 msgstr "C-josla"
 
 msgid "CAID"
+msgstr ""
+
+msgid "CAID:SrvID"
 msgstr ""
 
 msgid "CCcam Client Info"
@@ -2407,6 +2414,10 @@ msgstr "Dzēst žurnālu"
 
 msgid "Clear playlist"
 msgstr "Dzēst repertuāru"
+
+#, python-format
+msgid "Client Info ( Oscam-Version: %s )"
+msgstr ""
 
 msgid "Client is streaming from this box!"
 msgstr ""
@@ -4836,6 +4847,10 @@ msgstr "Frekvence"
 msgid "Frequency & Channel"
 msgstr "Lietot frekvenci vai kanālu"
 
+#, fuzzy
+msgid "Frequency & Polarization"
+msgstr "Polarizācija"
+
 msgid "Frequency bands"
 msgstr "Frekvenču joslas"
 
@@ -5265,6 +5280,9 @@ msgstr ""
 msgid "Hong Kong"
 msgstr ""
 
+msgid "Hops"
+msgstr ""
+
 msgid "Hops:"
 msgstr ""
 
@@ -5358,9 +5376,6 @@ msgstr ""
 "Timeris '%s' izslēgts!"
 
 msgid "IP server is enabled"
-msgstr ""
-
-msgid "IP-Address"
 msgstr ""
 
 msgid "IP:"
@@ -6169,6 +6184,9 @@ msgstr "Noenkurošanās attiecība"
 msgid "Lock:"
 msgstr "Noenkuroties:"
 
+msgid "Log"
+msgstr ""
+
 msgid "Log results to /tmp"
 msgstr "Žurnalēt rezultātus /tmp"
 
@@ -6674,7 +6692,7 @@ msgid "Multiboot"
 msgstr "Daudzpavadoņu"
 
 #, python-format
-msgid "Multiboot Image created on: %s"
+msgid "Multiboot Image created at: %s"
 msgstr ""
 
 #, fuzzy
@@ -6990,15 +7008,6 @@ msgstr "Nav  pieiejami brīvi indeksi"
 
 msgid "No free tuner!"
 msgstr "Nav brīva uztvērēja!"
-
-msgid "No httpport defined in oscam.conf. This value is required!"
-msgstr ""
-
-msgid "No httppwd defined in oscam.conf"
-msgstr ""
-
-msgid "No httpuser defined in oscam.conf"
-msgstr ""
 
 msgid "No network connection available."
 msgstr "Tīkla savienojums nav pieejams."
@@ -7394,6 +7403,10 @@ msgstr ""
 msgid "Oscam Info - Main Menu"
 msgstr ""
 
+#, python-format
+msgid "Oscam Log ( Oscam-Version: %s )"
+msgstr ""
+
 msgid "OscamInfo"
 msgstr ""
 
@@ -7439,6 +7452,10 @@ msgstr ""
 #, fuzzy
 msgid "PGS file"
 msgstr "%d fails"
+
+#, fuzzy
+msgid "PID"
+msgstr "PDC"
 
 msgid "PIN code needed"
 msgstr "Vajadzīgs PIN kods"
@@ -8643,6 +8660,10 @@ msgstr ""
 msgid "Rename name and description for new events"
 msgstr "Jauniem notikumiem pārsaukt nosaukumu un aprakstu"
 
+#, python-format
+msgid "Rename the file 'noforce' in the folder %s"
+msgstr ""
+
 msgid "Rename to:"
 msgstr ""
 
@@ -8717,6 +8738,9 @@ msgstr "Atstatīt video uzlabošanas iestatījumus uz noklusējuma?"
 
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "Atstatīt video uzlabošanas iestatījumus uz pēdējiem konfigurētajiem?"
+
+msgid "Reshare"
+msgstr ""
 
 msgid "Reshare:"
 msgstr ""
@@ -9705,6 +9729,14 @@ msgstr ""
 
 msgid "Serv.Name"
 msgstr ""
+
+#, python-format
+msgid "Server Info ( Oscam-Version: %s )"
+msgstr ""
+
+#, fuzzy
+msgid "Server:"
+msgstr "Kanāls"
 
 msgid "Servers"
 msgstr ""
@@ -11199,13 +11231,13 @@ msgstr "Pārslēgt kanālu uz augšu"
 msgid "Switch config"
 msgstr ""
 
-msgid "Switch off the display during Standby Mode"
+msgid "Switch the display on or off during Standby Mode"
 msgstr ""
 
-msgid "Switch off the display during Suspend Mode"
+msgid "Switch the display on or off during Suspend Mode"
 msgstr ""
 
-msgid "Switch off the display during operation"
+msgid "Switch the display on or off during operation"
 msgstr ""
 
 msgid "Switch to TV mode"
@@ -11592,9 +11624,6 @@ msgid "There are no updates available."
 msgstr "Pašlaik atjauninājumi nav pieejami."
 
 msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
-msgid "There is no [webif] section in oscam.conf"
 msgstr ""
 
 msgid "There is no signal to lock on !"
@@ -12291,7 +12320,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "USB Image created on: %s"
+msgid "USB Image created at: %s"
 msgstr ""
 
 msgid "USB stick"
@@ -12832,6 +12861,12 @@ msgstr "Skatīt sarakstu ar pieejamiem programmatūras paplašinājumiem"
 
 msgid "View list of available system extensions"
 msgstr "Skatīt sarakstu ar pieejamiem sistēmas paplašinājumiem"
+
+msgid "View or Edit your device mounts in etc/fstab."
+msgstr ""
+
+msgid "View or edit fstab"
+msgstr ""
 
 msgid "View photos..."
 msgstr "Skatīt fotogrāfijas..."
@@ -13857,7 +13892,7 @@ msgstr "un izvēlēties nākamo kanālu"
 msgid "and select previous channel"
 msgstr "un izvēlēties iepriekšējo kanālu"
 
-msgid "and there is made an extra copy on:"
+msgid "and there is made an extra copy at:"
 msgstr ""
 
 msgid "are you sure to cancel all changes"
@@ -14225,9 +14260,6 @@ msgstr ""
 msgid "feed status"
 msgstr ""
 
-msgid "file oscam.conf could not be found"
-msgstr ""
-
 msgid "file system type (auto): "
 msgstr ""
 
@@ -14283,6 +14315,10 @@ msgstr "brīvs"
 
 msgid "from"
 msgstr "no"
+
+#, fuzzy
+msgid "fstab Editor"
+msgstr "Griešanas redaktors"
 
 msgid "fstab restored!"
 msgstr ""
@@ -14532,6 +14568,9 @@ msgstr "mūzika/balets/dejas (vispārīgi)"
 msgid "musical/opera"
 msgstr "mūzika/opera"
 
+msgid "n/a"
+msgstr ""
+
 msgid "nature/animals/environment"
 msgstr "daba/dzīvnieki/vide"
 
@@ -14688,11 +14727,18 @@ msgstr ""
 msgid "options mount file system (default): "
 msgstr ""
 
+msgid "or use OnlineFlash in SoftwareManager"
+msgstr ""
+
 msgid "original"
 msgstr "oriģināls"
 
 msgid "original language"
 msgstr "oriģinālā valoda"
+
+#, fuzzy
+msgid "oscam webif disabled"
+msgstr "izslēgts"
 
 msgid "pass"
 msgstr "šobrīd"
@@ -15155,6 +15201,9 @@ msgstr "šim ierakstam"
 
 msgid "this service is protected by a parental control pin"
 msgstr "šis kanāls ir aizsargāts ar vecāku kontroles PIN kodu"
+
+msgid "to 'force' to flash this image without confirmation"
+msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "Ie/izslēgt laiku, nodaļu, skaņu, subtitru informāciju"

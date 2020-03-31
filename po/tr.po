@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 OPLi-3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 17:02+0100\n"
+"POT-Creation-Date: 2020-03-31 19:28+0200\n"
 "PO-Revision-Date: 2020-03-31 19:25+0100\n"
 "Last-Translator: esmos\n"
 "Language-Team: esmos\n"
@@ -197,9 +197,6 @@ msgstr "    yanlış yedekleme hedefi "
 #, python-format
 msgid "  (%s x %s)"
 msgstr ""
-
-msgid "Configure your network settings, and press OK to start the scan"
-msgstr "Ağ ayarlarınızı yapın, ve taramayı başlatmak için OK tuşuna basın"
 
 msgid " (0 - all networks)"
 msgstr " (0 - tüm ağlar)"
@@ -498,6 +495,10 @@ msgstr ""
 #, python-format
 msgid "%s %s free disk space"
 msgstr "%s %s boş disk alanı"
+
+#, fuzzy, python-format
+msgid "%s ( %s Cards )"
+msgstr "%s (%s)\n"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -1495,6 +1496,7 @@ msgstr "Audio / Video ayarları"
 msgid "Audio PID"
 msgstr "Ses PID"
 
+#, python-format
 msgid "Audio PID%s, codec & lang"
 msgstr "Ses PID%s, kodek & dil"
 
@@ -1953,11 +1955,11 @@ msgstr ""
 msgid "Bus: "
 msgstr "Yol: "
 
+msgid "By OpenEight Image Team"
+msgstr ""
+
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "Varsayılan olarak; SNR, dB olarak (Tuner tarafından destekleniyorsa) gösterilecektir. Bu ayar SNR yerine yüzde işareti gösterir."
-
-msgid "By openATV Image Team"
-msgstr ""
 
 msgid "Bypass HDMI EDID checking"
 msgstr "HDMI EDID kontrolünü atla"
@@ -1969,6 +1971,9 @@ msgid "C-Band"
 msgstr "C-Bant"
 
 msgid "CAID"
+msgstr ""
+
+msgid "CAID:SrvID"
 msgstr ""
 
 msgid "CCcam Client Info"
@@ -2233,6 +2238,7 @@ msgstr "Pikon ve servis ismi"
 msgid "Channels and EPG"
 msgstr "Kanal ve EPG"
 
+#, python-format
 msgid "Channels from fallback tuner failed %s"
 msgstr "Yedek tunerden gelen kanallar başarısız oldu %s"
 
@@ -2371,6 +2377,10 @@ msgstr "Kayıt günlüğünü sil"
 
 msgid "Clear playlist"
 msgstr "Çalma listesini temizle"
+
+#, python-format
+msgid "Client Info ( Oscam-Version: %s )"
+msgstr ""
 
 msgid "Client is streaming from this box!"
 msgstr ""
@@ -3813,6 +3823,7 @@ msgstr "İndirilebilir eklentiler"
 msgid "Downloading"
 msgstr "İndiriliyor..."
 
+#, fuzzy, python-format
 msgid "Downloading %s"
 msgstr "İndiriliyor..."
 
@@ -3822,6 +3833,7 @@ msgstr "İndiriliyor..."
 msgid "Downloading plugin information. Please wait..."
 msgstr "Eklenti bilgileri indiriliyor. Lütfen bekle..."
 
+#, python-format
 msgid "Drivers:\t%s"
 msgstr "sürücü:\t%s"
 
@@ -4019,6 +4031,7 @@ msgstr "Kanal seçimi için OK tuşunu etkinleştir"
 msgid "Enable Swap at startup"
 msgstr "Başlangıçta Değiştir'i etkinleştir"
 
+#, python-format
 msgid "Enable Tuner %d"
 msgstr "Tuner Etkinleştir %d"
 
@@ -4120,6 +4133,7 @@ msgstr "bekleme kapatıldı görmezden zaman son"
 msgid "English"
 msgstr "İngilizce"
 
+#, python-format
 msgid "Enigma (re)starts: %d\n"
 msgstr "E2 başlatmalar: %d\n"
 
@@ -4769,6 +4783,9 @@ msgstr "Frekans"
 msgid "Frequency & Channel"
 msgstr "Kanal veya frekans kullan"
 
+msgid "Frequency & Polarization"
+msgstr "Frekans & Polarizasyon"
+
 msgid "Frequency bands"
 msgstr "Frekans bantları"
 
@@ -4790,6 +4807,7 @@ msgstr "Cuma"
 msgid "From :"
 msgstr "Gönderen :"
 
+#, fuzzy, python-format
 msgid "Frontprocessor version: %s"
 msgstr "Önişlemci sürümü: %d"
 
@@ -5195,6 +5213,9 @@ msgstr ""
 msgid "Hong Kong"
 msgstr ""
 
+msgid "Hops"
+msgstr ""
+
 msgid "Hops:"
 msgstr ""
 
@@ -5284,9 +5305,6 @@ msgid "IP server is disabled"
 msgstr ""
 
 msgid "IP server is enabled"
-msgstr ""
-
-msgid "IP-Address"
 msgstr ""
 
 msgid "IP:"
@@ -5396,6 +5414,7 @@ msgstr "Yazılım Güncelleme"
 msgid "Image creation failed - "
 msgstr ""
 
+#, python-format
 msgid "Image started:\t%s"
 msgstr "Kullanılan Imaj:\t%s"
 
@@ -6087,6 +6106,9 @@ msgstr "Oranı kilitleyin"
 msgid "Lock:"
 msgstr "Kilitli:"
 
+msgid "Log"
+msgstr ""
+
 msgid "Log results to /tmp"
 msgstr "Sonuçları şuraya kaydet /tmp"
 
@@ -6302,6 +6324,7 @@ msgstr "Menü = diğer işlevleri çağır ..."
 msgid "Menu config"
 msgstr "Menü yapılandırması"
 
+#, fuzzy, python-format
 msgid "Menusort (%s)"
 msgstr "Menü sıralaması"
 
@@ -6588,7 +6611,7 @@ msgid "Multiboot"
 msgstr "Çoklu uydu"
 
 #, python-format
-msgid "Multiboot Image created on: %s"
+msgid "Multiboot Image created at: %s"
 msgstr ""
 
 #, fuzzy
@@ -6907,15 +6930,6 @@ msgstr "Boş yer yok"
 
 msgid "No free tuner!"
 msgstr "Boş tuner yok!"
-
-msgid "No httpport defined in oscam.conf. This value is required!"
-msgstr ""
-
-msgid "No httppwd defined in oscam.conf"
-msgstr ""
-
-msgid "No httpuser defined in oscam.conf"
-msgstr ""
 
 msgid "No network connection available."
 msgstr "Uygun ağ bağlantısı yok."
@@ -7298,9 +7312,6 @@ msgstr "Seçenekler:"
 msgid "Orbital position"
 msgstr "Yörüngesel pozisyon"
 
-msgid "Frequency & Polarization"
-msgstr "Frekans & Polarizasyon"
-
 msgid "Ordinary"
 msgstr ""
 
@@ -7311,6 +7322,10 @@ msgid "Oscam Info - Configuration"
 msgstr ""
 
 msgid "Oscam Info - Main Menu"
+msgstr ""
+
+#, python-format
+msgid "Oscam Log ( Oscam-Version: %s )"
 msgstr ""
 
 msgid "OscamInfo"
@@ -7355,6 +7370,10 @@ msgstr ""
 #, fuzzy
 msgid "PGS file"
 msgstr "% d dosya"
+
+#, fuzzy
+msgid "PID"
+msgstr "PCR PID"
 
 msgid "PIN code needed"
 msgstr "PIN kodu gerekli"
@@ -8552,6 +8571,10 @@ msgstr ""
 msgid "Rename name and description for new events"
 msgstr ""
 
+#, python-format
+msgid "Rename the file 'noforce' in the folder %s"
+msgstr ""
+
 msgid "Rename to:"
 msgstr ""
 
@@ -8624,6 +8647,10 @@ msgstr "Görüntü iyileştirme ayarınız, sistem varsayılanına döndürüls�
 
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "Görüntü iyileştirme ayarlarınız, en son yapılandırmanıza döndürülsün mü?"
+
+#, fuzzy
+msgid "Reshare"
+msgstr "uShare"
 
 msgid "Reshare:"
 msgstr ""
@@ -9552,6 +9579,7 @@ msgstr "Sağlayıcı seçin ve taramayı başlatmak için OK tuşuna basın"
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr ""
 
+#, python-format
 msgid "Selected Image:\t%s"
 msgstr "Seçilen Imaj:\t%s"
 
@@ -9597,6 +9625,14 @@ msgstr ""
 
 msgid "Serv.Name"
 msgstr ""
+
+#, python-format
+msgid "Server Info ( Oscam-Version: %s )"
+msgstr ""
+
+#, fuzzy
+msgid "Server:"
+msgstr "Kanal"
 
 msgid "Servers"
 msgstr ""
@@ -10389,6 +10425,7 @@ msgstr "Boyut: "
 msgid "Skin"
 msgstr "Arayüz"
 
+#, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "Arayüz cözünürlük: %s (%sx%s)\n"
 
@@ -11483,9 +11520,6 @@ msgstr "Yeni güncelleme yok."
 msgid "There is a valid USB-flash drive detected in one "
 msgstr ""
 
-msgid "There is no [webif] section in oscam.conf"
-msgstr ""
-
 msgid "There is no signal to lock on !"
 msgstr "Kilitlenecek hiçbir sinyal yok!"
 
@@ -12174,9 +12208,9 @@ msgstr ""
 "Bu, kullanılan dosya sistemine bağlı olarak 3 ila 15 dakika sürer ve tam otomatiktir.\n"
 "USB'yi seçmeden önce bir USB flash sürücü taktığınızdan emin olun."
 
-#, python-format
-msgid "USB Image created on: %s"
-msgstr ""
+#, fuzzy, python-format
+msgid "USB Image created at: %s"
+msgstr "Kullanılan Imaj:\t%s"
 
 msgid "USB stick"
 msgstr "USB bellek"
@@ -12707,6 +12741,13 @@ msgstr "Yazılım eklentilerini listele"
 
 msgid "View list of available system extensions"
 msgstr "Sistem eklentilerini listele"
+
+msgid "View or Edit your device mounts in etc/fstab."
+msgstr ""
+
+#, fuzzy
+msgid "View or edit fstab"
+msgstr "Fstab'ı düzenle"
 
 msgid "View photos..."
 msgstr "Fotoğrafları göster ..."
@@ -13728,7 +13769,7 @@ msgstr "ve sonraki kanalı seç"
 msgid "and select previous channel"
 msgstr "ve önceki kanalı seç"
 
-msgid "and there is made an extra copy on:"
+msgid "and there is made an extra copy at:"
 msgstr ""
 
 msgid "are you sure to cancel all changes"
@@ -14093,9 +14134,6 @@ msgstr "hızlı"
 msgid "feed status"
 msgstr "besleme durumu"
 
-msgid "file oscam.conf could not be found"
-msgstr ""
-
 msgid "file system type (auto): "
 msgstr ""
 
@@ -14151,6 +14189,10 @@ msgstr "boş"
 
 msgid "from"
 msgstr "itibaren"
+
+#, fuzzy
+msgid "fstab Editor"
+msgstr "fstab-Editör"
 
 msgid "fstab restored!"
 msgstr "fstab geri yüklendi!"
@@ -14399,6 +14441,9 @@ msgstr "müzik/bale/dans (genel)"
 msgid "musical/opera"
 msgstr "müzikal/opera"
 
+msgid "n/a"
+msgstr ""
+
 msgid "nature/animals/environment"
 msgstr "doğa / hayvan / çevre"
 
@@ -14555,11 +14600,18 @@ msgstr ""
 msgid "options mount file system (default): "
 msgstr ""
 
+msgid "or use OnlineFlash in SoftwareManager"
+msgstr ""
+
 msgid "original"
 msgstr "orjinal"
 
 msgid "original language"
 msgstr "orjinal dil"
+
+#, fuzzy
+msgid "oscam webif disabled"
+msgstr "devre dışı"
 
 msgid "pass"
 msgstr "pass"
@@ -15016,6 +15068,9 @@ msgstr "bu kaydın"
 
 msgid "this service is protected by a parental control pin"
 msgstr "bu kanal ebeveyn kontrol şifresiyle korunuyor"
+
+msgid "to 'force' to flash this image without confirmation"
+msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "geçiş süresi, bölüm, ses, altyazı bilgileri"

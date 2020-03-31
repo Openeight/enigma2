@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Slovenia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 17:02+0100\n"
+"POT-Creation-Date: 2020-03-31 19:28+0200\n"
 "PO-Revision-Date: 2015-08-30 09:00+0200\n"
 "Last-Translator: Taykun345 <support@satnigmo.com>\n"
 "Language-Team: Satnigmo <support@satnigmo.com>\n"
@@ -549,6 +549,11 @@ msgstr ""
 #, python-format
 msgid "%s %s free disk space"
 msgstr "%s %s praznega prostora na disku"
+
+#
+#, fuzzy, python-format
+msgid "%s ( %s Cards )"
+msgstr "%s (%s)\n"
 
 #
 #, python-format
@@ -2196,11 +2201,11 @@ msgstr ""
 msgid "Bus: "
 msgstr "Vodilo:"
 
+msgid "By OpenEight Image Team"
+msgstr ""
+
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "V osnovi je SNR vrednost prikazana v dB (če je to podprto). Ta nastavitev pa omogoči, da se SNR vrednost prikazuje v odstotkih."
-
-msgid "By openATV Image Team"
-msgstr ""
 
 msgid "Bypass HDMI EDID checking"
 msgstr ""
@@ -2214,6 +2219,9 @@ msgid "C-Band"
 msgstr "C-Band"
 
 msgid "CAID"
+msgstr ""
+
+msgid "CAID:SrvID"
 msgstr ""
 
 msgid "CCcam Client Info"
@@ -2656,6 +2664,10 @@ msgstr "Izbris dnevnika"
 #
 msgid "Clear playlist"
 msgstr "Počisti seznam predvajanja"
+
+#, python-format
+msgid "Client Info ( Oscam-Version: %s )"
+msgstr ""
 
 msgid "Client is streaming from this box!"
 msgstr ""
@@ -5349,6 +5361,11 @@ msgid "Frequency & Channel"
 msgstr "Uporabi frekvenco ali kanal"
 
 #
+#, fuzzy
+msgid "Frequency & Polarization"
+msgstr "Polarizacija"
+
+#
 msgid "Frequency bands"
 msgstr "Frekvenčni pasovi"
 
@@ -5815,6 +5832,9 @@ msgstr ""
 msgid "Hong Kong"
 msgstr ""
 
+msgid "Hops"
+msgstr ""
+
 msgid "Hops:"
 msgstr ""
 
@@ -5915,9 +5935,6 @@ msgstr ""
 "Časovnik '%s' je izklopljen!"
 
 msgid "IP server is enabled"
-msgstr ""
-
-msgid "IP-Address"
 msgstr ""
 
 msgid "IP:"
@@ -6821,6 +6838,9 @@ msgstr ""
 msgid "Lock:"
 msgstr "Zakleni:"
 
+msgid "Log"
+msgstr ""
+
 msgid "Log results to /tmp"
 msgstr ""
 
@@ -7378,7 +7398,7 @@ msgid "Multiboot"
 msgstr "Multisat"
 
 #, python-format
-msgid "Multiboot Image created on: %s"
+msgid "Multiboot Image created at: %s"
 msgstr ""
 
 #, fuzzy
@@ -7734,15 +7754,6 @@ msgstr ""
 #
 msgid "No free tuner!"
 msgstr "Ni prostega kanalnika!"
-
-msgid "No httpport defined in oscam.conf. This value is required!"
-msgstr ""
-
-msgid "No httppwd defined in oscam.conf"
-msgstr ""
-
-msgid "No httpuser defined in oscam.conf"
-msgstr ""
 
 #
 msgid "No network connection available."
@@ -8181,6 +8192,10 @@ msgstr ""
 msgid "Oscam Info - Main Menu"
 msgstr ""
 
+#, python-format
+msgid "Oscam Log ( Oscam-Version: %s )"
+msgstr ""
+
 msgid "OscamInfo"
 msgstr ""
 
@@ -8227,6 +8242,10 @@ msgstr ""
 #, fuzzy
 msgid "PGS file"
 msgstr "%d datoteka"
+
+#, fuzzy
+msgid "PID"
+msgstr "PLP ID"
 
 #
 msgid "PIN code needed"
@@ -9623,6 +9642,10 @@ msgstr ""
 msgid "Rename name and description for new events"
 msgstr "Preimenuj ime in opis za nove dogodke"
 
+#, python-format
+msgid "Rename the file 'noforce' in the folder %s"
+msgstr ""
+
 msgid "Rename to:"
 msgstr ""
 
@@ -9706,6 +9729,9 @@ msgstr "Želite ponastaviti napredne video nastavitve?"
 #
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "Želite uporabiti video nastavitve, ki ste jih uporabljali nazadnje?"
+
+msgid "Reshare"
+msgstr ""
 
 msgid "Reshare:"
 msgstr ""
@@ -10824,6 +10850,15 @@ msgstr ""
 
 msgid "Serv.Name"
 msgstr ""
+
+#, python-format
+msgid "Server Info ( Oscam-Version: %s )"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Server:"
+msgstr "Informacije o trenutnem kanalu"
 
 msgid "Servers"
 msgstr ""
@@ -12492,13 +12527,13 @@ msgstr "Preklop na naslednji kanal"
 msgid "Switch config"
 msgstr ""
 
-msgid "Switch off the display during Standby Mode"
+msgid "Switch the display on or off during Standby Mode"
 msgstr ""
 
-msgid "Switch off the display during Suspend Mode"
+msgid "Switch the display on or off during Suspend Mode"
 msgstr ""
 
-msgid "Switch off the display during operation"
+msgid "Switch the display on or off during operation"
 msgstr ""
 
 msgid "Switch to TV mode"
@@ -12927,9 +12962,6 @@ msgid "There are no updates available."
 msgstr "Nadgradnja ni na voljo."
 
 msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
-msgid "There is no [webif] section in oscam.conf"
 msgstr ""
 
 msgid "There is no signal to lock on !"
@@ -13696,7 +13728,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "USB Image created on: %s"
+msgid "USB Image created at: %s"
 msgstr ""
 
 #
@@ -14296,6 +14328,12 @@ msgstr "Ogled seznama software vtičnikov"
 #
 msgid "View list of available system extensions"
 msgstr "Ogled seznama obstoječih sistemskih vtičnikov"
+
+msgid "View or Edit your device mounts in etc/fstab."
+msgstr ""
+
+msgid "View or edit fstab"
+msgstr ""
 
 #
 msgid "View photos..."
@@ -15405,7 +15443,7 @@ msgstr "in izberi naslednji kanal"
 msgid "and select previous channel"
 msgstr "in izberi prejšnji kanal"
 
-msgid "and there is made an extra copy on:"
+msgid "and there is made an extra copy at:"
 msgstr ""
 
 msgid "are you sure to cancel all changes"
@@ -15820,9 +15858,6 @@ msgstr ""
 msgid "feed status"
 msgstr ""
 
-msgid "file oscam.conf could not be found"
-msgstr ""
-
 msgid "file system type (auto): "
 msgstr ""
 
@@ -15885,6 +15920,11 @@ msgstr "prosto"
 
 msgid "from"
 msgstr "od"
+
+#
+#, fuzzy
+msgid "fstab Editor"
+msgstr "Izhod iz urejevalnika"
 
 msgid "fstab restored!"
 msgstr ""
@@ -16169,6 +16209,9 @@ msgstr ""
 msgid "musical/opera"
 msgstr ""
 
+msgid "n/a"
+msgstr ""
+
 msgid "nature/animals/environment"
 msgstr ""
 
@@ -16345,11 +16388,19 @@ msgstr ""
 msgid "options mount file system (default): "
 msgstr ""
 
+msgid "or use OnlineFlash in SoftwareManager"
+msgstr ""
+
 msgid "original"
 msgstr "originalno"
 
 msgid "original language"
 msgstr "originalni jezik"
+
+#
+#, fuzzy
+msgid "oscam webif disabled"
+msgstr "onemogočeno"
 
 #
 msgid "pass"
@@ -16866,6 +16917,9 @@ msgstr "to snemanje"
 #
 msgid "this service is protected by a parental control pin"
 msgstr "kanal je zaščiten s PIN kodo"
+
+msgid "to 'force' to flash this image without confirmation"
+msgstr ""
 
 #
 msgid "toggle time, chapter, audio, subtitle info"

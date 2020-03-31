@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 17:02+0100\n"
+"POT-Creation-Date: 2020-03-31 19:28+0200\n"
 "PO-Revision-Date: 2016-04-30 11:17+0200\n"
 "Last-Translator: Nicker <nickersk@gmail.com>\n"
 "Language-Team: \n"
@@ -515,6 +515,10 @@ msgstr ""
 #, python-format
 msgid "%s %s free disk space"
 msgstr "%s %s voľného miesta na disku"
+
+#, fuzzy, python-format
+msgid "%s ( %s Cards )"
+msgstr "%s (%s)\n"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -1983,11 +1987,11 @@ msgstr ""
 msgid "Bus: "
 msgstr "Zbernica:"
 
+msgid "By OpenEight Image Team"
+msgstr ""
+
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "Predvolene je SNR zobrazené v dB (ak je podporované tunerom). Toto nastavenie zmení zobrazenie SNR na percentá."
-
-msgid "By openATV Image Team"
-msgstr ""
 
 msgid "Bypass HDMI EDID checking"
 msgstr ""
@@ -1999,6 +2003,9 @@ msgid "C-Band"
 msgstr "Pásmo C"
 
 msgid "CAID"
+msgstr ""
+
+msgid "CAID:SrvID"
 msgstr ""
 
 msgid "CCcam Client Info"
@@ -2406,6 +2413,10 @@ msgstr "Vymazať log"
 
 msgid "Clear playlist"
 msgstr "vymazať zoznam prehrávania"
+
+#, python-format
+msgid "Client Info ( Oscam-Version: %s )"
+msgstr ""
 
 msgid "Client is streaming from this box!"
 msgstr ""
@@ -4837,6 +4848,10 @@ msgstr "Kmitočet"
 msgid "Frequency & Channel"
 msgstr "Použiť frekvenciu alebo kanál"
 
+#, fuzzy
+msgid "Frequency & Polarization"
+msgstr "Polarizácia"
+
 msgid "Frequency bands"
 msgstr "Kmitočtové pásma"
 
@@ -5266,6 +5281,9 @@ msgstr ""
 msgid "Hong Kong"
 msgstr ""
 
+msgid "Hops"
+msgstr ""
+
 msgid "Hops:"
 msgstr ""
 
@@ -5359,9 +5377,6 @@ msgstr ""
 "Časovač '%s' zakázaný!"
 
 msgid "IP server is enabled"
-msgstr ""
-
-msgid "IP-Address"
 msgstr ""
 
 msgid "IP:"
@@ -6170,6 +6185,9 @@ msgstr "Uzamknúť pomer strán"
 msgid "Lock:"
 msgstr "Zámok:"
 
+msgid "Log"
+msgstr ""
+
 msgid "Log results to /tmp"
 msgstr "Logovať výsledky do /tmp"
 
@@ -6675,7 +6693,7 @@ msgid "Multiboot"
 msgstr "Viac satelitov"
 
 #, python-format
-msgid "Multiboot Image created on: %s"
+msgid "Multiboot Image created at: %s"
 msgstr ""
 
 #, fuzzy
@@ -6991,15 +7009,6 @@ msgstr "Žiadny voľný index k dispozícii"
 
 msgid "No free tuner!"
 msgstr "Nie je voľný tuner!"
-
-msgid "No httpport defined in oscam.conf. This value is required!"
-msgstr ""
-
-msgid "No httppwd defined in oscam.conf"
-msgstr ""
-
-msgid "No httpuser defined in oscam.conf"
-msgstr ""
 
 msgid "No network connection available."
 msgstr "Nie je dostupné sieťové pripojenie."
@@ -7395,6 +7404,10 @@ msgstr ""
 msgid "Oscam Info - Main Menu"
 msgstr ""
 
+#, python-format
+msgid "Oscam Log ( Oscam-Version: %s )"
+msgstr ""
+
 msgid "OscamInfo"
 msgstr ""
 
@@ -7440,6 +7453,10 @@ msgstr ""
 #, fuzzy
 msgid "PGS file"
 msgstr "%d súbor"
+
+#, fuzzy
+msgid "PID"
+msgstr "PDC"
 
 msgid "PIN code needed"
 msgstr "Je vyžadovaný PIN"
@@ -8645,6 +8662,10 @@ msgstr ""
 msgid "Rename name and description for new events"
 msgstr "Premenujte názov a popis pre nové relácie"
 
+#, python-format
+msgid "Rename the file 'noforce' in the folder %s"
+msgstr ""
+
 msgid "Rename to:"
 msgstr ""
 
@@ -8717,6 +8738,9 @@ msgstr "Vrátiť rozšírené nastavenia obrazu na systémové predvolené hodno
 
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "Vrátiť rozšírené nastavenia obrazu na poslednú konfiguráciu?"
+
+msgid "Reshare"
+msgstr ""
 
 msgid "Reshare:"
 msgstr ""
@@ -9705,6 +9729,14 @@ msgstr ""
 
 msgid "Serv.Name"
 msgstr ""
+
+#, python-format
+msgid "Server Info ( Oscam-Version: %s )"
+msgstr ""
+
+#, fuzzy
+msgid "Server:"
+msgstr "O stanici"
 
 msgid "Servers"
 msgstr ""
@@ -11199,13 +11231,13 @@ msgstr "Prepnúť kanál dopredu"
 msgid "Switch config"
 msgstr ""
 
-msgid "Switch off the display during Standby Mode"
+msgid "Switch the display on or off during Standby Mode"
 msgstr ""
 
-msgid "Switch off the display during Suspend Mode"
+msgid "Switch the display on or off during Suspend Mode"
 msgstr ""
 
-msgid "Switch off the display during operation"
+msgid "Switch the display on or off during operation"
 msgstr ""
 
 msgid "Switch to TV mode"
@@ -11595,9 +11627,6 @@ msgid "There are no updates available."
 msgstr "Nie sú dostupné žiadne aktualizácie."
 
 msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
-msgid "There is no [webif] section in oscam.conf"
 msgstr ""
 
 msgid "There is no signal to lock on !"
@@ -12294,7 +12323,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "USB Image created on: %s"
+msgid "USB Image created at: %s"
 msgstr ""
 
 msgid "USB stick"
@@ -12833,6 +12862,12 @@ msgstr "Zobraziť zoznam dostupných softvérových rozšírení"
 
 msgid "View list of available system extensions"
 msgstr "Zobraziť zoznam dostupných systémových rozšírení"
+
+msgid "View or Edit your device mounts in etc/fstab."
+msgstr ""
+
+msgid "View or edit fstab"
+msgstr ""
 
 msgid "View photos..."
 msgstr "Prezerať fotografie..."
@@ -13858,7 +13893,7 @@ msgstr "a vybrať nasledujúci kanál"
 msgid "and select previous channel"
 msgstr "a vybrať predchádzajúci kanál"
 
-msgid "and there is made an extra copy on:"
+msgid "and there is made an extra copy at:"
 msgstr ""
 
 msgid "are you sure to cancel all changes"
@@ -14226,9 +14261,6 @@ msgstr ""
 msgid "feed status"
 msgstr ""
 
-msgid "file oscam.conf could not be found"
-msgstr ""
-
 msgid "file system type (auto): "
 msgstr ""
 
@@ -14284,6 +14316,10 @@ msgstr "voľných"
 
 msgid "from"
 msgstr "z"
+
+#, fuzzy
+msgid "fstab Editor"
+msgstr "Editor strihov..."
 
 msgid "fstab restored!"
 msgstr ""
@@ -14533,6 +14569,9 @@ msgstr "hudba/balet/tanec (všeobecne)"
 msgid "musical/opera"
 msgstr "muzikál/opera"
 
+msgid "n/a"
+msgstr ""
+
 msgid "nature/animals/environment"
 msgstr "príroda/zvieratá/životné prostredie"
 
@@ -14689,11 +14728,18 @@ msgstr ""
 msgid "options mount file system (default): "
 msgstr ""
 
+msgid "or use OnlineFlash in SoftwareManager"
+msgstr ""
+
 msgid "original"
 msgstr "pôvodná"
 
 msgid "original language"
 msgstr "pôvodný jazyk"
+
+#, fuzzy
+msgid "oscam webif disabled"
+msgstr "zakázané"
 
 msgid "pass"
 msgstr "prechod"
@@ -15156,6 +15202,9 @@ msgstr "táto nahrávka"
 
 msgid "this service is protected by a parental control pin"
 msgstr "táto stanica je chránená rodičovskou kontrolou"
+
+msgid "to 'force' to flash this image without confirmation"
+msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "prepnúť informácie medzi časom, kapitolou, zvukovou stopou a titulkami"

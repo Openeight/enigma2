@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-12 20:07+0100\n"
+"POT-Creation-Date: 2020-03-31 19:28+0200\n"
 "PO-Revision-Date: 2020-03-27 19:14+0100\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: OpenEight <https://octagon-forum.eu>\n"
@@ -159,12 +159,6 @@ msgid ""
 msgstr ""
 "\n"
 "Anzeigen, Installieren und Entfernen verfügbarer oder installierter Pakete."
-
-msgid "View or edit fstab"
-msgstr "Zeige oder bearbeite die /etc/fstab"
-
-msgid "View or Edit your device mounts in etc/fstab."
-msgstr "Geräte Einhängepunkte (Mounts) in der /etc/fstab anzeigen oder bearbeiten."
 
 msgid ""
 "\n"
@@ -537,6 +531,10 @@ msgstr "%s %s"
 #, python-format
 msgid "%s %s free disk space"
 msgstr "%s %s freier Festplattenspeicher"
+
+#, fuzzy, python-format
+msgid "%s ( %s Cards )"
+msgstr "%s (%s)\n"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -1349,14 +1347,14 @@ msgstr "Auch in Standby"
 msgid "Alternative"
 msgstr "Alternativen hinzufügen"
 
+msgid "Alternative URL for images listed on FlashImage"
+msgstr "Alternative URL für Images gelistet in \"Flashe Image\""
+
 msgid "Alternative numbering mode"
 msgstr "Alternativer Nummerierungs-Modus"
 
 msgid "Alternative services tuner priority"
 msgstr "Tuner-Priorität bei alternativen Kanälen"
-
-msgid "Alternative URL for images listed on FlashImage"
-msgstr "Alternative URL für Images gelistet in \"Flashe Image\""
 
 msgid "Always ask"
 msgstr "Immer nachfragen"
@@ -1544,9 +1542,6 @@ msgstr ""
 
 msgid "Audio"
 msgstr "Ton"
-
-msgid "AudioSelection"
-msgstr "Ton-Auswahl"
 
 msgid "Audio / Video"
 msgstr "Audio / Video"
@@ -2026,6 +2021,9 @@ msgstr "C-Band"
 msgid "CAID"
 msgstr "CAID"
 
+msgid "CAID:SrvID"
+msgstr ""
+
 msgid "CCcam Client Info"
 msgstr "CCcam Client Info"
 
@@ -2428,6 +2426,10 @@ msgstr "Log löschen"
 
 msgid "Clear playlist"
 msgstr "Wiedergabeliste leeren"
+
+#, python-format
+msgid "Client Info ( Oscam-Version: %s )"
+msgstr ""
 
 msgid "Client is streaming from this box!"
 msgstr "Ein Client streamt von der Box !"
@@ -4185,6 +4187,7 @@ msgstr "Endzeit kein Wechsel vom Standby in den Deep-Standby"
 msgid "English"
 msgstr "Englisch"
 
+#, python-format
 msgid "Enigma (re)starts: %d\n"
 msgstr "Enigma Neustarts: %d\n"
 
@@ -4858,6 +4861,7 @@ msgstr "Freitag"
 msgid "From :"
 msgstr "Von:"
 
+#, python-format
 msgid "Frontprocessor version: %s"
 msgstr "Frontprozessor-Version: %s"
 
@@ -5188,9 +5192,6 @@ msgstr "Festplatte ist nicht im Ruhemodus, sie ist möglicherweise in Verwendung
 msgid "Hdmi CEC"
 msgstr ""
 
-msgid "HDMI CEC Setup"
-msgstr "HDMI CEC Einstellungen"
-
 msgid "Heard Island and McDonald Islands"
 msgstr ""
 
@@ -5267,6 +5268,10 @@ msgstr ""
 
 msgid "Hong Kong"
 msgstr ""
+
+#, fuzzy
+msgid "Hops"
+msgstr "Hops:"
 
 msgid "Hops:"
 msgstr "Hops:"
@@ -5354,9 +5359,6 @@ msgstr "IP-Server ist deaktiviert"
 
 msgid "IP server is enabled"
 msgstr "IP-Server ist aktiviert"
-
-msgid "IP-Address"
-msgstr "IP-Adresse"
 
 msgid "IP:"
 msgstr "IP:"
@@ -5463,6 +5465,7 @@ msgstr "Image Aktualisierung"
 msgid "Image creation failed - "
 msgstr ""
 
+#, python-format
 msgid "Image started:\t%s"
 msgstr "Image gestartet:\t%s"
 
@@ -6155,6 +6158,9 @@ msgstr "Signalverhältnis"
 msgid "Lock:"
 msgstr "Signal:"
 
+msgid "Log"
+msgstr ""
+
 msgid "Log results to /tmp"
 msgstr "Protokollieren Sie die Ergebnisse in /tmp"
 
@@ -6372,6 +6378,7 @@ msgstr ""
 msgid "Menu config"
 msgstr "Menü Konfiguration"
 
+#, python-format
 msgid "Menusort (%s)"
 msgstr "Menüsortierung (%s)"
 
@@ -6735,9 +6742,6 @@ msgstr "DNS-Einstellungen"
 msgid "Nameserver setup"
 msgstr "DNS-Einstellungen"
 
-msgid "NameserverSetup"
-msgstr "Nameserver Einstellungen"
-
 msgid "Namespace"
 msgstr "Namensraum"
 
@@ -6799,9 +6803,6 @@ msgid "Network configuration"
 msgstr "Netzwerk Konfiguration"
 
 msgid "Network configuration..."
-msgstr "Netzwerk Konfiguration..."
-
-msgid "Network Configuration..."
 msgstr "Netzwerk Konfiguration..."
 
 msgid "Network mount"
@@ -6991,15 +6992,6 @@ msgstr "Kein freier Index verfügbar"
 
 msgid "No free tuner!"
 msgstr "Kein freier Tuner"
-
-msgid "No httpport defined in oscam.conf. This value is required!"
-msgstr "Kein http-Port in der oscam.conf definiert. Dieser Wert ist erforderlich!"
-
-msgid "No httppwd defined in oscam.conf"
-msgstr "Kein http-Passwort in der oscam.conf definiert"
-
-msgid "No httpuser defined in oscam.conf"
-msgstr "Kein http-Benutzer in der oscam.conf definiert"
 
 msgid "No network connection available."
 msgstr "Keine Netzwerkverbindung verfügbar."
@@ -7400,6 +7392,10 @@ msgstr "Oscam Info - Konfiguration"
 msgid "Oscam Info - Main Menu"
 msgstr "Oscam Info - Hauptmenü"
 
+#, python-format
+msgid "Oscam Log ( Oscam-Version: %s )"
+msgstr ""
+
 msgid "OscamInfo"
 msgstr "Oscam Info"
 
@@ -7442,6 +7438,10 @@ msgstr ""
 #, fuzzy
 msgid "PGS file"
 msgstr "%d Datei"
+
+#, fuzzy
+msgid "PID"
+msgstr "PLP ID"
 
 msgid "PIN code needed"
 msgstr "PIN Code benötigt"
@@ -8713,6 +8713,10 @@ msgstr "Erweiterte A/V-Einstellungen auf Standardwerte zurücksetzten?"
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "Erweiterte A/V-Einstellungen auf ihre letzte Konfiguration zurücksetzen?"
 
+#, fuzzy
+msgid "Reshare"
+msgstr "Reshare:"
+
 msgid "Reshare:"
 msgstr "Reshare:"
 
@@ -8812,6 +8816,7 @@ msgstr ""
 msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
 msgstr "Wiederherstellen der Einstellungen aus einer Sicherung. Nach der Wiederherstellung wird die Box neu gestartet, um die neuen Einstellungen zu aktivieren."
 
+#, fuzzy, python-format
 msgid "Restoreing:  %s"
 msgstr "Wiederherstellen der Einstellungen"
 
@@ -9495,9 +9500,6 @@ msgstr ""
 msgid "Select movie"
 msgstr "Filmauswahl"
 
-msgid "Select Network Adapter"
-msgstr "Netzwerkadapter wählen"
-
 msgid "Select path for logfile"
 msgstr "Pfad für die Protokolldatei auswählen"
 
@@ -9628,6 +9630,7 @@ msgstr "Bitte wählen Sie den Provider aus und bestätigen Sie mit OK, um die Su
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Wählen Sie Ihre Region. Wenn nicht verfügbar ändern Sie 'Land' in 'Alle' und wählen Sie eine der Standardalternativen."
 
+#, python-format
 msgid "Selected Image:\t%s"
 msgstr "Ausgewähltes Image:\t% s"
 
@@ -9672,6 +9675,14 @@ msgstr "Seriennummer"
 
 msgid "Serv.Name"
 msgstr "Servername"
+
+#, python-format
+msgid "Server Info ( Oscam-Version: %s )"
+msgstr ""
+
+#, fuzzy
+msgid "Server:"
+msgstr "Server:"
 
 msgid "Servers"
 msgstr "Server"
@@ -10354,6 +10365,10 @@ msgstr "Fenster zeigen/verbergen"
 msgid "Shows Plugins Browser. Here you can setup installed Plugins."
 msgstr "Zeigt den Plugin Browser (Erweiterungen). Hier können die installierten Plugins konfiguriert werden."
 
+#, fuzzy
+msgid "Shows available Plugins. Here you can download and install them."
+msgstr "Zeige verfügbare Erweiterungen, zum Downloaden und Installieren."
+
 msgid "Shows available plugins. Here you can download and install them."
 msgstr "Zeige verfügbare Erweiterungen, zum Downloaden und Installieren."
 
@@ -10447,6 +10462,7 @@ msgstr "Größe:"
 msgid "Skin"
 msgstr "Skin Auswahl"
 
+#, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "Skin Auflösung: %s (%sx%s)\n"
 
@@ -11558,9 +11574,6 @@ msgstr "Es sind keine Updates verfügbar."
 msgid "There is a valid USB-flash drive detected in one "
 msgstr "Gültiges USB-Flashlaufwerk gefunden "
 
-msgid "There is no [webif] section in oscam.conf"
-msgstr "Es gibt keine [webif] Sektion in der oscam.conf"
-
 msgid "There is no signal to lock on !"
 msgstr "Es liegt kein Signal an !"
 
@@ -12271,6 +12284,7 @@ msgstr ""
 "Stellen Sie sicher, dass ein USB-Speichermedium angeschlossen ist\n"
 "bevor Sie USB wählen."
 
+#, python-format
 msgid "USB Image created at: %s"
 msgstr "Letztes Update:\t%s"
 
@@ -12803,6 +12817,12 @@ msgstr "Eine Liste der verfügbaren Software-Erweiterungen anzeigen."
 msgid "View list of available system extensions"
 msgstr "Eine Liste der verfügbaren System-Erweiterungen anzeigen."
 
+msgid "View or Edit your device mounts in etc/fstab."
+msgstr "Geräte Einhängepunkte (Mounts) in der /etc/fstab anzeigen oder bearbeiten."
+
+msgid "View or edit fstab"
+msgstr "Zeige oder bearbeite die /etc/fstab"
+
 msgid "View photos..."
 msgstr "Photos ansehen"
 
@@ -12820,9 +12840,6 @@ msgstr ""
 
 msgid "Virtual KeyBoard Functions"
 msgstr "Virtuelle Tastatur Funktionen"
-
-msgid "Virtual KeyBoard"
-msgstr "Virtuelle Tastatur"
 
 msgid "Virtual KeyBoard Text:"
 msgstr "Virtuelle Tastatur Text:"
@@ -14210,9 +14227,6 @@ msgstr "schnell"
 msgid "feed status"
 msgstr "Feed Status"
 
-msgid "file oscam.conf could not be found"
-msgstr "Datei oscam.conf wurde nicht gefunden-"
-
 msgid "file system type (auto): "
 msgstr ""
 
@@ -14268,6 +14282,10 @@ msgstr "Frei"
 
 msgid "from"
 msgstr "von"
+
+#, fuzzy
+msgid "fstab Editor"
+msgstr "fstab Editor"
 
 msgid "fstab restored!"
 msgstr "/etc/fstab wiederhergestellt !"
@@ -14514,6 +14532,9 @@ msgstr "Musik/Ballett/Tanz (Allgemein)"
 msgid "musical/opera"
 msgstr "Musical/Oper"
 
+msgid "n/a"
+msgstr ""
+
 msgid "nature/animals/environment"
 msgstr "Natur/Tiere/Umwelt"
 
@@ -14684,6 +14705,10 @@ msgstr "Original"
 
 msgid "original language"
 msgstr "Original Sprache"
+
+#, fuzzy
+msgid "oscam webif disabled"
+msgstr "Deaktiviert"
 
 msgid "pass"
 msgstr "Durchgang"

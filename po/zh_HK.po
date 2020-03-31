@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 17:02+0100\n"
+"POT-Creation-Date: 2020-03-31 19:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: 王彪 <satfan@163.com>\n"
 "Language-Team: 中國\n"
@@ -492,6 +492,10 @@ msgstr ""
 #, python-format
 msgid "%s %s free disk space"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s ( %s Cards )"
+msgstr "%s (%s)\n"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -1998,10 +2002,10 @@ msgstr ""
 msgid "Bus: "
 msgstr "匯流排:"
 
-msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
+msgid "By OpenEight Image Team"
 msgstr ""
 
-msgid "By openATV Image Team"
+msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr ""
 
 msgid "Bypass HDMI EDID checking"
@@ -2014,6 +2018,9 @@ msgid "C-Band"
 msgstr "C-波段"
 
 msgid "CAID"
+msgstr ""
+
+msgid "CAID:SrvID"
 msgstr ""
 
 #, fuzzy
@@ -2435,6 +2442,10 @@ msgid "Clear log"
 msgstr "清除日誌"
 
 msgid "Clear playlist"
+msgstr ""
+
+#, python-format
+msgid "Client Info ( Oscam-Version: %s )"
 msgstr ""
 
 msgid "Client is streaming from this box!"
@@ -4901,6 +4912,10 @@ msgstr "頻率"
 msgid "Frequency & Channel"
 msgstr ""
 
+#, fuzzy
+msgid "Frequency & Polarization"
+msgstr "極化"
+
 msgid "Frequency bands"
 msgstr "頻帶"
 
@@ -5324,6 +5339,9 @@ msgstr ""
 msgid "Hong Kong"
 msgstr "香港"
 
+msgid "Hops"
+msgstr ""
+
 msgid "Hops:"
 msgstr ""
 
@@ -5418,10 +5436,6 @@ msgstr ""
 
 msgid "IP server is enabled"
 msgstr ""
-
-#, fuzzy
-msgid "IP-Address"
-msgstr "IP地址"
 
 msgid "IP:"
 msgstr "IP:"
@@ -6269,6 +6283,9 @@ msgstr ""
 msgid "Lock:"
 msgstr "鎖定:"
 
+msgid "Log"
+msgstr ""
+
 msgid "Log results to /tmp"
 msgstr ""
 
@@ -6796,7 +6813,7 @@ msgid "Multiboot"
 msgstr "多星"
 
 #, python-format
-msgid "Multiboot Image created on: %s"
+msgid "Multiboot Image created at: %s"
 msgstr ""
 
 msgid "Multichannel PCM"
@@ -7124,15 +7141,6 @@ msgstr ""
 
 msgid "No free tuner!"
 msgstr "沒有空閒的調諧器"
-
-msgid "No httpport defined in oscam.conf. This value is required!"
-msgstr ""
-
-msgid "No httppwd defined in oscam.conf"
-msgstr ""
-
-msgid "No httpuser defined in oscam.conf"
-msgstr ""
 
 msgid "No network connection available."
 msgstr "無可用網路連接."
@@ -7540,6 +7548,10 @@ msgstr "Gemini 配置"
 msgid "Oscam Info - Main Menu"
 msgstr "CCcam 資訊"
 
+#, python-format
+msgid "Oscam Log ( Oscam-Version: %s )"
+msgstr ""
+
 #, fuzzy
 msgid "OscamInfo"
 msgstr "CCcam資訊"
@@ -7583,6 +7595,9 @@ msgid "PGS File"
 msgstr "文件"
 
 msgid "PGS file"
+msgstr ""
+
+msgid "PID"
 msgstr ""
 
 msgid "PIN code needed"
@@ -8826,6 +8841,10 @@ msgstr "移除失敗."
 msgid "Rename name and description for new events"
 msgstr ""
 
+#, python-format
+msgid "Rename the file 'noforce' in the folder %s"
+msgstr ""
+
 #, fuzzy
 msgid "Rename to:"
 msgstr "重命"
@@ -8900,6 +8919,10 @@ msgstr "重置視頻增強設定為預設設定?"
 
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "重置視頻增強設定為最近一次配置?"
+
+#, fuzzy
+msgid "Reshare"
+msgstr "共用"
 
 #, fuzzy
 msgid "Reshare:"
@@ -9920,6 +9943,14 @@ msgstr ""
 #, fuzzy
 msgid "Serv.Name"
 msgstr "服務名稱:"
+
+#, python-format
+msgid "Server Info ( Oscam-Version: %s )"
+msgstr ""
+
+#, fuzzy
+msgid "Server:"
+msgstr "伺服器:"
 
 #, fuzzy
 msgid "Servers"
@@ -11455,14 +11486,16 @@ msgstr ""
 msgid "Switch config"
 msgstr "最後一次正確配置"
 
-msgid "Switch off the display during Standby Mode"
-msgstr ""
-
-msgid "Switch off the display during Suspend Mode"
-msgstr ""
+#, fuzzy
+msgid "Switch the display on or off during Standby Mode"
+msgstr "在錄製期間閃動面板時鐘"
 
 #, fuzzy
-msgid "Switch off the display during operation"
+msgid "Switch the display on or off during Suspend Mode"
+msgstr "在錄製期間閃動面板時鐘"
+
+#, fuzzy
+msgid "Switch the display on or off during operation"
 msgstr "在錄製期間閃動面板時鐘"
 
 msgid "Switch to TV mode"
@@ -11842,9 +11875,6 @@ msgid "There are no updates available."
 msgstr "這裏沒有可用更新."
 
 msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
-msgid "There is no [webif] section in oscam.conf"
 msgstr ""
 
 msgid "There is no signal to lock on !"
@@ -12529,9 +12559,9 @@ msgid ""
 "Make sure you first insert a USB flash drive before you select USB."
 msgstr ""
 
-#, python-format
-msgid "USB Image created on: %s"
-msgstr ""
+#, fuzzy, python-format
+msgid "USB Image created at: %s"
+msgstr "本周開始:"
 
 msgid "USB stick"
 msgstr ""
@@ -13074,6 +13104,14 @@ msgstr "檢視可用的軟體列表"
 
 msgid "View list of available system extensions"
 msgstr "檢視可用的系統裝置列表"
+
+#, fuzzy
+msgid "View or Edit your device mounts in etc/fstab."
+msgstr "更改頻道密碼"
+
+#, fuzzy
+msgid "View or edit fstab"
+msgstr "恢復"
 
 msgid "View photos..."
 msgstr ""
@@ -14071,7 +14109,7 @@ msgstr ""
 msgid "and select previous channel"
 msgstr ""
 
-msgid "and there is made an extra copy on:"
+msgid "and there is made an extra copy at:"
 msgstr ""
 
 msgid "are you sure to cancel all changes"
@@ -14448,10 +14486,6 @@ msgstr ""
 msgid "feed status"
 msgstr "調諧器資訊"
 
-#, fuzzy
-msgid "file oscam.conf could not be found"
-msgstr "檔無法保存"
-
 msgid "file system type (auto): "
 msgstr ""
 
@@ -14507,6 +14541,10 @@ msgstr "空閒"
 
 msgid "from"
 msgstr "來自"
+
+#, fuzzy
+msgid "fstab Editor"
+msgstr "軟體還原"
 
 #, fuzzy
 msgid "fstab restored!"
@@ -14760,6 +14798,9 @@ msgstr ""
 msgid "musical/opera"
 msgstr ""
 
+msgid "n/a"
+msgstr ""
+
 msgid "nature/animals/environment"
 msgstr ""
 
@@ -14921,11 +14962,18 @@ msgstr "夜晚"
 msgid "options mount file system (default): "
 msgstr ""
 
+msgid "or use OnlineFlash in SoftwareManager"
+msgstr ""
+
 msgid "original"
 msgstr ""
 
 msgid "original language"
 msgstr ""
+
+#, fuzzy
+msgid "oscam webif disabled"
+msgstr "不可用"
 
 msgid "pass"
 msgstr "通過"
@@ -15404,6 +15452,9 @@ msgstr "這個錄影"
 
 msgid "this service is protected by a parental control pin"
 msgstr "此頻道受家長控制."
+
+msgid "to 'force' to flash this image without confirmation"
+msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "切換時間, 章節, 音頻,字幕資訊"

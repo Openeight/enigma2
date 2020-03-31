@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 17:02+0100\n"
+"POT-Creation-Date: 2020-03-31 19:28+0200\n"
 "PO-Revision-Date: 2013-10-15 19:32+0200\n"
 "Last-Translator: BoxFreak\n"
 "Language-Team: none\n"
@@ -522,6 +522,10 @@ msgstr ""
 #, python-format
 msgid "%s %s free disk space"
 msgstr "%s %s vapaata levytilaa"
+
+#, fuzzy, python-format
+msgid "%s ( %s Cards )"
+msgstr "%s (%s)\n"
 
 #, python-format
 msgid "%s (%s)\n"
@@ -2130,11 +2134,11 @@ msgstr ""
 msgid "Bus: "
 msgstr "Väylä: "
 
+msgid "By OpenEight Image Team"
+msgstr ""
+
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "Oletuksena SNR näytetään dB:nä (jos viritin tukee tätä). Tämä asetus sen sijaan pakoittaa SNR:n näkymään prosentteina."
-
-msgid "By openATV Image Team"
-msgstr ""
 
 msgid "Bypass HDMI EDID checking"
 msgstr ""
@@ -2147,6 +2151,9 @@ msgid "C-Band"
 msgstr "C-taajuusalue"
 
 msgid "CAID"
+msgstr ""
+
+msgid "CAID:SrvID"
 msgstr ""
 
 msgid "CCcam Client Info"
@@ -2592,6 +2599,10 @@ msgstr "Tyhjennä loki"
 #
 msgid "Clear playlist"
 msgstr "Tyhjennä soittolista"
+
+#, python-format
+msgid "Client Info ( Oscam-Version: %s )"
+msgstr ""
 
 msgid "Client is streaming from this box!"
 msgstr ""
@@ -5221,6 +5232,11 @@ msgid "Frequency & Channel"
 msgstr "Taajuusalueet"
 
 #
+#, fuzzy
+msgid "Frequency & Polarization"
+msgstr "Polarisaatio"
+
+#
 msgid "Frequency bands"
 msgstr "Taajuusalueet"
 
@@ -5677,6 +5693,9 @@ msgstr ""
 msgid "Hong Kong"
 msgstr ""
 
+msgid "Hops"
+msgstr ""
+
 msgid "Hops:"
 msgstr ""
 
@@ -5774,9 +5793,6 @@ msgid "IP server is disabled"
 msgstr ""
 
 msgid "IP server is enabled"
-msgstr ""
-
-msgid "IP-Address"
 msgstr ""
 
 msgid "IP:"
@@ -6662,6 +6678,9 @@ msgstr "Lukitse suhde"
 msgid "Lock:"
 msgstr "Lukit."
 
+msgid "Log"
+msgstr ""
+
 msgid "Log results to /tmp"
 msgstr ""
 
@@ -7211,7 +7230,7 @@ msgid "Multiboot"
 msgstr "Usea satelliitti"
 
 #, python-format
-msgid "Multiboot Image created on: %s"
+msgid "Multiboot Image created at: %s"
 msgstr ""
 
 #, fuzzy
@@ -7567,15 +7586,6 @@ msgstr "Ei vapaata indeksiä"
 #
 msgid "No free tuner!"
 msgstr "Kaikki virittimet ovat jo käytössä!"
-
-msgid "No httpport defined in oscam.conf. This value is required!"
-msgstr ""
-
-msgid "No httppwd defined in oscam.conf"
-msgstr ""
-
-msgid "No httpuser defined in oscam.conf"
-msgstr ""
 
 msgid "No network connection available."
 msgstr "Ei verkkoyhteyttä."
@@ -8015,6 +8025,10 @@ msgstr ""
 msgid "Oscam Info - Main Menu"
 msgstr ""
 
+#, python-format
+msgid "Oscam Log ( Oscam-Version: %s )"
+msgstr ""
+
 msgid "OscamInfo"
 msgstr ""
 
@@ -8060,6 +8074,10 @@ msgstr ""
 #, fuzzy
 msgid "PGS file"
 msgstr "%d tiedosto"
+
+#, fuzzy
+msgid "PID"
+msgstr "PLP ID"
 
 #
 msgid "PIN code needed"
@@ -9431,6 +9449,10 @@ msgstr ""
 msgid "Rename name and description for new events"
 msgstr ""
 
+#, python-format
+msgid "Rename the file 'noforce' in the folder %s"
+msgstr ""
+
 msgid "Rename to:"
 msgstr ""
 
@@ -9511,6 +9533,9 @@ msgstr "Nollaa kuvanparannus oletusarvoihin?"
 #
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "Nollaa kuvanparannus aikaisempiin arvoihin?"
+
+msgid "Reshare"
+msgstr ""
 
 msgid "Reshare:"
 msgstr ""
@@ -10602,6 +10627,15 @@ msgstr ""
 
 msgid "Serv.Name"
 msgstr ""
+
+#, python-format
+msgid "Server Info ( Oscam-Version: %s )"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Server:"
+msgstr "Kanava"
 
 msgid "Servers"
 msgstr ""
@@ -12228,13 +12262,13 @@ msgstr ""
 msgid "Switch config"
 msgstr ""
 
-msgid "Switch off the display during Standby Mode"
+msgid "Switch the display on or off during Standby Mode"
 msgstr ""
 
-msgid "Switch off the display during Suspend Mode"
+msgid "Switch the display on or off during Suspend Mode"
 msgstr ""
 
-msgid "Switch off the display during operation"
+msgid "Switch the display on or off during operation"
 msgstr ""
 
 msgid "Switch to TV mode"
@@ -12653,9 +12687,6 @@ msgid "There are no updates available."
 msgstr "Päivityksiä ei ole saatavilla."
 
 msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
-msgid "There is no [webif] section in oscam.conf"
 msgstr ""
 
 msgid "There is no signal to lock on !"
@@ -13416,7 +13447,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "USB Image created on: %s"
+msgid "USB Image created at: %s"
 msgstr ""
 
 #
@@ -14011,6 +14042,12 @@ msgstr "Näytä saatavilla olevat ohjelmistolaajennukset"
 #
 msgid "View list of available system extensions"
 msgstr "Näytä saatavilla olevat järjestelmälaajennukset"
+
+msgid "View or Edit your device mounts in etc/fstab."
+msgstr ""
+
+msgid "View or edit fstab"
+msgstr ""
 
 #
 msgid "View photos..."
@@ -15106,7 +15143,7 @@ msgstr ""
 msgid "and select previous channel"
 msgstr ""
 
-msgid "and there is made an extra copy on:"
+msgid "and there is made an extra copy at:"
 msgstr ""
 
 msgid "are you sure to cancel all changes"
@@ -15520,9 +15557,6 @@ msgstr ""
 msgid "feed status"
 msgstr ""
 
-msgid "file oscam.conf could not be found"
-msgstr ""
-
 msgid "file system type (auto): "
 msgstr ""
 
@@ -15585,6 +15619,11 @@ msgstr "vapaana"
 
 msgid "from"
 msgstr ""
+
+#
+#, fuzzy
+msgid "fstab Editor"
+msgstr "Poistu editorista"
 
 msgid "fstab restored!"
 msgstr ""
@@ -15869,6 +15908,9 @@ msgstr "musiikki/baletti/tanssi (yleinen)"
 msgid "musical/opera"
 msgstr "musikaali/ooppera"
 
+msgid "n/a"
+msgstr ""
+
 msgid "nature/animals/environment"
 msgstr "luonto/eläimet/ympäristö"
 
@@ -16042,11 +16084,19 @@ msgstr ""
 msgid "options mount file system (default): "
 msgstr ""
 
+msgid "or use OnlineFlash in SoftwareManager"
+msgstr ""
+
 msgid "original"
 msgstr "Alkuperäinen"
 
 msgid "original language"
 msgstr "Alkuperäinen kieli"
+
+#
+#, fuzzy
+msgid "oscam webif disabled"
+msgstr "Pois päältä"
 
 #
 msgid "pass"
@@ -16562,6 +16612,9 @@ msgstr "tämä tallennus"
 #
 msgid "this service is protected by a parental control pin"
 msgstr "tämä kanava on suojattu lapsilukolla"
+
+msgid "to 'force' to flash this image without confirmation"
+msgstr ""
 
 #
 msgid "toggle time, chapter, audio, subtitle info"
