@@ -259,12 +259,12 @@ class ImageBackup(Screen):
 
 		## TESTING IF ALL THE TOOLS FOR THE BUILDING PROCESS ARE PRESENT
 		if not path.exists(self.MKFS):
-			text = "%s not found !!" %self.MKFS
-			self.session.open(MessageBox, _(text), type = MessageBox.TYPE_ERROR)
+			text = _("%s not found !!") %self.MKFS
+			self.session.open(MessageBox, text, type = MessageBox.TYPE_ERROR)
 			return
 		if not path.exists(self.NANDDUMP):
-			text = "%s not found !!" %self.NANDDUMP
-			self.session.open(MessageBox, _(text), type = MessageBox.TYPE_ERROR)
+			text = _("%s not found !!") %self.NANDDUMP
+			self.session.open(MessageBox, text, type = MessageBox.TYPE_ERROR)
 			return
 
 		self.SHOWNAME = "%s %s" %(self.MACHINEBRAND, self.MODEL)
@@ -471,7 +471,7 @@ class ImageBackup(Screen):
 				text = _("Kernel dump error\n")
 				text += _("Please Flash your Kernel new and Backup again")
 				system('rm -rf /tmp/vmlinux.bin')
-				self.session.open(MessageBox, _(text), type = MessageBox.TYPE_ERROR)
+				self.session.open(MessageBox, text, type = MessageBox.TYPE_ERROR)
 				return
 
 		cmdlist = []
