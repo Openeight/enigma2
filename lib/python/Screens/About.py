@@ -42,7 +42,7 @@ class About(Screen):
 			f = open('/boot/bootname', 'r')
 			bootname = f.readline().split('=')[1]
 			f.close()
-		if getMachineBuild() in ('cc1','sf8008'):
+		if getMachineBuild() in ('cc1','sf8008', 'sf8008m'):
 			if path.exists('/boot/STARTUP'):
 				f = open('/boot/STARTUP', 'r')
 				f.seek(5)
@@ -223,6 +223,8 @@ class ModelPic(Screen):
 			model = "sf108.png"
 		elif getMachineBuild() in ('sf8008'):
 			model = "sf8008.png"
+		elif getMachineBuild() in ('sf8008m'):
+			model = "sf8008m.png"
 		elif getBoxType() in ('sf4008'):
 			model = "sf4008.png"
 		elif getBoxType() in ('sf3038'):

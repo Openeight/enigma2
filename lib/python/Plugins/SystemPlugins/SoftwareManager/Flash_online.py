@@ -140,7 +140,7 @@ class FlashOnline(Screen):
 			self.read_current_multiboot()
 
 	def read_current_multiboot(self):
-		if getMachineBuild() in ("cc1","sf8008"):
+		if getMachineBuild() in ("cc1","sf8008","sf8008m"):
 			if self.list[self.selection] == "Recovery":
 				cmdline = self.read_startup("/boot/STARTUP").split("=",1)[1].split(" ",1)[0]
 			else:
@@ -166,7 +166,7 @@ class FlashOnline(Screen):
 		files = []
 		if SystemInfo["HaveMultiBoot"]:
 			path = PATH
-			if getMachineBuild() in ("cc1","sf8008"):
+			if getMachineBuild() in ("cc1","sf8008","sf8008m"):
 				for name in os.listdir(path):
 					if name != 'bootname' and os.path.isfile(os.path.join(path, name)):
 						try:

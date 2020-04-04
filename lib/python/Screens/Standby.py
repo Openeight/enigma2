@@ -22,7 +22,7 @@ inStandby = None
 class Standby(Screen):
 	def Power(self):
 		print "[Standby] leave standby"
-		if (getBoxType() in ('sf8008', 'sf8008s', 'sf8008t')):
+		if (getBoxType() in ('sf8008', 'sf8008s', 'sf8008t', 'sf8008m')):
 			open("/proc/stb/hdmi/output", "w").write("on")
 		self.close(True)
 
@@ -108,7 +108,7 @@ class Standby(Screen):
 				if wakeup_time > 0:
 					self.standbyWakeupTimer.startLongTimer(wakeup_time)
 
-		if (getBoxType() in ('sf8008', 'sf8008s', 'sf8008t')):
+		if (getBoxType() in ('sf8008', 'sf8008s', 'sf8008t', 'sf8008m')):
 			open("/proc/stb/hdmi/output", "w").write("off")
 
 		self.onFirstExecBegin.append(self.__onFirstExecBegin)
