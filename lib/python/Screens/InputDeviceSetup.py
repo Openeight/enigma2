@@ -31,7 +31,7 @@ class InputDeviceSelection(Screen,HelpableScreen):
 									MultiContentEntryPixmapAlphaTest(pos = (2, 8), size = (54, 54), png = 2), # index 3 is the interface pixmap
 									MultiContentEntryText(pos = (65, 6), size = (450, 54), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text = 1), # index 1 is the interfacename
 								],
-							"fonts": [gFont("Regular",26),gFont("Regular", 20)],
+							"fonts": [gFont("Regular", 28),gFont("Regular", 20)],
 							"itemHeight": 70
 							}
 			</convert>
@@ -409,7 +409,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			self.close()
 		else:
 			self.setNewSetting()
-			self.session.openWithCallback(self.keySaveCallback, MessageBox, _("Is this Remote Control OK ?"), MessageBox.TYPE_YESNO, timeout = 20, default = True, timeout_default = False)
+			self.session.openWithCallback(self.keySaveCallback, MessageBox, _("Is this setting ok?"), MessageBox.TYPE_YESNO, timeout=20, default=True, timeout_default=False)
 
 	def keySaveCallback(self, answer):
 		if answer is False:

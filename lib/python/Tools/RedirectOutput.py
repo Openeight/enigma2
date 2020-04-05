@@ -39,9 +39,6 @@ class EnigmaLogFatal:
 
 	def flush(self):
 		pass
-	
-	def isatty(self):
-		return True
 
 	def isatty(self):
 		return True
