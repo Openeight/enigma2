@@ -1,4 +1,6 @@
 from Wizard import wizardManager
+from Screen import Screen
+from Screens.MessageBox import MessageBox
 from Screens.WizardLanguage import WizardLanguage
 from Screens.Rc import Rc
 from Tools.HardwareInfo import HardwareInfo
