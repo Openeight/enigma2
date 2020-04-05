@@ -30,7 +30,7 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
 from Addons import AddonsFileBrowser
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getBackupFilename, RestoreMenu
-from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
+from Screens.FlashImage import SelectImage
 from Screens.SkinSetup import SkinSetup
 from Screens.Ipkuninstall import Ipkuninstall
 from os import system, listdir, symlink, unlink, readlink, path as os_path, stat, mkdir, popen, makedirs, access, rename, remove, W_OK, R_OK, F_OK, chmod, walk, getcwd, chdir, statvfs
@@ -365,7 +365,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		elif menu == 'BackupImage':
 			self.session.open(ImageBackup)
 		elif menu == 'FlashImage':
-			self.session.open(FlashOnline)
+			self.session.open(SelectImage)
 		elif menu == 'BackupSettings':
 			self.session.openWithCallback(self.backupDone, BackupScreen, runBackup=True)
 		elif menu == 'RestoreSettings':
