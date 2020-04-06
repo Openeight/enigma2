@@ -300,24 +300,17 @@ class FlashImage(Screen):
 
 	def startBackupsettings(self, retval):
 		if retval:
-			if os.path.isfile(self.BACKUP_SCRIPT):
-				self["info"].setText(_("Backing up to: %s") % self.destination)
-				configfile.save()
-				if config.plugins.autobackup.epgcache.value:
-					eEPGCache.getInstance().save()
-				self.containerbackup = Console()
-				self.containerbackup.ePopen("%s%s'%s' %s" % (self.BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)), self.backupsettingsDone)
-			else:
-				self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
+			from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen
+			self.session.openWithCallback(self.backupsettingsDone, BackupScreen, runBackup = True)
 		else:
 			self.abort()
 
-	def backupsettingsDone(self, data, retval, extra_args):
+	def backupsettingsDone(self, retval):
 		self.containerbackup = None
-		if retval == 0:
+		if retval == True:
 			self.startDownload()
 		else:
-			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n%s") % reval, type=MessageBox.TYPE_ERROR, simple=True)
+			self.abort()
 
 	def startDownload(self, reply=True):
 		self.show()
