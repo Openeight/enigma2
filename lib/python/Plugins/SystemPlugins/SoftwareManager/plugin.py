@@ -169,7 +169,7 @@ class UpdatePluginMenu(Screen):
 			self.list.append(("backupfiles", _("Select backup files"),  _("Select files for backup.") + self.oktext + "\n\n" + self.infotext, None))
 			if config.usage.setup_level.index >= 2: # expert+
 				self.list.append(("ipkg-manager", _("Packet management"),  _("\nView, install and remove available or installed packages." ) + self.oktext, None))
-			self.list.append(("ipkg-source",_("Select upgrade source"), _("\nEdit the upgrade source address." ) + self.oktext, None))
+			self.list.append(("ipkg-source",_("Select update source"), _("\nEdit the update source address." ) + self.oktext, None))
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_SOFTWAREMANAGER):
 				if "AdvancedSoftwareSupported" in p.__call__:
 					callFnc = p.__call__["AdvancedSoftwareSupported"](None)
@@ -415,7 +415,7 @@ class SoftwareManagerSetup(Screen, ConfigListScreen):
 
 	def selectionChanged(self):
 		if self["config"].getCurrent() == self.overwriteConfigfilesEntry:
-			self["introduction"].setText(_("Overwrite configuration files during software upgrade?"))
+			self["introduction"].setText(_("Overwrite configuration files during software update?"))
 		else:
 			self["introduction"].setText("")
 
@@ -1071,7 +1071,7 @@ class PluginManagerInfo(Screen):
 		elif action == 'remove':
 			return(( _('Removing'), info, removepng, divpng))
 		else:
-			return(( _('Upgrading'), info, upgradepng, divpng))
+			return(( _('Updating'), info, upgradepng, divpng))
 
 	def exit(self):
 		self.close()
@@ -1557,7 +1557,7 @@ class UpdatePlugin(Screen):
 
 class IPKGMenu(Screen):
 	skin = """
-		<screen name="IPKGMenu" position="center,center" size="560,400" title="Select upgrade source to edit." >
+		<screen name="IPKGMenu" position="center,center" size="560,400" title="Select update source to edit." >
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
@@ -1598,7 +1598,7 @@ class IPKGMenu(Screen):
 		self.setWindowTitle()
 
 	def setWindowTitle(self):
-		self.setTitle(_("Select upgrade source to edit."))
+		self.setTitle(_("Select update source to edit."))
 
 	def fill_list(self):
 		flist = []
@@ -1628,7 +1628,7 @@ class IPKGMenu(Screen):
 
 class IPKGSource(Screen):
 	skin = """
-		<screen name="IPKGSource" position="center,center" size="560,80" title="Edit upgrade source url." >
+		<screen name="IPKGSource" position="center,center" size="560,80" title="Edit update source url." >
 			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
@@ -1694,7 +1694,7 @@ class IPKGSource(Screen):
 		self["text"].right()
 
 	def setWindowTitle(self):
-		self.setTitle(_("Edit upgrade source url."))
+		self.setTitle(_("Edit update source url."))
 
 	def go(self):
 		text = self["text"].getText()
@@ -1883,7 +1883,7 @@ class PacketManager(Screen, NumericalTextInput):
 			elif status == 'upgradeable':
 				self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": package }))
 				if len(self.cmdList):
-					self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to upgrade the package:\n") + package + "\n" + self.oktext)
+					self.session.openWithCallback(self.runUpgrade, MessageBox, _("Do you want to update the package:\n") + package + "\n" + self.oktext)
 			elif status == "installable":
 				self.cmdList.append((IpkgComponent.CMD_INSTALL, { "package": package }))
 				if len(self.cmdList):
@@ -2113,7 +2113,7 @@ def filescan(**kwargs):
 					ScanPath(path = "", with_subdirs = False),
 				],
 			name = "Ipkg",
-			description = _("Install extensions."),
+			description = _("Install extensions"),
 			openfnc = filescan_open, )
 
 def UpgradeMain(session, **kwargs):

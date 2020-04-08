@@ -229,7 +229,7 @@ class ServiceInfo(Screen):
 				audioPID = self.audio.getTrackInfo(i).getPID()
 				audioLang = self.audio.getTrackInfo(i).getLanguage()
 				if audioLang == "":
-					audioLang = "Not Defined"
+					audioLang = "Not defined"
 				if self.showAll or currentTrack == i:
 					trackList += [(_("Audio PID%s, codec & lang") % ((" %s") % (i + 1) if self.numberofTracks > 1 and self.showAll else ""), "%04X (%d) - %s - %s" % (to_unsigned(audioPID), audioPID, audioDesc, audioLang), TYPE_TEXT)]
 				if self.getServiceInfoValue(iServiceInformation.sAudioPID) == "N/A":
@@ -387,7 +387,9 @@ class ServiceInfo(Screen):
 						extra_info = "extra data=%s" % caid[2]
 				from Tools.GetEcmInfo import GetEcmInfo
 				ecmdata = GetEcmInfo().getEcmData()
-				formatstring = "ECMPid %04X (%d) %04X-%s %s " + _("(active)") if caid[0] == int(ecmdata[1], 16) and (caid[1] == int(ecmdata[3], 16) or str(int(ecmdata[2], 16)) in provid) else "ECMPid %04X (%d) %04X-%s %s"
+				formatstring = "ECMPid %04X (%d) %04X-%s %s"
+				if caid[0] == int(ecmdata[1], 16) and (caid[1] == int(ecmdata[3], 16) or str(int(ecmdata[2], 16)) in provid):
+					formatstring = "%s (%s)" % (formatstring, _("active"))
 				tlist.append(ServiceInfoListEntry(formatstring % (caid[1], caid[1], caid[0], CaIdDescription, extra_info)))
 			if not tlist:
 				tlist.append(ServiceInfoListEntry(_("No ECMPids available (FTA Service)")))

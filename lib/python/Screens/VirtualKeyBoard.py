@@ -48,7 +48,7 @@ SPACE = u"SPACEICON"  # Symbol to be used for a SPACE on the keyboard.  Must be 
 # For more information about using VirtualKeyBoard see /doc/VIRTUALKEYBOARD
 #
 class VirtualKeyBoard(Screen, HelpableScreen):
-	def __init__(self, session, title=_("Virtual KeyBoard Text:"), text="", maxSize=False, visible_width=False, type=Input.TEXT, currPos=0, allMarked=False, style=VKB_ENTER_ICON):
+	def __init__(self, session, title=_("Virtual KeyBoard Text:"), text="", maxSize=False, visible_width=False, type=Input.TEXT, currPos=None, allMarked=False, style=VKB_ENTER_ICON):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Virtual keyboard"))
@@ -331,7 +331,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 				[u"", u"", u"\u00B2", u"\u00B3", u"\u00A3", u"\u00A7", u"\u00B6", u"", u"\u00A4", u"\u00A6", u"\u00B0", u"\u00B1", u"\u00BD", u"BACKSPACEICON"],
 				[u"FIRSTICON", u"", u"\u03AC", u"\u03AD", u"\u03AE", u"\u03AF", u"\u03CC", u"\u03CD", u"\u03CE", u"\u03CA", u"\u03CB", u"\u00AB", u"\u00BB", u"\u00AC"],
 				[u"LASTICON", u"", u"\u0386", u"\u0388", u"\u0389", u"\u038A", u"\u038C", u"\u038E", u"\u038F", u"\u03AA", u"\u03AB", u"\u0385", self.green, self.green],
-				[u"CAPSLOCKICON", u"CAPSLOCKICON", u"", u"", u"", u"\u00A9", u"\u00AE", u"\u20AC", u"\u00A5", u"", u"", u"", u"CAPSLOCKICON", u"CAPSLOCKICON"],
+				[u"CAPSLOCKICON", u"CAPSLOCKICON", u"", u"", u"", u"\u00A9", u"\u00AE", u"\u20AC", u"\u00A5", u"\u0390", u"\u03B0", u"\u0387", u"CAPSLOCKICON", u"CAPSLOCKICON"],
 				self.footer
 			]
 		]
@@ -471,7 +471,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"fr_CH": [_("French"), _("Switzerland"), self.frenchSwiss(self.german)],
 			"de_DE": [_("German"), _("Germany"), self.german],
 			"de_CH": [_("German"), _("Switzerland"), self.germanSwiss(self.german)],
-			"el_GR": [_("Greek (Modern)"), _("Greece"), self.greek],
+			"el_GR": [_("Greek"), _("Greece"), self.greek],
 			"hu_HU": [_("Hungarian"), _("Hungary"), self.hungarian(self.german)],
 			"lv_01": [_("Latvian"), _("Alternative 1"), self.latvianStandard(self.english)],
 			"lv_02": [_("Latvian"), _("Alternative 2"), self.latvian],
@@ -523,7 +523,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 		self.lang = language.getLanguage()
 		self["prompt"] = Label(prompt)
-		self["text"] = Input(text=text, maxSize=maxSize, visible_width=visible_width, type=type, currPos=len(text.decode("utf-8", "ignore")), allMarked=allMarked)
+		self["text"] = Input(text=text, maxSize=maxSize, visible_width=visible_width, type=type, currPos=len(text.decode("utf-8", "ignore")) if currPos is None else currPos, allMarked=allMarked)
 		self["list"] = VirtualKeyBoardList([])
 		self["mode"] = Label(_("INS"))
 		self["locale"] = Label(_("Locale") + ": " + self.lang)
