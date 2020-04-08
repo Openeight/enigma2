@@ -10,10 +10,12 @@ def ChoiceEntryComponent(key = None, text = ["--"]):
 		x, y, w, h = skin.parameters.get("ChoicelistDash",(0, 0, 800, 25))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, "-"*200))
 	else:
-		x, y, w, h = skin.parameters.get("ChoicelistName",(45, 0, 800, 25))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, text[0]))
 		if key:
-			if key == "expandable":
+			x, y, w, h = skin.parameters.get("ChoicelistName",(45, 0, 800, 25))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, text[0]))
+			if key == "dummy":
+				png = None
+			elif key == "expandable":
 				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/expandable.png"))
 			elif key == "expanded":
 				png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/expanded.png"))
@@ -26,6 +28,9 @@ def ChoiceEntryComponent(key = None, text = ["--"]):
 			if png:
 				x, y, w, h = skin.parameters.get("ChoicelistIcon",(5, 0, 35, 25))
 				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, x, y, w, h, png))
+		else:
+			x, y, w, h = skin.parameters.get("ChoicelistNameSingle",(5, 0, 800, 25))
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, text[0]))
 	return res
 
 class ChoiceList(MenuList):

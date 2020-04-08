@@ -16,7 +16,7 @@ from Tools.HardwareInfo import HardwareInfo
 from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode
 import os, urllib2, json, time, zipfile, shutil
 
-from enigma import eTimer, eEPGCache
+from enigma import eEPGCache
 
 def checkimagefiles(files):
 	return len([x for x in files if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2', 'rootfs.ubi')]) == 2
@@ -55,9 +55,7 @@ class SelectImage(Screen):
 			"menu": boundFunction(self.close, True),
 		}, -1)
 
-		self.delay = eTimer()
-		self.delay.callback.append(self.getImagesList)
-		self.delay.start(0, True)
+		self.callLater(self.getImagesList)
 
 	def getImagesList(self):
 
@@ -209,10 +207,7 @@ class FlashImage(Screen):
 			"green": self.ok,
 		}, -1)
 
-		self.delay = eTimer()
-		self.delay.callback.append(self.confirmation)
-		self.delay.start(0, True)
-		self.hide()
+		self.callLater(self.confirmation)
 
 	def confirmation(self):
 		if self.reasons:
@@ -344,9 +339,7 @@ class FlashImage(Screen):
 		self["header"].setText(_("Unzipping Image"))
 		self["info"].setText("%s\n%s"% (self.imagename, _("Please wait")))
 		self["progress"].hide()
-		self.delay.callback.remove(self.confirmation)
-		self.delay.callback.append(self.doUnzip)
-		self.delay.start(0, True)
+		self.callLater(self.doUnzip)
 
 	def doUnzip(self):
 		try:
@@ -424,9 +417,7 @@ class MultibootSelection(SelectImage):
 			"menu": boundFunction(self.close, True),
 		}, -1)
 
-		self.delay = eTimer()
-		self.delay.callback.append(self.getImagesList)
-		self.delay.start(0, True)
+		self.callLater(self.getBootOptions)
 
 	def getImagesList(self, reply=None):
 		self.getImageList = GetImagelist(self.getImagelistCallback)
@@ -449,46 +440,39 @@ class MultibootSelection(SelectImage):
 
 	def keyOk(self):
 		self.currentSelected = self["list"].l.getCurrentSelection()
-		if self.currentSelected[0][1] != "Waiter":
-			self.container = Console()
-			if os.path.isdir('/tmp/startupmount'):
-				self.ContainterFallback()
-			else:
-				if os.path.islink("/dev/block/by-name/bootoptions"):
-					os.mkdir('/tmp/startupmount')
-					self.container.ePopen('mount /dev/block/by-name/bootoptions /tmp/startupmount', self.ContainterFallback)
-				elif os.path.islink("/dev/block/by-name/boot"):
-					os.mkdir('/tmp/startupmount')
-					self.container.ePopen('mount /dev/block/by-name/boot /tmp/startupmount', self.ContainterFallback)
-				else:
-					os.mkdir('/tmp/startupmount')
-					self.container.ePopen('mount /dev/%sp1 /tmp/startupmount' % SystemInfo["canMultiBoot"][2], self.ContainterFallback)
+		self.slot = self.currentSelected[0][1]
+		if self.slot != "Waiter":
+			self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
 
-	def ContainterFallback(self, data=None, retval=None, extra_args=None):
-		self.container.killAll()
-		slot = self.currentSelected[0][1]
-		model = HardwareInfo().get_machine_name()
-		if SystemInfo["canMultiBoot"][3]:
-			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % slot, "/tmp/startupmount/STARTUP")
-		elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4_BOXMODE_12"):
-			if slot < 12:
-				shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_1" % slot, "/tmp/startupmount/STARTUP")
+	def doReboot(self, answer):
+		if answer:
+			if self.slot == "Recovery":
+				shutil.copyfile("/tmp/startupmount/STARTUP_RECOVERY", "/tmp/startupmount/STARTUP")
+			elif self.slot == "Android":
+				shutil.copyfile("/tmp/startupmount/STARTUP_ANDROID", "/tmp/startupmount/STARTUP")
 			else:
-				slot -= 12
-				shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_12" % slot, "/tmp/startupmount/STARTUP")
-		elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4"):
-			shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s" % slot, "/tmp/startupmount/STARTUP")
-		elif os.path.isfile("/tmp/startupmount/STARTUP_4"):
-			shutil.copyfile("/tmp/startupmount/STARTUP_%s" % slot, "/tmp/startupmount/STARTUP")
-		else:
-			if slot < 12:
-				startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot, slot * 2 + 1, model)
-			else:
-				slot -= 12
-				startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot, SystemInfo["canMode12"], slot * 2 + 1, model)
-			open('/tmp/startupmount/STARTUP', 'w').write(startupFileContents)
-		from Screens.Standby import TryQuitMainloop
-		self.session.open(TryQuitMainloop, 2)
+				model = HardwareInfo().get_machine_name()
+				if SystemInfo["canMultiBoot"][3]:
+					shutil.copyfile("/tmp/startupmount/STARTUP_%s" % self.slot, "/tmp/startupmount/STARTUP")
+				elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4_BOXMODE_12"):
+					if self.slot < 12:
+						shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_1" % self.slot, "/tmp/startupmount/STARTUP")
+					else:
+						self.slot -= 12
+						shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s_BOXMODE_12" % self.slot, "/tmp/startupmount/STARTUP")
+				elif os.path.isfile("/tmp/startupmount/STARTUP_LINUX_4"):
+					shutil.copyfile("/tmp/startupmount/STARTUP_LINUX_%s" % self.slot, "/tmp/startupmount/STARTUP")
+				elif os.path.isfile("/tmp/startupmount/STARTUP_4"):
+					shutil.copyfile("/tmp/startupmount/STARTUP_%s" % self.slot, "/tmp/startupmount/STARTUP")
+				else:
+					if self.slot < 12:
+						startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (self.slot, self.slot * 2 + 1, model)
+					else:
+						self.slot -= 12
+						startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (self.slot, SystemInfo["canMode12"], self.slot * 2 + 1, model)
+					open('/tmp/startupmount/STARTUP', 'w').write(startupFileContents)
+			from Screens.Standby import TryQuitMainloop
+			self.session.open(TryQuitMainloop, 2)
 
 	def selectionChanged(self):
 		pass

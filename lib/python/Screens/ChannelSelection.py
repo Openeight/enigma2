@@ -30,7 +30,7 @@ from Screens.InputBox import PinInput
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
 from Screens.ServiceInfo import ServiceInfo
-from Screens.Hotkey import InfoBarHotkey, hotkeyActionMap, getHotkeyFunctions
+from Screens.Hotkey import InfoBarHotkey, hotkeyActionMap, hotkey
 profile("ChannelSelection.py 4")
 from Screens.PictureInPicture import PictureInPicture
 from Screens.RdsDisplay import RassInteractive
@@ -106,7 +106,10 @@ EDIT_ALTERNATIVES = 2
 
 def append_when_current_valid(current, menu, args, level=0, key=""):
 	if current and current.valid() and level <= config.usage.setup_level.index:
-		menu.append(ChoiceEntryComponent(key, args))
+		if key:
+			menu.append(ChoiceEntryComponent(key, args))
+		else:
+			menu.append(ChoiceEntryComponent("dummy", args))
 
 def removed_userbouquets_available():
 	for file in os.listdir("/etc/enigma2/"):
@@ -248,10 +251,10 @@ class ChannelContextMenu(Screen):
 						if self.parentalControl.getProtectionLevel(current.toCompareString()) == -1:
 							append_when_current_valid(current, menu, (_("add bouquet to parental protection"), boundFunction(self.addParentalProtection, current)), level=0, key="bullet")
 						else:
-							append_when_current_valid(current, menu, (_("remove bouquet from parental protection"), boundFunction(self.removeParentalProtection, current)), level=0, key="bullet")
-					menu.append(ChoiceEntryComponent(text=(_("add bouquet"), self.showBouquetInputBox), key="bullet"))
-					append_when_current_valid(current, menu, (_("rename entry"), self.renameEntry), level=0, key="5")
-					append_when_current_valid(current, menu, (_("remove entry"), self.removeEntry), level=0, key="6")
+							append_when_current_valid(current, menu, (_("remove bouquet from parental protection"), boundFunction(self.removeParentalProtection, current)), level=0)
+					menu.append(ChoiceEntryComponent("dummy", (_("add bouquet"), self.showBouquetInputBox)))
+					append_when_current_valid(current, menu, (_("rename entry"), self.renameEntry), level=0, key="2")
+					append_when_current_valid(current, menu, (_("remove entry"), self.removeEntry), level=0, key="8")
 					self.removeFunction = self.removeBouquet
 					if removed_userbouquets_available():
 						append_when_current_valid(current, menu, (_("purge deleted userbouquets"), self.purgeDeletedBouquets), level=0, key="bullet")
@@ -264,7 +267,7 @@ class ChannelContextMenu(Screen):
 					append_when_current_valid(current, menu, (_("enable move mode"), self.toggleMoveMode), level=0, key="7")
 				if not csel.entry_marked and not inBouquetRootList and current_root and not (current_root.flags & eServiceReference.isGroup):
 					if current.type != -1:
-						menu.append(ChoiceEntryComponent(text=(_("add marker"), self.showMarkerInputBox), key="8"))
+						menu.append(ChoiceEntryComponent("dummy", (_("add marker"), self.showMarkerInputBox)))
 					if not csel.movemode:
 						if haveBouquets:
 							append_when_current_valid(current, menu, (_("enable bouquet edit"), self.bouquetMarkStart), level=0, key="9")
@@ -690,7 +693,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 		selection = eval("config.misc.hotkey." + key + ".value.split(',')")
 		selected = []
 		for x in selection:
-			function = list(function for function in getHotkeyFunctions() if function[1] == x and function[2] == "EPG")
+			function = list(function for function in hotkey.functions if function[1] == x and function[2] == "EPG")
 			if function:
 				selected.append(function[0])
 		return selected
@@ -1329,7 +1332,6 @@ class ChannelSelectionBase(Screen):
 				"keyLeft": self.keyLeft,
 				"keyRight": self.keyRight,
 				"keyRecord": self.keyRecord,
-				"toggleTwoLines": self.toggleTwoLines,
 				"1": self.keyNumberGlobal,
 				"2": self.keyNumberGlobal,
 				"3": self.keyNumberGlobal,
@@ -1705,13 +1707,6 @@ class ChannelSelectionBase(Screen):
 		ref = self.getCurrentSelection()
 		if ref and not(ref.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 			Screens.InfoBar.InfoBar.instance.instantRecord(serviceRef=ref)
-
-	def toggleTwoLines(self):
-		if self.servicelist.mode == self.servicelist.MODE_FAVOURITES:
-			config.usage.servicelist_twolines.value = not config.usage.servicelist_twolines.value
-			config.usage.servicelist_twolines.save()
-		else:
-			return 0
 
 	def showFavourites(self):
 		self["key_green"].setText(_("Satellites"))
@@ -2103,10 +2098,9 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			if ref is None or ref != nref:
 				if nref:
 					if not checkParentalControl or Components.ParentalControl.parentalControl.isServicePlayable(nref, boundFunction(self.zap, enable_pipzap=True, checkParentalControl=False)):
-						self.session.pip.playService(self.session.pip.resolveAlternatePipService(nref))
+						self.session.pip.playService(nref)
 						self.__evServiceStart()
 						self.showPipzapMessage()
-						self.setStartRoot(self.curRoot)
 						self.setCurrentSelection(nref)
 				else:
 					self.setStartRoot(self.curRoot)

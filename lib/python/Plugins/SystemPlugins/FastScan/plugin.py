@@ -25,7 +25,8 @@ config.misc.fastscan.drop = ConfigYesNo(default = True)
 providers = [
 	('Canal Digitaal', (1, 900, True)),
 	('TV Vlaanderen', (1, 910, True)),
-	('TéléSAT', (0, 920, True)),
+	('TéléSAT Belgium', (0, 920, False)),
+	('TéléSAT Luxembourg', (0, 921, False)),
 	('HD Austria', (0, 950, False)),
 	('Diveo', (0, 960, False)),
 	('Skylink Czech Republic', (1, 30, False)),
@@ -35,7 +36,8 @@ providers = [
 	('FocusSAT Thor', (2, 84, False)),
 	('UPC Direct Thor', (2, 81, False)),
 	('KabelKiosk', (0, 970, False)),
-	('TéléSAT Astra3', (1, 920, True)),
+	('TéléSAT Belgium Astra3', (1, 920, False)),
+	('TéléSAT Luxembourg Astra3', (1, 921, False)),
 	('HD Austria Astra3', (1, 950, False)),
 	('Diveo Astra3', (1, 960, False)),
 	('Canal Digitaal Astra 1', (0, 900, True)),
@@ -209,20 +211,21 @@ class FastScanScreen(ConfigListScreen, Screen):
 				self.scan_nims = ConfigSelection(default=lastConfiguration[0] if lastConfiguration and lastConfiguration[0] in [x[0] for x in nimList] else nimList[0][0], choices=nimList)
 				self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims)
 
-		if not lastConfiguration or not lastConfiguration[1] in [x[0] for x in providers]:
-			self.scan_provider = ConfigSelection(default=None, choices=[(None, _("None"))] + getProviderList())
-			self.scan_provider.addNotifier(providerChanged)
-			self.scan_hd = ConfigYesNo(default=True)
-			self.scan_keepnumbering = ConfigYesNo(default=True)
-			self.scan_keepsettings = ConfigYesNo(default=False)
-			self.scan_create_radio_bouquet = ConfigYesNo(default=False)
-		else:
-			self.scan_provider = ConfigSelection(default=lastConfiguration[1], choices=[(None, _("None"))] + getProviderList())
+		providerList = getProviderList();
+		if lastConfiguration and lastConfiguration[1] in providerList:
+			self.scan_provider = ConfigSelection(default=lastConfiguration[1], choices=[(None, _("None"))] + providerList)
 			self.scan_provider.addNotifier(providerChanged)
 			self.scan_hd = ConfigYesNo(default=lastConfiguration[2])
 			self.scan_keepnumbering = ConfigYesNo(default=lastConfiguration[3])
 			self.scan_keepsettings = ConfigYesNo(default=lastConfiguration[4])
 			self.scan_create_radio_bouquet = ConfigYesNo(default=len(lastConfiguration) > 5 and lastConfiguration[5])
+		else:
+			self.scan_provider = ConfigSelection(default=None, choices=[(None, _("None"))] + providerList)
+			self.scan_provider.addNotifier(providerChanged)
+			self.scan_hd = ConfigYesNo(default=True)
+			self.scan_keepnumbering = ConfigYesNo(default=True)
+			self.scan_keepsettings = ConfigYesNo(default=False)
+			self.scan_create_radio_bouquet = ConfigYesNo(default=False)
 		self.scanProvider = getConfigListEntry(_("Provider"), self.scan_provider)
 		self.scanHD = getConfigListEntry(_("HD list"), self.scan_hd)
 		self.config_autoproviders = {}
@@ -242,7 +245,10 @@ class FastScanScreen(ConfigListScreen, Screen):
 		self.list.append(self.scanProvider)
 		if self.scan_provider.value:
 			self.list.append(self.tunerEntry)
-			self.list.append(self.scanHD)
+			for index in providers:
+				if index[0] == self.scan_provider.value and index[1][2]:
+					self.list.append(self.scanHD)
+					break
 			self.list.append(getConfigListEntry(_("Use fastscan channel numbering"), self.scan_keepnumbering))
 			self.list.append(getConfigListEntry(_("Use fastscan channel names"), self.scan_keepsettings))
 			self.list.append(getConfigListEntry(_("Create separate radio userbouquet"), self.scan_create_radio_bouquet))

@@ -218,7 +218,7 @@ class MovieList(GUIComponent):
 		result = {}
 		for timer in NavigationInstance.instance.RecordTimer.timer_list:
 			if timer.isRunning() and not timer.justplay:
-				result[os.path.split(timer.Filename)[1]+'.ts'] = timer
+				result[os.path.split(timer.Filename)[1] + timer.record_service.getFilenameExtension()] = timer
 		if self.runningTimers == result:
 			return
 		self.runningTimers = result
@@ -622,7 +622,7 @@ class MovieList(GUIComponent):
 				break
 			if config.ParentalControl.servicepinactive.value and config.ParentalControl.storeservicepin.value != "never":
 				from Components.ParentalControl import parentalControl
-				if not parentalControl.sessionPinCached and parentalControl.isProtected(serviceref):
+				if not parentalControl.sessionPinCached and parentalControl.isProtected(serviceref) and config.ParentalControl.storeservicepin.value != 'never' and config.ParentalControl.hideBlacklist.value:
 					continue
 			info = serviceHandler.info(serviceref)
 			if info is None:
