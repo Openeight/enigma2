@@ -3,6 +3,7 @@ import os
 
 from enigma import eEnv, getDesktop
 from re import compile
+from stat import S_IMODE
 
 pathExists = os.path.exists
 isMount = os.path.ismount  # Only used in OpenATV /lib/python/Plugins/SystemPlugins/NFIFlash/downloader.py.
@@ -72,7 +73,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 			print "[Directories] Warning: resolveFilename called with base starting with '~/' but 'path_prefix' is None!"
 	# Don't further resolve absolute paths.
 	if base.startswith("/"):
-		return base
+		return os.path.normpath(base)
 	# If an invalid scope is specified log an error and return None.
 	if scope not in defaultPaths:
 		print "[Directories] Error: Invalid scope=%d provided to resolveFilename!" % scope
@@ -95,62 +96,57 @@ def resolveFilename(scope, base="", path_prefix=None):
 	# If base is "" then set path to the scope.  Otherwise use the scope to resolve the base filename.
 	if base is "":
 		path, flags = defaultPaths.get(scope)
-		path = os.path.normpath(path)
+		# If the scope is SCOPE_CURRENT_SKIN or SCOPE_ACTIVE_SKIN append the current skin to the scope path.
+		if scope in (SCOPE_CURRENT_SKIN, SCOPE_ACTIVE_SKIN):
+			# This import must be here as this module finds the config file as part of the config initialisation.
+			from Components.config import config
+			skin = os.path.dirname(config.skin.primary_skin.value)
+			path = os.path.join(path, skin)
 	elif scope in (SCOPE_CURRENT_SKIN, SCOPE_ACTIVE_SKIN):
 		# This import must be here as this module finds the config file as part of the config initialisation.
 		from Components.config import config
-		skin = ""
-		if hasattr(config.skin, "primary_skin"):
-			pos = config.skin.primary_skin.value.rfind("/")
-			if pos != -1:
-				skin = config.skin.primary_skin.value[:pos + 1]
+		skin = os.path.dirname(config.skin.primary_skin.value)
 		resolveList = [
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin),
 			os.path.join(defaultPaths[SCOPE_SKIN][0], skin),
-			os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_%d" % getDesktop(0).size().height()),
+			os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_fallback_%d" % getDesktop(0).size().height()),
 			os.path.join(defaultPaths[SCOPE_SKIN][0], "skin_default"),
-			defaultPaths[SCOPE_CONFIG][0],  # Deprecated top level of SCOPE_CONFIG directory.
-			defaultPaths[SCOPE_SKIN][0]  # Deprecated top level of SCOPE_SKIN directory.
+			defaultPaths[SCOPE_SKIN][0],
+			defaultPaths[SCOPE_CONFIG][0]  # Deprecated top level of SCOPE_CONFIG directory.
 		]
 		for item in resolveList:
-			file = os.path.normpath(os.path.join(item, base))
+			file = os.path.join(item, base)
 			if pathExists(file):
 				path = file
 				break
 	elif scope == SCOPE_CURRENT_LCDSKIN:
 		# This import must be here as this module finds the config file as part of the config initialisation.
 		from Components.config import config
-		skin = ""
 		if hasattr(config.skin, "display_skin"):
-			pos = config.skin.display_skin.value.rfind("/")
-			if pos != -1:
-				skin = config.skin.display_skin.value[:pos + 1]
+			skin = os.path.dirname(config.skin.display_skin.value)
+		else:
+			skin = ""
 		resolveList = [
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], "display", skin),
 			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], skin),
-			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_%s" % getDesktop(1).size().height()),
+			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_fallback_%s" % getDesktop(1).size().height()),
 			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"),
-			defaultPaths[SCOPE_CONFIG][0],  # Deprecated top level of SCOPE_CONFIG directory.
-			defaultPaths[SCOPE_LCDSKIN][0]  # Deprecated top level of SCOPE_LCDSKIN directory.
+			defaultPaths[SCOPE_LCDSKIN][0],
+			defaultPaths[SCOPE_CONFIG][0]  # Deprecated top level of SCOPE_CONFIG directory.
 		]
 		for item in resolveList:
-			file = os.path.normpath(os.path.join(item, base))
+			file = os.path.join(item, base)
 			if pathExists(file):
 				path = file
 				break
 	elif scope == SCOPE_FONTS:
 		# This import must be here as this module finds the config file as part of the config initialisation.
 		from Components.config import config
-		skin = ""
-		display = ""
-		if hasattr(config.skin, "primary_skin"):
-			pos = config.skin.primary_skin.value.rfind("/")
-			if pos != -1:
-				skin = config.skin.primary_skin.value[:pos + 1]
+		skin = os.path.dirname(config.skin.primary_skin.value)
 		if hasattr(config.skin, "display_skin"):
-			pos = config.skin.display_skin.value.rfind("/")
-			if pos != -1:
-				display = config.skin.display_skin.value[:pos + 1]
+			display = os.path.dirname(config.skin.display_skin.value)
+		else:
+			display = ""
 		resolveList = [
 			os.path.join(defaultPaths[SCOPE_CONFIG][0], "fonts"),
 			os.path.join(defaultPaths[SCOPE_SKIN][0], skin),
@@ -158,21 +154,22 @@ def resolveFilename(scope, base="", path_prefix=None):
 			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], display),
 			os.path.join(defaultPaths[SCOPE_LCDSKIN][0], "skin_default"),
 			defaultPaths[SCOPE_FONTS][0],
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin),  # Deprecated skin in SCOPE_CONFIG directory.
-			os.path.join(defaultPaths[SCOPE_CONFIG][0], display)  # Deprecated display in SCOPE_CONFIG directory.
+			os.path.join(defaultPaths[SCOPE_CONFIG][0], skin),
+			os.path.join(defaultPaths[SCOPE_CONFIG][0], display)
 		]
 		for item in resolveList:
-			file = os.path.normpath(os.path.join(item, base))
+			file = os.path.join(item, base)
 			if pathExists(file):
 				path = file
 				break
 	elif scope == SCOPE_CURRENT_PLUGIN:
-		file = os.path.normpath(os.path.join(defaultPaths[SCOPE_PLUGINS][0], base))
+		file = os.path.join(defaultPaths[SCOPE_PLUGINS][0], base)
 		if pathExists(file):
 			path = file
 	else:
 		path, flags = defaultPaths.get(scope)
-		path = os.path.normpath(os.path.join(path, base))
+		path = os.path.join(path, base)
+	path = os.path.normpath(path)
 	# If the path is a directory then ensure that it ends with a "/".
 	if os.path.isdir(path) and not path.endswith("/"):
 		path += "/"
@@ -335,11 +332,16 @@ def copyfile(src, dst):
 		f2.close()
 	try:
 		st = os.stat(src)
-		mode = os.stat.S_IMODE(st.st_mode)
-		os.chmod(dst, mode)
-		os.utime(dst, (st.st_atime, st.st_mtime))
+		try:
+			os.chmod(dst, S_IMODE(st.st_mode))
+		except OSError, e:
+			print "[Directories] Error %d: Setting modes from '%s' to '%s'! (%s)" % (e.errno, src, dst, os.strerror(e.error))
+		try:
+			os.utime(dst, (st.st_atime, st.st_mtime))
+		except OSError, e:
+			print "[Directories] Error %d: Setting times from '%s' to '%s'! (%s)" % (e.errno, src, dst, os.strerror(e.error))
 	except OSError, e:
-		print "[Directories] Error %d: Copying stats from '%s' to '%s'! (%s)" % (e.errno, src, dst, os.strerror(e.error))
+		print "[Directories] Error %d: Obtaining stats from '%s' to '%s'! (%s)" % (e.errno, src, dst, os.strerror(e.error))
 	return status
 
 def copytree(src, dst, symlinks=False):
@@ -365,11 +367,16 @@ def copytree(src, dst, symlinks=False):
 			print "[Directories] Error %d: Copying tree '%s' to '%s'! (%s)" % (e.errno, srcname, dstname, os.strerror(e.error))
 	try:
 		st = os.stat(src)
-		mode = os.stat.S_IMODE(st.st_mode)
-		os.chmod(dst, mode)
-		os.utime(dst, (st.st_atime, st.st_mtime))
+		try:
+			os.chmod(dst, S_IMODE(st.st_mode))
+		except OSError, e:
+			print "[Directories] Error %d: Setting modes from '%s' to '%s'! (%s)" % (e.errno, src, dst, os.strerror(e.error))
+		try:
+			os.utime(dst, (st.st_atime, st.st_mtime))
+		except OSError, e:
+			print "[Directories] Error %d: Setting times from '%s' to '%s'! (%s)" % (e.errno, src, dst, os.strerror(e.error))
 	except OSError, e:
-		print "[Directories] Error %d: Copying stats from '%s' to '%s'! (%s)" % (e.errno, src, dst, os.strerror(e.error))
+		print "[Directories] Error %d: Obtaining stats from '%s' to '%s'! (%s)" % (e.errno, src, dst, os.strerror(e.error))
 
 # Renames files or if source and destination are on different devices moves them in background
 # input list of (source, destination)
