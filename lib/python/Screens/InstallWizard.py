@@ -97,7 +97,7 @@ class InstallWizard(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("I do not want to perform any service scans"), self.noscan))
 			self.list.append(getConfigListEntry(_("Do an automatic service scan now"), self.autoscan))
 			self.list.append(getConfigListEntry(_("Do a manual service scan now"), self.manualscan))
-			from Plugins.SystemPlugins.FastScan.plugin import getProviderList
+			#from Plugins.SystemPlugins.FastScan.plugin import getProviderList
 			#if getProviderList():
 			#	self.list.append(getConfigListEntry(_("Do a fast service scan now"), self.fastscan))
 			from Components.NimManager import nimmanager
