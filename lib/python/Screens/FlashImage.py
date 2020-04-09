@@ -295,17 +295,24 @@ class FlashImage(Screen):
 
 	def startBackupsettings(self, retval):
 		if retval:
-			from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen
-			self.session.openWithCallback(self.backupsettingsDone, BackupScreen, runBackup = True)
+			if os.path.isfile(self.BACKUP_SCRIPT):
+				self["info"].setText(_("Backing up to: %s") % self.destination)
+				configfile.save()
+				if config.plugins.autobackup.epgcache.value:
+					eEPGCache.getInstance().save()
+				self.containerbackup = Console()
+				self.containerbackup.ePopen("%s%s'%s' %s" % (self.BACKUP_SCRIPT, config.plugins.autobackup.autoinstall.value and " -a " or " ", self.destination, int(config.plugins.autobackup.prevbackup.value)), self.backupsettingsDone)
+			else:
+				self.session.openWithCallback(self.startDownload, MessageBox, _("Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"), default=False, simple=True)
 		else:
 			self.abort()
 
-	def backupsettingsDone(self, retval):
+	def backupsettingsDone(self, data, retval, extra_args):
 		self.containerbackup = None
-		if retval == True:
+		if retval == 0:
 			self.startDownload()
 		else:
-			self.abort()
+			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n%s") % reval, type=MessageBox.TYPE_ERROR, simple=True)
 
 	def startDownload(self, reply=True):
 		self.show()
@@ -403,8 +410,8 @@ class MultibootSelection(SelectImage):
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
 			"ok": self.keyOk,
-			"cancel": boundFunction(self.close, None),
-			"red": boundFunction(self.close, None),
+			"cancel": self.cancel,
+			"red": self.cancel,
 			"green": self.keyOk,
 			"up": self.keyUp,
 			"down": self.keyDown,
@@ -414,12 +421,38 @@ class MultibootSelection(SelectImage):
 			"downRepeated": self.keyDown,
 			"leftRepeated": self.keyLeft,
 			"rightRepeated": self.keyRight,
-			"menu": boundFunction(self.close, True),
+			"menu": boundFunction(self.cancel, True),
 		}, -1)
 
 		self.callLater(self.getBootOptions)
 
-	def getImagesList(self, reply=None):
+	def cancel(self, value=None):
+		self.container = Console()
+		self.container.ePopen('umount /tmp/startupmount', boundFunction(self.unmountCallback, value))
+
+	def unmountCallback(self, value, data=None, retval=None, extra_args=None):
+		self.container.killAll()
+		if not os.path.ismount('/tmp/startupmount'):
+			os.rmdir('/tmp/startupmount')
+		self.close(value)
+
+	def getBootOptions(self, value=None):
+		self.container = Console()
+		if os.path.isdir('/tmp/startupmount'):
+			self.getImagesList()
+		else:
+			if os.path.islink("/dev/block/by-name/bootoptions"):
+				os.mkdir('/tmp/startupmount')
+				self.container.ePopen('mount /dev/block/by-name/bootoptions /tmp/startupmount', self.getImagesList)
+			elif os.path.islink("/dev/block/by-name/boot"):
+				os.mkdir('/tmp/startupmount')
+				self.container.ePopen('mount /dev/block/by-name/boot /tmp/startupmount', self.getImagesList)
+			else:
+				os.mkdir('/tmp/startupmount')
+				self.container.ePopen('mount /dev/%sp1 /tmp/startupmount' % SystemInfo["canMultiBoot"][2], self.getImagesList)
+
+	def getImagesList(self, data=None, retval=None, extra_args=None):
+		self.container.killAll()
 		self.getImageList = GetImagelist(self.getImagelistCallback)
 
 	def getImagelistCallback(self, imagesdict):
@@ -427,14 +460,18 @@ class MultibootSelection(SelectImage):
 		currentimageslot = GetCurrentImage()
 		mode = GetCurrentImageMode() or 0
 		if imagesdict:
-			for x in sorted(imagesdict.keys()):
+			for index, x in enumerate(sorted(imagesdict.keys())):
 				if imagesdict[x]["imagename"] != _("Empty slot"):
 					if SystemInfo["canMode12"]:
-						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
+						list.insert(index, ChoiceEntryComponent('',((_("slot%s - %s mode 1 (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesdict[x]['imagename']), x)))
 						list.append(ChoiceEntryComponent('',((_("slot%s - %s mode 12 (current image)") if x == currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesdict[x]['imagename']), x + 12)))
 					else:
 						list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesdict[x]['imagename']), x)))
-		else:
+		if os.path.isfile("/tmp/startupmount/STARTUP_RECOVERY"):
+			list.append(ChoiceEntryComponent('',((_("Boot to Recovery menu")), "Recovery")))
+		if os.path.isfile("/tmp/startupmount/STARTUP_ANDROID"):
+			list.append(ChoiceEntryComponent('',((_("Boot to Android image")), "Android")))
+		if not list:
 			list.append(ChoiceEntryComponent('',((_("No images found")), "Waiter")))
 		self["list"].setList(list)
 
