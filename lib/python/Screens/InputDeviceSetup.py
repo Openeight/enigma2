@@ -317,7 +317,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("21", _("SF4008/Zgemma H.S/H.2S/H.2H/H5/H7(old model)")),
 			("25", _("Zgemma H9(old model)/I55Plus")),
 			("27", _("HD60")),
-			("28", _("Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"))
+			("28", _("Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10")),
 			("500", _("WWIO_BRE2ZE_TC")),
 			("501", _("OCTAGON_SFXXX8")),
 			("502", _("GIGABLUE Black")),
@@ -363,7 +363,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("h7", 28), # new model /old 21
 			("h9", 28), # new model /old 25
 			("h9combo", 28),
-			("h10", 28)
+			("h10", 28),
 			("et7000mini", 16),
 			("sf4008", 501),
 			("g100", 501),
