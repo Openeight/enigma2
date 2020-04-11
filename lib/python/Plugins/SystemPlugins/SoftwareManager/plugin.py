@@ -40,7 +40,7 @@ from ImageBackup import ImageBackup
 from RestoreWizard import backupAvailable, RestoreWizard
 from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from SoftwareTools import iSoftwareTools
-from Flash_online import FlashOnline
+from Screens.FlashImage import SelectImage
 
 config.plugins.configurationbackup = ConfigSubsection()
 if getBoxType() == "odinm9" :
@@ -275,7 +275,7 @@ class UpdatePluginMenu(Screen):
 				elif (currentEntry == "install-extensions"):
 					self.session.open(PluginManager, self.skin_path)
 				elif (currentEntry == "flash-online"):
-					self.session.open(FlashOnline)
+					self.session.open(SelectImage)
 				elif (currentEntry == "backup-image"):
 					self.session.open(ImageBackup)
 				elif (currentEntry == "system-backup"):

@@ -23,6 +23,7 @@ from Screens.SkinSelector import SkinSelector, LcdSkinSelector
 from Screens.RecordPaths import RecordPathsSettings
 from Screens.CCcamInfo import CCcamInfoMain
 from Screens.OScamInfo import OscamInfoMenu
+from Screens.FlashImage import SelectImage
 from Screens.Hotkey import HotkeySetup
 from Plugins.SystemPlugins.Videomode.plugin import videoSetupMain
 from Plugins.Plugin import PluginDescriptor
@@ -38,7 +39,6 @@ from Plugins.Extensions.ExtrasPanel.SoftcamPanel import *
 from Plugins.Extensions.ExtrasPanel.plugin import ShowSoftcamPanelExtensions
 from Plugins.Extensions.ExtrasPanel.SoftwarePanel import SoftwarePanel
 from Plugins.Extensions.ExtrasPanel.sundtek import SundtekControlCenter
-from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
 from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
 from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin, SoftwareManagerSetup
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getOldBackupPath, getBackupFilename
@@ -562,7 +562,7 @@ class QuickMenu(Screen):
 		elif item[0] == _('Software Update'):
 			self.session.open(SoftwarePanel)
 		elif item[0] == _('Flash Online'):
-			self.session.open(FlashOnline)
+			self.session.open(SelectImage)
 		elif item[0] == _('Complete Backup'):
 			if DFLASH == True:
 				self.session.open(dFlash)
