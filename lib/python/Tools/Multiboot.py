@@ -2,6 +2,8 @@ from Components.SystemInfo import SystemInfo
 from Components.Console import Console
 import os, glob
 
+from boxbranding import getBoxType, getMachineName
+
 TMP_MOUNT = '/tmp/multibootcheck'
 
 def getMultibootStartupDevice():
@@ -66,6 +68,17 @@ def GetCurrentImage():
 
 def GetCurrentImageMode():
 	return bool(SystemInfo["canMultiBoot"]) and SystemInfo["canMode12"] and int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
+
+def GetBoxName():
+	box = getBoxType()
+	machinename = getMachineName()
+	if box == "xp1000" and machinename.lower() == "sf8 hd":
+		box = "sf8"
+	elif box.startswith('sf8008m'):
+		box = "sf8008m"
+	elif box.startswith('sf8008'):
+		box = "sf8008"
+	return box
 
 class GetImagelist():
 	MOUNT = 0

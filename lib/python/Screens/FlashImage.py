@@ -13,7 +13,7 @@ from Components.SystemInfo import SystemInfo
 from Tools.BoundFunction import boundFunction
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
-from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode
+from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode, GetBoxName
 import os, urllib2, json, time, zipfile, shutil
 
 from enigma import eEPGCache
@@ -69,7 +69,7 @@ class SelectImage(Screen):
 				except:
 					pass
 
-		model = HardwareInfo().get_machine_name()
+		model = GetBoxName()
 
 		if not self.imagesList:
 			if not self.jsonlist:
