@@ -364,7 +364,13 @@ class FlashImage(Screen):
 		imagefiles = findimagefiles(self.unzippedimage)
 		if imagefiles:
 			if SystemInfo["canMultiBoot"]:
-				command = "/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles)
+				if "/dev/sda" in SystemInfo["canMultiBoot"][self.multibootslot]["device"]:
+					dev = SystemInfo["canMultiBoot"][self.multibootslot]["device"]
+					rootfs = dev[5:]
+					kernel = "sda" + str(int(rootfs[3:]) - 1)
+					command = "/usr/bin/ofgwrite -r%s -k%s %s" % (rootfs, kernel, imagefiles)
+				else:
+					command = "/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles)
 			else:
 				command = "/usr/bin/ofgwrite -k -r '%s'" % imagefiles
 			self.containerofgwrite = Console()
