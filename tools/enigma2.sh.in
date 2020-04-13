@@ -117,7 +117,7 @@ while : ; do
 		43)
 			#auto install and autobackup
 			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
-			/etc/init.d/settings-restore.sh
+			/usr/bin/settings-restore.sh
 			/etc/init.d/avahi-daemon stop
 			ifdown eth1
 			ip addr flush dev eth1 scope global

@@ -1,4 +1,4 @@
-bin_SCRIPTS = enigma2.sh
+bin_SCRIPTS = enigma2.sh settings-restore.sh convert-smbconf.py
 lib_LTLIBRARIES = libopen.la
 
 libopen_la_SOURCES = libopen.c
