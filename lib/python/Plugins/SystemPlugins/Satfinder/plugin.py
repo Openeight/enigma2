@@ -186,11 +186,12 @@ class Satfinder(ScanSetup, ServiceScan):
 						self.scan_sat.is_id.value = eDVBFrontendParametersSatellite.No_Stream_Id_Filter
 						self.scan_sat.pls_mode.value = eDVBFrontendParametersSatellite.PLS_Gold
 						self.scan_sat.pls_code.value = eDVBFrontendParametersSatellite.PLS_Default_Gold_Code
-					self.t2mi_Entry = getConfigListEntry(_('T2MI'), self.scan_sat.t2mi)
-					self.list.append(self.t2mi_Entry)
-					if self.scan_sat.t2mi.value == "on":
-						self.list.append(getConfigListEntry("%s%s" % (indent, _('T2MI PLP ID')), self.scan_sat.t2mi_plp_id))
-						self.list.append(getConfigListEntry("%s%s" % (indent, _('T2MI PID')), self.scan_sat.t2mi_pid))
+					if nim.isT2MI():
+						self.t2mi_plp_id_boolEntry = getConfigListEntry(_('T2MI PLP'), self.scan_sat.t2mi_plp_id_bool)
+						self.list.append(self.t2mi_plp_id_boolEntry)
+						if self.scan_sat.t2mi_plp_id_bool.value:
+							self.list.append(getConfigListEntry("%s%s" % (indent, _('T2MI PLP ID')), self.scan_sat.t2mi_plp_id))
+							self.list.append(getConfigListEntry("%s%s" % (indent, _('T2MI PID')), self.scan_sat.t2mi_pid))
 					else:
 						self.scan_sat.t2mi_plp_id.value = eDVBFrontendParametersSatellite.No_T2MI_PLP_Id
 						self.scan_sat.t2mi_pid.value = eDVBFrontendParametersSatellite.T2MI_Default_Pid
@@ -438,12 +439,6 @@ class Satfinder(ScanSetup, ServiceScan):
 				fec = self.scan_sat.fec_s2.value
 			else:
 				fec = self.scan_sat.fec.value
-
-			if self.scan_sat.t2mi_pid.value > 0 and self.scan_sat.t2mi_plp.value >= 0:
-				t2mi_plp_id = (self.scan_sat.t2mi_pid.value<<16)|self.scan_sat.t2mi_plp.value
-			else:
-				t2mi_plp_id = eDVBFrontendParametersSatellite.No_T2MI_PLP_Id
-
 			transponder = (
 				self.scan_sat.frequency.value,
 				self.scan_sat.symbolrate.value,
