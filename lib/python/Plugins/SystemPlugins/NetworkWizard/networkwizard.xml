@@ -63,6 +63,12 @@ self.condition = (self.InterfaceState == True )
 self.clearSelectedKeys()
 self.selectKey("OK")
                 </code>
+                <code pos="after">
+currStep = self.numSteps
+self.wizard[currStep]["nextstep"] = None
+self.markDone()
+self.close()
+                </code>
         </step>
         <step id="checklanstatusend">
 		<condition>

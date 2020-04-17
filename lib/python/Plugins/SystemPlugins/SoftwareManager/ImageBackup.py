@@ -651,7 +651,7 @@ class ImageBackup(Screen):
 		if path.exists('/proc/stb/info/chipset'):
 			AboutText += _("Chipset: BCM%s") % about.getChipSetString().lower().replace('\n','').replace('bcm','') + "\n"
 
-		AboutText += _("CPU: %s") % about.getCPUString() + "\n"
+		AboutText += _("CPU: %s") % about.getCPUInfoString() + "\n"
 		AboutText += _("Cores: %s") % about.getCpuCoresString() + "\n"
 
 		AboutText += _("Version: %s") % getImageVersion() + "\n"

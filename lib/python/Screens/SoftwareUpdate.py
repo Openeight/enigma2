@@ -9,6 +9,7 @@ from Components.config import config
 from Components.About import about
 from Components.ActionMap import ActionMap
 from Components.Ipkg import IpkgComponent
+from Components.Language import language
 from Components.Sources.StaticText import StaticText
 from Components.Slider import Slider
 from Tools.BoundFunction import boundFunction
@@ -16,7 +17,7 @@ from Tools.Directories import fileExists
 from Tools.HardwareInfo import HardwareInfo
 from enigma import eTimer, getBoxType, eDVBDB
 from urllib2 import urlopen
-import socket
+import datetime, os, json
 
 class UpdatePlugin(Screen, ProtectedScreen):
 	skin = """
@@ -76,60 +77,79 @@ class UpdatePlugin(Screen, ProtectedScreen):
 	def checkTraficLight(self):
 		self.activityTimer.callback.remove(self.checkTraficLight)
 		self.activityTimer.start(100, False)
+		status = None
+		message = None
+		abort = False
+		picon = MessageBox.TYPE_ERROR
+		url = "https://openpli.org/trafficlight"
 
-		currentTimeoutDefault = socket.getdefaulttimeout()
-		socket.setdefaulttimeout(3)
-		message = ""
-		picon = None
+		# try to fetch the trafficlight json from the website
 		try:
-			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
-			# run in parallel to the package update.
-			url = "https://openpli.org/status/"
-			try:
-				status = urlopen(url, timeout=5).read().split('!', 1)
-			except:
-				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
-				from ssl import _create_unverified_context
-				status = urlopen(url, timeout=5, context=_create_unverified_context()).read().split('!', 1)
-				print status
-			if getBoxType() in status[0].split(','):
-				message = len(status) > 1 and status[1] or _("The current image might not be stable.\nFor more information see %s.") % ("www.openpli.org")
-				# strip any HTML that may be in the message, but retain line breaks
-				import re
-				message = message.replace("<br />", "\n\n").replace("<br>", "\n\n")
-				message = re.sub('<[^<]+?>', '', re.sub('&#8209;', '-', message))
-				picon = MessageBox.TYPE_ERROR
+			status = dict(json.load(urlopen(url, timeout=5)))
+			print "[SoftwareUpdate] status is: ", status
 		except:
-			message = _("The status of the current image could not be checked because %s can not be reached.") % ("www.openpli.org")
-			picon = MessageBox.TYPE_ERROR
-		socket.setdefaulttimeout(currentTimeoutDefault)
-		if message != "":
-			message += "\n" + _("Do you want to update your receiver?")
-			self.session.openWithCallback(self.startActualUpdate, MessageBox, message, picon = picon)
+			pass
+
+		# process the status fetched
+		if status is not None:
+
+			try:
+				# get image version and machine name
+				machine = HardwareInfo().get_machine_name()
+				version = open("/etc/issue").readlines()[-2].split()[1]
+
+				# do we have an entry for this version
+				if version in status and machine in status[version]['machines']:
+					if 'abort' in status[version]:
+						abort = status[version]['abort']
+					if 'from' in status[version]:
+						starttime = datetime.datetime.strptime(status[version]['from'], '%Y%m%d%H%M%S')
+					else:
+						starttime = datetime.datetime.now()
+					if 'to' in status[version]:
+						endtime = datetime.datetime.strptime(status[version]['to'], '%Y%m%d%H%M%S')
+					else:
+						endtime = datetime.datetime.now()
+					if (starttime <= datetime.datetime.now() and endtime >= datetime.datetime.now()):
+						message = str(status[version]['message'])
+
+				# check if we have per-language messages
+				if type(message) is dict:
+					lang = language.getLanguage()
+					if lang in message:
+						message = message[lang]
+					elif 'en_EN' in message:
+						message = message['en_EN']
+					else:
+						message =  _("The current image might not be stable.\nFor more information see %s.") % ("openpli.org")
+
+			except Exception, e:
+				print "[SoftwareUpdate] status error: ", str(e)
+				message =  _("The current image might not be stable.\nFor more information see %s.") % ("openpli.org")
+
+		# or display a generic warning if fetching failed
+		else:
+			message = _("The status of the current image could not be checked because %s can not be reached.") % ("openpli.org")
+
+		# show the user the message first
+		if message is not None:
+			if abort:
+				self.session.openWithCallback(self.close, MessageBox, message, type=MessageBox.TYPE_ERROR, picon = picon)
+			else:
+				message += "\n\n" + _("Do you want to update your receiver?")
+				self.session.openWithCallback(self.startActualUpdate, MessageBox, message, picon = picon)
+
+		# no message, continue with the update
 		else:
 			self.startActualUpdate(True)
 
 	def getLatestImageTimestamp(self):
-		currentTimeoutDefault = socket.getdefaulttimeout()
-		socket.setdefaulttimeout(3)
-		try:
-			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
-			# run in parallel to the package update.
-			from time import strftime
-			from datetime import datetime
-			imageVersion = about.getImageTypeString().split(" ")[1]
-			imageVersion = (int(imageVersion) < 5 and "%.1f" or "%s") % int(imageVersion)
-			url = "https://openpli.org/download/timestamp/%s~%s" % (HardwareInfo().get_device_model(), imageVersion)
+		def gettime(url):
 			try:
-				latestImageTimestamp = datetime.fromtimestamp(int(urlopen(url, timeout=5).read())).strftime(_("%Y-%m-%d %H:%M"))
+				return str(datetime.datetime.strptime(urlopen("%s/Packages.gz" % url).info()["Last-Modified"], '%a, %d %b %Y %H:%M:%S %Z'))
 			except:
-				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
-				from ssl import _create_unverified_context
-				latestImageTimestamp = datetime.fromtimestamp(int(urlopen(url, timeout=5, context=_create_unverified_context()).read())).strftime(_("%Y-%m-%d %H:%M"))
-		except:
-			latestImageTimestamp = ""
-		socket.setdefaulttimeout(currentTimeoutDefault)
-		return latestImageTimestamp
+				return ""
+		return sorted([gettime(open("/etc/opkg/%s" % file, "r").readlines()[0].split()[2]) for file in os.listdir("/etc/opkg") if not file.startswith("3rd-party") and file not in ("arch.conf", "opkg.conf")], reverse=True)[0]
 
 	def startActualUpdate(self,answer):
 		if answer:
@@ -154,7 +174,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			if param in self.sliderPackages:
 				self.slider.setValue(self.sliderPackages[param])
 			self.package.setText(param)
-			self.status.setText(_("Upgrading") + ": %s/%s" % (self.packages, self.total_packages))
+			self.status.setText(_("Updating") + ": %s/%s" % (self.packages, self.total_packages))
 			if not param in self.processed_packages:
 				self.processed_packages.append(param)
 				self.packages += 1
@@ -193,7 +213,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				if self.total_packages:
 					latestImageTimestamp = self.getLatestImageTimestamp()
 					if latestImageTimestamp:
-						message = _("Do you want to update your receiver to %s?") % self.getLatestImageTimestamp() + "\n"
+						message = _("Do you want to update your receiver to %s?") % latestImageTimestamp + "\n"
 					else:
 						message = _("Do you want to update your receiver?") + "\n"
 					message += "(" + (ngettext("%s updated package available", "%s updated packages available", self.total_packages) % self.total_packages) + ")"
@@ -204,12 +224,12 @@ class UpdatePlugin(Screen, ProtectedScreen):
 						choices = [(_("Update and reboot (recommended)"), "cold"),
 						(_("Update and ask to reboot"), "hot")]
 					choices.append((_("Update channel list only"), "channels"))
-					choices.append((_("Show packages to be upgraded"), "showlist"))
+					choices.append((_("Show packages to be updated"), "showlist"))
 				else:
 					message = _("No updates available")
 					choices = []
 				if fileExists("/home/root/ipkgupgrade.log"):
-					choices.append((_("Show latest upgrade log"), "log"))
+					choices.append((_("Show latest update log"), "log"))
 				choices.append((_("Show latest commits"), "commits"))
 				choices.append((_("Cancel"), ""))
 				self.session.openWithCallback(self.startActualUpgrade, ChoiceBox, title=message, list=choices, windowTitle=self.title)
@@ -271,7 +291,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			self.session.openWithCallback(boundFunction(self.ipkgCallback, IpkgComponent.EVENT_DONE, None), TextBox, text, _("Packages to update"), True)
 		elif answer[1] == "log":
 			text = open("/home/root/ipkgupgrade.log", "r").read()
-			self.session.openWithCallback(boundFunction(self.ipkgCallback, IpkgComponent.EVENT_DONE, None), TextBox, text, _("Latest upgrade log"), True)
+			self.session.openWithCallback(boundFunction(self.ipkgCallback, IpkgComponent.EVENT_DONE, None), TextBox, text, _("Latest update log"), True)
 		else:
 			self.ipkg.startCmd(IpkgComponent.CMD_UPGRADE, args = {'test_only': False})
 

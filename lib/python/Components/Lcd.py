@@ -151,13 +151,8 @@ def standbyCounterChanged(dummy):
 	config.lcd.ledbrightnessdeepstandby.apply()
 
 def InitLcd():
-	if getBoxType() in ('et4000', 'et5000', 'et6000', 'et7000'):
-		detected = False
-	else:
-		detected = eDBoxLCD.getInstance() and eDBoxLCD.getInstance().detected()
-	SystemInfo["Display"] = detected
-	config.lcd = ConfigSubsection()
-
+	detected = eDBoxLCD.getInstance() and eDBoxLCD.getInstance().detected()
+	config.lcd = ConfigSubsection();
 	if detected:
 		config.lcd.scroll_speed = ConfigSelection(default = "300", choices = [
 			("500", _("slow")),

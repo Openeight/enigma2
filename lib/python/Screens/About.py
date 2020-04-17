@@ -13,7 +13,7 @@ from Components.ProgressBar import ProgressBar
 from boxbranding import getBoxType, getMachineBrand, getMachineBuild, getMachineName, getImageVersion, getImageBuild, getDriverDate
 
 from Tools.StbHardware import getFPVersion
-from enigma import ePicLoad, getDesktop, eSize, eTimer, eLabel, eConsoleAppContainer
+from enigma import ePicLoad, getDesktop, eSize, eTimer, eLabel, eConsoleAppContainer, eGetEnigmaDebugLvl
 from Components.Pixmap import Pixmap
 from Tools.LoadPixmap import LoadPixmap
 from Components.InputDevice import iInputDevices, iRcTypeControl
@@ -29,77 +29,38 @@ class About(Screen):
 		self.setTitle(_("About"))
 		hddsplit = skin.parameters.get("AboutHddSplit", 0)
 
-		AboutText = _("Model: %s %s") % (getMachineBrand(), getMachineName()) + "\n"
+		AboutText = _("Hardware: ") + about.getHardwareTypeString() + "\n"
+		cpu = about.getCPUInfoString()
+		AboutText += _("CPU: ") + cpu + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
-		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
-		if path.exists('/proc/stb/info/chipset'):
-			AboutText += _("Chipset: %s") % about.getChipSetString() + "\n"
-		AboutText += _("CPU: %s") % about.getCPUString() + "\n"
-		AboutText += _("Version: %s") % getImageVersion() + "\n"
-		imagestarted = ""
-		bootname = ''
-		if path.exists('/boot/bootname'):
-			f = open('/boot/bootname', 'r')
-			bootname = f.readline().split('=')[1]
-			f.close()
-		if getMachineBuild() in ('cc1','sf8008', 'sf8008m'):
-			if path.exists('/boot/STARTUP'):
-				f = open('/boot/STARTUP', 'r')
-				f.seek(5)
-				image = f.read(4)
-				if image == "emmc":
-					image = "1"
-				elif image == "usb0":
-					f.seek(13)
-					image = f.read(1)
-					if image == "1":
-						image = "2"
-					elif image == "3":
-						image = "3"
-					elif image == "5":
-						image = "4"
-					elif image == "7":
-						image = "5"
-				f.close()
-				if bootname: bootname = "   (%s)" %bootname 
-				AboutText += _("Selected Image:\t%s") % "STARTUP_" + image + bootname + "\n"
-		if path.exists('/boot/STARTUP'):
-			f = open('/boot/STARTUP', 'r')
-			f.seek(22)
-			image = f.read(1)
-			f.close()
-			if bootname: bootname = "   (%s)" %bootname
-			AboutText += _("Image started:\t%s") % "STARTUP_" + image + bootname + "\n"
-		AboutText += _("Build: %s") % getImageBuild() + "\n"
-		if path.exists('/proc/stb/info/release') and getBoxType() in ('et7000', 'et7500', 'et8500'):
-			realdriverdate = open("/proc/stb/info/release", 'r')
-			for line in realdriverdate:
-				tmp = line.strip()
-				AboutText += _("Drivers: %s") % tmp + "\n"
-			realdriverdate.close()
-		else:
-			string = getDriverDate()
-			year = string[0:4]
-			month = string[4:6]
-			day = string[6:8]
-			driversdate = '-'.join((year, month, day))
-			AboutText += _("Drivers: %s") % driversdate + "\n"
-		EnigmaVersion = "Enigma: " + about.getEnigmaVersionString()
-		self["EnigmaVersion"] = StaticText(EnigmaVersion)
-		AboutText += EnigmaVersion + "\n"
-		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
+		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
+		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
 
-		GStreamerVersion = "GStreamer: " + about.getGStreamerVersionString().replace("GStreamer","")
+		# [WanWizard] Removed until we find a reliable way to determine the installation date
+		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
+
+		EnigmaVersion = about.getEnigmaVersionString()
+		EnigmaVersion = EnigmaVersion.rsplit("-", EnigmaVersion.count("-") - 2)
+		if len(EnigmaVersion) == 3:
+			EnigmaVersion = EnigmaVersion[0] + " (" + EnigmaVersion[2] + "-" + EnigmaVersion[1] + ")"
+		else:
+			EnigmaVersion = EnigmaVersion[0] + " (" + EnigmaVersion[1] + ")"
+		EnigmaVersion = _("Enigma version: ") + EnigmaVersion
+		self["EnigmaVersion"] = StaticText(EnigmaVersion)
+		AboutText += "\n" + EnigmaVersion + "\n"
+
+		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
+
+		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
+
+		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString(cpu).replace("GStreamer","")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
 		AboutText += GStreamerVersion + "\n"
 
-		ImageVersion = _("Last upgrade: ") + about.getImageVersionString()
-		self["ImageVersion"] = StaticText(ImageVersion)
-		AboutText += ImageVersion + "\n"
-
-		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n" + "\n"
+		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
 
 		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
+		AboutText += _("Enigma debug level: %d\n") % eGetEnigmaDebugLvl()
 
 		fp_version = getFPVersion()
 		if fp_version is None:
@@ -128,7 +89,7 @@ class About(Screen):
 			fp.close
 			AboutText += _("Remote control ID") + _(": ") + RcID
 
-		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value[0:-9], getDesktop(0).size().width(), getDesktop(0).size().height())
+		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
 		self["TunerHeader"] = StaticText(_("Detected NIMs:"))
 		AboutText += "\n" + _("Detected NIMs:") + "\n"
@@ -403,10 +364,9 @@ class MemoryInfo(Screen):
 
 		self["params"] = MemoryInfoSkinParams()
 
-		self['info'] = Label(_("This info is for developers only.\nFor a normal user it is not relevant.\nDon't panic please when you see values being displayed that you think look suspicious!"))
+		self['info'] = Label(_("This info is for developers only.\nFor normal users it is not relevant.\nPlease don't panic if you see values displayed looking suspicious!"))
 
-		Typ = _("%s  ") % (getMachineName())
-		self.setTitle(Typ + "[" + (_("Memory Info"))+ "]")
+		self.setTitle(_("Memory Info"))
 		self.onLayoutFinish.append(self.getMemoryInfo)
 
 	def getMemoryInfo(self):
@@ -463,7 +423,7 @@ class MemoryInfoSkinParams(GUIComponent):
 					self.rows_in_column = int(value)
 			self.skinAttributes = attribs
 		return GUIComponent.applySkin(self, desktop, screen)
-	
+
 	GUI_WIDGET = eLabel
 
 class Troubleshoot(Screen):
@@ -556,6 +516,10 @@ class Troubleshoot(Screen):
 		self.container = None
 		self.close()
 
+	def getDebugFilesList(self):
+		import glob
+		return [x for x in sorted(glob.glob("/home/root/enigma.*.debuglog"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))]
+
 	def getLogFilesList(self):
 		import glob
 		home_root = "/home/root/enigma2_crash.log"
@@ -570,7 +534,7 @@ class Troubleshoot(Screen):
 				self.titles.append("%s" % install_log)
 				self.commands.append("cat %s" % install_log)
 		self.numberOfCommands = len(self.commands)
-		fileNames = self.getLogFilesList()
+		fileNames = self.getLogFilesList() + self.getDebugFilesList()
 		if fileNames:
 			totalNumberOfLogfiles = len(fileNames)
 			logfileCounter = 1

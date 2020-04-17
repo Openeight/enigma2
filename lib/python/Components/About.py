@@ -4,7 +4,7 @@ import re
 from Tools.HardwareInfo import HardwareInfo
 
 def getVersionString():
-	return getEnigmaVersionString()
+	return getImageVersionString()
 
 def getImageVersionString():
 	try:
@@ -49,13 +49,13 @@ def getEnigmaVersionString():
 		enigma_version = enigma_version [:-12]
 	return enigma_version
 
-def getGStreamerVersionString():
+def getGStreamerVersionString(cpu):
 	try:
 		from glob import glob
 		gst = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/gstreamer[0-9].[0-9].control")[0], "r") if x.startswith("Version:")][0]
 		return "%s" % gst[1].split("+")[0].replace("\n","")
 	except:
-		return _("unknown")
+		return _("Not Required") if cpu.upper().startswith('HI') else _("Not Installed")
 
 def getKernelVersionString():
 	try:
@@ -82,7 +82,7 @@ def getImageTypeString():
 	except:
 		return _("undefined")
 
-def getCPUString():
+def getCPUInfoString():
 	try:
 		cpu_count = 0
 		cpu_speed = 0
@@ -127,10 +127,26 @@ def getCPUString():
 			except:
 				pass
 		if temperature:
-			return "%s %s MHz (%s) %s°C" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature)
+			return "%s %s MHz (%s) %s\xb0C" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature)
 		return "%s %s MHz (%s)" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count)
 	except:
 		return _("undefined")
+
+def getDriverInstalledDate():
+	try:
+		from glob import glob
+		try:
+			driver = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
+			return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
+		except:
+			try:
+				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-dvb-proxy-*.control")[0], "r") if x.startswith("Version:")][0]
+				return  "%s" % driver[1].replace("\n","")
+			except:
+				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-platform-util-*.control")[0], "r") if x.startswith("Version:")][0]
+				return  "%s" % driver[1].replace("\n","")
+	except:
+		return _("unknown")
 
 def getCpuCoresString():
 	try:

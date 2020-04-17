@@ -3,16 +3,17 @@ installdir = $(pkgdatadir)/skin_default/buttons
 dist_install_DATA = \
 	blue.png \
 	blue_pressed.png \
-	button_blue_off.png \
 	button_blue.png \
-	button_green_off.png \
+	button_blue_off.png \
 	button_green.png \
-	button_red_off.png \
+	button_green_off.png \
 	button_red.png \
-	button_yellow_off.png \
+	button_red_off.png \
 	button_yellow.png \
+	button_yellow_off.png \
 	green-big.png \
 	green.png \
+	grey.png \
 	key_0.png \
 	key_1.png \
 	key_2.png \
@@ -23,17 +24,70 @@ dist_install_DATA = \
 	key_7.png \
 	key_8.png \
 	key_9.png \
+	key_audio.png \
 	key_blue.png \
+	key_channel.png \
+	key_exit.png \
 	key_green.png \
+	key_help.png \
 	key_info.png \
-	key_menu.png \
-	key_red.png \
-	key_yellow.png \
-	key_text.png \
 	key_left.png \
-	key_right.png \
+	key_menu.png \
 	key_next.png \
+	key_ok.png \
 	key_prev.png \
+	key_prevnext.png \
+	key_red.png \
+	key_right.png \
+	key_text.png \
+	key_tv.png \
+	key_yellow.png \
+	left.png \
+	play.png \
+	rec.png \
 	red-big.png \
 	red.png \
+	repeat-off.png \
+	repeat-on.png \
+	right.png \
+	sel.png \
+	sel2.png \
+	text.png \
+	vkey_backspace.png \
+	vkey_bg_l.png \
+	vkey_bg_m.png \
+	vkey_bg_r.png \
+	vkey_blue_l.png \
+	vkey_blue_m.png \
+	vkey_blue_r.png \
+	vkey_clear.png \
+	vkey_delete.png \
+	vkey_enter.png \
+	vkey_exit.png \
+	vkey_first.png \
+	vkey_green_l.png \
+	vkey_green_m.png \
+	vkey_green_r.png \
+	vkey_icon.png \
+	vkey_last.png \
+	vkey_left.png \
+	vkey_locale.png \
+	vkey_red_l.png \
+	vkey_red_m.png \
+	vkey_red_r.png \
+	vkey_right.png \
+	vkey_sel_l.png \
+	vkey_sel_m.png \
+	vkey_sel_r.png \
+	vkey_shift.png \
+	vkey_shift0.png \
+	vkey_shift1.png \
+	vkey_shift2.png \
+	vkey_shift3.png \
+	vkey_space.png \
+	vkey_space_alt.png \
+	vkey_text.png \
+	vkey_yellow_l.png \
+	vkey_yellow_m.png \
+	vkey_yellow_r.png \
 	yellow.png

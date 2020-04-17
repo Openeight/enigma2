@@ -30,7 +30,8 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
 from Addons import AddonsFileBrowser
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getBackupFilename, RestoreMenu
-from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
+from Plugins.Extensions.AutoBackup.ui import Config
+from Screens.FlashImage import SelectImage
 from Screens.SkinSetup import SkinSetup
 from Screens.Ipkuninstall import Ipkuninstall
 from os import system, listdir, symlink, unlink, readlink, path as os_path, stat, mkdir, popen, makedirs, access, rename, remove, W_OK, R_OK, F_OK, chmod, walk, getcwd, chdir, statvfs
@@ -365,9 +366,9 @@ class Extraspanel(Screen, InfoBarPiP):
 		elif menu == 'BackupImage':
 			self.session.open(ImageBackup)
 		elif menu == 'FlashImage':
-			self.session.open(FlashOnline)
+			self.session.open(SelectImage)
 		elif menu == 'BackupSettings':
-			self.session.openWithCallback(self.backupDone, BackupScreen, runBackup=True)
+			self.session.open(Config)
 		elif menu == 'RestoreSettings':
 			self.backuppath = getBackupPath()
 			self.backupfile = getBackupFilename()
@@ -537,7 +538,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.mylist = []
 		self.mylist.append((_('Backup Image'), 'BackupImage', _('Backup your Image')))
 		self.mylist.append((_('Flash Online'), 'FlashImage', _('Flash Online Image')))
-		self.mylist.append((_('Backup Settings'), 'BackupSettings', _('Backup your Settings')))
+		self.mylist.append((_('Backup Settings'), 'BackupSettings', _('AutoBackup Settings System')))
 		self.mylist.append((_('Restore Settings'), 'RestoreSettings', _('Restores your latest Settings Backup')))
 		self.mylist.append((_('Advanced Restore'), 'AdvancedRestore', _('Advanced Restore...')))
 		self.mylist.append((_('Backup Files'), 'BackupFiles', _('Choose Backup Files')))

@@ -12,8 +12,8 @@ class VideoClippingCoordinates(Screen, ConfigListScreen):
 	skin = """
 	<screen position="0,0" size="e,e" title="Video clipping setup" backgroundColor="transparent">
 		<widget name="config" position="c-175,c-75" size="350,150" foregroundColor="black" backgroundColor="transparent" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="c-145,e-100" zPosition="0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/red.png" position="c+5,e-100" zPosition="0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/green.png" position="c-145,e-100" zPosition="0" size="140,40" alphatest="on" />
+		<ePixmap pixmap="buttons/red.png" position="c+5,e-100" zPosition="0" size="140,40" alphatest="on" />
 		<widget name="ok" position="c-145,e-100" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" backgroundColor="green" />
 		<widget name="cancel" position="c+5,e-100" size="140,40" valign="center" halign="center" zPosition="1" font="Regular;20" transparent="1" backgroundColor="red" />
 	</screen>"""
@@ -127,5 +127,5 @@ def Plugins(**kwargs):
 	if path.exists("/proc/stb/vmpeg/0/clip_left"):
 		from Plugins.Plugin import PluginDescriptor
 		return [PluginDescriptor(name = _("Video clipping setup"), description = _("clip overscan / letterbox borders"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-					PluginDescriptor(name = "Video clipping  setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
+					PluginDescriptor(name = _("Video clipping setup"), description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
 	return []

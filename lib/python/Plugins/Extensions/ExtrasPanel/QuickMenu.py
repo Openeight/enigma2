@@ -23,6 +23,7 @@ from Screens.SkinSelector import SkinSelector, LcdSkinSelector
 from Screens.RecordPaths import RecordPathsSettings
 from Screens.CCcamInfo import CCcamInfoMain
 from Screens.OScamInfo import OscamInfoMenu
+from Screens.FlashImage import SelectImage
 from Screens.Hotkey import HotkeySetup
 from Plugins.SystemPlugins.Videomode.plugin import videoSetupMain
 from Plugins.Plugin import PluginDescriptor
@@ -38,7 +39,7 @@ from Plugins.Extensions.ExtrasPanel.SoftcamPanel import *
 from Plugins.Extensions.ExtrasPanel.plugin import ShowSoftcamPanelExtensions
 from Plugins.Extensions.ExtrasPanel.SoftwarePanel import SoftwarePanel
 from Plugins.Extensions.ExtrasPanel.sundtek import SundtekControlCenter
-from Plugins.SystemPlugins.SoftwareManager.Flash_online import FlashOnline
+from Addons import AddonsFileBrowser
 from Plugins.SystemPlugins.SoftwareManager.ImageBackup import ImageBackup
 from Plugins.SystemPlugins.SoftwareManager.plugin import UpdatePlugin, SoftwareManagerSetup
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen, RestoreScreen, BackupSelection, getBackupPath, getOldBackupPath, getBackupFilename
@@ -561,7 +562,7 @@ class QuickMenu(Screen):
 			self.SatfinderMain()
 		elif item[0] == _('Software Update'):
 			self.session.open(SoftwarePanel)
-		elif item[0] == _('Flash Online'):
+		elif item[0] == _('SelectImage'):
 			self.session.open(FlashOnline)
 		elif item[0] == _('Complete Backup'):
 			if DFLASH == True:
@@ -593,11 +594,7 @@ class QuickMenu(Screen):
 		elif item[0] == _('Plugin Filter'):
 			self.session.open(PluginFilter)
 		elif item[0] == _('IPK Installer'):
-			try:
-				from Plugins.Extensions.MediaScanner.plugin import main
-				main(self.session)
-			except:
-				self.session.open(MessageBox, _('Sorry MediaScanner is not installed!'), MessageBox.TYPE_INFO, timeout=10)
+		    self.session.open(AddonsFileBrowser)
 		elif item[0] == _('IPK Uninstaller'):
 			try:
 				self.session.open(Ipkuninstall)

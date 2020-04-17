@@ -44,7 +44,7 @@ class Language:
 		self.addLanguage("Latviešu",    "lv", "LV", "ISO-8859-15")
 		self.addLanguage("Nederlands",  "nl", "NL", "ISO-8859-15")
 		self.addLanguage("Norsk Bokmål","nb", "NO", "ISO-8859-15")
-		self.addLanguage("Norsk",       "no", "NO", "ISO-8859-15")
+		self.addLanguage("Norsk Nynorsk", "nn", "NO", "ISO-8859-15")
 		self.addLanguage("Polski",      "pl", "PL", "ISO-8859-15")
 		self.addLanguage("Português",   "pt", "PT", "ISO-8859-15")
 		self.addLanguage("Português do Brasil",  "pt", "BR", "ISO-8859-15")
@@ -56,6 +56,7 @@ class Language:
 		self.addLanguage("Svenska",     "sv", "SE", "ISO-8859-15")
 		self.addLanguage("ภาษาไทย",     "th", "TH", "ISO-8859-15")
 		self.addLanguage("Українська",  "uk", "UA", "ISO-8859-15")
+		self.addLanguage("Tiếng Việt",	"vi", "VN", "UTF-8")
 
 		self.callbacks = []
 
@@ -73,6 +74,7 @@ class Language:
 				index = "en_EN"
 			lang = self.lang[index]
 			print "Activating language " + lang[0]
+			os.environ["LANGUAGE"] = lang[1] # set languange in order gettext to work properly on external plugins
 			self.catalog = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[index], fallback=True)
 			self.catalog.install(names=("ngettext", "pgettext"))
 			self.activeLanguage = index

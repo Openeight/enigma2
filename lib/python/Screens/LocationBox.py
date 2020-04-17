@@ -40,13 +40,13 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 			<widget name="filelist" position="0,55" zPosition="1" size="540,210" scrollbarMode="showOnDemand" selectionDisabled="1" />
 			<widget name="textbook" position="0,272" size="540,22" font="Regular;22" />
 			<widget name="booklist" position="5,302" zPosition="2" size="535,100" scrollbarMode="showOnDemand" />
-			<widget name="red" position="0,415" zPosition="1" size="135,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<widget name="red" position="0,415" zPosition="1" size="135,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
 			<widget name="key_red" position="0,415" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="green" position="135,415" zPosition="1" size="135,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<widget name="green" position="135,415" zPosition="1" size="135,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
 			<widget name="key_green" position="135,415" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="yellow" position="270,415" zPosition="1" size="135,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<widget name="yellow" position="270,415" zPosition="1" size="135,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
 			<widget name="key_yellow" position="270,415" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-			<widget name="blue" position="405,415" zPosition="1" size="135,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+			<widget name="blue" position="405,415" zPosition="1" size="135,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
 			<widget name="key_blue" position="405,415" zPosition="2" size="135,40" halign="center" valign="center" font="Regular;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 
@@ -126,7 +126,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 				"right": self.right,
 				"up": self.up,
 				"down": self.down,
-				"ok": (self.ok, _("select")),
+				"ok": (self.ok, _("Select")),
 				"back": (self.cancel, _("Cancel")),
 			}, -2)
 
@@ -140,13 +140,13 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 
 		self["EPGSelectActions"] = LocationBoxActionMap(self, "EPGSelectActions",
 			{
-				"prevBouquet": (self.switchToBookList, _("switch to bookmarks")),
-				"nextBouquet": (self.switchToFileList, _("switch to filelist")),
+				"prevBouquet": (self.switchToBookList, _("Switch to bookmarks")),
+				"nextBouquet": (self.switchToFileList, _("Switch to filelist")),
 			}, -2)
 
 		self["MenuActions"] = LocationBoxActionMap(self, "MenuActions",
 			{
-				"menu": (self.showMenu, _("menu")),
+				"menu": (self.showMenu, _("Menu")),
 			}, -2)
 
 		# Actions used by quickselect
@@ -240,6 +240,11 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 				self.realBookmarks.value = self.bookmarks
 				self.realBookmarks.save()
 			self["booklist"].setList(self.bookmarks)
+
+	def updateBookmarks(self):
+		config.movielist.videodirs.load()
+		self.bookmarks = config.movielist.videodirs and config.movielist.videodirs.value[:] or []
+		self["booklist"].setList(self.bookmarks)
 
 	def createDir(self):
 		if self["filelist"].current_directory is not None:
@@ -431,18 +436,20 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 		if not self.userMode and self.realBookmarks:
 			if self.currList == "filelist":
 				menu = [
-					(_("switch to bookmarks"), self.switchToBookList),
-					(_("add bookmark"), self.addRemoveBookmark)
+					(_("Switch to bookmarks"), self.switchToBookList),
+					(_("Add bookmark"), self.addRemoveBookmark),
+					(_("Update bookmarks"), self.updateBookmarks)
 				]
 				if self.editDir:
 					menu.extend((
-						(_("create directory"), self.createDir),
-						(_("remove directory"), self.removeDir)
+						(_("Create directory"), self.createDir),
+						(_("Remove directory"), self.removeDir)
 					))
 			else:
 				menu = (
-					(_("switch to filelist"), self.switchToFileList),
-					(_("remove bookmark"), self.addRemoveBookmark)
+					(_("Switch to filelist"), self.switchToFileList),
+					(_("Remove bookmark"), self.addRemoveBookmark),
+					(_("Update bookmarks"), self.updateBookmarks)
 				)
 
 			self.session.openWithCallback(
@@ -535,7 +542,6 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 		return str(type(self)) + "(" + self.text + ")"
 
 def MovieLocationBox(session, text, dir, filename = "", minFree = None):
-	config.movielist.videodirs.load()
 	return LocationBox(session, text = text,  filename = filename, currDir = dir, bookmarks = config.movielist.videodirs, autoAdd = config.movielist.add_bookmark.value , editDir = True, inhibitDirs = defaultInhibitDirs, minFree = minFree)
 
 class TimeshiftLocationBox(LocationBox):

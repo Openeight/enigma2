@@ -205,6 +205,12 @@ uint16_t FastScanTransportStream::getOrbitalPosition(void) const
 	return 0;
 }
 
+uint8_t FastScanTransportStream::getWestEastFlag(void) const
+{
+	if (deliverySystem) return deliverySystem->getWestEastFlag();
+	return 0;
+}
+
 uint32_t FastScanTransportStream::getFrequency(void) const
 {
 	if (deliverySystem) return deliverySystem->getFrequency();
@@ -486,6 +492,9 @@ void eFastScan::parseResult()
 			eDVBChannelID chid;
 			int orbitalposbcd = (*it)->getOrbitalPosition();
 			int orbitalpos = (orbitalposbcd & 0x0f) + ((orbitalposbcd >> 4) & 0x0f) * 10 + ((orbitalposbcd >> 8) & 0x0f) * 100;
+			int westeastflag = (*it)->getWestEastFlag();
+			if (!westeastflag)
+				orbitalpos = 3600 - orbitalpos;
 
 			if (drop && transponderParameters.orbital_position != orbitalpos &&
 				!eDVBSatelliteEquipmentControl::getInstance()->isOrbitalPositionConfigured(orbitalpos))
@@ -514,6 +523,7 @@ void eFastScan::parseResult()
 			fesat.pls_mode = eDVBFrontendParametersSatellite::PLS_Gold;
 			fesat.pls_code = eDVBFrontendParametersSatellite::PLS_Default_Gold_Code;
 			fesat.t2mi_plp_id = eDVBFrontendParametersSatellite::No_T2MI_PLP_Id;
+			fesat.t2mi_pid = eDVBFrontendParametersSatellite::T2MI_Default_Pid;
 
 			parm->setDVBS(fesat);
 			db->addChannelToList(chid, parm);

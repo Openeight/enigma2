@@ -29,10 +29,6 @@ dist_install_DATA = \
 	epg_more.png \
 	epg_next.png \
 	epg_now.png \
-	expandable.png \
-	expandable-plugins.png \
-	expanded.png \
-	expanded-plugins.png \
 	info-bg_mp.png \
 	info-bg.png \
 	mediaplayer_bg.png \
@@ -61,33 +57,5 @@ dist_install_DATA = \
 	timeline-now.png \
 	timeline.png \
 	unhandled-key.png \
-	verticalline.png \
-	verticalline-plugins.png \
-	vkey_backspace.png \
-	vkey_bg.png \
-	vkey_blue.png \
-	vkey_enter.png \
-	vkey_first.png \
-	vkey_green.png \
-	vkey_icon.png \
-	vkey_longl_bg.png \
-	vkey_longl_sel.png \
-	vkey_longm_bg.png \
-	vkey_longm_sel.png \
-	vkey_longr_bg.png \
-	vkey_longr_sel.png \
-	vkey_yellow.png \
-	vkey_last.png \
-	vkey_left.png \
-	vkey_red.png \
-	vkey_right.png \
-	vkey_sel.png \
-	vkey_shift0.png \
-	vkey_shift1.png \
-	vkey_shift2.png \
-	vkey_shift3.png \
-	vkey_space_alt.png \
-	vkey_space.png \
-	vkey_text.png \
 	volume.png \
 	wizard.png

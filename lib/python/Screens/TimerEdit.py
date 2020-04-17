@@ -17,7 +17,7 @@ from Tools.FallbackTimer import FallbackTimerList
 from time import time
 from timer import TimerEntry as RealTimerEntry
 from ServiceReference import ServiceReference
-from enigma import eServiceReference
+from enigma import eServiceReference, eEPGCache
 
 class TimerEditList(Screen):
 	EMPTY = 0
@@ -73,7 +73,7 @@ class TimerEditList(Screen):
 		if result is None:
 			self.closeProtectedScreen()
 		elif not result:
-			self.session.openWithCallback(self.close(), MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR, timeout=3)
+			self.session.openWithCallback(self.close(), MessageBox, _("The pin code you entered is wrong."), MessageBox.TYPE_ERROR, timeout=5)
 
 	def closeProtectedScreen(self, result=None):
 		self.close(None)
@@ -164,8 +164,22 @@ class TimerEditList(Screen):
 			else:
 				self["key_info"].setText(_("Info"))
 			text = cur.description
+			event = eEPGCache.getInstance().lookupEventId(cur.service_ref.ref, cur.eit) if cur.eit is not None else None
+			if event:
+				ext_description = event.getExtendedDescription()
+				short_description = event.getShortDescription()
+				if text != short_description:
+					if text and short_description:
+						text = _("Timer:") + " " + text + "\n\n" + _("EPG:") + " " + short_description
+					elif short_description:
+						text = short_description
+				if ext_description and ext_description != text:
+					if text:
+						text += "\n\n" + ext_description
+					else:
+						text = ext_description
 			if not cur.conflict_detection:
-				text += _("\nConflict detection disabled!")
+				text = _("\nConflict detection disabled!") + "\n\n" + text
 			self["description"].setText(text)
 			stateRunning = cur.state in (1, 2)
 			if cur.state == 2 and self.key_red_choice != self.STOP:

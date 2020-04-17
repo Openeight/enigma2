@@ -16,7 +16,7 @@ from enigma import eEnv
 import os
 
 SKINXML = "skin.xml"
-DEFAULTSKIN = "<Default Skin>"
+DEFAULTSKIN = _("<Default Skin>")
 
 class SkinSelector(Screen):
 
@@ -41,6 +41,7 @@ class SkinSelector(Screen):
 			dirs = []
 
 		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Select"))
 		self["introduction"] = StaticText(_("Press OK to activate the selected skin."))
 		self.skinlist.sort()
 		self["SkinList"] = MenuList(self.skinlist)
@@ -51,6 +52,7 @@ class SkinSelector(Screen):
 			"ok": self.ok,
 			"back": self.close,
 			"red": self.close,
+			"green": self.ok,
 			"up": self.up,
 			"down": self.down,
 			"left": self.left,
@@ -135,4 +137,4 @@ def SkinSelSetup(menuid, **kwargs):
 	return []
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="Skin", description= _("Select your Skin"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=SkinSelSetup)
+	return PluginDescriptor(name = _("Skin"), description= _("Select your Skin"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=SkinSelSetup)

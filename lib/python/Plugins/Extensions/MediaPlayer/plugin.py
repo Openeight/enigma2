@@ -9,7 +9,7 @@ from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBar import InfoBar
 from Screens.InfoBarGenerics import InfoBarSeek, InfoBarScreenSaver, InfoBarAudioSelection, InfoBarCueSheetSupport, InfoBarNotifications, InfoBarSubtitleSupport
-from Components.ActionMap import NumberActionMap, HelpableActionMap
+from Components.ActionMap import NumberActionMap, HelpableActionMap, eActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap, MultiPixmap
 from Components.FileList import FileList
@@ -53,7 +53,7 @@ class MediaPixmap(Pixmap):
 					noCoverFile = value
 					break
 		if noCoverFile is None:
-			noCoverFile = resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/no_coverArt.png")
+			noCoverFile = resolveFilename(SCOPE_CURRENT_SKIN, "no_coverArt.png")
 		self.noCoverPixmap = LoadPixmap(noCoverFile)
 		return Pixmap.applySkin(self, desktop, screen)
 
@@ -651,12 +651,13 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			self.changeEntry(0)
 			self.switchToPlayList()
 
-	def applySettings(self):
-		self.savePlaylistOnExit = config.mediaplayer.savePlaylistOnExit.getValue()
-		if config.mediaplayer.repeat.getValue() == True:
-			self["repeat"].setPixmapNum(1)
-		else:
-			self["repeat"].setPixmapNum(0)
+	def applySettings(self, answer=True):
+		if answer is True:
+			self.savePlaylistOnExit = config.mediaplayer.savePlaylistOnExit.getValue()
+			if config.mediaplayer.repeat.getValue() == True:
+				self["repeat"].setPixmapNum(1)
+			else:
+				self["repeat"].setPixmapNum(0)
 
 	def showEventInformation(self):
 		from Screens.EventView import EventViewSimple
@@ -995,6 +996,14 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 
 	def unPauseService(self):
 		self.setSeekState(self.SEEK_STATE_PLAY)
+
+	def keypressScreenSaver(self, key, flag):
+		if flag:
+			self.screensaver.hide()
+			if self.seekstate == self.SEEK_STATE_PAUSE:
+				self.show()
+			self.ScreenSaverTimerStart()
+			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
 
 	def subtitleSelection(self):
 		from Screens.AudioSelection import SubtitleSelection

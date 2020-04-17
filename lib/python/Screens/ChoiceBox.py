@@ -26,9 +26,9 @@ class ChoiceBox(Screen):
 		self.list = []
 		self.summarylist = []
 		if keys is None:
-			self.__keys = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue" ] + (len(list) - 14) * [""]
+			self.__keys = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue" ] + (len(list) - 14) * ["dummy"]
 		else:
-			self.__keys = keys + (len(list) - len(keys)) * [""]
+			self.__keys = keys + (len(list) - len(keys)) * ["dummy"]
 
 		self.keymap = {}
 		pos = 0
@@ -89,7 +89,9 @@ class ChoiceBox(Screen):
 			"down": self.down,
 			"moveUp": self.additionalMoveUp,
 			"moveDown": self.additionalMoveDown,
-			"menu": self.setDefaultChoiceList
+			"menu": self.setDefaultChoiceList,
+			"rightUp": self.rightUp,
+			"leftUp": self.leftUp
 		}, -1)
 		self.setTitle(windowTitle or _("Select"))
 
@@ -138,6 +140,16 @@ class ChoiceBox(Screen):
 
 	def keyRight(self):
 		pass
+
+	def rightUp(self):
+		self.updateDescription()
+
+	def leftUp(self):
+		self.updateDescription()
+
+	def updateDescription(self):
+		if len(self["list"].list) > 0:
+			self.displayDescription(self["list"].l.getCurrentSelectionIndex())
 
 	def up(self):
 		if len(self["list"].list) > 0:
