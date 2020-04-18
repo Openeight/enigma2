@@ -51,6 +51,14 @@ def findMountPoint(path):
 		path = os.path.dirname(path)
 	return path
 
+def Freespace(dev):
+	try:
+		statdev = os.statvfs(dev)
+		space = (statdev.f_bavail * statdev.f_frsize) / 1024
+	except:
+		space = 0
+	return space
+
 DEVTYPE_UDEV = 0
 DEVTYPE_DEVFS = 1
 
