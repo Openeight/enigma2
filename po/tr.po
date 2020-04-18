@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2 OPLi-3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-15 18:33+0200\n"
-"PO-Revision-Date: 2020-04-07 20:30+0100\n"
+"PO-Revision-Date: 2020-04-17 23:45+0100\n"
 "Last-Translator: esmos\n"
 "Language-Team: esmos\n"
 "Language: tr\n"
@@ -41,11 +41,10 @@ msgstr ""
 "\n"
 "Devam etmek için kumandanızın OK tuşuna basın."
 
-#, fuzzy
 msgid ""
 "\n"
 "Press OK or Exit to abort!"
-msgstr "Arama için OK'a basın"
+msgstr "İptal etmek için Tamam veya Çık tuşuna basın!"
 
 msgid ""
 "\n"
@@ -59,21 +58,29 @@ msgid ""
 "\n"
 "Timer '%s' disabled!"
 msgstr ""
+"\n"
+"Kronometre (zamanlayıcı) '%s' devre dışı!"
 
 msgid ""
 "\n"
 "Update to current sundtek driver version?"
 msgstr ""
+"\n"
+"Güncel sundtek sürücü sürümüne güncellensin mi?"
 
 msgid ""
 "\n"
 "[Installed Plugins]\n"
 msgstr ""
+"\n"
+"[Yüklü Eklentiler]\n"
 
 msgid ""
 "\n"
 "[User - bouquets (RADIO)]\n"
 msgstr ""
+"\n"
+"[Kullanıcı - buketler (RADYO)]\n"
 
 #, fuzzy
 msgid ""
@@ -124,7 +131,7 @@ msgstr ""
 
 #, python-format
 msgid " (Partition %d)"
-msgstr ""
+msgstr " (Bölme %d)"
 
 msgid " (PiP)"
 msgstr " (RiR)"
@@ -155,6 +162,10 @@ msgid ""
 "Cam binname must be in the start command line\n"
 "Check your emu config file"
 msgstr ""
+" Başlatılmadı !!\n"
+"\n"
+"Kam binadı başlangıç komut satırında olmalıdır\n"
+"Emu yapılandırma dosyanızı kontrol edin"
 
 msgid " and"
 msgstr "ve"
@@ -168,9 +179,8 @@ msgstr " eklentileri."
 msgid " from "
 msgstr "itibaren"
 
-#, fuzzy
 msgid " min"
-msgstr "%d dk"
+msgstr " min"
 
 msgid " ms"
 msgstr " ms"
@@ -392,7 +402,7 @@ msgid ""
 "%s\n"
 "Do you still want to flash image\n"
 "%s?"
-msgstr "%s bellenimini indirmek istiyor musunuz?"
+msgstr "%s yazılımı indirmek istiyor musunuz?"
 
 #, python-format
 msgid ""
@@ -400,6 +410,9 @@ msgid ""
 "Press ok for multiboot selection\n"
 "Press exit to close"
 msgstr ""
+"%s\n"
+"Çoklu önyükleme seçimi için ok tuşuna basın\n"
+"Kapatmak için çıkışa basın"
 
 #, python-format
 msgid "%s "
@@ -470,7 +483,7 @@ msgid "(Show only reader:"
 msgstr "(Yalnızca okuyucuyu göster:"
 
 msgid "(VU+ type)"
-msgstr ""
+msgstr "(VU+ tip)"
 
 msgid "(ZAP as PiP)"
 msgstr "(RiR olarak ZAP)"
@@ -480,7 +493,7 @@ msgstr "(ZAP)"
 
 #, python-format
 msgid "(activated +%d min)"
-msgstr ""
+msgstr "(aktif +%d dak)"
 
 msgid "(empty)"
 msgstr "(boş)"
@@ -537,11 +550,11 @@ msgid "*****util-linux-blkid*****"
 msgstr ""
 
 msgid "-NO SERVICE\n"
-msgstr ""
+msgstr "-SERVİS YOK\n"
 
 #, python-format
 msgid "-SERVICE ERROR:%d\n"
-msgstr ""
+msgstr "-SERVİS HATASI:%d\n"
 
 msgid "/s"
 msgstr "/s"
@@ -550,16 +563,16 @@ msgid "0"
 msgstr "0"
 
 msgid "0 (disabled)"
-msgstr ""
+msgstr "0 (devre dışı)"
 
 msgid "1"
 msgstr "1"
 
 msgid "1 min."
-msgstr ""
+msgstr "1 dak."
 
 msgid "1 second"
-msgstr ""
+msgstr "1 saniye"
 
 msgid "1.0"
 msgstr "1.0"
@@ -574,16 +587,16 @@ msgid "10"
 msgstr ""
 
 msgid "10 (default)"
-msgstr ""
+msgstr "10 (varsayılan)"
 
 msgid "10 MB/s"
 msgstr ""
 
 msgid "10 min."
-msgstr ""
+msgstr "10 dak."
 
 msgid "10 seconds"
-msgstr ""
+msgstr "10 saniye"
 
 msgid "100 MB/s"
 msgstr ""
@@ -607,7 +620,7 @@ msgid "13 V"
 msgstr "13 V"
 
 msgid "15 min."
-msgstr ""
+msgstr "15 dak."
 
 msgid "15 seconds"
 msgstr "15 saniye"
@@ -646,7 +659,7 @@ msgid "20 MB/s"
 msgstr ""
 
 msgid "20 seconds"
-msgstr ""
+msgstr "20 saniye"
 
 msgid "23.976"
 msgstr "23.976"
@@ -676,10 +689,10 @@ msgid "30"
 msgstr "30"
 
 msgid "30 min."
-msgstr ""
+msgstr "30 dak."
 
 msgid "30 seconds"
-msgstr ""
+msgstr "30 saniye"
 
 msgid "32 Mb"
 msgstr ""
@@ -688,16 +701,16 @@ msgid "3D surround"
 msgstr ""
 
 msgid "3D surround softlimiter"
-msgstr ""
+msgstr "3D surround yumuşak sınırlayıcı"
 
 msgid "3D surround speaker position"
-msgstr ""
+msgstr "3D surround speaker position"
 
 msgid "3X"
 msgstr ""
 
 msgid "3d mode"
-msgstr "3d mode"
+msgstr "3d modu"
 
 msgid "4"
 msgstr "4"
@@ -727,7 +740,7 @@ msgid "5"
 msgstr "5"
 
 msgid "5 (default)"
-msgstr ""
+msgstr "5 (varsayılan)"
 
 msgid "5 min."
 msgstr "5 dakika"
@@ -769,14 +782,13 @@ msgid ": "
 msgstr ""
 
 msgid ": 0000 - default (disabled)"
-msgstr ""
+msgstr ": 0000 - varsayılan (devre dışı)"
 
 msgid "<Current movielist location>"
 msgstr "<Mevcut film listesi konumu>"
 
-#, fuzzy
 msgid "<Default Skin>"
-msgstr "Varsayılan ayarlar"
+msgstr "Varsayılan arayüz"
 
 msgid "<Default movie location>"
 msgstr "<Varsayılan film konumu>"
@@ -788,7 +800,7 @@ msgid "<unknown>"
 msgstr "<bilinmiyor>"
 
 msgid "=NO STREAM\n"
-msgstr ""
+msgstr "=YAYIN YOK\n"
 
 msgid "??"
 msgstr "??"
@@ -819,7 +831,7 @@ msgstr ""
 "Kendi dosyanızı tutmak istiyor musunuz?"
 
 msgid "A file from media is in use!"
-msgstr ""
+msgstr "Medyadan bir dosya kullanımda!"
 
 msgid ""
 "A finished record timer wants to set your\n"
@@ -844,6 +856,10 @@ msgid ""
 "https://octagon-forum.eu\n"
 "to update this embedded version."
 msgstr ""
+"Sundtek kontrol merkezi eklentisinin daha yeni bir sürümü mevcut.\n"
+"bu mesajı okuduysanız, lütfen OpenEight Ekibine şu adresi bildirin:\n"
+"https://octagon-forum.eu\n"
+"bu gömülü sürümü güncellemek için."
 
 #, python-format
 msgid ""
@@ -931,13 +947,13 @@ msgid "AFP"
 msgstr ""
 
 msgid "AFP Setup"
-msgstr ""
+msgstr "AFP Kurulum"
 
 msgid "AGC:"
 msgstr ""
 
 msgid "ASS File"
-msgstr ""
+msgstr "ASS Dosya"
 
 #, fuzzy
 msgid "ASS file"
@@ -946,30 +962,26 @@ msgstr "% d dosya"
 msgid "ATSC"
 msgstr ""
 
-#, fuzzy
 msgid "ATSC provider"
-msgstr "Sağlayıcı ekle"
+msgstr "ATSC Sağlayıcı"
 
 msgid "AV Settings"
-msgstr ""
+msgstr "AV Ayarları"
 
 msgid "AV Setup"
-msgstr ""
+msgstr "AV Kurulum"
 
 msgid "Abort"
 msgstr "Vazgeç"
 
-#, fuzzy
 msgid "Abort alternatives edit"
-msgstr "alternatif düzenlemekten vazgeç"
+msgstr "Alternatif düzenlemekten vazgeç"
 
-#, fuzzy
 msgid "Abort bouquet edit"
-msgstr "buket düzenlemekten vazgeç"
+msgstr "Buket düzenlemekten vazgeç"
 
-#, fuzzy
 msgid "Abort favourites edit"
-msgstr "favori düzenlemekten vazgeç"
+msgstr "Favori düzenlemekten vazgeç"
 
 msgid "About"
 msgstr "Cihaz Hakkında"
@@ -984,7 +996,7 @@ msgid "Activate"
 msgstr "Aktif et"
 
 msgid "Activate HbbTV (Redbutton)"
-msgstr ""
+msgstr "HbbTV aktif et (kırmızı tuş)"
 
 msgid "Activate Picture in Picture"
 msgstr "Resim içinde resim (RiR) 'i etkinleştir"
@@ -999,16 +1011,16 @@ msgid "Activate the configured network settings."
 msgstr "Yapılandırılmış ağ ayarlarını etkinleştirin."
 
 msgid "Activate timeshift End"
-msgstr ""
+msgstr "Timeshift Son'u etkinleştir"
 
 msgid "Activate timeshift end and pause"
-msgstr ""
+msgstr "Zaman kayması sonunu etkinleştir ve duraklat"
 
 msgid "Active"
 msgstr "Atif"
 
 msgid "Active clients"
-msgstr ""
+msgstr "Aktif müşteriler (client)"
 
 msgid "Adapter settings"
 msgstr "Ağ donanım ayarları"
@@ -1025,18 +1037,15 @@ msgstr "Bir isim sunucusu ekleyin"
 msgid "Add a new title"
 msgstr "Yeni başlık ekle"
 
-#, fuzzy
 msgid "Add alternatives"
 msgstr "Alternatiflere ekle"
 
 msgid "Add bookmark"
 msgstr "Yer imi ekle"
 
-#, fuzzy
 msgid "Add bouquet"
 msgstr "Buket oluştur"
 
-#, fuzzy
 msgid "Add bouquet to parental protection"
 msgstr "Aile koruması ekle"
 
@@ -1044,7 +1053,7 @@ msgid "Add directory to playlist"
 msgstr "Çalma listesine dizin ekle"
 
 msgid "Add entry"
-msgstr ""
+msgstr "Giriş ekle"
 
 msgid "Add file to playlist"
 msgstr "Çalma listesine dosya ekle"
@@ -1052,12 +1061,11 @@ msgstr "Çalma listesine dosya ekle"
 msgid "Add files to playlist"
 msgstr "Çalma listesine dosyaları ekle"
 
-#, fuzzy
 msgid "Add marker"
 msgstr "İşaretçi Ekle"
 
 msgid "Add new entry"
-msgstr ""
+msgstr "Yeni Giriş ekle"
 
 msgid "Add provider"
 msgstr "Sağlayıcı ekle"
