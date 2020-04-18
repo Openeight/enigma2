@@ -190,7 +190,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 		eDVBFrontendParametersSatellite.System_DVB_S, eDVBFrontendParametersSatellite.Modulation_QPSK,
 		eDVBFrontendParametersSatellite.RollOff_alpha_0_35, eDVBFrontendParametersSatellite.Pilot_Off))
 
-	def __init__(self, session, nimList):
+	def __init__(self, session):
 		Screen.__init__(self, session)
 
 		self.setTitle(_("Fast Scan"))
