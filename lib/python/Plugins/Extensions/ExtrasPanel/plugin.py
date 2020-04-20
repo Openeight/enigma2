@@ -525,10 +525,6 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.mylist = []
 		self.mylist.append((_('Software Manager'), 'SoftwareUpdate', 'software-update...'))
 		self.mylist.append((_('Backup Settings'), 'BackupSettings', 'backup your settings...'))
-		self.mylist.append((_('Restore Settings'), 'RestoreSettings', 'restore your settings'))
-		self.mylist.append((_('advanced restore'), 'AdvancedRestore', 'advanced restore'))
-		self.mylist.append((_('Backup Files'), 'BackupFiles', 'Choose backup-files'))
-		self.mylist.append((_('Backup location'), 'BackupLocation', 'choose backup location'))
 		self['list'].setList(self.mylist)
 
 	def BackupFlashManager(self):
@@ -539,10 +535,6 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.mylist.append((_('Backup Image'), 'BackupImage', _('Backup your Image')))
 		self.mylist.append((_('Flash Online'), 'FlashImage', _('Flash Online Image')))
 		self.mylist.append((_('Backup Settings'), 'BackupSettings', _('AutoBackup Settings System')))
-		self.mylist.append((_('Restore Settings'), 'RestoreSettings', _('Restores your latest Settings Backup')))
-		self.mylist.append((_('Advanced Restore'), 'AdvancedRestore', _('Advanced Restore...')))
-		self.mylist.append((_('Backup Files'), 'BackupFiles', _('Choose Backup Files')))
-		self.mylist.append((_('Backup location'), 'BackupLocation', _('Choose Backup location')))
 		self['list'].setList(self.mylist)
 
 	def backupfiles_choosen(self, ret):
