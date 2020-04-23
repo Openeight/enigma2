@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 OPLi-3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:33+0200\n"
+"POT-Creation-Date: 2020-04-23 18:54+0200\n"
 "PO-Revision-Date: 2020-04-17 23:59+0100\n"
 "Last-Translator: esmos\n"
 "Language-Team: esmos\n"
@@ -1152,12 +1152,6 @@ msgstr "Devam etmek için kumandanızın OK tuşuna basın."
 msgid "Advanced"
 msgstr "Gelişmiş"
 
-msgid "Advanced Restore"
-msgstr "Gelişmiş Geri Yükleme"
-
-msgid "Advanced Restore..."
-msgstr "Gelişmiş Geri Yükleme..."
-
 msgid "Advanced options"
 msgstr "Gelişmiş seçenekler"
 
@@ -1620,6 +1614,10 @@ msgid "Auto scart switching"
 msgstr "Otomatik scart değiştirme"
 
 #, fuzzy
+msgid "AutoBackup Settings System"
+msgstr "Sistem ayarlarını yedekle"
+
+#, fuzzy
 msgid "Autoinstalling Completed"
 msgstr "Kurulum tamamlandı."
 
@@ -1728,9 +1726,6 @@ msgstr ""
 msgid "Backup Drivers to HDD"
 msgstr ""
 
-msgid "Backup Files"
-msgstr "Yedekleme dosyaları"
-
 msgid "Backup Image"
 msgstr "Yazılım yedekle"
 
@@ -1746,14 +1741,8 @@ msgstr "Yedekleme yapıldı."
 msgid "Backup failed."
 msgstr "Yedekleme başarısız oldu."
 
-msgid "Backup finished and copied to your USB-flash drive"
-msgstr ""
-
 msgid "Backup is running..."
 msgstr "Yedekleme çalışıyor..."
-
-msgid "Backup location"
-msgstr "Yedekleme yeri"
 
 msgid ""
 "Backup plugins found\n"
@@ -1767,14 +1756,15 @@ msgstr "Sistem ayarlarını yedekle"
 msgid "Backup system settings"
 msgstr "Sistem ayarlarını yedekle"
 
+#, fuzzy, python-format
+msgid "Backup to destination: %s"
+msgstr "Sistem ayarlarını yedekleyin"
+
 msgid "Backup your Image"
 msgstr "Yazılımınızı Yedekleyin"
 
 msgid "Backup your Image/Settings or Flash a new Image"
 msgstr "Yazılım/Ayarlarını yedekle veya yeni bir yazılım yükle"
-
-msgid "Backup your Settings"
-msgstr "Sistem ayarlarını yedekleyin"
 
 msgid "Backup your current image"
 msgstr ""
@@ -2168,6 +2158,10 @@ msgid "Cancelled upon user request"
 msgstr ""
 
 #, fuzzy
+msgid "Cannot create backup directory"
+msgstr "klasör oluştur"
+
+#, fuzzy
 msgid "Cannot delete downloaded image"
 msgstr "Tamamlanan zamanlayıcıları silmek istiyor musunuz?"
 
@@ -2345,10 +2339,6 @@ msgstr ""
 msgid "Check/Install online updates (you must have a working internet connection)."
 msgstr "Güncelleme başarısız oldu. Alıcınızda bir İnternet bağlantısı yok."
 
-#, fuzzy
-msgid "Check:"
-msgstr "Kontrol et"
-
 msgid "Checking Feeds"
 msgstr ""
 
@@ -2382,12 +2372,6 @@ msgstr ""
 #, python-format
 msgid "Chipset: BCM%s"
 msgstr ""
-
-msgid "Choose Backup Files"
-msgstr "Yedek Dosyaları Seçin"
-
-msgid "Choose Backup location"
-msgstr "Yedekleme konumunu seçin"
 
 msgid "Choose Tuner"
 msgstr ""
@@ -2676,10 +2660,6 @@ msgstr "Kayıttan film oynatma sırasında, film sonuna ulaşıldığında davra
 
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr "Altyazı sınır genişliğini yapılandırın. Karanlık kenarlık hafif bir arka plan üzerinde altyazıları okumayı kolaylaştırır."
-
-#, fuzzy
-msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Bekleme sırasında ön panel ekranının parlaklık seviyesini yapılandırın."
 
 #, fuzzy
 msgid "Configure the brightness level of the front panel display for normal operation."
@@ -5239,13 +5219,6 @@ msgstr ""
 msgid "HD60"
 msgstr ""
 
-msgid ""
-"HDD = Do you want to make a USB-back-up image on HDD? \n"
-"This only takes 1 or 10 minutes and is fully automatic."
-msgstr ""
-"HDD = HDD'ye USB yedekleme yazılımı oluşturmak istiyor musunuz? \n"
-"Bu sadece 1 veya 10 dakika sürer ve tam otomatiktir."
-
 msgid "HDMI"
 msgstr "HDMI"
 
@@ -5588,6 +5561,10 @@ msgstr "DVB-T ad alanı alt ağını yoksay"
 msgid "Ignore conflict"
 msgstr "Çatışmayı yoksay"
 
+#, fuzzy
+msgid "Image Backup"
+msgstr "Imaj: "
+
 msgid "Image Info"
 msgstr "Yazılım Bilgisi"
 
@@ -5596,6 +5573,18 @@ msgstr "Yazılım Araçları"
 
 msgid "Image Update"
 msgstr "Yazılım Güncelleme"
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
+msgstr ""
 
 msgid "Image creation failed - "
 msgstr "Yazılım oluşturulamadı"
@@ -5677,10 +5666,6 @@ msgstr "Arttırılmış voltaj"
 
 msgid "Index"
 msgstr "Indeks"
-
-#, python-format
-msgid "Index Error in the following files: %s"
-msgstr "Aşağıdaki dosyalarda Dizin Hatası: %s"
 
 msgid "Index allocated:"
 msgstr "Ayrılan Endeks:"
@@ -6007,9 +5992,6 @@ msgstr ""
 
 msgid "Kernel"
 msgstr "Çekirdek (Kernel)"
-
-msgid "Kernel dump error\n"
-msgstr ""
 
 msgid "Kernel version: "
 msgstr "Çekirdek sürümü:"
@@ -6812,7 +6794,7 @@ msgid "Multiboot"
 msgstr "Çoklu uydu"
 
 #, python-format
-msgid "Multiboot Image created at: %s"
+msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 #, fuzzy
@@ -7041,11 +7023,6 @@ msgstr "Desteklenen DVDROM  bulunamadı!"
 msgid ""
 "No /hdd found !!\n"
 "Please make sure you have a HDD mounted.\n"
-msgstr ""
-
-msgid ""
-"No /hdd found !!\n"
-"Please make sure you have a HDD mounted.\n"
 "\n"
 "Exit plugin."
 msgstr ""
@@ -7076,12 +7053,6 @@ msgid "No HDD found or HDD not initialized!"
 msgstr "HDD bulunamadı veya HDD ilişkilendirilemedi!"
 
 msgid "No IPTV media server found"
-msgstr ""
-
-msgid ""
-"No USB-Device found for fullbackup !!\n"
-"\n"
-"\n"
 msgstr ""
 
 #, fuzzy
@@ -7240,6 +7211,10 @@ msgstr "Hayır, eklenti yüklemek istemiyorum"
 msgid "No, but restart from begin"
 msgstr "Hayır, ama en başından başlat"
 
+#, fuzzy
+msgid "No, do not backup a image"
+msgstr "Hayır, yeni yazılım yükleme"
+
 msgid "No, do not flash image"
 msgstr "Hayır, yeni yazılım yükleme"
 
@@ -7302,21 +7277,6 @@ msgstr "Tanımlanmamış"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Yetersiz disk alanı. Disk alanı boşaltarak tekrar deneyin. (%d MB gerekli, kullanılabilir %d MB)"
 
-#, python-format
-msgid ""
-"Not enough free space on %s !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-"Üzerinde yeterli boş alan yok %s !!\n"
-"En az 300Mb boş alana ihtiyacınız var.\n"
-
-msgid ""
-"Not enough free space on /hdd !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-"Hdd'de yeterli boş alan yok !!\n"
-"En az 300Mb boş alana ihtiyacınız var.\n"
-
 msgid ""
 "Not enough free space on /hdd !!\n"
 "You need at least 300Mb free space.\n"
@@ -7363,7 +7323,8 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Şimdi"
 
-msgid "Now building the USB-Image"
+#, fuzzy
+msgid "Now building the Backup Image"
 msgstr "Şimdi USB yazılım oluşturma"
 
 msgid "Now playing"
@@ -7815,9 +7776,6 @@ msgstr "Öncekini oynat"
 msgid "Play recorded movies..."
 msgstr "Kayıtlı video dosyalarını göster..."
 
-msgid "Please Flash your Kernel new and Backup again"
-msgstr "Lütfen Çekirdeğinizi yeni Flash ve Yedekleyin"
-
 msgid "Please add titles to the compilation."
 msgstr "Derleme için başlık ekleyin."
 
@@ -7919,6 +7877,10 @@ msgstr "Devam etmek için lütfen OK'a basın"
 
 msgid "Please re-enter the new PIN code"
 msgstr "Lütfen yeni PIN kodunu tekrar girin"
+
+#, fuzzy
+msgid "Please select a backup destination"
+msgstr "Lütfen yedekleme konumu için medya seçin"
 
 msgid "Please select a playlist to delete..."
 msgstr "Seçili oynatma listesini sil..."
@@ -8843,10 +8805,6 @@ msgstr "Yeniden adlandırma başarısız oldu!"
 msgid "Rename name and description for new events"
 msgstr "Yeni etkinlikler için adı ve açıklamayı yeniden adlandırma"
 
-#, python-format
-msgid "Rename the file 'noforce' in the folder %s"
-msgstr "Klasördeki 'noforce' dosyasını yeniden adlandırın %s"
-
 msgid "Rename to:"
 msgstr "Şununla yeniden adlandır:"
 
@@ -9051,9 +9009,6 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
 msgstr "Geri yükleniyor ..."
-
-msgid "Restores your latest Settings Backup"
-msgstr "En son Ayarlar Yedeklemenizi geri yükler"
 
 msgid "Restoring..."
 msgstr "Geri yükleniyor ..."
@@ -10941,9 +10896,6 @@ msgstr "Maalesef IPK kaldırıcı yüklü değil!"
 msgid "Sorry Inadyn Config is Missing"
 msgstr ""
 
-msgid "Sorry MediaScanner is not installed!"
-msgstr "Üzgünüz Medya Tarayıcı kurulu değil!"
-
 msgid "Sorry MiniDLNA Config is Missing"
 msgstr ""
 
@@ -11872,9 +11824,6 @@ msgstr "Yüklenecek kaydedilmiş oynatma listesi yok!"
 msgid "There are no updates available."
 msgstr "Yeni güncelleme yok."
 
-msgid "There is a valid USB-flash drive detected in one "
-msgstr "Birinde geçerli bir USB flash sürücü tespit edildi "
-
 msgid "There is no signal to lock on !"
 msgstr "Kilitlenecek hiçbir sinyal yok!"
 
@@ -11959,9 +11908,6 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
-msgstr ""
-
-msgid "This only takes about 1 or 2 minutes"
 msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
@@ -12290,9 +12236,6 @@ msgstr "Başlıkseti kipi"
 msgid "To audio selection"
 msgstr "Ses seçimi için"
 
-msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
-msgstr ""
-
 msgid "To restore the image:"
 msgstr "Evet, ayarlarımı geri yükle"
 
@@ -12562,19 +12505,6 @@ msgstr "USALS, motorlu bir anteni kullanıcı tarafından girilen koordinatlara 
 
 msgid "USALS calibration"
 msgstr "DiSEqC 1.3 (USALS) kalibrasyonu"
-
-msgid ""
-"USB = Do you want to make a back-up on USB?\n"
-"This will take between 3 and 15 minutes depending on the used filesystem and is fully automatic.\n"
-"Make sure you first insert a USB flash drive before you select USB."
-msgstr ""
-"USB = USB'ye yedekleme yapmak ister misiniz?\n"
-"Bu, kullanılan dosya sistemine bağlı olarak 3 ila 15 dakika sürer ve tam otomatiktir.\n"
-"USB'yi seçmeden önce bir USB flash sürücü taktığınızdan emin olun."
-
-#, fuzzy, python-format
-msgid "USB Image created at: %s"
-msgstr "Kullanılan Imaj:\t%s"
 
 msgid "USB stick"
 msgstr "USB bellek"
@@ -12864,6 +12794,9 @@ msgid "Use the Networkwizard to configure your Network. The wizard will help you
 msgstr "Seçilen ağ bağdaştırıcısını yapılandırmak için ağ sihirbazını kullan"
 
 msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam."
+msgstr ""
+
+msgid "Use the cursor keys to select an installed image and then Start button."
 msgstr ""
 
 msgid "Use the network wizard to configure selected network adapter"
@@ -13755,13 +13688,6 @@ msgstr "Sadece alıcıdaki kayıtlarını yazabilirsiniz!"
 msgid "You can remove this plugin."
 msgstr "Bu eklentiyi kaldırabilirsiniz."
 
-msgid ""
-"You can select with yellow the OnlineFlash Image\n"
-" or select Recovery to create a USB Disk Image for clean Install."
-msgstr ""
-"Sarı ile Çevrimiçi Flash yazılım seçebilirsiniz\n"
-" veya Temiz Kurulum için bir USB Disk yazılım oluşturmak üzere Kurtarma'yı seçin."
-
 msgid "You can set how will be finished movieplayer with 'Exit' button."
 msgstr "Çıkış tuşu ile film oynatıcının nasıl biteceğini ayarlayabilirsiniz."
 
@@ -14076,9 +14002,6 @@ msgstr "Yetişkin Film/Drama"
 msgid "advanced"
 msgstr "Gelişmiş"
 
-msgid "advanced restore"
-msgstr ""
-
 msgid "adventure/western/war"
 msgstr "macera/western/savaş"
 
@@ -14121,9 +14044,6 @@ msgstr "ve sonraki kanalı seç"
 msgid "and select previous channel"
 msgstr "ve önceki kanalı seç"
 
-msgid "and there is made an extra copy at:"
-msgstr "ve şu adreste fazladan bir kopya var:"
-
 msgid "are you sure to cancel all changes"
 msgstr "tüm değişiklikleri iptal ettiğinden emin misin"
 
@@ -14148,14 +14068,8 @@ msgstr "otomatik"
 msgid "back"
 msgstr "back"
 
-msgid "back-up image will now be copied to that USB- "
-msgstr ""
-
 msgid "background image"
 msgstr "arkaplan resmi"
-
-msgid "backupstick or backupstick.txt"
-msgstr ""
 
 msgid "ballet"
 msgstr "balet"
@@ -14253,11 +14167,6 @@ msgstr "onaylandı"
 
 msgid "connected"
 msgstr "bağlı"
-
-msgid ""
-"contain a file with the name: \n"
-"\n"
-msgstr ""
 
 msgid "controlled by HDMI"
 msgstr ""
@@ -14469,9 +14378,6 @@ msgstr "güzel sanatlar"
 msgid "fitness & health"
 msgstr "spor ve sağlık"
 
-msgid "flash drive. "
-msgstr ""
-
 msgid "flat alphabetic"
 msgstr "A-Z"
 
@@ -14602,6 +14508,14 @@ msgid "install linux utilities (util-linux-blkid)"
 msgstr ""
 
 msgid "installs the sundtek driver and runs related shellscripts"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "internal flash:  %s %s "
+msgstr "Dahili hafıza"
+
+#, python-format
+msgid "internal flash: %s %s as USB Recovery"
 msgstr ""
 
 msgid "invalid type"
@@ -14750,10 +14664,6 @@ msgstr "müzik/bale/dans (genel)"
 msgid "musical/opera"
 msgstr "müzikal/opera"
 
-#, fuzzy
-msgid "n/A"
-msgstr "N/A"
-
 msgid "n/a"
 msgstr ""
 
@@ -14856,9 +14766,6 @@ msgstr "ÇİFT katmanlı medya kullanıldığında."
 msgid "of a SINGLE layer medium used."
 msgstr "TEK katmanlı medya kullanıldığında."
 
-msgid "of the USB-ports, therefore an extra copy of the "
-msgstr "USB bağlantı noktalarının, bu nedenle. "
-
 msgid "off"
 msgstr "kapalı"
 
@@ -14910,9 +14817,6 @@ msgstr "OpenEight"
 
 msgid "options mount file system (default): "
 msgstr "seçenekler bağlama dosya sistemi (varsayılan): "
-
-msgid "or use OnlineFlash in SoftwareManager"
-msgstr "yada Online Flash'ı kullanma veya kullanma"
 
 msgid "original"
 msgstr "orjinal"
@@ -15177,6 +15081,10 @@ msgid "slot%s - %s (current image), without backup"
 msgstr ""
 
 #, python-format
+msgid "slot%s - %s as USB Recovery"
+msgstr ""
+
+#, python-format
 msgid "slot%s - %s mode 1"
 msgstr ""
 
@@ -15292,9 +15200,6 @@ msgstr "bu kaydın"
 
 msgid "this service is protected by a parental control pin"
 msgstr "bu kanal ebeveyn kontrol şifresiyle korunuyor"
-
-msgid "to 'force' to flash this image without confirmation"
-msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "geçiş süresi, bölüm, ses, altyazı bilgileri"

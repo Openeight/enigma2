@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli 4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:33+0200\n"
+"POT-Creation-Date: 2020-04-23 18:54+0200\n"
 "PO-Revision-Date: 2016-03-21 18:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -1157,12 +1157,6 @@ msgstr "Jätkamiseks vajuta OK."
 msgid "Advanced"
 msgstr "Lisavalikud"
 
-msgid "Advanced Restore"
-msgstr ""
-
-msgid "Advanced Restore..."
-msgstr ""
-
 msgid "Advanced options"
 msgstr "Lisavõimalused"
 
@@ -1630,6 +1624,10 @@ msgid "Auto scart switching"
 msgstr "Autom. SCART ümberlülitus"
 
 #, fuzzy
+msgid "AutoBackup Settings System"
+msgstr "Loo süsteemi seadete varukoopia"
+
+#, fuzzy
 msgid "Autoinstalling Completed"
 msgstr "Paigaldamine on lõppenud."
 
@@ -1739,9 +1737,6 @@ msgstr ""
 msgid "Backup Drivers to HDD"
 msgstr ""
 
-msgid "Backup Files"
-msgstr ""
-
 msgid "Backup Image"
 msgstr ""
 
@@ -1757,14 +1752,8 @@ msgstr ""
 msgid "Backup failed."
 msgstr "Varukoopia loomine nurjus."
 
-msgid "Backup finished and copied to your USB-flash drive"
-msgstr ""
-
 msgid "Backup is running..."
 msgstr "Varukoopia loomine..."
-
-msgid "Backup location"
-msgstr ""
 
 msgid ""
 "Backup plugins found\n"
@@ -1778,13 +1767,14 @@ msgstr "Loo süsteemi seadete varukoopia"
 msgid "Backup system settings"
 msgstr "Loo süsteemi seadete varukoopia"
 
+#, fuzzy, python-format
+msgid "Backup to destination: %s"
+msgstr "Loo süsteemi seadete varukoopia"
+
 msgid "Backup your Image"
 msgstr ""
 
 msgid "Backup your Image/Settings or Flash a new Image"
-msgstr ""
-
-msgid "Backup your Settings"
 msgstr ""
 
 msgid "Backup your current image"
@@ -2179,6 +2169,10 @@ msgid "Cancelled upon user request"
 msgstr ""
 
 #, fuzzy
+msgid "Cannot create backup directory"
+msgstr "Loo kataloog"
+
+#, fuzzy
 msgid "Cannot delete downloaded image"
 msgstr "Kustutame möödunud taimerid?"
 
@@ -2358,10 +2352,6 @@ msgstr ""
 msgid "Check/Install online updates (you must have a working internet connection)."
 msgstr "Uuendamine nurjus. Vastuvõtjal puudub töötav internetiühendus."
 
-#, fuzzy
-msgid "Check:"
-msgstr "Kontrolli"
-
 msgid "Checking Feeds"
 msgstr ""
 
@@ -2394,12 +2384,6 @@ msgstr ""
 
 #, python-format
 msgid "Chipset: BCM%s"
-msgstr ""
-
-msgid "Choose Backup Files"
-msgstr ""
-
-msgid "Choose Backup location"
 msgstr ""
 
 msgid "Choose Tuner"
@@ -2691,10 +2675,6 @@ msgstr "Määra käitumine taasesituse lõppemisel."
 
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr "Määra teleteksti subtiitrite kontuuri paksus. Tume kontuur teeb subtiitrid heledal taustal kergemini loetavaks."
-
-#, fuzzy
-msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Määra esipaneeli näidiku heleduse tase ooterežiimil."
 
 #, fuzzy
 msgid "Configure the brightness level of the front panel display for normal operation."
@@ -5285,11 +5265,6 @@ msgstr "HD2400"
 msgid "HD60"
 msgstr ""
 
-msgid ""
-"HDD = Do you want to make a USB-back-up image on HDD? \n"
-"This only takes 1 or 10 minutes and is fully automatic."
-msgstr ""
-
 msgid "HDMI"
 msgstr ""
 
@@ -5642,6 +5617,10 @@ msgstr ""
 msgid "Ignore conflict"
 msgstr "Ignoreeri konflikti"
 
+#, fuzzy
+msgid "Image Backup"
+msgstr "Tarkvara: "
+
 msgid "Image Info"
 msgstr ""
 
@@ -5649,6 +5628,18 @@ msgid "Image Tools"
 msgstr ""
 
 msgid "Image Update"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 msgid "Image creation failed - "
@@ -5732,10 +5723,6 @@ msgstr "Suurendatud pinge"
 
 msgid "Index"
 msgstr "Indeks"
-
-#, python-format
-msgid "Index Error in the following files: %s"
-msgstr ""
 
 msgid "Index allocated:"
 msgstr "Indeks asetseb:"
@@ -6062,9 +6049,6 @@ msgid "Kenya"
 msgstr ""
 
 msgid "Kernel"
-msgstr ""
-
-msgid "Kernel dump error\n"
 msgstr ""
 
 msgid "Kernel version: "
@@ -6873,7 +6857,7 @@ msgid "Multiboot"
 msgstr "Mitu satelliiti"
 
 #, python-format
-msgid "Multiboot Image created at: %s"
+msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 #, fuzzy
@@ -7103,11 +7087,6 @@ msgstr "Ei leitud (toetatud) DVDROM-i!"
 msgid ""
 "No /hdd found !!\n"
 "Please make sure you have a HDD mounted.\n"
-msgstr ""
-
-msgid ""
-"No /hdd found !!\n"
-"Please make sure you have a HDD mounted.\n"
 "\n"
 "Exit plugin."
 msgstr ""
@@ -7134,12 +7113,6 @@ msgid "No HDD found or HDD not initialized!"
 msgstr "Kõvaketast ei leitud või seda pole formaaditud!"
 
 msgid "No IPTV media server found"
-msgstr ""
-
-msgid ""
-"No USB-Device found for fullbackup !!\n"
-"\n"
-"\n"
 msgstr ""
 
 #, fuzzy
@@ -7301,6 +7274,10 @@ msgid "No, but restart from begin"
 msgstr "Ei, alusta uuesti algusest"
 
 #, fuzzy
+msgid "No, do not backup a image"
+msgstr "Ei, ära tee midagi."
+
+#, fuzzy
 msgid "No, do not flash image"
 msgstr "Ei, ära tee midagi."
 
@@ -7365,17 +7342,6 @@ msgstr "Määramata"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Kõvakettal pole piisavalt ruumi. Kustuta ebavajalik ja proovi uuesti. (%d MB vaja, %d MB saadaval)"
 
-#, python-format
-msgid ""
-"Not enough free space on %s !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
-msgid ""
-"Not enough free space on /hdd !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
 msgid ""
 "Not enough free space on /hdd !!\n"
 "You need at least 300Mb free space.\n"
@@ -7422,7 +7388,7 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Hetkel"
 
-msgid "Now building the USB-Image"
+msgid "Now building the Backup Image"
 msgstr ""
 
 msgid "Now playing"
@@ -7884,9 +7850,6 @@ msgstr "Esita eelmine"
 msgid "Play recorded movies..."
 msgstr "Näita salvestisi"
 
-msgid "Please Flash your Kernel new and Backup again"
-msgstr ""
-
 msgid "Please add titles to the compilation."
 msgstr "Palun lisa pealkirjad kogumikku."
 
@@ -7991,6 +7954,10 @@ msgstr "Jätkamiseks vajuta OK ."
 
 msgid "Please re-enter the new PIN code"
 msgstr "Sisesta veel kord uus PIN kood"
+
+#, fuzzy
+msgid "Please select a backup destination"
+msgstr "Vali asukoht varukoopiale"
 
 msgid "Please select a playlist to delete..."
 msgstr "Vali kustutatav esitusloend"
@@ -8940,10 +8907,6 @@ msgstr ""
 msgid "Rename name and description for new events"
 msgstr "Nimeta ümber uute sündmuste nimed ja kirjeldused"
 
-#, python-format
-msgid "Rename the file 'noforce' in the folder %s"
-msgstr ""
-
 msgid "Rename to:"
 msgstr ""
 
@@ -9150,9 +9113,6 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
 msgstr "Taastamine..."
-
-msgid "Restores your latest Settings Backup"
-msgstr ""
 
 msgid "Restoring..."
 msgstr "Taastamine..."
@@ -11060,9 +11020,6 @@ msgstr "%s ei  paigaldatud!"
 msgid "Sorry Inadyn Config is Missing"
 msgstr ""
 
-msgid "Sorry MediaScanner is not installed!"
-msgstr ""
-
 msgid "Sorry MiniDLNA Config is Missing"
 msgstr ""
 
@@ -12010,9 +11967,6 @@ msgstr "Kustuta salvestatud esitusloend"
 msgid "There are no updates available."
 msgstr "Uuendusi ei ole saadaval."
 
-msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
 msgid "There is no signal to lock on !"
 msgstr "Pole signaali, millele lukustuda! "
 
@@ -12097,9 +12051,6 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
-msgstr ""
-
-msgid "This only takes about 1 or 2 minutes"
 msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
@@ -12429,9 +12380,6 @@ msgstr "Pealkirja seadmine"
 msgid "To audio selection"
 msgstr "Heli valik"
 
-msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
-msgstr ""
-
 #, fuzzy
 msgid "To restore the image:"
 msgstr "pole ressursi juhti"
@@ -12710,16 +12658,6 @@ msgstr ""
 
 msgid "USALS calibration"
 msgstr "USALS kalibreerimine"
-
-msgid ""
-"USB = Do you want to make a back-up on USB?\n"
-"This will take between 3 and 15 minutes depending on the used filesystem and is fully automatic.\n"
-"Make sure you first insert a USB flash drive before you select USB."
-msgstr ""
-
-#, python-format
-msgid "USB Image created at: %s"
-msgstr ""
 
 msgid "USB stick"
 msgstr "USB mälupulk"
@@ -13014,6 +12952,9 @@ msgid "Use the Networkwizard to configure your Network. The wizard will help you
 msgstr "Kasuta abilist valitud võrgukaardi seadmiseks"
 
 msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam."
+msgstr ""
+
+msgid "Use the cursor keys to select an installed image and then Start button."
 msgstr ""
 
 msgid "Use the network wizard to configure selected network adapter"
@@ -13918,11 +13859,6 @@ msgstr "Plaadile saab kirjutada ainult vastuvõtja salvestusi!"
 msgid "You can remove this plugin."
 msgstr "Selle laienduse saab eemaldada."
 
-msgid ""
-"You can select with yellow the OnlineFlash Image\n"
-" or select Recovery to create a USB Disk Image for clean Install."
-msgstr ""
-
 msgid "You can set how will be finished movieplayer with 'Exit' button."
 msgstr ""
 
@@ -14240,9 +14176,6 @@ msgstr "täiskasvanute film/draama"
 msgid "advanced"
 msgstr "lisavalikud"
 
-msgid "advanced restore"
-msgstr ""
-
 msgid "adventure/western/war"
 msgstr "seiklus/vestern/sõda"
 
@@ -14287,9 +14220,6 @@ msgstr "vali järgmine kanal"
 msgid "and select previous channel"
 msgstr "vali eelmine kanal"
 
-msgid "and there is made an extra copy at:"
-msgstr ""
-
 msgid "are you sure to cancel all changes"
 msgstr "kas tühistada kõik muutused?"
 
@@ -14314,14 +14244,8 @@ msgstr "automaatne"
 msgid "back"
 msgstr "tagasi"
 
-msgid "back-up image will now be copied to that USB- "
-msgstr ""
-
 msgid "background image"
 msgstr "taustapilt"
-
-msgid "backupstick or backupstick.txt"
-msgstr ""
 
 msgid "ballet"
 msgstr "ballett"
@@ -14420,11 +14344,6 @@ msgstr "kinnitatud"
 
 msgid "connected"
 msgstr "ühendatud"
-
-msgid ""
-"contain a file with the name: \n"
-"\n"
-msgstr ""
 
 msgid "controlled by HDMI"
 msgstr ""
@@ -14642,9 +14561,6 @@ msgstr "kaunid kunstid"
 msgid "fitness & health"
 msgstr "kehakultuur & tervis"
 
-msgid "flash drive. "
-msgstr ""
-
 msgid "flat alphabetic"
 msgstr "tähestikujärjekord"
 
@@ -14781,6 +14697,14 @@ msgid "install linux utilities (util-linux-blkid)"
 msgstr ""
 
 msgid "installs the sundtek driver and runs related shellscripts"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "internal flash:  %s %s "
+msgstr "Sisemine flash-mälu"
+
+#, python-format
+msgid "internal flash: %s %s as USB Recovery"
 msgstr ""
 
 msgid "invalid type"
@@ -14930,10 +14854,6 @@ msgstr "muusika/ballett/tants (üldine)"
 msgid "musical/opera"
 msgstr "muusikal/ooper"
 
-#, fuzzy
-msgid "n/A"
-msgstr "Ei ole kasutusel"
-
 msgid "n/a"
 msgstr ""
 
@@ -15037,9 +14957,6 @@ msgstr "kasutatud kahekihilisest kettast."
 msgid "of a SINGLE layer medium used."
 msgstr "kasutatud ühekihilisest kettast."
 
-msgid "of the USB-ports, therefore an extra copy of the "
-msgstr ""
-
 msgid "off"
 msgstr "väljas"
 
@@ -15091,9 +15008,6 @@ msgid "openeight"
 msgstr ""
 
 msgid "options mount file system (default): "
-msgstr ""
-
-msgid "or use OnlineFlash in SoftwareManager"
 msgstr ""
 
 msgid "original"
@@ -15366,6 +15280,10 @@ msgid "slot%s - %s (current image), without backup"
 msgstr ""
 
 #, python-format
+msgid "slot%s - %s as USB Recovery"
+msgstr ""
+
+#, python-format
 msgid "slot%s - %s mode 1"
 msgstr ""
 
@@ -15482,9 +15400,6 @@ msgstr "see salvestis"
 
 msgid "this service is protected by a parental control pin"
 msgstr "see kanal on kaitstud lapselukuga"
-
-msgid "to 'force' to flash this image without confirmation"
-msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "vaheta aja, salvestuse, heli, subtiitri info"

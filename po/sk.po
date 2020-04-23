@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:33+0200\n"
+"POT-Creation-Date: 2020-04-23 18:54+0200\n"
 "PO-Revision-Date: 2016-04-30 11:17+0200\n"
 "Last-Translator: Nicker <nickersk@gmail.com>\n"
 "Language-Team: \n"
@@ -1170,12 +1170,6 @@ msgstr "Ak chcete pokračovať, stlačte tlačidlo OK na diaľkovom ovládači."
 msgid "Advanced"
 msgstr "Pokročilé"
 
-msgid "Advanced Restore"
-msgstr ""
-
-msgid "Advanced Restore..."
-msgstr ""
-
 msgid "Advanced options"
 msgstr "Rozšírené voľby"
 
@@ -1643,6 +1637,10 @@ msgid "Auto scart switching"
 msgstr "Automatické prepnutie scartu"
 
 #, fuzzy
+msgid "AutoBackup Settings System"
+msgstr "Zálohovať nastavenia systému"
+
+#, fuzzy
 msgid "Autoinstalling Completed"
 msgstr "Inštalácia bola dokončená."
 
@@ -1752,9 +1750,6 @@ msgstr ""
 msgid "Backup Drivers to HDD"
 msgstr ""
 
-msgid "Backup Files"
-msgstr ""
-
 msgid "Backup Image"
 msgstr ""
 
@@ -1770,14 +1765,8 @@ msgstr ""
 msgid "Backup failed."
 msgstr "Zálohovanie zlyhalo."
 
-msgid "Backup finished and copied to your USB-flash drive"
-msgstr ""
-
 msgid "Backup is running..."
 msgstr "Zálohovanie beží..."
-
-msgid "Backup location"
-msgstr ""
 
 msgid ""
 "Backup plugins found\n"
@@ -1791,13 +1780,14 @@ msgstr "Zálohovať nastavenia systému"
 msgid "Backup system settings"
 msgstr "Zálohovať nastavenia systému"
 
+#, fuzzy, python-format
+msgid "Backup to destination: %s"
+msgstr "Zálohovať nastavenia systému"
+
 msgid "Backup your Image"
 msgstr ""
 
 msgid "Backup your Image/Settings or Flash a new Image"
-msgstr ""
-
-msgid "Backup your Settings"
 msgstr ""
 
 msgid "Backup your current image"
@@ -2192,6 +2182,10 @@ msgid "Cancelled upon user request"
 msgstr ""
 
 #, fuzzy
+msgid "Cannot create backup directory"
+msgstr "vytvoriť adresár"
+
+#, fuzzy
 msgid "Cannot delete downloaded image"
 msgstr "Naozaj zmazať dokončené časovače?"
 
@@ -2371,10 +2365,6 @@ msgstr ""
 msgid "Check/Install online updates (you must have a working internet connection)."
 msgstr "Aktualizácia zlyhala. Váš prijímač nemá funkčné pripojenie k internetu."
 
-#, fuzzy
-msgid "Check:"
-msgstr "Skontrolovať"
-
 msgid "Checking Feeds"
 msgstr ""
 
@@ -2409,12 +2399,6 @@ msgstr ""
 
 #, python-format
 msgid "Chipset: BCM%s"
-msgstr ""
-
-msgid "Choose Backup Files"
-msgstr ""
-
-msgid "Choose Backup location"
 msgstr ""
 
 msgid "Choose Tuner"
@@ -2706,10 +2690,6 @@ msgstr "Činnosť po dosiahnutí konca filmu, počas prehrávania."
 
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr "Nastavenie šírky rámčeka titulkov. Tmavý rámček uľahčuje čítanie titulkov na svetlom pozadí."
-
-#, fuzzy
-msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Nastavenie jasu predného panela počas pohotovostného režimu."
 
 #, fuzzy
 msgid "Configure the brightness level of the front panel display for normal operation."
@@ -5299,11 +5279,6 @@ msgstr "HD2400"
 msgid "HD60"
 msgstr ""
 
-msgid ""
-"HDD = Do you want to make a USB-back-up image on HDD? \n"
-"This only takes 1 or 10 minutes and is fully automatic."
-msgstr ""
-
 msgid "HDMI"
 msgstr ""
 
@@ -5656,6 +5631,10 @@ msgstr ""
 msgid "Ignore conflict"
 msgstr "Ignorovať konflikt"
 
+#, fuzzy
+msgid "Image Backup"
+msgstr "Image: "
+
 msgid "Image Info"
 msgstr ""
 
@@ -5663,6 +5642,18 @@ msgid "Image Tools"
 msgstr ""
 
 msgid "Image Update"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 msgid "Image creation failed - "
@@ -5746,10 +5737,6 @@ msgstr "Zvýšené napätie"
 
 msgid "Index"
 msgstr "Index"
-
-#, python-format
-msgid "Index Error in the following files: %s"
-msgstr ""
 
 msgid "Index allocated:"
 msgstr "Index pridelený:"
@@ -6076,9 +6063,6 @@ msgid "Kenya"
 msgstr ""
 
 msgid "Kernel"
-msgstr ""
-
-msgid "Kernel dump error\n"
 msgstr ""
 
 msgid "Kernel version: "
@@ -6888,7 +6872,7 @@ msgid "Multiboot"
 msgstr "Viac satelitov"
 
 #, python-format
-msgid "Multiboot Image created at: %s"
+msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 #, fuzzy
@@ -7118,11 +7102,6 @@ msgstr "Nenájdený (podporovaný) DVDROM!"
 msgid ""
 "No /hdd found !!\n"
 "Please make sure you have a HDD mounted.\n"
-msgstr ""
-
-msgid ""
-"No /hdd found !!\n"
-"Please make sure you have a HDD mounted.\n"
 "\n"
 "Exit plugin."
 msgstr ""
@@ -7149,12 +7128,6 @@ msgid "No HDD found or HDD not initialized!"
 msgstr "Pevný disk nebol nájdený alebo nebol inicializovaný."
 
 msgid "No IPTV media server found"
-msgstr ""
-
-msgid ""
-"No USB-Device found for fullbackup !!\n"
-"\n"
-"\n"
 msgstr ""
 
 #, fuzzy
@@ -7316,6 +7289,10 @@ msgid "No, but restart from begin"
 msgstr "Nie, ale začať od začiatku."
 
 #, fuzzy
+msgid "No, do not backup a image"
+msgstr "Nie, nič neurobiť."
+
+#, fuzzy
 msgid "No, do not flash image"
 msgstr "Nie, nič neurobiť."
 
@@ -7380,17 +7357,6 @@ msgstr "Nedefinované"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Nie je dostatok miesta na disku. Uvoľnite miesto na disku a a skúste to znova. (Potrebných je %d MB, ale voľných je len %d MB.)"
 
-#, python-format
-msgid ""
-"Not enough free space on %s !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
-msgid ""
-"Not enough free space on /hdd !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
 msgid ""
 "Not enough free space on /hdd !!\n"
 "You need at least 300Mb free space.\n"
@@ -7437,7 +7403,7 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Teraz"
 
-msgid "Now building the USB-Image"
+msgid "Now building the Backup Image"
 msgstr ""
 
 msgid "Now playing"
@@ -7899,9 +7865,6 @@ msgstr "Prehrať predchádzajúce"
 msgid "Play recorded movies..."
 msgstr "Prehrať nahrané filmy..."
 
-msgid "Please Flash your Kernel new and Backup again"
-msgstr ""
-
 msgid "Please add titles to the compilation."
 msgstr "Prosím, pridajte titulky do kompilácie."
 
@@ -8006,6 +7969,10 @@ msgstr "Pre pokračovanie stlačte tlačidlo OK."
 
 msgid "Please re-enter the new PIN code"
 msgstr "Prosím, znova zadajte nový kód PIN"
+
+#, fuzzy
+msgid "Please select a backup destination"
+msgstr "Prosím, zvoľte médium, ktoré sa použije ako umiestnenie zálohy"
 
 msgid "Please select a playlist to delete..."
 msgstr "Prosím, zvoľte zoznam prehrávok, ktorý sa má zmazať..."
@@ -8955,10 +8922,6 @@ msgstr ""
 msgid "Rename name and description for new events"
 msgstr "Premenujte názov a popis pre nové relácie"
 
-#, python-format
-msgid "Rename the file 'noforce' in the folder %s"
-msgstr ""
-
 msgid "Rename to:"
 msgstr ""
 
@@ -9163,9 +9126,6 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
 msgstr "Obnovujem..."
-
-msgid "Restores your latest Settings Backup"
-msgstr ""
 
 msgid "Restoring..."
 msgstr "Obnovujem..."
@@ -11076,9 +11036,6 @@ msgstr "Ospravedlňujeme sa, %s nebol nainštalovaný!"
 msgid "Sorry Inadyn Config is Missing"
 msgstr ""
 
-msgid "Sorry MediaScanner is not installed!"
-msgstr ""
-
 msgid "Sorry MiniDLNA Config is Missing"
 msgstr ""
 
@@ -12023,9 +11980,6 @@ msgstr "Zmazať uložený zoznam prehrávok"
 msgid "There are no updates available."
 msgstr "Nie sú dostupné žiadne aktualizácie."
 
-msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
 msgid "There is no signal to lock on !"
 msgstr "Nie je signál pre uzamknutie!"
 
@@ -12114,9 +12068,6 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
-msgstr ""
-
-msgid "This only takes about 1 or 2 minutes"
 msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
@@ -12446,9 +12397,6 @@ msgstr "Režim sady titulov"
 msgid "To audio selection"
 msgstr "Výber zvuku"
 
-msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
-msgstr ""
-
 #, fuzzy
 msgid "To restore the image:"
 msgstr "nie je manažér prostriedkov"
@@ -12727,16 +12675,6 @@ msgstr ""
 
 msgid "USALS calibration"
 msgstr "USALS kalibrácia"
-
-msgid ""
-"USB = Do you want to make a back-up on USB?\n"
-"This will take between 3 and 15 minutes depending on the used filesystem and is fully automatic.\n"
-"Make sure you first insert a USB flash drive before you select USB."
-msgstr ""
-
-#, python-format
-msgid "USB Image created at: %s"
-msgstr ""
 
 msgid "USB stick"
 msgstr "USB zariadenie"
@@ -13032,6 +12970,9 @@ msgid "Use the Networkwizard to configure your Network. The wizard will help you
 msgstr "Použiť Sprievodcu nastavením siete na nastavenie zvoleného sieťového adaptéra"
 
 msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam."
+msgstr ""
+
+msgid "Use the cursor keys to select an installed image and then Start button."
 msgstr ""
 
 msgid "Use the network wizard to configure selected network adapter"
@@ -13931,11 +13872,6 @@ msgstr "Môžete napáliť iba nahrávky z prijímača!"
 msgid "You can remove this plugin."
 msgstr "Tento modul môžete odstrániť."
 
-msgid ""
-"You can select with yellow the OnlineFlash Image\n"
-" or select Recovery to create a USB Disk Image for clean Install."
-msgstr ""
-
 msgid "You can set how will be finished movieplayer with 'Exit' button."
 msgstr ""
 
@@ -14253,9 +14189,6 @@ msgstr "film pre dospelých/dráma"
 msgid "advanced"
 msgstr "pokročilé"
 
-msgid "advanced restore"
-msgstr ""
-
 msgid "adventure/western/war"
 msgstr "dobrodružný/western/vojnový"
 
@@ -14300,9 +14233,6 @@ msgstr "a vybrať nasledujúci kanál"
 msgid "and select previous channel"
 msgstr "a vybrať predchádzajúci kanál"
 
-msgid "and there is made an extra copy at:"
-msgstr ""
-
 msgid "are you sure to cancel all changes"
 msgstr "naozaj chcete zrušiť všetky zmeny"
 
@@ -14327,14 +14257,8 @@ msgstr "Automatické"
 msgid "back"
 msgstr "späť"
 
-msgid "back-up image will now be copied to that USB- "
-msgstr ""
-
 msgid "background image"
 msgstr "obraz v pozadí"
-
-msgid "backupstick or backupstick.txt"
-msgstr ""
 
 msgid "ballet"
 msgstr "balet"
@@ -14433,11 +14357,6 @@ msgstr "potvrdené"
 
 msgid "connected"
 msgstr "pripojené"
-
-msgid ""
-"contain a file with the name: \n"
-"\n"
-msgstr ""
 
 msgid "controlled by HDMI"
 msgstr ""
@@ -14655,9 +14574,6 @@ msgstr "výtvarné umenie"
 msgid "fitness & health"
 msgstr "fitnes a zdravie"
 
-msgid "flash drive. "
-msgstr ""
-
 msgid "flat alphabetic"
 msgstr "abecedne"
 
@@ -14794,6 +14710,14 @@ msgid "install linux utilities (util-linux-blkid)"
 msgstr ""
 
 msgid "installs the sundtek driver and runs related shellscripts"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "internal flash:  %s %s "
+msgstr "Vnútorná flash pamäť"
+
+#, python-format
+msgid "internal flash: %s %s as USB Recovery"
 msgstr ""
 
 msgid "invalid type"
@@ -14943,10 +14867,6 @@ msgstr "hudba/balet/tanec (všeobecne)"
 msgid "musical/opera"
 msgstr "muzikál/opera"
 
-#, fuzzy
-msgid "n/A"
-msgstr "Nie je k dispozícii"
-
 msgid "n/a"
 msgstr ""
 
@@ -15050,9 +14970,6 @@ msgstr "dvojvrstvového média využitých."
 msgid "of a SINGLE layer medium used."
 msgstr "jednovrstvového média využitých."
 
-msgid "of the USB-ports, therefore an extra copy of the "
-msgstr ""
-
 msgid "off"
 msgstr "vyp."
 
@@ -15104,9 +15021,6 @@ msgid "openeight"
 msgstr ""
 
 msgid "options mount file system (default): "
-msgstr ""
-
-msgid "or use OnlineFlash in SoftwareManager"
 msgstr ""
 
 msgid "original"
@@ -15379,6 +15293,10 @@ msgid "slot%s - %s (current image), without backup"
 msgstr ""
 
 #, python-format
+msgid "slot%s - %s as USB Recovery"
+msgstr ""
+
+#, python-format
 msgid "slot%s - %s mode 1"
 msgstr ""
 
@@ -15495,9 +15413,6 @@ msgstr "táto nahrávka"
 
 msgid "this service is protected by a parental control pin"
 msgstr "táto stanica je chránená rodičovskou kontrolou"
-
-msgid "to 'force' to flash this image without confirmation"
-msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "prepnúť informácie medzi časom, kapitolou, zvukovou stopou a titulkami"

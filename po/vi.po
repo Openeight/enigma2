@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:33+0200\n"
+"POT-Creation-Date: 2020-04-23 18:54+0200\n"
 "PO-Revision-Date: 2019-07-23 16:42+0200\n"
 "Last-Translator: krong\n"
 "Language-Team: none\n"
@@ -1197,14 +1197,6 @@ msgstr "Nhấn OK trên điều khiển từ xa của bạn để tiếp tục."
 msgid "Advanced"
 msgstr "Nâng cao"
 
-#, fuzzy
-msgid "Advanced Restore"
-msgstr "Khôi phục nâng cao"
-
-#, fuzzy
-msgid "Advanced Restore..."
-msgstr "Khôi phục nâng cao"
-
 msgid "Advanced options"
 msgstr "Tùy chọn nâng cao"
 
@@ -1668,6 +1660,10 @@ msgstr "Tự động phát tệp blu-ray"
 msgid "Auto scart switching"
 msgstr "Tự động chuyển mạch"
 
+#, fuzzy
+msgid "AutoBackup Settings System"
+msgstr "Cài đặt sao lưu"
+
 msgid "Autoinstalling Completed"
 msgstr "Hoàn tất cài đặt tự động"
 
@@ -1779,10 +1775,6 @@ msgid "Backup Drivers to HDD"
 msgstr ""
 
 #, fuzzy
-msgid "Backup Files"
-msgstr "Sao lưu thất bại."
-
-#, fuzzy
 msgid "Backup Image"
 msgstr "Sao lưu thất bại."
 
@@ -1800,15 +1792,8 @@ msgstr "Sao lưu thất bại."
 msgid "Backup failed."
 msgstr "Sao lưu thất bại."
 
-msgid "Backup finished and copied to your USB-flash drive"
-msgstr ""
-
 msgid "Backup is running..."
 msgstr "Sao lưu đang chạy ..."
-
-#, fuzzy
-msgid "Backup location"
-msgstr "Chọn vị trí dự phòng"
 
 #, fuzzy
 msgid ""
@@ -1822,16 +1807,16 @@ msgstr "Cài đặt sao lưu"
 msgid "Backup system settings"
 msgstr "Cài đặt hệ thống sao lưu"
 
+#, fuzzy, python-format
+msgid "Backup to destination: %s"
+msgstr "Cài đặt sao lưu"
+
 #, fuzzy
 msgid "Backup your Image"
 msgstr "hình nền"
 
 msgid "Backup your Image/Settings or Flash a new Image"
 msgstr ""
-
-#, fuzzy
-msgid "Backup your Settings"
-msgstr "Cài đặt sao lưu"
 
 #, fuzzy
 msgid "Backup your current image"
@@ -2238,6 +2223,10 @@ msgstr "Chọn kênh"
 msgid "Cancelled upon user request"
 msgstr "Hủy theo yêu cầu của người dùng"
 
+#, fuzzy
+msgid "Cannot create backup directory"
+msgstr "tạo thư mục"
+
 msgid "Cannot delete downloaded image"
 msgstr "Không thể xóa hình ảnh đã tải xuống"
 
@@ -2416,10 +2405,6 @@ msgid "Check/Install online updates (you must have a working internet connection
 msgstr "Cập nhật thất bại. Đầu thu của bạn không có kết nối internet làm việc."
 
 #, fuzzy
-msgid "Check:"
-msgstr "Kiểm tra"
-
-#, fuzzy
 msgid "Checking Feeds"
 msgstr "Kiểm tra hệ thống tập tin ..."
 
@@ -2455,14 +2440,6 @@ msgstr "Truyền thống Trung Hoa"
 #, python-format
 msgid "Chipset: BCM%s"
 msgstr ""
-
-#, fuzzy
-msgid "Choose Backup Files"
-msgstr "Chọn tập tin sao lưu"
-
-#, fuzzy
-msgid "Choose Backup location"
-msgstr "Chọn vị trí dự phòng"
 
 msgid "Choose Tuner"
 msgstr "Chọn bộ chỉnh"
@@ -2753,9 +2730,6 @@ msgstr "Định cấu hình hành vi khi đến cuối phim, trong khi phát l�
 
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr "Cấu hình chiều rộng đường viền của phụ đề. Đường viền tối làm cho phụ đề dễ đọc hơn trên nền sáng."
-
-msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Định cấu hình mức độ sáng của màn hình bảng mặt trước trong chế độ chờ."
 
 #, fuzzy
 msgid "Configure the brightness level of the front panel display for normal operation."
@@ -5369,11 +5343,6 @@ msgstr "HD2400"
 msgid "HD60"
 msgstr ""
 
-msgid ""
-"HDD = Do you want to make a USB-back-up image on HDD? \n"
-"This only takes 1 or 10 minutes and is fully automatic."
-msgstr ""
-
 msgid "HDMI"
 msgstr "HDMI"
 
@@ -5720,6 +5689,10 @@ msgid "Ignore conflict"
 msgstr "Bỏ qua xung đột"
 
 #, fuzzy
+msgid "Image Backup"
+msgstr "Hoàn thành"
+
+#, fuzzy
 msgid "Image Info"
 msgstr "Hình ảnh: "
 
@@ -5730,6 +5703,18 @@ msgstr "Hình ảnh: "
 #, fuzzy
 msgid "Image Update"
 msgstr "Cập nhật"
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
+msgstr ""
 
 msgid "Image creation failed - "
 msgstr ""
@@ -5814,10 +5799,6 @@ msgstr "Tăng điện áp"
 
 msgid "Index"
 msgstr "Mục lục"
-
-#, python-format
-msgid "Index Error in the following files: %s"
-msgstr ""
 
 msgid "Index allocated:"
 msgstr "Chỉ số được phân bổ:"
@@ -6159,9 +6140,6 @@ msgid "Kenya"
 msgstr "Nước Kenya"
 
 msgid "Kernel"
-msgstr ""
-
-msgid "Kernel dump error\n"
 msgstr ""
 
 msgid "Kernel version: "
@@ -6979,7 +6957,7 @@ msgid "Multiboot"
 msgstr "Đa khởi động"
 
 #, python-format
-msgid "Multiboot Image created at: %s"
+msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 msgid "Multichannel PCM"
@@ -7219,11 +7197,6 @@ msgstr "Không tìm thấy (hỗ trợ) DVDROM!"
 msgid ""
 "No /hdd found !!\n"
 "Please make sure you have a HDD mounted.\n"
-msgstr ""
-
-msgid ""
-"No /hdd found !!\n"
-"Please make sure you have a HDD mounted.\n"
 "\n"
 "Exit plugin."
 msgstr ""
@@ -7252,12 +7225,6 @@ msgid "No HDD found or HDD not initialized!"
 msgstr "Không tìm thấy ổ cứng hoặc ổ cứng không được khởi tạo!"
 
 msgid "No IPTV media server found"
-msgstr ""
-
-msgid ""
-"No USB-Device found for fullbackup !!\n"
-"\n"
-"\n"
 msgstr ""
 
 msgid "No active subservices available."
@@ -7417,6 +7384,10 @@ msgstr "Không, tôi không muốn cài đặt plugin"
 msgid "No, but restart from begin"
 msgstr "Không, nhưng khởi động lại từ đầu"
 
+#, fuzzy
+msgid "No, do not backup a image"
+msgstr "Không, đừng flash hình ảnh"
+
 msgid "No, do not flash image"
 msgstr "Không, đừng flash hình ảnh"
 
@@ -7477,17 +7448,6 @@ msgstr "Không xác định"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Không đủ dung lượng đĩa. Vui lòng giải phóng không gian đĩa và thử lại. (Yêu cầu%d MB,%d MB khả dụng)"
 
-#, python-format
-msgid ""
-"Not enough free space on %s !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
-msgid ""
-"Not enough free space on /hdd !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
 msgid ""
 "Not enough free space on /hdd !!\n"
 "You need at least 300Mb free space.\n"
@@ -7532,7 +7492,7 @@ msgid "Now"
 msgstr "Hiện nay"
 
 #, fuzzy
-msgid "Now building the USB-Image"
+msgid "Now building the Backup Image"
 msgstr "Đang tải hình ảnh"
 
 msgid "Now playing"
@@ -8004,9 +7964,6 @@ msgstr "Chơi trước"
 msgid "Play recorded movies..."
 msgstr "Chơi phim đã ghi ..."
 
-msgid "Please Flash your Kernel new and Backup again"
-msgstr ""
-
 msgid "Please add titles to the compilation."
 msgstr "Vui lòng thêm tiêu đề để biên dịch."
 
@@ -8115,6 +8072,10 @@ msgstr "Vui lòng nhấn OK để tiếp tục."
 
 msgid "Please re-enter the new PIN code"
 msgstr "Vui lòng nhập lại mã PIN mới"
+
+#, fuzzy
+msgid "Please select a backup destination"
+msgstr "Vui lòng chọn phương tiện để sử dụng làm vị trí dự phòng"
 
 msgid "Please select a playlist to delete..."
 msgstr "Vui lòng chọn danh sách phát để xóa ..."
@@ -9080,10 +9041,6 @@ msgstr "Điều chỉnh thất bại!"
 msgid "Rename name and description for new events"
 msgstr "Đổi tên và mô tả cho các sự kiện mới"
 
-#, python-format
-msgid "Rename the file 'noforce' in the folder %s"
-msgstr ""
-
 #, fuzzy
 msgid "Rename to:"
 msgstr "Đổi tên"
@@ -9296,12 +9253,6 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
 msgstr "Khôi phục ..."
-
-#, fuzzy
-msgid "Restores your latest Settings Backup"
-msgstr ""
-"\n"
-"Khôi phục cài đặt máy thu của bạn."
 
 msgid "Restoring..."
 msgstr "Khôi phục ..."
@@ -11230,10 +11181,6 @@ msgstr "Xin lỗi,%s chưa được cài đặt!"
 msgid "Sorry Inadyn Config is Missing"
 msgstr ""
 
-#, fuzzy
-msgid "Sorry MediaScanner is not installed!"
-msgstr "Xin lỗi,%s chưa được cài đặt!"
-
 msgid "Sorry MiniDLNA Config is Missing"
 msgstr ""
 
@@ -12199,9 +12146,6 @@ msgstr "Không có danh sách phát đã lưu để tải!"
 msgid "There are no updates available."
 msgstr "Không có cập nhật có sẵn."
 
-msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
 msgid "There is no signal to lock on !"
 msgstr "Không có tín hiệu để khóa!"
 
@@ -12308,9 +12252,6 @@ msgstr "Đây là một bộ điều chỉnh multitype. Tùy chọn có sẵn ph
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
 msgstr "Đây là thứ tự mà các lệnh DiSEqC được gửi đến hệ thống trên không. Thứ tự phải tương ứng chính xác với thứ tự các thiết bị vật lý được sắp xếp dọc theo cáp tín hiệu (bắt đầu từ đầu thu)."
-
-msgid "This only takes about 1 or 2 minutes"
-msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
 msgstr "Tùy chọn này cho phép giảm nhiễu khối trong ảnh. Rõ ràng đây là cái giá của độ sắc nét của hình ảnh."
@@ -12645,9 +12586,6 @@ msgstr "Chế độ tiêu đề"
 msgid "To audio selection"
 msgstr "Để lựa chọn âm thanh"
 
-msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
-msgstr ""
-
 #, fuzzy
 msgid "To restore the image:"
 msgstr "không có người quản lý tài nguyên"
@@ -12921,16 +12859,6 @@ msgstr "USALS tự động di chuyển một đĩa có động cơ đến đúng
 
 msgid "USALS calibration"
 msgstr "Hiệu chuẩn USALS"
-
-msgid ""
-"USB = Do you want to make a back-up on USB?\n"
-"This will take between 3 and 15 minutes depending on the used filesystem and is fully automatic.\n"
-"Make sure you first insert a USB flash drive before you select USB."
-msgstr ""
-
-#, python-format
-msgid "USB Image created at: %s"
-msgstr ""
 
 msgid "USB stick"
 msgstr "Thanh USB"
@@ -13224,6 +13152,9 @@ msgid "Use the Networkwizard to configure your Network. The wizard will help you
 msgstr "Sử dụng trình hướng dẫn mạng để định cấu hình mạng của bạn\n"
 
 msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam."
+msgstr ""
+
+msgid "Use the cursor keys to select an installed image and then Start button."
 msgstr ""
 
 msgid "Use the network wizard to configure selected network adapter"
@@ -14130,11 +14061,6 @@ msgstr "Bạn chỉ có thể ghi bản ghi nhận!"
 msgid "You can remove this plugin."
 msgstr "Bạn có thể loại bỏ plugin này."
 
-msgid ""
-"You can select with yellow the OnlineFlash Image\n"
-" or select Recovery to create a USB Disk Image for clean Install."
-msgstr ""
-
 msgid "You can set how will be finished movieplayer with 'Exit' button."
 msgstr "Bạn có thể đặt cách hoàn thành trình phát phim bằng nút 'Thoát'."
 
@@ -14472,10 +14398,6 @@ msgstr "phim / phim người lớn"
 msgid "advanced"
 msgstr "nâng cao"
 
-#, fuzzy
-msgid "advanced restore"
-msgstr "Khôi phục nâng cao"
-
 msgid "adventure/western/war"
 msgstr "phiêu lưu / tây / chiến tranh"
 
@@ -14519,9 +14441,6 @@ msgstr "và chọn kênh tiếp theo"
 msgid "and select previous channel"
 msgstr "và chọn kênh trước"
 
-msgid "and there is made an extra copy at:"
-msgstr ""
-
 msgid "are you sure to cancel all changes"
 msgstr "bạn có chắc chắn hủy tất cả các thay đổi"
 
@@ -14546,14 +14465,8 @@ msgstr "tự động"
 msgid "back"
 msgstr "trở lại"
 
-msgid "back-up image will now be copied to that USB- "
-msgstr ""
-
 msgid "background image"
 msgstr "hình nền"
-
-msgid "backupstick or backupstick.txt"
-msgstr ""
 
 msgid "ballet"
 msgstr "vở ballet"
@@ -14652,11 +14565,6 @@ msgstr "xác nhận"
 
 msgid "connected"
 msgstr "đã kết nối"
-
-msgid ""
-"contain a file with the name: \n"
-"\n"
-msgstr ""
 
 msgid "controlled by HDMI"
 msgstr "được điều khiển bởi HDMI"
@@ -14883,9 +14791,6 @@ msgstr "mỹ thuật"
 msgid "fitness & health"
 msgstr "thể dục & sức khỏe"
 
-msgid "flash drive. "
-msgstr ""
-
 msgid "flat alphabetic"
 msgstr "chữ cái phẳng"
 
@@ -15019,6 +14924,14 @@ msgid "install linux utilities (util-linux-blkid)"
 msgstr ""
 
 msgid "installs the sundtek driver and runs related shellscripts"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "internal flash:  %s %s "
+msgstr "Đèn flash bên trong"
+
+#, python-format
+msgid "internal flash: %s %s as USB Recovery"
 msgstr ""
 
 msgid "invalid type"
@@ -15171,10 +15084,6 @@ msgstr "âm nhạc / ballet / khiêu vũ (nói chung)"
 msgid "musical/opera"
 msgstr "âm nhạc / ba lê / thương mại (nói chung)"
 
-#, fuzzy
-msgid "n/A"
-msgstr "N/A"
-
 msgid "n/a"
 msgstr ""
 
@@ -15282,9 +15191,6 @@ msgstr "của một môi trường lớp DUAL được sử dụng."
 msgid "of a SINGLE layer medium used."
 msgstr "của một phương tiện lớp SINGLE được sử dụng."
 
-msgid "of the USB-ports, therefore an extra copy of the "
-msgstr ""
-
 msgid "off"
 msgstr "tắt"
 
@@ -15337,9 +15243,6 @@ msgid "openeight"
 msgstr "chiều cao"
 
 msgid "options mount file system (default): "
-msgstr ""
-
-msgid "or use OnlineFlash in SoftwareManager"
 msgstr ""
 
 msgid "original"
@@ -15620,6 +15523,10 @@ msgstr "vị trí%s -%s (kiểu dáng trẻ em)"
 msgid "slot%s - %s (current image), without backup"
 msgstr "vị trí%s -%s (hình ảnh hiện tại), không cần sao lưu"
 
+#, fuzzy, python-format
+msgid "slot%s - %s as USB Recovery"
+msgstr "khe%s -%s chế độ 1"
+
 #, python-format
 msgid "slot%s - %s mode 1"
 msgstr "khe%s -%s chế độ 1"
@@ -15740,9 +15647,6 @@ msgstr "bản ghi âm này"
 
 msgid "this service is protected by a parental control pin"
 msgstr "dịch vụ này được bảo vệ bởi pin kiểm soát của phụ huynh"
-
-msgid "to 'force' to flash this image without confirmation"
-msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "chuyển thời gian, chương, âm thanh, thông tin phụ đề"

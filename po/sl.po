@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Slovenia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:33+0200\n"
+"POT-Creation-Date: 2020-04-23 18:54+0200\n"
 "PO-Revision-Date: 2015-08-30 09:00+0200\n"
 "Last-Translator: Taykun345 <support@satnigmo.com>\n"
 "Language-Team: Satnigmo <support@satnigmo.com>\n"
@@ -1297,12 +1297,6 @@ msgstr "Za nadaljevanje pritisnite OK."
 msgid "Advanced"
 msgstr "Napredno"
 
-msgid "Advanced Restore"
-msgstr ""
-
-msgid "Advanced Restore..."
-msgstr ""
-
 #
 msgid "Advanced options"
 msgstr "Napredne nastavitve"
@@ -1826,6 +1820,11 @@ msgstr ""
 msgid "Auto scart switching"
 msgstr "Samodejno preklapljanje SCART"
 
+#
+#, fuzzy
+msgid "AutoBackup Settings System"
+msgstr "Shrani glavne nastavitve"
+
 #, fuzzy
 msgid "Autoinstalling Completed"
 msgstr "Namestitev je zaključena."
@@ -1948,9 +1947,6 @@ msgstr ""
 msgid "Backup Drivers to HDD"
 msgstr ""
 
-msgid "Backup Files"
-msgstr ""
-
 msgid "Backup Image"
 msgstr ""
 
@@ -1968,15 +1964,9 @@ msgstr ""
 msgid "Backup failed."
 msgstr "Varnostno kopiranje ni uspelo."
 
-msgid "Backup finished and copied to your USB-flash drive"
-msgstr ""
-
 #
 msgid "Backup is running..."
 msgstr "Poteka varnostno kopiranje..."
-
-msgid "Backup location"
-msgstr ""
 
 msgid ""
 "Backup plugins found\n"
@@ -1992,13 +1982,15 @@ msgstr "Shrani glavne nastavitve"
 msgid "Backup system settings"
 msgstr "Shrani glavne nastavitve"
 
+#
+#, fuzzy, python-format
+msgid "Backup to destination: %s"
+msgstr "Shrani glavne nastavitve"
+
 msgid "Backup your Image"
 msgstr ""
 
 msgid "Backup your Image/Settings or Flash a new Image"
-msgstr ""
-
-msgid "Backup your Settings"
 msgstr ""
 
 msgid "Backup your current image"
@@ -2427,6 +2419,11 @@ msgstr ""
 
 #
 #, fuzzy
+msgid "Cannot create backup directory"
+msgstr "Ustvarite novo mapo"
+
+#
+#, fuzzy
 msgid "Cannot delete downloaded image"
 msgstr "Želite izbrisati končane časovnike?"
 
@@ -2627,11 +2624,6 @@ msgstr ""
 msgid "Check/Install online updates (you must have a working internet connection)."
 msgstr "Posodobitev ni bila uspešna. Sprejemnik nima delujoče internetne povezave!"
 
-#
-#, fuzzy
-msgid "Check:"
-msgstr "Preveri"
-
 msgid "Checking Feeds"
 msgstr ""
 
@@ -2665,12 +2657,6 @@ msgstr ""
 
 #, python-format
 msgid "Chipset: BCM%s"
-msgstr ""
-
-msgid "Choose Backup Files"
-msgstr ""
-
-msgid "Choose Backup location"
 msgstr ""
 
 msgid "Choose Tuner"
@@ -2997,10 +2983,6 @@ msgstr "Določitev obnašanja sprejemnika, ko se video posnetek približuje konc
 
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr "Določitev širine obrobe pisave pri podnapisih. Temnejša obroba omogoči lažje branje podnapisov na svetlejši podlagi."
-
-#, fuzzy
-msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Določitev ravni svetlosti sprednjega zaslona sprejemnika, ko se le-ta nahaja v stanju pripravljenosti."
 
 #, fuzzy
 msgid "Configure the brightness level of the front panel display for normal operation."
@@ -5876,11 +5858,6 @@ msgstr "HD2400"
 msgid "HD60"
 msgstr ""
 
-msgid ""
-"HDD = Do you want to make a USB-back-up image on HDD? \n"
-"This only takes 1 or 10 minutes and is fully automatic."
-msgstr ""
-
 msgid "HDMI"
 msgstr ""
 
@@ -6254,6 +6231,10 @@ msgstr ""
 msgid "Ignore conflict"
 msgstr ""
 
+#, fuzzy
+msgid "Image Backup"
+msgstr "Verzija slike: "
+
 msgid "Image Info"
 msgstr ""
 
@@ -6261,6 +6242,18 @@ msgid "Image Tools"
 msgstr ""
 
 msgid "Image Update"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 msgid "Image creation failed - "
@@ -6353,10 +6346,6 @@ msgstr "Povečana napetost"
 #
 msgid "Index"
 msgstr "Indeks"
-
-#, python-format
-msgid "Index Error in the following files: %s"
-msgstr ""
 
 msgid "Index allocated:"
 msgstr ""
@@ -6722,9 +6711,6 @@ msgid "Kenya"
 msgstr ""
 
 msgid "Kernel"
-msgstr ""
-
-msgid "Kernel dump error\n"
 msgstr ""
 
 msgid "Kernel version: "
@@ -7629,7 +7615,7 @@ msgid "Multiboot"
 msgstr "Multisat"
 
 #, python-format
-msgid "Multiboot Image created at: %s"
+msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 #, fuzzy
@@ -7889,11 +7875,6 @@ msgstr "Ne najdem (podprte oblike) DVDROM!"
 msgid ""
 "No /hdd found !!\n"
 "Please make sure you have a HDD mounted.\n"
-msgstr ""
-
-msgid ""
-"No /hdd found !!\n"
-"Please make sure you have a HDD mounted.\n"
 "\n"
 "Exit plugin."
 msgstr ""
@@ -7922,12 +7903,6 @@ msgid "No HDD found or HDD not initialized!"
 msgstr "Trdega diska ni mogoče dodati!"
 
 msgid "No IPTV media server found"
-msgstr ""
-
-msgid ""
-"No USB-Device found for fullbackup !!\n"
-"\n"
-"\n"
 msgstr ""
 
 #, fuzzy
@@ -8117,6 +8092,11 @@ msgstr "Ne, zaženi ponovno od začetka"
 
 #
 #, fuzzy
+msgid "No, do not backup a image"
+msgstr "Ne stori ničesar."
+
+#
+#, fuzzy
 msgid "No, do not flash image"
 msgstr "Ne stori ničesar."
 
@@ -8187,17 +8167,6 @@ msgstr "nedoločeno"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Ni dovolj prostora! Sprostite prostor na disku in poizkusite ponovno (%d MB zahtevano, %d MB na voljo)"
 
-#, python-format
-msgid ""
-"Not enough free space on %s !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
-msgid ""
-"Not enough free space on /hdd !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
 msgid ""
 "Not enough free space on /hdd !!\n"
 "You need at least 300Mb free space.\n"
@@ -8247,7 +8216,7 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Zdaj"
 
-msgid "Now building the USB-Image"
+msgid "Now building the Backup Image"
 msgstr ""
 
 #
@@ -8753,9 +8722,6 @@ msgstr "Predvajaj prejšnje"
 msgid "Play recorded movies..."
 msgstr "Predvajanje posnetkov"
 
-msgid "Please Flash your Kernel new and Backup again"
-msgstr ""
-
 #
 msgid "Please add titles to the compilation."
 msgstr ""
@@ -8879,6 +8845,11 @@ msgstr "Za nadaljevanje pritisnite tipko OK."
 
 msgid "Please re-enter the new PIN code"
 msgstr "Ponovno vnesi novo PIN kodo"
+
+#
+#, fuzzy
+msgid "Please select a backup destination"
+msgstr "Izberite ustrezen medij za varnostno kopiranje:"
 
 #
 msgid "Please select a playlist to delete..."
@@ -9981,10 +9952,6 @@ msgstr ""
 msgid "Rename name and description for new events"
 msgstr "Preimenuj ime in opis za nove dogodke"
 
-#, python-format
-msgid "Rename the file 'noforce' in the folder %s"
-msgstr ""
-
 msgid "Rename to:"
 msgstr ""
 
@@ -10220,9 +10187,6 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
 msgstr "Obnavljanje ..."
-
-msgid "Restores your latest Settings Backup"
-msgstr ""
 
 #
 msgid "Restoring..."
@@ -12357,9 +12321,6 @@ msgstr "Oprostite, %s ni bil nameščen!"
 msgid "Sorry Inadyn Config is Missing"
 msgstr ""
 
-msgid "Sorry MediaScanner is not installed!"
-msgstr ""
-
 msgid "Sorry MiniDLNA Config is Missing"
 msgstr ""
 
@@ -13414,9 +13375,6 @@ msgstr "Izbris shranjenega seznama predvajanja"
 msgid "There are no updates available."
 msgstr "Nadgradnja ni na voljo."
 
-msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
 msgid "There is no signal to lock on !"
 msgstr "Ni signala!"
 
@@ -13503,9 +13461,6 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
-msgstr ""
-
-msgid "This only takes about 1 or 2 minutes"
 msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
@@ -13870,9 +13825,6 @@ msgstr "Način za določanje naslovov"
 msgid "To audio selection"
 msgstr "Izbira jezika zvočne sledi"
 
-msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
-msgstr ""
-
 #
 #, fuzzy
 msgid "To restore the image:"
@@ -14188,16 +14140,6 @@ msgstr ""
 
 msgid "USALS calibration"
 msgstr "USALS kalibracija"
-
-msgid ""
-"USB = Do you want to make a back-up on USB?\n"
-"This will take between 3 and 15 minutes depending on the used filesystem and is fully automatic.\n"
-"Make sure you first insert a USB flash drive before you select USB."
-msgstr ""
-
-#, python-format
-msgid "USB Image created at: %s"
-msgstr ""
 
 #
 msgid "USB stick"
@@ -14515,6 +14457,9 @@ msgid "Use the Networkwizard to configure your Network. The wizard will help you
 msgstr "Za nastavljanje izbranega omrežnega vmesnika, izberite omrežni čarovnik."
 
 msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam."
+msgstr ""
+
+msgid "Use the cursor keys to select an installed image and then Start button."
 msgstr ""
 
 #
@@ -15505,11 +15450,6 @@ msgstr ""
 msgid "You can remove this plugin."
 msgstr "Izbrani vtičnik lahko izbrišete."
 
-msgid ""
-"You can select with yellow the OnlineFlash Image\n"
-" or select Recovery to create a USB Disk Image for clean Install."
-msgstr ""
-
 msgid "You can set how will be finished movieplayer with 'Exit' button."
 msgstr ""
 
@@ -15850,9 +15790,6 @@ msgstr ""
 msgid "advanced"
 msgstr "napredno"
 
-msgid "advanced restore"
-msgstr ""
-
 msgid "adventure/western/war"
 msgstr ""
 
@@ -15901,9 +15838,6 @@ msgstr "in izberi naslednji kanal"
 msgid "and select previous channel"
 msgstr "in izberi prejšnji kanal"
 
-msgid "and there is made an extra copy at:"
-msgstr ""
-
 msgid "are you sure to cancel all changes"
 msgstr "ali si prepričan, da želiš preklicati vse spremembe"
 
@@ -15932,15 +15866,9 @@ msgstr "Samodejno"
 msgid "back"
 msgstr "Nazaj"
 
-msgid "back-up image will now be copied to that USB- "
-msgstr ""
-
 #
 msgid "background image"
 msgstr "slika ozadja"
-
-msgid "backupstick or backupstick.txt"
-msgstr ""
 
 msgid "ballet"
 msgstr ""
@@ -16052,11 +15980,6 @@ msgstr "potrjeno"
 #
 msgid "connected"
 msgstr "povezano"
-
-msgid ""
-"contain a file with the name: \n"
-"\n"
-msgstr ""
 
 msgid "controlled by HDMI"
 msgstr ""
@@ -16294,9 +16217,6 @@ msgstr ""
 msgid "fitness & health"
 msgstr ""
 
-msgid "flash drive. "
-msgstr ""
-
 #
 msgid "flat alphabetic"
 msgstr "razvrščanje po abecedi"
@@ -16451,6 +16371,15 @@ msgid "install linux utilities (util-linux-blkid)"
 msgstr ""
 
 msgid "installs the sundtek driver and runs related shellscripts"
+msgstr ""
+
+#
+#, fuzzy, python-format
+msgid "internal flash:  %s %s "
+msgstr "Notranji pomnilnik"
+
+#, python-format
+msgid "internal flash: %s %s as USB Recovery"
 msgstr ""
 
 msgid "invalid type"
@@ -16622,11 +16551,6 @@ msgstr ""
 msgid "musical/opera"
 msgstr ""
 
-#
-#, fuzzy
-msgid "n/A"
-msgstr "N/A"
-
 msgid "n/a"
 msgstr ""
 
@@ -16742,9 +16666,6 @@ msgstr "od uporabljenega DVOPLASTNEGA medija"
 msgid "of a SINGLE layer medium used."
 msgstr "od uporabljenega ENOPLASTNEGA medija."
 
-msgid "of the USB-ports, therefore an extra copy of the "
-msgstr ""
-
 #
 msgid "off"
 msgstr "izklopi"
@@ -16804,9 +16725,6 @@ msgid "openeight"
 msgstr ""
 
 msgid "options mount file system (default): "
-msgstr ""
-
-msgid "or use OnlineFlash in SoftwareManager"
 msgstr ""
 
 msgid "original"
@@ -17103,6 +17021,10 @@ msgid "slot%s - %s (current image), without backup"
 msgstr ""
 
 #, python-format
+msgid "slot%s - %s as USB Recovery"
+msgstr ""
+
+#, python-format
 msgid "slot%s - %s mode 1"
 msgstr ""
 
@@ -17228,9 +17150,6 @@ msgstr "to snemanje"
 #
 msgid "this service is protected by a parental control pin"
 msgstr "kanal je zaščiten s PIN kodo"
-
-msgid "to 'force' to flash this image without confirmation"
-msgstr ""
 
 #
 msgid "toggle time, chapter, audio, subtitle info"

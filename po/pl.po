@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:33+0200\n"
+"POT-Creation-Date: 2020-04-23 18:54+0200\n"
 "PO-Revision-Date: 2016-02-18 19:00+0100\n"
 "Last-Translator: blzr <blzr@o2.pl>\n"
 "Language-Team: \n"
@@ -1210,12 +1210,6 @@ msgstr "Wciśnij OK, aby kontynuować."
 msgid "Advanced"
 msgstr "Zaawansowane"
 
-msgid "Advanced Restore"
-msgstr "Zaawansowane przywracanie"
-
-msgid "Advanced Restore..."
-msgstr "Zaawansowane przywracanie..."
-
 msgid "Advanced options"
 msgstr "Opcje zaawansowane"
 
@@ -1701,6 +1695,10 @@ msgid "Auto scart switching"
 msgstr "Automatyczne przełączanie 'scart'"
 
 #, fuzzy
+msgid "AutoBackup Settings System"
+msgstr "Kopia Ustawień"
+
+#, fuzzy
 msgid "Autoinstalling Completed"
 msgstr "Instalacja zakończona."
 
@@ -1814,9 +1812,6 @@ msgstr "Pliki Kopii"
 msgid "Backup Drivers to HDD"
 msgstr "Pliki Kopii"
 
-msgid "Backup Files"
-msgstr "Pliki Kopii"
-
 msgid "Backup Image"
 msgstr "Kopia Oprogramowania"
 
@@ -1833,14 +1828,8 @@ msgstr "Tworzenie backupu bie powiódło się."
 msgid "Backup failed."
 msgstr "Tworzenie backupu bie powiódło się."
 
-msgid "Backup finished and copied to your USB-flash drive"
-msgstr ""
-
 msgid "Backup is running..."
 msgstr "Tworzenie backupu..."
-
-msgid "Backup location"
-msgstr "Lokalizacja kopii"
 
 msgid ""
 "Backup plugins found\n"
@@ -1854,14 +1843,15 @@ msgstr "Kopia Ustawień"
 msgid "Backup system settings"
 msgstr "Backup ustawień systemowych"
 
+#, fuzzy, python-format
+msgid "Backup to destination: %s"
+msgstr "Kopia Twoich ustawień"
+
 msgid "Backup your Image"
 msgstr "Pełna Kopia Oprogramowania"
 
 msgid "Backup your Image/Settings or Flash a new Image"
 msgstr "Kopia Obrazu/Ustawień lub wgrywanie oprogramowania online"
-
-msgid "Backup your Settings"
-msgstr "Kopia Twoich ustawień"
 
 #, fuzzy
 msgid "Backup your current image"
@@ -2268,6 +2258,10 @@ msgid "Cancelled upon user request"
 msgstr ""
 
 #, fuzzy
+msgid "Cannot create backup directory"
+msgstr "Utwórz katalog"
+
+#, fuzzy
 msgid "Cannot delete downloaded image"
 msgstr "Usunąć wykonane timery?"
 
@@ -2453,10 +2447,6 @@ msgid "Check/Install online updates (you must have a working internet connection
 msgstr "Aktualizacja nie powiodła się. Brak działającego połączenia internetowego."
 
 #, fuzzy
-msgid "Check:"
-msgstr "Sprawdź"
-
-#, fuzzy
 msgid "Checking Feeds"
 msgstr "Sprawdzanie systemu plików..."
 
@@ -2490,12 +2480,6 @@ msgstr ""
 #, python-format
 msgid "Chipset: BCM%s"
 msgstr ""
-
-msgid "Choose Backup Files"
-msgstr "Wybierz pliki dla kopii"
-
-msgid "Choose Backup location"
-msgstr "Wybierz lokalizację dla plików kopii"
 
 msgid "Choose Tuner"
 msgstr "Wybierz tuner"
@@ -2799,10 +2783,6 @@ msgstr "Skonfiguruj zachowanie gdy odtwarzanie filmu osiągnie koniec."
 
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr "Skonfiguruj szerokość obramowania napisów. Ciemne obramowanie sprawia, że napisy są bardziej czytelne na jasnym tle. "
-
-#, fuzzy
-msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Skonfiguruj kontrast wyświetlacza na frontowym panelu."
 
 #, fuzzy
 msgid "Configure the brightness level of the front panel display for normal operation."
@@ -5461,11 +5441,6 @@ msgstr ""
 msgid "HD60"
 msgstr ""
 
-msgid ""
-"HDD = Do you want to make a USB-back-up image on HDD? \n"
-"This only takes 1 or 10 minutes and is fully automatic."
-msgstr ""
-
 msgid "HDMI"
 msgstr ""
 
@@ -5825,6 +5800,10 @@ msgid "Ignore conflict"
 msgstr "Ignoruj konflikt"
 
 #, fuzzy
+msgid "Image Backup"
+msgstr "Zakończ"
+
+#, fuzzy
 msgid "Image Info"
 msgstr "Soft:"
 
@@ -5833,6 +5812,18 @@ msgstr "Narzędzia Oprogramowania"
 
 msgid "Image Update"
 msgstr "Aktualizacja Oprogramowania"
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
+msgstr ""
 
 msgid "Image creation failed - "
 msgstr ""
@@ -5918,10 +5909,6 @@ msgstr "Zwiększone napięcie"
 
 msgid "Index"
 msgstr "Indeks"
-
-#, python-format
-msgid "Index Error in the following files: %s"
-msgstr ""
 
 msgid "Index allocated:"
 msgstr "Indeks przypisany:"
@@ -6262,9 +6249,6 @@ msgid "Kenya"
 msgstr ""
 
 msgid "Kernel"
-msgstr ""
-
-msgid "Kernel dump error\n"
 msgstr ""
 
 msgid "Kernel version: "
@@ -7099,7 +7083,7 @@ msgid "Multiboot"
 msgstr ""
 
 #, python-format
-msgid "Multiboot Image created at: %s"
+msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 #, fuzzy
@@ -7339,11 +7323,6 @@ msgstr "Nie znaleziono (obsługiwanego) napędu DVDROM!"
 msgid ""
 "No /hdd found !!\n"
 "Please make sure you have a HDD mounted.\n"
-msgstr ""
-
-msgid ""
-"No /hdd found !!\n"
-"Please make sure you have a HDD mounted.\n"
 "\n"
 "Exit plugin."
 msgstr ""
@@ -7372,12 +7351,6 @@ msgid "No HDD found or HDD not initialized!"
 msgstr "Nie znaleziono HDD lub dysk nie jest zainicjowany!"
 
 msgid "No IPTV media server found"
-msgstr ""
-
-msgid ""
-"No USB-Device found for fullbackup !!\n"
-"\n"
-"\n"
 msgstr ""
 
 #, fuzzy
@@ -7539,6 +7512,10 @@ msgstr "Chcesz zainstalować listę kanałów?"
 msgid "No, but restart from begin"
 msgstr "Nie, ale odtwórz od początku"
 
+#, fuzzy
+msgid "No, do not backup a image"
+msgstr "Nie zmieniaj"
+
 msgid "No, do not flash image"
 msgstr ""
 
@@ -7603,17 +7580,6 @@ msgstr "Niezdefiniowany"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Nie wystarczająca ilość przestrzeni dyskowej. Zwolnij miejsce na dysku i spróbuj ponownie. (%d MB wymagane, %d MB dostępne)"
 
-#, python-format
-msgid ""
-"Not enough free space on %s !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
-msgid ""
-"Not enough free space on /hdd !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
 msgid ""
 "Not enough free space on /hdd !!\n"
 "You need at least 300Mb free space.\n"
@@ -7660,7 +7626,7 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Teraz"
 
-msgid "Now building the USB-Image"
+msgid "Now building the Backup Image"
 msgstr ""
 
 msgid "Now playing"
@@ -8136,9 +8102,6 @@ msgstr "Odtwórz poprzedni"
 msgid "Play recorded movies..."
 msgstr "Odtwórz nagrane filmy..."
 
-msgid "Please Flash your Kernel new and Backup again"
-msgstr ""
-
 msgid "Please add titles to the compilation."
 msgstr "Dodaj tytuły do kompilacji."
 
@@ -8247,6 +8210,10 @@ msgstr "Naciśnij OK aby kontynuować."
 
 msgid "Please re-enter the new PIN code"
 msgstr "Wpisz ponownie nowy kod PIN"
+
+#, fuzzy
+msgid "Please select a backup destination"
+msgstr "Wybierz nośnik do użycia jako miejsce backupu"
 
 msgid "Please select a playlist to delete..."
 msgstr "Wybierz playlistę do usunięcia..."
@@ -9234,10 +9201,6 @@ msgstr "Dostrojenie nie powiodło się!"
 msgid "Rename name and description for new events"
 msgstr "Zmień nazwę i opis dla nowych wydarzeń"
 
-#, python-format
-msgid "Rename the file 'noforce' in the folder %s"
-msgstr ""
-
 #, fuzzy
 msgid "Rename to:"
 msgstr "Zmień nazwę"
@@ -9457,9 +9420,6 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
 msgstr "Przywracanie ustawień"
-
-msgid "Restores your latest Settings Backup"
-msgstr "Przywracanie kopi ostatnich ustawień"
 
 msgid "Restoring..."
 msgstr "Przywracanie..."
@@ -11427,10 +11387,6 @@ msgstr "Niestety, %s nie został zainstalowany!"
 msgid "Sorry Inadyn Config is Missing"
 msgstr ""
 
-#, fuzzy
-msgid "Sorry MediaScanner is not installed!"
-msgstr "Niestety, %s nie został zainstalowany!"
-
 msgid "Sorry MiniDLNA Config is Missing"
 msgstr ""
 
@@ -12396,9 +12352,6 @@ msgstr "Usuń zachowaną playlistę"
 msgid "There are no updates available."
 msgstr "Brak dostępnych aktualizacji"
 
-msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
 msgid "There is no signal to lock on !"
 msgstr "Brak sygnału do złapania!"
 
@@ -12484,9 +12437,6 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
-msgstr ""
-
-msgid "This only takes about 1 or 2 minutes"
 msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
@@ -12812,9 +12762,6 @@ msgstr "Tryb tytułów"
 msgid "To audio selection"
 msgstr "Przejdź do wyboru ścieżki audio"
 
-msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
-msgstr ""
-
 #, fuzzy
 msgid "To restore the image:"
 msgstr "brak menadżera zasobów"
@@ -13104,16 +13051,6 @@ msgstr ""
 
 msgid "USALS calibration"
 msgstr "Kalibracja USALS"
-
-msgid ""
-"USB = Do you want to make a back-up on USB?\n"
-"This will take between 3 and 15 minutes depending on the used filesystem and is fully automatic.\n"
-"Make sure you first insert a USB flash drive before you select USB."
-msgstr ""
-
-#, fuzzy, python-format
-msgid "USB Image created at: %s"
-msgstr "Aktualizacja Oprogramowania"
 
 msgid "USB stick"
 msgstr "Pen USB"
@@ -13414,6 +13351,9 @@ msgid "Use the Networkwizard to configure your Network. The wizard will help you
 msgstr "Użyj kreatora sieci do konfiguracji wybranego adaptera"
 
 msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam."
+msgstr ""
+
+msgid "Use the cursor keys to select an installed image and then Start button."
 msgstr ""
 
 msgid "Use the network wizard to configure selected network adapter"
@@ -14340,11 +14280,6 @@ msgstr "\"Możesz wypalać tylko nagrania!"
 msgid "You can remove this plugin."
 msgstr "Możesz usunąć tą wtyczkę"
 
-msgid ""
-"You can select with yellow the OnlineFlash Image\n"
-" or select Recovery to create a USB Disk Image for clean Install."
-msgstr ""
-
 msgid "You can set how will be finished movieplayer with 'Exit' button."
 msgstr ""
 
@@ -14669,10 +14604,6 @@ msgstr "Film/Dramat dla dorosłych"
 msgid "advanced"
 msgstr "Zaawansowane"
 
-#, fuzzy
-msgid "advanced restore"
-msgstr "Przywracanie zaawansowane"
-
 msgid "adventure/western/war"
 msgstr "Przygoda/Wojenny/Western"
 
@@ -14717,9 +14648,6 @@ msgstr "i wybierz kolejny kanał"
 msgid "and select previous channel"
 msgstr "i wybierz poprzedni kanał."
 
-msgid "and there is made an extra copy at:"
-msgstr ""
-
 msgid "are you sure to cancel all changes"
 msgstr "Jesteś pewien, że chcesz anulować wszystkie zmiany?"
 
@@ -14744,14 +14672,8 @@ msgstr "Automatycznie"
 msgid "back"
 msgstr "Wróć"
 
-msgid "back-up image will now be copied to that USB- "
-msgstr ""
-
 msgid "background image"
 msgstr "Obraz tła"
-
-msgid "backupstick or backupstick.txt"
-msgstr ""
 
 msgid "ballet"
 msgstr "Balet"
@@ -14851,11 +14773,6 @@ msgstr "Potwierdzony"
 
 msgid "connected"
 msgstr "Połączony"
-
-msgid ""
-"contain a file with the name: \n"
-"\n"
-msgstr ""
 
 msgid "controlled by HDMI"
 msgstr ""
@@ -15080,9 +14997,6 @@ msgstr "Sztuki piękne"
 msgid "fitness & health"
 msgstr "Fittness i zdrowie"
 
-msgid "flash drive. "
-msgstr ""
-
 msgid "flat alphabetic"
 msgstr "Alfabetycznie (+katalogi)"
 
@@ -15221,6 +15135,14 @@ msgid "install linux utilities (util-linux-blkid)"
 msgstr ""
 
 msgid "installs the sundtek driver and runs related shellscripts"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "internal flash:  %s %s "
+msgstr "Wewnętrzny flash"
+
+#, python-format
+msgid "internal flash: %s %s as USB Recovery"
 msgstr ""
 
 msgid "invalid type"
@@ -15373,10 +15295,6 @@ msgstr "Muzyka/Balet/Taniec"
 msgid "musical/opera"
 msgstr "Musical/Opera"
 
-#, fuzzy
-msgid "n/A"
-msgstr "N/A"
-
 msgid "n/a"
 msgstr ""
 
@@ -15485,9 +15403,6 @@ msgstr "nośnika dual layer zużyto."
 msgid "of a SINGLE layer medium used."
 msgstr "nośnika single layer zużyto."
 
-msgid "of the USB-ports, therefore an extra copy of the "
-msgstr ""
-
 msgid "off"
 msgstr "Wyłączony"
 
@@ -15540,9 +15455,6 @@ msgid "openeight"
 msgstr "Wysokość"
 
 msgid "options mount file system (default): "
-msgstr ""
-
-msgid "or use OnlineFlash in SoftwareManager"
 msgstr ""
 
 msgid "original"
@@ -15825,6 +15737,10 @@ msgid "slot%s - %s (current image), without backup"
 msgstr ""
 
 #, python-format
+msgid "slot%s - %s as USB Recovery"
+msgstr ""
+
+#, python-format
 msgid "slot%s - %s mode 1"
 msgstr ""
 
@@ -15944,9 +15860,6 @@ msgstr "to nagranie"
 
 msgid "this service is protected by a parental control pin"
 msgstr "Ten serwis jest chroniony kodem PIN"
-
-msgid "to 'force' to flash this image without confirmation"
-msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "Czas odtwarzania, rozdział, audio, informacja o napisach"

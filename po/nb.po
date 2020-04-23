@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:33+0200\n"
+"POT-Creation-Date: 2020-04-23 18:54+0200\n"
 "PO-Revision-Date: 2016-03-29 16:22+0100\n"
 "Last-Translator: Andy1 <dmmm8000hdpvr@gmail.com>\n"
 "Language-Team: none\n"
@@ -1240,12 +1240,6 @@ msgstr "Trykk OK for å fortsette."
 msgid "Advanced"
 msgstr "Avansert"
 
-msgid "Advanced Restore"
-msgstr ""
-
-msgid "Advanced Restore..."
-msgstr ""
-
 msgid "Advanced options"
 msgstr "Avansert innstilling"
 
@@ -1749,6 +1743,11 @@ msgstr "Spill av automatisk blu-ray fil"
 msgid "Auto scart switching"
 msgstr "Auto scart bytte"
 
+#
+#, fuzzy
+msgid "AutoBackup Settings System"
+msgstr "Sikkerhetskopier system innstillinger"
+
 #, fuzzy
 msgid "Autoinstalling Completed"
 msgstr "Installasjonen er ferdig."
@@ -1867,9 +1866,6 @@ msgstr ""
 msgid "Backup Drivers to HDD"
 msgstr ""
 
-msgid "Backup Files"
-msgstr ""
-
 msgid "Backup Image"
 msgstr ""
 
@@ -1887,15 +1883,9 @@ msgstr ""
 msgid "Backup failed."
 msgstr "Sikkerhetskopi feilet."
 
-msgid "Backup finished and copied to your USB-flash drive"
-msgstr ""
-
 #
 msgid "Backup is running..."
 msgstr "Sikkerhetskopi kjører..."
-
-msgid "Backup location"
-msgstr ""
 
 msgid ""
 "Backup plugins found\n"
@@ -1911,13 +1901,15 @@ msgstr "Sikkerhetskopier system innstillinger"
 msgid "Backup system settings"
 msgstr "Sikkerhetskopier system innstillinger"
 
+#
+#, fuzzy, python-format
+msgid "Backup to destination: %s"
+msgstr "Sikkerhetskopier system innstillinger"
+
 msgid "Backup your Image"
 msgstr ""
 
 msgid "Backup your Image/Settings or Flash a new Image"
-msgstr ""
-
-msgid "Backup your Settings"
 msgstr ""
 
 msgid "Backup your current image"
@@ -2337,6 +2329,10 @@ msgstr "Kanalvalg"
 msgid "Cancelled upon user request"
 msgstr ""
 
+#, fuzzy
+msgid "Cannot create backup directory"
+msgstr "Opprett mappe"
+
 #
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -2543,11 +2539,6 @@ msgstr ""
 msgid "Check/Install online updates (you must have a working internet connection)."
 msgstr "Oppdateringen mislyktes. Mottakeren mangler internettforbindelse."
 
-#
-#, fuzzy
-msgid "Check:"
-msgstr "Kontroller"
-
 msgid "Checking Feeds"
 msgstr ""
 
@@ -2581,12 +2572,6 @@ msgstr ""
 
 #, python-format
 msgid "Chipset: BCM%s"
-msgstr ""
-
-msgid "Choose Backup Files"
-msgstr ""
-
-msgid "Choose Backup location"
 msgstr ""
 
 msgid "Choose Tuner"
@@ -2907,10 +2892,6 @@ msgstr "Still inn valg når en avspilling slutter."
 
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr "Still inn bredde på rammen rundt undertekst. Mørk ramme gjør teksten lettere å lese på en lys bakgrunn."
-
-#, fuzzy
-msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Still inn lysstyrken på mottakerens frontpanel skjerm når mottakeren er avslått."
 
 #, fuzzy
 msgid "Configure the brightness level of the front panel display for normal operation."
@@ -5714,11 +5695,6 @@ msgstr ""
 msgid "HD60"
 msgstr ""
 
-msgid ""
-"HDD = Do you want to make a USB-back-up image on HDD? \n"
-"This only takes 1 or 10 minutes and is fully automatic."
-msgstr ""
-
 msgid "HDMI"
 msgstr ""
 
@@ -6088,6 +6064,10 @@ msgstr ""
 msgid "Ignore conflict"
 msgstr "Ignorer konflikt"
 
+#, fuzzy
+msgid "Image Backup"
+msgstr "Operativsystem:"
+
 msgid "Image Info"
 msgstr ""
 
@@ -6095,6 +6075,18 @@ msgid "Image Tools"
 msgstr ""
 
 msgid "Image Update"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 msgid "Image creation failed - "
@@ -6183,10 +6175,6 @@ msgstr "Økt spenning (V)"
 #
 msgid "Index"
 msgstr "Innhold"
-
-#, python-format
-msgid "Index Error in the following files: %s"
-msgstr ""
 
 msgid "Index allocated:"
 msgstr "Innholdsfortegnelse tildelt:"
@@ -6551,9 +6539,6 @@ msgid "Kenya"
 msgstr ""
 
 msgid "Kernel"
-msgstr ""
-
-msgid "Kernel dump error\n"
 msgstr ""
 
 #
@@ -7440,7 +7425,7 @@ msgid "Multiboot"
 msgstr "Alle satellitt posisjoner"
 
 #, python-format
-msgid "Multiboot Image created at: %s"
+msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 #, fuzzy
@@ -7699,11 +7684,6 @@ msgstr "Ingen (støttet) DVD-ROM funnet!"
 msgid ""
 "No /hdd found !!\n"
 "Please make sure you have a HDD mounted.\n"
-msgstr ""
-
-msgid ""
-"No /hdd found !!\n"
-"Please make sure you have a HDD mounted.\n"
 "\n"
 "Exit plugin."
 msgstr ""
@@ -7731,12 +7711,6 @@ msgid "No HDD found or HDD not initialized!"
 msgstr "Ingen lagringsdisk ble funnet!"
 
 msgid "No IPTV media server found"
-msgstr ""
-
-msgid ""
-"No USB-Device found for fullbackup !!\n"
-"\n"
-"\n"
 msgstr ""
 
 #, fuzzy
@@ -7919,6 +7893,11 @@ msgstr "Nei, men start på nytt"
 
 #
 #, fuzzy
+msgid "No, do not backup a image"
+msgstr "Nei, ikke gjør noe."
+
+#
+#, fuzzy
 msgid "No, do not flash image"
 msgstr "Nei, ikke gjør noe."
 
@@ -7990,17 +7969,6 @@ msgstr "Ikke definert"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Ikke nok diskplass. Frigjør litt diskplass og prøv på nytt. (%d MB nødvendig, %d MB tilgjengelig)"
 
-#, python-format
-msgid ""
-"Not enough free space on %s !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
-msgid ""
-"Not enough free space on /hdd !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
 msgid ""
 "Not enough free space on /hdd !!\n"
 "You need at least 300Mb free space.\n"
@@ -8048,7 +8016,7 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Nå"
 
-msgid "Now building the USB-Image"
+msgid "Now building the Backup Image"
 msgstr ""
 
 #
@@ -8545,9 +8513,6 @@ msgstr "Spill av siste"
 msgid "Play recorded movies..."
 msgstr "Spill av opptak..."
 
-msgid "Please Flash your Kernel new and Backup again"
-msgstr ""
-
 #
 msgid "Please add titles to the compilation."
 msgstr "Legg til en tittel i samlingen."
@@ -8664,6 +8629,11 @@ msgstr "Trykk OK for å fortsette."
 
 msgid "Please re-enter the new PIN code"
 msgstr "Tast inn den nye PIN koden på nytt"
+
+#
+#, fuzzy
+msgid "Please select a backup destination"
+msgstr "Velg medium for lagring av sikkerhetskopi"
 
 #
 msgid "Please select a playlist to delete..."
@@ -9718,10 +9688,6 @@ msgstr ""
 msgid "Rename name and description for new events"
 msgstr "Gi nytt navn og beskrivelse for nye kanaler"
 
-#, python-format
-msgid "Rename the file 'noforce' in the folder %s"
-msgstr ""
-
 msgid "Rename to:"
 msgstr ""
 
@@ -9944,9 +9910,6 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
 msgstr "Gjenoppretter..."
-
-msgid "Restores your latest Settings Backup"
-msgstr ""
 
 #
 msgid "Restoring..."
@@ -12015,9 +11978,6 @@ msgstr "Beklager, %s har ikke blitt installert!"
 msgid "Sorry Inadyn Config is Missing"
 msgstr ""
 
-msgid "Sorry MediaScanner is not installed!"
-msgstr ""
-
 msgid "Sorry MiniDLNA Config is Missing"
 msgstr ""
 
@@ -13040,9 +13000,6 @@ msgstr "Slett lagret opptaksliste"
 msgid "There are no updates available."
 msgstr "Det finnes ingen oppdateringer nå."
 
-msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
 msgid "There is no signal to lock on !"
 msgstr "Det finnes ikke noe signal og låse seg på!"
 
@@ -13129,9 +13086,6 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
-msgstr ""
-
-msgid "This only takes about 1 or 2 minutes"
 msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
@@ -13496,9 +13450,6 @@ msgstr "Navnevalg"
 msgid "To audio selection"
 msgstr "Lyd valg"
 
-msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
-msgstr ""
-
 #, fuzzy
 msgid "To restore the image:"
 msgstr "ingen ressurs utdeler"
@@ -13809,16 +13760,6 @@ msgstr ""
 
 msgid "USALS calibration"
 msgstr "USALS kalibrering"
-
-msgid ""
-"USB = Do you want to make a back-up on USB?\n"
-"This will take between 3 and 15 minutes depending on the used filesystem and is fully automatic.\n"
-"Make sure you first insert a USB flash drive before you select USB."
-msgstr ""
-
-#, python-format
-msgid "USB Image created at: %s"
-msgstr ""
 
 #
 msgid "USB stick"
@@ -14132,6 +14073,9 @@ msgid "Use the Networkwizard to configure your Network. The wizard will help you
 msgstr "Bruk nettverksveiviseren for oppsett av nettverkskortet"
 
 msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam."
+msgstr ""
+
+msgid "Use the cursor keys to select an installed image and then Start button."
 msgstr ""
 
 #
@@ -15092,11 +15036,6 @@ msgstr "Det kan bare (DVD)brennes mottaker opptak!"
 msgid "You can remove this plugin."
 msgstr "Dette tillegget kan slettes."
 
-msgid ""
-"You can select with yellow the OnlineFlash Image\n"
-" or select Recovery to create a USB Disk Image for clean Install."
-msgstr ""
-
 msgid "You can set how will be finished movieplayer with 'Exit' button."
 msgstr ""
 
@@ -15428,9 +15367,6 @@ msgstr "voksenfilm/drama"
 msgid "advanced"
 msgstr "utvidet"
 
-msgid "advanced restore"
-msgstr ""
-
 msgid "adventure/western/war"
 msgstr "eventyr/western/krig"
 
@@ -15481,9 +15417,6 @@ msgstr "og velg neste kanal"
 msgid "and select previous channel"
 msgstr "og velg forrige kanal"
 
-msgid "and there is made an extra copy at:"
-msgstr ""
-
 msgid "are you sure to cancel all changes"
 msgstr "skal alle endringer avbrytes"
 
@@ -15512,15 +15445,9 @@ msgstr "automatisk"
 msgid "back"
 msgstr "tilbake"
 
-msgid "back-up image will now be copied to that USB- "
-msgstr ""
-
 #
 msgid "background image"
 msgstr "bakgrunns bilde"
-
-msgid "backupstick or backupstick.txt"
-msgstr ""
 
 msgid "ballet"
 msgstr "ballett"
@@ -15629,11 +15556,6 @@ msgstr "bekreftet"
 #
 msgid "connected"
 msgstr "tilkoblet"
-
-msgid ""
-"contain a file with the name: \n"
-"\n"
-msgstr ""
 
 msgid "controlled by HDMI"
 msgstr ""
@@ -15872,9 +15794,6 @@ msgstr "kunst"
 msgid "fitness & health"
 msgstr "trening & helse"
 
-msgid "flash drive. "
-msgstr ""
-
 #
 msgid "flat alphabetic"
 msgstr "sorter alfabetisk"
@@ -16027,6 +15946,15 @@ msgid "install linux utilities (util-linux-blkid)"
 msgstr ""
 
 msgid "installs the sundtek driver and runs related shellscripts"
+msgstr ""
+
+#
+#, fuzzy, python-format
+msgid "internal flash:  %s %s "
+msgstr "Internt flash"
+
+#, python-format
+msgid "internal flash: %s %s as USB Recovery"
 msgstr ""
 
 msgid "invalid type"
@@ -16198,10 +16126,6 @@ msgstr "musikk/ballett/dans (generelt)"
 msgid "musical/opera"
 msgstr "musikal/opera"
 
-#, fuzzy
-msgid "n/A"
-msgstr "Ikke/aktuelt"
-
 msgid "n/a"
 msgstr ""
 
@@ -16318,9 +16242,6 @@ msgstr "av et to lags medium i bruk."
 msgid "of a SINGLE layer medium used."
 msgstr "av et enkeltlags medium i bruk."
 
-msgid "of the USB-ports, therefore an extra copy of the "
-msgstr ""
-
 #
 msgid "off"
 msgstr "av"
@@ -16379,9 +16300,6 @@ msgid "openeight"
 msgstr ""
 
 msgid "options mount file system (default): "
-msgstr ""
-
-msgid "or use OnlineFlash in SoftwareManager"
 msgstr ""
 
 msgid "original"
@@ -16672,6 +16590,10 @@ msgid "slot%s - %s (current image), without backup"
 msgstr ""
 
 #, python-format
+msgid "slot%s - %s as USB Recovery"
+msgstr ""
+
+#, python-format
 msgid "slot%s - %s mode 1"
 msgstr ""
 
@@ -16794,9 +16716,6 @@ msgstr "dette opptaket"
 #
 msgid "this service is protected by a parental control pin"
 msgstr "denne kanalen er beskyttet av en foreldrekontroll kode"
-
-msgid "to 'force' to flash this image without confirmation"
-msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "juster tid, kapittel, lyd, undertekst info"

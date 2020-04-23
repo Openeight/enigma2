@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:33+0200\n"
+"POT-Creation-Date: 2020-04-23 18:54+0200\n"
 "PO-Revision-Date: 2020-04-18 13:21+0200\n"
 "Last-Translator: Smokey\n"
 "Language-Team: OpenEight <https://octagon-forum.eu>\n"
@@ -1161,12 +1161,6 @@ msgstr "Hier kunt u de functies van uw afstandsbediening wijzigen."
 msgid "Advanced"
 msgstr "Geavanceerd"
 
-msgid "Advanced Restore"
-msgstr "Geavanceerd Herstellen"
-
-msgid "Advanced Restore..."
-msgstr "Kies een Instellingen-Backup file..."
-
 msgid "Advanced options"
 msgstr "Geavanceerde opties"
 
@@ -1623,6 +1617,10 @@ msgstr "Speel blu-ray bestand automatisch af"
 msgid "Auto scart switching"
 msgstr "Automatisch scart schakelen"
 
+#, fuzzy
+msgid "AutoBackup Settings System"
+msgstr "Backup Instellingen"
+
 msgid "Autoinstalling Completed"
 msgstr "Installatie is gereed"
 
@@ -1729,9 +1727,6 @@ msgstr "Backup Datum: %s\n"
 msgid "Backup Drivers to HDD"
 msgstr "Back-up drivers naar HDD"
 
-msgid "Backup Files"
-msgstr "Backup Bestanden"
-
 msgid "Backup Image"
 msgstr "Maak een Backup van uw Image"
 
@@ -1747,14 +1742,8 @@ msgstr "Backup is klaar."
 msgid "Backup failed."
 msgstr "Backup is mislukt."
 
-msgid "Backup finished and copied to your USB-flash drive"
-msgstr "Back-up klaar en gekopieerd naar uw USB-stick"
-
 msgid "Backup is running..."
 msgstr "Backup wordt uitgevoerd..."
-
-msgid "Backup location"
-msgstr "Backup locatie"
 
 msgid ""
 "Backup plugins found\n"
@@ -1769,14 +1758,15 @@ msgstr "Backup Instellingen"
 msgid "Backup system settings"
 msgstr "Backup uw instellingen"
 
+#, fuzzy, python-format
+msgid "Backup to destination: %s"
+msgstr "Maak een Backup van uw Instellingen"
+
 msgid "Backup your Image"
 msgstr "Maak een backup van uw Image"
 
 msgid "Backup your Image/Settings or Flash a new Image"
 msgstr "Maak een Backup van uw Image/Instellingen of Flash een nieuw Image"
-
-msgid "Backup your Settings"
-msgstr "Maak een Backup van uw Instellingen"
 
 msgid "Backup your current image"
 msgstr "Maak een Backup van uw Image"
@@ -2180,6 +2170,10 @@ msgstr "Annuleer de opdracht?"
 msgid "Cancelled upon user request"
 msgstr "Geannuleerd door de gebruiker"
 
+#, fuzzy
+msgid "Cannot create backup directory"
+msgstr "Map aanmaken"
+
 msgid "Cannot delete downloaded image"
 msgstr "Gedownloade images kunnen niet verwijderd worden"
 
@@ -2356,9 +2350,6 @@ msgstr ""
 "Controleer/Installeer online updates.\n"
 "(De ontvanger moet verbonden zijn met internet)."
 
-msgid "Check:"
-msgstr "Controleer:"
-
 msgid "Checking Feeds"
 msgstr "Controleer Feeds"
 
@@ -2394,12 +2385,6 @@ msgstr "Chinees - Traditioneel"
 #, python-format
 msgid "Chipset: BCM%s"
 msgstr "Chipset: BCM%s"
-
-msgid "Choose Backup Files"
-msgstr "Kies Bestanden voor uw Backup"
-
-msgid "Choose Backup location"
-msgstr "Kies een Backup locatie"
 
 msgid "Choose Tuner"
 msgstr "Kies Tuner"
@@ -2720,9 +2705,6 @@ msgstr ""
 "Met deze optie stelt u de randdikte van de ondertitels in. Een donkere rand maakt de ondertiteling makkelijker leesbaar op een lichte achtergrond.\n"
 "\n"
 "U kunt hier een waarde kiezen van 1- 5 mm. De standaardwaarde is 3 mm."
-
-msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Stel de helderheid in van het display als de ontvanger standby staat."
 
 msgid "Configure the brightness level of the front panel display for normal operation."
 msgstr "Stel het helderheid in van het display als de ontvanger aan staat."
@@ -5353,13 +5335,6 @@ msgstr "HD2400"
 msgid "HD60"
 msgstr "HD60"
 
-msgid ""
-"HDD = Do you want to make a USB-back-up image on HDD? \n"
-"This only takes 1 or 10 minutes and is fully automatic."
-msgstr ""
-"HDD = Wilt u een image back-up maken op HDD? \n"
-"Dit duurt slechts 1 tot 10 minuten, en gaat volledig automatisch."
-
 msgid "HDMI"
 msgstr "HDMI"
 
@@ -5700,6 +5675,10 @@ msgstr "Negeer DVB-T namespace sub netwerk"
 msgid "Ignore conflict"
 msgstr "Negeer conflict"
 
+#, fuzzy
+msgid "Image Backup"
+msgstr "Volledige Image Backup "
+
 msgid "Image Info"
 msgstr "Image Info"
 
@@ -5708,6 +5687,18 @@ msgstr "Image Gereedschap"
 
 msgid "Image Update"
 msgstr "Image Update"
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
+msgstr ""
 
 msgid "Image creation failed - "
 msgstr "Image creatie mislukt - "
@@ -5792,10 +5783,6 @@ msgstr "Verhoogd voltage"
 
 msgid "Index"
 msgstr "Index"
-
-#, python-format
-msgid "Index Error in the following files: %s"
-msgstr "Index Fout in the volgende bestanden: %s"
 
 msgid "Index allocated:"
 msgstr "Index gespecificeerd:"
@@ -6121,9 +6108,6 @@ msgstr "Kenia"
 
 msgid "Kernel"
 msgstr "Kernel"
-
-msgid "Kernel dump error\n"
-msgstr "Kernel dump fout\n"
 
 msgid "Kernel version: "
 msgstr "Kernel versie: "
@@ -6906,8 +6890,8 @@ msgstr "Multitype"
 msgid "Multiboot"
 msgstr "Multiboot"
 
-#, python-format
-msgid "Multiboot Image created at: %s"
+#, fuzzy, python-format
+msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr "Multiboot Image gecreëerd in: %s"
 
 msgid "Multichannel PCM"
@@ -7135,13 +7119,6 @@ msgstr "Geen (ondersteunde) DVDROM gevonden!"
 msgid ""
 "No /hdd found !!\n"
 "Please make sure you have a HDD mounted.\n"
-msgstr ""
-"Geen /hdd gevonden !!\n"
-"Zorg er voor dat u een HDD gekoppeld hebt.\n"
-
-msgid ""
-"No /hdd found !!\n"
-"Please make sure you have a HDD mounted.\n"
 "\n"
 "Exit plugin."
 msgstr ""
@@ -7176,15 +7153,6 @@ msgstr "Geen harde schijf gevonden of de harde schijf is niet geïnitialiseerd!"
 
 msgid "No IPTV media server found"
 msgstr "Geen IPTV media server gevonden"
-
-msgid ""
-"No USB-Device found for fullbackup !!\n"
-"\n"
-"\n"
-msgstr ""
-"Geen USB-Opslag apparaat, voor een image back-up gevonden !!\n"
-"\n"
-"\n"
 
 msgid "No active subservices available."
 msgstr "Geen updates beschikbaar."
@@ -7338,6 +7306,10 @@ msgstr "Nee, Ik wil geen plugins installeren"
 msgid "No, but restart from begin"
 msgstr "Nee, maar start opnieuw"
 
+#, fuzzy
+msgid "No, do not backup a image"
+msgstr "Nee, Image niet flashen"
+
 msgid "No, do not flash image"
 msgstr "Nee, Image niet flashen"
 
@@ -7397,21 +7369,6 @@ msgstr "Niet Vastgelegd"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Onvoldoende schijfruimte. Maak ruimte vrij en probeer het opnieuw (%d MB noodzakelijk, %d MB beschikbaar)"
 
-#, python-format
-msgid ""
-"Not enough free space on %s !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-"Niet genoeg vrije ruimte op %s !!\n"
-"U heeft minstens 300Mb vrije rimte nodig.\n"
-
-msgid ""
-"Not enough free space on /hdd !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-"Niet genoeg vrije ruimte op /hdd !!\n"
-"U heeft minstens 300Mb vrije rimte nodig.\n"
-
 msgid ""
 "Not enough free space on /hdd !!\n"
 "You need at least 300Mb free space.\n"
@@ -7460,7 +7417,8 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Nu"
 
-msgid "Now building the USB-Image"
+#, fuzzy
+msgid "Now building the Backup Image"
 msgstr "Het USB-Image wordt nu opgebouwd"
 
 msgid "Now playing"
@@ -7907,9 +7865,6 @@ msgstr "Vorige afspelen"
 msgid "Play recorded movies..."
 msgstr "Opname afspelen..."
 
-msgid "Please Flash your Kernel new and Backup again"
-msgstr "Flash een nieuw kernel aub, en maak een opnieuw een backup"
-
 msgid "Please add titles to the compilation."
 msgstr "Voeg aub titels toe aan de compilatie."
 
@@ -8011,6 +7966,10 @@ msgstr "Druk op OK om door te gaan."
 
 msgid "Please re-enter the new PIN code"
 msgstr "Voer de nieuwe pincode opnieuw in"
+
+#, fuzzy
+msgid "Please select a backup destination"
+msgstr "Selecteer een opslag medium om te gebruiken als backuplocatie"
 
 msgid "Please select a playlist to delete..."
 msgstr "Selecteer de afspeellijst die u wilt verwijderen..."
@@ -8921,10 +8880,6 @@ msgstr "Hernoemen mislukt!"
 msgid "Rename name and description for new events"
 msgstr "Hernoem de naam + de omschrijving voor nieuwe programma's"
 
-#, python-format
-msgid "Rename the file 'noforce' in the folder %s"
-msgstr "Hernoem het bestand 'noforce' in de map %s"
-
 msgid "Rename to:"
 msgstr "Hernoemen naar:"
 
@@ -9115,9 +9070,6 @@ msgstr "Herstel uw instellingen terug naar de laatste instellingen backup. Na he
 #, python-format
 msgid "Restoreing:  %s"
 msgstr "Herstelt:  %s"
-
-msgid "Restores your latest Settings Backup"
-msgstr "Herstelt uw laatste Instellingen Backup"
 
 msgid "Restoring..."
 msgstr "Herstellen..."
@@ -10953,9 +10905,6 @@ msgstr "Sorry IPK-uninstaller is niet geïnstalleerd!"
 msgid "Sorry Inadyn Config is Missing"
 msgstr "Sorry, Inadyn instellingen ontbreken"
 
-msgid "Sorry MediaScanner is not installed!"
-msgstr "Sorry, MediaScanner is niet geïnstalleerd!"
-
 msgid "Sorry MiniDLNA Config is Missing"
 msgstr "Sorry, MiniDLNA instellingen ontbreken"
 
@@ -11578,9 +11527,6 @@ msgstr "Systeem: "
 msgid "SystemPlugin SkinSelector is not installed !"
 msgstr "SysteemPlugin SkinSelector is niet geïnstalleerd!"
 
-msgid "T2MI"
-msgstr "T2MI"
-
 msgid "T2MI PID"
 msgstr "T2MT PID"
 
@@ -11900,9 +11846,6 @@ msgstr "Er zijn geen opgeslagen afspeellijsten te laden!"
 msgid "There are no updates available."
 msgstr "Er zijn momenteel geen updates beschikbaar."
 
-msgid "There is a valid USB-flash drive detected in one "
-msgstr "Er is een geldige USB-stick gedetecteerd in één "
-
 msgid "There is no signal to lock on !"
 msgstr "Er is geen signaal om te locken !"
 
@@ -11991,9 +11934,6 @@ msgstr "Dit is een multitype tuner. Beschikbare opties zijn afhankelijk van de h
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
 msgstr "Dit is hoe de diseqc commando's naar het ontvangstsysteem verstuurd worden. Dit moet exact overeenkomen met de volgorde zoals de fysieke apparaten op de coax aangesloten zijn, te beginnen bij de ontvanger."
-
-msgid "This only takes about 1 or 2 minutes"
-msgstr "Dit duurt maar 1 of 2 minuten"
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
 msgstr "Deze optie staat toe om ruis in het beeld te blokken. Uiteraard gaat e.e.a. ten koste van de beeldscherpte."
@@ -12326,9 +12266,6 @@ msgstr "Titelset modus"
 msgid "To audio selection"
 msgstr "Naar audioselectie"
 
-msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
-msgstr "Om een image Back-up op een USB-stick te maken, moet er op de USB-stick\n"
-
 msgid "To restore the image:"
 msgstr "Het image herstellen:"
 
@@ -12595,19 +12532,6 @@ msgstr "USALS verplaatst de automatische schotel naar de juiste satelliet gebase
 
 msgid "USALS calibration"
 msgstr "USALS calibratie"
-
-msgid ""
-"USB = Do you want to make a back-up on USB?\n"
-"This will take between 3 and 15 minutes depending on the used filesystem and is fully automatic.\n"
-"Make sure you first insert a USB flash drive before you select USB."
-msgstr ""
-"USB = Wilt u een image back-up maken op USB?\n"
-"Dit duurt 3 tot 15 minuten, afhankelijk van het gebruikte filesysteem, en gaat volledig automatisch.\n"
-"Zorg er eerst voor dat er een USB-stick in de ontvanger zit, voordat u de optie USB kiest."
-
-#, python-format
-msgid "USB Image created at: %s"
-msgstr "USB Image gecreëerd in: %s"
 
 msgid "USB stick"
 msgstr "USB stick"
@@ -12889,6 +12813,9 @@ msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select
 msgstr ""
 "Gebruik het Softcam paneel om de gebruikte Softcam te beheren.\n"
 "Hier kunt u een Softcam starten, stoppen of kiezen."
+
+msgid "Use the cursor keys to select an installed image and then Start button."
+msgstr ""
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Gebruik de netwerkwizard om de geselecteerde netwerkadapter te configureren"
@@ -13794,13 +13721,6 @@ msgstr "U kunt enkel opnames branden die door uw receiver gemaakt zijn!"
 msgid "You can remove this plugin."
 msgstr "Deze plugin kunt u verwijderen."
 
-msgid ""
-"You can select with yellow the OnlineFlash Image\n"
-" or select Recovery to create a USB Disk Image for clean Install."
-msgstr ""
-"Met de gele toets kunt u OnlineFlash Image kiezen\n"
-" of kies Herstel om een USB Disk Image te installeren voor een schone Installatie."
-
 msgid "You can set how will be finished movieplayer with 'Exit' button."
 msgstr "U kunt instellen hoe de movieplayer zal eindigen bij gebruik van de 'Exit' knop."
 
@@ -14143,9 +14063,6 @@ msgstr "erotiek / Drama"
 msgid "advanced"
 msgstr "geavanceerd"
 
-msgid "advanced restore"
-msgstr "geavanceerd herstellen"
-
 msgid "adventure/western/war"
 msgstr "avontuur / Western / Oorlog"
 
@@ -14188,9 +14105,6 @@ msgstr "en kies volgende zender"
 msgid "and select previous channel"
 msgstr "en kies vorige zender"
 
-msgid "and there is made an extra copy at:"
-msgstr "en er is een extra kopie gemaakt in:"
-
 msgid "are you sure to cancel all changes"
 msgstr "weet u zeker dat u de wijzigingen wilt annuleren"
 
@@ -14215,14 +14129,8 @@ msgstr "automatisch"
 msgid "back"
 msgstr "terug"
 
-msgid "back-up image will now be copied to that USB- "
-msgstr "image back-up nu gekopieerd naar deze USB- "
-
 msgid "background image"
 msgstr "achtergrondafbeelding"
-
-msgid "backupstick or backupstick.txt"
-msgstr "backupstick of backupstick.txt"
 
 msgid "ballet"
 msgstr "ballet"
@@ -14320,13 +14228,6 @@ msgstr "bevestigd"
 
 msgid "connected"
 msgstr "verbonden"
-
-msgid ""
-"contain a file with the name: \n"
-"\n"
-msgstr ""
-"een file staan met de naam: \n"
-"\n"
 
 msgid "controlled by HDMI"
 msgstr "geregeld door de HDMI"
@@ -14538,9 +14439,6 @@ msgstr "fijne kunst"
 msgid "fitness & health"
 msgstr "fittness & gezondheid"
 
-msgid "flash drive. "
-msgstr "usb-stick. "
-
 msgid "flat alphabetic"
 msgstr "enkel alfabetisch"
 
@@ -14672,6 +14570,14 @@ msgstr "installeer linux utilities (util-linux-blkid)"
 
 msgid "installs the sundtek driver and runs related shellscripts"
 msgstr "installeert de sundtek drivers en start de gerelateerde shellscripts"
+
+#, fuzzy, python-format
+msgid "internal flash:  %s %s "
+msgstr "Intern geheugen"
+
+#, python-format
+msgid "internal flash: %s %s as USB Recovery"
+msgstr ""
 
 msgid "invalid type"
 msgstr "ongeldig type"
@@ -14817,9 +14723,6 @@ msgstr "muziek / ballet / dans (algemeen)"
 msgid "musical/opera"
 msgstr "musical / opera"
 
-msgid "n/A"
-msgstr "niet beschikbaar"
-
 msgid "n/a"
 msgstr "n/a"
 
@@ -14922,9 +14825,6 @@ msgstr "op een DUAL layer medium gebruikt."
 msgid "of a SINGLE layer medium used."
 msgstr "op een SINGLE layer medium gebruikt."
 
-msgid "of the USB-ports, therefore an extra copy of the "
-msgstr "van de USB-poorten, dus wordt er een extra kopie van de "
-
 msgid "off"
 msgstr "uit"
 
@@ -14980,9 +14880,6 @@ msgstr "openeight"
 
 msgid "options mount file system (default): "
 msgstr "opties mount bestandssysteem (default): "
-
-msgid "or use OnlineFlash in SoftwareManager"
-msgstr "of gebruik Flash Online (Lokaal) in Software Beheer"
 
 msgid "original"
 msgstr "origineel"
@@ -15246,6 +15143,10 @@ msgstr "slot%s - %s (huidig image) met, backup"
 msgid "slot%s - %s (current image), without backup"
 msgstr "slot%s - %s (huidig image), zonder backup"
 
+#, fuzzy, python-format
+msgid "slot%s - %s as USB Recovery"
+msgstr "slot%s - %s modus 1"
+
 #, python-format
 msgid "slot%s - %s mode 1"
 msgstr "slot%s - %s modus 1"
@@ -15362,9 +15263,6 @@ msgstr "deze opname"
 
 msgid "this service is protected by a parental control pin"
 msgstr "deze zender is beveiligd met een kinderslot"
-
-msgid "to 'force' to flash this image without confirmation"
-msgstr "naar 'force' om dit image zonder bevestiging te flashen"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "tijd, hoofdstuk, audio en ondertitels instellen"

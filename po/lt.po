@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:33+0200\n"
+"POT-Creation-Date: 2020-04-23 18:54+0200\n"
 "PO-Revision-Date: 2016-05-10 13:26+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. <vyteniui@gmail.com>\n"
@@ -1174,12 +1174,6 @@ msgstr "Kad tęsti, spauskite 'OK'."
 msgid "Advanced"
 msgstr "Išsamiai"
 
-msgid "Advanced Restore"
-msgstr ""
-
-msgid "Advanced Restore..."
-msgstr ""
-
 msgid "Advanced options"
 msgstr "Išplėstinės parinktys"
 
@@ -1647,6 +1641,10 @@ msgid "Auto scart switching"
 msgstr "Automatinis SCART perjungimas"
 
 #, fuzzy
+msgid "AutoBackup Settings System"
+msgstr "Sukurti sistemos nustatymų atsarginę kopiją"
+
+#, fuzzy
 msgid "Autoinstalling Completed"
 msgstr "Diegimas baigtas."
 
@@ -1756,9 +1754,6 @@ msgstr ""
 msgid "Backup Drivers to HDD"
 msgstr ""
 
-msgid "Backup Files"
-msgstr ""
-
 msgid "Backup Image"
 msgstr ""
 
@@ -1774,14 +1769,8 @@ msgstr ""
 msgid "Backup failed."
 msgstr "Atsarginis kopijavimas nepavyko."
 
-msgid "Backup finished and copied to your USB-flash drive"
-msgstr ""
-
 msgid "Backup is running..."
 msgstr "Kuriama atsarginė kopija..."
-
-msgid "Backup location"
-msgstr ""
 
 msgid ""
 "Backup plugins found\n"
@@ -1795,13 +1784,14 @@ msgstr "Sukurti sistemos nustatymų atsarginę kopiją"
 msgid "Backup system settings"
 msgstr "Sukurti sistemos nustatymų atsarginę kopiją"
 
+#, fuzzy, python-format
+msgid "Backup to destination: %s"
+msgstr "Sukurti sistemos nustatymų atsarginę kopiją"
+
 msgid "Backup your Image"
 msgstr ""
 
 msgid "Backup your Image/Settings or Flash a new Image"
-msgstr ""
-
-msgid "Backup your Settings"
 msgstr ""
 
 msgid "Backup your current image"
@@ -2196,6 +2186,10 @@ msgid "Cancelled upon user request"
 msgstr ""
 
 #, fuzzy
+msgid "Cannot create backup directory"
+msgstr "sukurti katalogą"
+
+#, fuzzy
 msgid "Cannot delete downloaded image"
 msgstr "Ar tikrai pašalinti atliktus laikmačius?"
 
@@ -2375,10 +2369,6 @@ msgstr ""
 msgid "Check/Install online updates (you must have a working internet connection)."
 msgstr "Atnaujinimo klaida. Jūsų imtuvas neturi interneto ryšio."
 
-#, fuzzy
-msgid "Check:"
-msgstr "Tikrinti"
-
 msgid "Checking Feeds"
 msgstr ""
 
@@ -2413,12 +2403,6 @@ msgstr ""
 
 #, python-format
 msgid "Chipset: BCM%s"
-msgstr ""
-
-msgid "Choose Backup Files"
-msgstr ""
-
-msgid "Choose Backup location"
 msgstr ""
 
 msgid "Choose Tuner"
@@ -2710,10 +2694,6 @@ msgstr "Nustatykite elgseną, kai filmo peržiūros metu filmas baigiasi."
 
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr "Nustatykite subtitrų rėmelio plotį. Tamsus rėmelis padeda lengviau perskaityti subtitrus, jei fonas šviesus."
-
-#, fuzzy
-msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Nustatykite aparato priekinio skydelio ekrano šviesumą, kai imtuvas yra budėjimo būsenoje."
 
 #, fuzzy
 msgid "Configure the brightness level of the front panel display for normal operation."
@@ -5300,11 +5280,6 @@ msgstr ""
 msgid "HD60"
 msgstr ""
 
-msgid ""
-"HDD = Do you want to make a USB-back-up image on HDD? \n"
-"This only takes 1 or 10 minutes and is fully automatic."
-msgstr ""
-
 msgid "HDMI"
 msgstr ""
 
@@ -5657,6 +5632,10 @@ msgstr ""
 msgid "Ignore conflict"
 msgstr "Ignoruoti konfliktą"
 
+#, fuzzy
+msgid "Image Backup"
+msgstr "Grafinė aplinka: "
+
 msgid "Image Info"
 msgstr ""
 
@@ -5664,6 +5643,18 @@ msgid "Image Tools"
 msgstr ""
 
 msgid "Image Update"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
+msgstr ""
+
+#, python-format
+msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 msgid "Image creation failed - "
@@ -5747,10 +5738,6 @@ msgstr "Padidinta įtampa"
 
 msgid "Index"
 msgstr "Indeksas"
-
-#, python-format
-msgid "Index Error in the following files: %s"
-msgstr ""
 
 msgid "Index allocated:"
 msgstr "Indeksas priskirtas:"
@@ -6077,9 +6064,6 @@ msgid "Kenya"
 msgstr ""
 
 msgid "Kernel"
-msgstr ""
-
-msgid "Kernel dump error\n"
 msgstr ""
 
 msgid "Kernel version: "
@@ -6889,7 +6873,7 @@ msgid "Multiboot"
 msgstr "Kelių palydovų"
 
 #, python-format
-msgid "Multiboot Image created at: %s"
+msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
 
 #, fuzzy
@@ -7119,11 +7103,6 @@ msgstr "Palaikomas DVDROM nerastas!"
 msgid ""
 "No /hdd found !!\n"
 "Please make sure you have a HDD mounted.\n"
-msgstr ""
-
-msgid ""
-"No /hdd found !!\n"
-"Please make sure you have a HDD mounted.\n"
 "\n"
 "Exit plugin."
 msgstr ""
@@ -7150,12 +7129,6 @@ msgid "No HDD found or HDD not initialized!"
 msgstr "HDD nerastas, arba jis neinicijuotas!"
 
 msgid "No IPTV media server found"
-msgstr ""
-
-msgid ""
-"No USB-Device found for fullbackup !!\n"
-"\n"
-"\n"
 msgstr ""
 
 #, fuzzy
@@ -7317,6 +7290,10 @@ msgid "No, but restart from begin"
 msgstr "Ne, bet vėl pradėti nuo pradžių"
 
 #, fuzzy
+msgid "No, do not backup a image"
+msgstr "Ne, nieko nedaryti."
+
+#, fuzzy
 msgid "No, do not flash image"
 msgstr "Ne, nieko nedaryti."
 
@@ -7381,17 +7358,6 @@ msgstr "Neapibrėžta"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Diske nepakanka vietos. Atlaisvinkite vietos diske ir bandykite dar kartą (reikia %d MB, laisva %d MB)."
 
-#, python-format
-msgid ""
-"Not enough free space on %s !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
-msgid ""
-"Not enough free space on /hdd !!\n"
-"You need at least 300Mb free space.\n"
-msgstr ""
-
 msgid ""
 "Not enough free space on /hdd !!\n"
 "You need at least 300Mb free space.\n"
@@ -7438,7 +7404,7 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Dabar"
 
-msgid "Now building the USB-Image"
+msgid "Now building the Backup Image"
 msgstr ""
 
 msgid "Now playing"
@@ -7903,9 +7869,6 @@ msgstr "Atkurti ankstesnį"
 msgid "Play recorded movies..."
 msgstr "Atkurti įrašytus filmus..."
 
-msgid "Please Flash your Kernel new and Backup again"
-msgstr ""
-
 msgid "Please add titles to the compilation."
 msgstr "Įtraukite į kompiliaciją pavadinimus."
 
@@ -8011,6 +7974,10 @@ msgstr "Spauskite 'OK', kad tęsti."
 
 msgid "Please re-enter the new PIN code"
 msgstr "Įrašykite naują PIN kodą dar kartą"
+
+#, fuzzy
+msgid "Please select a backup destination"
+msgstr "Pasirinkite laikmeną atsarginėms kopijoms saugoti"
 
 msgid "Please select a playlist to delete..."
 msgstr "Pasirinkite grojaraštį, kurį norite ištrinti..."
@@ -8962,10 +8929,6 @@ msgstr ""
 msgid "Rename name and description for new events"
 msgstr "Naujų įvykių pervardijimas ir apibūdinimas"
 
-#, python-format
-msgid "Rename the file 'noforce' in the folder %s"
-msgstr ""
-
 msgid "Rename to:"
 msgstr ""
 
@@ -9172,9 +9135,6 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
 msgstr "Atkuriama..."
-
-msgid "Restores your latest Settings Backup"
-msgstr ""
 
 msgid "Restoring..."
 msgstr "Atkuriama..."
@@ -11084,9 +11044,6 @@ msgstr "Atsiprašome, %s neįdiegtas!"
 msgid "Sorry Inadyn Config is Missing"
 msgstr ""
 
-msgid "Sorry MediaScanner is not installed!"
-msgstr ""
-
 msgid "Sorry MiniDLNA Config is Missing"
 msgstr ""
 
@@ -12031,9 +11988,6 @@ msgstr "Pašalinti išsaugotą grojaraštį"
 msgid "There are no updates available."
 msgstr "Atnaujinimų nėra."
 
-msgid "There is a valid USB-flash drive detected in one "
-msgstr ""
-
 msgid "There is no signal to lock on !"
 msgstr "Nėra signalo užfiksavimui !"
 
@@ -12122,9 +12076,6 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
-msgstr ""
-
-msgid "This only takes about 1 or 2 minutes"
 msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
@@ -12454,9 +12405,6 @@ msgstr "Pavadinimo būdas"
 msgid "To audio selection"
 msgstr "Į garso pasirinkimą"
 
-msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
-msgstr ""
-
 #, fuzzy
 msgid "To restore the image:"
 msgstr "išteklių tvarkytuvo nėra"
@@ -12735,16 +12683,6 @@ msgstr ""
 
 msgid "USALS calibration"
 msgstr "USALS kalibravimas"
-
-msgid ""
-"USB = Do you want to make a back-up on USB?\n"
-"This will take between 3 and 15 minutes depending on the used filesystem and is fully automatic.\n"
-"Make sure you first insert a USB flash drive before you select USB."
-msgstr ""
-
-#, python-format
-msgid "USB Image created at: %s"
-msgstr ""
 
 msgid "USB stick"
 msgstr "USB laikmena"
@@ -13040,6 +12978,9 @@ msgid "Use the Networkwizard to configure your Network. The wizard will help you
 msgstr "Pasirinkto tinklo modulio konfigūravimui naudokite tinklo vedlį"
 
 msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select a cam."
+msgstr ""
+
+msgid "Use the cursor keys to select an installed image and then Start button."
 msgstr ""
 
 msgid "Use the network wizard to configure selected network adapter"
@@ -13941,11 +13882,6 @@ msgstr "Į CD/DVD galite įrašyti tik imtuvo įrašus!"
 msgid "You can remove this plugin."
 msgstr "Galite pašalinti šį įskiepį."
 
-msgid ""
-"You can select with yellow the OnlineFlash Image\n"
-" or select Recovery to create a USB Disk Image for clean Install."
-msgstr ""
-
 msgid "You can set how will be finished movieplayer with 'Exit' button."
 msgstr ""
 
@@ -14263,9 +14199,6 @@ msgstr "filmas suaugusiems, drama"
 msgid "advanced"
 msgstr "išplėstinis"
 
-msgid "advanced restore"
-msgstr ""
-
 msgid "adventure/western/war"
 msgstr "nuotykiai, vesternas, karinis"
 
@@ -14310,9 +14243,6 @@ msgstr "ir pasirinkti sekantį kanalą"
 msgid "and select previous channel"
 msgstr "ir pasirinkti ankstesnį kanalą"
 
-msgid "and there is made an extra copy at:"
-msgstr ""
-
 msgid "are you sure to cancel all changes"
 msgstr "jūs tikrai norite atšaukti visus pakeitimus"
 
@@ -14337,14 +14267,8 @@ msgstr "automatinis"
 msgid "back"
 msgstr "atgal"
 
-msgid "back-up image will now be copied to that USB- "
-msgstr ""
-
 msgid "background image"
 msgstr "fono paveikslėlis"
-
-msgid "backupstick or backupstick.txt"
-msgstr ""
 
 msgid "ballet"
 msgstr "baletas"
@@ -14443,11 +14367,6 @@ msgstr "patvirtinta"
 
 msgid "connected"
 msgstr "prisijungta"
-
-msgid ""
-"contain a file with the name: \n"
-"\n"
-msgstr ""
 
 msgid "controlled by HDMI"
 msgstr ""
@@ -14663,9 +14582,6 @@ msgstr "dailė"
 msgid "fitness & health"
 msgstr "fitnesas ir sveikata"
 
-msgid "flash drive. "
-msgstr ""
-
 msgid "flat alphabetic"
 msgstr "pagal abėcėlę"
 
@@ -14802,6 +14718,14 @@ msgid "install linux utilities (util-linux-blkid)"
 msgstr ""
 
 msgid "installs the sundtek driver and runs related shellscripts"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "internal flash:  %s %s "
+msgstr "Vidinė atmintinė"
+
+#, python-format
+msgid "internal flash: %s %s as USB Recovery"
 msgstr ""
 
 msgid "invalid type"
@@ -14951,9 +14875,6 @@ msgstr "muzika, baletas, šokiai (bendrai)"
 msgid "musical/opera"
 msgstr "miuziklas, opera"
 
-msgid "n/A"
-msgstr ""
-
 msgid "n/a"
 msgstr ""
 
@@ -15057,9 +14978,6 @@ msgstr "DVISLUOKSNĖS laikmenos naudojama."
 msgid "of a SINGLE layer medium used."
 msgstr "VIENSLUOKSNĖS laikmenos naudojama."
 
-msgid "of the USB-ports, therefore an extra copy of the "
-msgstr ""
-
 msgid "off"
 msgstr "išjungta"
 
@@ -15111,9 +15029,6 @@ msgid "openeight"
 msgstr ""
 
 msgid "options mount file system (default): "
-msgstr ""
-
-msgid "or use OnlineFlash in SoftwareManager"
 msgstr ""
 
 msgid "original"
@@ -15386,6 +15301,10 @@ msgid "slot%s - %s (current image), without backup"
 msgstr ""
 
 #, python-format
+msgid "slot%s - %s as USB Recovery"
+msgstr ""
+
+#, python-format
 msgid "slot%s - %s mode 1"
 msgstr ""
 
@@ -15502,9 +15421,6 @@ msgstr "šis įrašas"
 
 msgid "this service is protected by a parental control pin"
 msgstr "šis kanalas apsaugotas tėvų kontrolės PIN kodu"
-
-msgid "to 'force' to flash this image without confirmation"
-msgstr ""
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "perjungti laiką, skyrių, garsą, subtitrų informaciją"
