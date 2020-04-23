@@ -562,8 +562,8 @@ class QuickMenu(Screen):
 			self.SatfinderMain()
 		elif item[0] == _('Software Update'):
 			self.session.open(SoftwarePanel)
-		elif item[0] == _('SelectImage'):
-			self.session.open(FlashOnline)
+		elif item[0] == _('Flash Online'):
+			self.session.open(SelectImage)
 		elif item[0] == _('Complete Backup'):
 			if DFLASH == True:
 				self.session.open(dFlash)
