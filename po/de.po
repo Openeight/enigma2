@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 18:54+0200\n"
-"PO-Revision-Date: 2020-04-23 01:20+0200\n"
+"PO-Revision-Date: 2020-04-23 22:37+0200\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: OpenEight <https://octagon-forum.eu>\n"
 "Language: de\n"
@@ -95,7 +95,7 @@ msgstr ""
 "Ihre Treiber Version:\n"
 
 msgid " "
-msgstr ""
+msgstr " "
 
 msgid "      Autostart"
 msgstr "      Autostart"
@@ -1372,7 +1372,7 @@ msgid "Are you sure to purge all deleted user bouquets?"
 msgstr "Wirklich, alle gelöschten Userbouquets entfernen ?"
 
 msgid "Are you sure to reboot to"
-msgstr "Sind Sie sicher - Neustart zu"
+msgstr "Sind Sie sicher ? -> neu starten zu"
 
 #, python-format
 msgid "Are you sure to remove all %d.%d%s%s services?"
@@ -1615,9 +1615,8 @@ msgstr "Auto-Abspielen Bluray Datei"
 msgid "Auto scart switching"
 msgstr "Automatische Scart-Umschaltung"
 
-#, fuzzy
 msgid "AutoBackup Settings System"
-msgstr "Sicherung der Einstellungen"
+msgstr "AutoBackup System-Einstellungen"
 
 msgid "Autoinstalling Completed"
 msgstr "Auto-Installation abgeschlossen"
@@ -1756,9 +1755,9 @@ msgstr "Einstellungen sichern"
 msgid "Backup system settings"
 msgstr "Einstellungen sichern"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Backup to destination: %s"
-msgstr "Sicherung der Einstellungen"
+msgstr "Full-Backup nach: %s"
 
 msgid "Backup your Image"
 msgstr "Sicherung des Image"
@@ -1897,7 +1896,7 @@ msgid "Boot to Android image"
 msgstr "Android-Image hochfahren"
 
 msgid "Boot to Recovery menu"
-msgstr "Recovery-Menü hochfahren"
+msgstr "Wartungsmodus (Recovery-Menü) starten"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnien und Herzegowina"
@@ -2165,9 +2164,8 @@ msgstr "Ausführung abbrechen ?"
 msgid "Cancelled upon user request"
 msgstr "Aufgabe durch den Benutzer abgebrochen"
 
-#, fuzzy
 msgid "Cannot create backup directory"
-msgstr "Verzeichnis erstellen"
+msgstr "Sicherungsverzeichnis kann nicht erstellt werden"
 
 msgid "Cannot delete downloaded image"
 msgstr "Das heruntergeladene Image kann nicht gelöscht werden"
@@ -5523,9 +5521,8 @@ msgstr "Ignoriere das DVB-T-Namensraum Subnetzwerk"
 msgid "Ignore conflict"
 msgstr "Ignoriere Konflikt"
 
-#, fuzzy
 msgid "Image Backup"
-msgstr "Voll-Backup Image "
+msgstr "Image-Sicherung"
 
 msgid "Image Info"
 msgstr "Image Info"
@@ -5538,15 +5535,15 @@ msgstr "Image Aktualisierung"
 
 #, python-format
 msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
-msgstr ""
+msgstr "Image erstellt auf: %s/%s-%s-%s-backup-%s_mmc.zip"
 
 #, python-format
 msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
-msgstr ""
+msgstr "Image erstellt auf: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
 
 #, python-format
 msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
-msgstr ""
+msgstr "Image erstellt auf: %s/%s-%s-%s-backup-%s_usb.zip"
 
 msgid "Image creation failed - "
 msgstr "Image-Erstellung fehlgeschlagen - "
@@ -6736,9 +6733,9 @@ msgstr "MultiTyp"
 msgid "Multiboot"
 msgstr "MultiBoot"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
-msgstr "MultiBoot Image erstellt in: %s"
+msgstr "Multiboot-Image erstellt als: %s/%s-%s-%s-backup-%s_usb.zip"
 
 msgid "Multichannel PCM"
 msgstr "Multikanal PCM"
@@ -7152,9 +7149,8 @@ msgstr "Nein, ich will keine Plugins installieren"
 msgid "No, but restart from begin"
 msgstr "Nein, aber von Anfang an neu beginnen"
 
-#, fuzzy
 msgid "No, do not backup a image"
-msgstr "Nein, kein Image flashen"
+msgstr "Nein, kein Full-Backup vom Image erstellen"
 
 msgid "No, do not flash image"
 msgstr "Nein, kein Image flashen"
@@ -7261,9 +7257,8 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Jetzt"
 
-#, fuzzy
 msgid "Now building the Backup Image"
-msgstr "Erstelle USB-Image..."
+msgstr "Erstelle jetzt das Backup-Image..."
 
 msgid "Now playing"
 msgstr "Wiedergabe läuft"
@@ -7808,9 +7803,8 @@ msgstr "Zum Fortfahren bitte OK drücken."
 msgid "Please re-enter the new PIN code"
 msgstr "Bitte geben Sie den neuen PIN Code erneut ein"
 
-#, fuzzy
 msgid "Please select a backup destination"
-msgstr "Bitte wählen Sie einen Datenträger als Sicherungsziel aus"
+msgstr "Bitte ein Sicherungsziel auswählen"
 
 msgid "Please select a playlist to delete..."
 msgstr "Bitte wählen Sie eine Wiedergabeliste zum Löschen..."
@@ -8194,16 +8188,14 @@ msgstr "Drücken Sie OK, um weitere Details zu %s zu erhalten."
 msgid "Press OK to scan"
 msgstr "Zum Starten der Suche OK drücken."
 
-#, fuzzy
 msgid "Press OK to select a group of satellites to configure in one block."
-msgstr "Drücken Sie auf OK, um die Satelliten zu wählen."
+msgstr "Drücken Sie OK, um eine Gruppe von Satelliten auszuwählen, die in einem Block konfiguriert werden sollen."
 
 msgid "Press OK to select a provider."
 msgstr "Drücken Sie OK um einen Provider auszuwählen."
 
-#, fuzzy
 msgid "Press OK to select a service."
-msgstr "Drücken Sie OK um einen Provider auszuwählen."
+msgstr "Drücken Sie OK, um einen Kanal auszuwählen."
 
 msgid "Press OK to select satellites"
 msgstr "Drücken Sie auf OK, um die Satelliten zu wählen."
@@ -8341,9 +8333,8 @@ msgstr "Anbieter: "
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
-#, fuzzy
 msgid "Purge deleted user bouquets"
-msgstr "gelöschte Userbouquets löschen"
+msgstr "Gelöschte Userbouquets entfernen"
 
 msgid "Put TV in standby"
 msgstr "Fernseher in den Standby versetzen"
@@ -8369,13 +8360,11 @@ msgstr "Frage ! "
 msgid "Quick"
 msgstr "Schnell"
 
-#, fuzzy
 msgid "Quick EPG"
-msgstr "Schnell"
+msgstr "Kurz-EPG"
 
-#, fuzzy
 msgid "Quick Menu"
-msgstr "Schnellstart-Menü"
+msgstr "Schnell-Menü"
 
 msgid "Quick zap"
 msgstr "Schnellumschalter"
@@ -8468,13 +8457,11 @@ msgstr "Wirklich speichern bei Index %2d für die aktuelle Position ?"
 msgid "Really unmount "
 msgstr "Wirklich aushängen (umounten) "
 
-#, fuzzy
 msgid "Really update the frontprocessor and reboot now?"
-msgstr "Wollen Sie den Frontprozessor wirklich aktualisieren und anschließend neu starten?"
+msgstr "Den Frontprozessor wirklich aktualisieren, und danach neu starten ?"
 
-#, fuzzy
 msgid "Really update your settop box and reboot now?"
-msgstr "Wollen Sie Ihren Receiver wirklich aktualisieren und anschließend neu starten?"
+msgstr "Den Receiver wirklich aktualisieren, und danach neu starten ?"
 
 #, python-format
 msgid "Really use and mount %s as HDD ?"
@@ -8637,27 +8624,23 @@ msgstr "Markierung entfernen"
 msgid "Remove a nameserver entry"
 msgstr "DNS-Servereintrag entfernen"
 
-#, fuzzy
 msgid "Remove all alternatives"
-msgstr "Entferne alle Alternativen"
+msgstr "Alle Alternativen entfernen"
 
 msgid "Remove all logfiles"
 msgstr "Alle Log-Dateien entfernen"
 
-#, fuzzy
 msgid "Remove all new found flags"
-msgstr "Entfernen aller 'neu gefunden'-Kennzeichnungen"
+msgstr "Alle 'neu gefundenen Kennzeichnungen' entfernen"
 
 msgid "Remove bookmark"
 msgstr "Lesezeichen entfernen"
 
-#, fuzzy
 msgid "Remove bouquet from parental protection"
-msgstr "Dieses Bouquet aus dem Jugenschutz nehmen"
+msgstr "Bouquet aus Jugendschutz entfernen"
 
-#, fuzzy
 msgid "Remove cable services"
-msgstr "Kabelsender löschen"
+msgstr "Kabelsender entfernen"
 
 msgid "Remove completed timers after (days)"
 msgstr "Entferne abgeschlossene Timer nach (Tage)"
@@ -8665,23 +8648,20 @@ msgstr "Entferne abgeschlossene Timer nach (Tage)"
 msgid "Remove currently selected title"
 msgstr "Entferne aktuell ausgewählten Titel"
 
-#, fuzzy
 msgid "Remove directory"
 msgstr "Verzeichnis entfernen"
 
 msgid "Remove entry"
 msgstr "Eintrag entfernen"
 
-#, fuzzy
 msgid "Remove from parental protection"
-msgstr "Jugendschutz ausschalten"
+msgstr "Aus Jugendschutz entfernen"
 
 msgid "Remove items from trash can after (days)"
 msgstr "Löschen aus Mülleimer nach (Tagen)"
 
-#, fuzzy
 msgid "Remove new found flag"
-msgstr "Entfernen der 'neu gefunden'-Kennzeichnung"
+msgstr "'neu gefundenen Kennzeichnungen' entfernen"
 
 msgid "Remove plugins"
 msgstr "Plugins entfernen"
@@ -8689,16 +8669,14 @@ msgstr "Plugins entfernen"
 msgid "Remove second-infobar"
 msgstr "Zweite Infoleiste nicht anzeigen"
 
-#, fuzzy
 msgid "Remove selected satellite"
-msgstr "Entferne gewählten Satellit"
+msgstr "Ausgewählten Satellit entfernen"
 
 msgid "Remove skin"
 msgstr "Skin deinstallieren"
 
-#, fuzzy
 msgid "Remove terrestrial services"
-msgstr "Terrestrische Sender löschen"
+msgstr "Terrestrische Kanäle entfernen"
 
 msgid "Remove this logfile"
 msgstr "Diese Log-Datei entfernen"
@@ -8730,7 +8708,6 @@ msgstr "Partitionstabelle erneut einlesen"
 msgid "Rename"
 msgstr "Umbenennen"
 
-#, fuzzy
 msgid "Rename entry"
 msgstr "Eintrag umbenennen"
 
@@ -8756,9 +8733,8 @@ msgstr "Wiederholen der Display-Meldung"
 msgid "Repeat leave standby messages"
 msgstr "Wiederhole Infos beim Verlassen des Standby"
 
-#, fuzzy
 msgid "Repeat playlist"
-msgstr "Wiederholung der Wiedergabeliste"
+msgstr "Wiedergabeliste erneut abspielen"
 
 msgid "Repeat type"
 msgstr "Wiederholungstyp"
@@ -8820,9 +8796,8 @@ msgstr "Erweiterte A/V-Einstellungen auf Standardwerte zurücksetzten?"
 msgid "Reset video enhancement settings to your last configuration?"
 msgstr "Erweiterte A/V-Einstellungen auf ihre letzte Konfiguration zurücksetzen?"
 
-#, fuzzy
 msgid "Reshare"
-msgstr "Reshare:"
+msgstr "Re-Share"
 
 msgid "Reshare:"
 msgstr "Reshare:"
@@ -8857,9 +8832,8 @@ msgstr "Benutzeroberfläche neu starten"
 msgid "Restart enigma in debug mode"
 msgstr "Im Debug-Modus neu starten"
 
-#, fuzzy
 msgid "Restart enigma in standard mode"
-msgstr "Im Debug-Modus neu starten"
+msgstr "Enigma2 (GUI) im Standard-Modus neu starten"
 
 msgid "Restart network"
 msgstr "Netzwerk neu starten"
@@ -8903,9 +8877,8 @@ msgstr "Einstellungen wiederherstellen"
 msgid "Restore default fstab"
 msgstr "Die Standard /etc/fstab wiederherstellen"
 
-#, fuzzy
 msgid "Restore deleted user bouquets"
-msgstr "Gelöschte Benutzerbouquets wiederherstellen"
+msgstr "Gelöschte Userbouquets wiederherstellen"
 
 msgid "Restore fstab"
 msgstr "/etc/fstab wiederherstellen"
@@ -8925,24 +8898,18 @@ msgstr ""
 "\n"
 "%s"
 
-#, fuzzy
 msgid "Restore your backups by date."
-msgstr ""
-"\n"
-"Wiederherstellen Ihrer nach Datum sortierten Sicherungen."
+msgstr "Wiederherstellen der nach Datum sortierten Sicherungen."
 
-#, fuzzy
 msgid "Restore your receiver settings."
-msgstr ""
-"\n"
-"Wiederherstellen Ihrer Receiver-Einstellungen."
+msgstr "Wiederherstellen Ihrer Receiver-Einstellungen."
 
 msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
 msgstr "Wiederherstellen der Einstellungen aus einer Sicherung. Nach der Wiederherstellung wird die Box neu gestartet, um die neuen Einstellungen zu aktivieren."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Restoreing:  %s"
-msgstr "Wiederherstellen der Einstellungen"
+msgstr "Wiederherstellen:  %s"
 
 msgid "Restoring..."
 msgstr "Wiederherstellung..."
@@ -9078,13 +9045,11 @@ msgstr "SCR (Unicable/JESS)"
 msgid "SCR JESS"
 msgstr "SCR JESS"
 
-#, fuzzy
 msgid "SCR Unicable"
-msgstr "Unicable"
+msgstr "SCR Unicable"
 
-#, fuzzy
 msgid "SDR"
-msgstr "SID"
+msgstr "SDR"
 
 msgid "SF4008/Zgemma H.S/H.2S/H.2H/H5/H7(old model)"
 msgstr "SF4008/Zgemma H.S/H.2S/H.2H/H5/H7(altes Modell)"
@@ -9203,9 +9168,8 @@ msgstr "Saudi-Arabien"
 msgid "Save"
 msgstr "Speichern"
 
-#, fuzzy
 msgid "Save / Enter text and exit"
-msgstr "Text eingeben und beenden"
+msgstr "Text eingeben/speichern und beenden"
 
 msgid "Save and exit"
 msgstr "Speichern und beenden"
@@ -9222,9 +9186,8 @@ msgstr "Speichern und Timeshift stoppen"
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
-#, fuzzy
 msgid "Save last directory on exit"
-msgstr "Anfangsverzeichnis beim Beenden merken"
+msgstr "Letztes Verzeichnis beim Beenden speichern"
 
 msgid "Save mount in fstab"
 msgstr "Einhängepunkt (Mount) in /etc/fstab speichern"
@@ -9232,7 +9195,6 @@ msgstr "Einhängepunkt (Mount) in /etc/fstab speichern"
 msgid "Save playlist"
 msgstr "Wiedergabeliste speichern"
 
-#, fuzzy
 msgid "Save playlist on exit"
 msgstr "Wiedergabeliste beim Beenden speichern"
 
@@ -9291,30 +9253,26 @@ msgstr "Durchsuche weitere SR"
 msgid "Scan and connect to a TV Server"
 msgstr "Suchen und zu einem TV Server verbinden"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Scan completed, %d channel found."
 msgid_plural "Scan completed, %d channels found."
-msgstr[0] "Suche beendet, %d gefundener Kanal"
-msgstr[1] "Suche beendet, %d Kanäle gefunden"
+msgstr[0] "Suche abgeschlossen, %d Kanal gefunden."
+msgstr[1] "Suche abgeschlossen, %d Kanäle gefunden."
 
-#, fuzzy
 msgid "Scan failed!"
-msgstr "Suche gescheitert!"
+msgstr "Suche fehlgeschlagen !"
 
 msgid "Scan files..."
 msgstr "Dateien durchsuchen"
 
-#, fuzzy
 msgid "Scan for IPTV server addresses"
-msgstr "Bouquet - = Suche nach IPTV-Server-Adressen"
+msgstr "Nach IPTV Server-Adressen suchen"
 
-#, fuzzy
 msgid "Scan for MIS/PLS LCN services."
-msgstr "Manuelle Suche nach Kanälen"
+msgstr "Nach MIS/PLS LCN Kanälen suchen."
 
-#, fuzzy
 msgid "Scan for cable services."
-msgstr "Kabelsender löschen"
+msgstr "Kabelkanäle suchen"
 
 msgid "Scan for installed .ipk packages, and uninstall a package."
 msgstr "Nach installierten *.ipk Paketen suchen, und diese deinstallieren."
@@ -9325,16 +9283,14 @@ msgstr "Nach lokalen Erweiterungen suchen und diese installieren."
 msgid "Scan for satellite services."
 msgstr "Komplettes Frequenzspektrum eines Satelliten ohne Eingabe von Frequenzen, Symbolraten oder Verwendung von Voreinstellungen durchsuchen."
 
-#, fuzzy
 msgid "Scan for terrestrial services."
-msgstr "Terrestrische Sender löschen"
+msgstr "Nach Terrestrische Kanäle suchen."
 
 msgid "Scan options"
 msgstr "Such Optionen"
 
-#, fuzzy
 msgid "Scan state"
-msgstr "Status"
+msgstr "Such-Status"
 
 msgid "Scan wireless networks"
 msgstr "WLAN-Netzwerke suchen"
@@ -9371,9 +9327,8 @@ msgstr "Führt eine Sendersuche aller Satelliten durch, wenn Sie einen Rotor an 
 msgid "Scrolling Speed"
 msgstr "Scroll-Geschwindigkeit"
 
-#, fuzzy
 msgid "Search"
-msgstr "Durchsuche"
+msgstr "Suche"
 
 msgid "Search Sats"
 msgstr "Satelliten Suche und Pegelanzeige"
@@ -9498,9 +9453,8 @@ msgstr "Wähle Cam 1"
 msgid "Select Cam 2"
 msgstr "Wähle Cam 2"
 
-#, fuzzy
 msgid "Select Card Server"
-msgstr "Filmauswahl"
+msgstr "Karten-Server Auswahl"
 
 msgid "Select Channel"
 msgstr "Kanal wählen"
@@ -9528,11 +9482,10 @@ msgid "Select Lan/Wlan"
 msgstr "Wähle Lan/Wlan"
 
 msgid "Select Multiboot"
-msgstr "MultiBoot auswählen"
+msgstr "MultiBoot-Auswahl"
 
-#, fuzzy
 msgid "Select Softcam"
-msgstr "Wähle Cam 1"
+msgstr "Softcam Auswahl"
 
 msgid "Select a bouquet"
 msgstr "Bouquet auswählen"
@@ -9595,9 +9548,8 @@ msgstr "Wähle Zielverzeichnis für:"
 msgid "Select destination for:"
 msgstr "Wähle Ziel für:"
 
-#, fuzzy
 msgid "Select directory for logfile"
-msgstr "Erstellen des Verzeichnisses %s fehlgeschlagen."
+msgstr "Verzeichnis für die Log-Datei wählen"
 
 msgid "Select files for backup."
 msgstr "Dateien zum Sichern auswählen."
@@ -9611,13 +9563,11 @@ msgstr "Wähle Verzeichnisse"
 msgid "Select function"
 msgstr "Funktion wählen"
 
-#, fuzzy
 msgid "Select hard disk"
-msgstr "Benutzeroberfläche wählen"
+msgstr "Festplatte auswählen"
 
-#, fuzzy
 msgid "Select horizontal resolution:"
-msgstr "Wählen Sie die Sortierungsmethode:"
+msgstr "Wählen Sie die horizontale Auflösung:"
 
 msgid "Select how quickly the dish should move between satellites."
 msgstr "Wählen Sie, wie schnell die Antenne zwischen den Satelliten wechseln soll."
@@ -9737,17 +9687,14 @@ msgstr "Wählen Sie das Gebietsschema der virtuellen Tastatur aus einem Menü"
 msgid "Select the virtual keyboard shifted character set"
 msgstr "Wählen Sie den Umstell-Zeichensatz für die Virtuelle Tastatur aus"
 
-#, fuzzy
 msgid "Select the virtual keyboard shifted character set for the next character only"
-msgstr "Wählen Sie den Umstell-Zeichensatz für die Virtuelle Tastatur aus"
+msgstr "Shift nur für das nächste Zeichen benutzen"
 
-#, fuzzy
 msgid "Select update source"
-msgstr "Wählen Sie eine Update-Quelle"
+msgstr "Update-Quelle wählen"
 
-#, fuzzy
 msgid "Select update source to edit"
-msgstr "Wählen Sie eine Update-Quelle zum Bearbeiten."
+msgstr "Wählen Sie eine Update-Quelle zum Bearbeiten"
 
 msgid "Select video input with up/down buttons"
 msgstr "Wählen Sie den Video-Eingang mit den Hoch/Runter-Tasten"
@@ -9758,9 +9705,8 @@ msgstr "Wählen Sie den Video-Modus"
 msgid "Select wireless network"
 msgstr "Wählen Sie ein Funk-Netzwerk aus"
 
-#, fuzzy
 msgid "Select your ATSC provider."
-msgstr "Wählen Sie einen Provider zum Hinzufügen"
+msgstr "Wählen Sie Ihren ATSC-Anbieter aus."
 
 msgid "Select your Language for Audio/Subtitles."
 msgstr "Wähle die Sprache für Audio / Untertitel."
@@ -9768,13 +9714,11 @@ msgstr "Wähle die Sprache für Audio / Untertitel."
 msgid "Select your Skin"
 msgstr "Skin Auswahl"
 
-#, fuzzy
 msgid ""
 "Select your backup device.\n"
 "Current device: "
 msgstr ""
-"\n"
-"Wählen Sie Ihr Sicherungs-Laufwerk.\n"
+"Wählen Sie das Sicherungs-Laufwerk.\n"
 "Aktuelles Laufwerk: "
 
 msgid "Select your country. If not available select 'all'."
@@ -9835,7 +9779,6 @@ msgstr "Servername"
 msgid "Server Info ( Oscam-Version: %s )"
 msgstr "Server Info ( Oscam-Version: %s )"
 
-#, fuzzy
 msgid "Server:"
 msgstr "Server:"
 
@@ -9851,13 +9794,11 @@ msgstr "Kanal"
 msgid "Service & PIDs"
 msgstr "Kanäle und PIDs"
 
-#, fuzzy
 msgid "Service ID"
-msgstr "Kanal"
+msgstr "Kanal-ID"
 
-#, fuzzy
 msgid "Service Mode"
-msgstr "Kanal-Infos"
+msgstr "Wartungs-Modus"
 
 msgid ""
 "Service Mode starts a tunnel to the sundtek server. Please start service mode only if requested by sundtek support.\n"
@@ -9874,9 +9815,8 @@ msgstr "Automatische Kanal Suche"
 msgid "Service Searching Manually"
 msgstr "Manuelle Kanal Suche"
 
-#, fuzzy
 msgid "Service belongs to a parental protected bouquet"
-msgstr "Kanal wurde zum gewählten Bouquet hinzugefügt."
+msgstr "Kanal gehört zu einem Jugendschutz-geschütztem Bouquet"
 
 msgid "Service has been added to the favourites."
 msgstr "Kanal wurde zu Favoriten hinzugefügt."
@@ -9887,9 +9827,8 @@ msgstr "Kanal wurde zum gewählten Bouquet hinzugefügt."
 msgid "Service info"
 msgstr "Kanal-Infos"
 
-#, fuzzy
 msgid "Service info - ECM Info"
-msgstr "Kanal-Infos"
+msgstr "Kanal-Info - ECM-Info"
 
 msgid "Service info - service & Basic PID Info"
 msgstr "Service Info - Service & Basic PID Info"
@@ -9939,7 +9878,6 @@ msgstr ""
 "Kanal nicht verfügbar!\n"
 "Bitte Tuner-Konfiguration überprüfen!"
 
-#, fuzzy
 msgid "Servicename"
 msgstr "Kanalname"
 
@@ -9955,9 +9893,8 @@ msgstr "PIN festlegen"
 msgid "Set System"
 msgstr "System festlegen"
 
-#, fuzzy
 msgid "Set action when movie playback is finished."
-msgstr "Verhalten beim Start eines Films"
+msgstr "Aktion bestimmen, wenn die Filmwiedergabe beendet wurde."
 
 msgid "Set all hotkey to default?"
 msgstr "Alle Hotkeys auf Standard setzen ?"
@@ -9965,9 +9902,8 @@ msgstr "Alle Hotkeys auf Standard setzen ?"
 msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
 msgstr "Bestimme alternative Reserve-Tuner für DVB-T/C oder ATSC"
 
-#, fuzzy
 msgid "Set as startup service"
-msgstr "Als Anschalt-Kanal setzen"
+msgstr "Als Anschalt-Kanal festlegen"
 
 msgid "Set blocktimes by weekday"
 msgstr "Setze Blockzeiten nach Wochentag"
@@ -9996,9 +9932,8 @@ msgstr "Netzwerkadapter als Standard festlegen"
 msgid "Set limits"
 msgstr "Limits setzen"
 
-#, fuzzy
 msgid "Set movielist type."
-msgstr "Verlasse Filmliste"
+msgstr "Filmlisten-Typ bestimmen"
 
 msgid "Set pin code persistent"
 msgstr "PIN Code dauerhaft speichern"
@@ -10210,9 +10145,8 @@ msgstr "Konfiguration der Netzwerk Freigaben."
 msgid "Setup your positioner"
 msgstr "Einstellung des Rotors"
 
-#, fuzzy
 msgid "Setup your positioner for your satellite system."
-msgstr "Einstellungen für den Stellungsregler Ihrer Satelliten-Anlage"
+msgstr "Positioner Einstellungen für ihr Sat-System."
 
 msgid "Setup your preferences for the automatic resolution switch."
 msgstr "Konfiguration der bevorzugten Einstellungen für die Auto-Auflösung."
@@ -10265,9 +10199,8 @@ msgstr "Ton-Auswahl anzeigen"
 msgid "Show CCcamInfo in Extensions Menu"
 msgstr "Zeige CCcamInfo im Erweiterungsmenü"
 
-#, fuzzy
 msgid "Show CI messages"
-msgstr "Verberge CI Nachrichten"
+msgstr "CI Meldungen anzeigen"
 
 msgid "Show Clients"
 msgstr "Zeige Clients"
@@ -10332,9 +10265,8 @@ msgstr "Zeige VCR-SCART im Hauptmenü"
 msgid "Show WLAN status"
 msgstr "Zeige WLAN-Status"
 
-#, fuzzy
 msgid "Show alternatives"
-msgstr "Zeige Alternativen"
+msgstr "Alternativen anzeigen"
 
 msgid "Show animation while busy"
 msgstr "Zeige Animation bei Beschäftigung"
@@ -10417,13 +10349,11 @@ msgstr "Zeige Infoleiste beim Spulen"
 msgid "Show latest commits"
 msgstr "Zeige die letzten Commits"
 
-#, fuzzy
 msgid "Show latest update log"
-msgstr "Letztes Update: "
+msgstr "Protokoll der letzten Aktualisierung anzeigen"
 
-#, fuzzy
 msgid "Show media player on main menu"
-msgstr "Zeige Mediaplayer im Hauptmenü"
+msgstr "Mediaplayer im Hauptmenü anzeigen"
 
 msgid "Show menu or plugin numbers"
 msgstr "Zeige Menü oder Plugin Nummern"
@@ -10458,9 +10388,8 @@ msgstr "Benachrichtigung anzeigen, wenn Importkanäle erfolgreich waren"
 msgid "Show only found image and mtd partitions.\n"
 msgstr "Anzeigen von gefundenem Image und gemounteden Partitionen.\n"
 
-#, fuzzy
 msgid "Show packages to be updated"
-msgstr "Zu aktualisierende Pakete"
+msgstr "Zu aktualisierende Pakete anzeigen"
 
 msgid "Show picons in channel selection list"
 msgstr "Zeige Picons in Kanalliste"
@@ -10525,17 +10454,14 @@ msgstr "TV-Wiedergabemodus..."
 msgid "Show time elapsed as positive"
 msgstr "Zeige abgelaufene Zeit als positiv"
 
-#, fuzzy
 msgid "Show transponder info"
-msgstr "Zeige Transponder-Info an"
+msgstr "Transponder-Info anzeigen"
 
-#, fuzzy
 msgid "Show tuner informations"
-msgstr "Info = Zeige Tuner Informationen"
+msgstr "Tuner Informationen anzeigen"
 
-#, fuzzy
 msgid "Show underline characters in filenames"
-msgstr "Reduzierter Zeichensatz für Aufnahme-Dateinamen"
+msgstr "Unterstriche anzeigen"
 
 msgid "Show vertical timelines"
 msgstr "Vertikale Timeline anzeigen"
@@ -10878,9 +10804,8 @@ msgstr "Erweiterungen (Plugins) nach Standard sortieren ?"
 msgid "Sort time"
 msgstr "Sortiere nach Zeit"
 
-#, fuzzy
 msgid "Sorting of playlists"
-msgstr "Sortierung der Wiedergabeliste"
+msgstr "Wiedergabeliste sortieren"
 
 msgid "Sound"
 msgstr "Ton"
@@ -10999,7 +10924,6 @@ msgstr "Start Modus"
 msgid "Start attempts"
 msgstr "Startversuche"
 
-#, fuzzy
 msgid "Start directory"
 msgstr "Anfangsverzeichnis"
 
@@ -11153,9 +11077,8 @@ msgstr "Timeshift beenden"
 msgid "Stop timeshift?"
 msgstr "Timeshift beenden?"
 
-#, fuzzy
 msgid "Stop using as startup service"
-msgstr "Nicht mehr als Anschaltkanal nutzen"
+msgstr "Nicht mehr als Anschalt-Kanal nutzen"
 
 msgid "Stopped"
 msgstr "Gestoppt"
@@ -11355,9 +11278,8 @@ msgstr "Display während dem Betrieb an oder aus schalten"
 msgid "Switch to TV mode"
 msgstr "Wechsel zum TV Modus"
 
-#, fuzzy
 msgid "Switch to bookmarks"
-msgstr "Zu den Lesezeichen gehen"
+msgstr "Gehe zu Lesezeichen"
 
 msgid "Switch to filelist"
 msgstr "In Dateiliste wechseln"
@@ -11434,9 +11356,8 @@ msgstr "System Plugin SkinSelector ist nicht installiert !"
 msgid "T2MI PID"
 msgstr "T2MI PID"
 
-#, fuzzy
 msgid "T2MI PLP"
-msgstr "T2MI PLP ID (T2-MI)"
+msgstr "T2MI PLP"
 
 msgid "T2MI PLP ID"
 msgstr "T2MI PLP ID (T2-MI)"
@@ -11739,13 +11660,11 @@ msgstr "Es sind mindestens %s Updates verfügbar."
 msgid "There are currently no outstanding actions."
 msgstr "Es sind keine Aktivitäten geplant."
 
-#, fuzzy
 msgid "There are no saved playlists to delete!"
-msgstr "Bitte wählen Sie eine Wiedergabeliste zum Löschen..."
+msgstr "Keine gespeicherte Wiedergabeliste zum Löschen vorhanden !"
 
-#, fuzzy
 msgid "There are no saved playlists to load!"
-msgstr "Gespeicherte Wiedergabeliste löschen"
+msgstr "Keine gespeicherte Wiedergabeliste zum Laden vorhanden !"
 
 msgid "There are no updates available."
 msgstr "Es sind keine Updates verfügbar."
@@ -12716,7 +12635,7 @@ msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select
 msgstr "Softcam Panel für Ihre Cam Einstellungen, Start/Stop/Auswählen der Cam."
 
 msgid "Use the cursor keys to select an installed image and then Start button."
-msgstr ""
+msgstr "Ein installiertes Image auswählen und danach die Taste GRÜN drücken, um das Full-Backup zu starten."
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Nutzen Sie den Netzwerkassistenten, um den selektierten Adapter zu konfigurieren."
@@ -13648,7 +13567,7 @@ msgid "You didn't select a channel to record from."
 msgstr "Sie haben keinen Sender zum Aufnehmen ausgewählt."
 
 msgid "You have chosen to restore your settings."
-msgstr ""
+msgstr "Sie haben sich entschieden, Ihre Einstellungen wiederherzustellen."
 
 msgid "You have no script to run."
 msgstr "Es läuft kein Script."
@@ -13663,6 +13582,8 @@ msgstr "Sie müssen %s warten!"
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr ""
+"Es muss zum Dienst %s (%s - '%s') gewechselt werden !\n"
+"\n"
 
 #, python-format
 msgid "Your %s %s is not connected to the internet, please check your network settings and try again."
@@ -13674,7 +13595,7 @@ msgstr "Ihr %s %s ist nicht richtig mit dem Internet verbunden, bitte überprüf
 
 #, python-format
 msgid "Your %s %s will Reboot..."
-msgstr ""
+msgstr "%s %s startet neu..."
 
 #, python-format
 msgid ""
@@ -13757,10 +13678,10 @@ msgid "Your network configuration has been activated."
 msgstr "Ihre Netzwerk-Konfiguration wurde aktiviert."
 
 msgid "Your receiver can use SCPC optimized search range. Consult your receiver's manual for more information."
-msgstr ""
+msgstr "Ihr Empfänger kann SCPC-optimierten Suchbereich verwenden. Weitere Informationen finden Sie in der Bedienungsanleitung Ihres Receivers."
 
 msgid "Your receiver can use tone amplitude. Consult your receiver's manual for more information."
-msgstr ""
+msgstr "Ihr Empfänger kann die Tonamplitude verwenden. Weitere Informationen finden Sie im Bedienungsanleitung Ihres Receivers."
 
 msgid "Your receiver does not have an internet connection"
 msgstr "Keine Verbindung zum Internet vorhanden"
@@ -13799,10 +13720,10 @@ msgid "Your receiver might be unusable now. Please consult the manual for furthe
 msgstr "Ihr Receiver könnte jetzt unbenutzbar sein. Bitte konsultieren Sie das Handbuch, bevor Sie Ihren Receiver neustarten."
 
 msgid "Your receiver will go to deep standby due to inactivity."
-msgstr ""
+msgstr "Wegen 'Inaktivität' fährt ihr Receiver jetzt in den Deep Standby."
 
 msgid "Your receiver will go to standby due to inactivity."
-msgstr ""
+msgstr "Wegen 'Inaktivität' fährt ihr Receiver jetzt in den Standby."
 
 msgid "Your receiver will got to stand by due to the sleeptimer."
 msgstr "Der Receiver geht jetzt gemäß des Sleeptimers in den Standby."
@@ -13819,7 +13740,7 @@ msgstr ""
 "Bitte wählen Sie eine Option zum Fortfahren."
 
 msgid "Zambia"
-msgstr ""
+msgstr "Sambia"
 
 msgid "Zap"
 msgstr "Umschalten"
@@ -13833,7 +13754,7 @@ msgstr ""
 "Öffnen der Motor-Einstellungen lief?"
 
 msgid "Zap bouquets blindly on zap buttons"
-msgstr ""
+msgstr "Bouquets mit Zap Tasten blind umschalten"
 
 msgid "Zap down"
 msgstr "Zap runter"
@@ -13864,23 +13785,23 @@ msgstr "Zap rauf"
 
 #, python-format
 msgid "Zapped to timer service %s as PiP!"
-msgstr ""
+msgstr "Umschalten zum Timerkanal %s als Bild im Bild !"
 
 #, python-format
 msgid "Zapped to timer service %s!"
 msgstr "Umgeschalten zum Timerdienst %s !"
 
 msgid "Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"
-msgstr ""
+msgstr "Zgemma H7(neues Modell)/ H9(neues Modell)/ H9COMBO/H9TWIN/H10"
 
 msgid "Zgemma H9(old model)/I55Plus"
-msgstr ""
+msgstr "Zgemma H9(altes Modell)/ I55Plus"
 
 msgid "Zgemma Star S/2S/H1/H2"
-msgstr ""
+msgstr "Zgemma Star S/ 2S/ H1/ H2"
 
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Simbabwe"
 
 msgid "[Enigma2 Settings]\n"
 msgstr "[Einstellungen]\n"
@@ -14444,13 +14365,13 @@ msgstr "Installiere Linux Programm (util-linux-blkid)"
 msgid "installs the sundtek driver and runs related shellscripts"
 msgstr "Installiert die Sundtek Treiber und läuft mit den damit verbundenen Shell-Skripten"
 
-#, fuzzy, python-format
+#, python-format
 msgid "internal flash:  %s %s "
-msgstr "Interner Flash"
+msgstr "Interner Flash:  %s %s "
 
 #, python-format
 msgid "internal flash: %s %s as USB Recovery"
-msgstr ""
+msgstr "Interner Flash: %s %s as USB Recovery"
 
 msgid "invalid type"
 msgstr "Ungültige Werte"
@@ -14877,9 +14798,8 @@ msgstr "Kanalsuche"
 msgid "scan state"
 msgstr "Status"
 
-#, fuzzy
 msgid "scc update available"
-msgstr " Updates verfügbar"
+msgstr "scc Aktualisierung verfügbar"
 
 msgid "science fiction/fantasy/horror"
 msgstr "Science-Fiction/Fantasie/Horror"
@@ -14914,9 +14834,8 @@ msgstr "Ernste Musik/Klassische Musik"
 msgid "serious/classical/religious/historical movie/drama"
 msgstr "Ernst/Klassisch/Religiös/Historischer Film/Drama"
 
-#, fuzzy
 msgid "service off-air"
-msgstr "Kanal PIN"
+msgstr "Kanal off-air"
 
 msgid "settings"
 msgstr "Einstellungen"
@@ -15018,9 +14937,9 @@ msgstr "Slot%s - %s (aktuelles Image) 'mit Backup'"
 msgid "slot%s - %s (current image), without backup"
 msgstr "Slot%s - %s (aktuelles Image) 'ohne Backup'"
 
-#, fuzzy, python-format
+#, python-format
 msgid "slot%s - %s as USB Recovery"
-msgstr "Slot%s - %s Modus 1"
+msgstr "Slot%s - %s als USB Recovery"
 
 #, python-format
 msgid "slot%s - %s mode 1"
