@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 18:54+0200\n"
-"PO-Revision-Date: 2020-04-18 13:21+0200\n"
+"PO-Revision-Date: 2020-04-24 12:32+0200\n"
 "Last-Translator: Smokey\n"
 "Language-Team: OpenEight <https://octagon-forum.eu>\n"
 "Language: nl\n"
@@ -1758,9 +1758,9 @@ msgstr "Backup Instellingen"
 msgid "Backup system settings"
 msgstr "Backup uw instellingen"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Backup to destination: %s"
-msgstr "Maak een Backup van uw Instellingen"
+msgstr "Backup naar locatie: %s"
 
 msgid "Backup your Image"
 msgstr "Maak een backup van uw Image"
@@ -2170,9 +2170,8 @@ msgstr "Annuleer de opdracht?"
 msgid "Cancelled upon user request"
 msgstr "Geannuleerd door de gebruiker"
 
-#, fuzzy
 msgid "Cannot create backup directory"
-msgstr "Map aanmaken"
+msgstr "Backup kan niet gecreëerd worden"
 
 msgid "Cannot delete downloaded image"
 msgstr "Gedownloade images kunnen niet verwijderd worden"
@@ -5675,9 +5674,8 @@ msgstr "Negeer DVB-T namespace sub netwerk"
 msgid "Ignore conflict"
 msgstr "Negeer conflict"
 
-#, fuzzy
 msgid "Image Backup"
-msgstr "Volledige Image Backup "
+msgstr "Image Backup"
 
 msgid "Image Info"
 msgstr "Image Info"
@@ -5690,15 +5688,15 @@ msgstr "Image Update"
 
 #, python-format
 msgid "Image created on: %s/%s-%s-%s-backup-%s_mmc.zip"
-msgstr ""
+msgstr "Image gecreëerd op: %s/%s-%s-%s-backup-%s_mmc.zip"
 
 #, python-format
 msgid "Image created on: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
-msgstr ""
+msgstr "Image gecreëerd op: %s/%s-%s-%s-backup-%s_recovery_emmc.zip"
 
 #, python-format
 msgid "Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
-msgstr ""
+msgstr "Image gecreëerd op: %s/%s-%s-%s-backup-%s_usb.zip"
 
 msgid "Image creation failed - "
 msgstr "Image creatie mislukt - "
@@ -6890,9 +6888,9 @@ msgstr "Multitype"
 msgid "Multiboot"
 msgstr "Multiboot"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
-msgstr "Multiboot Image gecreëerd in: %s"
+msgstr "Multiboot Image gecreëerd op: %s/%s-%s-%s-backup-%s_usb.zip"
 
 msgid "Multichannel PCM"
 msgstr "Meerkanaals PCM"
@@ -7306,9 +7304,8 @@ msgstr "Nee, Ik wil geen plugins installeren"
 msgid "No, but restart from begin"
 msgstr "Nee, maar start opnieuw"
 
-#, fuzzy
 msgid "No, do not backup a image"
-msgstr "Nee, Image niet flashen"
+msgstr "Nee, geen image backup maken"
 
 msgid "No, do not flash image"
 msgstr "Nee, Image niet flashen"
@@ -7417,9 +7414,8 @@ msgctxt "now/next: 'now' event label"
 msgid "Now"
 msgstr "Nu"
 
-#, fuzzy
 msgid "Now building the Backup Image"
-msgstr "Het USB-Image wordt nu opgebouwd"
+msgstr "Het Backup Image wordt nu opgebouwd"
 
 msgid "Now playing"
 msgstr "Huidige weergave"
@@ -7967,9 +7963,8 @@ msgstr "Druk op OK om door te gaan."
 msgid "Please re-enter the new PIN code"
 msgstr "Voer de nieuwe pincode opnieuw in"
 
-#, fuzzy
 msgid "Please select a backup destination"
-msgstr "Selecteer een opslag medium om te gebruiken als backuplocatie"
+msgstr "Selecteer een backuplocatie"
 
 msgid "Please select a playlist to delete..."
 msgstr "Selecteer de afspeellijst die u wilt verwijderen..."
@@ -12815,7 +12810,7 @@ msgstr ""
 "Hier kunt u een Softcam starten, stoppen of kiezen."
 
 msgid "Use the cursor keys to select an installed image and then Start button."
-msgstr ""
+msgstr "Gebruik de cursor toetsen om een image te selecteren en daarna installeren de start toets."
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Gebruik de netwerkwizard om de geselecteerde netwerkadapter te configureren"
@@ -14571,13 +14566,13 @@ msgstr "installeer linux utilities (util-linux-blkid)"
 msgid "installs the sundtek driver and runs related shellscripts"
 msgstr "installeert de sundtek drivers en start de gerelateerde shellscripts"
 
-#, fuzzy, python-format
+#, python-format
 msgid "internal flash:  %s %s "
-msgstr "Intern geheugen"
+msgstr "Intern geheugen:  %s %s "
 
 #, python-format
 msgid "internal flash: %s %s as USB Recovery"
-msgstr ""
+msgstr "intern geheugen: %s %s als USB Recovery"
 
 msgid "invalid type"
 msgstr "ongeldig type"
@@ -15143,9 +15138,9 @@ msgstr "slot%s - %s (huidig image) met, backup"
 msgid "slot%s - %s (current image), without backup"
 msgstr "slot%s - %s (huidig image), zonder backup"
 
-#, fuzzy, python-format
+#, python-format
 msgid "slot%s - %s as USB Recovery"
-msgstr "slot%s - %s modus 1"
+msgstr "slot%s - %s als USB Recovery"
 
 #, python-format
 msgid "slot%s - %s mode 1"
