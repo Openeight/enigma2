@@ -103,7 +103,7 @@ class ImageBackup(Screen):
 			for media in ['/media/%s' % x for x in os.listdir('/media')] + (['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []):
 				if Harddisk.Freespace(media) > 300000:
 					choices.append((_("Backup to destination: %s") % (media),self.currentSelected[0][1], media, self.currentSelected[0][2]))
-			choices.append((_("No, do not backup a image"), False))
+			choices.append((_("No, do not backup an image"), False))
 			self.session.openWithCallback(self.doFullBackup, ChoiceBox,title=title,list=choices)
 
 	def selectionChanged(self):
@@ -135,7 +135,7 @@ class ImageBackup(Screen):
 					try:
 						os.makedirs(self.DIRECTORY)
 					except:
-						self.session.open(MessageBox, _("Cannot create backup directory"), MessageBox.TYPE_ERROR, timeout=10)
+						self.session.open(MessageBox, _("Can't create backup directory"), MessageBox.TYPE_ERROR, timeout=10)
 						return
 				self.SLOT = answer[1]
 				self.MODEL = GetBoxName()
