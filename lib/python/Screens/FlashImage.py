@@ -59,13 +59,13 @@ class SelectImage(Screen):
 
 	def getImagesList(self):
 
-		def getImages(path, files):
+		def getImages(path, files, dir = _("Root directory")):
 			for file in [x for x in files if os.path.splitext(x)[1] == ".zip" and model in x]:
 				try:
 					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
-						if "Downloaded Images" not in self.imagesList:
-							self.imagesList["Downloaded Images"] = {}
-						self.imagesList["Downloaded Images"][file] = {'link': file, 'name': file.split(os.sep)[-1]}
+						if dir not in self.imagesList:
+							self.imagesList[dir] = {}
+						self.imagesList[dir][file] = {'link': file, 'name': file.split(os.sep)[-1]}
 				except:
 					pass
 
@@ -85,12 +85,13 @@ class SelectImage(Screen):
 				if not(SystemInfo['HasMMC'] and "/mmc" in media) and os.path.isdir(media):
 					try:
 						getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
-						if "downloaded_images" in os.listdir(media):
-							media = os.path.join(media, "downloaded_images")
-							if os.path.isdir(media) and not os.path.islink(media) and not os.path.ismount(media):
-								getImages(media, [os.path.join(media, x) for x in os.listdir(media) if os.path.splitext(x)[1] == ".zip" and model in x])
-								for dir in [dir for dir in [os.path.join(media, dir) for dir in os.listdir(media)] if os.path.isdir(dir) and os.path.splitext(dir)[1] == ".unzipped"]:
-									shutil.rmtree(dir)
+						for dir in ["Downloaded_Images", "Images", "Fullbackup"]:
+							if dir.lower() in os.listdir(media):
+								path = os.path.join(media, dir.lower())
+								if os.path.isdir(path) and not os.path.islink(path) and not os.path.ismount(path):
+									getImages(path, [os.path.join(path, x) for x in os.listdir(path) if os.path.splitext(x)[1] == ".zip" and model in x], dir)
+									for rdir in [rdir for rdir in [os.path.join(path, rdir) for rdir in os.listdir(path)] if os.path.isdir(rdir) and os.path.splitext(rdir)[1] == ".unzipped"]:
+										shutil.rmtree(rdir)
 					except:
 						pass
 
