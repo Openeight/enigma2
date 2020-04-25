@@ -32,6 +32,7 @@ from Plugins.SystemPlugins.NetworkBrowser.MountManager import AutoMountManager
 from Plugins.SystemPlugins.NetworkBrowser.NetworkBrowser import NetworkBrowser
 from Plugins.SystemPlugins.NetworkBrowser.AutoMount import AutoMount
 from Plugins.SystemPlugins.NetworkWizard.NetworkWizard import NetworkWizard
+from Plugins.Extensions.AutoBackup.ui import Config, BackupSelection
 from Plugins.Extensions.ExtrasPanel.RestartNetwork import RestartNetwork
 from Plugins.Extensions.ExtrasPanel.plugin import Extraspanel
 from Plugins.Extensions.ExtrasPanel.MountManager import DevicesMountPanel
@@ -133,6 +134,11 @@ if path.exists('/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoResolution/plu
 	AUTORES = True
 else:
 	AUTORES = False
+if path.exists('/usr/lib/enigma2/python/Plugins/Extensions/VpnChanger/plugin.pyo'):
+	from Plugins.Extensions.VpnChanger.plugin import VpnScreen
+	VPNCHP = True
+else:
+	VPNCHP = False
 
 def isFileSystemSupported(filesystem):
 	try:
@@ -294,6 +300,8 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Network Interface', _('Setup interface'), _('Setup network. Here you can setup DHCP, IP, DNS.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Network Restart', _('Restart network with current setup'), _('Restart network and remount connections.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Network Services', _('Setup Network Services'), _('Setup Network Services (Samba, Ftp, NFS, ...)')))
+		if VPNCHP:
+			self.sublist.append(QuickSubMenuEntryComponent('VPN Changer', _('Setup VPN Changer'), _('Setup VPN Changer for more privacy.')))
 		self['sublist'].l.setList(self.sublist)
 		return
 
@@ -384,7 +392,7 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Flash Online', _('Flash Online a new image'), _('Flash on the fly your Receiver software.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Complete Backup', _('Backup your current image'), _('Backup your current image to HDD or USB. This will make a 1:1 copy of your box.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Backup Settings', _('Backup your current settings'), _('Backup your current settings. This includes E2-setup, channels, network and all selected files.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Restore Settings', _('Restore settings from a backup'), _('Restore your settings back from a backup. After restore the box will restart to activate the new settings.')))
+#		self.sublist.append(QuickSubMenuEntryComponent('Restore Settings', _('Restore settings from a backup'), _('Restore your settings back from a backup. After restore the box will restart to activate the new settings.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Select Backup files', _('Choose the files to backup'), _('Here you can select which files should be added to backupfile. (default: E2-setup, channels, network).')))
 		self.sublist.append(QuickSubMenuEntryComponent('Software Manager Setup', _('Manage your online update files'), _('Here you can select which files should be updated with a online update.')))
 		self['sublist'].l.setList(self.sublist)
@@ -468,6 +476,8 @@ class QuickMenu(Screen):
 			self.session.open(NetworkuShare)
 		elif item[0] == _('Telnet'):
 			self.session.open(NetworkTelnet)
+		elif item[0] == _('VPN Changer'):
+			self.session.open(VpnScreen)
 		elif item[0] == _('Customize'):
 			self.openSetup('usage')
 		elif item[0] == _('Display Settings'):
@@ -570,19 +580,19 @@ class QuickMenu(Screen):
 			else:
 				self.session.open(ImageBackup)
 		elif item[0] == _('Backup Settings'):
-			self.session.openWithCallback(self.backupDone, BackupScreen, runBackup=True)
-		elif item[0] == _('Restore Settings'):
-			self.backuppath = getBackupPath()
-			if not path.isdir(self.backuppath):
-				self.backuppath = getOldBackupPath()
-			self.backupfile = getBackupFilename()
-			self.fullbackupfilename = self.backuppath + '/' + self.backupfile
-			if os.path.exists(self.fullbackupfilename):
-				self.session.openWithCallback(self.startRestore, MessageBox, _('Are you sure you want to restore your %s %s backup?\nSTB will restart after the restore') % (getMachineBrand(), getMachineName()))
-			else:
-				self.session.open(MessageBox, _('Sorry no backups found!'), MessageBox.TYPE_INFO, timeout=10)
+			self.session.open(Config)
+#		elif item[0] == _('Restore Settings'):
+#			self.backuppath = getBackupPath()
+#			if not path.isdir(self.backuppath):
+#				self.backuppath = getOldBackupPath()
+#			self.backupfile = getBackupFilename()
+#			self.fullbackupfilename = self.backuppath + '/' + self.backupfile
+#			if os.path.exists(self.fullbackupfilename):
+#				self.session.openWithCallback(self.startRestore, MessageBox, _('Are you sure you want to restore your %s %s backup?\nSTB will restart after the restore') % (getMachineBrand(), getMachineName()))
+#			else:
+#				self.session.open(MessageBox, _('Sorry no backups found!'), MessageBox.TYPE_INFO, timeout=10)
 		elif item[0] == _('Select Backup files'):
-			self.session.openWithCallback(self.backupfiles_choosen, BackupSelection)
+			self.session.open(BackupSelection)
 		elif item[0] == _('Software Manager Setup'):
 			self.session.open(SoftwareManagerSetup)
 		elif item[0] == _('Plugin Browser'):
