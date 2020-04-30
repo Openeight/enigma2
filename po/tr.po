@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2 OPLi-3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 18:54+0200\n"
-"PO-Revision-Date: 2020-04-25 23:40+0100\n"
+"PO-Revision-Date: 2020-04-30 22:15+0100\n"
 "Last-Translator: esmos\n"
 "Language-Team: esmos\n"
 "Language: tr\n"
@@ -1807,7 +1807,7 @@ msgid "Barbados"
 msgstr ""
 
 msgid "Basic PID info"
-msgstr ""
+msgstr "Temel PID bilgisi"
 
 msgid "Basque"
 msgstr "Bask"
@@ -1819,7 +1819,7 @@ msgid "Behavior of 'pause and ok' when paused"
 msgstr "'Duraklama ve Tamam' Davranış Duraklatıldığında"
 
 msgid "Behavior of 0 key in PiP-mode"
-msgstr "RiR kipinde 0 tuşu görevi"
+msgstr "RiR (Resim içinde Resim) kipinde 0 tuşu görevi"
 
 msgid "Behavior when a movie is started"
 msgstr "Film başlatıldığı zaman"
@@ -1940,9 +1940,8 @@ msgstr ""
 msgid "Build date :"
 msgstr ""
 
-#, fuzzy
 msgid "Build date: "
-msgstr "Hız:"
+msgstr "Imaj Tarihi: "
 
 #, python-format
 msgid "Build: %s"
@@ -2580,32 +2579,31 @@ msgid "Configure if and how service type icons will be shown in the channel sele
 msgstr "Kanal seçim listesinde hizmet türü simgelerinin nasıl gösterileceğini yapılandır."
 
 msgid "Configure if and how the record indicator will be shown in the channel selection list."
-msgstr ""
+msgstr "Kayıt göstergesinin kanal seçim listesinde gösterilip gösterilmeyeceğini ve nasıl gösterileceğini yapılandırın."
 
 msgid "Configure if and how wide columns will be shown in the channel selection list."
 msgstr "Kanal seçim listesinde gösterilir ve nasıl geniş sütunlar yapılandırın."
 
 msgid "Configure if behind the subtitles a background is shown."
-msgstr ""
+msgstr "Altyazıların arkasında bir arka plan gösterilecekse yapılandırın."
 
-#, fuzzy
 msgid "Configure if service picons will be shown in display (when supported by the skin)."
-msgstr "Kanal seçim listesinde kanal simgelerinin nasıl gösterileceğini yapılandır."
+msgstr "Servis pikonların ekranda gösterilip gösterilmeyeceğini yapılandırın (arayüz tarafından desteklendiğinde)."
 
 msgid "Configure if service picons will be shown in the channel selection list."
 msgstr "Kanal seçim listesinde kanal simgelerinin nasıl gösterileceğini yapılandır."
 
 msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
-msgstr ""
+msgstr "HDMI EDID kontrolünün atlanıp atlanmayacağını yapılandırın, çünkü bu bazı TV'lerde sorunu çözebilir."
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
-msgstr ""
+msgstr "Altyazının normal, italik, kalın ve bolditalik arasında geçiş yapıp yapmayacağını yapılandırın"
 
 msgid "Configure interface"
 msgstr "Arayüz yapılandırması"
 
 msgid "Configure mainmenu"
-msgstr ""
+msgstr "Ana menüyü yapılandır"
 
 msgid "Configure nameservers"
 msgstr "İsim sunucu yapılandırması"
@@ -2617,7 +2615,7 @@ msgid "Configure remote control type"
 msgstr "Uzaktan kumanda türünü yapılandırın"
 
 msgid "Configure second-infobar"
-msgstr ""
+msgstr "İkinci bilgi çubuğunu yapılandır"
 
 msgid "Configure the DiSEqC mode for this LNB."
 msgstr "Bu LNB için DiSEqC modunu yapılandırın."
@@ -3240,20 +3238,19 @@ msgid "DUAL LAYER DVD"
 msgstr "ÇİFT KATMAN DVD"
 
 msgid "DVB CI Delay"
-msgstr ""
+msgstr "DVB CI Gecikmesi"
 
 msgid "DVB Subtitles PID & lang"
 msgstr "DVB Altyazı PID & dil"
 
-#, fuzzy
 msgid "DVB driver version: "
-msgstr "Geçerli sürüm:"
+msgstr "DVB sürücü sürümü: "
 
 msgid "DVB subtitle black transparency"
 msgstr "DVB altyazı siyah saydamlığı"
 
 msgid "DVB type"
-msgstr ""
+msgstr "DVB tipi"
 
 #, fuzzy
 msgid "DVB-"
@@ -3963,14 +3960,13 @@ msgid "ECM-Time"
 msgstr ""
 
 msgid "EPG"
-msgstr "EPG"
+msgstr "EPG - Elektronik program rehberi"
 
-#, fuzzy
 msgid "EPG Selection"
-msgstr "EPG Dil seçimi"
+msgstr "EPG Seçimi"
 
 msgid "EPG Setup"
-msgstr ""
+msgstr "EPG Kurulumu"
 
 msgid "EPG language selection 1"
 msgstr "EPG Dil seçimi 1"
@@ -4146,7 +4142,7 @@ msgid "Enable Wake On LAN"
 msgstr "LAN Wake On etkinleştirme"
 
 msgid "Enable and setup your fallback remote receiver(s)."
-msgstr ""
+msgstr "Yedek uzak alıcınızı etkinleştirin ve ayarlayın."
 
 msgid "Enable auto cable scan"
 msgstr "Otomatik kablo taramayı etkinleştir"
@@ -4154,9 +4150,9 @@ msgstr "Otomatik kablo taramayı etkinleştir"
 msgid "Enable auto fast scan"
 msgstr "Otomatik hızlı tarama etkinleştir"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Enable auto fast scan for %s"
-msgstr "Otomatik hızlı tarama etkinleştir"
+msgstr "Otomatik hızlı tarama etkinleştir %s"
 
 msgid "Enable bouquet edit"
 msgstr "Buket düzenlemeyi aç"
@@ -4177,7 +4173,7 @@ msgid "Enable import timer from fallback tuner"
 msgstr "Yedek tunerden aktarma zamanlayıcısını etkinleştir"
 
 msgid "Enable move mode"
-msgstr "Taşıma kipini aç"
+msgstr "Kanal Taşıma aç"
 
 msgid "Enable multiple bouquets"
 msgstr "Çoklu buket kullanımını etkinleştir"
@@ -4186,23 +4182,22 @@ msgid "Enable parental protection"
 msgstr "Ebeveyn korumasını etkinleştir"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr ""
+msgstr "Yerel olarak ayarlanamayan hizmetleri ayarlamaya çalışmak için uzak enigma2 alıcısının etkinleştirilmesini etkinleştirin (örneğin, tuner dolu veya yerel tunerde hizmet türü kullanılamıyor. http:// ve bağlantı noktası numarası (tam olarak ...: 8001) dahil tam URL'yi belirtin), örneğin http://second_box:8001."
 
 msgid "Enable teletext caching"
 msgstr "Teletext önbelleğini etkinleştir"
 
-#, fuzzy
 msgid "Enable the IP server"
-msgstr "Kanal şifresini girin"
+msgstr "IP sunucusunu etkinleştir"
 
 msgid "Enable this setting if your aerial system needs power"
-msgstr ""
+msgstr "Anten sisteminizin güce ihtiyacı varsa bu ayarı etkinleştirin"
 
 msgid "Enable timer conflict detection"
 msgstr "Zamanlayıcı çakışma algılamasını etkinleştir"
 
 msgid "Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch."
-msgstr ""
+msgstr "Tüm doğru/yanlış, evet/hayır, açık/kapalı görüntülemeyi etkinleştirin ve kurulum seçeneklerini grafiksel bir anahtar olarak etkinleştirin/devre dışı bırakın."
 
 msgid "Enable volume control with arrow buttons"
 msgstr "Ok tuşlarını kullanarak ses düzeyi etkinleştirme"
@@ -4261,18 +4256,16 @@ msgstr "E2 başlatmalar: %d\n"
 
 #, python-format
 msgid "Enigma debug level: %d\n"
-msgstr ""
+msgstr "Enigma hata ayıklama seviyesi: %d\n"
 
-#, fuzzy
 msgid "Enigma version: "
-msgstr "Çekirdek sürümü:"
+msgstr "Enigma Versiyon: "
 
 msgid "Enigma2 skin selector"
 msgstr "Enigma2 arayüz seçici"
 
-#, fuzzy
 msgid "Enter"
-msgstr "merkez"
+msgstr "Giriş"
 
 msgid "Enter IP address"
 msgstr "IP adresi girin"
@@ -4733,23 +4726,23 @@ msgid ""
 "File oscam.conf not found.\n"
 "Please enter username/password manually."
 msgstr ""
+"Oscam.conf dosyası bulunamadı.\n"
+"Lütfen kullanıcı adını/şifreyi manuel olarak girin."
 
 msgid "File system type:"
-msgstr ""
+msgstr "Dosya sistemi türü:"
 
-#, fuzzy
 msgid "Filename"
-msgstr "dosyaadı"
+msgstr "Dosya adı"
 
 msgid "Filesystem Check"
-msgstr ""
+msgstr "Dosya sistemi kontrolü"
 
 msgid "Filesystem check"
 msgstr "Dosya sistemi kontrolü"
 
-#, fuzzy
 msgid "Filesystem check your Harddisk."
-msgstr "Dosya sistemi kontrolü"
+msgstr "Dosya Sistemi HDD kontrol edin."
 
 msgid "Final position at"
 msgstr "Son pozisyonunda"
@@ -4758,7 +4751,7 @@ msgid "Final position at index"
 msgstr "Dizindeki son pozisyonda"
 
 msgid "Find currently playing service"
-msgstr "şu anda oynatılan hizmeti bul"
+msgstr "Şu anda oynatılan hizmeti bul"
 
 msgid "Fine movement"
 msgstr "Ince hareket"
@@ -4940,26 +4933,25 @@ msgstr "Cuma"
 msgid "Friday"
 msgstr "Cuma"
 
-#, fuzzy
 msgid "From:"
-msgstr "Gönderen :"
+msgstr "Itibaren: "
 
-#, fuzzy, python-format
+#, python-format
 msgid "Frontprocessor version: %s"
 msgstr "Önişlemci sürümü: %d"
 
 msgid "Frozen Cam Check"
-msgstr ""
+msgstr "Donmuş Cam Kontrolü"
 
 msgid "Ftpd service type: Vsftpd server"
-msgstr ""
+msgstr "FTP hizmet türü: Vsftpd sunucusu"
 
 msgid "Full Image Backup "
-msgstr ""
+msgstr "Tam Yazılım Yedekleme"
 
 #, python-format
 msgid "Full back-up on %s"
-msgstr ""
+msgstr "Tarihinde tam yedekleme %s"
 
 #. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
 #, fuzzy
@@ -4980,7 +4972,7 @@ msgid "Further Options"
 msgstr "Öteki Seçenekler"
 
 msgid "Further options"
-msgstr ""
+msgstr "Diğer seçenekler"
 
 msgid "G"
 msgstr ""
@@ -4991,9 +4983,8 @@ msgstr ""
 msgid "GIGABLUE Black"
 msgstr ""
 
-#, fuzzy
 msgid "GStreamer version: "
-msgstr "Çekirdek sürümü:"
+msgstr "GStreamer versiyon: "
 
 msgid "GUI Settings"
 msgstr "Genel Ayarlar"
@@ -5266,7 +5257,7 @@ msgid "Harddisk Setup"
 msgstr ""
 
 msgid "Hardware: "
-msgstr ""
+msgstr "Donanım: "
 
 msgid "Hdmi CEC"
 msgstr ""
@@ -5278,25 +5269,25 @@ msgid "Hebrew"
 msgstr "İbranice"
 
 msgid "Helps setting up your antenna"
-msgstr ""
+msgstr "Anteninizin kurulumuna yardımcı olur"
 
 msgid "Here you can change skin, configure mainmenu, configure second-infobar or configure TechniHD skin."
-msgstr ""
+msgstr "Burada kaplamayı değiştirebilir, ana menüyü yapılandırabilir, ikinci bilgi çubuğunu yapılandırabilir veya TechniHD kaplamasını yapılandırabilirsiniz."
 
 msgid "Here you can download, install or remove skins"
-msgstr ""
+msgstr "Buradan kaplamaları indirebilir, kurabilir veya kaldırabilirsiniz"
 
 msgid "Here you can select which files should be added to backupfile. (default: E2-setup, channels, network)."
-msgstr ""
+msgstr "Burada hangi dosyaların backupfile'a ekleneceğini seçebilirsiniz. (varsayılan: E2 kurulumu, kanallar, ağ)."
 
 msgid "Here you can select which files should be updated with a online update."
-msgstr ""
+msgstr "Burada hangi dosyaların çevrimiçi güncelleme ile güncellenmesi gerektiğini seçebilirsiniz."
 
 msgid "Hidden network"
 msgstr "Gizlenmiş ağ"
 
 msgid "Hide"
-msgstr ""
+msgstr "Gizle (Sakla)"
 
 msgid "Hide channel list in radio mode"
 msgstr "Radyo modunda kanal listesini gizle"
@@ -5970,7 +5961,7 @@ msgid "Kernel"
 msgstr "Çekirdek (Kernel)"
 
 msgid "Kernel version: "
-msgstr "Çekirdek sürümü:"
+msgstr "Çekirdek sürümü: "
 
 msgid "Kernel..."
 msgstr "Çekirdek... (Kernel)"
@@ -7015,10 +7006,10 @@ msgid "No Connection"
 msgstr "Bağlantı yok"
 
 msgid "No Devices Found !!"
-msgstr ""
+msgstr "Hiçbir cihaz bulunamadı !!"
 
 msgid "No ECM info"
-msgstr ""
+msgstr "ECM bilgisi yok"
 
 msgid "No ECMPids available (FTA Service)"
 msgstr "Kullanılabilir ECMPid yok (FTA Hizmeti)"
@@ -7027,25 +7018,22 @@ msgid "No HDD found or HDD not initialized!"
 msgstr "HDD bulunamadı veya HDD ilişkilendirilemedi!"
 
 msgid "No IPTV media server found"
-msgstr ""
+msgstr "IPTV medya sunucusu bulunamadı"
 
-#, fuzzy
 msgid "No active subservices available."
-msgstr "Güncelleme yok"
+msgstr "Etkin alt hizmet yok."
 
 msgid "No age block"
-msgstr ""
+msgstr "Yaş bloğu yok"
 
-#, fuzzy
 msgid "No backup file was found."
-msgstr "Yedekleme başarısız oldu."
+msgstr "Yedek dosya bulunamadı."
 
-#, fuzzy
 msgid "No backups found."
-msgstr "Ne yazık ki yedekleme bulunamadı!"
+msgstr "Yedek bulunamadı."
 
 msgid "No card inserted!"
-msgstr ""
+msgstr "Kart takılı değil!"
 
 msgid ""
 "No data on transponder!\n"
@@ -8628,7 +8616,7 @@ msgid "Remaining & Elapsed"
 msgstr "Kalan ve Geçen"
 
 msgid "Remember last service in PiP"
-msgstr "PiP son hizmet hatırla"
+msgstr "PiP son hizmet (Kanal) hatırla"
 
 msgid "Remember service PIN"
 msgstr "Kanal Şifresini hatırla"
@@ -8637,16 +8625,16 @@ msgid "Reminder, you have chosen to save timeshift file."
 msgstr "Hatırlatma,TimeShift dosyayı kaydetmek için seçtiniz."
 
 msgid "Remote box"
-msgstr "Uzak kutu"
+msgstr "Uzak Kutu"
 
 msgid "Remote control ID"
-msgstr "Uzaktan kumanda kimliği"
+msgstr "Uzaktan Kumanda kimliği"
 
 msgid "Remote control type"
-msgstr "Uzaktan kumanda tipi"
+msgstr "Uzaktan Kumanda tipi"
 
 msgid "Remote control type setup"
-msgstr "Uzaktan kumanda tipi kurulumu"
+msgstr "Uzaktan Kumanda tipi kurulumu"
 
 msgid "Removal has completed."
 msgstr "Kaldırma tamamladı."
@@ -8766,7 +8754,7 @@ msgid "Rename"
 msgstr "Ad değiştir "
 
 msgid "Rename entry"
-msgstr "yeniden adlandır"
+msgstr "Yeniden adlandır"
 
 msgid "Rename failed!"
 msgstr "Yeniden adlandırma başarısız oldu!"
@@ -9899,17 +9887,14 @@ msgid ""
 "Start Service Mode now?"
 msgstr ""
 
-#, fuzzy
 msgid "Service Searching Automatically"
-msgstr "Kanal aranıyor"
+msgstr "Otomatik Olarak Servis Arama"
 
-#, fuzzy
 msgid "Service Searching Manually"
-msgstr "Kanal aranıyor"
+msgstr "Manuel Arama Hizmeti"
 
-#, fuzzy
 msgid "Service belongs to a parental protected bouquet"
-msgstr "Kanal seçilen bukete eklendi."
+msgstr "Hizmet ebeveyn korumalı bir bukete aittir"
 
 msgid "Service has been added to the favourites."
 msgstr "Kanal favorilere eklendi."
@@ -9920,9 +9905,8 @@ msgstr "Kanal seçilen bukete eklendi."
 msgid "Service info"
 msgstr "Kanal bilgisi"
 
-#, fuzzy
 msgid "Service info - ECM Info"
-msgstr "Kanal bilgisi"
+msgstr "Servis bilgisi - ECM Bilgisi"
 
 msgid "Service info - service & Basic PID Info"
 msgstr "Servis Bilgisi - servis & PID Bilgisi"
@@ -9937,7 +9921,7 @@ msgid "Service info - tuner live values"
 msgstr "Servis Bilgisi - Tuner Değerleri"
 
 msgid "Service info - tuner setting values"
-msgstr "Servis Bilgisi - tuner ayar değerleri"
+msgstr "Servis Bilgisi - Tuner ayar değerleri"
 
 msgid ""
 "Service invalid!\n"
