@@ -391,7 +391,7 @@ class QuickMenu(Screen):
 		if not getBoxType().startswith('az') and not getBoxType().startswith('dream') and not getBoxType().startswith('ebox'):
 			self.sublist.append(QuickSubMenuEntryComponent('Flash Online', _('Flash Online a new image'), _('Flash on the fly your Receiver software.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Complete Backup', _('Backup your current image'), _('Backup your current image to HDD or USB. This will make a 1:1 copy of your box.')))
-		self.sublist.append(QuickSubMenuEntryComponent('AutoBackup Settings', _('Backup your current settings'), _('Backup your current settings. This includes E2-setup, channels, network and all selected files.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Backup Settings', _('AutoBackup Settings System'), _('Backup your current settings. This includes E2-setup, channels, network and all selected files.')))
 #		self.sublist.append(QuickSubMenuEntryComponent('Restore Settings', _('Restore settings from a backup'), _('Restore your settings back from a backup. After restore the box will restart to activate the new settings.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Select Backup files', _('Choose the files to backup'), _('Here you can select which files should be added to backupfile. (default: E2-setup, channels, network).')))
 		self.sublist.append(QuickSubMenuEntryComponent('Software Manager Setup', _('Manage your online update files'), _('Here you can select which files should be updated with a online update.')))
@@ -579,7 +579,7 @@ class QuickMenu(Screen):
 				self.session.open(dFlash)
 			else:
 				self.session.open(ImageBackup)
-		elif item[0] == _('AutoBackup Settings'):
+		elif item[0] == _('Backup Settings'):
 			self.session.open(Config)
 #		elif item[0] == _('Restore Settings'):
 #			self.backuppath = getBackupPath()
