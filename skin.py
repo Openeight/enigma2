@@ -81,8 +81,8 @@ config.skin = ConfigSubsection()
 DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "SmartLiteFHD/skin.xml" or "SmartLiteSD/skin.xml"
 # on SD hardware, PLi-HD will not be available
 if not fileExists(resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)):
-	# in that case, fallback to PLi-HD (which is an SD skin)
-	DEFAULT_SKIN = "PLi-HD/skin.xml"
+	# in that case, fallback to SmartLiteSD (which is an SD skin)
+	DEFAULT_SKIN = "SmartLiteSD/skin.xml"
 	if not fileExists(resolveFilename(SCOPE_SKIN, DEFAULT_SKIN)):
 		DEFAULT_SKIN = "skin.xml"
 config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
