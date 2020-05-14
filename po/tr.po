@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: enigma2 OPLi-3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 18:54+0200\n"
-"PO-Revision-Date: 2020-05-05 20:15+0100\n"
+"PO-Revision-Date: 2020-05-14 19:30+0100\n"
 "Last-Translator: esmos\n"
 "Language-Team: esmos\n"
 "Language: tr\n"
@@ -1764,7 +1764,7 @@ msgid "Backup your Image/Settings or Flash a new Image"
 msgstr "Yazılım/Ayarlarını yedekle veya yeni bir yazılım yükle"
 
 msgid "Backup your current image"
-msgstr "Mevcut resminizi yedekleyin"
+msgstr "Mevcut yazılımı yedekleyin"
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr "Geçerli yazılımı HDD'ye veya USB'ye yedekleyin. Bu, kutunuzun 1:1 kopyasını oluşturur."
@@ -2365,13 +2365,13 @@ msgid "Choose Tuner"
 msgstr "Tuner Seçin"
 
 msgid "Choose bouquet"
-msgstr ""
+msgstr "Bouquet seçin"
 
 msgid "Choose the files to backup"
-msgstr ""
+msgstr "Yedeklenecek dosyaları seçin"
 
 msgid "Choose the language of the user interface and plugins."
-msgstr ""
+msgstr "Kullanıcı arayüzü ve eklentilerin dilini seçin."
 
 msgid "Choose which tuner to configure."
 msgstr "Yapılandırmak için tuner seçimi."
@@ -2505,7 +2505,7 @@ msgid "Complete"
 msgstr "Tamamı"
 
 msgid "Complete Backup"
-msgstr ""
+msgstr "Tam Yazılım Yedekleme"
 
 msgid "Complex (allows mixing audio tracks and aspects)"
 msgstr "Kompleks (karışık ses izlerine ve açılara izin verir)"
@@ -3501,15 +3501,17 @@ msgid "Detected NIMs:"
 msgstr "Tanınan Tuner`ler:"
 
 msgid "Device Mount Manager"
-msgstr ""
+msgstr "Cihaz Mount Yöneticisi"
 
 msgid ""
 "Device changes need a system restart to take effects.\n"
 "Restart your Box now?"
 msgstr ""
+"Cihaz değişikliklerinin efekt alabilmesi için sistemin yeniden başlatılması gerekir.\n"
+"Kutunuzu yeniden başlatmak istiyor musunuz?"
 
 msgid "Device name:"
-msgstr ""
+msgstr "Cihaz ismi:"
 
 msgid "Device: "
 msgstr "Cihaz: "
@@ -3518,12 +3520,14 @@ msgid "Devicename:"
 msgstr "Aygıt Adı​​:"
 
 msgid "Devices"
-msgstr ""
+msgstr "Cihazlar"
 
 msgid ""
 "Devices changes need a system restart to take effects.\n"
 "Restart your Box now?"
 msgstr ""
+"Cihaz değişikliklerinin etkili olması için sistemin yeniden başlatılması gerekir.\n"
+"Kutunuzu yeniden başlatmak istiyor musunuz?"
 
 msgid "DiSEqC"
 msgstr "DiSEqC"
@@ -3641,10 +3645,10 @@ msgid "Display EPG list for current channel"
 msgstr "Mevcut kanal için EPG göster..."
 
 msgid "Display Settings"
-msgstr ""
+msgstr "Display ayarları"
 
 msgid "Display Setup"
-msgstr ""
+msgstr "Display Kurulum"
 
 msgid "Display and userinterface"
 msgstr "Görüntüleme ve kullanıcı arayüzü"
@@ -5221,10 +5225,10 @@ msgid "Hard disk standby after"
 msgstr "HDD bekleme modundan sonra"
 
 msgid "Harddisk"
-msgstr "Sabitdisk"
+msgstr "Sabit disk"
 
 msgid "Harddisk Setup"
-msgstr ""
+msgstr "Sabit Disk Kurulumu"
 
 msgid "Hardware: "
 msgstr "Donanım: "
@@ -6298,20 +6302,17 @@ msgstr ""
 msgid "Manage extensions"
 msgstr "Eklentileri yönet"
 
-#, fuzzy
 msgid "Manage extensions or plugins for your receiver"
-msgstr ""
-"\n"
-"Alıcınız için uzantıları veya eklentileri yönetin"
+msgstr "Alıcınız için uzantıları veya eklentileri yönetme"
 
 msgid "Manage network mounts"
-msgstr ""
+msgstr "Ağ bağlantılarını yönetme"
 
 msgid "Manage your device mountpoints"
-msgstr ""
+msgstr "Cihaz bağlama noktalarını yönetin"
 
 msgid "Manage your online update files"
-msgstr ""
+msgstr "Çevrimiçi güncelleme dosyalarınızı yönetin"
 
 msgid "Manage your receiver's software"
 msgstr "Uydu alıcınızın sistem yazılımımı yönetin"
@@ -6542,10 +6543,10 @@ msgid "Mosquito noise reduction"
 msgstr "Sivrisinek Parazit Azaltma"
 
 msgid "Motor command retries"
-msgstr ""
+msgstr "Motor komutu yeniden deniyor"
 
 msgid "Motor running timeout"
-msgstr ""
+msgstr "Motor çalışma zaman aşımı"
 
 msgid "Mount"
 msgstr "Bağla"
@@ -6557,35 +6558,36 @@ msgid "Mount Manager - edit label/fstab"
 msgstr "Mount Yöneticisi - etiketi düzenle / fstab"
 
 msgid "Mount Setup"
-msgstr ""
+msgstr "Mount Ayarları"
 
 msgid "Mount again"
 msgstr "Tekrar monte et"
 
 msgid "Mount all device from the fstab"
-msgstr ""
+msgstr "Tüm cihazı fstab'den bağlayın"
 
 msgid ""
 "Mount current device failed!\n"
 "Maybe this device is not spelled out in the fstab?"
 msgstr ""
+"Mevcut cihazı bağlama başarısız!\n"
+"Belki bu cihaz fstab'da yazılmamıştır?"
 
 msgid "Mount current device from the fstab"
-msgstr ""
+msgstr "Geçerli cihazı fstab'dan bağlama"
 
 #, python-format
 msgid "Mount current device to %s"
-msgstr ""
+msgstr "Mevcut cihazı %s"
 
 msgid "Mount failed!"
-msgstr ""
+msgstr "Mount başarısız oldu!"
 
 msgid "Mount point:"
-msgstr ""
+msgstr "Bağlama noktası:"
 
-#, fuzzy
 msgid "Mount your network shares again"
-msgstr "Kablosuz ağınızı yeniden yapılandırın"
+msgstr "Ağ paylaşımlarınızı tekrar bağlayın"
 
 msgid "Mount-Manager..."
 msgstr "Mount-Yöneticisi ..."
@@ -9473,7 +9475,7 @@ msgid "Select 'yes' to only send the DiSEqC command when changing from one satel
 msgstr ""
 
 msgid "Select Backup files"
-msgstr ""
+msgstr "Yedeklenecek dosyaları seçin"
 
 msgid "Select CAId"
 msgstr "CAId Seç"
@@ -10022,62 +10024,61 @@ msgid "Settings"
 msgstr "Ayarlar"
 
 msgid "Settings can be different for each directory separately (for non removeable devices only)."
-msgstr ""
+msgstr "Ayarlar her dizin için ayrı ayrı farklı olabilir (yalnızca çıkarılamayan cihazlar için)."
 
 msgid "Setup"
 msgstr "Kurulum"
 
 msgid "Setup AFP"
-msgstr ""
+msgstr "AFP Kurulum"
 
 msgid "Setup Audio Sync"
-msgstr ""
+msgstr "Ses Senkronizasyonunu Ayarla"
 
 msgid "Setup Audio Sync settings"
-msgstr ""
+msgstr "Ses Senkronizasyonu ayarlarını yap"
 
-#, fuzzy
 msgid "Setup Audio/Video"
-msgstr "Kurulum Modu"
+msgstr "Ses/Video Ayarları"
 
 msgid "Setup Ecm Info of the CCcamInfo plugin."
-msgstr ""
+msgstr "CCcamInfo eklentisinin Kurulum Ecm Bilgisi."
 
 msgid "Setup Ecm Info of the Softcam Manager."
-msgstr ""
+msgstr "Softcam Yöneticisinin Ecm Bilgilerini ayarlayın."
 
 msgid "Setup Enigma2"
-msgstr ""
+msgstr "Enigma2 Kurulumu"
 
 msgid "Setup FTP"
-msgstr ""
+msgstr "FTP Kurulum"
 
 msgid "Setup Inadyn"
-msgstr ""
+msgstr "Inadyn Kurulumu"
 
 msgid "Setup MiniDLNA"
-msgstr ""
+msgstr "Mini DLNA Kurulum"
 
 msgid "Setup Mounts"
 msgstr "Kurulum Bağlantıları"
 
 msgid "Setup NFS"
-msgstr ""
+msgstr "NFS Kurulum"
 
 msgid "Setup Network Services"
-msgstr ""
+msgstr "Ağ Hizmetlerini Kur"
 
 msgid "Setup Network Services (Samba, Ftp, NFS, ...)"
-msgstr ""
+msgstr "Ağ Hizmetlerini Kur (Samba, Ftp, NFS, ...)"
 
 msgid "Setup OpenVPN"
-msgstr ""
+msgstr "OpenVPN Kurulum"
 
 msgid "Setup Plugin filter"
-msgstr ""
+msgstr "Eklenti filtresini ayarla"
 
 msgid "Setup Plugin filter. Here you can select which Plugins are showed in the PluginBrowser."
-msgstr ""
+msgstr "Eklenti filtresini ayarlayın. Burada, Eklenti Tarayıcısında hangi Eklentilerin gösterileceğini seçebilirsiniz."
 
 msgid "Setup SABnzbd"
 msgstr ""
@@ -10118,112 +10119,100 @@ msgid "Setup mode"
 msgstr "Kurulum Modu"
 
 msgid "Setup network. Here you can setup DHCP, IP, DNS."
-msgstr ""
+msgstr "Ağı kurun. Burada DHCP, IP, DNS'yi ayarlayabilirsiniz."
 
 msgid "Setup rotor"
-msgstr ""
+msgstr "Rotor (Motor) Kurulum"
 
 msgid "Setup tuner(s)"
-msgstr ""
+msgstr "Tuner`ler Kurulumu"
 
 msgid "Setup uShare"
-msgstr ""
+msgstr "uShare Kurulum"
 
 msgid "Setup your Device mounts (USB, HDD, others...)"
-msgstr ""
+msgstr "Cihaz bağlantılarınızı kurun (USB, HDD, diğerleri...)"
 
-#, fuzzy
 msgid "Setup your EPG config."
-msgstr "Pozisyoner kurulumu"
+msgstr "EPG yapılandırmanızı ayarlayın."
 
 msgid "Setup your HDMI communication and preferences."
-msgstr ""
+msgstr "HDMI iletişiminizi ve tercihlerinizi ayarlayın."
 
-#, fuzzy
 msgid "Setup your Harddisk(s)."
-msgstr "HDD"
+msgstr "Sabit Disklerinizi kurun."
 
-#, fuzzy
 msgid "Setup your Harddisk."
-msgstr "HDD"
+msgstr "Sabit Diskinizi Kurun."
 
-#, fuzzy
 msgid "Setup your LCD."
-msgstr "Pozisyoner kurulumu"
+msgstr "LCD'nizi kurun."
 
-#, fuzzy
 msgid "Setup your Skin."
-msgstr "Pozisyoner kurulumu"
+msgstr "Arayüzü`nüzü kurun."
 
-#, fuzzy
 msgid "Setup your System."
-msgstr "Pozisyoner kurulumu"
+msgstr "Sisteminizi kurun."
 
-#, fuzzy
 msgid "Setup your Tuner and search for channels."
-msgstr "Kullanıcı arayüzü"
+msgstr "Tuner'ınızı ayarlayın ve kanalları arayın."
 
-#, fuzzy
 msgid "Setup your User interface."
-msgstr "Kullanıcı arayüzü"
+msgstr "Kullanıcı arayüzünüzü kurun."
 
 msgid "Setup your Video Mode, Video Output and other Video Settings."
-msgstr ""
+msgstr "Video Modunuzu, Video Çıkışınızı ve diğer Video Ayarlarınızı yapın."
 
 msgid "Setup your Video Mode, Video Output, Audio and Language Settings."
-msgstr ""
+msgstr "Video Modunuzu, Video Çıkışınızı, Ses ve Dil Ayarlarınızı yapın."
 
-#, fuzzy
 msgid "Setup your display."
-msgstr "Pozisyoner kurulumu"
+msgstr "Ekranınızı ayarlayın."
 
 msgid "Setup your local network"
-msgstr ""
+msgstr "Yerel ağınızı kurun"
 
 msgid "Setup your local network. For Wlan you need to boot with a USB-Wlan stick."
-msgstr ""
+msgstr "Yerel ağınızı kurun. Wlan için bir USB-Wlan çubuğu ile önyükleme yapmanız gerekir."
 
 msgid "Setup your mounts for network and storage devices."
-msgstr ""
+msgstr "Ağ ve depolama aygıtları için bağlantılarınızı kurun."
 
 msgid "Setup your network interface. If no Wlan stick is used, you only can select Lan."
-msgstr ""
+msgstr "Ağ arayüzünüzü kurun. Wlan çubuğu kullanılmazsa, yalnızca Lan'i seçebilirsiniz."
 
-#, fuzzy
 msgid "Setup your network mounts."
-msgstr "Pozisyoner kurulumu"
+msgstr "Ağ bağlarınızı kurun."
 
 msgid "Setup your positioner"
-msgstr "Pozisyoner kurulumu"
+msgstr "Pozisyoner (Motor) kurulumu"
 
-#, fuzzy
 msgid "Setup your positioner for your satellite system."
-msgstr "Pozisyoner kurulumu"
+msgstr "Uydu sisteminiz için konumlayıcınızı ayarlayın."
 
 msgid "Setup your preferences for the automatic resolution switch."
-msgstr ""
+msgstr "Otomatik çözünürlük anahtarı için tercihlerinizi ayarlayın."
 
-#, fuzzy
 msgid "Setup your recording config."
-msgstr "Zamanlayıcı Kaydı durdurmak"
+msgstr "Kayıt yapılandırmanızı ayarlayın."
 
 msgid "Setup your recording paths config."
-msgstr ""
+msgstr "Kayıt yolları yapılandırmanızı ayarlayın."
 
 msgid "Setup your satellite equipment"
-msgstr "Uydu ekipmanları kurulumu"
+msgstr "Uydu donanımınızı ayarlayın"
 
 msgid "Seychelles"
 msgstr ""
 
 msgid "Share Folder's"
-msgstr ""
+msgstr "Klasörü Paylaş"
 
 msgid "Share View"
-msgstr ""
+msgstr "Görünümü Paylaş"
 
 msgid "Shares"
-msgstr ""
+msgstr "Paylar"
 
 msgid "Sharpness"
 msgstr "Keskinlik"
@@ -10237,31 +10226,29 @@ msgstr ""
 msgid "Short filenames"
 msgstr "Kısa dosya adları"
 
-#, fuzzy
 msgid "Show"
-msgstr "Bilgisi göster"
+msgstr "Göster"
 
 msgid "Show /etc/sundtek.conf"
-msgstr ""
+msgstr "/etc/sundtek.conf göster"
 
 msgid "Show /tmp/ecm.info"
-msgstr ""
+msgstr "/tmp/ecm.info göster"
 
 msgid "Show Audioselection"
-msgstr ""
+msgstr "Sesli Seçimi Göster"
 
 msgid "Show CCcamInfo in Extensions Menu"
-msgstr ""
+msgstr "CCcamInfo'yu Uzantılar Menüsünde Göster"
 
-#, fuzzy
 msgid "Show CI messages"
-msgstr "CI mesejlarını sakla"
+msgstr "CI mesejlarını göster"
 
 msgid "Show Clients"
-msgstr ""
+msgstr "İstemcileri Göster"
 
 msgid "Show Display Icons"
-msgstr ""
+msgstr "Ekran Simgelerini Göster"
 
 msgid "Show EIT now/next in infobar"
 msgstr "Şimdi/Sonraki bilgi çubuğunda EIT'yi göster."
@@ -10279,31 +10266,31 @@ msgid "Show Graphical Multi EPG in extensions menu"
 msgstr "Uzantılar menüsünde Grafik Çoklu EPG'yi göster"
 
 msgid "Show InfoBar"
-msgstr ""
+msgstr "Bilgi Çubuğunu Göster"
 
 msgid "Show Log"
-msgstr ""
+msgstr "Log göster"
 
 msgid "Show Media playback Remaining/Elapsed as"
 msgstr "Medya oynatımını göster Kalan/Geçen süre"
 
 msgid "Show OscamInfo in Extensions Menu"
-msgstr ""
+msgstr "Uzantılar Menüsünde OscamInfo'yu Göster"
 
 msgid "Show PIP"
-msgstr ""
+msgstr "RiR göster"
 
 msgid "Show Picons in Channel List"
-msgstr ""
+msgstr "Kanal Listesinde Pionlari göster"
 
 msgid "Show Readers/Proxies"
-msgstr ""
+msgstr "Okuyucuları/Vekil Sunucuları Göster"
 
 msgid "Show SNR percentage instead of dB value"
 msgstr "SNR yüzdesi yerine dB değeri göster"
 
 msgid "Show Softcam-Panel Red-key long"
-msgstr ""
+msgstr "Softcam-Panel Kırmızı tuş uzun göster"
 
 msgid "Show Time Remaining/Elapsed"
 msgstr "Kalan Süreyi Göster/Geçen"
@@ -10320,9 +10307,8 @@ msgstr "VCR skartı ana menüde göster"
 msgid "Show WLAN status"
 msgstr "WLAN durumunu göster"
 
-#, fuzzy
 msgid "Show alternatives"
-msgstr "alternatifleri göster"
+msgstr "Alternatifleri göster"
 
 msgid "Show animation while busy"
 msgstr "Meşgulken Animasyon Göster"
@@ -10355,7 +10341,7 @@ msgid "Show detailed event info"
 msgstr "Ayrıntılı olay bilgisi göster"
 
 msgid "Show eXTrAs-Panel Red-key"
-msgstr ""
+msgstr "eXTrAs-Panel Kırmızı tuşunu göster"
 
 msgid "Show event details"
 msgstr "Olay ayrıntılarını göster"
@@ -10405,11 +10391,9 @@ msgstr "İleri/geri sardırmada bilgi çubuğunu göster"
 msgid "Show latest commits"
 msgstr "En son değişiklikleri göster"
 
-#, fuzzy
 msgid "Show latest update log"
 msgstr "En son yükseltme günlüğünü göster"
 
-#, fuzzy
 msgid "Show media player on main menu"
 msgstr "Ana menüde Media Player'ı gösterir"
 
@@ -10432,10 +10416,10 @@ msgid "Show multi channel EPG"
 msgstr "Çoklu kanal EPG göster"
 
 msgid "Show notification when import channels and/or EPG from remote receiver URL did not complete"
-msgstr ""
+msgstr "Uzak alıcı URL'sinden kanalları ve/veya EPG'yi alma işlemi tamamlanmadığında bildirim göster"
 
 msgid "Show notification when import channels and/or EPG from remote receiver URL is completed"
-msgstr ""
+msgstr "Uzak alıcı URL'sinden kanalları ve/veya EPG'yi içe aktarma tamamlandığında bildirim göster"
 
 msgid "Show notification when import channels was not successful"
 msgstr "Kanalları içe aktarma başarılı olmadığında bildirim göster"
@@ -10444,18 +10428,16 @@ msgid "Show notification when import channels was successful"
 msgstr "Kanalları içe aktarma başarılı olduğunda bildirim göster"
 
 msgid "Show only found image and mtd partitions.\n"
-msgstr ""
+msgstr "Sadece bulunan resim ve mtd bölümlerini göster.\n"
 
-#, fuzzy
 msgid "Show packages to be updated"
-msgstr "Güncellenecek paketler"
+msgstr "Güncellenecek paketleri göster"
 
 msgid "Show picons in channel selection list"
 msgstr "Kanal listesinde pikonları (Logo) göster"
 
-#, fuzzy
 msgid "Show picons in display"
-msgstr "Kanal listesinde simgeleri göster"
+msgstr "Kanal listesinde pikonları göster"
 
 msgid "Show positioner movement"
 msgstr "Pozisyoner haraketini göster"
@@ -10473,22 +10455,22 @@ msgid "Show screensaver"
 msgstr "Ekrankoruyucuyu göster"
 
 msgid "Show second InfoBar"
-msgstr ""
+msgstr "İkinci Bilgi Çubuğunu göster"
 
 msgid "Show second infobar"
 msgstr "İkinci bilgi çubuğunu göster"
 
 msgid "Show second-infobar"
-msgstr ""
+msgstr "İkinci bilgi çubuğunu göster"
 
 msgid "Show service list"
-msgstr ""
+msgstr "Servis listesini göster"
 
 msgid "Show service type icons"
 msgstr "Kanal tipi simgelerini göster"
 
 msgid "Show servicelist or movies"
-msgstr ""
+msgstr "Servis listesini veya filmleri göster"
 
 msgid "Show single service EPG"
 msgstr "Tekli kanal EPG göster"
@@ -10500,10 +10482,10 @@ msgid "Show status icons in movielist"
 msgstr "Film listesinde durumu simgesi göster"
 
 msgid "Show subservice selection"
-msgstr ""
+msgstr "Alt hizmet seçimini göster"
 
 msgid "Show subtitle selection"
-msgstr ""
+msgstr "Altyazı seçimini göster"
 
 msgid "Show the radio player..."
 msgstr "Radyo kanal listesini göster..."
@@ -10527,28 +10509,28 @@ msgid "Show vertical timelines"
 msgstr "Dikey zaman çizelgelerini göster"
 
 msgid "Show warning before set 'Ignore conflict'"
-msgstr ""
+msgstr "'Çakışmayı yoksay' ayarından önce uyarı göster"
 
 msgid "Show warning when timeshift is stopped"
 msgstr "Film durdurulduğu zaman uyar"
 
 msgid "Show/hide window"
-msgstr ""
+msgstr "Pencereyi göster/gizle"
 
 msgid "Shows Plugins Browser. Here you can setup installed Plugins."
-msgstr ""
+msgstr "Eklentiler Tarayıcısını gösterir. Burada yüklü Eklentileri ayarlayabilirsiniz."
 
 msgid "Shows available Plugins. Here you can download and install them."
-msgstr ""
+msgstr "Kullanılabilir Eklentileri gösterir. Buradan indirip yükleyebilirsiniz."
 
 msgid "Shows available plugins. Here you can download and install them."
-msgstr ""
+msgstr "Kullanılabilir eklentileri gösterir. Buradan indirip yükleyebilirsiniz."
 
 msgid "Shows available softcams. Here you can download and install them."
-msgstr ""
+msgstr "Kullanılabilir softcamleri gösterir. Buradan indirip yükleyebilirsiniz."
 
 msgid "Shows live tv or informations on LCD."
-msgstr ""
+msgstr "LCD'de canlı tv veya bilgileri gösterir."
 
 msgid "Shows the state of your wireless LAN connection.\n"
 msgstr "Kablosuz ağ bağlantısı durumunu gösterir.\n"
@@ -10599,7 +10581,7 @@ msgid "Simple titleset (compatibility for legacy players)"
 msgstr "Basit başlıkseti (klasik oynatıcılarla uyumlu)"
 
 msgid "Simulate (no write)"
-msgstr ""
+msgstr "Benzet (yazma yok)"
 
 #, fuzzy
 msgid "Singapore"
