@@ -2216,7 +2216,7 @@ class NetworkSamba(Screen):
 		self['lab2'] = Label(_("Current Status:"))
 		self['labstop'] = Label(_("Stopped"))
 		self['labrun'] = Label(_("Running"))
-		self['key_green'] = Label(_("Start"))
+		self['key_green'] = StaticText(_("Start"))
 		self['key_red'] = Label(_("Remove Service"))
 		self['key_yellow'] = Label(_("Autostart"))
 		self['key_blue'] = Label(_("Show Log"))
