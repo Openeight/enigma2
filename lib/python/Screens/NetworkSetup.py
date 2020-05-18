@@ -2066,6 +2066,8 @@ class NetworkOpenvpn(Screen):
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'red': self.UninstallCheck, 'green': self.VpnStartStop, 'yellow': self.activateVpn, 'blue': self.Vpnshowlog})
 		self.service_name = 'openvpn'
 		self.onLayoutFinish.append(self.InstallCheck)
+		if not os.path.exists("/etc/openvpn"):
+			os.system("mkdir /etc/openvpn")
 
 	def InstallCheck(self):
 		self.Console.ePopen('/usr/bin/opkg list_installed ' + self.service_name, self.checkNetworkState)
