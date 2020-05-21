@@ -481,6 +481,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"fa_IR": [_("Persian"), _("Iran, Islamic Republic"), self.persian(self.english)],
 			"pl_01": [_("Polish"), _("Alternative"), self.polish(self.german)],
 			"pl_PL": [_("Polish"), _("Poland"), self.polishProgrammers(self.english)],
+			"pt_PT": [_("Portuguese"), _("Portugal"), self.portuguese(self.english)],
 			"ru_RU": [_("Russian"), _("Russian Federation"), self.russian],
 			"sk_SK": [_("Slovak"), _("Slovakia"), self.slovak(self.german)],
 			"es_ES": [_("Spanish"), _("Spain"), self.spanish],
@@ -839,6 +840,33 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			[u"FIRSTICON", u"", u"", u"\u0119", u"\u0118", u"", u"", u"\u20AC", u"", u"\u00F3", u"\u00D3", u"", u"", u""],
 			[u"LASTICON", u"\u0105", u"\u0104", u"\u015B", u"\u015A", u"", u"", u"", u"", u"\u0142", u"\u0141", u"", self.green, self.green],
 			[u"CAPSLOCKICON", u"\u017C", u"\u017B", u"\u017A", u"\u0179", u"\u0107", u"\u0106", u"\u0144", u"\u0143", u"", u"", u"", u"CAPSLOCKICON", u"CAPSLOCKICON"],
+			self.footer
+		])
+		return keyList
+
+	def portuguese(self, base):
+		keyList = copy.deepcopy(base)
+		keyList[0][0][0] = u"\\"
+		keyList[0][0][11] = u"'"
+		keyList[0][0][12] = u"\u00AB"
+		keyList[0][1][11] = u"+"
+		keyList[0][1][12] = u"\u00B4"
+		keyList[0][1][13] = u"~"
+		keyList[0][2][10] = u"\u00E7"
+		keyList[0][2][11] = u"\u00B4"
+		keyList[0][3] = [u"CAPSLOCKICON", u"<", u"z", u"x", u"c", u"v", u"b", u"n", u"m", u",", u".", u"-", u"CAPSLOCKICON", u"CAPSLOCKICON"]
+		keyList[1][0] = [u"|", u"!", u"\"", u"#", u"$", u"%", u"&", u"/", u"(", u")", u"=", u"?", u"\u00BB", u"BACKSPACEICON"]
+		keyList[1][1][11] = u"*"
+		keyList[1][1][12] = u"`"
+		keyList[1][1][13] = u"^"
+		keyList[1][2][10] = u"\u00C7"
+		keyList[1][2][11] = u"\u00AA"
+		keyList[1][3] = [u"CAPSLOCKICON", u">", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u";", u":", u"_", u"CAPSLOCKICON", u"CAPSLOCKICON"]
+		keyList.append([
+			[u"", u"", u"@", u"\u00A3", u"\u00A7", u"", u"", u"{", u"[", u"]", u"}", u"", u"", u"BACKSPACEICON"],
+			[u"FIRSTICON", u"", u"", u"\u20AC", u"", u"", u"", u"", u"", u"", u"", u"\u00A8", u"", u""],
+			[u"LASTICON", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", self.green, self.green],
+			[u"CAPSLOCKICON", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"", u"CAPSLOCKICON", u"CAPSLOCKICON"],
 			self.footer
 		])
 		return keyList
