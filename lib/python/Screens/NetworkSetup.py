@@ -2487,7 +2487,7 @@ class NetworkInadyn(Screen):
 		self['system'] = Label(_("System") + ":")
 		self['labsys'] = Label()
 		self['key_red'] = Label(_("Remove Service"))
-		self['key_green'] = StaticText(_("Start"))
+		self['key_green'] = Label(_("Start"))
 		self['key_yellow'] = Label(_("Autostart"))
 		self['key_blue'] = Label(_("Show Log"))
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions', 'SetupActions'], {'ok': self.setupinadyn, 'back': self.close, 'menu': self.setupinadyn, 'red': self.UninstallCheck, 'green': self.InadynStartStop, 'yellow': self.autostart, 'blue': self.inaLog})
