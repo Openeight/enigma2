@@ -264,7 +264,7 @@ class QuickMenu(Screen):
 		self.list = []
 		self.oldlist = []
 		self.list.append(QuickMenuEntryComponent('Software Manager', _('Update/Backup/Restore your box'), _('Update/Backup your firmware, Backup/Restore settings.')))
-		if Check_Softcam() or (Softcam_Check() and SC) or (Softcam_Check() and SCC):
+		if Check_Softcam() or Softcam_Check():
 			self.list.append(QuickMenuEntryComponent('Softcam', _('Start/stop/select cam'), _('Start/stop/select your cam, You need to install first a softcam.')))
 		self.list.append(QuickMenuEntryComponent('System', _('System Setup'), _('Setup your System.')))
 		self.list.append(QuickMenuEntryComponent('Mounts', _('Mount Setup'), _('Setup your mounts for network and storage devices.')))
@@ -333,7 +333,6 @@ class QuickMenu(Screen):
 		if Check_Softcam():
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam Panel', _('Control your Softcams'), _('Use the Softcam Panel to control your Cam. This let you start/stop/select a cam.')))
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Panel Setup',_('Softcam-Panel Setup'),_('Softcam-Panel Setup.')))
-			self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them.')))
 		if Softcam_Check():
 			if SC:
 				self.sublist.append(QuickSubMenuEntryComponent('Cam Setup', _('Cam Setup'), _('Select and control your Cam. This let you start/stop/select a cam.')))
@@ -342,6 +341,7 @@ class QuickMenu(Screen):
 				self.sublist.append(QuickSubMenuEntryComponent('Softcam-Setup', _('Softcam Setup'), _('Select and control your Softcam. Here you can start/stop/select a softcam, and see ecm info.')))
 		if ECMINFOSETUP:
 			self.sublist.append(QuickSubMenuEntryComponent('Ecm Info',_('Ecm Info setup'),_('Setup Ecm Info of the CCcamInfo plugin.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them.')))
 		self.sublist.append(QuickSubMenuEntryComponent("CCcam Info",_("Check your CCcam"),_("This plugin shows you the status of your CCcam.")))
 		self.sublist.append(QuickSubMenuEntryComponent("OScam Info",_("Check your OScam"),_("This plugin shows you the status of your OScam.")))
 		self['sublist'].l.setList(self.sublist)
