@@ -75,7 +75,6 @@ SOFTCAM_SKIN = """<screen name="SoftcamPanel" position="center,center" size="580
 	<widget font="Regular;15" name="ecminfo" position="10,235" size="500,300" />
 </screen>"""
 
-
 REFRESH = 0
 CCCAMINFO = 1
 OSCAMINFO = 2
@@ -409,7 +408,6 @@ class SoftcamPanel(ConfigListScreen, Screen):
 		f.close()
 		return ecmi2
 
-
 	def Red(self):
 		#// Stopping the CAM when pressing the RED button
 		self.Timer.stop()
@@ -709,9 +707,10 @@ class ShowSoftcamPackages(Screen):
 		<screen name="ShowSoftcamPackages" position="center,center" size="630,500" title="Install Softcams" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_ok.png" position="260,0" size="60,40" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="key_ok" render="Label" position="240,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_green" render="Label" position="145,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_ok" render="Label" position="295,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget source="list" render="Listbox" position="5,50" size="620,420" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 					{"template": [
@@ -819,14 +818,23 @@ class ShowSoftcamPackages(Screen):
 		self.Timer1.start(1000, True)
 
 	def rebuildList(self):
+		if os.path.exists("/etc/opkg/openeight-armv7-softcam-feed.conf"): 
+			OCTA = True
+		else:
+			OCTA = False
 		self.list = []
 		self.Flist = []
 		self.Elist = []
-		t = command('opkg list | grep "enigma2-plugin-softcams-"')
+		if OCTA:
+			t = command('opkg list | grep "enigma2-plugin-openeight-softcam-"')
+			tt = command('opkg list-installed | grep "enigma2-plugin-openeight-softcam-"')
+			self.soca = '-softcam-'
+		else:
+			t = command('opkg list | grep "enigma2-plugin-softcams-"')
+			tt = command('opkg list-installed | grep "enigma2-plugin-softcams-"')
+			self.soca = '-softcams-'
 		self.Flist = t.split('\n')
-		tt = command('opkg list-installed | grep "enigma2-plugin-softcams-"')
 		self.Elist = tt.split('\n')
-
 		if len(self.Flist) > 0:
 			self.buildPacketList()
 		else:
@@ -848,7 +856,7 @@ class ShowSoftcamPackages(Screen):
 				x_installed = False
 				Fx = x.split(' - ')
 				try:
-					if Fx[0].find('-softcams-') > -1:
+					if Fx[0].find(self.soca) > -1:
 						for exc in excludeList:
 							Ex = exc.split(' - ')
 							if Fx[0] == Ex[0]:
