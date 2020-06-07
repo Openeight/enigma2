@@ -373,7 +373,7 @@ class OscamInfo:
 					result.append( (_("ECM Time"), i.split(":")[1].strip()) )
 			return result
 		else:
-			return "%s not found" % self.ecminfo
+			return _("%s not found") % self.ecminfo
 
 class oscMenuList(MenuList):
 	def __init__(self, list, itemH = 30):
@@ -977,24 +977,24 @@ class oscReaderStats(Screen, OscamInfo):
 				<convert type="TemplatedMultiContent">
 				{"templates":
 					{"default": (25,[
-							MultiContentEntryText(pos = (0, 1), size = (190, 24), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is caid
-							MultiContentEntryText(pos = (200, 1), size = (180, 24), font=0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is csystem
-							MultiContentEntryText(pos = (250, 1), size = (250, 24), font=0, flags = RT_HALIGN_LEFT, text = 2), # index 2 is hop 1
-							MultiContentEntryText(pos = (450, 1), size = (160, 24), font=0, flags = RT_HALIGN_LEFT, text = 3), # index 3 is hop 2
-							MultiContentEntryText(pos = (570, 1), size = (160, 24), font=0, flags = RT_HALIGN_LEFT, text = 4), # index 4 is hop 3
-							MultiContentEntryText(pos = (670, 1), size = (250, 24), font=0, flags = RT_HALIGN_LEFT, text = 5), # index 5 is hop 4
-							MultiContentEntryText(pos = (960, 1), size = (180, 24), font=0, flags = RT_HALIGN_LEFT, text = 6), # index 6 is hop 5
-							MultiContentEntryText(pos = (1100, 1), size = (180, 24), font=0, flags = RT_HALIGN_LEFT, text = 7), # index 7 is sum of cards for caid
+							MultiContentEntryText(pos = (0, 1), size = (190, 24), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is label
+							MultiContentEntryText(pos = (200, 1), size = (180, 24), font=0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is caid
+							MultiContentEntryText(pos = (250, 1), size = (250, 24), font=0, flags = RT_HALIGN_LEFT, text = 2), # index 2 is channel
+							MultiContentEntryText(pos = (450, 1), size = (160, 24), font=0, flags = RT_HALIGN_LEFT, text = 3), # index 3 is emc average
+							MultiContentEntryText(pos = (570, 1), size = (160, 24), font=0, flags = RT_HALIGN_LEFT, text = 4), # index 4 is emc last
+							MultiContentEntryText(pos = (670, 1), size = (250, 24), font=0, flags = RT_HALIGN_LEFT, text = 5), # index 5 is status
+							MultiContentEntryText(pos = (960, 1), size = (180, 24), font=0, flags = RT_HALIGN_LEFT, text = 6), # index 6 is last request
+							MultiContentEntryText(pos = (1100, 1), size = (180, 24), font=0, flags = RT_HALIGN_LEFT, text = 7), # index 7 is total requests
 							]),
 					"HD": (25,[
-							MultiContentEntryText(pos = (0, 1), size = (250, 24), font=1, flags = RT_HALIGN_LEFT, text = 0), # index 0 is caid
-							MultiContentEntryText(pos = (270, 1), size = (70, 24), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is csystem
-							MultiContentEntryText(pos = (350, 1), size = (300, 24), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is hop 1
-							MultiContentEntryText(pos = (640, 1), size = (150, 24), font=1, flags = RT_HALIGN_LEFT, text = 3), # index 3 is hop 2
-							MultiContentEntryText(pos = (800, 1), size = (110, 24), font=1, flags = RT_HALIGN_LEFT, text = 4), # index 4 is hop 3
-							MultiContentEntryText(pos = (930, 1), size = (400, 24), font=1, flags = RT_HALIGN_LEFT, text = 5), # index 5 is hop 4
-							MultiContentEntryText(pos = (1300, 1), size = (130, 24), font=1, flags = RT_HALIGN_LEFT, text = 6), # index 6 is hop 5
-							MultiContentEntryText(pos = (1470, 1), size = (100, 24), font=1, flags = RT_HALIGN_LEFT, text = 7), # index 7 is sum of cards for caid
+							MultiContentEntryText(pos = (0, 1), size = (250, 24), font=1, flags = RT_HALIGN_LEFT, text = 0), # index 0 is label
+							MultiContentEntryText(pos = (270, 1), size = (70, 24), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is caid
+							MultiContentEntryText(pos = (350, 1), size = (300, 24), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is channel
+							MultiContentEntryText(pos = (640, 1), size = (150, 24), font=1, flags = RT_HALIGN_LEFT, text = 3), # index 3 is emc average
+							MultiContentEntryText(pos = (800, 1), size = (110, 24), font=1, flags = RT_HALIGN_LEFT, text = 4), # index 4 is emc last
+							MultiContentEntryText(pos = (930, 1), size = (400, 24), font=1, flags = RT_HALIGN_LEFT, text = 5), # index 5 is status
+							MultiContentEntryText(pos = (1300, 1), size = (130, 24), font=1, flags = RT_HALIGN_LEFT, text = 6), # index 6 is last request
+							MultiContentEntryText(pos = (1470, 1), size = (100, 24), font=1, flags = RT_HALIGN_LEFT, text = 7), # index 7 is total requests
 							]),
 					},
 					"fonts": [gFont("Regular", 14),gFont("Regular", 18),gFont("Regular", 24),gFont("Regular", 20)],
@@ -1090,6 +1090,7 @@ class oscReaderStats(Screen, OscamInfo):
 						rcs = j.attrib["rcs"]
 						num = j.text
 						if rcs == "found":
+							rcs = _("found")
 							avg_time = str(float(avgtime) / 1000)[:5]
 							last_time = str(float(lasttime) / 1000)[:5]
 							if j.attrib.has_key("lastrequest"):
@@ -1101,6 +1102,7 @@ class oscReaderStats(Screen, OscamInfo):
 							else:
 								last_req = ""
 						else:
+							rcs = _("not found")
 							avg_time = last_time = last_req = ""
 #						if lastreq != "":
 #							last_req = lastreq.split("T")[1][:-5]
