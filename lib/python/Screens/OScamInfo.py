@@ -8,6 +8,7 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config, configfile, getConfigListEntry
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.MenuList import MenuList
+from Components.Label import Label
 
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import SCOPE_ACTIVE_SKIN, resolveFilename, fileExists
@@ -605,6 +606,7 @@ class oscInfo(Screen, OscamInfo):
 		self["output"] = self.mlist
 		self.errmsg = ""
 		self["key_red"] = StaticText(_("Close"))
+		self["key_ok"] = Label(_("Refresh"))
 		if self.what == "c":
 			self["key_green"] = StaticText("")
 			self["key_yellow"] = StaticText(_("Servers"))
@@ -873,6 +875,7 @@ class oscEntitlements(Screen, OscamInfo):
 		Screen.__init__(self, session)
 		self.mlist = oscMenuList([])
 		self.cccamreader = reader
+		self["key_ok"] = Label(_("Refresh"))
 		self["output"] = List([ ])
 		self["actions"] = ActionMap(["OkCancelActions"],
 					{
@@ -1012,6 +1015,7 @@ class oscReaderStats(Screen, OscamInfo):
 			self.allreaders = False
 		self.reader = reader
 		self.mlist = oscMenuList([])
+		self["key_ok"] = Label(_("Refresh"))
 		self["output"] = List([ ])
 		self["actions"] = ActionMap(["OkCancelActions"],
 					{
