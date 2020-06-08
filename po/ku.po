@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 Kurdish translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2013-04-22 04:29+0330\n"
 "Last-Translator: dimili21\n"
 "Language-Team: \n"
@@ -450,6 +450,10 @@ msgstr "disconnected"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s is no longer used. Should it be deleted?"
+
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d services found!"
 
 #, python-format
 msgid "%s points"
@@ -1473,14 +1477,6 @@ msgstr ""
 "%s\n"
 "Your receiver will restart after the backup has been restored!"
 
-#, fuzzy, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-"Are you sure you want to restore the backup?\n"
-"Your receiver will restart after the backup has been restored!"
-
 #, fuzzy
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
@@ -1835,12 +1831,6 @@ msgstr ""
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr ""
-
-#, fuzzy
-msgid "Backup your current settings"
-msgstr ""
-"\n"
-"yedeka bigre...."
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
 msgstr ""
@@ -2214,6 +2204,10 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "create directory"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2232,10 +2226,6 @@ msgstr "Channel selection"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "create directory"
 
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -7425,7 +7415,7 @@ msgid "No, but restart from begin"
 msgstr "No, but restart from begin"
 
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "No, do nothing."
 
 #, fuzzy
@@ -9256,10 +9246,6 @@ msgid "Restore Plugins"
 msgstr "Remove plugins"
 
 #, fuzzy
-msgid "Restore Settings"
-msgstr "Restore system settings"
-
-#, fuzzy
 msgid "Restore backup fstab"
 msgstr "Restore backups"
 
@@ -9282,10 +9268,6 @@ msgstr "Restore"
 msgid "Restore fstab.backup"
 msgstr "Restore backups"
 
-#, fuzzy
-msgid "Restore settings from a backup"
-msgstr "Restore backups"
-
 msgid "Restore system settings"
 msgstr "Restore system settings"
 
@@ -9304,9 +9286,6 @@ msgid "Restore your receiver settings."
 msgstr ""
 "\n"
 "Risiver restore bikin"
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
@@ -10532,6 +10511,13 @@ msgstr "Setup menu"
 #, fuzzy
 msgid "Setup Tuner"
 msgstr "Setup menu"
+
+#, fuzzy
+msgid "Setup VPN Changer"
+msgstr "Setup menu"
+
+msgid "Setup VPN Changer for more privacy."
+msgstr ""
 
 #, fuzzy
 msgid "Setup Videomode"
@@ -13323,6 +13309,9 @@ msgstr ""
 msgid "VOB file"
 msgstr ""
 
+msgid "VPN Changer"
+msgstr ""
+
 msgid "VU+"
 msgstr ""
 
@@ -14865,6 +14854,10 @@ msgstr "foreign countries/expeditions"
 msgid "forward to the next chapter"
 msgstr "forward to the next chapter"
 
+#, fuzzy
+msgid "found"
+msgstr "Sound"
+
 msgid "free"
 msgstr "free"
 
@@ -15211,6 +15204,10 @@ msgstr "normal"
 
 msgid "not configured"
 msgstr "not configured"
+
+#, fuzzy
+msgid "not found"
+msgstr "No networks found"
 
 msgid "not locked"
 msgstr "not locked"

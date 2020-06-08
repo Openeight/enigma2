@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2015-11-01 21:14+0100\n"
 "Last-Translator: Pr2 <dummy@dummy.com>\n"
 "Language-Team: french\n"
@@ -455,6 +455,10 @@ msgstr "Ce périphérique est déjà monté!"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s n'est plus utilisé. Doit-il être supprimé ?"
+
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d chaine trouvée"
 
 #, python-format
 msgid "%s points"
@@ -1449,14 +1453,6 @@ msgstr ""
 "%s\n"
 "Votre récepteur redémarra après la restauration !"
 
-#, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-"Etes-vous sûr de vouloir restaurer votre sauvegarde %s %s.\n"
-"Le récepteur va redémarrer après le restaure."
-
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
 "STB will restart after the restore"
@@ -1805,9 +1801,6 @@ msgstr "Sauvegarde de votre image courante"
 #, fuzzy
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr "Sauvegarde votre image actuelle vers le HDD ou l’USB. Cela va faire une copie 1:1 de votre récepteur."
-
-msgid "Backup your current settings"
-msgstr "Sauvegarde de vos paramètres courants"
 
 #, fuzzy
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
@@ -2181,6 +2174,10 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "Création répertoire"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr "Impossible de faire un unmount d’une partition, assurez vous qu’elle n’est pas utilisée pour comme chemin pour un swap ou les enregistrements / PauseDirect"
 
@@ -2199,10 +2196,6 @@ msgstr "Sélection de la chaîne"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "Création répertoire"
 
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -7372,7 +7365,7 @@ msgid "No, but restart from begin"
 msgstr "Non, mais relancer depuis le début"
 
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "Ne pas flasher l’image"
 
 #, fuzzy
@@ -9176,9 +9169,6 @@ msgstr ""
 msgid "Restore Plugins"
 msgstr "Restaurer les plugins"
 
-msgid "Restore Settings"
-msgstr "Réglages de Rotor"
-
 msgid "Restore backup fstab"
 msgstr "Enlever la sauvegarde fstab"
 
@@ -9197,9 +9187,6 @@ msgstr "Restaurer fstab"
 
 msgid "Restore fstab.backup"
 msgstr "Restaurer fstab.backup"
-
-msgid "Restore settings from a backup"
-msgstr "Restaurer les paramètres d’une sauvegarde"
 
 msgid "Restore system settings"
 msgstr "Restaurer paramètres système"
@@ -9222,10 +9209,6 @@ msgid "Restore your receiver settings."
 msgstr ""
 "\n"
 "Restaurer les réglages de votre récepteur."
-
-#, fuzzy
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr "Restaure des configurations depuis une sauvegarde. Après le restaure le récepteur va redémarrer pour activer les nouveaux paramètres."
 
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
@@ -10429,6 +10412,13 @@ msgstr "Configure Telnet"
 
 msgid "Setup Tuner"
 msgstr "Configure tuner"
+
+#, fuzzy
+msgid "Setup VPN Changer"
+msgstr "Configure tuner"
+
+msgid "Setup VPN Changer for more privacy."
+msgstr ""
 
 msgid "Setup Videomode"
 msgstr "Configure le mode vidéo"
@@ -13251,6 +13241,10 @@ msgstr "Sauvegarde des fichiers"
 msgid "VOB file"
 msgstr "%d fichier"
 
+#, fuzzy
+msgid "VPN Changer"
+msgstr "Changer programmation"
+
 msgid "VU+"
 msgstr ""
 
@@ -14794,6 +14788,10 @@ msgstr "Pays étrangers/Expéditions"
 msgid "forward to the next chapter"
 msgstr "Avancer au chapitre suivant"
 
+#, fuzzy
+msgid "found"
+msgstr "Son"
+
 msgid "free"
 msgstr "Libre"
 
@@ -15132,6 +15130,10 @@ msgstr "Normal"
 
 msgid "not configured"
 msgstr "Pas configuré"
+
+#, fuzzy
+msgid "not found"
+msgstr "Aucun réseau trouvé"
 
 msgid "not locked"
 msgstr "Pas verrouillé"

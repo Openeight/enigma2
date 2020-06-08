@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: satdreamgr\n"
 "Language-Team: \n"
@@ -441,6 +441,10 @@ msgstr "disconnected"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s is no longer used. Should it be deleted?"
+
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d services found!"
 
 #, python-format
 msgid "%s points"
@@ -1428,12 +1432,6 @@ msgstr ""
 "%s\n"
 "Your receiver will restart after the backup has been restored!"
 
-#, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
 "STB will restart after the restore"
@@ -1770,9 +1768,6 @@ msgid "Backup your current image"
 msgstr ""
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
-msgstr ""
-
-msgid "Backup your current settings"
 msgstr ""
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
@@ -2138,6 +2133,10 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "create directory"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2156,10 +2155,6 @@ msgstr "Channel selection"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "create directory"
 
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -7225,7 +7220,7 @@ msgid "No, but restart from begin"
 msgstr "No, but restart from begin"
 
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "No, do nothing."
 
 #, fuzzy
@@ -9009,9 +9004,6 @@ msgstr ""
 msgid "Restore Plugins"
 msgstr ""
 
-msgid "Restore Settings"
-msgstr ""
-
 msgid "Restore backup fstab"
 msgstr ""
 
@@ -9028,9 +9020,6 @@ msgid "Restore fstab"
 msgstr ""
 
 msgid "Restore fstab.backup"
-msgstr ""
-
-msgid "Restore settings from a backup"
 msgstr ""
 
 msgid "Restore system settings"
@@ -9051,9 +9040,6 @@ msgid "Restore your receiver settings."
 msgstr ""
 "\n"
 "Restore your receiver settings."
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
@@ -10245,6 +10231,12 @@ msgid "Setup Telnet"
 msgstr ""
 
 msgid "Setup Tuner"
+msgstr ""
+
+msgid "Setup VPN Changer"
+msgstr ""
+
+msgid "Setup VPN Changer for more privacy."
 msgstr ""
 
 msgid "Setup Videomode"
@@ -12985,6 +12977,9 @@ msgstr ""
 msgid "VOB file"
 msgstr "%d file"
 
+msgid "VPN Changer"
+msgstr ""
+
 msgid "VU+"
 msgstr ""
 
@@ -14498,6 +14493,10 @@ msgstr "foreign countries/expeditions"
 msgid "forward to the next chapter"
 msgstr "forward to the next chapter"
 
+#, fuzzy
+msgid "found"
+msgstr "Sound"
+
 msgid "free"
 msgstr "free"
 
@@ -14835,6 +14834,10 @@ msgstr "normal"
 
 msgid "not configured"
 msgstr "not configured"
+
+#, fuzzy
+msgid "not found"
+msgstr "No networks found"
 
 msgid "not locked"
 msgstr "not locked"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2019-07-23 16:42+0200\n"
 "Last-Translator: krong\n"
 "Language-Team: none\n"
@@ -454,6 +454,10 @@ msgstr "ngắt kết nối"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s không còn được sử dụng. Có nên xóa nó không?"
+
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d kênh được tìm thấy"
 
 #, python-format
 msgid "%s points"
@@ -1469,14 +1473,6 @@ msgstr ""
 "%s\n"
 "Người nhận của bạn sẽ khởi động lại sau khi sao lưu đã được khôi phục!"
 
-#, fuzzy, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-"Bạn có chắc chắn muốn khôi phục lại bản sao lưu?\n"
-"Đầu thu của bạn sẽ khởi động lại sau khi sao lưu đã được khôi phục!"
-
 #, fuzzy
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
@@ -1826,12 +1822,6 @@ msgstr ""
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr ""
-
-#, fuzzy
-msgid "Backup your current settings"
-msgstr ""
-"\n"
-"Sao lưu cài đặt máy thu của bạn."
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
 msgstr ""
@@ -2204,6 +2194,10 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr "Chỉ có thể tìm một ổ đĩa mạng để lưu trữ bản sao lưu này có nghĩa là sau khi đèn flash tự động không hoạt động. Alternativaly bạn có thể gắn ổ đĩa mạng sau đèn flash và thực hiện thiết lập lại manufacker thành autorestore"
 
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "tạo thư mục"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2222,10 +2216,6 @@ msgstr "Chọn kênh"
 
 msgid "Cancelled upon user request"
 msgstr "Hủy theo yêu cầu của người dùng"
-
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "tạo thư mục"
 
 msgid "Cannot delete downloaded image"
 msgstr "Không thể xóa hình ảnh đã tải xuống"
@@ -7385,7 +7375,7 @@ msgid "No, but restart from begin"
 msgstr "Không, nhưng khởi động lại từ đầu"
 
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "Không, đừng flash hình ảnh"
 
 msgid "No, do not flash image"
@@ -9198,10 +9188,6 @@ msgid "Restore Plugins"
 msgstr "Xóa plugin"
 
 #, fuzzy
-msgid "Restore Settings"
-msgstr "Khôi phục cài đặt hệ thống"
-
-#, fuzzy
 msgid "Restore backup fstab"
 msgstr "Khôi phục bản sao lưu"
 
@@ -9224,10 +9210,6 @@ msgstr "Khôi phục"
 msgid "Restore fstab.backup"
 msgstr "Khôi phục bản sao lưu"
 
-#, fuzzy
-msgid "Restore settings from a backup"
-msgstr "Khôi phục bản sao lưu"
-
 msgid "Restore system settings"
 msgstr "Khôi phục cài đặt hệ thống"
 
@@ -9246,9 +9228,6 @@ msgid "Restore your receiver settings."
 msgstr ""
 "\n"
 "Khôi phục cài đặt máy thu của bạn."
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
@@ -10455,6 +10434,13 @@ msgstr "Menu cài đặt"
 #, fuzzy
 msgid "Setup Tuner"
 msgstr "Menu cài đặt"
+
+#, fuzzy
+msgid "Setup VPN Changer"
+msgstr "Menu cài đặt"
+
+msgid "Setup VPN Changer for more privacy."
+msgstr ""
 
 #, fuzzy
 msgid "Setup Videomode"
@@ -13263,6 +13249,10 @@ msgstr "Tập tin VOB"
 msgid "VOB file"
 msgstr "Tập tin VOB"
 
+#, fuzzy
+msgid "VPN Changer"
+msgstr "Thay đổi bộ đếm thời gian"
+
 msgid "VU+"
 msgstr "VU+"
 
@@ -14815,6 +14805,10 @@ msgstr "nước ngoài / cuộc thám hiểm"
 msgid "forward to the next chapter"
 msgstr "chuyển sang chương tiếp theo"
 
+#, fuzzy
+msgid "found"
+msgstr "Âm thanh"
+
 msgid "free"
 msgstr "miễn phí"
 
@@ -15160,6 +15154,10 @@ msgstr "bình thường"
 
 msgid "not configured"
 msgstr "không được cấu hình"
+
+#, fuzzy
+msgid "not found"
+msgstr "Không tìm thấy kết nối mạng"
 
 msgid "not locked"
 msgstr "không bị khóa"

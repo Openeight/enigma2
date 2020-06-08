@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 OPLi-3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2020-05-14 19:30+0100\n"
 "Last-Translator: esmos\n"
 "Language-Team: esmos\n"
@@ -407,8 +407,7 @@ msgid ""
 "%s?"
 msgstr ""
 "%s\n"
-"Yazılımı indirmek istiyor musunuz?"
-"%s?"
+"Yazılımı indirmek istiyor musunuz?%s?"
 
 #, python-format
 msgid ""
@@ -456,6 +455,10 @@ msgstr "%s zaten bağlı"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "Artık %s kullanılmaktadır. Bu silinmelidir?"
+
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d kanal bulundu"
 
 #, python-format
 msgid "%s points"
@@ -1425,12 +1428,6 @@ msgstr ""
 "%s\n"
 "Your receiver will restart after the backup has been restored!"
 
-#, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
 "STB will restart after the restore"
@@ -1768,9 +1765,6 @@ msgstr "Mevcut yazılımı yedekleyin"
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr "Geçerli yazılımı HDD'ye veya USB'ye yedekleyin. Bu, kutunuzun 1:1 kopyasını oluşturur."
-
-msgid "Backup your current settings"
-msgstr "Mevcut ayarlarınızı yedekleyin"
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
 msgstr "Mevcut ayarlarınızı yedekleyin. Buna E2 kurulumu, kanallar, ağ ve seçilen tüm dosyalar dahildir."
@@ -2131,6 +2125,10 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "klasör oluştur"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2149,10 +2147,6 @@ msgstr "Kanal seçimi"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "klasör oluştur"
 
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -7135,7 +7129,8 @@ msgstr "Hayır, eklenti yüklemek istemiyorum"
 msgid "No, but restart from begin"
 msgstr "Hayır, ama en başından başlat"
 
-msgid "No, do not backup a image"
+#, fuzzy
+msgid "No, do not backup an image"
 msgstr "Hayır, yeni yazılım yükleme"
 
 msgid "No, do not flash image"
@@ -8878,9 +8873,6 @@ msgstr ""
 msgid "Restore Plugins"
 msgstr ""
 
-msgid "Restore Settings"
-msgstr "Ayarları eski haline getir"
-
 msgid "Restore backup fstab"
 msgstr ""
 
@@ -8898,9 +8890,6 @@ msgid "Restore fstab"
 msgstr ""
 
 msgid "Restore fstab.backup"
-msgstr ""
-
-msgid "Restore settings from a backup"
 msgstr ""
 
 msgid "Restore system settings"
@@ -8921,9 +8910,6 @@ msgid "Restore your receiver settings."
 msgstr ""
 "\n"
 "Alıcının ayarlarını geri yükle."
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
@@ -10090,6 +10076,13 @@ msgid "Setup Telnet"
 msgstr ""
 
 msgid "Setup Tuner"
+msgstr ""
+
+#, fuzzy
+msgid "Setup VPN Changer"
+msgstr "uShare Kurulum"
+
+msgid "Setup VPN Changer for more privacy."
 msgstr ""
 
 msgid "Setup Videomode"
@@ -12757,6 +12750,10 @@ msgstr "VOB dosya"
 msgid "VOB file"
 msgstr "VOB dosya"
 
+#, fuzzy
+msgid "VPN Changer"
+msgstr "Zamanlayıcı değiştir"
+
 msgid "VU+"
 msgstr ""
 
@@ -14237,6 +14234,10 @@ msgstr "yabancı ülkelere / keşif"
 msgid "forward to the next chapter"
 msgstr "sonraki bölüme ilerle"
 
+#, fuzzy
+msgid "found"
+msgstr "Ses"
+
 msgid "free"
 msgstr "boş"
 
@@ -14569,6 +14570,10 @@ msgstr "normal"
 
 msgid "not configured"
 msgstr "henüz yapılandırılmamış"
+
+#, fuzzy
+msgid "not found"
+msgstr "USB Tuner bulunamadı"
 
 msgid "not locked"
 msgstr "kilitlenmedi"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2015-03-10 23:39+0100\n"
 "Last-Translator: lupine <a_ecklon@hotmail.com>\n"
 "Language-Team: \n"
@@ -462,6 +462,11 @@ msgstr "afbrudt"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s er ikke længere brugt. Skal den slettes?"
+
+#
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d kanale fundet!"
 
 #, python-format
 msgid "%s points"
@@ -1559,12 +1564,6 @@ msgstr ""
 "%s\n"
 "Din receiver vil genstarte efter at backuppen er gendannet!"
 
-#, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
 "STB will restart after the restore"
@@ -1941,9 +1940,6 @@ msgid "Backup your current image"
 msgstr ""
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
-msgstr ""
-
-msgid "Backup your current settings"
 msgstr ""
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
@@ -2336,6 +2332,11 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "opret mappe"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2356,11 +2357,6 @@ msgstr "Kanal valg"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "opret mappe"
 
 #
 #, fuzzy
@@ -7948,7 +7944,7 @@ msgstr "Nej, men genstart fra begyndelse"
 
 #
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "Nej, gør intet."
 
 #
@@ -9963,9 +9959,6 @@ msgstr ""
 msgid "Restore Plugins"
 msgstr ""
 
-msgid "Restore Settings"
-msgstr ""
-
 msgid "Restore backup fstab"
 msgstr ""
 
@@ -9983,9 +9976,6 @@ msgid "Restore fstab"
 msgstr ""
 
 msgid "Restore fstab.backup"
-msgstr ""
-
-msgid "Restore settings from a backup"
 msgstr ""
 
 #
@@ -10008,9 +9998,6 @@ msgid "Restore your receiver settings."
 msgstr ""
 "\n"
 "Genetabler receiverens indstillinger."
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #
 #, fuzzy, python-format
@@ -11331,6 +11318,12 @@ msgid "Setup Telnet"
 msgstr ""
 
 msgid "Setup Tuner"
+msgstr ""
+
+msgid "Setup VPN Changer"
+msgstr ""
+
+msgid "Setup VPN Changer for more privacy."
 msgstr ""
 
 msgid "Setup Videomode"
@@ -14339,6 +14332,10 @@ msgstr ""
 msgid "VOB file"
 msgstr "%d fil"
 
+#, fuzzy
+msgid "VPN Changer"
+msgstr "Ændre timer"
+
 msgid "VU+"
 msgstr ""
 
@@ -15987,6 +15984,11 @@ msgid "forward to the next chapter"
 msgstr "frem til næste kapitel"
 
 #
+#, fuzzy
+msgid "found"
+msgstr "Lyd"
+
+#
 msgid "free"
 msgstr "ledig"
 
@@ -16367,6 +16369,11 @@ msgstr "normal"
 #
 msgid "not configured"
 msgstr "ikke konfigureret"
+
+#
+#, fuzzy
+msgid "not found"
+msgstr "Ingen fundne netværk"
 
 #
 msgid "not locked"

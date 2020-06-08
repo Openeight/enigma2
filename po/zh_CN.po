@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2016-06-17 12:13+0800\n"
 "Last-Translator: nx111 <gdzdz@163.com>\n"
 "Language-Team: NEWBOLT\n"
@@ -446,6 +446,10 @@ msgstr "断开"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "未找到网络"
 
 #, fuzzy, python-format
 msgid "%s points"
@@ -1453,14 +1457,6 @@ msgid ""
 "Your receiver will restart after the backup has been restored!"
 msgstr ""
 
-#, fuzzy, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-"您确定要恢复Enigma2备份?\n"
-"恢复后重启Enigma2"
-
 #, fuzzy
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
@@ -1810,12 +1806,6 @@ msgstr "正在备份"
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr ""
-
-#, fuzzy
-msgid "Backup your current settings"
-msgstr ""
-"\n"
-"备份您的Dreambox设置。"
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
 msgstr ""
@@ -2193,6 +2183,10 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "创建目录"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2211,10 +2205,6 @@ msgstr "频道选择"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "创建目录"
 
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -7405,7 +7395,7 @@ msgid "No, but restart from begin"
 msgstr "不，重新开始播放这个视频"
 
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "不，什么也不做."
 
 #, fuzzy
@@ -9235,10 +9225,6 @@ msgid "Restore Plugins"
 msgstr "移除插件"
 
 #, fuzzy
-msgid "Restore Settings"
-msgstr "恢复系统设置"
-
-#, fuzzy
 msgid "Restore backup fstab"
 msgstr "恢复备份"
 
@@ -9261,10 +9247,6 @@ msgstr "到 fstab"
 msgid "Restore fstab.backup"
 msgstr "恢复备份"
 
-#, fuzzy
-msgid "Restore settings from a backup"
-msgstr "恢复备份"
-
 msgid "Restore system settings"
 msgstr "恢复系统设置"
 
@@ -9280,9 +9262,6 @@ msgstr ""
 #, fuzzy
 msgid "Restore your receiver settings."
 msgstr "恢复系统设置"
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
@@ -10510,6 +10489,13 @@ msgstr ""
 #, fuzzy
 msgid "Setup Tuner"
 msgstr "设置"
+
+#, fuzzy
+msgid "Setup VPN Changer"
+msgstr "设置"
+
+msgid "Setup VPN Changer for more privacy."
+msgstr ""
 
 #, fuzzy
 msgid "Setup Videomode"
@@ -13263,6 +13249,9 @@ msgstr "文件"
 msgid "VOB file"
 msgstr ""
 
+msgid "VPN Changer"
+msgstr ""
+
 msgid "VU+"
 msgstr ""
 
@@ -14766,6 +14755,10 @@ msgstr ""
 msgid "forward to the next chapter"
 msgstr "快进到下一个章节"
 
+#, fuzzy
+msgid "found"
+msgstr "声音"
+
 msgid "free"
 msgstr "空闲"
 
@@ -15111,6 +15104,10 @@ msgstr ""
 
 msgid "not configured"
 msgstr "未设置"
+
+#, fuzzy
+msgid "not found"
+msgstr "未找到"
 
 msgid "not locked"
 msgstr "无信号"

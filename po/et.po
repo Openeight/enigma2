@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli 4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2016-03-21 18:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -445,6 +445,10 @@ msgstr "ühendamata"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s ei ole enam kasutuses. Kas see tuleks kustutada?"
+
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d kanal leitud"
 
 #, python-format
 msgid "%s points"
@@ -1436,12 +1440,6 @@ msgstr ""
 "%s\n"
 "Pärast taastamist vastuvõtja taaskäivitub!"
 
-#, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
 "STB will restart after the restore"
@@ -1781,9 +1779,6 @@ msgid "Backup your current image"
 msgstr ""
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
-msgstr ""
-
-msgid "Backup your current settings"
 msgstr ""
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
@@ -2149,6 +2144,10 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "Loo kataloog"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2167,10 +2166,6 @@ msgstr "Kanali valik"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "Loo kataloog"
 
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -7274,7 +7269,7 @@ msgid "No, but restart from begin"
 msgstr "Ei, alusta uuesti algusest"
 
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "Ei, ära tee midagi."
 
 #, fuzzy
@@ -9063,9 +9058,6 @@ msgstr ""
 msgid "Restore Plugins"
 msgstr ""
 
-msgid "Restore Settings"
-msgstr ""
-
 msgid "Restore backup fstab"
 msgstr ""
 
@@ -9083,9 +9075,6 @@ msgid "Restore fstab"
 msgstr ""
 
 msgid "Restore fstab.backup"
-msgstr ""
-
-msgid "Restore settings from a backup"
 msgstr ""
 
 msgid "Restore system settings"
@@ -9106,9 +9095,6 @@ msgid "Restore your receiver settings."
 msgstr ""
 "\n"
 "Taasta vastuvõtja seaded."
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
@@ -10307,6 +10293,12 @@ msgid "Setup Telnet"
 msgstr ""
 
 msgid "Setup Tuner"
+msgstr ""
+
+msgid "Setup VPN Changer"
+msgstr ""
+
+msgid "Setup VPN Changer for more privacy."
 msgstr ""
 
 msgid "Setup Videomode"
@@ -13061,6 +13053,10 @@ msgstr ""
 msgid "VOB file"
 msgstr "%d fail"
 
+#, fuzzy
+msgid "VPN Changer"
+msgstr "Muuda taimerit"
+
 msgid "VU+"
 msgstr "VU+"
 
@@ -14587,6 +14583,10 @@ msgstr "välisriigid/reisid"
 msgid "forward to the next chapter"
 msgstr "hüppa järgmisele peatükile"
 
+#, fuzzy
+msgid "found"
+msgstr "Heli"
+
 msgid "free"
 msgstr "vaba"
 
@@ -14925,6 +14925,10 @@ msgstr "normaalne"
 
 msgid "not configured"
 msgstr "ei ole häälestatud"
+
+#, fuzzy
+msgid "not found"
+msgstr "Võrke ei leidnud"
 
 msgid "not locked"
 msgstr "pole lukustatud"

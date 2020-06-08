@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2015-04-20 10:04+0100\n"
 "Last-Translator: Raskino <info@dvbmedia.it>\n"
 "Language-Team: www.dvbmedia.it <info@dvbmedia.it>\n"
@@ -472,6 +472,11 @@ msgstr "Disconnesso"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s non è più in uso. Cancellarlo?"
+
+#
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "Trovato %d canale."
 
 #, python-format
 msgid "%s points"
@@ -1670,15 +1675,6 @@ msgstr ""
 "Al termine del ripristino, il ricevitore verrà riavviato."
 
 #
-#, fuzzy, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-"Ripristinare il backup?\n"
-"Al termine del ripristino, il ricevitore verrà riavviato."
-
-#
 #, fuzzy
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
@@ -2089,12 +2085,6 @@ msgstr ""
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr ""
 
-#, fuzzy
-msgid "Backup your current settings"
-msgstr ""
-"\n"
-"Backup impostazioni ricevitore."
-
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
 msgstr ""
 
@@ -2496,6 +2486,11 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "Creare cartella"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2516,11 +2511,6 @@ msgstr "Selezione canale"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "Creare cartella"
 
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -8453,7 +8443,7 @@ msgstr "No, ma riprendere dall'inizio"
 
 #
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "No, non fare nulla."
 
 #
@@ -10648,11 +10638,6 @@ msgstr "Rimuovere plugin"
 
 #
 #, fuzzy
-msgid "Restore Settings"
-msgstr "Ripristino conf. sistema"
-
-#
-#, fuzzy
 msgid "Restore backup fstab"
 msgstr "Ripristino backup."
 
@@ -10680,11 +10665,6 @@ msgid "Restore fstab.backup"
 msgstr "Ripristino backup."
 
 #
-#, fuzzy
-msgid "Restore settings from a backup"
-msgstr "Ripristino backup."
-
-#
 msgid "Restore system settings"
 msgstr "Ripristino conf. sistema"
 
@@ -10704,9 +10684,6 @@ msgid "Restore your receiver settings."
 msgstr ""
 "\n"
 "Ripristinare le impostazioni del ricevitore."
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #
 #, fuzzy, python-format
@@ -12092,6 +12069,13 @@ msgstr "Menu impostazioni"
 #, fuzzy
 msgid "Setup Tuner"
 msgstr "Menu impostazioni"
+
+#, fuzzy
+msgid "Setup VPN Changer"
+msgstr "Menu impostazioni"
+
+msgid "Setup VPN Changer for more privacy."
+msgstr ""
 
 #
 #, fuzzy
@@ -15266,6 +15250,10 @@ msgstr ""
 msgid "VOB file"
 msgstr "%d Datei"
 
+#, fuzzy
+msgid "VPN Changer"
+msgstr "Cambiamento Timer"
+
 msgid "VU+"
 msgstr ""
 
@@ -16997,6 +16985,11 @@ msgid "forward to the next chapter"
 msgstr "Passare al capitolo successivo"
 
 #
+#, fuzzy
+msgid "found"
+msgstr "Audio"
+
+#
 msgid "free"
 msgstr "Libero"
 
@@ -17391,6 +17384,11 @@ msgstr "Normale"
 
 msgid "not configured"
 msgstr "non configurato"
+
+#
+#, fuzzy
+msgid "not found"
+msgstr "Nessuna rete rilevata!"
 
 #
 msgid "not locked"

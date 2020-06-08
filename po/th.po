@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1-En-Th\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2010-04-08 18:13+0700\n"
 "Last-Translator: Tony - Thaidreambox\n"
 "Language-Team: Tony @ Thai Dreambox <tonyboyth@gmail.com>\n"
@@ -447,6 +447,10 @@ msgstr "เชื่อมต่อถูกตัดแล้ว"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "บริการนี้ %d ไม่มี!"
 
 #, python-format
 msgid "%s points"
@@ -1441,12 +1445,6 @@ msgstr ""
 "ท่านจะนำสำรอง Enigma2 กลับมาใช้หรือไม่?\n"
 "Enigma2 จะเริ่มระบบใหม่ (Restart) หลังจากทำงานเสร็จ"
 
-#, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
 "STB will restart after the restore"
@@ -1790,9 +1788,6 @@ msgid "Backup your current image"
 msgstr ""
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
-msgstr ""
-
-msgid "Backup your current settings"
 msgstr ""
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
@@ -2156,6 +2151,10 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "สร้างโฟล์เดอร์"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2174,10 +2173,6 @@ msgstr "เลือกช่องรายการ"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "สร้างโฟล์เดอร์"
 
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -7334,7 +7329,7 @@ msgid "No, but restart from begin"
 msgstr "ไม่ - กลับไปเริ่มต้นใหม่"
 
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "ไม่ - ไม่ต้องการทำ"
 
 #, fuzzy
@@ -9142,9 +9137,6 @@ msgstr ""
 msgid "Restore Plugins"
 msgstr ""
 
-msgid "Restore Settings"
-msgstr ""
-
 msgid "Restore backup fstab"
 msgstr ""
 
@@ -9163,9 +9155,6 @@ msgstr ""
 msgid "Restore fstab.backup"
 msgstr ""
 
-msgid "Restore settings from a backup"
-msgstr ""
-
 msgid "Restore system settings"
 msgstr "นำสำรองการตั้งค่าต่างๆ กลับมาใช้"
 
@@ -9181,9 +9170,6 @@ msgstr ""
 #, fuzzy
 msgid "Restore your receiver settings."
 msgstr "นำสำรองการตั้งค่าต่างๆ กลับมาใช้"
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
@@ -10395,6 +10381,12 @@ msgid "Setup Telnet"
 msgstr ""
 
 msgid "Setup Tuner"
+msgstr ""
+
+msgid "Setup VPN Changer"
+msgstr ""
+
+msgid "Setup VPN Changer for more privacy."
 msgstr ""
 
 msgid "Setup Videomode"
@@ -13171,6 +13163,9 @@ msgstr ""
 msgid "VOB file"
 msgstr ""
 
+msgid "VPN Changer"
+msgstr ""
+
 msgid "VU+"
 msgstr ""
 
@@ -14671,6 +14666,10 @@ msgstr ""
 msgid "forward to the next chapter"
 msgstr "ข้ามไปตอนต่อไป"
 
+#, fuzzy
+msgid "found"
+msgstr "เสียง"
+
 msgid "free"
 msgstr "เหลืออยู่"
 
@@ -15008,6 +15007,10 @@ msgstr ""
 
 msgid "not configured"
 msgstr ""
+
+#, fuzzy
+msgid "not found"
+msgstr "ไม่พบเครือข่าย"
 
 msgid "not locked"
 msgstr "ไม่ล๊อค"

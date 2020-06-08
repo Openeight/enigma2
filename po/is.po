@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2011-05-07 12:23+0200\n"
 "Last-Translator: Baldur <bsveinsson@gmail.com>\n"
 "Language-Team: Polar Team/LT Team <baddi@oreind.is>\n"
@@ -466,6 +466,11 @@ msgstr "ótengt"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr ""
+
+#
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d rásir fundnar!"
 
 #, python-format
 msgid "%s points"
@@ -1607,14 +1612,6 @@ msgstr ""
 "Ertu viss um að þú viljir setja inn þetta Enigma2 afrit?\n"
 "Enigma2 mun endurræsa eftir innsetningu"
 
-#, fuzzy, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-"Ertu viss um að þú viljir setja inn þetta Enigma2 afrit?\n"
-"Enigma2 mun endurræsa eftir innsetningu"
-
 #, fuzzy
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
@@ -1990,10 +1987,6 @@ msgstr ""
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr ""
-
-#, fuzzy
-msgid "Backup your current settings"
-msgstr "Afrita kerfis stillingar"
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
 msgstr ""
@@ -2377,6 +2370,11 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "búa til möppu"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2395,11 +2393,6 @@ msgstr "Rása val"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "búa til möppu"
 
 #
 #, fuzzy
@@ -8154,7 +8147,7 @@ msgstr "Nei, en byrja frá byrjun"
 
 #
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "Nei, ekki gera neitt."
 
 #
@@ -10268,11 +10261,6 @@ msgstr "Taka út íforrit"
 
 #
 #, fuzzy
-msgid "Restore Settings"
-msgstr "Setja inn kerfis stillingar"
-
-#
-#, fuzzy
 msgid "Restore backup fstab"
 msgstr "Setja inn afrit"
 
@@ -10301,11 +10289,6 @@ msgid "Restore fstab.backup"
 msgstr "Setja inn afrit"
 
 #
-#, fuzzy
-msgid "Restore settings from a backup"
-msgstr "Setja inn afrit"
-
-#
 msgid "Restore system settings"
 msgstr "Setja inn kerfis stillingar"
 
@@ -10323,9 +10306,6 @@ msgstr ""
 #, fuzzy
 msgid "Restore your receiver settings."
 msgstr "Setja inn kerfis stillingar"
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #
 #, fuzzy, python-format
@@ -11719,6 +11699,14 @@ msgstr "Uppsetninga hamur"
 #, fuzzy
 msgid "Setup Tuner"
 msgstr "Uppsetninga hamur"
+
+#
+#, fuzzy
+msgid "Setup VPN Changer"
+msgstr "Uppsetninga hamur"
+
+msgid "Setup VPN Changer for more privacy."
+msgstr ""
 
 #
 #, fuzzy
@@ -14863,6 +14851,9 @@ msgstr ""
 msgid "VOB file"
 msgstr ""
 
+msgid "VPN Changer"
+msgstr ""
+
 msgid "VU+"
 msgstr ""
 
@@ -16543,6 +16534,11 @@ msgid "forward to the next chapter"
 msgstr "stökkva í næsta kafla"
 
 #
+#, fuzzy
+msgid "found"
+msgstr "Hljóð"
+
+#
 msgid "free"
 msgstr "laust"
 
@@ -16933,6 +16929,11 @@ msgstr ""
 
 msgid "not configured"
 msgstr "ekki stillt"
+
+#
+#, fuzzy
+msgid "not found"
+msgstr "Ekkert netkerfi fannst"
 
 #
 msgid "not locked"

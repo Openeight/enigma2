@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Budiarno\n"
 "Language-Team: \n"
@@ -447,6 +447,10 @@ msgstr "terputus"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s sudah tidak digunakan. Perlu dihapus?"
+
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d kanal ditemukan"
 
 #, python-format
 msgid "%s points"
@@ -1476,14 +1480,6 @@ msgstr ""
 "%s\n"
 "Rx anda akan restart setelah berkas cadangan selesai dipulihkan!"
 
-#, fuzzy, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-"Anda yakin ingin memulihkan berkas cadangan?\n"
-"Rx anda akan restart setelah berkas cadangan selesai dipulihkan!"
-
 #, fuzzy
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
@@ -1840,12 +1836,6 @@ msgstr ""
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr ""
-
-#, fuzzy
-msgid "Backup your current settings"
-msgstr ""
-"\n"
-"Buat berkas cadangan penyetelan Rx anda"
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
 msgstr ""
@@ -2222,6 +2212,10 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "buat direktori"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2240,10 +2234,6 @@ msgstr "Pilihan Kanal"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "buat direktori"
 
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -7468,7 +7458,7 @@ msgid "No, but restart from begin"
 msgstr "No, but restart from begin"
 
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "Tidak, jangan lakukan."
 
 #, fuzzy
@@ -9302,10 +9292,6 @@ msgid "Restore Plugins"
 msgstr "Hapus plugin"
 
 #, fuzzy
-msgid "Restore Settings"
-msgstr "Restore system settings"
-
-#, fuzzy
 msgid "Restore backup fstab"
 msgstr "Restore backups"
 
@@ -9328,10 +9314,6 @@ msgstr "Restore"
 msgid "Restore fstab.backup"
 msgstr "Restore backups"
 
-#, fuzzy
-msgid "Restore settings from a backup"
-msgstr "Restore backups"
-
 msgid "Restore system settings"
 msgstr "Restore system settings"
 
@@ -9350,9 +9332,6 @@ msgid "Restore your receiver settings."
 msgstr ""
 "\n"
 "Pulihkan penyetelan Rx anda."
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
@@ -10579,6 +10558,13 @@ msgstr "Menu pengaturan"
 #, fuzzy
 msgid "Setup Tuner"
 msgstr "Menu pengaturan"
+
+#, fuzzy
+msgid "Setup VPN Changer"
+msgstr "Menu pengaturan"
+
+msgid "Setup VPN Changer for more privacy."
+msgstr ""
 
 #, fuzzy
 msgid "Setup Videomode"
@@ -13377,6 +13363,10 @@ msgstr ""
 msgid "VOB file"
 msgstr ""
 
+#, fuzzy
+msgid "VPN Changer"
+msgstr "Ubah pewaktu"
+
 msgid "VU+"
 msgstr ""
 
@@ -14938,6 +14928,10 @@ msgstr "foreign countries/expeditions"
 msgid "forward to the next chapter"
 msgstr "forward to the next chapter"
 
+#, fuzzy
+msgid "found"
+msgstr "Suara"
+
 msgid "free"
 msgstr "free"
 
@@ -15286,6 +15280,10 @@ msgstr "normal"
 
 msgid "not configured"
 msgstr "tidak dikonfigurasi"
+
+#, fuzzy
+msgid "not found"
+msgstr "Jaringan tidak ditemukan"
 
 msgid "not locked"
 msgstr "tidak dikunci"

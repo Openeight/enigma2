@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
 "PO-Revision-Date: 2016-02-18 19:00+0100\n"
 "Last-Translator: blzr <blzr@o2.pl>\n"
 "Language-Team: \n"
@@ -458,6 +458,10 @@ msgstr "Rozłączone"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s nie jest już używany. Usunąć?"
+
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d znaleziony kanał!"
 
 #, python-format
 msgid "%s points"
@@ -1492,16 +1496,6 @@ msgstr ""
 "%s\n"
 "Odbiornik zrestartuje się po przywróceniu backupu!"
 
-#, fuzzy, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
-"Jesteś pewien, że chcesz przywrócić\n"
-"następujący backup:\n"
-"%s\n"
-"Odbiornik zrestartuje się po przywróceniu backupu!"
-
 #, fuzzy
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
@@ -1859,10 +1853,6 @@ msgstr "Pełna Kopia Oprogramowania"
 
 msgid "Backup your current image to HDD or USB. This will make a 1:1 copy of your box."
 msgstr ""
-
-#, fuzzy
-msgid "Backup your current settings"
-msgstr "Kopia Twoich ustawień"
 
 msgid "Backup your current settings. This includes E2-setup, channels, network and all selected files."
 msgstr ""
@@ -2238,6 +2228,10 @@ msgstr ""
 msgid "Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#, fuzzy
+msgid "Can't create backup directory"
+msgstr "Utwórz katalog"
+
 msgid "Can't unmount partiton, make sure it is not being used for swap or record/timeshift paths!"
 msgstr ""
 
@@ -2256,10 +2250,6 @@ msgstr "Wybór kanałów"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#, fuzzy
-msgid "Cannot create backup directory"
-msgstr "Utwórz katalog"
 
 #, fuzzy
 msgid "Cannot delete downloaded image"
@@ -7513,7 +7503,7 @@ msgid "No, but restart from begin"
 msgstr "Nie, ale odtwórz od początku"
 
 #, fuzzy
-msgid "No, do not backup a image"
+msgid "No, do not backup an image"
 msgstr "Nie zmieniaj"
 
 msgid "No, do not flash image"
@@ -9365,9 +9355,6 @@ msgstr ""
 msgid "Restore Plugins"
 msgstr "Usuń wtyczki"
 
-msgid "Restore Settings"
-msgstr "Przywracanie ustawień"
-
 #, fuzzy
 msgid "Restore backup fstab"
 msgstr "Przywróć backup"
@@ -9391,10 +9378,6 @@ msgstr "Przywróć"
 msgid "Restore fstab.backup"
 msgstr "Przywróć backup"
 
-#, fuzzy
-msgid "Restore settings from a backup"
-msgstr "Przywracanie kopi ostatnich ustawień"
-
 msgid "Restore system settings"
 msgstr "Przywróć ustawienia systemowe"
 
@@ -9413,9 +9396,6 @@ msgid "Restore your receiver settings."
 msgstr ""
 "\n"
 "Przywróć własne ustawienia odbiornika."
-
-msgid "Restore your settings back from a backup. After restore the box will restart to activate the new settings."
-msgstr ""
 
 #, fuzzy, python-format
 msgid "Restoreing:  %s"
@@ -10648,6 +10628,13 @@ msgstr "Menu ustawień"
 #, fuzzy
 msgid "Setup Tuner"
 msgstr "Menu ustawień"
+
+#, fuzzy
+msgid "Setup VPN Changer"
+msgstr "Menu ustawień"
+
+msgid "Setup VPN Changer for more privacy."
+msgstr ""
 
 #, fuzzy
 msgid "Setup Videomode"
@@ -13466,6 +13453,10 @@ msgstr "Pliki Kopii"
 msgid "VOB file"
 msgstr "%d plik"
 
+#, fuzzy
+msgid "VPN Changer"
+msgstr "Zmień timer"
+
 msgid "VU+"
 msgstr ""
 
@@ -15023,6 +15014,10 @@ msgstr "Wyprawy/Podróże"
 msgid "forward to the next chapter"
 msgstr "Przeskocz do nastepnego rozdziału"
 
+#, fuzzy
+msgid "found"
+msgstr "Dźwięk"
+
 msgid "free"
 msgstr "Wolne"
 
@@ -15371,6 +15366,10 @@ msgstr "Zwykły"
 
 msgid "not configured"
 msgstr "Nieskonfigurowany"
+
+#, fuzzy
+msgid "not found"
+msgstr "Nie znaleziono sieci"
 
 msgid "not locked"
 msgstr "Nie zablokowany"
