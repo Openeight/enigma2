@@ -339,9 +339,9 @@ class QuickMenu(Screen):
 				self.sublist.append(QuickSubMenuEntryComponent('Ecm Info Sc',_('Sc Ecm Info setup'),_('Setup Ecm Info of the Softcam Manager.')))
 			elif SSC:
 				self.sublist.append(QuickSubMenuEntryComponent('Softcam-Setup', _('Softcam Setup'), _('Select and control your Softcam. Here you can start/stop/select a softcam, and see ecm info.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them.')))
 		if ECMINFOSETUP:
 			self.sublist.append(QuickSubMenuEntryComponent('Ecm Info',_('Ecm Info setup'),_('Setup Ecm Info of the CCcamInfo plugin.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them.')))
 		self.sublist.append(QuickSubMenuEntryComponent("CCcam Info",_("Check your CCcam"),_("This plugin shows you the status of your CCcam.")))
 		self.sublist.append(QuickSubMenuEntryComponent("OScam Info",_("Check your OScam"),_("This plugin shows you the status of your OScam.")))
 		self['sublist'].l.setList(self.sublist)
