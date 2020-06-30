@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 18:54+0200\n"
-"PO-Revision-Date: 2020-05-31 23:39+0100\n"
+"POT-Creation-Date: 2020-06-08 17:23+0200\n"
+"PO-Revision-Date: 2020-06-30 21:22+0100\n"
 "Last-Translator: Pereiira69 <pereira69@gmail.com>\n"
 "Language-Team: Muaitai <muaitai@gmail.com>\n"
 "Language: pt\n"
@@ -467,6 +467,11 @@ msgstr "%s Já está conectado"
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr "%s já não está a ser utilizado. Deve ser eliminado?"
+
+#
+#, fuzzy, python-format
+msgid "%s not found"
+msgstr "%d canal encontrado"
 
 #, python-format
 msgid "%s points"
@@ -1095,7 +1100,7 @@ msgstr "Adicionar Bouquet"
 
 #
 msgid "Add bouquet to parental protection"
-msgstr "Adicionar ao controle paternal"
+msgstr "Adicionar ao Controle Parental"
 
 #
 msgid "Add directory to playlist"
@@ -1177,7 +1182,7 @@ msgstr "Adicionar aos favoritos"
 
 #
 msgid "Add to parental protection"
-msgstr "Adicionar ao controle paternal"
+msgstr "Adicionar ao Controle Parental"
 
 msgid "Add/remove change timer for current event"
 msgstr "Adicionar/Remover/Alterar agendamento para o programa actual"
@@ -1491,12 +1496,6 @@ msgstr ""
 "seguinte Backup:\n"
 "%s\n"
 "O seu recetor vai reiniciar depois do restauro!"
-
-#, python-format
-msgid ""
-"Are you sure you want to restore your %s %s backup?\n"
-"STB will restart after the restore"
-msgstr ""
 
 msgid ""
 "Are you sure you want to restore your STB backup?\n"
@@ -1822,9 +1821,6 @@ msgid ""
 msgstr ""
 "Backup da sua imagem atual para HDD ou USB. Isso fará uma cópia 1: 1 da sua "
 "box."
-
-msgid "Backup your current settings"
-msgstr "Backup das configurações atuais"
 
 msgid ""
 "Backup your current settings. This includes E2-setup, channels, network and "
@@ -2178,6 +2174,10 @@ msgid ""
 "after the flash and perform a manufacurer reset to autorestore"
 msgstr ""
 
+#
+msgid "Can't create backup directory"
+msgstr "Não é possível criar o diretório de backup"
+
 msgid ""
 "Can't unmount partiton, make sure it is not being used for swap or record/"
 "timeshift paths!"
@@ -2199,10 +2199,6 @@ msgstr "Cancelar execução?"
 
 msgid "Cancelled upon user request"
 msgstr ""
-
-#
-msgid "Can't create backup directory"
-msgstr "Não é possível criar o diretório de backup"
 
 #
 msgid "Cannot delete downloaded image"
@@ -4459,8 +4455,8 @@ msgid ""
 msgstr ""
 "A redefinição de fábrica restaurará o seu recetor para sua configuração "
 "padrão. Todos os dados do usuário, incluindo configurações do sistema, "
-"configuração do sintonizador, buquês, serviços e plugins serão EXCLUÍDOS. As "
-"gravações e outros arquivos armazenados na mídia HDD e USB permanecerão "
+"configuração do sintonizador, Bouquet, serviços e plugins serão EXCLUÍDOS. "
+"As gravações e outros arquivos armazenados na mídia HDD e USB permanecerão "
 "intactos. Após a conclusão, o sistema será reiniciado automaticamente!\n"
 "\n"
 "Deseja mesmo prosseguir?"
@@ -4507,7 +4503,7 @@ msgid "Fallback remote receiver for DVB-T"
 msgstr ""
 
 msgid "Fallback remote receiver setup"
-msgstr "Configuração do recetor remoto substituto"
+msgstr "Configuração do recetor remoto"
 
 msgid "Fallback tuner setup"
 msgstr "Configuração do sintonizador de fallback"
@@ -7465,11 +7461,11 @@ msgstr "Diretório Parental"
 
 #
 msgid "Parental control"
-msgstr "Controle paternal"
+msgstr "Controle Parental"
 
 #
 msgid "Parental control setup"
-msgstr "Definições de controle parental"
+msgstr "Definições de Controle Parental"
 
 msgid "Partitions"
 msgstr ""
@@ -8207,7 +8203,7 @@ msgstr ""
 
 #
 msgid "Purge deleted user bouquets"
-msgstr "Limpar buquês de usuários excluídos"
+msgstr "Limpar Bouquet de usuários excluídos"
 
 msgid "Put TV in standby"
 msgstr "Colocar TV em Standby"
@@ -8523,7 +8519,7 @@ msgstr "Remover marcador"
 
 #
 msgid "Remove bouquet from parental protection"
-msgstr "Remover do controle paternal"
+msgstr "Remover do Controle Parental"
 
 #
 msgid "Remove cable services"
@@ -8542,7 +8538,7 @@ msgstr "Remover entrada"
 
 #
 msgid "Remove from parental protection"
-msgstr "Remover do controle paternal"
+msgstr "Remover do Controle Parental"
 
 #
 msgid "Remove new found flag"
@@ -8762,9 +8758,6 @@ msgstr ""
 msgid "Restore Plugins"
 msgstr ""
 
-msgid "Restore Settings"
-msgstr ""
-
 msgid "Restore backup fstab"
 msgstr ""
 
@@ -8784,9 +8777,6 @@ msgstr ""
 msgid "Restore fstab.backup"
 msgstr ""
 
-msgid "Restore settings from a backup"
-msgstr ""
-
 #
 msgid "Restore system settings"
 msgstr "Restaurar configurações do sistema"
@@ -8800,11 +8790,6 @@ msgstr "Restaurar Backups por data."
 
 msgid "Restore your receiver settings."
 msgstr "Restaurar as definições do recetor."
-
-msgid ""
-"Restore your settings back from a backup. After restore the box will restart "
-"to activate the new settings."
-msgstr ""
 
 #
 #, python-format
@@ -12763,6 +12748,10 @@ msgstr ""
 msgid "VOB file"
 msgstr "Ficheiro VOB"
 
+#, fuzzy
+msgid "VPN Changer"
+msgstr "Alterar agendamento"
+
 msgid "VU+"
 msgstr "VU+"
 
@@ -14151,6 +14140,11 @@ msgid "forward to the next chapter"
 msgstr "ir para o próximo capítulo"
 
 #
+#, fuzzy
+msgid "found"
+msgstr "Som"
+
+#
 msgid "free"
 msgstr "livre"
 
@@ -14524,6 +14518,11 @@ msgstr "normal"
 #
 msgid "not configured"
 msgstr "não configurado"
+
+#
+#, fuzzy
+msgid "not found"
+msgstr "Nenhum stick encontrado"
 
 #
 msgid "not locked"
@@ -15688,7 +15687,7 @@ msgstr "Extra Setup"
 
 #
 msgid "Factory reset"
-msgstr "Restauro de fábrica"
+msgstr "Restauro de Fábrica"
 
 #
 msgid "Filesystem check"
@@ -16632,7 +16631,7 @@ msgstr ""
 "operativos ou sistemas de ficheiros com comprimentos limitados."
 
 msgid "Load unlinked userbouquets"
-msgstr "Carregar buquês de usuário desvinculados"
+msgstr "Carregar Bouquet de usuário desvinculados"
 
 msgid "Location EPG Cache file"
 msgstr "Localização do Arquivo de cache do EPG"
@@ -17117,8 +17116,8 @@ msgid ""
 "bouquets.radio files, will still be loaded. This allows you for example to "
 "keep your own user bouquet while installed settings are updated"
 msgstr ""
-"Quando ativado, o enigma2 carregará buquês de usuários desvinculados. Isso "
-"significa que os buquês de usuário disponíveis, mas não incluídos nos "
+"Quando ativado, o enigma2 carregará Bouquet de usuários desvinculados. Isso "
+"significa que os Bouquet de usuário disponíveis, mas não incluídos nos "
 "arquivos bouquets.tv ou bouquets.radio, ainda serão carregados. Isso "
 "permite, por exemplo, manter seu próprio buquê de usuários enquanto as "
 "configurações instaladas são atualizadas"
