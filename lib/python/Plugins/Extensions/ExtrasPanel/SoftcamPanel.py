@@ -707,10 +707,10 @@ class ShowSoftcamPackages(Screen):
 		<screen name="ShowSoftcamPackages" position="center,center" size="630,500" title="Install Softcams" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/key_ok.png" position="260,0" size="60,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/key_ok.png" position="260,9" size="35,25" alphatest="on" />
 			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 			<widget source="key_green" render="Label" position="145,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="key_ok" render="Label" position="295,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_ok" render="Label" position="327,0" zPosition="1" size="140,40" font="Regular;20" valign="center" backgroundColor="#1f771f" transparent="1" />
 			<widget source="list" render="Listbox" position="5,50" size="620,420" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 					{"template": [
