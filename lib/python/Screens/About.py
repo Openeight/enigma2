@@ -46,7 +46,7 @@ class About(Screen):
 					image -=4
 				else:
 					image -=1
-				part = "SD-card slot %s" % image
+				part = _("SD-card slot %s") % image
 			AboutText += _("Selected Image: %s") % _("STARTUP_") + str(slot) + "  (" + part + ")\n"
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
