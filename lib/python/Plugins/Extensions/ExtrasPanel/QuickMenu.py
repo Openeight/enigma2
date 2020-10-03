@@ -284,7 +284,7 @@ class QuickMenu(Screen):
 		if os.path.exists('/usr/share/enigma2/display'):
 			self.sublist.append(QuickSubMenuEntryComponent('LCD Skin Setup', _('Skin Setup'), _('Setup your LCD.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Skin Setup',_('Select Enigma2 Skin'),_('Setup your Skin.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Recording settings', _('Recording Setup'), _('Setup your recording config.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Recording and Playback settings', _('Recording/Playback Setup'), _('Setup your recording and playback config.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording paths', _('Recording paths Setup'), _('Setup your recording paths config.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Hotkey', _('Hotkey Setup'), _('Adjust the functions of your remote cotrol buttons.')))
 		self.sublist.append(QuickSubMenuEntryComponent('EPG settings', _('EPG Setup'), _('Setup your EPG config.')))
@@ -490,7 +490,7 @@ class QuickMenu(Screen):
 			self.openSetup('userinterface')
 		elif item[0] == _('Recording paths'):
 			self.session.open(RecordPathsSettings)
-		elif item[0] == _('Recording settings'):
+		elif item[0] == _('Recording and Playback settings'):
 			self.openSetup('recording')
 		elif item[0] == _('Hotkey'):
 			self.session.open(HotkeySetup)
