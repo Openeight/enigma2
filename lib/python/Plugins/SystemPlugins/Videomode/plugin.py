@@ -101,7 +101,7 @@ class VideoSetup(Screen, ConfigListScreen):
 				if SystemInfo["HasColorimetry"]:
 					self.list.append(getConfigListEntry(_("HDMI Colorimetry"), config.av.hdmicolorimetry, _("This option allows you to configure the Colorimetry for HDR.")))
 				if SystemInfo["HasHdrType"]:
-					self.list.append(getConfigListEntry(_("HDMI HDR Type"), config.av.hdmihdrtype, _("This option allows you to configure the HDR type.")))
+					self.list.append(getConfigListEntry(_("HDMI Dynamic Range"), config.av.hdmihdrtype, _("This option allows you to configure the type of Dynamic Range.")))
 				if SystemInfo["HasHDMIpreemphasis"]:
 					self.list.append(getConfigListEntry(_("Use HDMI pre-emphasis"), config.av.hdmipreemphasis, _("This option can be useful for long HDMI cables.")))
 				if SystemInfo["HDRSupport"]:
