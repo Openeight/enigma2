@@ -45,61 +45,45 @@ class Ipkremove(Screen):
 			"right": self.keyRight,
 		}, -1)
 		title = _("Ipkremove")
-                self.setTitle(title)
+		self.setTitle(title)
 		self.onShown.append(self.openTest)
 
 	def openTest(self):
-                fpath = "/etc/ipkinst"
-                tlist = []
-                for root, dirs, files in os.walk(fpath):
-                     for name in files:
-                        n1 = name.find("_", 0)
-                        name2 = name[:n1]
-		        tlist.append([name, name2])
-                ipkres = self.session.openWithCallback(self.test2, ChoiceBox, title=(_("Please select ipkg to remove")), list=tlist)
-                
-        def test2(self, returnValue):
-                if returnValue is None:
-                       self.close()
-                else: 
-                       print "returnValue", returnValue
-                       remname = returnValue[1]
-                       ipk = returnValue[0]
- 	               print "ipkname =", ipk
-                       cmd1 = "opkg remove " + remname
-                       cmd2 = "rm /etc/ipkinst/" + ipk
-                       cmd = cmd1 + " && " + cmd2
-                       print cmd
-                       title = _("Removing addon %s" %(remname))
-                       self.session.open(Console,_(title),[cmd])
-                self.close()
-                       	
+		fpath = "/etc/ipkinst"
+		tlist = []
+		for root, dirs, files in os.walk(fpath):
+			for name in files:
+				n1 = name.find("_", 0)
+				name2 = name[:n1]
+			tlist.append([name, name2])
+		ipkres = self.session.openWithCallback(self.test2, ChoiceBox, title=(_("Please select ipkg to remove")), list=tlist)
+
+	def test2(self, returnValue):
+		if returnValue is None:
+			self.close()
+		else: 
+			print "returnValue", returnValue
+			remname = returnValue[1]
+			ipk = returnValue[0]
+			print "ipkname =", ipk
+			cmd1 = "opkg remove " + remname
+			cmd2 = "rm /etc/ipkinst/" + ipk
+			cmd = cmd1 + " && " + cmd2
+			print cmd
+			title = _("Removing addon %s" %(remname))
+			self.session.open(Console,_(title),[cmd])
+		self.close()
+
 	def keyLeft(self):
 		self["text"].left()
-	
+
 	def keyRight(self):
 		self["text"].right()
-		
-              	
-	
+
 	def ok(self):
 		self.close()
-	
+
 	def keyNumberGlobal(self, number):
 		print "pressed", number
 		self["text"].number(number)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
