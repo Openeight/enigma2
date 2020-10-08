@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenHeight-enigma2\n"
+"Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-08 17:23+0200\n"
-"PO-Revision-Date: 2020-10-06 20:17+0200\n"
+"PO-Revision-Date: 2020-10-08 19:14+0200\n"
 "Last-Translator: mariosbbs <allxsan@gmail.com>\n"
 "Language-Team: www.dvbmedia.it <info@dvbmedia.it>\n"
 "Language: it\n"
@@ -1397,7 +1397,7 @@ msgid "Allow unsupported modes"
 msgstr "Consenti modalità non supportate"
 
 msgid "Almost there... "
-msgstr ""
+msgstr "Backup quasi terminato.."
 
 #
 msgid "Already installed"
@@ -1739,7 +1739,7 @@ msgstr "Scambio automatico scart"
 
 #
 msgid "AutoBackup Settings System"
-msgstr "Backup automatico delle impostazioni di Sistema"
+msgstr "Configurazione del sistema di backup automatico"
 
 #
 msgid "Autoinstalling Completed"
@@ -1847,11 +1847,11 @@ msgstr "Backup drivers su HDD"
 
 #
 msgid "Backup Image"
-msgstr "Backup immagine attuale"
+msgstr "Backup immagini installate"
 
 #
 msgid "Backup Settings"
-msgstr "Backup configurazione di sistema"
+msgstr "Impostazioni backup automatico"
 
 #
 msgid "Backup completed."
@@ -1884,13 +1884,13 @@ msgid "Backup system settings"
 msgstr "Backup conf. sistema"
 
 #
-#, fuzzy, python-format
+#, python-format
 msgid "Backup to destination: %s"
-msgstr "Backup conf. sistema"
+msgstr "Backup immagine su: %s"
 
 #
 msgid "Backup your Image"
-msgstr "Backup sistema corrente"
+msgstr "Backup completo delle immagini installate "
 
 msgid "Backup your Image/Settings or Flash a new Image"
 msgstr "Backup Immagine/Impostazioni o installa nuova immagine"
@@ -1912,13 +1912,13 @@ msgstr ""
 
 #, python-format
 msgid "Backup your running %s %s image to HDD or USB."
-msgstr ""
+msgstr "Backup immagine corrente %s %s su HDD o USB."
 
 msgid "Backup/Flash"
-msgstr ""
+msgstr "Backup/Flash"
 
 msgid "Backup/Flash Manager"
-msgstr ""
+msgstr "Gestione Backup/Flash"
 
 msgid "Bahamas"
 msgstr ""
@@ -2989,7 +2989,7 @@ msgstr "Creare un bouquet radio separato"
 
 #
 msgid "Create:"
-msgstr "Creare: "
+msgstr "Creazione: "
 
 #, fuzzy, python-format
 msgid "Create: Recovery Fullbackup %s"
@@ -3399,9 +3399,8 @@ msgstr "Rimozione fallita!"
 msgid "Delete file"
 msgstr "Rimuovere file"
 
-#, fuzzy
 msgid "Delete image"
-msgstr "Cancella timer"
+msgstr "Cancella immagine"
 
 #
 msgid "Delete playlist entry"
@@ -4445,7 +4444,7 @@ msgstr "Esecuzione terminata!!"
 
 #
 msgid "Execution progress:"
-msgstr "Progresso in esecuzione:"
+msgstr "Processo in esecuzione:"
 
 #
 msgid "Exif"
@@ -4797,7 +4796,7 @@ msgstr "Flash Online"
 
 #
 msgid "Flash Online Image"
-msgstr "Flash immagine online"
+msgstr "Flash immagine, online oppure presente nella cartella \"images\""
 
 #
 msgid "Flash Online a new image"
@@ -5123,10 +5122,10 @@ msgid "Goto position"
 msgstr "Posizione goto"
 
 msgid "Goto previous day of events"
-msgstr "Passarei a eventi giorno precedente"
+msgstr "Passare a eventi giorno precedente"
 
 msgid "Goto previous page of events"
-msgstr "Passare alla pagina eventi precedente"
+msgstr "Passare alla precedente pagina eventi"
 
 msgid "Goto primetime / now"
 msgstr "Vai a Prima Serata / adesso"
@@ -5924,7 +5923,7 @@ msgid "Italy"
 msgstr "Italia"
 
 msgid "Items per page "
-msgstr "Voci per pagina"
+msgstr "Voci per pagina "
 
 msgid "Items per page for list screen"
 msgstr "Voci per pagina negli elenchi"
@@ -7256,14 +7255,12 @@ msgid "No, but restart from begin"
 msgstr "No, ma riprendere dall'inizio"
 
 #
-#, fuzzy
 msgid "No, do not backup an image"
-msgstr "No, non fare nulla."
+msgstr "No, non effettuare il backup"
 
 #
-#, fuzzy
 msgid "No, do not flash image"
-msgstr "No, non fare nulla."
+msgstr "No, non installare nulla"
 
 msgid "No, except Wakeup timer"
 msgstr "No, eccetto timer riattivazione"
@@ -7384,7 +7381,7 @@ msgid "Now"
 msgstr "Ora"
 
 msgid "Now building the Backup Image"
-msgstr ""
+msgstr "Creazione dell'immagine, che potrà essere anche installata su un altro ricevitore, purché identico"
 
 msgid "Now, use the contrast setting to turn up the brightness of the background as much as possible, but make sure that you can still see the difference between the two brightest levels of shades.If you have done that, press OK."
 msgstr "Ora utilizzare il controllo contrasto per aumentare la luminosità dello sfondo il più possibile, ma assicurarsi di poter distinguere la differenza tra le due sfumature più chiare. Alla fine premere OK."
@@ -7880,16 +7877,15 @@ msgid "Please add titles to the compilation."
 msgstr "Aggiungere titoli alla collezione"
 
 msgid "Please be patient, a backup will now be made,\n"
-msgstr ""
+msgstr "Attendere, il backup è in corso,\n"
 
 #
 msgid "Please change recording endtime"
 msgstr "Cambiare ora di fine registrazione"
 
 #
-#, fuzzy
 msgid "Please check the manual of the receiver"
-msgstr "Inserire un nome per la nuova cartella"
+msgstr "si prega di consultare il manuale del ricevitore, se fornito,"
 
 #
 #, fuzzy
@@ -7933,17 +7929,16 @@ msgstr "Inserire un nome per il nuovo contrassegno"
 msgid "Please enter filename (empty = use current date)"
 msgstr "Inserire un nome per il file (nulla >>data corrente)"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please enter label for %s:"
-msgstr "Inserire un nuovo nome:"
+msgstr "Inserire un nuovo nome per %s:"
 
 #
 msgid "Please enter name of the new directory"
 msgstr "Inserire un nome per la nuova cartella"
 
-#, fuzzy
 msgid "Please enter new description:"
-msgstr "Inserire un nuovo nome:"
+msgstr "Inserire una nuova descrizione:"
 
 msgid "Please enter new name:"
 msgstr "Inserire un nuovo nome:"
@@ -7965,9 +7960,8 @@ msgid "Please enter your personal feed URL"
 msgstr "Inserire il codice PIN corretto"
 
 #
-#, fuzzy
 msgid "Please install tune2fs"
-msgstr "Configurare il Tuner A"
+msgstr "Installare \"tune2fs\""
 
 #
 msgid "Please note that the previously selected media could not be accessed and therefore the default directory is being used instead."
@@ -7982,9 +7976,10 @@ msgid "Please re-enter the new PIN code"
 msgstr "Inserire il vecchio codice PIN"
 
 #
-#, fuzzy
 msgid "Please select a backup destination"
-msgstr "Selezionare il supporto su cui effettuare il backup"
+msgstr ""
+"Selezionare il supporto su cui effettuare il backup\n"
+"(sarà salvato nella cartella \"Fullbakup\")"
 
 msgid "Please select a playlist to delete..."
 msgstr "Selezionare la playlist da rimuovere..."
@@ -12325,7 +12320,7 @@ msgstr ""
 
 #, python-format
 msgid "Time required for this process: %s"
-msgstr ""
+msgstr "Tempo impiegato per portare a termine questo backup: %s"
 
 #
 msgid "Time scale"
@@ -12415,9 +12410,8 @@ msgid "To audio selection"
 msgstr ">> Selezione audio"
 
 #
-#, fuzzy
 msgid "To restore the image:"
-msgstr "Sì, ripristinare la configurazione"
+msgstr "Per ripristinare l'immagine,"
 
 msgid "To subtitle selection"
 msgstr ">> Selezione sottotitoli"
@@ -12996,7 +12990,7 @@ msgid "Use the Softcam Panel to control your Cam. This let you start/stop/select
 msgstr ""
 
 msgid "Use the cursor keys to select an installed image and then Start button."
-msgstr ""
+msgstr "Con i tasti Su/Giù selezionare l'immagine, poi premere OK"
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "Utilizzare NetworkWizard per configurare l'adattatore di rete selezionato"
@@ -13100,9 +13094,8 @@ msgstr ""
 msgid "Vanuatu"
 msgstr "Manuale"
 
-#, fuzzy
 msgid "Various"
-msgstr "Riprodurre la precedente"
+msgstr "Varie"
 
 msgid "Venezuela (Bolivarian Republic of)"
 msgstr ""
@@ -14101,7 +14094,7 @@ msgid "bc%s"
 msgstr "bc%s"
 
 msgid "because of the used filesystem the back-up\n"
-msgstr ""
+msgstr "anche in base al tipo di filesystem in uso,\n"
 
 #
 msgid "better"
@@ -14949,9 +14942,8 @@ msgid "on READ ONLY medium."
 msgstr "su supporto A SOLA LETTURA."
 
 #
-#, fuzzy
 msgid "on how to restore the image"
-msgstr "Rimuovere il pacchetto?\n"
+msgstr "oppure cercare informazioni sul web."
 
 #
 msgid "once"
@@ -15566,7 +15558,7 @@ msgid "width"
 msgstr "Larghezza"
 
 msgid "will take about 1-15 minutes for this system\n"
-msgstr ""
+msgstr "il completamento può richiedere da 1 a 15 minuti\n"
 
 msgid "will take about 30 minutes for this system\n"
 msgstr ""
@@ -16837,14 +16829,14 @@ msgstr "Impostazioni tastiera"
 
 #
 msgid "LED Deep Standby"
-msgstr "LED Deep Standby"
+msgstr "LED in Deep Standby"
 
 msgid "LED Normal"
-msgstr "LED Normal"
+msgstr "LED il funzionamento"
 
 #
 msgid "LED Standby"
-msgstr "LED Standby"
+msgstr "LED in Standby"
 
 msgid "LED brightness during deep standby."
 msgstr "Luminosità LED durante il deep Standby "
@@ -16916,10 +16908,10 @@ msgid "Position of completed timers in timerlist"
 msgstr "Posizione dei timer conclusi in elenco timer"
 
 msgid "Power LED"
-msgstr ""
+msgstr "LED alimentazione"
 
 msgid "Power LED state in (deep)-standby"
-msgstr ""
+msgstr "LED alimentazione in (deep)Standby"
 
 #, fuzzy
 msgid "Power LED state in deep-standby"
@@ -17051,16 +17043,16 @@ msgid "Show Graphical Multi EPG in extensions menu"
 msgstr "Mostrare EPG grafico nel menu estensioni"
 
 msgid "Show Media playback Remaining/Elapsed as"
-msgstr "Mostrare il tempo di riproduzione Rimasto/Trascorso come"
+msgstr "Visualizzazione tempo trascorso e rimasto della riproduzione in corso"
 
 msgid "Show SNR percentage instead of dB value"
 msgstr "Mostrare la percentuale SNR anzichè il valore in dB"
 
 msgid "Show Time Remaining/Elapsed"
-msgstr "Mostrare tempo Rimasto/Trascorso"
+msgstr "Visualizzazione tempo trascorso e rimasto trasmissione in corso"
 
 msgid "Show Transponder Remaining/Elapsed as"
-msgstr "Mostrare tempo trasmissione Rimasto/Trascorso come"
+msgstr "Visualizzazione durata della trasmissione in corso"
 
 msgid "Show True/False as graphical switch"
 msgstr "Mostrare Si/No come switch grafico"
@@ -17248,7 +17240,7 @@ msgid "This option allows you to choose how to display remaining time, or elapse
 msgstr ""
 
 msgid "This option allows you to choose how to display the remaining/elapsed time for Media playback."
-msgstr ""
+msgstr "Questa opzione permette di stabilire come mostrare il tempo trascorso/rimasto durante la riproduzione dei file multimediali."
 
 msgid "This option allows you to choose how to display the remaining/elapsed time for live tv."
 msgstr ""
@@ -17265,8 +17257,9 @@ msgstr ""
 msgid "This option allows you to show menu paths."
 msgstr ""
 
+#, fuzzy
 msgid "This will go fast forward/backward with time frames of x secs"
-msgstr ""
+msgstr "Questa opzione cambia il comportamento dei tasti Avanti/Indietro veloce che, una volta attivata, seguiranno intervalli di tempo"
 
 #
 msgid "Timezone"
@@ -17511,16 +17504,16 @@ msgid "When nonzero, a recording will stop later than the ending time indicated 
 msgstr "Opzione che determina il ritardo, in minuti, con cui far terminare una registrazione rispetto all'orario di fine evento indicato dall'EPG."
 
 msgid "With this option you can switch off the display during operation."
-msgstr ""
+msgstr "Opzione che permette di determinare se il LED fontale debba essere acceso o spento durante il normale funzionamento del ricevitore."
 
 msgid "With this option you can switch off the display in Deep Standby Mode."
-msgstr ""
+msgstr "Opzione che permette di determinare se il LED fontale debba essere acceso o spento quando il ricevitore si trova in stato di deep Standby."
 
 msgid "With this option you can switch off the display in Standby Mode."
-msgstr ""
+msgstr "Opzione che permette di determinare se il LED fontale debba essere acceso o spento quando il ricevitore si trova in stato di Standby."
 
 msgid "With this option you can switch the LED color or deactivate the LED."
-msgstr ""
+msgstr "Opzione che permette di determinare se il LED fontale debba essere acceso o spento e il colore che deve avere se acceso."
 
 #
 msgid "Wizard setup"
