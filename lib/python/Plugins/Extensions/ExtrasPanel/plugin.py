@@ -103,7 +103,6 @@ def Check_Softcam():
 
 	return found
 
-
 if not Check_Softcam() and (config.plugins.showextraspanelextensions.getValue() or config.plugins.extraspanel_redpanel.enabledlong.getValue()):
 	config.plugins.showextraspanelextensions.setValue(False)
 	config.plugins.extraspanel_redpanel.enabledlong.setValue(False)
@@ -279,7 +278,7 @@ class Extraspanel(Screen, InfoBarPiP):
 			self.servicelist = services
 		else:
 			self.servicelist = None
-		self['actions'] = ActionMap(['SetupActions', 'DirectionActions', 'ColorActions'], {'cancel': self.close,
+		self['actions'] = ActionMap(['SetupActions', 'DirectionActions', 'ColorActions'], {'cancel': self.Exit,
 		 'upUp': self.up,
 		 'downUp': self.down,
 		 'ok': self.okpress}, 1)
@@ -342,18 +341,12 @@ class Extraspanel(Screen, InfoBarPiP):
 				inEXTRASPanel = None
 			except:
 				print '[Extras-Panel] Error Hide'
-
 			self.close()
 		elif menu == 1:
-			self['Mlist'].moveToIndex(0)
-			self['Mlist'].l.setList(self.oldmlist)
 			menu = 0
-			self['label1'].setText(EXTRAS_Panel_Version)
+			self.HomeMenulist()
 		elif menu == 2:
-			self['Mlist'].moveToIndex(0)
-			self['Mlist'].l.setList(self.oldmlist1)
-			menu = 1
-			self['label1'].setText('Infos')
+			self.Infos()
 		return
 
 	def okpress(self):
@@ -384,7 +377,6 @@ class Extraspanel(Screen, InfoBarPiP):
 			for x in parts:
 				if not access(x[1], F_OK | R_OK | W_OK) or x[1] == '/':
 					parts.remove(x)
-
 			if len(parts):
 				self.session.openWithCallback(self.backuplocation_choosen, ChoiceBox, title=_('Please select medium to use as backup location'), list=parts)
 		elif menu == 'CamSetup':
@@ -466,6 +458,8 @@ class Extraspanel(Screen, InfoBarPiP):
 		return
 
 	def Plugins(self):
+		global menu
+		menu = 1
 		self['label1'].setText(_('Image Tools'))
 		self.mylist = []
 		self.mylist.append((_('Keymap Selection'), 'KeymapSel', _('change your Keymap: *.mqb, *.usr, *.ntr, *.xml, *.u80')))
@@ -482,6 +476,8 @@ class Extraspanel(Screen, InfoBarPiP):
 		self['list'].setList(self.mylist)
 
 	def Infos(self):
+		global menu
+		menu = 1
 		self['label1'].setText(_('Infos'))
 		self.mylist = []
 		self.mylist.append((_('Info Panel'), 'InfoPanel', _('Info-Panel...')))
@@ -499,6 +495,8 @@ class Extraspanel(Screen, InfoBarPiP):
 		return SkinSetup
 
 	def System(self):
+		global menu
+		menu = 2
 		self['label1'].setText(_('System Info'))
 		self.mylist = []
 		self.mylist.append((_('Cpu'), 'Cpu', _('Cpu...')))
