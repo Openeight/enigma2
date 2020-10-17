@@ -335,8 +335,8 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Panel Setup',_('Softcam-Panel Setup'),_('Softcam-Panel Setup.')))
 		if Softcam_Check():
 			if SC:
-				self.sublist.append(QuickSubMenuEntryComponent('Cam Setup', _('Cam Setup'), _('Select and control your Cam. This let you start/stop/select a cam.')))
-				self.sublist.append(QuickSubMenuEntryComponent('Ecm Info Sc',_('Sc Ecm Info setup'),_('Setup Ecm Info of the Softcam Manager.')))
+				self.sublist.append(QuickSubMenuEntryComponent('Softcam Manager', _('Softcam Manager'), _('Select and control your Cam. This let you start/stop/select a cam.')))
+				self.sublist.append(QuickSubMenuEntryComponent('Softcam Manager Settings',_('Softcam Manager Settings'),_('Settings for the Softcam Manager.')))
 			elif SSC:
 				self.sublist.append(QuickSubMenuEntryComponent('Softcam-Setup', _('Softcam Setup'), _('Select and control your Softcam. Here you can start/stop/select a softcam, and see ecm info.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them.')))
@@ -515,9 +515,9 @@ class QuickMenu(Screen):
 			self.session.open(ShowSoftcamPanelExtensions)
 		elif item[0] == _('Download Softcams'):
 			self.session.open(ShowSoftcamPackages)
-		elif item[0] == _('Cam Setup'):
+		elif item[0] == _('Softcam Manager'):
 			self.session.open(ScNewSelection)
-		elif item[0] == _('Ecm Info Sc'):
+		elif item[0] == _('Softcam Manager Settings'):
 			self.session.open(ScSetupScreen)
 		elif item[0] == _('Softcam-Setup'):
 			self.session.open(SoftcamSetup)

@@ -293,7 +293,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.mylist = []
 		self.mylist.append((_('Backup/Flash'), 'BackupFlashManager', _('Backup your Image/Settings or Flash a new Image')))
 		if Check_Softcam():
-			self.mylist.append((_('Cam Setup'), 'CamSetup', _('select your favourite cam')))
+			self.mylist.append((_('Softcam Manager'), 'CamSetup', _('select your favourite cam')))
 		self.mylist.append((_('Image Update'), 'ImageUpdate', _('Software-Updates and Feed state')))
 		self.mylist.append((_('Image Tools'), 'ImageTools', _('Image-Tools')))
 		self.mylist.append((_('Infos'), 'Infos', _('Infos...')))
