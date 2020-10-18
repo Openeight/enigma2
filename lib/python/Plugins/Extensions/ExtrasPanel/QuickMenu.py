@@ -802,30 +802,7 @@ class QuickMenuDevices(Screen):
 			self['lab1'].hide()
 
 	def buildMy_rec(self, device):
-		try:
-			if device.find('1') > 0:
-				device2 = device.replace('1', '')
-		except:
-			device2 = ''
-
-		try:
-			if device.find('2') > 0:
-				device2 = device.replace('2', '')
-		except:
-			device2 = ''
-
-		try:
-			if device.find('3') > 0:
-				device2 = device.replace('3', '')
-		except:
-			device2 = ''
-
-		try:
-			if device.find('4') > 0:
-				device2 = device.replace('4', '')
-		except:
-			device2 = ''
-
+		device2 = device[:-1]	#strip device number
 		devicetype = path.realpath('/sys/block/' + device2 + '/device')
 		d2 = device
 		name = 'USB: '
@@ -837,6 +814,7 @@ class QuickMenuDevices(Screen):
 			name = _('HARD DISK: ')
 			mypixmap = '/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/dev_hdd.png'
 		name = name + model
+
 		from Components.Console import Console
 		self.Console = Console()
 		self.Console.ePopen("sfdisk -l /dev/sd? | grep swap | awk '{print $(NF-9)}' >/tmp/devices.tmp")
@@ -855,26 +833,26 @@ class QuickMenuDevices(Screen):
 				rw = parts[3]
 				break
 				continue
-			elif device in swapdevices:
-				parts = line.strip().split()
-				d1 = _('None')
-				dtype = 'swap'
-				rw = _('None')
-				break
-				continue
 			else:
-				d1 = _('None')
-				dtype = _('unavailable')
-				rw = _('None')
-
+				if device in swapdevices:
+					parts = line.strip().split()
+					d1 = _('None')
+					dtype = 'swap'
+					rw = _('None')
+					break
+					continue
+				else:
+					d1 = _('None')
+					dtype = _('unavailable')
+					rw = _('None')
 		f.close()
 		f = open('/proc/partitions', 'r')
 		for line in f.readlines():
 			if line.find(device) != -1:
 				parts = line.strip().split()
 				size = int(parts[2])
-				if size / 1024 / 1024 > 1:
-					des = _('Size: ') + str(size / 1024 / 1024) + _('GB')
+				if ((size / 1024) / 1024) > 1:
+					des = _('Size: ') + str((size / 1024) / 1024) + _('GB')
 				else:
 					des = _('Size: ') + str(size / 1024) + _('MB')
 			else:
@@ -884,12 +862,10 @@ class QuickMenuDevices(Screen):
 					size = int(size)
 				except:
 					size = 0
-
-				if size / 2 / 1024 / 1024 > 1:
-					des = _('Size: ') + str(size / 2 / 1024 / 1024) + _('GB')
+				if (((size / 2) / 1024) / 1024) > 1:
+					des = _('Size: ') + str(((size / 2) / 1024) / 1024) + _('GB')
 				else:
-					des = _('Size: ') + str(size / 2 / 1024) + _('MB')
-
+					des = _('Size: ') + str((size / 2) / 1024) + _('MB')
 		f.close()
 		if des != '':
 			if rw.startswith('rw'):
