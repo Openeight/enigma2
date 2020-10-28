@@ -807,7 +807,11 @@ class QuickMenuDevices(Screen):
 		d2 = device
 		name = 'USB: '
 		mypixmap = '/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/dev_usbstick.png'
-		model = file('/sys/block/' + device2 + '/device/model').read()
+		try:
+			model = file('/sys/block/' + device2 + '/device/model').read()
+		except:
+			device2 = device[:-2] #strip (2 digit) device number
+			model = file('/sys/block/' + device2 + '/device/model').read()
 		model = str(model).replace('\n', '')
 		des = ''
 		if devicetype.find('/devices/pci') != -1:
