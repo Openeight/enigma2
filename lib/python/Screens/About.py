@@ -46,7 +46,10 @@ class About(Screen):
 					image -=4
 				else:
 					image -=1
-				part = _("SD-card slot %s") % image
+				if getMachineBuild() in ("sf8008"):
+					part = _("SD-card slot %s") % image
+				else:
+					part = _("USB-device slot %s") % image
 			AboutText += _("Selected Image: %s") % _("STARTUP_") + str(slot) + "  (" + part + ")\n"
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
