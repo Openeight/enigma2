@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-08 17:23+0200\n"
-"PO-Revision-Date: 2020-10-26 17:38+0100\n"
+"PO-Revision-Date: 2020-11-17 18:18+0100\n"
 "Last-Translator: mariosbbs <allxsan@gmail.com>\n"
 "Language-Team: OpenEight <Octagon Forum>\n"
 "Language: it\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
 msgid ""
@@ -3523,7 +3523,7 @@ msgid "Dialing:"
 msgstr "Composizione:"
 
 msgid "Did you see all eight arrow heads?"
-msgstr ""
+msgstr "Riuscite a vedere le punte delle otto frecce ?"
 
 #
 msgid "Digital contour removal"
@@ -5884,7 +5884,9 @@ msgid ""
 "Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at http://forums.openpli.org.\n"
 "\n"
 msgstr ""
-"Sembra che tu non abbia visto tutte le otto punte di freccia. Ciò significa che il televisore ha l'overscan abilitato e non è configurato correttamente\n"
+"Sembra che non si riescano a vedere tutte le otto punte di freccia. \n"
+"\n"
+"Ciò significa che il televisore ha l'overscan abilitato e non è configurato correttamente\n"
 "\n"
 "Consultare il manuale del televisore per scoprire come disattivare l'overscan. Cerca termini come 'Just fit', 'Full width', ecc. Se non riesci a trovarlo, chiedi ad altri utenti di https://octagon-forum.eu/.\n"
 "\n"
@@ -11606,18 +11608,17 @@ msgid "TechniHD is not installed on your Xtrend box !"
 msgstr ""
 
 msgid "Telnet"
-msgstr ""
+msgstr "Telmet"
 
 #
-#, fuzzy
 msgid "Telnet Interface"
-msgstr "Selezionare l'interfaccia"
+msgstr "Interfaccia Telnet"
 
 msgid "Telnet Port"
-msgstr ""
+msgstr "Porta Telnet"
 
 msgid "Telnet Setup"
-msgstr ""
+msgstr "Configurazione Telnet"
 
 #
 msgid "Temperature and fan control"
@@ -11628,14 +11629,12 @@ msgid "Terrestrial"
 msgstr "Terrestre"
 
 #
-#, fuzzy
 msgid "Terrestrial Scan"
-msgstr "Terrestre"
+msgstr "Scansione DVB-T"
 
 #
-#, fuzzy
 msgid "Terrestrial Service Searching"
-msgstr "Ricerca canali"
+msgstr "Ricerca canali DVB-T"
 
 #
 msgid "Test DiSEqC settings"
@@ -11663,7 +11662,7 @@ msgid "Text color"
 msgstr "Colore testo"
 
 msgid "Thai"
-msgstr "Thai"
+msgstr "Tailandese"
 
 msgid "Thailand"
 msgstr "Tailandia"
@@ -11685,12 +11684,12 @@ msgstr "Codice PIN aggiornato correttamente."
 msgid "The PIN codes you entered are different."
 msgstr "I codici PIN inseriti sono diversi!"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "The current image is not stable.\n"
 "For more information see %s."
 msgstr ""
-"L'immagine beta corrente potrebbe non essere stabile.\n"
+"L'immagine corrente potrebbe non essere stabile.\n"
 "Per maggiori informazioni: %s."
 
 #, python-format
@@ -11734,6 +11733,11 @@ msgid ""
 "\n"
 "Menu->Installation->System->Audio/Video->Overscan wizard"
 msgstr ""
+"La regolazione dell'overscan è stata completata.\n"
+"\n"
+"Nota: è sempre possibile avviare l'assistente di overscan in un secondo momento, tramite\n"
+"\n"
+"Menu->Configurazione->Impostazioni sistema->Audio/Video->Regolazione overscan"
 
 msgid ""
 "The overscan wizard helps you to setup your TV in the correct way.\n"
@@ -11749,6 +11753,18 @@ msgid ""
 "\n"
 "Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"
 msgstr ""
+"Regolare l'overscan consente di impostare in modo corretto la visualizzazione delle immagini sullo schermo del televisore.\n"
+"\n"
+"Nella maggior parte dei televisori l'overscan è l'impostazione predefinita.\n"
+"Per cui l'immagine visualizzata, invece di essere una reale immagine HD, viene allargata e parte dell'interfaccia utente (skin) potrebbe risultare non visibile.\n"
+"\n"
+"Vedere l'area gialla toccare i bordi, vuol dire che il 5% dell'immagine Full HD non è visibile.\n"
+"Vedere l'area verde toccare i bordi, vuol dire che il 10% dell'immagine Full HD non è visibile.\n"
+"\n"
+"In altre parole, se l'area gialla tocca i bordi dello schermo, avete almeno il 5% di overscan.\n"
+"Se vedete la punta delle otto frecce, il vostro televisore ha l'overscan disabilitato.\n"
+"\n"
+"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"
 
 #
 #, python-format
@@ -11760,9 +11776,9 @@ msgid "The pin code you entered is wrong."
 msgstr "Inserito codice PIN errato!"
 
 #
-#, fuzzy, python-format
+#, python-format
 msgid "The results have been written to %s"
-msgstr "Risultati salvati su %s."
+msgstr "Risultati salvati su %s"
 
 msgid "The saved PIN was cleared."
 msgstr ""
@@ -11783,18 +11799,17 @@ msgstr ""
 "L'estensione Sofwaremanagement non è installata.\n"
 "Provvedere a installarla."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The status of the current image could not be checked because %s can not be reached."
-msgstr "Lo stato della immagine beta corrente non può essere verificato: %s non raggiungibile."
+msgstr "Lo stato della immagine corrente non può essere verificato: %s non raggiungibile."
 
 #
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
 msgstr "File Timer (timers.xml) corrotto: NON caricabile!"
 
 #
-#, fuzzy
 msgid "The user interface of the receiver will now restart to select the selected skin"
-msgstr "Riavvio interfaccia utente del ricevitore in corso"
+msgstr "Riavvio interfaccia utente del ricevitore per applicare la skin selezionata"
 
 #
 msgid "The user interface of your receiver is restarting"
@@ -11808,9 +11823,8 @@ msgstr ""
 "a causa di un errore in mytest.py"
 
 #
-#, fuzzy
 msgid "The user interface of your receiver is restarting in debug mode"
-msgstr "Riavvio interfaccia utente del ricevitore in corso"
+msgstr "Riavvio dell'interfaccia utente in modalità di debug"
 
 #
 msgid ""
@@ -11833,14 +11847,12 @@ msgstr "Aggiornamenti disponibili: %s (minimo)"
 msgid "There are currently no outstanding actions."
 msgstr "Nessuna azione in sospeso al momento."
 
-#, fuzzy
 msgid "There are no saved playlists to delete!"
-msgstr "Selezionare la playlist da rimuovere..."
+msgstr "Non ci sono playlist da rimuovere!"
 
 #
-#, fuzzy
 msgid "There are no saved playlists to load!"
-msgstr "Rimuovere la playlist salvata"
+msgstr "Non ci sono playlist da caricare!"
 
 #
 msgid "There are no updates available."
@@ -11858,9 +11870,8 @@ msgstr ""
 "Procedere comunque ?"
 
 #
-#, fuzzy
 msgid "There was an error downloading the updatelist. Please try again."
-msgstr "Errore nel download elenco pacchetti! Riprovare."
+msgstr "Errore nel download dell'elenco dei pacchetti da aggiornare! Riprovare."
 
 #
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
@@ -13481,10 +13492,10 @@ msgid "You can continue watching TV etc. while this is running."
 msgstr "Durante l'esecuzione sarà possibile continuare la visione."
 
 msgid "You can disable Telnet Server and use ssh to login."
-msgstr ""
+msgstr "Potete disabilitare il server Telnet e usare ssh per effettuare il login."
 
 msgid "You can enable if will be displayed extended EPG description for item."
-msgstr ""
+msgstr "È possibile scegliere se verrà visualizzata la descrizione estesa EPG per questo elemento."
 
 #
 msgid "You can install this plugin."
@@ -13498,20 +13509,18 @@ msgid "You can remove this plugin."
 msgstr "E' possibile rimuovere questo plugin."
 
 msgid "You can set how will be finished movieplayer with 'Exit' button."
-msgstr ""
+msgstr "È possibile impostare in che modo deve terminare il movieplayer quando si preme il pulsante 'Esci'."
 
 msgid "You can set selected directory as 'root' directory for movie player."
-msgstr ""
+msgstr "È possibile impostare la cartella selezionata come directory 'root' per il movie player."
 
 #
-#, fuzzy
 msgid "You can set sorting type for items in movielist."
-msgstr "Caricare in elenco la durata registrazioni"
+msgstr "È possibile impostare il tipo di ordinamento per gli oggetti in movielist."
 
 #
-#, fuzzy
 msgid "You can show images in the movielist."
-msgstr "Nessuna etichetta configurata su queste registrazioni."
+msgstr "È possibile mostrare le immagini nella movielist."
 
 msgid "You cannot delete this!"
 msgstr "Impossibile rimuovere!"
@@ -13527,6 +13536,15 @@ msgid ""
 "\n"
 "menu->installation->system->Overscan wizard"
 msgstr ""
+"Non hai visto tutte le otto le punte. Vuol dire che il televisore ha la funzione di overscan attiva e mostra un'immagine ingrandita, facendovi perdere parte di uno schermo full HD. Inoltre, è possibile che si perdano anche parti dell'interfaccia utente, ad esempio le barre del volume e altro ancora..\n"
+"\n"
+"Purtroppo il vostro ricevitore non è in grado di regolare le dimensioni dell'interfaccia utente. Se non tutto è visibile, dovreste cambiare la skin installata con una che supporti l'area di overscan del vostro televisore.\n"
+"\n"
+"Quando si seleziona una skin diversa, l'interfaccia utente del ricevitore viene riavviata.\n"
+"\n"
+"Nota: è sempre possibile avviare l'assistente di overscan in un secondo momento, tramite\n"
+"\n"
+"Menu->Configurazione->Impostazioni sistema->Regolazione overscan"
 
 msgid ""
 "You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition to this you may also miss parts of the user interface, for example volume bars and more.\n"
@@ -13536,6 +13554,12 @@ msgid ""
 "When done press OK.\n"
 "\n"
 msgstr ""
+"Non hai visto tutte e otto le punte di freccia. Vuol dire che il televisore ha attiva la funzione di overscan e vi presenta un'immagine ingrandita, facendovi perdere una parte dello schermo full HD. Oltre a questo si possono perdere anche parti dell'interfaccia utente, ad esempio le barre del volume e altro ancora.\n"
+"\n"
+"È possibile provare a ridimensionare e modificare la posizione dell'interfaccia utente fino a quando non si vedono le otto punte di freccia.\n"
+"\n"
+"Una volta terminato premere OK.\n"
+"\n"
 
 msgid "You didn't select a channel to record from."
 msgstr "Non è stato selezionato alcun canale da cui registrare."
@@ -13574,6 +13598,8 @@ msgid ""
 "Your %s %s will be restarted after the installation of service\n"
 "Ready to install %s ?"
 msgstr ""
+"Il vostro %s %s sarà riavviato dopo l'installazione del servizio\n"
+"Pronti a installare %s ?"
 
 #, python-format
 msgid ""
@@ -13671,58 +13697,55 @@ msgid "Your receiver will got to stand by due to the sleeptimer."
 msgstr "Il ricevitore va in Standby a causa del timer di spegnimento."
 
 msgid "Zambia"
-msgstr ""
+msgstr "Zambia"
 
 msgid "Zap"
-msgstr "Zap"
+msgstr "Cambiare canale"
 
 msgid "Zap back to previously tuned service?"
-msgstr "Tornare al canale sintonizzato in precedenza ?"
+msgstr "Tornare al canale sintonizzato precedentemente ?"
 
 #
 msgid "Zap back to service before positioner setup?"
 msgstr ""
 "Ritornare al canale attivo\n"
-"prima della configurazione motore ?"
+"prima della configurazione del motore ?"
 
 msgid "Zap bouquets blindly on zap buttons"
-msgstr ""
+msgstr "Cambiare i bouquet alla cieca con i pulsanti per cambiare canale"
 
-#, fuzzy
 msgid "Zap down"
-msgstr "Modalità zap"
+msgstr "Canale successivo"
 
 msgid "Zap focus to Picture in Picture"
-msgstr "Fuoco zap nella PiP"
+msgstr "Cambio canali nel Picture In Picture"
 
 msgid "Zap focus to main screen"
-msgstr "Fuoco zap nello schermo principale"
+msgstr "Cambio canali nello schermo principale"
 
-#, fuzzy
 msgid "Zap to"
-msgstr "Modalità zap"
+msgstr "Passare al canale"
 
 msgid "Zap to selected channel"
-msgstr "Zap al canale selezionato"
+msgstr "Passare al canale selezionato"
 
-#, fuzzy
 msgid "Zap to selected channel and exit GMEPG"
-msgstr "Zap al canale selezionato"
+msgstr "Passa al canale selezionato ed esci da GMPEG"
 
 msgid "Zap to selected channel, or show detailed event info (depends on configuration)"
-msgstr "Zap al canale selezionato, o mostrare informazioni dettagliate evento (secondo configurazione)"
+msgstr "Passare al canale selezionato, o mostrare informazioni dettagliate evento (secondo configurazione)"
 
 msgid "Zap up"
-msgstr ""
+msgstr "Canale precedente"
 
 #, python-format
 msgid "Zapped to timer service %s as PiP!"
-msgstr ""
+msgstr "Passato al canale del timer %s in modalità PiP!"
 
 #
-#, fuzzy, python-format
+#, python-format
 msgid "Zapped to timer service %s!"
-msgstr "Al primo canale"
+msgstr "Passato al canale del timer %s!"
 
 msgid "Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"
 msgstr ""
@@ -13734,32 +13757,30 @@ msgid "Zgemma Star S/2S/H1/H2"
 msgstr ""
 
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabwe"
 
 #
-#, fuzzy
 msgid "[Enigma2 Settings]\n"
-msgstr "Mod. configurazione"
+msgstr "[Impostazioni Enigma2]\n"
 
-#, fuzzy
 msgid "[Image Info]\n"
-msgstr "Immagine:"
+msgstr "[Info Immagine]\n"
 
 #
 msgid "[alternative edit]"
-msgstr "[edit alternative]"
+msgstr "[modifica alternative]"
 
 #
 msgid "[bouquet edit]"
-msgstr "[edit bouquet]"
+msgstr "[modifica bouquet]"
 
 #
 msgid "[favourite edit]"
-msgstr "[edit preferiti]"
+msgstr "[modifica preferiti]"
 
 #
 msgid "[move mode]"
-msgstr "[modalità muovere]"
+msgstr "[modalità spostamento]"
 
 msgid "a gui to assign services/providers to common interface modules"
 msgstr "Assegnazione canali/provider a moduli common interface tramite GUI"
@@ -13776,15 +13797,14 @@ msgid "activate network adapter configuration"
 msgstr "Attivare la configurazione interfaccia di rete"
 
 #
-#, fuzzy
 msgid "active"
-msgstr "Alternative"
+msgstr "attivo"
 
 msgid "active CAM 1: "
-msgstr ""
+msgstr "attiva CAM 1: "
 
 msgid "active CAM 2: "
-msgstr ""
+msgstr "attiva CAM 2: "
 
 msgid "actual time only"
 msgstr ""
