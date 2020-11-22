@@ -226,6 +226,9 @@ def qmenu(session, **kwargs):
 	from Plugins.Extensions.ExtrasPanel.QuickMenu import QuickMenu
 	session.open(QuickMenu)
 
+def scriptrunner(session, **kwargs):
+	session.open(ScriptRunner)
+
 def sccmain(session, **kwargs):
 	session.open(SundtekControlCenter)
 
@@ -240,6 +243,7 @@ def Plugins(**kwargs):
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=SwapAutostart),
 		PluginDescriptor(name='Eight Panel', description='Eight panel GUI 12/11/2012', where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
 		PluginDescriptor(name=_("Quick Menu"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=qmenu),
+		PluginDescriptor(name=_("Job Manager"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=scriptrunner),
 		PluginDescriptor(name=_("Sundtek Control Center"), description =_("installs the sundtek driver and runs related shellscripts"), where = PluginDescriptor.WHERE_MENU, fnc=SundtekControlCenterStart)
 		]
 	if config.plugins.SundtekControlCenter.display.value == "1" or config.plugins.SundtekControlCenter.display.value == "3":
