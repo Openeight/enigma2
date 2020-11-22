@@ -75,7 +75,11 @@ class ScriptRunner(Screen):
 			if not access("/usr/script/" + self.sel, X_OK):
 				chmod("/usr/script/" + self.sel, 0755)
 			cmd1 = ". /usr/script/" + self.sel
-			self.session.open(Console, title=self.sel, cmdlist = [cmd1], closeOnSuccess = False)	
+			if ".hidden." in self.sel:
+				from enigma import eConsoleAppContainer
+				eConsoleAppContainer().execute(cmd1)
+			else:
+				self.session.open(Console, title=self.sel, cmdlist = [cmd1], closeOnSuccess = False)	
 					
 	def myclose(self):
 		self.close()
