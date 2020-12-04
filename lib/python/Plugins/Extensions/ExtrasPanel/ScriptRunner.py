@@ -54,7 +54,7 @@ class ScriptRunner(Screen):
 
 		self["key_red"] = Button(_("Close"))
 		self["key_green"] = Button(_("Run"))
-		self["key_yellow"] = Button(_("Run hidden"))
+		self["key_yellow"] = Button(_("Run in the background"))
 		self["key_blue"] = Button(_("Run and Close on success"))
 		
 	def populate_List(self):
