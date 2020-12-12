@@ -13,7 +13,7 @@ from Components.MenuList import MenuList
 from Components.Sources.List import List
 from Screens.Standby import TryQuitMainloop
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
-from os import listdir, remove, mkdir, path, access, X_OK, chmod
+from os import listdir, remove, mkdir, path, access, X_OK, chmod, system
 import datetime, time
 
 class ScriptRunner(Screen):
@@ -32,7 +32,6 @@ class ScriptRunner(Screen):
 			self["list"].instance.setItemHeight(25)
 		</applet>
 	</screen>"""
-
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -56,7 +55,7 @@ class ScriptRunner(Screen):
 		self["key_green"] = Button(_("Run"))
 		self["key_yellow"] = Button(_("Run in the background"))
 		self["key_blue"] = Button(_("Run and Close on success"))
-		
+
 	def populate_List(self):
 		if not path.exists('/usr/script'):
 			mkdir('/usr/script', 0755)
@@ -93,6 +92,7 @@ class ScriptRunner(Screen):
 
 	def Run(self,answer):
 		if answer is True:
+			system("if awk '/\r$/{exit 0;} 1{exit 1;}' /usr/script/" + self.sel + " ; then dos2unix /usr/script/" + self.sel + "; fi")
 			if not access("/usr/script/" + self.sel, X_OK):
 				chmod("/usr/script/" + self.sel, 0755)
 			cmd1 = ". /usr/script/" + self.sel
@@ -106,8 +106,7 @@ class ScriptRunner(Screen):
 			elif self.execute == "2":
 				self.session.open(Console, title=self.sel, cmdlist = [cmd1], closeOnSuccess = True)
 			else:
-				self.session.open(Console, title=self.sel, cmdlist = [cmd1])	
-					
+				self.session.open(Console, title=self.sel, cmdlist = [cmd1])
+
 	def myclose(self):
 		self.close()
-		
