@@ -52,6 +52,7 @@ dist_install_DATA = \
 	rc2.png \
 	screws_mp.png \
 	screws.png \
+	skin.xml \
 	sleeptimer.png \
 	testscreen.png \
 	timeline-now.png \

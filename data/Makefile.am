@@ -26,7 +26,6 @@ dist_pkgdata_DATA = \
 	setup.xml \
 	skin.xml \
 	skin_default.xml \
-	skin_display.xml \
 	skin_subtitles.xml \
 	startwizard.xml \
 	timezone.xml \
