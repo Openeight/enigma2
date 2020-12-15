@@ -19,6 +19,10 @@ profile("SetupDevices")
 import Components.SetupDevices
 Components.SetupDevices.InitSetupDevices()
 
+profile("Geolocation")
+import Tools.Geolocation
+Tools.Geolocation.InitGeolocation()
+
 profile("SimpleSummary")
 from Screens import InfoBar
 from Screens.SimpleSummary import SimpleSummary
@@ -59,7 +63,7 @@ config.misc.prev_wakeup_time = ConfigInteger(default=0)
 #config.misc.prev_wakeup_time_type is only valid when wakeup_time is not 0
 config.misc.prev_wakeup_time_type = ConfigInteger(default=0)
 # 0 = RecordTimer, 1 = ZapTimer, 2 = Plugins, 3 = WakeupTimer
-config.misc.epgcache_filename = ConfigText(default = "/hdd/epg.dat")
+config.misc.epgcache_filename = ConfigText(default = "/hdd/epg.dat", fixed_size = False)
 
 def setEPGCachePath(configElement):
 	if os.path.isdir(configElement.value) or os.path.islink(configElement.value):
@@ -546,6 +550,10 @@ Components.RecordingConfig.InitRecordingConfig()
 profile("UsageConfig")
 import Components.UsageConfig
 Components.UsageConfig.InitUsageConfig()
+
+profile("Timezones")
+import Components.Timezones
+Components.Timezones.InitTimeZones()
 
 profile("keymapparser")
 import keymapparser

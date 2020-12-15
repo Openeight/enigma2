@@ -3,7 +3,7 @@ from boxbranding import getBoxType
 from twisted.internet import threads
 from enigma import eDBoxLCD, eTimer
 
-from config import config, ConfigSubsection, ConfigSelection, ConfigSlider, ConfigYesNo, ConfigNothing
+from config import config, ConfigSubsection, ConfigSlider, ConfigYesNo, ConfigNothing, ConfigSelection
 from Components.SystemInfo import SystemInfo
 from Tools.Directories import fileExists
 import usb
