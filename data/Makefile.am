@@ -1,5 +1,11 @@
 SUBDIRS = countries fonts extensions keymaps skin_default skin_fallback_1080 hw_info
 
+if HAVE_TEXTLCD
+DISPLAYTYPE = text
+else
+DISPLAYTYPE = display
+endif
+
 dist_pkgdata_DATA = \
 	encoding.conf \
 	keymap.xml \
@@ -12,6 +18,7 @@ dist_pkgdata_DATA = \
 	skin_default.xml \
 	skin_subtitles.xml \
 	skin.xml \
+	skin_display.xml \
 	startwizard.xml \
 	freesat.t1 \
 	freesat.t2 \
