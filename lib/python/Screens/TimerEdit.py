@@ -173,6 +173,7 @@ class TimerEditList(Screen):
 						text = _("Timer:") + " " + text + "\n\n" + _("EPG:") + " " + short_description
 					elif short_description:
 						text = short_description
+						cur.description = short_description
 				if ext_description and ext_description != text:
 					if text:
 						text += "\n\n" + ext_description
@@ -324,8 +325,10 @@ class TimerEditList(Screen):
 			data = (int(time()), int(time() + 60), "", "", None)
 		else:
 			data = parseEvent(event, description = False)
-
-		self.addTimer(RecordTimerEntry(serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data))
+		timer = RecordTimerEntry(serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data)
+		timer.justplay = config.recording.timer_default_type.value == "zap"
+		timer.always_zap = config.recording.timer_default_type.value == "zap+record"
+		self.addTimer(timer)
 
 	def addTimer(self, timer):
 		self.session.openWithCallback(self.finishedAdd, TimerEntry, timer)
