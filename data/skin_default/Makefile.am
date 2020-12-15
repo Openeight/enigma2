@@ -36,11 +36,13 @@ dist_install_DATA = \
 	nim_active.png \
 	no_coverArt.png \
 	openeight.png \
+	noprev.png \
 	overscan1280x720.png \
 	overscan1920x1080.png \
 	picon_default.png \
 	position_arrow.png \
 	position_pointer.png \
+	prev.png \	
 	progress_bg.png \
 	progress_big.png \
 	progress_medium.png \
