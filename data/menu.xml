@@ -82,18 +82,7 @@
 			</menu>
 			<item weight="10" level="1" text="Common Interface" entryID="ci_setup" requires="CommonInterface"><screen module="Ci" screen="CiSelection" /></item>
 			<item weight="15" level="0" text="Parental control" entryID="parental_setup"><screen module="ParentalControlSetup" screen="ParentalControlSetup" /></item>
-			<item weight="15" level="0" text="Factory reset" entryID="factory_reset">
-				<code>
-from Screens.FactoryReset import FactoryReset
-def msgClosed(ret):
-	if ret:
-		open('/etc/.doNotAutoinstall', 'w')
-		from os import system, _exit
-		system("rm -R /etc/enigma2")
-		_exit(0)
-self.session.openWithCallback(msgClosed, FactoryReset)
-</code>
-			</item>
+			<item weight="15" level="0" text="Factory reset" entryID="factory_reset"><screen module="FactoryReset" screen="FactoryReset"/></item>
 		</menu>
 		<item level="0" text="Extra Setup" entryID="extra_setup"><screen module="ExtraSetup" screen="ExtraSetup" /></item>
 
