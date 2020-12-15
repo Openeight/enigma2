@@ -299,7 +299,6 @@ Makefile
 data/Makefile
 data/fonts/Makefile
 data/countries/Makefile
-data/display/Makefile
 data/extensions/Makefile
 data/keymaps/Makefile
 data/hw_info/Makefile
