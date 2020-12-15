@@ -24,8 +24,6 @@ dist_pkgdata_DATA = \
 	radio.mvi \
 	rcpositions.xml \
 	setup.xml \
-	skin.xml \
-	skin_default.xml \
 	skin_subtitles.xml \
 	startwizard.xml \
 	timezone.xml \
