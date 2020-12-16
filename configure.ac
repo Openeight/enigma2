@@ -304,10 +304,6 @@ data/keymaps/Makefile
 data/hw_info/Makefile
 data/display/Makefile
 data/7segment/Makefile
-data/display/LCDAnalogClock_1_Standby/Makefile
-data/display/LCDAnalogClock_2_Standby/Makefile
-data/display/LCDWeather_Standby/Makefile
-data/display/LCDAnalogClock_3_Weather_Infobar/Makefile
 data/display/display220/Makefile
 data/skin_default/Makefile
 data/skin_default/menu/Makefile
