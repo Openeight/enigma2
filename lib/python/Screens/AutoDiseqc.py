@@ -86,27 +86,27 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			318,
 			"Hotbird 13.0e"),
 
- 		# Eutelsat 16.0E OTV
- 		(
- 			11345,
- 			30000,
- 			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
- 			eDVBFrontendParametersSatellite.FEC_3_4,
- 			eDVBFrontendParametersSatellite.Inversion_Off,
- 			160,
- 			eDVBFrontendParametersSatellite.System_DVB_S,
- 			eDVBFrontendParametersSatellite.Modulation_Auto,
- 			eDVBFrontendParametersSatellite.RollOff_auto,
+		# Eutelsat 16.0E OTV
+		(
+			11345,
+			30000,
+			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
+			eDVBFrontendParametersSatellite.FEC_3_4,
+			eDVBFrontendParametersSatellite.Inversion_Off,
+			160,
+			eDVBFrontendParametersSatellite.System_DVB_S,
+			eDVBFrontendParametersSatellite.Modulation_Auto,
+			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
 			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
 			eDVBFrontendParametersSatellite.PLS_Gold,
 			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
 			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
 			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
- 			24100,
- 			366,
- 			"Eutelsat 16A 16.0e"),
- 
+			24100,
+			366,
+			"Eutelsat 16A 16.0e"),
+
 		# Astra 19.2E ZDF
 		(
 			11953,
@@ -169,6 +169,27 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			2004,
 			2,
 			"Astra 2 28.2e"),
+
+		# Eutelsat 5.0W Fransat
+		(
+			11054,
+			29950,
+			eDVBFrontendParametersSatellite.Polarisation_Vertical,
+			eDVBFrontendParametersSatellite.FEC_3_4,
+			eDVBFrontendParametersSatellite.Inversion_Off,
+			3550,
+			eDVBFrontendParametersSatellite.System_DVB_S2,
+			eDVBFrontendParametersSatellite.Modulation_8PSK,
+			eDVBFrontendParametersSatellite.RollOff_auto,
+			eDVBFrontendParametersSatellite.Pilot_Unknown,
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
+			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
+			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
+			20500,
+			1375,
+			"Eutelsat A/B 5.0w"),
 
 		# Hispasat 30.0W TSA
 		(

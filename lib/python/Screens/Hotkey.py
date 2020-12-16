@@ -33,6 +33,7 @@ class hotkey:
 		(_("Yellow"), "yellow", ""),
 		(_("Blue"), "blue", ""),
 		("Rec", "rec", ""),
+		("Rec" + " " + _("long"), "rec_long", "Infobar/instantRecord"),
 		("Radio", "radio", ""),
 		("Radio" + " " + _("long"), "radio_long", ""),
 		("TV", "showTv", "Infobar/toggleTvRadio"),
@@ -142,6 +143,8 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Show extension selection"), "Infobar/showExtensionSelection", "InfoBar"))
 	hotkey.functions.append((_("Zap down"), "Infobar/zapDown", "InfoBar"))
 	hotkey.functions.append((_("Zap up"), "Infobar/zapUp", "InfoBar"))
+	hotkey.functions.append((_("Volume up"), "Infobar/volumeUp", "InfoBar"))
+	hotkey.functions.append((_("Volume down"), "Infobar/volumeDown", "InfoBar"))
 	hotkey.functions.append((_("Switch channel up"), "Infobar/switchChannelUp", "InfoBar"))
 	hotkey.functions.append((_("Switch channel down"), "Infobar/switchChannelDown", "InfoBar"))
 	hotkey.functions.append((_("Show service list"), "Infobar/openServiceList", "InfoBar"))
@@ -237,7 +240,7 @@ def getHotkeyFunctions():
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
 for x in hotkey.hotkeys:
-        exec "config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:]
+	exec "config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:]
 
 class HotkeySetup(Screen):
 	ALLOW_SUSPEND = False

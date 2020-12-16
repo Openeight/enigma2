@@ -123,28 +123,30 @@ def loadResumePoints():
 resumePointCache = loadResumePoints()
 resumePointCacheLast = int(time())
 
-whitelist_vbi = None
+class whitelist:
+	vbi = []
+
 def reload_whitelist_vbi():
-	global whitelist_vbi
-	whitelist_vbi = [line.strip() for line in open('/etc/enigma2/whitelist_vbi', 'r').readlines()] if os.path.isfile('/etc/enigma2/whitelist_vbi') else []
+	whitelist.vbi = [line.strip() for line in open('/etc/enigma2/whitelist_vbi', 'r').readlines()] if os.path.isfile('/etc/enigma2/whitelist_vbi') else []
 reload_whitelist_vbi()
 
-subservice_groupslist = None
+class subservice:
+	groupslist = None
+
 def reload_subservice_groupslist(force=False):
-	global subservice_groupslist
-	if subservice_groupslist is None or force:
+	if subservice.groupslist is None or force:
 		try:
 			groupedservices = "/etc/enigma2/groupedservices"
 			if not os.path.isfile(groupedservices):
 				groupedservices = "/usr/share/enigma2/groupedservices"
-			subservice_groupslist = [list(g) for k,g in itertools.groupby([line.split('#')[0].strip() for line in open(groupedservices).readlines()], lambda x:not x) if not k]
+			subservice.groupslist = [list(g) for k,g in itertools.groupby([line.split('#')[0].strip() for line in open(groupedservices).readlines()], lambda x:not x) if not k]
 		except:
-			subservice_groupslist = []
+			subservice.groupslist = []
 reload_subservice_groupslist()
 
 def getPossibleSubservicesForCurrentChannel(current_service):
-	if current_service and subservice_groupslist:
-		ref_in_subservices_group = [x for x in subservice_groupslist if current_service in x]
+	if current_service and subservice.groupslist:
+		ref_in_subservices_group = [x for x in subservice.groupslist if current_service in x]
 		if ref_in_subservices_group:
 			return ref_in_subservices_group[0]
 	return []
@@ -421,10 +423,10 @@ class InfoBarShowHide(InfoBarScreenSaver):
 					service = service and eServiceReference(service)
 					if service:
 						print service, service and service.toString()
-					return service and ":".join(service.toString().split(":")[:11]) in whitelist_vbi
+					return service and ":".join(service.toString().split(":")[:11]) in whitelist.vbi
 				else:
 					return ".hidevbi." in servicepath.lower()
-		return service and service.toString() in whitelist_vbi
+		return service and service.toString() in whitelist.vbi
 
 	def showHideVBI(self):
 		if self.checkHideVBI():
@@ -436,12 +438,11 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		service = service or self.session.nav.getCurrentlyPlayingServiceReference()
 		if service:
 			service = service.toString()
-			global whitelist_vbi
-			if service in whitelist_vbi:
-				whitelist_vbi.remove(service)
+			if service in whitelist.vbi:
+				whitelist.vbi.remove(service)
 			else:
-				whitelist_vbi.append(service)
-			open('/etc/enigma2/whitelist_vbi', 'w').write('\n'.join(whitelist_vbi))
+				whitelist.vbi.append(service)
+			open('/etc/enigma2/whitelist_vbi', 'w').write('\n'.join(whitelist.vbi))
 			self.showHideVBI()
 
 class BufferIndicator(Screen):
@@ -719,7 +720,7 @@ class InfoBarChannelSelection:
 		if config.usage.oldstyle_zap_controls.value:
 			self.zapDown()
 		elif config.usage.volume_instead_of_channelselection.value:
-			VolumeControl.instance and VolumeControl.instance.volUp()
+			self.volumeUp()
 		else:
 			self.switchChannelUp()
 
@@ -727,14 +728,14 @@ class InfoBarChannelSelection:
 		if config.usage.oldstyle_zap_controls.value:
 			self.zapUp()
 		elif config.usage.volume_instead_of_channelselection.value:
-			VolumeControl.instance and VolumeControl.instance.volDown()
+			self.volumeDown()
 		else:
 			self.switchChannelDown()
 
 	def keyLeftCheck(self):
 		if config.usage.oldstyle_zap_controls.value:
 			if config.usage.volume_instead_of_channelselection.value:
-				VolumeControl.instance and VolumeControl.instance.volDown()
+				self.volumeDown()
 			else:
 				self.switchChannelUp()
 		else:
@@ -743,7 +744,7 @@ class InfoBarChannelSelection:
 	def keyRightCheck(self):
 		if config.usage.oldstyle_zap_controls.value:
 			if config.usage.volume_instead_of_channelselection.value:
-				VolumeControl.instance and VolumeControl.instance.volUp()
+				self.volumeUp()
 			else:
 				self.switchChannelDown()
 		else:
@@ -875,6 +876,12 @@ class InfoBarChannelSelection:
 
 	def openServiceList(self):
 		self.session.execDialog(self.servicelist)
+
+	def volumeUp(self):
+		VolumeControl.instance and VolumeControl.instance.volUp()
+
+	def volumeDown(self):
+		VolumeControl.instance and VolumeControl.instance.volDown()
 
 class InfoBarMenu:
 	""" Handles a menu action, to open the (main) menu """
@@ -2027,7 +2034,7 @@ class InfoBarTimeshift():
 		if int(config.usage.timeshift_start_delay.value):
 			self.ts_start_delay_timer.start(int(config.usage.timeshift_start_delay.value) * 1000, True)
 
-	def checkTimeshiftRunning(self, returnFunction):
+	def checkTimeshiftRunning(self, returnFunction, timeout=-1):
 		if self.timeshiftEnabled() and config.usage.check_timeshift.value and self.timeshift_was_activated:
 			message = _("Stop timeshift?")
 			if not self.save_timeshift_file:
@@ -2039,7 +2046,7 @@ class InfoBarTimeshift():
 					remaining = self.currentEventTime()
 					if remaining > 0:
 						message += "\n" + _("The %d min remaining before the end of the event.") % abs(remaining / 60)
-			self.session.openWithCallback(boundFunction(self.checkTimeshiftRunningCallback, returnFunction), MessageBox, message, simple = True, list = choice)
+			self.session.openWithCallback(boundFunction(self.checkTimeshiftRunningCallback, returnFunction), MessageBox, message, timeout=timeout, simple=True, list=choice)
 		else:
 			returnFunction(True)
 
@@ -2672,7 +2679,7 @@ class InfoBarInstantRecord:
 			if not pirr:
 				pirr = ""
 			self.session.open(MessageBox, _("Missing ") + "\n" + pirr +
-						 "\n" + _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
+						"\n" + _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
 			return
 
 		if isStandardInfoBar(self):
