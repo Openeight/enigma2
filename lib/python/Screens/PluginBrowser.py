@@ -69,7 +69,7 @@ def CreateFeedConfig():
 	f.write(feedurl)
 	f.close()
 	container = eConsoleAppContainer()
-	container.execute('ipkg update')
+	container.execute('opkg update')
 	del container
 
 config.misc.pluginbrowser = ConfigSubsection()
