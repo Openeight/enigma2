@@ -13,7 +13,7 @@ from Components.ProgressBar import ProgressBar
 from boxbranding import getBoxType, getMachineBrand, getMachineBuild, getMachineName, getImageVersion, getImageBuild, getDriverDate
 
 from Components.SystemInfo import SystemInfo
-from Tools.Multiboot import GetCurrentImage
+from Tools.Multiboot import getCurrentImage
 from Tools.StbHardware import getFPVersion
 from enigma import ePicLoad, getDesktop, eSize, eTimer, eLabel, eConsoleAppContainer, eGetEnigmaDebugLvl
 from Components.Pixmap import Pixmap
@@ -38,7 +38,7 @@ class About(Screen):
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
 		if SystemInfo["canMultiBoot"]:
-			slot = image = GetCurrentImage()
+			slot = image = getCurrentImage()
 			bootmode = ""
 			part = _("eMMC slot %s") %slot
 			if "sda" in SystemInfo["canMultiBoot"][slot]['device']:

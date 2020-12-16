@@ -14,7 +14,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Downloader import downloadWithProgress
 from Tools.HardwareInfo import HardwareInfo
-from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode, deleteImage, restoreImages, GetBoxName
+from Tools.Multiboot import getImagelist, getCurrentImage, getCurrentImageMode, deleteImage, restoreImages, GetBoxName
 import os, urllib2, json, time, zipfile, shutil, tempfile
 
 from enigma import eEPGCache
