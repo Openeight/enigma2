@@ -84,7 +84,7 @@ class CamStart:
 		self.emuDirlist = os.listdir(emuDir)
 		cam_name = config.softcam.actCam.getValue()
 		cam_name2 = config.softcam.actCam2.getValue()
-		if (cam_name == "no CAM 1 active" or cam_name == "") and (cam_name2 == "no CAM 1 active" or cam_name2 == ""):
+		if (cam_name == _("no CAM 1 active") or cam_name == "") and (cam_name2 == _("no CAM 1 active") or cam_name2 == ""):
 			self.timer.stop()
 			self.service = None
 			print "[CAMSTARTER] No Cam to Start, Exit"
