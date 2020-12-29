@@ -659,10 +659,14 @@ class QuickMenu(Screen):
 				self.session.open(MessageBox, _('No tuner is configured for use with a diseqc positioner!'), MessageBox.TYPE_ERROR)
 
 	def SatfinderMain(self):
-		if len(NavigationInstance.instance.getRecordings()) > 0:
-			self.session.open(MessageBox, _('A recording is currently running. Please stop the recording before trying to start the satfinder.'), MessageBox.TYPE_ERROR)
+		ActiveNim = nimmanager.somethingConnected()
+		if ActiveNim:
+			if len(NavigationInstance.instance.getRecordings()) > 0:
+				self.session.open(MessageBox, _('A recording is currently running. Please stop the recording before trying to start the satfinder.'), MessageBox.TYPE_ERROR)
+			else:
+				self.session.open(Satfinder)
 		else:
-			self.session.open(Satfinder)
+			self.session.open(MessageBox, _('No active tuner found !!') + '\n' + _('Sat Finder can only work with an activated tuner.'), MessageBox.TYPE_ERROR)
 
 	def backupfiles_choosen(self, ret):
 		config.plugins.configurationbackup.backupdirs.save()
