@@ -51,7 +51,6 @@ class ImageBackup(Screen):
 		self["config"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image slots - Please wait...")), "Queued"))])
 		imagedict = []
 		self.getImageList = None
-		self.startit()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -73,11 +72,10 @@ class ImageBackup(Screen):
 
 	def layoutFinished(self):
 		self.setTitle(self.title)
+		self.ImageList()
 
-	def startit(self):
-		self.getImageList = getImagelist(self.ImageList)
-
-	def ImageList(self, imagedict):
+	def ImageList(self):
+		imagedict = getImagelist()
 		self.saveImageList = imagedict
 		list = []
 		currentimageslot = getCurrentImage() or 1
