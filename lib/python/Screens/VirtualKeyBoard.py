@@ -844,7 +844,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def portuguese(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0][0] = u"\\"
 		keyList[0][0][11] = u"'"
 		keyList[0][0][12] = u"\u00AB"
