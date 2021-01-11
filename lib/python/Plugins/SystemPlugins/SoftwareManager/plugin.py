@@ -1495,7 +1495,7 @@ class UpdatePlugin(Screen):
 			if self.updating:
 				self.updating = False
 				self.opkg.startCmd(OpkgComponent.CMD_UPGRADE_LIST)
-			elif self.opkg.currentCommand == pkgComponent.CMD_UPGRADE_LIST:
+			elif self.opkg.currentCommand == OpkgComponent.CMD_UPGRADE_LIST:
 				self.total_packages = len(self.opkg.getFetchedList())
 				if self.total_packages:
 					message = _("Do you want to update your %s %s?") % (getMachineBrand(), getMachineName()) + "                 \n(%s " % self.total_packages + _("Packages") + ")"
