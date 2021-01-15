@@ -20,7 +20,11 @@ def getMultibootStartupDevice():
 		os.rmdir(tmp.dir)
 
 def getparam(line, param):
-	return line.rsplit('%s=' % param, 1)[1].split(' ', 1)[0]
+	for part in line.strip().replace("'","").replace('"','').split():
+		p = part.split('=')
+		if len(p) == 2 and p[0] == param:
+			return p[1]
+	return ''
 
 def getMultibootslots():
 	bootslots = {}
