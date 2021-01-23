@@ -18,7 +18,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from time import time, strftime, localtime
 from Tools.BoundFunction import boundFunction
-from Tools.Multiboot import GetImagelist, GetCurrentImage, GetCurrentImageMode, GetBoxName
+from Tools.Multiboot import getImagelist, getCurrentImage, getCurrentImageMode, GetBoxName
 import os, commands, datetime
 from boxbranding import getMachineBrand, getMachineName, getDriverDate, getImageVersion, getImageBuild, getBrandOEM, getMachineBuild, getImageFolder, getMachineUBINIZE, getMachineMKUBIFS, getMachineMtdKernel, getMachineMtdRoot, getMachineKernelFile, getMachineRootFile, getImageFileSystem, getImageDistro, getImageVersion
 
@@ -51,7 +51,6 @@ class ImageBackup(Screen):
 		self["config"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image slots - Please wait...")), "Queued"))])
 		imagedict = []
 		self.getImageList = None
-		self.startit()
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -73,14 +72,13 @@ class ImageBackup(Screen):
 
 	def layoutFinished(self):
 		self.setTitle(self.title)
+		self.ImageList()
 
-	def startit(self):
-		self.getImageList = GetImagelist(self.ImageList)
-
-	def ImageList(self, imagedict):
+	def ImageList(self):
+		imagedict = getImagelist()
 		self.saveImageList = imagedict
 		list = []
-		currentimageslot = GetCurrentImage() or 1
+		currentimageslot = getCurrentImage() or 1
 		print "[Image Backup] Current Image Slot %s, Imagelist %s"% ( currentimageslot, imagedict)
 		if imagedict:
 			for x in sorted(imagedict.keys()):

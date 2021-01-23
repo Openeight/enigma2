@@ -13,7 +13,7 @@ from Components.ProgressBar import ProgressBar
 from boxbranding import getBoxType, getMachineBrand, getMachineBuild, getMachineName, getImageVersion, getImageBuild, getDriverDate
 
 from Components.SystemInfo import SystemInfo
-from Tools.Multiboot import GetCurrentImage
+from Tools.Multiboot import getCurrentImage
 from Tools.StbHardware import getFPVersion
 from enigma import ePicLoad, getDesktop, eSize, eTimer, eLabel, eConsoleAppContainer, eGetEnigmaDebugLvl
 from Components.Pixmap import Pixmap
@@ -38,7 +38,7 @@ class About(Screen):
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
 		if SystemInfo["canMultiBoot"]:
-			slot = image = GetCurrentImage()
+			slot = image = getCurrentImage()
 			bootmode = ""
 			part = _("eMMC slot %s") %slot
 			if "sda" in SystemInfo["canMultiBoot"][slot]['device']:
@@ -139,6 +139,7 @@ class About(Screen):
 		AboutText += hddinfo + "\n\n" + _("Network Info:")
 		for x in about.GetIPsFromNetworkInterfaces():
 			AboutText += "\n" + x[0] + ": " + x[1]
+		AboutText += '\n\n' + _("Uptime") + ": " + about.getBoxUptime()
 
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
 		self["key_green"] = Button(_("Troubleshoot"))
@@ -455,6 +456,8 @@ class Troubleshoot(Screen):
 				"cancel": self.close,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown,
+				"moveUp": self["AboutScrollLabel"].homePage,
+				"moveDown": self["AboutScrollLabel"].endPage,
 				"left": self.left,
 				"right": self.right,
 				"red": self.red,
@@ -480,7 +483,7 @@ class Troubleshoot(Screen):
 
 	def red(self):
 		if self.commandIndex >= self.numberOfCommands:
-			self.session.openWithCallback(self.removeAllLogfiles, MessageBox, _("Do you want to remove all the crahs logfiles"), default=False)
+			self.session.openWithCallback(self.removeAllLogfiles, MessageBox, _("Do you want to remove all the crash logfiles"), default=False)
 		else:
 			self.close()
 

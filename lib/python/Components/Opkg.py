@@ -1,6 +1,7 @@
 import os
 from enigma import eConsoleAppContainer
 from Components.Harddisk import harddiskmanager
+from Tools.Directories import resolveFilename, SCOPE_LIBDIR
 
 opkgDestinations = []
 opkgStatusPath = ''
@@ -13,7 +14,7 @@ def opkgAddDestination(mountpoint):
 	global opkgDestinations
 	if mountpoint not in opkgDestinations:
 		opkgDestinations.append(mountpoint)
-		print "[Ipkg] Added to OPKG destinations:", mountpoint
+		print "[Opkg] Added to OPKG destinations:", mountpoint
 
 def onPartitionChange(why, part):
 	global opkgDestinations
@@ -26,21 +27,81 @@ def onPartitionChange(why, part):
 				opkgStatusPath = 'var/lib/opkg/status'
 				if not os.path.exists(os.path.join('/', opkgStatusPath)):
 					# older opkg versions
-					opkgStatusPath = 'usr/lib/opkg/status'
+					opkgStatusPath = resolveFilename(SCOPE_LIBDIR, 'opkg/status')
 			if os.path.exists(os.path.join(mountpoint, opkgStatusPath)):
 				opkgAddDestination(mountpoint)
 		elif why == 'remove':
 			try:
 				opkgDestinations.remove(mountpoint)
-				print "[Ipkg] Removed from OPKG destinations:", mountpoint
+				print "[Opkg] Removed from OPKG destinations:", mountpoint
 			except:
 				pass
+
+def enumFeeds():
+	for fn in os.listdir('/etc/opkg'):
+		if fn.endswith('-feed.conf'):
+			try:
+				for feed in open(os.path.join('/etc/opkg', fn)):
+					yield feed.split()[1]
+			except IndexError:
+				pass
+			except IOError:
+				pass
+
+def enumPlugins(filter_start=''):
+	list_dir = listsDirPath()
+	for feed in enumFeeds():
+		package = None
+		try:
+			for line in open(os.path.join(list_dir, feed), 'r'):
+				if line.startswith('Package:'):
+					package = line.split(":",1)[1].strip()
+					version = ''
+					description = ''
+					if package.startswith(filter_start) and not package.endswith('-dev') and not package.endswith('-staticdev') and not package.endswith('-dbg') and not package.endswith('-doc') and not package.endswith('-src'):
+						continue
+					package = None
+				if package is None:
+					continue
+				if line.startswith('Version:'):
+					version = line.split(":",1)[1].strip()
+				elif line.startswith('Description:'):
+					description = line.split(":",1)[1].strip()
+				elif description and line.startswith(' '):
+					description += line[:-1]
+				elif len(line) <= 1:
+					d = description.split(' ',3)
+					if len(d) > 3:
+						# Get rid of annoying "version" and package repeating strings
+						if d[1] == 'version':
+							description = d[3]
+						if description.startswith('gitAUTOINC'):
+							description = description.split(' ',1)[1]
+					yield package, version, description.strip()
+					package = None
+		except IOError:
+			pass
+
+def listsDirPath():
+	try:
+		for line in open('/etc/opkg/opkg.conf', "r"):
+			if line.startswith('option'):
+				line = line.split(' ', 2)
+				if len(line) > 2 and line[1] == ('lists_dir'):
+					return line[2].strip()
+	except Exception, ex:
+		print "[opkg]", ex
+	return '/var/lib/opkg/lists'
+
+if __name__ == '__main__':
+	for p in enumPlugins('enigma'):
+		print p
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 for part in harddiskmanager.getMountedPartitions():
 	onPartitionChange('add', part)
 
-class IpkgComponent:
+class OpkgComponent:
 	EVENT_INSTALL = 0
 	EVENT_DOWNLOAD = 1
 	EVENT_INFLATING = 2
@@ -59,8 +120,8 @@ class IpkgComponent:
 	CMD_UPGRADE = 4
 	CMD_UPGRADE_LIST = 5
 
-	def __init__(self, ipkg = 'opkg'):
-		self.ipkg = ipkg
+	def __init__(self, opkg = 'opkg'):
+		self.opkg = opkg
 		self.cmd = eConsoleAppContainer()
 		self.cache = None
 		self.callbackList = []
@@ -73,10 +134,10 @@ class IpkgComponent:
 		self.runCmd("%s %s" % (opkgExtraDestinations(), cmd))
 
 	def runCmd(self, cmd):
-		print "executing", self.ipkg, cmd
+		print "executing", self.opkg, cmd
 		self.cmd.appClosed.append(self.cmdFinished)
 		self.cmd.dataAvail.append(self.cmdData)
-		if self.cmd.execute("%s %s" % (self.ipkg, cmd)):
+		if self.cmd.execute("%s %s" % (self.opkg, cmd)):
 			self.cmdFinished(-1)
 
 	def startCmd(self, cmd, args = None):
@@ -86,7 +147,7 @@ class IpkgComponent:
 			append = ""
 			if args["test_only"]:
 				append = " -test"
-			self.runCmdEx("upgrade %s | tee /home/root/ipkgupgrade.log" % append)
+			self.runCmdEx("upgrade %s | tee /home/root/opkgupgrade.log" % append)
 		elif cmd == self.CMD_LIST:
 			self.fetchedList = []
 			if args['installed_only']:
@@ -149,7 +210,7 @@ class IpkgComponent:
 				self.callCallbacks(self.EVENT_ERROR, None)
 			elif data.startswith('Failed to download'):
 				self.callCallbacks(self.EVENT_ERROR, None)
-			elif data.startswith('ipkg_download: ERROR:'):
+			elif data.startswith('opkg_download: ERROR:'):
 				self.callCallbacks(self.EVENT_ERROR, None)
 			elif data.find('Configuration file \'') >= 0:
 				# Note: the config file update question doesn't end with a newline, so
@@ -157,8 +218,8 @@ class IpkgComponent:
 				# don't necessarily start at the beginning of a line
 				self.callCallbacks(self.EVENT_MODIFIED, data.split(' \'', 3)[1][:-1])
 		except Exception, ex:
-			print "[Ipkg] Failed to parse: '%s'" % data
-			print "[Ipkg]", ex
+			print "[Opkg] Failed to parse: '%s'" % data
+			print "[Opkg]", ex
 
 	def callCallbacks(self, event, param = None):
 		for callback in self.callbackList:

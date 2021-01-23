@@ -9,6 +9,7 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from ServiceReference import ServiceReference
 from enigma import eServiceReference
 from Components.Pixmap import Pixmap
@@ -32,6 +33,7 @@ class hotkey:
 		(_("Yellow"), "yellow", ""),
 		(_("Blue"), "blue", ""),
 		("Rec", "rec", ""),
+		("Rec" + " " + _("long"), "rec_long", "Infobar/instantRecord"),
 		("Radio", "radio", ""),
 		("Radio" + " " + _("long"), "radio_long", ""),
 		("TV", "showTv", "Infobar/toggleTvRadio"),
@@ -42,6 +44,7 @@ class hotkey:
 		("Help", "displayHelp", ""),
 		("Help" + " " + _("long"), "displayHelp_long", ""),
 		("Subtitle", "subtitle", ""),
+		("Subtitle"+ " " + _("long"), "subtitle_long", ""),
 		("Menu", "mainMenu", ""),
 		("Info (EPG)", "info", "Infobar/openEventView"),
 		("Info (EPG)" + " " + _("long"), "info_long", "Infobar/showEventInfoPlugins"),
@@ -74,7 +77,7 @@ class hotkey:
 		("Fastforward", "fastforward", ""),
 		("Skip back", "skip_back", ""),
 		("Skip forward", "skip_forward", ""),
-		("activatePiP", "activatePiP", ""),
+		("Activate PiP", "activatePiP", ""),
 		("Timer", "timer", ""),
 		("Timer" + " " + _("long"), "timer_long", ""),
 		("Playlist", "playlist", ""),
@@ -141,6 +144,8 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Show extension selection"), "Infobar/showExtensionSelection", "InfoBar"))
 	hotkey.functions.append((_("Zap down"), "Infobar/zapDown", "InfoBar"))
 	hotkey.functions.append((_("Zap up"), "Infobar/zapUp", "InfoBar"))
+	hotkey.functions.append((_("Volume up"), "Infobar/volumeUp", "InfoBar"))
+	hotkey.functions.append((_("Volume down"), "Infobar/volumeDown", "InfoBar"))
 	hotkey.functions.append((_("Switch channel up"), "Infobar/switchChannelUp", "InfoBar"))
 	hotkey.functions.append((_("Switch channel down"), "Infobar/switchChannelDown", "InfoBar"))
 	hotkey.functions.append((_("Show service list"), "Infobar/openServiceList", "InfoBar"))
@@ -170,12 +175,13 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Show InfoBar"), "Infobar/showFirstInfoBar", "InfoBar"))
 	hotkey.functions.append((_("Show second InfoBar"), "Infobar/showSecondInfoBar", "InfoBar"))
 	hotkey.functions.append((_("Toggle infoBar"), "Infobar/toggleShow", "InfoBar"))
-	hotkey.functions.append((_("Letterbox zoom"), "Infobar/vmodeSelection", "InfoBar"))
+	hotkey.functions.append((_("Toggle videomode"), "Infobar/ToggleVideoMode", "InfoBar"))
+	hotkey.functions.append((_("Toggle subtitles show/hide"), "Infobar/toggleSubtitleShown", "InfoBar"))
 	if SystemInfo["PIPAvailable"]:
-		hotkey.functions.append((_("Show PIP"), "Infobar/showPiP", "InfoBar"))
-		hotkey.functions.append((_("Swap PIP"), "Infobar/swapPiP", "InfoBar"))
-		hotkey.functions.append((_("Move PIP"), "Infobar/movePiP", "InfoBar"))
-		hotkey.functions.append((_("Toggle PIPzap"), "Infobar/togglePipzap", "InfoBar"))
+		hotkey.functions.append((_("Show PiP"), "Infobar/showPiP", "InfoBar"))
+		hotkey.functions.append((_("Swap PiP"), "Infobar/swapPiP", "InfoBar"))
+		hotkey.functions.append((_("Move PiP"), "Infobar/movePiP", "InfoBar"))
+		hotkey.functions.append((_("Toggle PiPzap"), "Infobar/togglePipzap", "InfoBar"))
 	hotkey.functions.append((_("Activate HbbTV (Redbutton)"), "Infobar/activateRedButton", "InfoBar"))
 	hotkey.functions.append((_("Toggle HDMI In"), "Infobar/HDMIIn", "InfoBar"))
 	if SystemInfo["LcdLiveTV"]:
@@ -223,7 +229,7 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Language"), "Module/Screens.LanguageSelection/LanguageSelection", "Setup"))
 	hotkey.functions.append((_("Memory Info"), "Module/Screens.About/MemoryInfo", "Setup"))
 	if SystemInfo["canMultiBoot"]:
-		hotkey.functions.append((_("Multiboot"), "Module/Screens.FlashImage/MultibootSelection", "Setup"))
+		hotkey.functions.append((_("Multiboot image selector"), "Module/Screens.FlashImage/MultibootSelection", "Setup"))
 	if os.path.isdir("/etc/ppanels"):
 		for x in [x for x in os.listdir("/etc/ppanels") if x.endswith(".xml")]:
 			x = x[:-4]
@@ -236,7 +242,7 @@ def getHotkeyFunctions():
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
 for x in hotkey.hotkeys:
-        exec "config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:]
+	exec "config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:]
 
 class HotkeySetup(Screen):
 	ALLOW_SUSPEND = False
@@ -639,8 +645,10 @@ class InfoBarHotkey():
 				try:
 					exec "from %s import %s" % (selected[1], selected[2])
 					exec "self.session.open(%s)" %  ",".join(selected[2:])
-				except:
-					print "[Hotkey] error during executing module %s, screen %s" % (selected[1], selected[2])
+				except Exception as e:
+					print "[Hotkey] error during executing module %s, screen %s, %s" % (selected[1], selected[2], e)					
+					import traceback
+					traceback.print_exc()
 			elif selected[0] == "SoftcamSetup" and SystemInfo["HasSoftcamInstalled"]:
 				from Screens.SoftcamSetup import SoftcamSetup
 				self.session.open(SoftcamSetup)
@@ -664,7 +672,7 @@ class InfoBarHotkey():
 					config.movielist.last_videodir.value = moviepath
 			elif selected[0] == "PPanel":
 				ppanelFileName = '/etc/ppanels/' + selected[1] + ".xml"
-				if os.path.isfile(ppanelFileName) and os.path.isdir('/usr/lib/enigma2/python/Plugins/Extensions/PPanel'):
+				if os.path.isfile(ppanelFileName) and os.path.isdir(resolveFilename(SCOPE_PLUGINS, 'Extensions/PPanel')):
 					from Plugins.Extensions.PPanel.ppanel import PPanel
 					self.session.open(PPanel, name=selected[1] + ' PPanel', node=None, filename=ppanelFileName, deletenode=None)
 			elif selected[0] == "Shellscript":

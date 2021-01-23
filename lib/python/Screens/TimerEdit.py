@@ -2,6 +2,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Label import Label
 from Components.config import config
+from Components.Sources.ServiceEvent import ServiceEvent
 from Components.TimerList import TimerList
 from Components.TimerSanityCheck import TimerSanityCheck
 from Components.UsageConfig import preferredTimerPath
@@ -34,6 +35,7 @@ class TimerEditList(Screen):
 		self.list = list
 		self.url = None
 		self["timerlist"] = TimerList(list)
+		self["Service"] = ServiceEvent()
 
 		self.key_red_choice = self.EMPTY
 		self.key_yellow_choice = self.EMPTY
@@ -159,6 +161,7 @@ class TimerEditList(Screen):
 	def updateState(self):
 		cur = self["timerlist"].getCurrent()
 		if cur:
+			self["Service"].newService(cur.service_ref.ref)
 			if cur.external:
 				self["key_info"].setText("")
 			else:
@@ -173,6 +176,7 @@ class TimerEditList(Screen):
 						text = _("Timer:") + " " + text + "\n\n" + _("EPG:") + " " + short_description
 					elif short_description:
 						text = short_description
+						cur.description = short_description
 				if ext_description and ext_description != text:
 					if text:
 						text += "\n\n" + ext_description
@@ -324,8 +328,10 @@ class TimerEditList(Screen):
 			data = (int(time()), int(time() + 60), "", "", None)
 		else:
 			data = parseEvent(event, description = False)
-
-		self.addTimer(RecordTimerEntry(serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data))
+		timer = RecordTimerEntry(serviceref, checkOldTimers = True, dirname = preferredTimerPath(), *data)
+		timer.justplay = config.recording.timer_default_type.value == "zap"
+		timer.always_zap = config.recording.timer_default_type.value == "zap+record"
+		self.addTimer(timer)
 
 	def addTimer(self, timer):
 		self.session.openWithCallback(self.finishedAdd, TimerEntry, timer)
@@ -403,16 +409,14 @@ class TimerSanityConflict(Screen):
 		Screen.__init__(self, session)
 		self.skinName = "TimerEditList"
 		self.timer = timer
-
 		self.list = []
 		count = 0
 		for x in timer:
 			self.list.append((timer[count], False))
 			count += 1
-		if count == 1:
-			self.setTitle((_("Channel not in services list")))
-		else:
-			self.setTitle(_("Timer sanity error"))
+		warning_color = "\c00????00" # yellow
+		title_text = count == 1 and warning_color + _("Channel not in services list") or warning_color + _("Timer sanity error")
+		self.setTitle(title_text)
 
 		self["timerlist"] = TimerList(self.list)
 

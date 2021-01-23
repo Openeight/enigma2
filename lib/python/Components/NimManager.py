@@ -1,5 +1,6 @@
 import os
 
+from SystemInfo import SystemInfo
 from Tools.HardwareInfo import HardwareInfo
 from Tools.BoundFunction import boundFunction
 
@@ -124,6 +125,7 @@ class SecConfigure:
 	def update(self):
 		sec = secClass.getInstance()
 		self.configuredSatellites = set()
+		self.maxLnbNum = sec.getMaxLnbNum()
 		for slotid in self.NimManager.getNimListOfType("DVB-S"):
 			if self.NimManager.nimInternallyConnectableTo(slotid) is not None:
 				self.NimManager.nimRemoveInternalLink(slotid)
@@ -295,7 +297,7 @@ class SecConfigure:
 				currLnb = config.Nims[slotid].advanced.lnb[x]
 				sec.addLNB()
 
-				if x < 65:
+				if x <= self.maxLnbNum:
 					sec.setLNBNum(x)
 
 				tunermask = 1 << slotid
@@ -320,6 +322,7 @@ class SecConfigure:
 					sec.setLNBSatCRvco(currLnb.scrfrequency.value * 1000)
 					sec.setLNBSatCRPositionNumber(int(currLnb.positionNumber.value) + int(currLnb.positionsOffset.value))
 					sec.setLNBSatCRformat(currLnb.format.value == "jess" and 2 or 1)
+					sec.setLNBBootupTime(currLnb.bootuptime.value)
 				elif currLnb.lof.value == "c_band":
 					sec.setLNBLOFL(5150000)
 					sec.setLNBLOFH(5150000)
@@ -457,6 +460,8 @@ class SecConfigure:
 						sec.setVoltageMode(switchParam._14V)
 					elif currSat.voltage.value == "18V":
 						sec.setVoltageMode(switchParam._18V)
+					elif currSat.voltage.value == "0V":
+						sec.setVoltageMode(switchParam._0V)
 
 					if currSat.tonemode.value == "band":
 						sec.setToneMode(switchParam.HILO)
@@ -1228,7 +1233,7 @@ def InitNimManager(nimmgr, update_slots = []):
 		(3601, _('All satellites 1 (USALS)'), 1), (3602, _('All satellites 2 (USALS)'), 1),
 		(3603, _('All satellites 3 (USALS)'), 1), (3604, _('All satellites 4 (USALS)'), 1), (3605, _('Selecting satellites 1 (USALS)'), 1), (3606, _('Selecting satellites 2 (USALS)'), 1)]
 	advanced_lnb_choices = [("0", _("not configured"))] + [(str(y), "LNB " + str(y)) for y in range(1, 65)]
-	advanced_voltage_choices = [("polarization", _("Polarization")), ("13V", _("13 V")), ("18V", _("18 V"))]
+	advanced_voltage_choices = [("polarization", _("Polarization")), ("13V", _("13 V")), ("18V", _("18 V")), ("0V", _("Externally powered"))]
 	advanced_tonemode_choices = [("band", _("Band")), ("on", _("On")), ("off", _("Off"))]
 	advanced_lnb_toneburst_choices = [("none", _("None")), ("A", _("A")), ("B", _("B"))]
 	advanced_lnb_allsat_diseqcmode_choices = [("1_2", _("1.2"))]
@@ -1250,6 +1255,8 @@ def InitNimManager(nimmgr, update_slots = []):
 			lnbs = nim.advanced.lnb
 			section = lnbs[lnb]
 			if isinstance(section.unicable, ConfigNothing):
+				def setPowerInserter(configEntry):
+					section.bootuptime.value = 0 if configEntry.value else section.bootuptime.default
 				def getformat(value, index):
 					return ("jess" if index >= int(value.split(",")[1] if "," in value else 4) else "unicable") if value.startswith("dSCR") else value
 				def positionsChanged(configEntry):
@@ -1267,6 +1274,11 @@ def InitNimManager(nimmgr, update_slots = []):
 					config.unicable.unicableProduct.value = configEntry.value
 					config.unicable.unicableProduct.save()
 					productparameters = [p for p in [m.getchildren() for m in unicable_xml.find(lnb_or_matrix) if m.get("name") == manufacturer][0] if p.get("name") == configEntry.value][0]
+					section.bootuptime = ConfigInteger(default=int(productparameters.get("bootuptime", 1000)), limits = (0, 9999))
+					section.bootuptime.save_forced = True
+					section.powerinserter = ConfigYesNo(default=SystemInfo["LnbPowerAlwaysOn"])
+					section.powerinserter.save_forced = True
+					section.powerinserter.addNotifier(setPowerInserter)
 					srcfrequencylist = productparameters.get("scrs").split(",")
 					section.scrList = ConfigSelection([("%d" % (x + 1), "User Band %d (%s)" % ((x + 1), srcfrequencylist[x])) for x in range(len(srcfrequencylist))])
 					section.scrList.save_forced = True
@@ -1295,6 +1307,11 @@ def InitNimManager(nimmgr, update_slots = []):
 					srcfrequencyList = configEntry.value=="jess" and (1210, 1420, 1680, 2040, 984, 1020, 1056, 1092, 1128, 1164, 1256, 1292, 1328, 1364, 1458, 1494, 1530, 1566, 1602,\
 						1638, 1716, 1752, 1788, 1824, 1860, 1896, 1932, 1968, 2004, 2076, 2112, 2148) or (1284, 1400, 1516, 1632, 1748, 1864, 1980, 2096)
 					section.scrList.addNotifier(boundFunction(userScrListChanged, srcfrequencyList))
+					section.bootuptime = ConfigInteger(default=1000, limits = (0, 9999))
+					section.bootuptime.save_forced = True
+					section.powerinserter = ConfigYesNo(default=SystemInfo["LnbPowerAlwaysOn"])
+					section.powerinserter.save_forced = True
+					section.powerinserter.addNotifier(setPowerInserter)
 				def unicableChanged(configEntry):
 					config.unicable.unicable.value = configEntry.value
 					config.unicable.unicable.save()

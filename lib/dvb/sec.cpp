@@ -224,7 +224,8 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 					int lof = sat.frequency > lnb_param.m_lof_threshold ?
 						lnb_param.m_lof_hi : lnb_param.m_lof_lo;
 					unsigned int tuner_freq = absdiff(sat.frequency, lof);
-					if (tuner_freq < fe_info.frequency_min || tuner_freq > fe_info.frequency_max)
+					if (tuner_freq < (fe_info.type ? fe_info.frequency_min/1000 : fe_info.frequency_min)
+						|| tuner_freq > (fe_info.type ? fe_info.frequency_max/1000 : fe_info.frequency_max))
 						ret = 0;
 				}
 
@@ -398,8 +399,10 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 				frequency = ((((local * 2) / 125) + 1) / 2) * 125;
 				frontend.setData(eDVBFrontend::FREQ_OFFSET, sat.frequency - frequency);
 
+				if ( voltage_mode == eDVBSatelliteSwitchParameters::_0V)
+					voltage = iDVBFrontend::voltageOff;
 				/* Dishpro bandstacking HACK */
-				if (lnb_param.m_lof_threshold == 1000)
+				else if (lnb_param.m_lof_threshold == 1000)
 					voltage = VOLTAGE(18);
 				else if ( voltage_mode == eDVBSatelliteSwitchParameters::_14V
 					|| ( sat.polarisation & eDVBFrontendParametersSatellite::Polarisation_Vertical
@@ -714,7 +717,7 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 				compare.voltage = iDVBFrontend::voltageOff;
 				sec_sequence.push_back( eSecCommand(eSecCommand::IF_NOT_VOLTAGE_GOTO, compare) );
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, VOLTAGE(13)) );
-				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[UNICABLE_DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS] ) );
+				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[UNICABLE_DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS] > lnb_param.boot_up_time ? m_params[UNICABLE_DELAY_AFTER_ENABLE_VOLTAGE_BEFORE_SWITCH_CMDS] : lnb_param.boot_up_time ) );
 
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, VOLTAGE(18)) );
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_TONE, iDVBFrontend::toneOff) );
@@ -1538,6 +1541,18 @@ RESULT eDVBSatelliteEquipmentControl::setLNBSatCRPositionNumber(unsigned int pos
 	else
 		return -ENOENT;
 
+	return 0;
+}
+
+RESULT eDVBSatelliteEquipmentControl::setLNBBootupTime(int BootUpTime)
+{
+	eSecDebug("eDVBSatelliteEquipmentControl::setLNBBootupTime(%d)", BootUpTime);
+	if(!((BootUpTime >= 0)))
+		return -EPERM;
+	if ( currentLNBValid() )
+		m_lnbs[m_lnbidx].boot_up_time = BootUpTime;
+	else
+		return -ENOENT;
 	return 0;
 }
 

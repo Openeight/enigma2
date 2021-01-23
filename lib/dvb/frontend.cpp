@@ -5,6 +5,7 @@
 #include <lib/dvb/frontendparms.h>
 #include <lib/base/cfile.h>
 #include <lib/base/eerror.h>
+#include <lib/base/estring.h>
 #include <lib/base/nconfig.h> // access to python config
 #include <errno.h>
 #include <unistd.h>
@@ -1089,7 +1090,13 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (snr * 240) >> 8;
 	}
-	else if (strstr(m_description, "BCM4506") || strstr(m_description, "BCM4505") || strstr(m_description, "BCM45208") || strstr(m_description, "BCM45308") || strstr(m_description, "BCM4506 (internal)") || strstr(m_description, "BCM73625 (G3)"))
+	else if (strstr(m_description, "BCM4506") ||
+		strstr(m_description, "BCM4505") ||
+		strstr(m_description, "BCM45208") ||
+		strstr(m_description, "BCM45308") ||
+		strstr(m_description, "BCM4506 (internal)") ||
+		strstr(m_description, "BCM73625 (G3)") ||
+		strstr(m_description, "BCM3158"))
 	{
 		ret = (snr * 100) >> 8;
 	}
@@ -1106,7 +1113,9 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1600) + 0.2100) * 100);
 	}
-	else if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL6222)") || !strcmp(m_description, "Vuplus DVB-S NIM(AVL6211)") || !strcmp(m_description, "BCM7335 DVB-S2 NIM (internal)")) // VU+ DVB-S2 Dual NIM and VU+DUO DVB-S2 NIM
+	else if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL6222)") ||
+		!strcmp(m_description, "Vuplus DVB-S NIM(AVL6211)") ||
+		!strcmp(m_description, "BCM7335 DVB-S2 NIM (internal)")) // VU+ DVB-S2 Dual NIM and VU+DUO DVB-S2 NIM
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1244) + 2.5079) * 100);
 		if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL6222)"))
@@ -1128,9 +1137,11 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.28) - 10.0) * 100);
 	}
-	else if (!strcmp(m_description, "DVB-S2 NIM(45208 FBC)") || !strcmp(m_description, "DVB-S2 NIM(45308 FBC)"))
+	else if (strstr(m_description, "NIM(45208 FBC)") ||
+		strstr(m_description, "NIM(45308 FBC)") ||
+		strstr(m_description, "NIM(45308X FBC)"))
 	{
-		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1950) - 1.0000) * 100);
+		ret = (int)(snr < 57500 ? (snr < 52500 ? (snr < 32200 ? 0.02640 * snr + 0.0 :  0.02604 * snr + 11.55125) : 0.01310 * snr + 661.55172) : 0.02826 * snr - 210.);
 	}
 	else if (!strcmp(m_description, "DVB-C NIM(3128 FBC)"))
 	{
@@ -1188,6 +1199,11 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = (int)(snr / 40.5);
 		sat_max = 1900;
 	}
+	else if (strstr(m_description, "BCM3148"))
+	{
+		ret = (int)(snr / 15.61);
+		sat_max = 4200;
+	}
 	else if(!strcmp(m_description, "TBS-5925") || !strcmp(m_description, "DVBS2BOX") || !strcmp(m_description, "TechniSat USB device"))
 	{
 		ret = (snr * 2000) / 0xFFFF;
@@ -1223,6 +1239,22 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 				break;
 		}
 	}
+	else if (!strcmp(m_description, "Si21682") || !strcmp(m_description, "Si2168")) // SF4008 T/T2/C and Zgemma TC Models
+	{
+		int type = -1;
+		oparm.getSystem(type);
+		switch (type)
+		{
+			case feCable:
+				ret = (int)(snr / 17);
+				cab_max = 3800;
+				break;
+			case feTerrestrial:
+				ret = (int)(snr / 22.3);
+				ter_max = 2900;
+				break;
+		}
+	}
 	else if (!strncmp(m_description, "Si2166D", 7)) // SF8008 S2
 	{
 		ret = snr;
@@ -1231,6 +1263,8 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	else if (!strncmp(m_description, "Si216", 5)) // New models with SI tuners
 	{
 		ret = snr;
+		if (!strcmp(m_description, "Si2169")) // DVB-T/C Xtrend
+			ret = snr / 10;
 	}
 
 	signalqualitydb = ret;
@@ -2378,7 +2412,8 @@ RESULT eDVBFrontend::prepare_sat(const eDVBFrontendParametersSatellite &feparm, 
 			feparm.pls_code,
 			feparm.t2mi_plp_id,
 			feparm.t2mi_pid);
-		if ((unsigned int)satfrequency < fe_info.frequency_min || (unsigned int)satfrequency > fe_info.frequency_max)
+		if ((unsigned int)satfrequency < (fe_info.type ? fe_info.frequency_min/1000 : fe_info.frequency_min)
+			|| (unsigned int)satfrequency > (fe_info.type ? fe_info.frequency_max/1000 : fe_info.frequency_max))
 		{
 			eDebugNoSimulate("[eDVBFrontend%d] %d mhz out of tuner range.. dont tune", m_dvbid, satfrequency / 1000);
 			return -EINVAL;
@@ -2610,6 +2645,7 @@ RESULT eDVBFrontend::setVoltage(int voltage)
 	}
 	if (m_simulate)
 		return 0;
+	eDebug("[eDVBFrontend%d] setVoltage FE_ENABLE_HIGH_LNB_VOLTAGE %d FE_SET_VOLTAGE %d", m_dvbid, increased, vlt);
 	::ioctl(m_fd, FE_ENABLE_HIGH_LNB_VOLTAGE, increased);
 	return ::ioctl(m_fd, FE_SET_VOLTAGE, vlt);
 }
@@ -2998,16 +3034,18 @@ std::string eDVBFrontend::getCapabilities()
 	ss << "DVB API version: " << m_dvbversion / 256 << "." << m_dvbversion % 256 << std::endl;
 	ss << "Frontend: " << fe_info.name << std::endl;
 
+	int k = fe_info.type ? 1 : 1000;
+
 	ss << "Frequency:";
-	ss << " min " << fe_info.frequency_min;
-	ss << " max " << fe_info.frequency_max;
-	ss << " stepsize " << fe_info.frequency_stepsize;
-	ss << " tolerance " << fe_info.frequency_tolerance << std::endl;
+	ss << " min " <<  formatHz(fe_info.frequency_min * k);
+	ss << " max " << formatHz(fe_info.frequency_max * k);
+	ss << " stepsize " << formatHz(fe_info.frequency_stepsize * k);
+	ss << " tolerance " << formatHz(fe_info.frequency_tolerance * k) << std::endl;
 
 	ss << "Symbolrate:";
-	ss << " min " << fe_info.symbol_rate_min;
-	ss << " max " << fe_info.symbol_rate_max;
-	ss << " tolerance " << fe_info.symbol_rate_tolerance << std::endl;
+	ss << " min " << formatNumber(fe_info.symbol_rate_min, "Bauds");
+	ss << " max " << formatNumber(fe_info.symbol_rate_max, "Bauds");
+	ss << " tolerance " << formatHz(fe_info.symbol_rate_tolerance) << std::endl;
 
 	ss << "Capabilities:";
 	if (fe_info.caps == FE_IS_STUPID)			ss << " stupid FE";

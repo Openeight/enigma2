@@ -1,36 +1,21 @@
-import copy
-import skin
+from copy import copy, deepcopy
 
-from enigma import eListboxPythonMultiContent, gFont, getPrevAsciiCode, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_HALIGN_RIGHT, RT_VALIGN_TOP, RT_VALIGN_CENTER, RT_VALIGN_BOTTOM, BT_SCALE
+from enigma import BT_SCALE, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_BOTTOM, RT_VALIGN_CENTER, RT_VALIGN_TOP, eListboxPythonMultiContent, getPrevAsciiCode, gFont
 
+from skin import fonts, parameters
 from Components.ActionMap import HelpableNumberActionMap
 from Components.Input import Input
 from Components.Label import Label
 from Components.Language import language
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Sources.StaticText import StaticText
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
-
-
-class VirtualKeyBoardList(MenuList):
-	def __init__(self, list, enableWrapAround=False):
-		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		font = skin.fonts.get("VirtualKeyBoard", ("Regular", 28, 45))
-		self.l.setFont(0, gFont(font[0], font[1]))
-		self.l.setFont(1, gFont(font[0], font[1] * 5 / 9))  # Smaller font is 56% the height of bigger font
-		self.l.setItemHeight(font[2])
-
-
-class VirtualKeyBoardEntryComponent:
-	def __init__(self):
-		pass
-
 
 VKB_DONE_ICON = 0
 VKB_ENTER_ICON = 1
@@ -44,6 +29,21 @@ VKB_SAVE_TEXT = 8
 VKB_SEARCH_TEXT = 9
 
 SPACE = u"SPACEICON"  # Symbol to be used for a SPACE on the keyboard.  Must be u"SPACE" (any case), u"SPACEICON" or u"SPACEICONALT".
+
+
+class VirtualKeyBoardList(MenuList):
+	def __init__(self, list, enableWrapAround=False):
+		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
+		font = fonts.get("VirtualKeyBoard", ("Regular", 28, 45))
+		self.l.setFont(0, gFont(font[0], font[1]))
+		self.l.setFont(1, gFont(font[0], font[1] * 5 // 9))  # Smaller font is 56% the height of bigger font
+		self.l.setItemHeight(font[2])
+
+
+class VirtualKeyBoardEntryComponent:
+	def __init__(self):
+		pass
+
 
 # For more information about using VirtualKeyBoard see /doc/VIRTUALKEYBOARD
 #
@@ -490,24 +490,24 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"uk_01": [_("Ukrainian"), _("Russian"), self.ukranian(self.russian)],
 			"uk_UA": [_("Ukrainian"), _("Ukraine"), self.ukranianEnhanced(self.russian)]
 		}
-
 		self["actions"] = HelpableNumberActionMap(self, "VirtualKeyBoardActions", {
 			"cancel": (self.cancel, _("Cancel any text changes and exit")),
 			"save": (self.save, _("Save / Enter text and exit")),
-			"shift": (self.shiftSelected, _("Select the virtual keyboard shifted character set for the next character only")),
-			"capsLock": (self.capsLockSelected, _("Select the virtual keyboard shifted character set")),
-			"select": (self.processSelect, _("Select the character or action under the virtual keyboard cursor")),
-			"locale": (self.localeMenu, _("Select the virtual keyboard locale from a menu")),
-			"up": (self.up, _("Move the virtual keyboard cursor up")),
-			"left": (self.left, _("Move the virtual keyboard cursor left")),
-			"right": (self.right, _("Move the virtual keyboard cursor right")),
-			"down": (self.down, _("Move the virtual keyboard cursor down")),
-			"first": (self.cursorFirst, _("Move the text buffer cursor to the first character")),
-			"prev": (self.cursorLeft, _("Move the text buffer cursor left")),
-			"next": (self.cursorRight, _("Move the text buffer cursor right")),
-			"last": (self.cursorLast, _("Move the text buffer cursor to the last character")),
-			"backspace": (self.backSelected, _("Delete the character to the left of text buffer cursor")),
-			"delete": (self.forwardSelected, _("Delete the character under the text buffer cursor")),
+			"shift": (self.shiftSelected, _("Select the shifted character set for the next character only")),
+			"capsLock": (self.capsLockSelected, _("Select the shifted character set")),
+			"select": (self.processSelect, _("Select the character or action under the keyboard cursor")),
+			"locale": (self.localeMenu, _("Select the locale from a menu")),
+			"up": (self.up, _("Move the keyboard cursor up")),
+			"left": (self.left, _("Move the keyboard cursor left")),
+			"right": (self.right, _("Move the keyboard cursor right")),
+			"down": (self.down, _("Move the keyboard cursor down")),
+			"first": (self.cursorFirst, _("Move the text cursor to the first character")),
+			"prev": (self.cursorLeft, _("Move the text cursor left")),
+			"next": (self.cursorRight, _("Move the text cursor right")),
+			"last": (self.cursorLast, _("Move the text cursor to the last character")),
+			"backspace": (self.backSelected, _("Delete the character to the left of text cursor")),
+			"delete": (self.forwardSelected, _("Delete the character under the text cursor")),
+			"erase": (self.eraseAll, _("Delete all the text")),
 			"toggleOverwrite": (self.keyToggleOW, _("Toggle new text inserts before or overwrites existing text")),
 			"1": (self.keyNumberGlobal, _("Number or SMS style data entry")),
 			"2": (self.keyNumberGlobal, _("Number or SMS style data entry")),
@@ -521,7 +521,6 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			"0": (self.keyNumberGlobal, _("Number or SMS style data entry")),
 			"gotAsciiCode": (self.keyGotAscii, _("Keyboard data entry"))
 		}, -2, description=_("Virtual KeyBoard Functions"))
-
 		self.lang = language.getLanguage()
 		self["prompt"] = Label(prompt)
 		self["text"] = Input(text=text, maxSize=maxSize, visible_width=visible_width, type=type, currPos=len(text.decode("utf-8", "ignore")) if currPos is None else currPos, allMarked=allMarked)
@@ -534,9 +533,9 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self["key_green"] = StaticText(_(greenLabel))
 		self["key_yellow"] = StaticText(_("Shift"))
 		self["key_blue"] = StaticText(self.shiftMsgs[1])
+		self["key_text"] = StaticText(_("TEXT"))
 		self["key_help"] = StaticText(_("HELP"))
-
-		width, height = skin.parameters.get("VirtualKeyBoard", (45, 45))
+		width, height = parameters.get("VirtualKeyBoard", (45, 45))
 		if self.bg_l is None or self.bg_m is None or self.bg_r is None:
 			self.width = width
 			self.height = height
@@ -546,11 +545,11 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		# Alignment -> (Horizontal, Vertical):
 		# 	Horizontal alignment: 0=Auto, 1=Left, 2=Center, 3=Right (Auto=Left on left, Center on middle, Right on right).
 		# 	Vertical alignment: 0=Auto, 1=Top, 2=Center, 3=Bottom (Auto=Center).
-		self.alignment = skin.parameters.get("VirtualKeyBoardAlignment", (0, 0))
+		self.alignment = parameters.get("VirtualKeyBoardAlignment", (0, 0))
 		# Padding -> (Left/Right, Top/Botton) in pixels
-		self.padding = skin.parameters.get("VirtualKeyBoardPadding", (4, 4))
+		self.padding = parameters.get("VirtualKeyBoardPadding", (4, 4))
 		# Text color for each shift level.  (Ensure there is a color for each shift level!)
-		self.shiftColors = skin.parameters.get("VirtualKeyBoardShiftColors", (0x00ffffff, 0x00ffffff, 0x0000ffff, 0x00ff00ff))
+		self.shiftColors = parameters.get("VirtualKeyBoardShiftColors", (0x00ffffff, 0x00ffffff, 0x0000ffff, 0x00ff00ff))
 		self.language = None
 		self.location = None
 		self.keyList = []
@@ -569,7 +568,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.onLayoutFinish.append(self.buildVirtualKeyBoard)
 
 	def arabic(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[1][0][8] = u"\u066D"
 		keyList.extend([[
 			[u"\u0630", u"\u0661", u"\u0662", u"\u0663", u"\u0664", u"\u0665", u"\u0666", u"\u0667", u"\u0668", u"\u0669", u"\u0660", u"-", u"=", u"BACKSPACEICON"],
@@ -587,7 +586,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def belgian(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0][6] = u"\u00A7"
 		keyList[0][0][8] = u"!"
 		keyList[0][0][12] = u"-"
@@ -609,7 +608,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def dutch(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0][0] = u"@"
 		keyList[0][0][11] = u"/"
 		keyList[0][0][12] = u"\u00B0"
@@ -636,7 +635,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def estonian(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0][0] = u"\u02C7"
 		keyList[0][1][11] = u"\u00FC"
 		keyList[0][1][12] = u"\u00F5"
@@ -667,7 +666,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def germanSwiss(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0][0] = u"\u00A7"
 		keyList[0][0][11] = u"'"
 		keyList[0][0][12] = u"^"
@@ -700,7 +699,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def hungarian(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0][0] = u"0"
 		keyList[0][0][10] = u"\u00F6"
 		keyList[0][0][11] = u"\u00FC"
@@ -737,7 +736,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def latvianStandard(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][3][1] = u"\\"
 		keyList[1][3][1] = u"|"
 		keyList.append([
@@ -757,7 +756,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def lithuanian(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0] = [u"`", u"\u0105", u"\u010D", u"\u0119", u"\u0117", u"\u012F", u"\u0161", u"\u0173", u"\u016B", u"9", u"0", u"-", u"\u017E", u"BACKSPACEICON"]
 		keyList[0][3][1] = u"\\"
 		keyList[1][0] = [u"~", u"\u0104", u"\u010C", u"\u0118", u"\u0116", u"\u012E", u"\u0160", u"\u0172", u"\u016A", u"(", u")", u"_", u"\u017D", u"BACKSPACEICON"]
@@ -772,7 +771,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def norwegian(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0][0] = u"|"
 		keyList[0][0][12] = u"\\"
 		keyList[0][2][10] = u"\u00F8"
@@ -786,7 +785,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def persian(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList.append([
 			[u"\u00F7", u"\u06F1", u"\u06F2", u"\u06F3", u"\u06F4", u"\u06F5", u"\u06F6", u"\u06F7", u"\u06F8", u"\u06F9", u"\u06F0", u"-", u"=", u"BACKSPACEICON"],
 			[u"FIRSTICON", u"\u0636", u"\u0635", u"\u062B", u"\u0642", u"\u0641", u"\u063A", u"\u0639", u"\u0647", u"\u062E", u"\u062D", u"\u062C", u"\u0686", u"\u067E"],
@@ -804,7 +803,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def polish(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0][0] = u"\u02DB"
 		keyList[0][0][11] = u"+"
 		keyList[0][1][11] = u"\u017C"
@@ -832,7 +831,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def polishProgrammers(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][3][1] = u"\\"
 		keyList[1][3][1] = u"|"
 		keyList.append([
@@ -845,7 +844,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def portuguese(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0][0] = u"\\"
 		keyList[0][0][11] = u"'"
 		keyList[0][0][12] = u"\u00AB"
@@ -872,7 +871,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def slovak(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][0] = [u";", u"+", u"\u013E", u"\u0161", u"\u010D", u"\u0165", u"\u017E", u"\u00FD", u"\u00E1", u"\u00ED", u"\u00E9", u"=", u"\u00B4", u"BACKSPACEICON"]
 		keyList[0][1][11] = u"\u00FA"
 		keyList[0][1][12] = u"\u00E4"
@@ -899,7 +898,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def ukranian(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][1][12] = u"\u0457"
 		keyList[0][1][13] = u"\\"
 		keyList[0][2][11] = u"\u0454"
@@ -919,10 +918,10 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		return keyList
 
 	def unitedKingdom(self, base):
-		keyList = copy.deepcopy(base)
+		keyList = deepcopy(base)
 		keyList[0][1][13] = u"#"
 		keyList[0][3] = [u"CAPSLOCKICON", u"\\", u"z", u"x", u"c", u"v", u"b", u"n", u"m", u",", u".", u"/", u"CAPSLOCKICON", u"CAPSLOCKICON"]
-		keyList[0][4] = copy.copy(self.footer)
+		keyList[0][4] = copy(self.footer)
 		keyList[0][4][10] = u"\u00A6"
 		keyList[1][0][0] = u"\u00AC"
 		keyList[1][0][2] = u"\""
@@ -930,7 +929,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		keyList[1][1][13] = u"~"
 		keyList[1][2][11] = u"@"
 		keyList[1][3] = [u"CAPSLOCKICON", u"|", u"Z", u"X", u"C", u"V", u"B", u"N", u"M", u"<", u">", u"?", u"CAPSLOCKICON", u"CAPSLOCKICON"]
-		keyList[1][4] = copy.copy(self.footer)
+		keyList[1][4] = copy(self.footer)
 		keyList[1][4][10] = u"\u20AC"
 		return keyList
 
@@ -955,7 +954,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.keyboardWidth = len(self.keyList[self.shiftLevel][0])  # Determine current keymap size.
 		self.keyboardHeight = len(self.keyList[self.shiftLevel])
 		self.maxKey = self.keyboardWidth * (self.keyboardHeight - 1) + len(self.keyList[self.shiftLevel][-1]) - 1
-		# print "[VirtualKeyBoard] DEBUG: Width=%d, Height=%d, Keys=%d, maxKey=%d, shiftLevels=%d" % (self.keyboardWidth, self.keyboardHeight, self.maxKey + 1, self.maxKey, self.shiftLevels)
+		# print("[VirtualKeyBoard] DEBUG: Width=%d, Height=%d, Keys=%d, maxKey=%d, shiftLevels=%d" % (self.keyboardWidth, self.keyboardHeight, self.maxKey + 1, self.maxKey, self.shiftLevels))
 		self.index = 0
 		self.list = []
 		for keys in self.keyList[self.shiftLevel]:  # Process all the buttons in this shift level.
@@ -969,9 +968,9 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		res = [keys]
 		text = []
 		offset = 14 - self.keyboardWidth  # 14 represents the maximum buttons per row as defined here and in the skin (14 x self.width).
-		x = self.width * offset / 2
+		x = self.width * offset // 2
 		if offset % 2:
-			x += self.width / 2
+			x += self.width // 2
 		xHighlight = x
 		prevKey = None
 		for key in keys:
@@ -982,26 +981,26 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 					x += self.width * width
 				else:
 					w = self.bg_l.size().width()
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.bg_l))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.bg_l))
 					x += w
 					w = self.bg_m.size().width() + (self.width * (width - 1))
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.bg_m, flags = BT_SCALE))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.bg_m, flags=BT_SCALE))
 					x += w
 					w = self.bg_r.size().width()
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.bg_r))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.bg_r))
 					x += w
 				highlight = self.keyHighlights.get(key.upper(), (None, None, None))  # Check if the cell needs to be highlighted.
 				if highlight[0] is None or highlight[1] is None or highlight[2] is None:  # If available display the cell highlight.
 					xHighlight += self.width * width
 				else:
 					w = highlight[0].size().width()
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(xHighlight, 0), size=(w, self.height), png=highlight[0]))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(xHighlight, 0), size=(w, self.height), png=highlight[0]))
 					xHighlight += w
 					w = highlight[1].size().width() + (self.width * (width - 1))
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(xHighlight, 0), size=(w, self.height), png=highlight[1], flags = BT_SCALE))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(xHighlight, 0), size=(w, self.height), png=highlight[1], flags=BT_SCALE))
 					xHighlight += w
 					w = highlight[2].size().width()
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(xHighlight, 0), size=(w, self.height), png=highlight[2]))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(xHighlight, 0), size=(w, self.height), png=highlight[2]))
 					xHighlight += w
 				if self.alignment[0] == 1:  # Determine the cell alignment.
 					alignH = RT_HALIGN_LEFT
@@ -1029,17 +1028,17 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 					left = xData
 					wImage = image.size().width()
 					if alignH == RT_HALIGN_CENTER:
-						left += (w - wImage) / 2
+						left += (w - wImage) // 2
 					elif alignH == RT_HALIGN_RIGHT:
 						left += w - wImage
 					top = self.padding[1]
 					hImage = image.size().height()
 					if alignV == RT_VALIGN_CENTER:
-						top += (h - hImage) / 2
+						top += (h - hImage) // 2
 					elif alignV == RT_VALIGN_BOTTOM:
 						top += h - hImage
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(left, top), size=(wImage, hImage), png=image))
-					# print "[VirtualKeyBoard] DEBUG: Left=%d, Top=%d, Width=%d, Height=%d, Image Width=%d, Image Height=%d" % (left, top, w, h, wImage, hImage)
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(left, top), size=(wImage, hImage), png=image))
+					# print("[VirtualKeyBoard] DEBUG: Left=%d, Top=%d, Width=%d, Height=%d, Image Width=%d, Image Height=%d" % (left, top, w, h, wImage, hImage))
 				else:  # Display the cell text.
 					if len(key) > 1:  # NOTE: UTF8 / Unicode glyphs only count as one character here.
 						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=1, flags=alignH | alignV, text=key.encode("utf-8"), color=self.shiftColors[self.shiftLevel]))
@@ -1053,26 +1052,26 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		if self.sel_l is None or self.sel_m is None or self.sel_r is None:
 			return
 		if self.previousSelectedKey is not None:
-			del self.list[self.previousSelectedKey / self.keyboardWidth][-3:]
+			del self.list[self.previousSelectedKey // self.keyboardWidth][-3:]
 		if self.selectedKey > self.maxKey:
 			self.selectedKey = self.maxKey
 		start, width = self.findStartAndWidth(self.selectedKey)
 		x = start * self.width
 		w = self.sel_l.size().width()
-		self.list[self.selectedKey / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.sel_l))
+		self.list[self.selectedKey // self.keyboardWidth].append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.sel_l))
 		x += w
 		w = self.sel_m.size().width() + (self.width * (width - 1))
-		self.list[self.selectedKey / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.sel_m, flags = BT_SCALE))
+		self.list[self.selectedKey // self.keyboardWidth].append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.sel_m, flags=BT_SCALE))
 		x += w
 		w = self.sel_r.size().width()
-		self.list[self.selectedKey / self.keyboardWidth].append(MultiContentEntryPixmapAlphaBlend(pos=(x, 0), size=(w, self.height), png=self.sel_r))
+		self.list[self.selectedKey // self.keyboardWidth].append(MultiContentEntryPixmapAlphaTest(pos=(x, 0), size=(w, self.height), png=self.sel_r))
 		self.previousSelectedKey = self.selectedKey
 		self["list"].setList(self.list)
 
 	def findStartAndWidth(self, key):
 		if key > self.maxKey:
 			key = self.maxKey
-		row = key / self.keyboardWidth
+		row = key // self.keyboardWidth
 		key = key % self.keyboardWidth
 		start = key
 		while start:
@@ -1085,12 +1084,12 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 			if start + width >= max or self.keyList[self.shiftLevel][row][start + width] != self.keyList[self.shiftLevel][row][key]:
 				break
 			width += 1
-		# print "[VirtualKeyBoard] DEBUG: Key='%s', Position=%d, Start=%d, Width=%d" % (self.keyList[self.shiftLevel][row][key], key, start, width)
+		# print("[VirtualKeyBoard] DEBUG: Key='%s', Position=%d, Start=%d, Width=%d" % (self.keyList[self.shiftLevel][row][key], key, start, width))
 		return (start, width)
 
 	def processSelect(self):
 		self.smsChar = None
-		text = self.keyList[self.shiftLevel][self.selectedKey / self.keyboardWidth][self.selectedKey % self.keyboardWidth].encode("UTF-8")
+		text = self.keyList[self.shiftLevel][self.selectedKey // self.keyboardWidth][self.selectedKey % self.keyboardWidth].encode("UTF-8")
 		cmd = self.cmds.get(text.upper(), None)
 		if cmd is None:
 			self['text'].char(text.encode('UTF-8'))
@@ -1159,6 +1158,10 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 	def forwardSelected(self):
 		self["text"].deleteForward()
 
+	def eraseAll(self):
+		self['text'].deleteAllChars()
+		self['text'].update()
+
 	def cursorFirst(self):
 		self["text"].home()
 
@@ -1175,7 +1178,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		self.smsChar = None
 		self.selectedKey -= self.keyboardWidth
 		if self.selectedKey < 0:
-			self.selectedKey = self.maxKey / self.keyboardWidth * self.keyboardWidth + self.selectedKey % self.keyboardWidth
+			self.selectedKey = self.maxKey // self.keyboardWidth * self.keyboardWidth + self.selectedKey % self.keyboardWidth
 			if self.selectedKey > self.maxKey:
 				self.selectedKey -= self.keyboardWidth
 		self.markSelectedKey()
@@ -1185,7 +1188,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		start, width = self.findStartAndWidth(self.selectedKey)
 		if width > 1:
 			width = self.selectedKey % self.keyboardWidth - start + 1
-		self.selectedKey = self.selectedKey / self.keyboardWidth * self.keyboardWidth + (self.selectedKey + self.keyboardWidth - width) % self.keyboardWidth
+		self.selectedKey = self.selectedKey // self.keyboardWidth * self.keyboardWidth + (self.selectedKey + self.keyboardWidth - width) % self.keyboardWidth
 		if self.selectedKey > self.maxKey:
 			self.selectedKey = self.maxKey
 		self.markSelectedKey()
@@ -1195,9 +1198,9 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 		start, width = self.findStartAndWidth(self.selectedKey)
 		if width > 1:
 			width = start + width - self.selectedKey % self.keyboardWidth
-		self.selectedKey = self.selectedKey / self.keyboardWidth * self.keyboardWidth + (self.selectedKey + width) % self.keyboardWidth
+		self.selectedKey = self.selectedKey // self.keyboardWidth * self.keyboardWidth + (self.selectedKey + width) % self.keyboardWidth
 		if self.selectedKey > self.maxKey:
-			self.selectedKey = self.selectedKey / self.keyboardWidth * self.keyboardWidth
+			self.selectedKey = self.selectedKey // self.keyboardWidth * self.keyboardWidth
 		self.markSelectedKey()
 
 	def down(self):

@@ -68,7 +68,7 @@
 		<key id="KEY_YELLOW" mapto="shift" flags="m" />
 		<key id="KEY_BLUE" mapto="capsLock" flags="m" />
 		<key id="KEY_EXIT" mapto="cancel" flags="m" />
-		<key id="KEY_OK" mapto="select" flags="m" />
+		<key id="KEY_OK" mapto="select" flags="mr" />
 		<key id="KEY_TEXT" mapto="locale" flags="m" />
 		<key id="KEY_UP" mapto="up" flags="mr" />
 		<key id="KEY_PREVIOUS" mapto="backspace" flags="mr" />
@@ -82,6 +82,10 @@
 		<key id="KEY_STOP" mapto="backspace" flags="mr" />
 		<key id="KEY_PLAYPAUSE" mapto="delete" flags="mr" />
 		<key id="KEY_PLAY" mapto="delete" flags="mr" />
+		<key id="KEY_VIDEO" mapto="erase" flags="m" />
+		<key id="KEY_MEDIA" mapto="erase" flags="m" />
+		<key id="KEY_LIST" mapto="erase" flags="m" />
+		<key id="KEY_PVR" mapto="erase" flags="m" />
 		<key id="KEY_INFO" mapto="toggleOverwrite" flags="m" />
 		<key id="KEY_0" mapto="0" flags="m" />
 		<key id="KEY_1" mapto="1" flags="m" />
@@ -99,7 +103,7 @@
 		<key id="KEY_F3" mapto="locale" flags="m" />
 		<key id="KEY_F4" mapto="shift" flags="m" />
 		<key id="KEY_ESC" mapto="cancel" flags="m" />
-		<key id="KEY_ENTER" mapto="select" flags="m" />
+		<key id="KEY_ENTER" mapto="select" flags="mr" />
 		<key id="KEY_PREVIOUSSONG" mapto="first" flags="m" />
 		<key id="KEY_F9" mapto="first" flags="m" />
 		<key id="KEY_F11" mapto="prev" flags="m" />
@@ -147,7 +151,7 @@
 	</map>
 
 	<map context="InfobarInstantRecord">
-		<key id="KEY_RECORD" mapto="instantRecord" flags="m"/>
+		<key id="KEY_RECORD" mapto="instantRecord" flags="b"/>
 	</map>
 
 	<map context="InfobarExtensions">
@@ -260,7 +264,8 @@
 	</map>
 
 	<map context="InfobarSubtitleSelectionActions">
-		<key id="KEY_SUBTITLE" mapto="subtitleSelection" flags="m"/>
+		<key id="KEY_SUBTITLE" mapto="subtitleSelection" flags="b"/>
+		<key id="KEY_SUBTITLE" mapto="subtitleShowHide" flags="l"/>
 	</map>
 
 	<map context="InfobarSubserviceSelectionActions">
@@ -279,6 +284,7 @@
 
 	<map context="InfobarVmodeButtonActions">
 		<key id="KEY_VMODE" mapto="vmodeSelection" flags="b"/>
+		<key id="KEY_GREEN" mapto="vmodeSelection" flags="l"/>
 	</map>
 
 	<map context="InfobarPiPActions">
@@ -498,6 +504,7 @@
 		<key id="KEY_RIGHT" mapto="keyRight" flags="m"/>
 		<key id="KEY_RECORD" mapto="keyRecord" flags="m"/>
 		<key id="KEY_FAVORITES" mapto="showFavourites" flags="m"/>
+		<key id="KEY_TEXT" mapto="toggleTwoLines" flags="m"/>
 	</map>
 
 	<map context="ChannelSelectEPGActions">
@@ -763,7 +770,8 @@
 		<key id="KEY_YELLOW" mapto="yellow_long" flags="l"/>
 		<key id="KEY_BLUE" mapto="blue" flags="b"/>
 		<key id="KEY_BLUE" mapto="blue_long" flags="l"/>
-		<key id="KEY_RECORD" mapto="rec" flags="m"/>
+		<key id="KEY_RECORD" mapto="rec" flags="b"/>
+		<key id="KEY_RECORD" mapto="rec_long" flags="l"/>
 		<key id="KEY_RADIO" mapto="radio" flags="b"/>
 		<key id="KEY_RADIO" mapto="radio_long" flags="l"/>
 		<key id="KEY_TV" mapto="showTv" flags="b"/>
@@ -773,7 +781,8 @@
 		<key id="KEY_TEXT" mapto="text" flags="m"/>
 		<key id="KEY_HELP" mapto="displayHelp" flags="b"/>
 		<key id="KEY_HELP" mapto="displayHelp_long" flags="l"/>
-		<key id="KEY_SUBTITLE" mapto="subtitle" flags="m"/>
+		<key id="KEY_SUBTITLE" mapto="subtitle" flags="b"/>
+		<key id="KEY_SUBTITLE" mapto="subtitle_long" flags="l"/>
 		<key id="KEY_MENU" mapto="mainMenu" flags="m"/>
 		<key id="KEY_INFO" mapto="info" flags="b"/>
 		<key id="KEY_INFO" mapto="info_long" flags="l"/>
@@ -884,4 +893,9 @@
 		<key id="KEY_CHANNELUP" mapto="incUphop" flags="m"/>
 		<key id="KEY_CHANNELDOWN" mapto="decUphop" flags="m"/>
 	</map>
+	<translate>
+		<device name="gigablue remote control">
+			<key from="KEY_OPTION" to="KEY_HELP"/>
+		</device>
+	</translate>
 </keymap>

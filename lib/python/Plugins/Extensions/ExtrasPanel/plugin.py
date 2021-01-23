@@ -1,6 +1,6 @@
 from Plugins.Plugin import PluginDescriptor
 from Screens.PluginBrowser import *
-from Screens.Ipkg import Ipkg
+from Screens.Opkg import Opkg
 from Components.SelectionList import SelectionList
 from Screens.NetworkSetup import *
 from enigma import *

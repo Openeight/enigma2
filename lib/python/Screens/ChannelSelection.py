@@ -38,12 +38,13 @@ from ServiceReference import ServiceReference
 from Tools.BoundFunction import boundFunction
 from Tools import Notifications
 from Tools.Alternatives import GetWithAlternative
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Plugins.Plugin import PluginDescriptor
 from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EventView import EventViewEPGSelect
 import os, unicodedata
+from time import time
 profile("ChannelSelection.py after imports")
 
 FLAG_SERVICE_NEW_FOUND = 64
@@ -180,7 +181,7 @@ class ChannelContextMenu(Screen):
 								append_when_current_valid(current, menu, (_("Remove from parental protection"), boundFunction(self.removeParentalProtection, current)), level=0)
 						if self.parentalControl.blacklist and config.ParentalControl.hideBlacklist.value and not self.parentalControl.sessionPinCached and config.ParentalControl.storeservicepin.value != "never":
 							append_when_current_valid(current, menu, (_("Unhide parental control services"), self.unhideParentalServices), level=0)
-					if SystemInfo["3DMode"] and fileExists("/usr/lib/enigma2/python/Plugins/SystemPlugins/OSD3DSetup/plugin.pyo"):
+					if SystemInfo["3DMode"] and fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/OSD3DSetup/plugin.pyo")):
 						if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_IS_DEDICATED_3D:
 							append_when_current_valid(current, menu, (_("Unmark service as dedicated 3D service"), self.removeDedicated3DFlag), level=2)
 						else:
@@ -262,6 +263,8 @@ class ChannelContextMenu(Screen):
 					append_when_current_valid(current, menu, (_("Disable move mode"), self.toggleMoveMode), level=0, key="7")
 				else:
 					append_when_current_valid(current, menu, (_("Enable move mode"), self.toggleMoveMode), level=0, key="7")
+				append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level=0, key="8")
+				self.removeFunction = self.removeCurrentService
 				if not csel.entry_marked and not inBouquetRootList and current_root and not (current_root.flags & eServiceReference.isGroup):
 					if current.type != -1:
 						menu.append(ChoiceEntryComponent("8", (_("Add marker"), self.showMarkerInputBox)))
@@ -662,9 +665,15 @@ class SelectionEventInfo:
 		self.timer = eTimer()
 		self.timer.callback.append(self.updateEventInfo)
 		self.onShown.append(self.__selectionChanged)
+		self.onHide.append(self.__stopTimer)
+
+	def __stopTimer(self):
+		self.timer.stop()
 
 	def __selectionChanged(self):
+		self.timer.stop()
 		if self.execing:
+			self.update_root = False
 			self.timer.start(100, True)
 
 	def updateEventInfo(self):
@@ -673,6 +682,22 @@ class SelectionEventInfo:
 		try:
 			service.newService(cur)
 			self["Event"].newEvent(service.event)
+			if cur and service.event:
+				if self.update_root and self.shown and self.getMutableList():
+					root = self.getRoot()
+					if root and hasattr(self, "editMode") and not self.editMode:
+						self.clearPath()
+						if self.bouquet_root:
+							self.enterPath(self.bouquet_root)
+						self.enterPath(root)
+						self.setCurrentSelection(cur)
+						self.update_root = False
+				if not self.update_root:
+					now = int(time())
+					end_time = service.event.getBeginTime() + service.event.getDuration()
+					if end_time > now:
+						self.update_root = True
+						self.timer.start((end_time - now) * 1000, True)
 		except:
 			pass
 
@@ -1190,6 +1215,8 @@ class ChannelSelectionEdit:
 				self.removeCurrentService()
 
 	def removeCurrentService(self, bouquet=False):
+		if self.movemode and self.entry_marked:
+			self.toggleMoveMarked() # unmark current entry
 		self.editMode = True
 		ref = self.servicelist.getCurrent()
 		mutableList = self.getMutableList()
@@ -1329,6 +1356,7 @@ class ChannelSelectionBase(Screen):
 				"keyLeft": self.keyLeft,
 				"keyRight": self.keyRight,
 				"keyRecord": self.keyRecord,
+				"toggleTwoLines": self.toggleTwoLines,
 				"1": self.keyNumberGlobal,
 				"2": self.keyNumberGlobal,
 				"3": self.keyNumberGlobal,
@@ -1705,6 +1733,13 @@ class ChannelSelectionBase(Screen):
 		if ref and not(ref.flags & (eServiceReference.isMarker|eServiceReference.isDirectory)):
 			Screens.InfoBar.InfoBar.instance.instantRecord(serviceRef=ref)
 
+	def toggleTwoLines(self):
+		if config.usage.setup_level.index > 1 and not self.pathChangeDisabled and self.servicelist.mode == self.servicelist.MODE_FAVOURITES:
+			config.usage.servicelist_twolines.value = not config.usage.servicelist_twolines.value
+			config.usage.servicelist_twolines.save()
+		else:
+			return 0
+
 	def showFavourites(self):
 		self["key_green"].setText(_("Satellites"))
 		if not self.pathChangeDisabled:
@@ -1951,6 +1986,10 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		lastservice = eServiceReference(self.lastservice.value)
 		if lastservice.valid():
 			self.setCurrentSelection(lastservice)
+			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			if ref and Components.ParentalControl.parentalControl.isProtected(ref):
+				if self.getCurrentSelection() and self.getCurrentSelection() != ref:
+					self.setCurrentSelection(ref)
 
 	def doTVButton(self):
 		if self.mode == MODE_TV:

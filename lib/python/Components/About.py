@@ -10,8 +10,6 @@ def getImageVersionString():
 	try:
 		if os.path.isfile('/var/lib/opkg/status'):
 			st = os.stat('/var/lib/opkg/status')
-		else:
-			st = os.stat('/usr/lib/ipkg/status')
 		tm = time.localtime(st.st_mtime)
 		if tm.tm_year >= 2011:
 			return time.strftime("%Y-%m-%d %H:%M:%S", tm)
@@ -202,6 +200,24 @@ def GetIPsFromNetworkInterfaces():
 			iface_addr = socket.inet_ntoa(namestr[i+20:i+24])
 			ifaces.append((iface_name, iface_addr))
 	return ifaces
+
+def getBoxUptime():
+	try:
+		time = ''
+		f = open("/proc/uptime", "rb")
+		secs = int(f.readline().split('.')[0])
+		f.close()
+		if secs > 86400:
+			days = secs / 86400
+			secs = secs % 86400
+			time = ngettext("%d day","%d days", days) % days + " "
+		h = secs / 3600
+		m = (secs % 3600) / 60
+		time += ngettext("%d hour", "%d hours", h) % h + " "
+		time += ngettext("%d minute", "%d minutes", m) % m
+		return  "%s" % time
+	except:
+		return '-'
 
 # For modules that do "from About import about"
 about = sys.modules[__name__]

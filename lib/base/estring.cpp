@@ -3,6 +3,8 @@
 #include <cctype>
 #include <climits>
 #include <string>
+#include <sstream>
+#include <map>
 #include <lib/base/eerror.h>
 #include <lib/base/encoding.h>
 #include <lib/base/estring.h>
@@ -761,17 +763,32 @@ int isUTF8(const std::string &string)
 
 unsigned int truncateUTF8(std::string &s, unsigned int newsize)
 {
-        unsigned int len = s.size();
+	unsigned int len = s.size();
+	// Assume s is a real UTF8 string!!!
+	unsigned int n = 0;
+	unsigned int idx = newsize - 1;
 
-        // Assume s is a real UTF8 string!!!
-        while (len > newsize) {
-                while (len-- > 0  && (s[len] & 0xC0) == 0x80)
-                        ; // remove UTF data bytes,  e.g. range 0x80 - 0xBF
-                if (len > 0)   // remove the UTF startbyte, or normal ascii character
-                         --len;
-        }
-        s.resize(len);
-        return len;
+	if (len > idx){
+		while (idx > 0) {
+			if (!s.at(idx) & 0x80 || (s.at(idx) & 0xc0) == 0xc0){
+				if (!s.at(idx) & 0x80)
+					idx++;
+				else if ((s.at(idx) & 0xF8) == 0xf0 && n == 3)
+					idx += n + 1;
+				else if ((s.at(idx) & 0xF0) == 0xe0 && n == 2)
+					idx += n + 1;
+				else if ((s.at(idx) & 0xE0) == 0xc0 && n == 1)
+					idx += n + 1;
+				break;
+			}
+			n++;
+			if (idx > 0)
+				idx--;
+		}
+		len = idx;
+	}
+	s.resize(len);
+	return len;
 }
 
 
@@ -958,4 +975,36 @@ std::vector<std::string> split(std::string s, const std::string& separator)
 int strcasecmp(const std::string& s1, const std::string& s2)
 {
 	return ::strcasecmp(s1.c_str(), s2.c_str());
+}
+
+std::string formatNumber(size_t size, const std::string& suffix, bool binary)
+{
+	std::map<uint8_t, std::string> unit = {
+		{  24, "Y" },
+		{  21, "Z" },
+		{  18, "E" },
+		{  15, "P" },
+		{  12, "T" },
+		{   9, "G" },
+		{   6, "M" },
+		{   3, binary ? "K" : "k" },
+		{   0, ""  }
+	};
+
+	uint8_t k = 0;
+	size_t rem = 0;
+	uint16_t base = binary ? 1024 : 1000;
+
+	while (size >= base)
+	{
+		rem = size % base;
+		k += 3;
+		size /= base;
+	}
+
+	float num = size + (rem*1.0f/base);
+
+	std::stringstream ss;
+	ss << num << " " << unit[k] << suffix;
+	return ss.str();
 }

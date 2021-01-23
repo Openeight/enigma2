@@ -292,7 +292,7 @@ AX_CXX_COMPILE_STDCXX_11([ext],[mandatory])
 
 CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS"
 CFLAGS="$CFLAGS -Wall"
-CXXFLAGS="$CXXFLAGS -Wall $BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $ALSA_CFLAGS"
+CXXFLAGS="$CXXFLAGS -Wall -flto $BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $ALSA_CFLAGS"
 
 AC_CONFIG_FILES([
 Makefile
@@ -304,10 +304,6 @@ data/keymaps/Makefile
 data/hw_info/Makefile
 data/display/Makefile
 data/7segment/Makefile
-data/display/LCDAnalogClock_1_Standby/Makefile
-data/display/LCDAnalogClock_2_Standby/Makefile
-data/display/LCDWeather_Standby/Makefile
-data/display/LCDAnalogClock_3_Weather_Infobar/Makefile
 data/display/display220/Makefile
 data/skin_default/Makefile
 data/skin_default/menu/Makefile
@@ -355,8 +351,6 @@ lib/python/Plugins/Extensions/PicturePlayer/data/Makefile
 lib/python/Plugins/Extensions/SocketMMI/Makefile
 lib/python/Plugins/Extensions/SocketMMI/meta/Makefile
 lib/python/Plugins/Extensions/SocketMMI/src/Makefile
-lib/python/Plugins/Extensions/TuxboxPlugins/Makefile
-lib/python/Plugins/Extensions/TuxboxPlugins/meta/Makefile
 lib/python/Plugins/PLi/Makefile
 lib/python/Plugins/SystemPlugins/DefaultServicesScanner/Makefile
 lib/python/Plugins/SystemPlugins/DefaultServicesScanner/meta/Makefile
@@ -375,8 +369,6 @@ lib/python/Plugins/SystemPlugins/SatelliteEquipmentControl/Makefile
 lib/python/Plugins/SystemPlugins/SatelliteEquipmentControl/meta/Makefile
 lib/python/Plugins/SystemPlugins/Satfinder/Makefile
 lib/python/Plugins/SystemPlugins/Satfinder/meta/Makefile
-lib/python/Plugins/SystemPlugins/SkinSelector/Makefile
-lib/python/Plugins/SystemPlugins/SkinSelector/meta/Makefile
 lib/python/Plugins/Extensions/ExtrasPanel/Makefile
 lib/python/Plugins/Extensions/ExtrasPanel/meta/Makefile
 lib/python/Plugins/Extensions/ExtrasPanel/pics/Makefile

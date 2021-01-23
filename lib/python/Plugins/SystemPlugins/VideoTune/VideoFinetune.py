@@ -4,7 +4,7 @@ from Components.Sources.CanvasSource import CanvasSource
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Console import Console
 from Components.SystemInfo import SystemInfo
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from enigma import gFont, getDesktop, gMainDC, eSize, RT_HALIGN_RIGHT, RT_WRAP
 
 def RGB(r,g,b):
@@ -82,7 +82,7 @@ class FullUHDTestScreen(OverscanTestScreen):
 		Screen.__init__(self, session)
 		self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.session.nav.stopService()
-		Console().ePopen("/usr/bin/showiframe /usr/lib/enigma2/python/Plugins/SystemPlugins/VideoTune/testbeeld-4k.mvi")
+		Console().ePopen("/usr/bin/showiframe %s" % resolveFilename(SCOPE_PLUGINS, "SystemPlugins/VideoTune/testbeeld-4k.mvi"))
 		self.hide()
 		self.onClose.append(self.__close)
 
@@ -296,7 +296,7 @@ class VideoFinetune(Screen):
 					self.bbox(x, offset, width, eh, RGB(0,0,0), bbw, bbh)
 
 		c.writeText(xres / 10, yres / 6 - self.fontsize * 2, xres * 3 / 5, 40, RGB(128,0,0), RGB(255,255,255), gFont("Regular", self.fontsize * 2),
-			("Color"))
+			_("Color"))
 		c.writeText(xres / 10, yres / 6, xres / 2, yres * 4 / 6, RGB(0,0,0), RGB(255,255,255), gFont("Regular", self.fontsize),
 			_("Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. "
 				"If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."),

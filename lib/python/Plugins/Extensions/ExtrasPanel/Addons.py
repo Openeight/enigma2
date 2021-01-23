@@ -21,8 +21,8 @@ from Extra.ExtraActionBox import ExtraActionBox
 import re
 import os
 from __init__ import _
-from Components.Ipkg import IpkgComponent
-from Screens.Ipkg import Ipkg
+from Components.Opkg import OpkgComponent
+from Screens.Opkg import Opkg
 
 class AddonsFileBrowser(Screen):
 
@@ -60,7 +60,7 @@ class AddonsFileBrowser(Screen):
             if filename[-3:] == 'ipk':
                 self.oktext = _('\nAfter pressing OK, please wait!')
                 self.cmdList = []
-                self.cmdList.append((IpkgComponent.CMD_INSTALL, {'package': filename}))
+                self.cmdList.append((OpkgComponent.CMD_INSTALL, {'package': filename}))
                 if len(self.cmdList):
                     self.session.openWithCallback(self.runUpgrade, MessageBox, _('Do you want to install the package:\n') + filename + '\n' + self.oktext)
             elif filename[-6:] == 'tar.gz' or filename[-3:] == 'tgz' or filename[-7:] == 'tar.bz2':
@@ -99,7 +99,7 @@ class AddonsFileBrowser(Screen):
 
     def runUpgrade(self, result):
         if result:
-            self.session.openWithCallback(self.runUpgradeFinished, Ipkg, cmdList=self.cmdList)
+            self.session.openWithCallback(self.runUpgradeFinished, Opkg, cmdList=self.cmdList)
 
     def runUpgrade2(self, result):
         if result:

@@ -51,6 +51,8 @@
 					<item level="0" text="Language" entryID="language_setup"><screen module="LanguageSelection"/></item>
 					<item level="0" entryID="timezone_setup"><setup id="timezone"/></item>
 					<item level="0" entryID="user_interface"><setup id="userinterface"/></item>
+					<item level="0" text="GUI Skin" entryID="primary_skin_selector"><screen module="SkinSelector" screen="SkinSelector"/></item>
+					<item level="0" requires="FrontpanelDisplay" text="Display Skin" entryID="display_skin_selector"><screen module="SkinSelector" screen="LcdSkinSelector"/></item>
 				</menu>
 				<menu level="0" text="EPG" entryID="epg_menu">
 					<id val="epg"/>
@@ -73,7 +75,6 @@
 				<menu level="1" text="Display" entryID="display_selection" requires="Display">
 					<id val="display"/>
 					<item level="0" text="Display setup" entryID="lcd"><setup id="lcd"/></item>
-					<item level="0" text="Skin setup" entryID="lcd_skin_setup" requires="LCDSKINSetup"><screen module="SkinSelector" screen="LcdSkinSelector"/></item>
 				</menu>
 				<item entryID="keyboard_setup" text="Keyboard"><setup id="keyboard" /></item>
 				<item level="2" text="Recording paths" entryID="RecordPaths"><screen module="RecordPaths" screen="RecordPathsSettings" /></item>
@@ -82,27 +83,16 @@
 			</menu>
 			<item weight="10" level="1" text="Common Interface" entryID="ci_setup" requires="CommonInterface"><screen module="Ci" screen="CiSelection" /></item>
 			<item weight="15" level="0" text="Parental control" entryID="parental_setup"><screen module="ParentalControlSetup" screen="ParentalControlSetup" /></item>
-			<item weight="15" level="0" text="Factory reset" entryID="factory_reset">
-				<code>
-from Screens.FactoryReset import FactoryReset
-def msgClosed(ret):
-	if ret:
-		open('/etc/.doNotAutoinstall', 'w')
-		from os import system, _exit
-		system("rm -R /etc/enigma2")
-		_exit(0)
-self.session.openWithCallback(msgClosed, FactoryReset)
-</code>
-			</item>
+			<item weight="15" level="0" text="Factory reset" entryID="factory_reset"><screen module="FactoryReset" screen="FactoryReset"/></item>
 		</menu>
 		<item level="0" text="Extra Setup" entryID="extra_setup"><screen module="ExtraSetup" screen="ExtraSetup" /></item>
 
 		<menu text="Standby / restart" entryID="standby_restart_list">
 			<id val="shutdown"/>
-			<item text="Multiboot" entryID="multiboot" requires="canMultiBoot"><screen module="FlashImage" screen="MultibootSelection">1</screen></item>
 			<item text="Sleep timer" entryID="sleep"><screen module="SleepTimerEdit" screen="SleepTimerEdit"/></item>
 			<item text="Standby" entryID="standby"><screen module="Standby" screen="Standby"/></item>
 			<item text="Restart" entryID="restart"><screen module="Standby" screen="TryQuitMainloop">2</screen></item>
+			<item text="Multiboot image selector" entryID="multiboot" requires="canMultiBoot"><screen module="FlashImage" screen="MultibootSelection">1</screen></item>
 			<item text="Restart enigma" requires="InDebugMode" entryID="restart_enigma_debug"><screen module="Standby" screen="TryQuitMainloop">6</screen></item>
 			<item text="Restart enigma" requires="!InDebugMode" entryID="restart_enigma"><screen module="Standby" screen="TryQuitMainloop">3</screen></item>
 			<item text="Restart enigma in standard mode" requires="InDebugMode" entryID="restart_enigma"><screen module="Standby" screen="TryQuitMainloop">3</screen></item>
