@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-08 17:23+0200\n"
+"POT-Creation-Date: 2021-01-23 11:15+0100\n"
 "PO-Revision-Date: 2016-05-02 19:30+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -282,6 +282,13 @@ msgid_plural "%d cores"
 msgstr[0] "%d ядро"
 msgstr[1] "%d ядра"
 msgstr[2] "%d ядра"
+
+#, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #, python-format
 msgid "%d file"
@@ -657,6 +664,9 @@ msgstr "16:9 Letterbox"
 msgid "16:9 always"
 msgstr "16:9 всегда"
 
+msgid "16K"
+msgstr ""
+
 msgid "18 V"
 msgstr "18 V"
 
@@ -747,6 +757,10 @@ msgstr "4:3 Letterbox"
 msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
 msgid "4X"
 msgstr ""
 
@@ -783,6 +797,10 @@ msgstr "7"
 msgid "8"
 msgstr "8"
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr ""
 
@@ -800,10 +818,6 @@ msgstr ": 0000 - по умолчанию (отключено)"
 
 msgid "<Current movielist location>"
 msgstr "<Текущее место списка видео>"
-
-#, fuzzy
-msgid "<Default Skin>"
-msgstr "Дефолтные настройки"
 
 msgid "<Default movie location>"
 msgstr "<Место видео по дефолту>"
@@ -1002,9 +1016,6 @@ msgstr "прервать редактирование фаворитов"
 
 msgid "About"
 msgstr "Информация"
-
-msgid "About..."
-msgstr "Информация..."
 
 msgid "Accesspoint:"
 msgstr "Точка доступа:"
@@ -1390,6 +1401,10 @@ msgid "Are you ready to run the script ?"
 msgstr ""
 
 #, fuzzy
+msgid "Are you sure to delete image:"
+msgstr "Вы действительно хотите удалить выбранное?"
+
+#, fuzzy
 msgid "Are you sure to purge all deleted user bouquets?"
 msgstr "Вы действительно хотите очистить все удаленные пользовательские букеты?"
 
@@ -1409,6 +1424,10 @@ msgstr "Вы действительно хотите удалить все на�
 
 msgid "Are you sure to remove this entry?"
 msgstr "Вы действительно хотите удалить выбранное?"
+
+#, fuzzy
+msgid "Are you sure to restore all deleted images"
+msgstr "Вы действительно хотите удалить все кабельные сервисы?"
 
 msgid ""
 "Are you sure you want to activate this network configuration?\n"
@@ -1837,11 +1856,12 @@ msgstr "Баскский"
 msgid "Begin time"
 msgstr "Время начала"
 
+#, fuzzy
+msgid "Behavior of '0' button in PiP mode"
+msgstr "Поведение кнопки 0 в режиме PiP"
+
 msgid "Behavior of 'pause and ok' when paused"
 msgstr "Поведение 'пауза и ок' во время паузы"
-
-msgid "Behavior of 0 key in PiP-mode"
-msgstr "Поведение кнопки 0 в режиме PiP"
 
 msgid "Behavior when a movie is started"
 msgstr "Поведение при старте видео"
@@ -1921,6 +1941,10 @@ msgstr ""
 
 msgid "Boot to Recovery menu"
 msgstr ""
+
+#, fuzzy
+msgid "Bootup time"
+msgstr "По времени"
 
 msgid "Bosnia and Herzegovina"
 msgstr ""
@@ -2121,9 +2145,6 @@ msgstr "Расчет завершен"
 msgid "Calibrate"
 msgstr "Калибровка"
 
-msgid "Cam Setup"
-msgstr ""
-
 msgid "Cambodia"
 msgstr ""
 
@@ -2166,6 +2187,12 @@ msgstr ""
 
 msgid "Cancel"
 msgstr "Отмена"
+
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
 
 msgid "Cancel any text changes and exit"
 msgstr ""
@@ -2461,7 +2488,8 @@ msgstr ""
 msgid "Close"
 msgstr "Закрыть"
 
-msgid "Close PiP on exit"
+#, fuzzy
+msgid "Close PiP with 'exit' button"
 msgstr "Закрывать PiP кнопкой exit"
 
 msgid "Close plugin"
@@ -2490,6 +2518,10 @@ msgstr "Настройки коллекции"
 
 #, fuzzy
 msgid "Colombia"
+msgstr "Формат цвета"
+
+#, fuzzy
+msgid "Color"
 msgstr "Формат цвета"
 
 msgid "Color format"
@@ -2598,6 +2630,10 @@ msgstr "Настройка дополнительной задержки для 
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr "Настройка дополнительной задержки для улучшения синхронизации субтитров."
 
+#, fuzzy
+msgid "Configure default type for new timers."
+msgstr "Настройка маски сети."
+
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Настройка для показа инфобара после его активации в секундах."
 
@@ -2613,7 +2649,8 @@ msgstr "Настройка способа составления названи�
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
 msgstr "Настройка иконок для кодированных сервисов в списке селектора каналов."
 
-msgid "Configure if and how long the latest service in the PiP will be remembered."
+#, fuzzy
+msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Настройка - запомнить и на какой период времени последний сервис PiP."
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
@@ -2730,7 +2767,8 @@ msgstr "Настройка четвертого языка аудио."
 msgid "Configure the fourth subtitle language."
 msgstr "Настройка четвертого языка субтитров."
 
-msgid "Configure the function of the '0' button do when PIP is active."
+#, fuzzy
+msgid "Configure the function of the '0' button when Picture in Picture is active."
 msgstr "Настройка функции кнопки '0' , если  PiP активирован."
 
 msgid "Configure the gateway."
@@ -3035,9 +3073,6 @@ msgstr ""
 msgid "Could not load medium! No disc inserted?"
 msgstr "Не удалось загрузить носитель! Проверьте, вставлен ли диск?"
 
-msgid "Could not locate epg file on fallback tuner"
-msgstr ""
-
 msgid "Could not open Picture in Picture"
 msgstr "Невозможно открыть PiP (картинку в картинке)"
 
@@ -3126,6 +3161,10 @@ msgstr ""
 
 msgid "Curacao"
 msgstr ""
+
+#, fuzzy
+msgid "Current"
+msgstr "Текущее значение: "
 
 msgid "Current CEC address"
 msgstr "Текущий адрес CEC"
@@ -3394,6 +3433,14 @@ msgid "Default settings"
 msgstr "Дефолтные настройки"
 
 #, fuzzy
+msgid "Default timer type"
+msgstr "Удалить таймер"
+
+#, fuzzy
+msgid "Default+Picon"
+msgstr "Дефолт"
+
+#, fuzzy
 msgid "Define the location of the EPG Cache file."
 msgstr "Настройка соотношения сторон экрана."
 
@@ -3462,8 +3509,16 @@ msgstr "Удалить"
 msgid "Delete %s?"
 msgstr ""
 
+#, fuzzy
+msgid "Delete Image"
+msgstr "Удалить таймер"
+
 msgid "Delete Plugins"
 msgstr ""
+
+#, fuzzy
+msgid "Delete all the text"
+msgstr "удалить запись из плейлиста"
 
 msgid "Delete and unstall Plugins. This will remove the Plugin from your box."
 msgstr ""
@@ -3487,10 +3542,10 @@ msgstr "удалить запись из плейлиста"
 msgid "Delete saved playlist"
 msgstr "удалить сохраненный плейлист"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the character to the left of text cursor"
 msgstr ""
 
-msgid "Delete the character under the text buffer cursor"
+msgid "Delete the character under the text cursor"
 msgstr ""
 
 msgid "Delete timer"
@@ -3502,6 +3557,10 @@ msgstr "Удалено"
 #, python-format
 msgid "Deleted %s!"
 msgstr ""
+
+#, fuzzy
+msgid "Deleted image"
+msgstr "Удалить таймер"
 
 msgid "Deleted items"
 msgstr "Удаленные файлы"
@@ -3698,6 +3757,10 @@ msgstr ""
 msgid "Display Setup"
 msgstr ""
 
+#, fuzzy
+msgid "Display Skin"
+msgstr "Настройка дисплея"
+
 msgid "Display and userinterface"
 msgstr "Экран и пользовательский интерфейс"
 
@@ -3850,7 +3913,7 @@ msgid "Do you want to reboot your receiver?"
 msgstr "Вы хотите перезагрузить Ваш ресивер?"
 
 #, fuzzy
-msgid "Do you want to remove all the crahs logfiles"
+msgid "Do you want to remove all the crash logfiles"
 msgstr "Вы хотите удалить пакет:\n"
 
 msgid "Do you want to remove the package:\n"
@@ -4046,6 +4109,10 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "ОШИБКА - сканирование не удалось (%s)!"
 
+#, python-format
+msgid "ERROR downloading file %s"
+msgstr ""
+
 msgid "ET-MultiQuickButton  (keymap.mqb)"
 msgstr ""
 
@@ -4058,9 +4125,6 @@ msgstr "Установить ограничение на восток"
 #, fuzzy
 msgid "Ecm Info"
 msgstr "Инфо"
-
-msgid "Ecm Info Sc"
-msgstr ""
 
 msgid "Ecm Info setup"
 msgstr ""
@@ -4141,6 +4205,9 @@ msgid "Electronic Program Guide"
 msgstr "Электронный Программный Гид"
 
 msgid "Embedded"
+msgstr ""
+
+msgid "Emergency"
 msgstr ""
 
 msgid "Empty slot"
@@ -4326,9 +4393,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Версия ядра: "
 
-msgid "Enigma2 skin selector"
-msgstr "Селектор скинов Enigma2"
-
 #, fuzzy
 msgid "Enter"
 msgstr "центр"
@@ -4404,6 +4468,10 @@ msgstr "Стрим"
 msgid "Error"
 msgstr "Ошибка"
 
+#, fuzzy, python-format
+msgid "Error %s"
+msgstr "Ошибка"
+
 msgid "Error code"
 msgstr "Код ошибки"
 
@@ -4426,9 +4494,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Error executing plugin"
-msgstr "Ошибка запуска плагина"
-
 msgid "Error installing package"
 msgstr ""
 
@@ -4444,10 +4509,19 @@ msgstr ""
 msgid "Error stop stream!"
 msgstr ""
 
+msgid "Error when writing epg.dat on server"
+msgstr ""
+
+msgid "Error while retreiving epg.dat from server"
+msgstr ""
+
 #, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
+msgstr ""
+
+msgid "Error while retreiving location of epg.dat on server"
 msgstr ""
 
 msgid ""
@@ -4623,6 +4697,10 @@ msgstr "Диалоговое расцвечивание внешних субт�
 msgid "External subtitle switch fonts"
 msgstr "Смена шрифта для внешних субтитров"
 
+#, fuzzy
+msgid "Externally powered"
+msgstr "Внешний накопитель %s"
+
 msgid "Extra Setup"
 msgstr ""
 
@@ -4678,6 +4756,9 @@ msgid "FEC"
 msgstr "FEC"
 
 msgid "FEC:"
+msgstr ""
+
+msgid "FHD"
 msgstr ""
 
 msgid "FTA"
@@ -5071,15 +5152,12 @@ msgid "GUI Settings"
 msgstr "Установки"
 
 #, fuzzy
+msgid "GUI Skin"
+msgstr "Установки"
+
+#, fuzzy
 msgid ""
 "GUI needs a restart to apply a new language\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Для активации нового скина необходим рестарт GUI.\n"
-"Вы хотите сделать это сейчас?"
-
-msgid ""
-"GUI needs a restart to apply a new skin\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 "Для активации нового скина необходим рестарт GUI.\n"
@@ -5261,6 +5339,10 @@ msgstr ""
 msgid "HARD DISK: "
 msgstr ""
 
+#, fuzzy
+msgid "HD"
+msgstr "D"
+
 msgid "HD list"
 msgstr "HD лист"
 
@@ -5282,7 +5364,7 @@ msgstr ""
 msgid "HDMI Colorspace"
 msgstr ""
 
-msgid "HDMI HDR Type"
+msgid "HDMI Dynamic Range"
 msgstr ""
 
 #, fuzzy
@@ -5526,6 +5608,10 @@ msgstr ""
 msgid "IP:"
 msgstr ""
 
+#, fuzzy
+msgid "IPK - Uninstaller"
+msgstr "Удалить"
+
 msgid "IPK Installer"
 msgstr ""
 
@@ -5721,7 +5807,8 @@ msgstr "Включать ECM в http стрим потоки"
 msgid "Include EIT in http streams"
 msgstr "Включать EIT в http стрим потоки"
 
-msgid "Incorrect type service for PiP!"
+#, fuzzy
+msgid "Incorrect service type for Picture in Picture!"
 msgstr "Некорректный тип сервиса для PiP!"
 
 msgid "Increased voltage"
@@ -5946,9 +6033,6 @@ msgstr ""
 
 msgid "Invert"
 msgstr "Выбрать все"
-
-msgid "Ipkg"
-msgstr "Ipkg"
 
 msgid "Ipkremove"
 msgstr ""
@@ -6487,6 +6571,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Производитель"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Please wait until enigma2 restarts"
+msgstr ""
+
 msgid "Margin after recording (minutes)"
 msgstr "Объединить после записи (в минутах)"
 
@@ -6752,7 +6841,8 @@ msgstr ""
 msgid "Move"
 msgstr "Перемещение"
 
-msgid "Move PIP"
+#, fuzzy
+msgid "Move PiP"
 msgstr "Изменить PiP"
 
 msgid "Move PiP to main picture"
@@ -6764,32 +6854,48 @@ msgstr "Переместить картинку в картинке"
 msgid "Move east"
 msgstr "Перемещение на восток"
 
-msgid "Move the text buffer cursor left"
+msgid "Move the keyboard cursor down"
 msgstr ""
 
-msgid "Move the text buffer cursor right"
+msgid "Move the keyboard cursor left"
 msgstr ""
 
-msgid "Move the text buffer cursor to the first character"
+msgid "Move the keyboard cursor right"
 msgstr ""
 
-msgid "Move the text buffer cursor to the last character"
+msgid "Move the keyboard cursor up"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor down"
+msgid "Move the text cursor left"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor left"
+msgid "Move the text cursor right"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor right"
+msgid "Move the text cursor to the first character"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor up"
+msgid "Move the text cursor to the last character"
 msgstr ""
 
 msgid "Move to position X"
 msgstr "Перемещение к позиции Х"
+
+#, fuzzy
+msgid "Move to the next page"
+msgstr "перейти в следующей угол"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "переместить вниз к следующей записи"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "назад на предыдущую главу"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "переместить вверх к предыдущей записи"
 
 msgid "Move west"
 msgstr "Перемещение на запад"
@@ -6859,13 +6965,13 @@ msgstr "Несколько спутников (выбор всех)"
 msgid "MultiType"
 msgstr "Мультмедиа"
 
-#, fuzzy
-msgid "Multiboot"
-msgstr "Несколько спутников"
-
 #, python-format
 msgid "Multiboot Image created on: %s/%s-%s-%s-backup-%s_usb.zip"
 msgstr ""
+
+#, fuzzy
+msgid "Multiboot image selector"
+msgstr "Несколько спутников (выбор всех)"
 
 #, fuzzy
 msgid "Multichannel PCM"
@@ -7126,6 +7232,9 @@ msgstr ""
 msgid "No active subservices available."
 msgstr "Обновлений пока нет"
 
+msgid "No active tuner found !!"
+msgstr ""
+
 msgid "No age block"
 msgstr "Нет возрастного ограничения"
 
@@ -7158,6 +7267,9 @@ msgstr "Нет доступного описания."
 
 msgid "No displayable files on this medium found!"
 msgstr "Нет отображаемых файлов на этом носителе!"
+
+msgid "No epg.dat file found server"
+msgstr ""
 
 msgid "No event info found, recording indefinitely."
 msgstr "Информация о событии не найдена, запись на неопределенное время."
@@ -7207,9 +7319,6 @@ msgstr "Нет сервиса"
 
 msgid "No services/providers selected"
 msgstr "Не выбраны сервисы/провайдеры"
-
-msgid "No settings files to download on fallback tuner"
-msgstr ""
 
 msgid "No standby"
 msgstr "не переходить в режим ожидания"
@@ -7553,6 +7662,9 @@ msgstr ""
 msgid "Operating LED status while running"
 msgstr ""
 
+msgid "Opkg"
+msgstr ""
+
 msgid "Options disable timer"
 msgstr "Варианты отключения таймера"
 
@@ -7745,6 +7857,10 @@ msgstr "Пауза/продолжение воспроизведение"
 
 msgid "Peak load (max queued requests per workerthread)"
 msgstr ""
+
+#, fuzzy
+msgid "Pending restart"
+msgstr "Меню выключения"
 
 msgid "Percentage"
 msgstr ""
@@ -8343,7 +8459,8 @@ msgstr "Нажмите кнопку MENU на Вашем пульте Д/У дл
 msgid "Press OK on your remote control to continue."
 msgstr "Нажмите ОК на Вашем пульте Д/У для продолжения."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected %s skin."
 msgstr "Нажмите OK для активации выбранного скина."
 
 msgid "Press OK to activate the settings."
@@ -8355,6 +8472,10 @@ msgstr "Нажмите OK, для измения настройки."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Нажмите ОК, чтобы получить подробную информацию для %s"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected %s skin."
+msgstr "Нажмите OK для активации выбранного скина."
 
 msgid "Press OK to scan"
 msgstr "Нажмите OK для сканирования."
@@ -8614,6 +8735,10 @@ msgstr ""
 msgid "Really exit the subservices quickzap?"
 msgstr "Действительно выйти из меню субсервисов?"
 
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Защита меню сброса на дефолтные настройки"
+
 msgid "Really reboot now?"
 msgstr "Действительно выполнить перезагрузку сейчас?"
 
@@ -8681,6 +8806,9 @@ msgstr "Запись"
 msgid "Recording Setup"
 msgstr "Настройка записей"
 
+msgid "Recording and Playback settings"
+msgstr ""
+
 msgid "Recording in progress"
 msgstr "Запись в процессе"
 
@@ -8691,14 +8819,15 @@ msgstr "Место записей, таймшифта"
 msgid "Recording paths Setup"
 msgstr "Место записей, таймшифта"
 
-msgid "Recording settings"
-msgstr ""
-
 msgid "Recording type"
 msgstr "Тип записи"
 
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Запись(и) в процессе или начнется в ближайшие несколько секунд!"
+
+#, fuzzy
+msgid "Recording/Playback Setup"
+msgstr "Настройка записей"
 
 msgid "Recordings"
 msgstr "Записи"
@@ -9083,6 +9212,14 @@ msgid "Restore default fstab"
 msgstr ""
 
 #, fuzzy
+msgid "Restore defaults"
+msgstr "Установить по дефолту"
+
+#, fuzzy
+msgid "Restore deleted images"
+msgstr "восстановить удаленные пользовательские букеты"
+
+#, fuzzy
 msgid "Restore deleted user bouquets"
 msgstr "восстановить удаленные пользовательские букеты"
 
@@ -9210,8 +9347,15 @@ msgstr ""
 msgid "Run Confirmation"
 msgstr ""
 
+msgid "Run and Close on success"
+msgstr ""
+
 msgid "Run how often ?"
 msgstr ""
+
+#, fuzzy
+msgid "Run in the background"
+msgstr "%d процесс запущен в фоновом режиме!"
 
 msgid "Run mount -a"
 msgstr ""
@@ -9258,6 +9402,10 @@ msgstr ""
 msgid "SCR Unicable"
 msgstr "FBC технология (Unicable)"
 
+#, python-format
+msgid "SD-card slot %s"
+msgstr ""
+
 #, fuzzy
 msgid "SDR"
 msgstr "SID"
@@ -9296,6 +9444,9 @@ msgid "SSID:"
 msgstr "SSID:"
 
 msgid "STARTUP"
+msgstr ""
+
+msgid "STARTUP_"
 msgstr ""
 
 msgid "Saint Barthelemy"
@@ -9350,6 +9501,9 @@ msgstr "Сб"
 msgid "Sat Finder"
 msgstr ""
 
+msgid "Sat Finder can only work with an activated tuner."
+msgstr ""
+
 msgid "Satellite"
 msgstr "Спутник"
 
@@ -9386,6 +9540,10 @@ msgstr "Сохранить"
 #, fuzzy
 msgid "Save / Enter text and exit"
 msgstr "Сохранить и выйти"
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Нажмите OK для активации выбранного скина."
 
 msgid "Save and exit"
 msgstr "Сохранить и выйти"
@@ -9439,9 +9597,6 @@ msgstr "Сохранить таймшифт в каталог movie и пере�
 
 msgid "Save timeshift only for current event"
 msgstr "Сохранить таймшифт только для текущего события"
-
-msgid "Sc Ecm Info setup"
-msgstr ""
 
 msgid "Scaler sharpness"
 msgstr "Чёткость"
@@ -9705,10 +9860,6 @@ msgstr ""
 msgid "Select HDD"
 msgstr "Выбор HDD"
 
-#, fuzzy
-msgid "Select Image"
-msgstr "Выбор видео"
-
 #, fuzzy, python-format
 msgid "Select Image: %s"
 msgstr "Выбрать скин"
@@ -9718,10 +9869,6 @@ msgstr ""
 
 msgid "Select Lan/Wlan"
 msgstr ""
-
-#, fuzzy
-msgid "Select Multiboot"
-msgstr "Выбор слота"
 
 #, fuzzy
 msgid "Select Softcam"
@@ -9878,8 +10025,12 @@ msgstr ""
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr ""
 
-msgid "Select the character or action under the virtual keyboard cursor"
+msgid "Select the character or action under the keyboard cursor"
 msgstr ""
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "выбрать путь к видео"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr ""
@@ -9911,6 +10062,16 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
+#, fuzzy
+msgid "Select the shifted character set"
+msgstr "выбрать путь к видео"
+
+msgid "Select the shifted character set for the next character only"
+msgstr ""
+
+msgid "Select the time zone within your area or region."
+msgstr ""
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -9924,15 +10085,6 @@ msgid "Select the type of LNB/device being used (normally 'Universal'). If your 
 msgstr ""
 
 msgid "Select the type of Single Cable Reception device you are using."
-msgstr ""
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 #, fuzzy
@@ -9949,6 +10101,9 @@ msgstr "Выберите видеовход кнопками вверх/вниз
 msgid "Select video mode"
 msgstr "Выберите видеорежим"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 msgid "Select wireless network"
 msgstr "Выберите беспроводную сеть"
 
@@ -9958,9 +10113,6 @@ msgstr "Выбор Вашего скина"
 
 msgid "Select your Language for Audio/Subtitles."
 msgstr ""
-
-msgid "Select your Skin"
-msgstr "Выбор Вашего скина"
 
 #, fuzzy
 msgid ""
@@ -9982,6 +10134,14 @@ msgstr "Выберите Вашего провайдера и нажмите О�
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr ""
+
+#, fuzzy
+msgid "Select your time zone area or region."
+msgstr "Выбор способа сортировки:"
+
+#, fuzzy, python-format
+msgid "Selected Image: %s"
+msgstr "Выбрать скин"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Выбор спутников 1 (USALS)"
@@ -10170,9 +10330,6 @@ msgstr ""
 msgid "Set default"
 msgstr "Установить по дефолту"
 
-msgid "Set default settings?"
-msgstr "Установить настройки по дефолту?"
-
 msgid "Set end time"
 msgstr "Установить время окончания"
 
@@ -10246,6 +10403,9 @@ msgstr "Установки"
 msgid "Settings can be different for each directory separately (for non removeable devices only)."
 msgstr ""
 
+msgid "Settings for the Softcam Manager."
+msgstr ""
+
 msgid "Setup"
 msgstr "Настройки"
 
@@ -10263,9 +10423,6 @@ msgid "Setup Audio/Video"
 msgstr "Режим настроек"
 
 msgid "Setup Ecm Info of the CCcamInfo plugin."
-msgstr ""
-
-msgid "Setup Ecm Info of the Softcam Manager."
 msgstr ""
 
 msgid "Setup Enigma2"
@@ -10433,7 +10590,7 @@ msgid "Setup your preferences for the automatic resolution switch."
 msgstr ""
 
 #, fuzzy
-msgid "Setup your recording config."
+msgid "Setup your recording and playback config."
 msgstr "Остановка записей по таймеру"
 
 msgid "Setup your recording paths config."
@@ -10519,7 +10676,8 @@ msgstr ""
 msgid "Show OscamInfo in Extensions Menu"
 msgstr ""
 
-msgid "Show PIP"
+#, fuzzy
+msgid "Show PiP"
 msgstr "Показать PiP"
 
 msgid "Show Picons in Channel List"
@@ -10715,6 +10873,9 @@ msgstr ""
 msgid "Show service list"
 msgstr "Показать список сервисов"
 
+msgid "Show service name and event description among each other instead of side by side."
+msgstr ""
+
 msgid "Show service type icons"
 msgstr "Показать иконки типа сервиса"
 
@@ -10752,6 +10913,9 @@ msgstr "показать инфо транспондера"
 #, fuzzy
 msgid "Show tuner informations"
 msgstr "Информация менеджера софта"
+
+msgid "Show two lines per entry"
+msgstr ""
 
 #, fuzzy
 msgid "Show underline characters in filenames"
@@ -10864,9 +11028,6 @@ msgstr "Долгота по сайту"
 msgid "Size: "
 msgstr ""
 
-msgid "Skin"
-msgstr "Выбор скина"
-
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr ""
@@ -10878,14 +11039,18 @@ msgstr ""
 msgid "Skin Name: %s"
 msgstr ""
 
+#, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Выберите действие"
+
 msgid "Skin Setting"
 msgstr ""
 
 msgid "Skin Setup"
 msgstr ""
 
-msgid "Skin setup"
-msgstr "Настройка скина"
+msgid "SkinSelector: Restart GUI"
+msgstr ""
 
 msgid "Skins"
 msgstr "Скины"
@@ -10961,6 +11126,14 @@ msgstr ""
 
 msgid "Softcam"
 msgstr ""
+
+#, fuzzy
+msgid "Softcam Manager"
+msgstr "Настройки менеджера софта"
+
+#, fuzzy
+msgid "Softcam Manager Settings"
+msgstr "Настройки менеджера софта"
 
 msgid "Softcam Panel"
 msgstr ""
@@ -11463,11 +11636,23 @@ msgstr "Выбор субтитров..."
 msgid "Subtitle settings"
 msgstr "Меню настройки субтитров"
 
+#, fuzzy
+msgid "Subtitle show/hide..."
+msgstr "Выбор субтитров..."
+
 msgid "Subtitles"
 msgstr "Субтитры"
 
 msgid "Subtitles Settings"
 msgstr "Настройки субтитров"
+
+#, fuzzy
+msgid "Subtitles disabled"
+msgstr "Настройки субтитров"
+
+#, fuzzy
+msgid "Subtitles enabled"
+msgstr "Ограничения включены"
 
 msgid "Succeeded:"
 msgstr "Успешных:"
@@ -11522,7 +11707,8 @@ msgstr ""
 msgid "Swap Manager"
 msgstr ""
 
-msgid "Swap PIP"
+#, fuzzy
+msgid "Swap PiP"
 msgstr "Поменять PiP"
 
 msgid "Swap PiP and main picture"
@@ -11681,6 +11867,9 @@ msgid "T2MI RAW Mode"
 msgstr ""
 
 msgid "TB"
+msgstr ""
+
+msgid "TEXT"
 msgstr ""
 
 #. TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
@@ -12105,7 +12294,7 @@ msgstr ""
 msgid "This option allows you to configure the Colorspace from Auto to RGB"
 msgstr ""
 
-msgid "This option allows you to configure the HDR type."
+msgid "This option allows you to configure the type of Dynamic Range."
 msgstr ""
 
 msgid "This option allows you to disable or change the virtuell loadspeaker position."
@@ -12307,6 +12496,14 @@ msgstr "Временной масштаб сетки"
 msgid "Time to execute command or script"
 msgstr ""
 
+#, fuzzy
+msgid "Time zone"
+msgstr "Часовой пояс"
+
+#, fuzzy
+msgid "Time zone area"
+msgstr "Часовой пояс"
+
 msgid "Timer"
 msgstr "Таймер"
 
@@ -12381,12 +12578,20 @@ msgstr "Свойства названия"
 msgid "Titleset mode"
 msgstr "Режим установки названия"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "К выбору звука"
 
 #, fuzzy
 msgid "To restore the image:"
 msgstr "нет менеджера ресурсов"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart. Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "К выбору субтитров"
@@ -12400,7 +12605,8 @@ msgstr "Смена HDMI In"
 msgid "Toggle LCD LiveTV"
 msgstr "Смена LCD LiveTV"
 
-msgid "Toggle PIPzap"
+#, fuzzy
+msgid "Toggle PiPzap"
 msgstr "Смена Pipzap"
 
 msgid "Toggle Pillarbox <> Pan&Scan"
@@ -12424,9 +12630,16 @@ msgstr ""
 msgid "Toggle show/hide"
 msgstr ""
 
+msgid "Toggle subtitles show/hide"
+msgstr ""
+
 #, fuzzy
 msgid "Toggle the tv and the radio player..."
 msgstr "Показать радио плеер..."
+
+#, fuzzy
+msgid "Toggle videomode"
+msgstr "Выберите видеорежим"
 
 msgid "Togo"
 msgstr ""
@@ -12665,6 +12878,10 @@ msgstr "Калибровка USALS"
 
 msgid "USB stick"
 msgstr "USB фстик"
+
+#, python-format
+msgid "USB-device slot %s"
+msgstr ""
 
 msgid "USB: "
 msgstr ""
@@ -13467,7 +13684,8 @@ msgstr ""
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Если это включено, то при старте энигма2 будут загружены доступные букеты, которые не включены в списки bouquets.tv или bouquets.radio."
 
-msgid "When enabled the PiP can be closed by the exit button."
+#, fuzzy
+msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Если включено, то можно закрыть экран PiP с помощью кнопки выход."
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
@@ -13923,6 +14141,9 @@ msgstr "Вам необходимо подождать %s!"
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Вам необходимо переключить на сервис %s (%s - '%s')!\n"
 
+msgid "You seem to be in timeshift!"
+msgstr ""
+
 #, python-format
 msgid "Your %s %s is not connected to the internet, please check your network settings and try again."
 msgstr ""
@@ -14106,9 +14327,9 @@ msgstr "Переключить на выбранный канал или пок�
 msgid "Zap up"
 msgstr "Переключить канал вверх"
 
-#, python-format
-msgid "Zapped to timer service %s as PiP!"
-msgstr ""
+#, fuzzy, python-format
+msgid "Zapped to timer service %s as Picture in Picture!"
+msgstr "Перейти на первый сервис"
 
 #, fuzzy, python-format
 msgid "Zapped to timer service %s!"
@@ -14427,6 +14648,10 @@ msgstr ""
 
 msgid "dump (0 - create backup off): "
 msgstr ""
+
+#, fuzzy, python-format
+msgid "eMMC slot %s"
+msgstr "Слот CI: "
 
 msgid "east"
 msgstr "восток"
@@ -15406,6 +15631,10 @@ msgstr "шаблон файла"
 msgid "tennis/squash"
 msgstr "теннис/сквош"
 
+#, fuzzy
+msgid "testing"
+msgstr "Вопрос"
+
 msgid "this bouquet is protected by a parental control pin"
 msgstr "этот букет защищен PIN-кодом родительского контроля"
 
@@ -15570,9 +15799,6 @@ msgstr ""
 
 msgid "wnw"
 msgstr ""
-
-msgid "working"
-msgstr "в работе"
 
 msgid "wsw"
 msgstr ""
