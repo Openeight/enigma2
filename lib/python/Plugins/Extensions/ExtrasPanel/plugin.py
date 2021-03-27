@@ -84,7 +84,7 @@ if os.path.isfile('/usr/lib/enigma2/python/Plugins/SystemPlugins/SoftwareManager
 	except:
 		pass
 
-from Plugins.Extensions.ExtrasPanel.CronManager import *
+from Screens.CronTimer import *
 from Plugins.Extensions.ExtrasPanel.ScriptRunner import *
 from Plugins.Extensions.ExtrasPanel.MountManager import *
 from Plugins.Extensions.ExtrasPanel.SoftcamPanel import *
@@ -427,8 +427,8 @@ class Extraspanel(Screen, InfoBarPiP):
 			self.session.open(Info, 'Swap')
 		elif menu == 'System_Info':
 			self.System()
-		elif menu == 'CronManager':
-			self.session.open(CronManager)
+		elif menu == 'CronTimer':
+			self.session.open(CronTimers)
 		elif menu == 'JobManager':
 			self.session.open(ScriptRunner)
 		elif menu == 'SoftcamPanel':
@@ -468,7 +468,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		self.mylist = []
 		self.mylist.append((_('Keymap Selection'), 'KeymapSel', _('change your Keymap: *.mqb, *.usr, *.ntr, *.xml, *.u80')))
 		self.mylist.append((_('Mount Manager'), 'MountManager', _('Mount-Manager...')))
-		self.mylist.append((_('Cron Manager'), 'CronManager', _('Cron-Manager...')))
+		self.mylist.append((_('Cron Timer'), 'CronTimer', _('Cron-Timer...')))
 		self.mylist.append((_('Job Manager'), 'JobManager', _('Job-Manager...')))
 		self.mylist.append((_('Swap Manager'), 'SwapManager', _('Swap-Manager...')))
 		self.mylist.append((_('IPK-install Manager'), 'IPK-installManager', _('install *.ipk, *.tar.gz files')))
