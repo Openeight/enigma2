@@ -28,6 +28,8 @@ class hotkey:
 		("F2" + " " + _("long"), "f2_long", ""),
 		("F3", "f3", ""),
 		("F3" + " " + _("long"), "f3_long", ""),
+		("F4", "f4", ""),
+		("F4" + " " + _("long"), "f4_long", ""),
 		(_("Red"), "red", ""),
 		(_("Green"), "green", "Module/Screens.PluginBrowser/PluginBrowser"),
 		(_("Yellow"), "yellow", ""),
