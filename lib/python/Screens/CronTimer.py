@@ -10,7 +10,7 @@ from Components.Pixmap import Pixmap
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Tools.Directories import fileExists
-from os import system, listdir, rename, path, mkdir
+from os import system, listdir, rename, path, mkdir, access, X_OK, chmod
 from time import sleep
 from boxbranding import getMachineBrand, getMachineName
 
@@ -37,7 +37,7 @@ class CronTimers(Screen):
 
 		self['key_red'] = Label(_("Delete"))
 		self['key_green'] = Label(_("Add"))
-		self['key_yellow'] = StaticText(_("Start"))
+		self['key_yellow'] = Label(_("Start"))
 		self['key_blue'] = Label(_("Autostart"))
 		self.list = []
 		self['list'] = List(self.list)
@@ -354,6 +354,9 @@ class CronTimersConfig(Screen, ConfigListScreen):
 		minutes = '%02d' % config.crontimers.cmdtime.value[1]
 		if config.crontimers.commandtype.value == 'predefined' and config.crontimers.predefined_command.value != '':
 			command = config.crontimers.predefined_command.value
+			system("if awk '/\r$/{exit 0;} 1{exit 1;}' " + command + " ; then dos2unix " + command + "; fi")
+			if not access(command, X_OK):
+				chmod(command, 0755)
 		else:
 			command = config.crontimers.user_command.value
 
