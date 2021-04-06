@@ -30,6 +30,8 @@ class hotkey:
 		("F3" + " " + _("long"), "f3_long", ""),
 		("F4", "f4", ""),
 		("F4" + " " + _("long"), "f4_long", ""),
+		("Magic", "f10", ""),
+		("Magic" + " " + _("long"), "f10_long", ""),
 		(_("Red"), "red", ""),
 		(_("Green"), "green", "Module/Screens.PluginBrowser/PluginBrowser"),
 		(_("Yellow"), "yellow", ""),
