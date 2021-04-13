@@ -44,7 +44,8 @@ def fnmatch(name, pat):
 
 def filter(names, pat):
     """Return the subset of the list NAMES that match PAT"""
-    import os,posixpath
+    import os
+    import posixpath
     result=[]
     pat=os.path.normcase(pat)
     if not pat in _cache:

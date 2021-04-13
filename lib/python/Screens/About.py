@@ -23,7 +23,8 @@ from Components.AVSwitch import AVSwitch
 from os import path
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
-import skin, os
+import skin
+import os
 
 class About(Screen):
 	def __init__(self, session):
