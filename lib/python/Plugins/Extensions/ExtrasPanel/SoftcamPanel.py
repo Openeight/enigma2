@@ -21,7 +21,7 @@ def Check_Softcam():
 	for x in os.listdir('/etc'):
 		if x.find('.emu') > -1:
 			found = True
-			break;
+			break
 	return found
 
 def command(comandline, strip=1):
@@ -36,10 +36,12 @@ def command(comandline, strip=1):
     else:
       for line in file:
         text = text + line
-        if text[-1:] != '\n': text = text + "\n"
+        if text[-1:] != '\n':
+        	text = text + "\n"
     file.close()
   # if one or last line then remove linefeed
-  if text[-1:] == '\n': text = text[:-1]
+  if text[-1:] == '\n':
+  	text = text[:-1]
   comandline = text
   os.system("rm /tmp/command.txt")
   return comandline
@@ -476,7 +478,8 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				t = 0
 				while t < 5:
 					p = command('pidof %s |wc -w' % oldcam )
-					if not p.isdigit(): p=0
+					if not p.isdigit():
+						p=0
 					if int(p) > 0:
 						self.container = eConsoleAppContainer()
 						self.container.execute('killall -9 ' + oldcam)
@@ -493,7 +496,8 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				t = 0
 				while t < 5:
 					p = command('pidof %s |wc -w' % oldcam2 )
-					if not p.isdigit(): p=0
+					if not p.isdigit():
+						p=0
 					if int(p) > 0:
 						self.container = eConsoleAppContainer()
 						self.container.execute('killall -9 ' + oldcam2)
@@ -604,7 +608,8 @@ class SoftcamPanel(ConfigListScreen, Screen):
 
 	def isCamrunning(self, cam):
 		p = command('pidof ' + cam + ' |wc -w')
-		if not p.isdigit(): p=0
+		if not p.isdigit():
+			p=0
 		if int(p) > 0:
 			return True
 		else:

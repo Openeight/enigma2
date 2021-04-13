@@ -152,7 +152,7 @@ def standbyCounterChanged(dummy):
 
 def InitLcd():
 	detected = eDBoxLCD.getInstance() and eDBoxLCD.getInstance().detected()
-	config.lcd = ConfigSubsection();
+	config.lcd = ConfigSubsection()
 	if detected:
 		config.lcd.scroll_speed = ConfigSelection(default = "300", choices = [
 			("500", _("slow")),
@@ -182,10 +182,10 @@ def InitLcd():
 			ilcd.setMode(configElement.value)
 
 		def setLCDpower(configElement):
-			ilcd.setPower(configElement.value);
+			ilcd.setPower(configElement.value)
 			
 		def setLCD8500(configElement):
-			ilcd.setEt8500(configElement.value);
+			ilcd.setEt8500(configElement.value)
 
 		def setLCDrepeat(configElement):
 			ilcd.setRepeat(configElement.value)
@@ -296,13 +296,13 @@ def InitLcd():
 
 		if fileExists("/proc/stb/power/vfd"):
 			config.lcd.power = ConfigSelection([("0", _("Off")), ("1", _("On"))], "1")
-			config.lcd.power.addNotifier(setLCDpower);
+			config.lcd.power.addNotifier(setLCDpower)
 		else:
 			config.lcd.power = ConfigNothing()
 			
 		if fileExists("/proc/stb/fb/sd_detach"):
 			config.lcd.et8500 = ConfigSelection([("1", _("No")), ("0", _("Yes"))], "0")
-			config.lcd.et8500.addNotifier(setLCD8500);
+			config.lcd.et8500.addNotifier(setLCD8500)
 		else:
 			config.lcd.et8500 = ConfigNothing()
 

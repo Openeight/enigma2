@@ -97,7 +97,7 @@ def Check_Softcam():
 	for x in os.listdir('/etc'):
 		if x.find('.emu') > -1:
 			found = True
-			break;
+			break
 	return found
 
 class UpdatePluginMenu(Screen):
