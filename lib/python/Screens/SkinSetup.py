@@ -61,7 +61,7 @@ class SkinSetup(Screen):
                         from Plugins.Extensions.TechniHDSetup.plugin import TechniHDSetup
                         self.session.open(TechniHDSetup) 
                 except:        
-                        self.session.open(MessageBox, _("TechniHD is not installed on your Xtrend box !"), MessageBox.TYPE_ERROR, timeout = 10)
+                        self.session.open(MessageBox, _("TechniHD is not installed on your Xtrend box !"), MessageBox.TYPE_ERROR, timeout=10)
                         self.close()
 
 class SettingsA(Screen):
@@ -104,7 +104,7 @@ class SettingsA(Screen):
                         from Plugins.SystemPlugins.SkinSelector.plugin import SkinSelector
                         self.session.open(SkinSelector)
                 except:
-                        self.session.open(MessageBox, _("SystemPlugin SkinSelector is not installed !"), MessageBox.TYPE_ERROR, timeout = 10)
+                        self.session.open(MessageBox, _("SystemPlugin SkinSelector is not installed !"), MessageBox.TYPE_ERROR, timeout=10)
                         self.close()
 
 
@@ -201,7 +201,7 @@ class SettingsC(Screen):
                         
     def ShowSI(self):
           if self.cur is not "":
-                self.session.open(MessageBox, _("Current Second-infobar setting is Show !"), type = MessageBox.TYPE_INFO,timeout = 10 )
+                self.session.open(MessageBox, _("Current Second-infobar setting is Show !"), type=MessageBox.TYPE_INFO,timeout=10 )
           else:
                 config.usage.show_second_infobar.value = int(0)
     	        config.usage.show_second_infobar.save()
@@ -210,7 +210,7 @@ class SettingsC(Screen):
 
     def RemSI(self):
           if self.cur is "":
-                self.session.open(MessageBox, _("Current Second-infobar setting is None !"), type = MessageBox.TYPE_INFO,timeout = 10 )
+                self.session.open(MessageBox, _("Current Second-infobar setting is None !"), type=MessageBox.TYPE_INFO,timeout=10 )
           else:
                 config.usage.show_second_infobar.value = ""
     	        config.usage.show_second_infobar.save()
@@ -254,7 +254,7 @@ class SettingsD(Screen):
                         
     def ShowSp(self):
           if self.cur is True:
-                self.session.open(MessageBox, _("Current picon setting is True !"), type = MessageBox.TYPE_INFO,timeout = 10 )
+                self.session.open(MessageBox, _("Current picon setting is True !"), type=MessageBox.TYPE_INFO,timeout=10 )
           else:
                 config.usage.service_icon_enable.value = True
     	        config.usage.service_icon_enable.save()
@@ -263,7 +263,7 @@ class SettingsD(Screen):
 
     def RemSp(self):
           if self.cur is False:
-                self.session.open(MessageBox, _("Current picon setting is False !"), type = MessageBox.TYPE_INFO,timeout = 10 )
+                self.session.open(MessageBox, _("Current picon setting is False !"), type=MessageBox.TYPE_INFO,timeout=10 )
           else:
                 config.usage.service_icon_enable.value = False
     	        config.usage.service_icon_enable.save()

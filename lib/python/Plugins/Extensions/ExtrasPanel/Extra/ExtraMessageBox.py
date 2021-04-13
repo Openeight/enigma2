@@ -7,9 +7,9 @@ from Tools.LoadPixmap import LoadPixmap
 from Components.Label import Label
 
 def MessageBoxEntry(name, picture):
-	pixmap = LoadPixmap(cached = True, path = resolveFilename(SCOPE_PLUGINS, "Extensions/ExtrasPanel/icons/" + picture))
+	pixmap = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/ExtrasPanel/icons/" + picture))
 	if not pixmap:
-		pixmap = LoadPixmap(cached = True, path = resolveFilename(SCOPE_PLUGINS, "Extensions/ExtrasPanel/icons/empty.png"))
+		pixmap = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/ExtrasPanel/icons/empty.png"))
 		
 	return (pixmap, name)
 	
@@ -29,7 +29,7 @@ class ExtraMessageBox(Screen):
 			</convert>
 		</widget>
 	</screen>"""
-	def __init__(self, session, message = "", title = "", menulist = [], type = 0, exitid = -1, default = 0, timeout = 0):
+	def __init__(self, session, message="", title="", menulist=[], type=0, exitid=-1, default=0, timeout=0):
 		# type exist for compability... will be ignored
 		Screen.__init__(self, session)
 		self.session = session

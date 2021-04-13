@@ -90,13 +90,13 @@ class FlashOnline(Screen):
 
 	def check_hdd(self):
 		if not os.path.exists("/media/hdd"):
-			self.session.open(MessageBox, _("No /hdd found !!\nPlease make sure you have a HDD mounted.\n\nExit plugin."), type = MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("No /hdd found !!\nPlease make sure you have a HDD mounted.\n\nExit plugin."), type=MessageBox.TYPE_ERROR)
 			return False
 		if Freespace('/media/hdd') < 300000:
-			self.session.open(MessageBox, _("Not enough free space on /hdd !!\nYou need at least 300Mb free space.\n\nExit plugin."), type = MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Not enough free space on /hdd !!\nYou need at least 300Mb free space.\n\nExit plugin."), type=MessageBox.TYPE_ERROR)
 			return False
 		if not os.path.exists(ofgwritePath):
-			self.session.open(MessageBox, _('ofgwrite not found !!\nPlease make sure you have ofgwrite installed in /usr/bin/ofgwrite.\n\nExit plugin.'), type = MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _('ofgwrite not found !!\nPlease make sure you have ofgwrite installed in /usr/bin/ofgwrite.\n\nExit plugin.'), type=MessageBox.TYPE_ERROR)
 			return False
 
 		if not os.path.exists(imagePath):
@@ -121,13 +121,13 @@ class FlashOnline(Screen):
 		
 	def blue(self):
 		if self.check_hdd():
-			self.session.open(doFlashImage, online = False, list=self.list[self.selection], mtdkernel=self.MTDKERNEL, mtdrootfs=self.MTDROOTFS)
+			self.session.open(doFlashImage, online=False, list=self.list[self.selection], mtdkernel=self.MTDKERNEL, mtdrootfs=self.MTDROOTFS)
 		else:
 			self.close()
 
 	def green(self):
 		if self.check_hdd():
-			self.session.open(doFlashImage, online = True, list=self.list[self.selection], mtdkernel=self.MTDKERNEL, mtdrootfs=self.MTDROOTFS)
+			self.session.open(doFlashImage, online=True, list=self.list[self.selection], mtdkernel=self.MTDKERNEL, mtdrootfs=self.MTDROOTFS)
 		else:
 			self.close()
 
@@ -268,11 +268,11 @@ class doFlashImage(Screen):
 		self.filename = self.imagePath + "/" + self.sel
 		return self.checkTrafficLight()
 
-	def greenCB(self, ret = None):
+	def greenCB(self, ret=None):
 		if self.Online:
 			if ret:
 				from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen
-				self.session.openWithCallback(self.startInstallOnline,BackupScreen, runBackup = True)
+				self.session.openWithCallback(self.startInstallOnline,BackupScreen, runBackup=True)
 			else:
 				self.startInstallOnline()
 		else:
@@ -302,10 +302,10 @@ class doFlashImage(Screen):
 				tmpStatus = _("yellow")
 			elif '2' in tmpStatus:
 				tmpStatus = _("red")
-			self.session.open(MessageBox, _("Traffic light state is '%s' - please use an another image.") %tmpStatus.upper(), type = MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Traffic light state is '%s' - please use an another image.") %tmpStatus.upper(), type=MessageBox.TYPE_ERROR)
 			return False
 
-	def startInstallOnline(self, ret = None):
+	def startInstallOnline(self, ret=None):
 		box = self.box()
 		if self.feed == "openeight":
 			url = self.feedurl + "/images/" + box + "/" + self.sel
@@ -320,10 +320,10 @@ class doFlashImage(Screen):
 			job.afterEvent = "close"
 			job_manager.AddJob(job)
 			job_manager.failed_jobs = []
-			self.session.openWithCallback(self.ImageDownloadCB, JobView, job, backgroundable = False, afterEventChangeable = False)
+			self.session.openWithCallback(self.ImageDownloadCB, JobView, job, backgroundable=False, afterEventChangeable=False)
 		except urllib2.URLError as e:
 			print "[Flash Online] Download failed !!\n%s" % e
-			self.session.openWithCallback(self.ImageDownloadCB, MessageBox, _("Download Failed !!") + "\n%s" % e, type = MessageBox.TYPE_ERROR)
+			self.session.openWithCallback(self.ImageDownloadCB, MessageBox, _("Download Failed !!") + "\n%s" % e, type=MessageBox.TYPE_ERROR)
 			self.close()
 
 	def ImageDownloadCB(self, ret):
@@ -337,9 +337,9 @@ class doFlashImage(Screen):
 			self.flashWithPostFlashActionMode = 'online'
 			self.flashWithPostFlashAction()
 		else:
-			self.session.open(MessageBox, _("Download Failed !!"), type = MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Download Failed !!"), type=MessageBox.TYPE_ERROR)
 
-	def flashWithPostFlashAction(self, ret = True):
+	def flashWithPostFlashAction(self, ret=True):
 		if ret:
 			print "flashWithPostFlashAction"
 			title =_("Please select what to do after flashing the image:\n(In addition, if it exists, a local script will be executed as well at /media/hdd/images/config/myrestore.sh)")
@@ -432,7 +432,7 @@ class doFlashImage(Screen):
 
 	def unzip_image(self, filename, path):
 		print "Unzip %s to %s" %(filename,path)
-		self.session.openWithCallback(self.cmdFinished, Console, title = _("Unzipping files, Please wait ..."), cmdlist = ['unzip ' + filename + ' -o -d ' + path, "sleep 3"], closeOnSuccess = True)
+		self.session.openWithCallback(self.cmdFinished, Console, title=_("Unzipping files, Please wait ..."), cmdlist=['unzip ' + filename + ' -o -d ' + path, "sleep 3"], closeOnSuccess=True)
 
 	def cmdFinished(self):
 		self.prepair_flashtmp(flashPath)
@@ -470,7 +470,7 @@ class doFlashImage(Screen):
 					message += _('The image or kernel will be flashing and auto booted in few minutes.\n')
 				message += "'"
 				cmdlist.append(message)
-			self.session.open(Console, title = text, cmdlist = cmdlist, finishedCallback = self.quit, closeOnSuccess = False)
+			self.session.open(Console, title=text, cmdlist=cmdlist, finishedCallback=self.quit, closeOnSuccess=False)
 			if not self.simulate:
 				fbClass.getInstance().lock()
 			if self.List not in ("STARTUP","cmdline.txt"):
@@ -505,16 +505,16 @@ class doFlashImage(Screen):
 		elif self.getSel():
 			self.greenCB(True)
 
-	def startInstallLocal(self, ret = None):
+	def startInstallLocal(self, ret=None):
 		if ret:
 			from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen
 			self.flashWithPostFlashActionMode = 'local'
-			self.session.openWithCallback(self.flashWithPostFlashAction,BackupScreen, runBackup = True)
+			self.session.openWithCallback(self.flashWithPostFlashAction,BackupScreen, runBackup=True)
 		else:
 			self.flashWithPostFlashActionMode = 'local'
 			self.flashWithPostFlashAction()
 
-	def startInstallLocalCB(self, ret = None):
+	def startInstallLocalCB(self, ret=None):
 		if self.sel == str(flashTmp):
 			self.Start_Flashing()
 		else:
@@ -655,7 +655,7 @@ class ImageDownloadTask(Task):
 
 	def download_finished(self, string=""):
 		if self.aborted:
-			self.finish(aborted = True)
+			self.finish(aborted=True)
 		else:
 			Task.processFinished(self, 0)
 
@@ -670,7 +670,7 @@ class DeviceBrowser(Screen, HelpableScreen):
 			<widget name="filelist" position="5,210" size="510,220" scrollbarMode="showOnDemand" />
 		</screen>"""
 
-	def __init__(self, session, startdir, message="", showDirectories = True, showFiles = True, showMountpoints = True, matchingPattern = "", useServiceRef = False, inhibitDirs = False, inhibitMounts = False, isTop = False, enableWrapAround = False, additionalExtensions = None):
+	def __init__(self, session, startdir, message="", showDirectories=True, showFiles=True, showMountpoints=True, matchingPattern="", useServiceRef=False, inhibitDirs=False, inhibitMounts=False, isTop=False, enableWrapAround=False, additionalExtensions=None):
 		Screen.__init__(self, session)
 
 		HelpableScreen.__init__(self)
@@ -680,7 +680,7 @@ class DeviceBrowser(Screen, HelpableScreen):
 		self["key_green"] = StaticText()
 		self["message"] = StaticText(message)
 
-		self.filelist = FileList(startdir, showDirectories = showDirectories, showFiles = showFiles, showMountpoints = showMountpoints, matchingPattern = matchingPattern, useServiceRef = useServiceRef, inhibitDirs = inhibitDirs, inhibitMounts = inhibitMounts, isTop = isTop, enableWrapAround = enableWrapAround, additionalExtensions = additionalExtensions)
+		self.filelist = FileList(startdir, showDirectories=showDirectories, showFiles=showFiles, showMountpoints=showMountpoints, matchingPattern=matchingPattern, useServiceRef=useServiceRef, inhibitDirs=inhibitDirs, inhibitMounts=inhibitMounts, isTop=isTop, enableWrapAround=enableWrapAround, additionalExtensions=additionalExtensions)
 		self["filelist"] = self.filelist
 
 		self["FilelistActions"] = ActionMap(["SetupActions", "ColorActions"],

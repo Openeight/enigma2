@@ -123,7 +123,7 @@ def setDefaultKeymap():
 	config.usage.keymap.setValue(eEnv.resolve('${datadir}/enigma2/keymap.xml'))
 	config.save()
 
-def command(comandline, strip = 1):
+def command(comandline, strip=1):
 	comandline = comandline + ' >/tmp/command.txt'
 	os.system(comandline)
 	text = ''
@@ -242,12 +242,12 @@ def Plugins(**kwargs):
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=camstart),
 		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=SwapAutostart),
 		PluginDescriptor(name='Eight Panel', description='Eight panel GUI 12/11/2012', where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main),
-		PluginDescriptor(name=_("Quick Menu"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=qmenu),
-		PluginDescriptor(name=_("Job Manager"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=scriptrunner),
-		PluginDescriptor(name=_("Sundtek Control Center"), description =_("installs the sundtek driver and runs related shellscripts"), where = PluginDescriptor.WHERE_MENU, fnc=SundtekControlCenterStart)
+		PluginDescriptor(name=_("Quick Menu"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=qmenu),
+		PluginDescriptor(name=_("Job Manager"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=scriptrunner),
+		PluginDescriptor(name=_("Sundtek Control Center"), description=_("installs the sundtek driver and runs related shellscripts"), where=PluginDescriptor.WHERE_MENU, fnc=SundtekControlCenterStart)
 		]
 	if config.plugins.SundtekControlCenter.display.value == "1" or config.plugins.SundtekControlCenter.display.value == "3":
-		list.append(PluginDescriptor(name=_("Sundtek Control Center"), description =_("installs the sundtek driver and runs related shellscripts"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=sccmain))
+		list.append(PluginDescriptor(name=_("Sundtek Control Center"), description=_("installs the sundtek driver and runs related shellscripts"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=sccmain))
 	return list
 
 MENU_SKIN = '<screen name="Extraspanel" position="center,center" size="500,370" title="Extra Panel" >\n\t<widget source="global.CurrentTime" render="Label" position="0, 340" size="500,24" font="Regular;20" foregroundColor="#FFFFFF" halign="right" transparent="1" zPosition="5">\n\t\t<convert type="ClockToText">>Format%H:%M:%S</convert>\n\t</widget>\n\t<eLabel backgroundColor="#56C856" position="0,330" size="500,1" zPosition="0" />\n\t<widget source="list" render="Listbox" position="10,25" size="500,280" scrollbarMode="showOnDemand" zPosition="1" transparent="1">\n                <convert type="TemplatedMultiContent">\n\t\t\t\t{"template": [\n\t\t\t\t\t\tMultiContentEntryText(pos = (0, 5), size = (520, 28), font=0, text = 0), # menu_entry\n\t\t\t\t\t\tMultiContentEntryText(pos = (0, 35), size = (520, 22), font=1, text = 2), # menu_entry_description\n\t\t\t\t\t],\n\t\t\t\t"fonts": [gFont("Regular",24),gFont("Regular",16)],\n\t\t\t\t"itemHeight": 70\n\t\t\t\t}\n\t \t</convert>\n        </widget>\n\t<widget name="label1" position="10,340" size="490,25" font="Regular;20" transparent="1" foregroundColor="#f2e000" halign="left" />\n</screen>'
@@ -260,7 +260,7 @@ from Screens.InfoBarGenerics import InfoBarPiP
 class Extraspanel(Screen, InfoBarPiP):
 	servicelist = None
 
-	def __init__(self, session, services = None):
+	def __init__(self, session, services=None):
 		global menu
 		global pluginlist
 		global INFOCONF
@@ -565,13 +565,13 @@ class Extraspanel(Screen, InfoBarPiP):
 		except OSError:
 			self.session.open(MessageBox, _('Sorry, your backup destination is not writeable.\nPlease select a different one.'), MessageBox.TYPE_INFO, timeout=10)
 
-	def backupDone(self, retval = None):
+	def backupDone(self, retval=None):
 		if retval is True:
 			self.session.open(MessageBox, _('Backup done.'), MessageBox.TYPE_INFO, timeout=10)
 		else:
 			self.session.open(MessageBox, _('Backup failed.'), MessageBox.TYPE_INFO, timeout=10)
 
-	def startRestore(self, ret = False):
+	def startRestore(self, ret=False):
 		if ret == True:
 			self.exe = True
 			self.session.open(RestoreScreen, runRestore=True)
@@ -1256,7 +1256,7 @@ class Info(Screen):
 			text = text[:-1]
 		return text
 
-	def Do_cmd(self, cmd, file, arg, pipe = ''):
+	def Do_cmd(self, cmd, file, arg, pipe=''):
 		try:
 			if file != None:
 				if os.path.exists(file) is True:

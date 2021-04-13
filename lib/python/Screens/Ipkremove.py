@@ -28,11 +28,11 @@ class Ipkremove(Screen):
 			<widget name="list" position="10,0" size="190,250" scrollbarMode="showOnDemand" />
 			<widget name="pixmap" position="200,0" size="190,250" />
 		</screen>"""
-	def __init__(self, session, args = None):
+	def __init__(self, session, args=None):
 		self.skin = Ipkremove.skin
 		Screen.__init__(self, session)
 
-		self["list"] = FileList("/", matchingPattern = "^.*\.(ipk|png|avi|mp3|mpeg|ts)")
+		self["list"] = FileList("/", matchingPattern="^.*\.(ipk|png|avi|mp3|mpeg|ts)")
 		self["pixmap"] = Pixmap()
 		
 		self["text"] = Input("1234", maxSize=True, type=Input.NUMBER)

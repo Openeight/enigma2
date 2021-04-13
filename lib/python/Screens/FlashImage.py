@@ -66,7 +66,7 @@ class SelectImage(Screen):
 
 	def getImagesList(self):
 
-		def getImages(path, files, dir = _("Root directory")):
+		def getImages(path, files, dir=_("Root directory")):
 			for file in [x for x in files if os.path.splitext(x)[1] == ".zip" and model in x]:
 				try:
 					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):

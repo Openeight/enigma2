@@ -23,7 +23,7 @@ class GUISkin:
 		self.desktop = None
 		self.screenPathMode = False
 
-	def createGUIScreen(self, parent, desktop, updateonly = False):
+	def createGUIScreen(self, parent, desktop, updateonly=False):
 		for val in self.renderer:
 			if isinstance(val, GUIComponent):
 				if not updateonly:

@@ -673,19 +673,19 @@ class QuickMenu(Screen):
 		config.plugins.configurationbackup.save()
 		config.save()
 
-	def backupDone(self, retval = None):
+	def backupDone(self, retval=None):
 		if retval is True:
 			self.session.open(MessageBox, _('Backup done.'), MessageBox.TYPE_INFO, timeout=10)
 		else:
 			self.session.open(MessageBox, _('Backup failed.'), MessageBox.TYPE_INFO, timeout=10)
 
-	def startRestore(self, ret = False):
+	def startRestore(self, ret=False):
 		if ret == True:
 			self.exe = True
 			self.session.open(RestoreScreen, runRestore=True)
 
 
-def QuickMenuEntryComponent(name, description, long_description = None, width = 540):
+def QuickMenuEntryComponent(name, description, long_description=None, width=540):
 	pngname = name.replace(' ', '_')
 	png = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/' + pngname + '.png')
 	if png is None:
@@ -694,9 +694,9 @@ def QuickMenuEntryComponent(name, description, long_description = None, width = 
 	if sz_w and sz_w == 1920:
 		width *= 1.5
 		return [_(name),
-		MultiContentEntryText(pos=(90, 2), size=(width-90, 40), font=0, text = _(name)),
-		MultiContentEntryText(pos=(90, 42), size=(width-90, 30), font=1, text = _(description)),
-		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), flags = BT_SCALE, png = png),
+		MultiContentEntryText(pos=(90, 2), size=(width-90, 40), font=0, text=_(name)),
+		MultiContentEntryText(pos=(90, 42), size=(width-90, 30), font=1, text=_(description)),
+		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), flags=BT_SCALE, png=png),
 		_(long_description)]
 	elif sz_w > 720:
 		return [_(name),
@@ -706,19 +706,19 @@ def QuickMenuEntryComponent(name, description, long_description = None, width = 
 		_(long_description)]
 	else:
 		return [_(name),
-		MultiContentEntryText(pos=(60, 3), size=(width-60, 25), font=0, text = _(name)),
-		MultiContentEntryText(pos=(60, 25), size=(width-60, 20), font=1, text = _(description)),
-		MultiContentEntryPixmapAlphaTest(pos=(10, 5), size=(40, 40), png = png),
+		MultiContentEntryText(pos=(60, 3), size=(width-60, 25), font=0, text=_(name)),
+		MultiContentEntryText(pos=(60, 25), size=(width-60, 20), font=1, text=_(description)),
+		MultiContentEntryPixmapAlphaTest(pos=(10, 5), size=(40, 40), png=png),
 		_(long_description)]
 
 
-def QuickSubMenuEntryComponent(name, description, long_description = None, width = 540):
+def QuickSubMenuEntryComponent(name, description, long_description=None, width=540):
 	sz_w = getDesktop(0).size().width()
 	if sz_w and sz_w == 1920:
 		width *= 1.5
 		return [_(name),
-		MultiContentEntryText(pos=(15, 2), size=(width-15, 40), font=0, text = _(name)),
-		MultiContentEntryText(pos=(15, 42), size=(width-15, 30), font=1, text = _(description)),
+		MultiContentEntryText(pos=(15, 2), size=(width-15, 40), font=0, text=_(name)),
+		MultiContentEntryText(pos=(15, 42), size=(width-15, 30), font=1, text=_(description)),
 		_(long_description)]
 	elif sz_w > 720:
 		return [_(name),
@@ -727,14 +727,14 @@ def QuickSubMenuEntryComponent(name, description, long_description = None, width
 		_(long_description)]
 	else:
 		return [_(name),
-		MultiContentEntryText(pos=(10, 3), size=(width-10, 25), font=0, text = _(name)),
-		MultiContentEntryText(pos=(10, 25), size=(width-10, 20), font=1, text = _(description)),
+		MultiContentEntryText(pos=(10, 3), size=(width-10, 25), font=0, text=_(name)),
+		MultiContentEntryText(pos=(10, 25), size=(width-10, 20), font=1, text=_(description)),
 		_(long_description)]
 
 
 class QuickMenuList(MenuList):
 
-	def __init__(self, list, enableWrapAround = True):
+	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		sz_w = getDesktop(0).size().width()
 		if sz_w and sz_w == 1920:
@@ -749,7 +749,7 @@ class QuickMenuList(MenuList):
 
 class QuickMenuSubList(MenuList):
 
-	def __init__(self, sublist, enableWrapAround = True):
+	def __init__(self, sublist, enableWrapAround=True):
 		MenuList.__init__(self, sublist, enableWrapAround, eListboxPythonMultiContent)
 		sz_w = getDesktop(0).size().width()
 		if sz_w and sz_w == 1920:
@@ -776,7 +776,7 @@ class QuickMenuDevices(Screen):
 		self.activityTimer.timeout.get().append(self.updateList2)
 		self.updateList()
 
-	def updateList(self, result = None, retval = None, extra_args = None):
+	def updateList(self, result=None, retval=None, extra_args=None):
 		scanning = _('Wait please while scanning for devices...')
 		self['lab1'].setText(scanning)
 		self.activityTimer.start(10)

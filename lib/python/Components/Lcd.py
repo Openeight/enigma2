@@ -154,11 +154,11 @@ def InitLcd():
 	detected = eDBoxLCD.getInstance() and eDBoxLCD.getInstance().detected()
 	config.lcd = ConfigSubsection()
 	if detected:
-		config.lcd.scroll_speed = ConfigSelection(default = "300", choices = [
+		config.lcd.scroll_speed = ConfigSelection(default="300", choices=[
 			("500", _("slow")),
 			("300", _("normal")),
 			("100", _("fast"))])
-		config.lcd.scroll_delay = ConfigSelection(default = "10000", choices = [
+		config.lcd.scroll_delay = ConfigSelection(default="10000", choices=[
 			("10000", "10 " + _("seconds")),
 			("20000", "20 " + _("seconds")),
 			("30000", "30 " + _("seconds")),
@@ -259,31 +259,31 @@ def InitLcd():
 		config.lcd.flip.addNotifier(setLCDflipped)
 
 		if fileExists("/proc/stb/fp/ledpowercolor"):
-			config.lcd.ledpowercolor = ConfigSelection(default = "1", choices = [("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			config.lcd.ledpowercolor = ConfigSelection(default="1", choices=[("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
 			config.lcd.ledpowercolor.addNotifier(setLedPowerColor)
 
 		if fileExists("/proc/stb/fp/ledstandbycolor"):
-			config.lcd.ledstandbycolor = ConfigSelection(default = "3", choices = [("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			config.lcd.ledstandbycolor = ConfigSelection(default="3", choices=[("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
 			config.lcd.ledstandbycolor.addNotifier(setLedStandbyColor)
 
 		if fileExists("/proc/stb/fp/ledsuspendledcolor"):
-			config.lcd.ledsuspendcolor = ConfigSelection(default = "2", choices = [("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			config.lcd.ledsuspendcolor = ConfigSelection(default="2", choices=[("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
 			config.lcd.ledsuspendcolor.addNotifier(setLedSuspendColor)
 
 		if fileExists("/proc/stb/fp/power4x7on"):
-			config.lcd.power4x7on = ConfigSelection(default = "on", choices = [("off", _("Off")), ("on", _("On"))])
+			config.lcd.power4x7on = ConfigSelection(default="on", choices=[("off", _("Off")), ("on", _("On"))])
 			config.lcd.power4x7on.addNotifier(setPower4x7On)
 
 		if fileExists("/proc/stb/fp/power4x7standby"):
-			config.lcd.power4x7standby = ConfigSelection(default = "on", choices = [("off", _("Off")), ("on", _("On"))])
+			config.lcd.power4x7standby = ConfigSelection(default="on", choices=[("off", _("Off")), ("on", _("On"))])
 			config.lcd.power4x7standby.addNotifier(setPower4x7Standby)
 
 		if fileExists("/proc/stb/fp/power4x7suspend"):
-			config.lcd.power4x7suspend = ConfigSelection(default = "on", choices = [("off", _("Off")), ("on", _("On"))])
+			config.lcd.power4x7suspend = ConfigSelection(default="on", choices=[("off", _("Off")), ("on", _("On"))])
 			config.lcd.power4x7suspend.addNotifier(setPower4x7Suspend)
 
 		if fileExists("/proc/stb/lcd/scroll_delay"):
-			config.lcd.scrollspeed = ConfigSlider(default = 150, increment = 10, limits = (0, 500))
+			config.lcd.scrollspeed = ConfigSlider(default=150, increment=10, limits=(0, 500))
 			config.lcd.scrollspeed.addNotifier(setLCDscrollspeed)
 			config.lcd.repeat = ConfigSelection([("0", _("None")), ("1", _("1X")), ("2", _("2X")), ("3", _("3X")), ("4", _("4X")), ("500", _("Continues"))], "3")
 			config.lcd.repeat.addNotifier(setLCDrepeat)
@@ -307,16 +307,16 @@ def InitLcd():
 			config.lcd.et8500 = ConfigNothing()
 
 		if getBoxType() == 'vuultimo':
-			config.lcd.ledblinkingtime = ConfigSlider(default = 5, increment = 1, limits = (0,15))
+			config.lcd.ledblinkingtime = ConfigSlider(default=5, increment=1, limits=(0,15))
 			config.lcd.ledblinkingtime.addNotifier(setLEDblinkingtime)
-			config.lcd.ledbrightnessdeepstandby = ConfigSlider(default = 1, increment = 1, limits = (0,15))
+			config.lcd.ledbrightnessdeepstandby = ConfigSlider(default=1, increment=1, limits=(0,15))
 			config.lcd.ledbrightnessdeepstandby.addNotifier(setLEDnormalstate)
 			config.lcd.ledbrightnessdeepstandby.addNotifier(setLEDdeepstandby)
 			config.lcd.ledbrightnessdeepstandby.apply = lambda : setLEDdeepstandby(config.lcd.ledbrightnessdeepstandby)
-			config.lcd.ledbrightnessstandby = ConfigSlider(default = 1, increment = 1, limits = (0,15))
+			config.lcd.ledbrightnessstandby = ConfigSlider(default=1, increment=1, limits=(0,15))
 			config.lcd.ledbrightnessstandby.addNotifier(setLEDnormalstate)
 			config.lcd.ledbrightnessstandby.apply = lambda : setLEDnormalstate(config.lcd.ledbrightnessstandby)
-			config.lcd.ledbrightness = ConfigSlider(default = 3, increment = 1, limits = (0,15))
+			config.lcd.ledbrightness = ConfigSlider(default=3, increment=1, limits=(0,15))
 			config.lcd.ledbrightness.addNotifier(setLEDnormalstate)
 			config.lcd.ledbrightness.apply = lambda : setLEDnormalstate(config.lcd.ledbrightness)
 			config.lcd.ledbrightness.callNotifiersOnSaveAndCancel = True
@@ -351,7 +351,7 @@ def InitLcd():
 		config.lcd.ledbrightnessdeepstandby.apply = lambda : doNothing()
 		config.lcd.ledblinkingtime = ConfigNothing()
 
-	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call = False)
+	config.misc.standbyCounter.addNotifier(standbyCounterChanged, initial_call=False)
 
 def setLCDLiveTv(value):
 	if "live_enable" in SystemInfo["LcdLiveTV"]:

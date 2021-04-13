@@ -98,13 +98,13 @@ class SoftwarePanel(Screen):
 			elif self.trafficLight == 2: # red
 				message = _("The current image is not stable.\nFor more information see %s.") % ("http://octagon-forum.eu")
 				picon = MessageBox.TYPE_ERROR
-				self.session.open(MessageBox, message, type=MessageBox.TYPE_ERROR, picon=picon, timeout = 15, close_on_any_key=True)
+				self.session.open(MessageBox, message, type=MessageBox.TYPE_ERROR, picon=picon, timeout=15, close_on_any_key=True)
 				return
 			elif self.trafficLight == 3: # unknown
 				message = _("The status of the current image could not be checked because %s can not be reached.") % ("http://octagon-forum.eu")
 				picon = MessageBox.TYPE_ERROR
 			message += "\n" + _("Do you want to update your receiver?")
-			self.session.openWithCallback(self.startActualUpdate, MessageBox, message, default = False, picon = picon)
+			self.session.openWithCallback(self.startActualUpdate, MessageBox, message, default=False, picon=picon)
 		elif self.packages > 0:
 				self.startActualUpdate(True)
 
@@ -166,7 +166,7 @@ class SoftwarePanel(Screen):
 			self['a_off'].show()
 		socket.setdefaulttimeout(currentTimeoutDefault)
 
-	def setStatus(self,status = None):
+	def setStatus(self,status=None):
 		if status:
 			self.statuslist = []
 			divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"))

@@ -3,7 +3,7 @@ from enigma import *
 import os
 import datetime
 
-config.softcam.actCam = ConfigText(visible_width = 200)
+config.softcam.actCam = ConfigText(visible_width=200)
 config.softcam.restartRunning = ConfigYesNo(default=True)
 config.softcam.restartAttempts =  ConfigSelection(
 					[

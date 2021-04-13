@@ -21,7 +21,7 @@ class ExtraSetup(Screen):
                         self.session.open(Extraspanel)
                         self.close()
                 except:        
-                        self.session.open(MessageBox, _("Plugin ExtrasPanel is not installed !"), MessageBox.TYPE_ERROR, timeout = 10)
+                        self.session.open(MessageBox, _("Plugin ExtrasPanel is not installed !"), MessageBox.TYPE_ERROR, timeout=10)
                         self.close()
 
 

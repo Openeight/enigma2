@@ -89,7 +89,7 @@ class ScriptRunner(Screen):
 			ybox = self.session.openWithCallback(self.Run, MessageBox, message, MessageBox.TYPE_YESNO)
 			ybox.setTitle(_("Run Confirmation"))
 		else:
-			self.session.open(MessageBox, _("You have no script to run."), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("You have no script to run."), MessageBox.TYPE_INFO, timeout=10)
 
 	def Run(self,answer):
 		if answer is True:
@@ -105,9 +105,9 @@ class ScriptRunner(Screen):
 				from enigma import eConsoleAppContainer
 				eConsoleAppContainer().execute(cmd1)
 			elif self.execute == "2":
-				self.session.open(Console, title=self.sel, cmdlist = [cmd1], closeOnSuccess = True)
+				self.session.open(Console, title=self.sel, cmdlist=[cmd1], closeOnSuccess=True)
 			else:
-				self.session.open(Console, title=self.sel, cmdlist = [cmd1])
+				self.session.open(Console, title=self.sel, cmdlist=[cmd1])
 
 	def myclose(self):
 		self.close()

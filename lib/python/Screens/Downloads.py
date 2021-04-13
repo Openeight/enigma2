@@ -624,7 +624,7 @@ def main(session, **kwargs):
 		
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="PluginDownload", description="Download/install plugins ", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
+	return PluginDescriptor(name="PluginDownload", description="Download/install plugins ", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
 
 
 

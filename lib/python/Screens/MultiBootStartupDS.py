@@ -87,7 +87,7 @@ class MultiBootStartup(ConfigListScreen, Screen):
 			cmdlist.append("echo -e 'EOF' >> /tmp/init.sh")
 			cmdlist.append("chmod +x /tmp/init.sh")
 			cmdlist.append("/tmp/init.sh")
-			self.session.open(Console, title = self.TITLE, cmdlist = cmdlist, closeOnSuccess = True)
+			self.session.open(Console, title=self.TITLE, cmdlist=cmdlist, closeOnSuccess=True)
 
 	def checkEMMC(self):
 		if path.exists('/boot/STARTUP'):
