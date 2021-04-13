@@ -39,28 +39,28 @@ class SkinSetup(Screen):
                 self.res.append(_("TechniHD Setup"))
                 self.res.append(_("Exit"))
                 self["list"].setList(self.res)
-    
+
     def okClicked(self):
                 ires = self["list"].getSelectionIndex()
 		if ires == 0:
-		        self.session.open(SettingsA)  
+		        self.session.open(SettingsA)
 		elif ires == 1:
-		        self.session.open(SettingsB)  
+		        self.session.open(SettingsB)
                 elif ires == 2:
-		        self.session.open(SettingsC) 
+		        self.session.open(SettingsC)
 		elif ires == 3:
 		        self.session.open(SettingsD)
                 elif ires == 4:
-		        self.xtaskin()  
-               				
+		        self.xtaskin()
+
 		else:
                         self.close()
-                        
-    def xtaskin(self):                         
-                try:        
+
+    def xtaskin(self):
+                try:
                         from Plugins.Extensions.TechniHDSetup.plugin import TechniHDSetup
-                        self.session.open(TechniHDSetup) 
-                except:        
+                        self.session.open(TechniHDSetup)
+                except:
                         self.session.open(MessageBox, _("TechniHD is not installed on your Xtrend box !"), MessageBox.TYPE_ERROR, timeout=10)
                         self.close()
 
@@ -88,7 +88,7 @@ class SettingsA(Screen):
                 self.res.append(_("Remove skin"))
                 self.res.append(_("Exit"))
                 self["list"].setList(self.res)
-    
+
     def okClicked(self):
                 ires = self["list"].getSelectionIndex()
 		if ires == 0:
@@ -99,7 +99,7 @@ class SettingsA(Screen):
                         self.session.open(Ipkremove)
 		else:
                         self.close()
-                        
+
     def startskin(self):
                 try:
                         from Plugins.SystemPlugins.SkinSelector.plugin import SkinSelector
@@ -137,7 +137,7 @@ class SettingsB(Screen):
                 self.res.append(_("Horizontal animated list"))
                 self.res.append(_("Exit"))
                 self["list"].setList(self.res)
-    
+
     def okClicked(self):
                 ires = self["list"].getSelectionIndex()
 		if ires == 0:
@@ -145,14 +145,14 @@ class SettingsB(Screen):
 		elif ires == 1:
 		        self.Vert()
                 elif ires == 2:
-		        self.Anim()         
+		        self.Anim()
 		else:
                         self.close()
-                        
+
     def Icon(self):
                 config.usage.mainmenu_mode.value = "horzicon"
     	        config.usage.mainmenu_mode.save()
-    	        self.session.open(TryQuitMainloop, 3) 
+    	        self.session.open(TryQuitMainloop, 3)
 
     def Vert(self):
                 config.usage.mainmenu_mode.value = "vert"
@@ -162,8 +162,8 @@ class SettingsB(Screen):
     def Anim(self):
                 config.usage.mainmenu_mode.value = "horzanim"
     	        config.usage.mainmenu_mode.save()
-    	        self.session.open(TryQuitMainloop, 3) 
-    
+    	        self.session.open(TryQuitMainloop, 3)
+
 
 class SettingsC(Screen):
     def __init__(self, session):
@@ -177,7 +177,7 @@ class SettingsC(Screen):
 #                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
                 self.cur = config.usage.show_second_infobar.value
-                txt = " " 
+                txt = " "
                 if self.cur is "":
                         txt = _("Current Second-infobar setting is None.\nHere you can change it.")
                 else:
@@ -191,16 +191,16 @@ class SettingsC(Screen):
                 self.res.append(_("Remove second-infobar"))
                 self.res.append(_("Exit"))
                 self["list"].setList(self.res)
-    
+
     def okClicked(self):
                 ires = self["list"].getSelectionIndex()
 		if ires == 0:
 		        self.ShowSI()
 		elif ires == 1:
-		        self.RemSI()        
+		        self.RemSI()
 		else:
                         self.close()
-                        
+
     def ShowSI(self):
           if self.cur is not "":
                 self.session.open(MessageBox, _("Current Second-infobar setting is Show !"), type=MessageBox.TYPE_INFO, timeout=10)
@@ -231,7 +231,7 @@ class SettingsD(Screen):
 #                self["actions"] = ActionMap(["OkCancelActions", "HelpActions"], {"ok": self.okClicked, "cancel": self.close, "displayHelp" : self.readme}, -1)
                 self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
                 self.cur = config.usage.service_icon_enable.value
-                txt = " " 
+                txt = " "
                 if self.cur is True:
                         txt = _("Current picon setting is True.\nHere you can change it.")
                 else:
@@ -245,16 +245,16 @@ class SettingsD(Screen):
                 self.res.append(_("Remove Picons in Channel List"))
                 self.res.append(_("Exit"))
                 self["list"].setList(self.res)
-    
+
     def okClicked(self):
                 ires = self["list"].getSelectionIndex()
 		if ires == 0:
 		        self.ShowSp()
 		elif ires == 1:
-		        self.RemSp()        
+		        self.RemSp()
 		else:
                         self.close()
-                        
+
     def ShowSp(self):
           if self.cur is True:
                 self.session.open(MessageBox, _("Current picon setting is True !"), type=MessageBox.TYPE_INFO, timeout=10)
@@ -271,4 +271,3 @@ class SettingsD(Screen):
                 config.usage.service_icon_enable.value = False
     	        config.usage.service_icon_enable.save()
 #    	        self.session.open(TryQuitMainloop, 3)
-    

@@ -11,9 +11,9 @@ def MessageBoxEntry(name, picture):
 	pixmap = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/ExtrasPanel/icons/" + picture))
 	if not pixmap:
 		pixmap = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/ExtrasPanel/icons/empty.png"))
-		
+
 	return (pixmap, name)
-	
+
 
 class ExtraMessageBox(Screen):
 	skin = """
@@ -41,11 +41,11 @@ class ExtraMessageBox(Screen):
 		self.default = default
 		self.timeout = timeout
 		self.elapsed = 0
-		
+
 		self.list = []
 		for item in menulist:
 			self.list.append(MessageBoxEntry(item[0], item[1]))
-		
+
 		self['menu'] = List(self.list)
 		self["menu"].onSelectionChanged.append(self.selectionChanged)
 
@@ -55,9 +55,9 @@ class ExtraMessageBox(Screen):
 			"ok": self.ok,
 			"cancel": self.cancel
 		}, -2)
-		
+
 		self.onLayoutFinish.append(self.layoutFinished)
-		
+
 		self.timer = eTimer()
 		self.timer.callback.append(self.timeoutStep)
 		if self.timeout > 0:
@@ -81,11 +81,11 @@ class ExtraMessageBox(Screen):
 		else:
 			self.setTitle(self.ctitle)
 		self['menu'].setCurrentIndex(self.default)
-		
+
 	def ok(self):
 		index = self['menu'].getIndex()
 		self.close(index)
-		
+
 	def cancel(self):
 		if self.exitid > -1:
 			self.close(self.exitid)

@@ -647,7 +647,7 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 	def keyCancelConfirm(self, result):
 		if not result:
 			return
-		#config.network.wol.setValue(self.wolstartvalue)	
+		#config.network.wol.setValue(self.wolstartvalue)
 		if self.oldInterfaceState is False:
 			iNetwork.deactivateInterface(self.iface, self.keyCancelCB)
 		else:

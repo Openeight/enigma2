@@ -538,7 +538,7 @@ class ImageBackup(Screen):
 						f.close()
 		except:
 			AboutText += _("Error reading bouquets.tv")
-			
+
 		AboutText += _("\n[User - bouquets (RADIO)]\n")
 		try:
 			f = open("/etc/enigma2/bouquets.radio", "r")

@@ -37,9 +37,9 @@ class Ipkremove(Screen):
 
 		self["list"] = FileList("/", matchingPattern="^.*\.(ipk|png|avi|mp3|mpeg|ts)")
 		self["pixmap"] = Pixmap()
-		
+
 		self["text"] = Input("1234", maxSize=True, type=Input.NUMBER)
-				
+
 		self["actions"] = NumberActionMap(["WizardActions", "InputActions"],
 		{
 			"ok": self.close,
@@ -64,7 +64,7 @@ class Ipkremove(Screen):
 	def test2(self, returnValue):
 		if returnValue is None:
 			self.close()
-		else: 
+		else:
 			print "returnValue", returnValue
 			remname = returnValue[1]
 			ipk = returnValue[0]
@@ -89,4 +89,3 @@ class Ipkremove(Screen):
 	def keyNumberGlobal(self, number):
 		print "pressed", number
 		self["text"].number(number)
-

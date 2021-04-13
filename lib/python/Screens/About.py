@@ -88,7 +88,7 @@ class About(Screen):
 			AboutText += fp_version + "\n"
 
 		self["FPVersion"] = StaticText(fp_version)
-		
+
 		skinWidth = getDesktop(0).size().width()
 		skinHeight = getDesktop(0).size().height()
 		AboutText += _("Skin Name: %s") % config.skin.primary_skin.value[0:-9] + _("  (%s x %s)") % (skinWidth, skinHeight) + "\n"
@@ -170,7 +170,7 @@ class About(Screen):
 
 	def showMemoryInfo(self):
 		self.session.open(MemoryInfo)
-		
+
 	def showModelPic(self):
 		self.session.open(ModelPic)
 
@@ -182,7 +182,7 @@ class ModelPic(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["ModelPic", "About"]
-		
+
 		self["key_green"] = Button(_(" "))
 		self["key_red"] = Button(_(" "))
 		self["key_yellow"] = Button(_(" "))
@@ -198,7 +198,7 @@ class ModelPic(Screen):
 				"ok": self.close,
 				"blue": self.close
 			}, -2)
-		
+
 	def poster_resize(self):
 		if getBoxType() in ('sf108'):
 			model = "sf108.png"

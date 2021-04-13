@@ -110,4 +110,3 @@ class RestoreWizard(WizardLanguage, Rc):
 		else:
 			self.currStep = self.getStepWithID(self.NextStep)
 			self.afterAsyncCode()
-

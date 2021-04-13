@@ -238,7 +238,7 @@ class CamCheckPoller:
 							print "[CAMSTARTER] CAM 2 not running, stop " + stop
 							self.container = eConsoleAppContainer()
 							self.container.execute(stop)
-							
+
 							import time
 							time.sleep(int(config.softcam.waittime.getValue()))
 							start = self.emuStart[indexcam2]

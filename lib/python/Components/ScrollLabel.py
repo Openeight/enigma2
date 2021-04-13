@@ -43,7 +43,7 @@ class ScrollLabel(GUIComponent):
 					self.split = int(value)
 					if self.split:
 						self.right_text = eLabel(self.instance)
-					self.skinAttributes.remove((attrib, value))	
+					self.skinAttributes.remove((attrib, value))
 				elif "colposition" in attrib:
 					self.column = int(value)
 				elif "dividechar" in attrib:

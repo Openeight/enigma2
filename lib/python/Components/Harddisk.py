@@ -13,7 +13,7 @@ def readFile(filename):
 	data = file.read().strip()
 	file.close()
 	return data
-	
+
 
 def getextdevices(ext):
 	cmd = 'blkid -t TYPE=%s -o device' % ext
@@ -22,7 +22,7 @@ def getextdevices(ext):
 		return None
 	else:
 		extdevices = [x.strip() for x in extdevices.split(",")]
-		return extdevices	
+		return extdevices
 
 
 def getProcMounts():
@@ -684,7 +684,7 @@ class HarddiskManager:
 				dev = None
 				subdev = False
 			# blacklist ram, loop, mtdblock, romblock, ramzswap
-			blacklisted = dev in [1, 7, 31, 253, 254] 
+			blacklisted = dev in [1, 7, 31, 253, 254]
 			# blacklist non-root eMMC devices
 			if not blacklisted and dev == 179:
 				is_mmc = True

@@ -281,7 +281,7 @@ class QuickMenu(Screen):
 
 	def Qsystem(self):
 		self.sublist = []
-		self.sublist.append(QuickSubMenuEntryComponent('Customize', _('Setup Enigma2'), _('Customize enigma2 personal settings.'))) 
+		self.sublist.append(QuickSubMenuEntryComponent('Customize', _('Setup Enigma2'), _('Customize enigma2 personal settings.')))
 		self.sublist.append(QuickSubMenuEntryComponent('User interface', _('User interface Setup'), _('Setup your User interface.')))
 		if SystemInfo['FrontpanelDisplay'] and SystemInfo['Display']:
 			self.sublist.append(QuickSubMenuEntryComponent('Display Settings', _('Display Setup'), _('Setup your display.')))
@@ -327,7 +327,7 @@ class QuickMenu(Screen):
 		self.sublist = []
 		self.sublist.append(QuickSubMenuEntryComponent('Network Mount Manager', _('Manage network mounts'), _('Setup your network mounts.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Mount again', _('Mount your network shares again'), _('Attempt to recover lost mounts (in background).')))
-		self.sublist.append(QuickSubMenuEntryComponent('Network Browser', _('Search for network shares'), _('Search for network shares.'))) 
+		self.sublist.append(QuickSubMenuEntryComponent('Network Browser', _('Search for network shares'), _('Search for network shares.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Device Mount Manager', _('Mounts Devices'), _('Setup your Device mounts (USB, HDD, others...)')))
 		self.sublist.append(QuickSubMenuEntryComponent("fstab Editor", _("View or edit fstab"), _("View or Edit your device mounts in etc/fstab.")))
 		self['sublist'].l.setList(self.sublist)

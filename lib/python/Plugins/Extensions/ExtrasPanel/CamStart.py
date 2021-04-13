@@ -179,7 +179,7 @@ class CamStart:
 				else:
 					if camfound == 0:
 						print "[CAMSTARTER] No Cam found to start"
-				
+
 				# If Cam is running don't check anymore
 				if config.softcam.restartRunning.getValue() and camrunning == 1:
 					if camfound2 == 1:

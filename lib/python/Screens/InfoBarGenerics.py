@@ -2949,7 +2949,7 @@ class InfoBarTimerButton:
 	def timerSelection(self):
 		from Screens.TimerEdit import TimerEditList
 		self.session.open(TimerEditList)
-	
+
 	def sleepTimerSelection(self):
 		from Screens.SleepTimerEdit import SleepTimerEdit
 		self.session.open(SleepTimerEdit)

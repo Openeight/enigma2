@@ -146,7 +146,7 @@ class DevicesMountPanel(Screen):
 				if x.find(device) != -1 and x not in mount_list:
 					parts = x.strip().split()
 					d1 = parts[1]
-					mount_list.append(d1) 
+					mount_list.append(d1)
 			self.buildMy_rec(device, mount_list)
 			list2.append(device)
 		f.close()
@@ -885,7 +885,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 	def action3(self):
 		from Screens.Console import Console as myConsole
 		self.session.open(myConsole, _("*****sfdisk -l*****"), ["sfdisk -l"])
-		
+
 	def action4(self):
 		from Screens.Console import Console as myConsole
 		self.session.open(myConsole, _("*****blkid*****"), ["blkid"])
@@ -922,7 +922,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 		for x in self['config'].list:
 			device = x[2]
 			mountp = x[1].value
-			if mountp not in val: 
+			if mountp not in val:
 				val.append((mountp))
 			else:
 				self.session.open(MessageBox, _("Error!\nThe same mount point!"), MessageBox.TYPE_ERROR, timeout=5)

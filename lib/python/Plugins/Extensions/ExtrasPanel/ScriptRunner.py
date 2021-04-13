@@ -69,7 +69,7 @@ class ScriptRunner(Screen):
 			pkg = parts[0]
 			if pkg.find('.sh') >= 0:
 				self.list.append(pkg)
-		self.list.sort()	
+		self.list.sort()
 
 	def green(self):
 		self.execute = "0"

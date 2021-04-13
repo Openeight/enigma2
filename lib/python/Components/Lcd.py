@@ -171,7 +171,7 @@ def InitLcd():
 			("60000", "1 " + _("minute")),
 			("300000", "5 " + _("minutes")),
 			("noscrolling", _("off"))])
-	
+
 		def setLCDbright(configElement):
 			ilcd.setBright(configElement.value)
 
@@ -189,7 +189,7 @@ def InitLcd():
 
 		def setLCDpower(configElement):
 			ilcd.setPower(configElement.value)
-			
+
 		def setLCD8500(configElement):
 			ilcd.setEt8500(configElement.value)
 
@@ -305,7 +305,7 @@ def InitLcd():
 			config.lcd.power.addNotifier(setLCDpower)
 		else:
 			config.lcd.power = ConfigNothing()
-			
+
 		if fileExists("/proc/stb/fb/sd_detach"):
 			config.lcd.et8500 = ConfigSelection([("1", _("No")), ("0", _("Yes"))], "0")
 			config.lcd.et8500.addNotifier(setLCD8500)

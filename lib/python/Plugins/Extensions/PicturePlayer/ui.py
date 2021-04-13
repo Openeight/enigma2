@@ -160,7 +160,7 @@ class Pic_Setup(Screen, ConfigListScreen):
 		self["actions"] = ActionMap(["SetupActions", "MenuActions", "ColorActions"],
 			{
                                 "cancel": self.keyCancel,
-                                "red": self.keyCancel, 
+                                "red": self.keyCancel,
 				"save": self.keySave,
 				"ok": self.keySave,
 			}, -1)
@@ -619,7 +619,7 @@ class Pic_Full_View(Screen):
 
 	def KeyMenu(self):
 		self.session.openWithCallback(self.setPicloadConf, Pic_Setup)
-		
+
 	def StartExif(self):
 		if self.maxentry < 0:
 			return

@@ -357,7 +357,7 @@ def InitUsageConfig():
 	config.usage.swap_media_time_display_on_vfd = ConfigSelection(default="0", choices=[("0", _("Skin Setting")), ("1", _("Mins")), ("2", _("Mins Secs")), ("3", _("Hours Mins")), ("4", _("Hours Mins Secs")), ("5", _("Percentage"))])
 	config.usage.swap_time_remaining_on_vfd = ConfigSelection(default="0", choices=[("0", _("Remaining")), ("1", _("Elapsed")), ("2", _("Elapsed & Remaining")), ("3", _("Remaining & Elapsed"))])
 	config.usage.elapsed_time_positive_vfd = ConfigYesNo(default=False)
-	
+
 	def SpinnerOnOffChanged(configElement):
 		setSpinnerOnOff(int(configElement.value))
 	config.usage.show_spinner.addNotifier(SpinnerOnOffChanged)
@@ -817,7 +817,7 @@ def InitUsageConfig():
 	if SystemInfo["GraphMultiEpg"]:
 		config.misc.graph_mepg = ConfigSubsection()
 		config.misc.graph_mepg.extension_menu = ConfigYesNo(default=True)
-		
+
 	config.misc.ci_autopin = ConfigYesNo(default=False)
 
 	config.mediaplayer = ConfigSubsection()
@@ -860,4 +860,3 @@ def preferredInstantRecordPath():
 
 def defaultMoviePath():
 	return defaultRecordingLocation(config.usage.default_path.value)
-

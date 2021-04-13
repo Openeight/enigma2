@@ -124,7 +124,7 @@ class YWeather(Poll, Converter, object):
                         self.type = self.picon5
                 self.poll_interval = self.time_update_ms
                 self.poll_enabled = True
-                
+
         @cached
         def getText(self):
                 xweather = {'ycity': "N/A", 'ycountry': "N/A", 'ydirection': "N/A", 'yspeed': "N/A", 'yhumidity': "N/A", 'yvisibility': "N/A", 'ypressure': "N/A", 'ytext': "N/A", 'ytemp': "N/A", 'ypicon': "3200",
@@ -197,8 +197,8 @@ class YWeather(Poll, Converter, object):
                                         xweather['ypiconday5'] = line.split('code')[1].split('"')[1]
                                         xweather['ytemphighday5'] = line.split('high')[1].split('"')[1]
                                         xweather['ytemplowday5'] = line.split('low')[1].split('"')[1]
-                                wday = wday + 1                  
-                                
+                                wday = wday + 1
+
                 if self.type == self.city:
                         info = xweather['ycity']
                 elif self.type == self.country:
@@ -259,7 +259,7 @@ class YWeather(Poll, Converter, object):
                         info = xweather['ytext']
                 elif self.type == self.temp:
                         if info != "N/A":
-                                info = xweather['ytemp'] + '%s' % unichr(176).encode("latin-1") 
+                                info = xweather['ytemp'] + '%s' % unichr(176).encode("latin-1")
                         else:
                                 info = xweather['ytemp']
                 elif self.type == self.picon:

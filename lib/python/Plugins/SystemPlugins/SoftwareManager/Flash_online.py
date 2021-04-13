@@ -76,8 +76,8 @@ class FlashOnline(Screen):
 		self["key_blue"] = StaticText(_("Local"))
 		self["info-local"] = Label(_("Local = Flash an image from local path /hdd/images"))
 		self["info-online"] = Label(_("Online = Download an image and flash it"))
-		
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
+
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
 			"blue": self.blue,
 			"yellow": self.yellow,
@@ -120,7 +120,7 @@ class FlashOnline(Screen):
 
 	def quit(self):
 		self.close()
-		
+
 	def blue(self):
 		if self.check_hdd():
 			self.session.open(doFlashImage, online=False, list=self.list[self.selection], mtdkernel=self.MTDKERNEL, mtdrootfs=self.MTDROOTFS)
@@ -197,7 +197,7 @@ class doFlashImage(Screen):
 		<widget source="key_blue" render="Label" position="420,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="imageList" position="10,10" zPosition="1" size="450,450" font="Regular;20" scrollbarMode="showOnDemand" transparent="1" />
 	</screen>"""
-		
+
 	def __init__(self, session, online, list=None, mtdkernel=None, mtdrootfs=None):
 		Screen.__init__(self, session)
 		self.session = session
@@ -218,7 +218,7 @@ class doFlashImage(Screen):
 		self.feedurl = feedurl_openeight
 		self.feed = "openeight"
 		self["imageList"] = MenuList(self.imagelist)
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
 			"ok": self.green,
 			"green": self.green,
@@ -487,7 +487,7 @@ class doFlashImage(Screen):
 			os.mkdir(flashTmp)
 		kernel = True
 		rootfs = True
-		
+
 		for path, subdirs, files in os.walk(tmpPath):
 			for name in files:
 				if name.find('kernel') > -1 and name.endswith('.bin') and kernel:
@@ -500,7 +500,7 @@ class doFlashImage(Screen):
 					dest = flashTmp + '/%s' % ROOTFSBIN
 					shutil.copyfile(binfile, dest)
 					rootfs = False
-					
+
 	def yellow(self):
 		if not self.Online:
 			self.session.openWithCallback(self.DeviceBrowserClosed, DeviceBrowser, None, matchingPattern="^.*\.(zip|bin|jffs2|img)", showDirectories=True, showMountpoints=True, inhibitMounts=["/autofs/sr0/"])
@@ -542,7 +542,7 @@ class doFlashImage(Screen):
 				self.unzip_image(strPath + '/' + filename, flashPath)
 			else:
 				self.layoutFinished()
-	
+
 		else:
 			self.imagePath = imagePath
 

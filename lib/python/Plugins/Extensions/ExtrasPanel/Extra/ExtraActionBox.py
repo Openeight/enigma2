@@ -30,7 +30,7 @@ class ExtraActionBox(Screen):
 		self.timer = eTimer()
 		self.timer.callback.append(self.__setTitle)
 		self.timer.start(200, 1)
-		
+
 	def __setTitle(self):
 		if self["logo"].instance is not None:
 			self["logo"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/run.png")
@@ -38,6 +38,6 @@ class ExtraActionBox(Screen):
 		self.timer = eTimer()
 		self.timer.callback.append(self.__start)
 		self.timer.start(200, 1)
-		
+
 	def __start(self):
 		self.close(self.caction())

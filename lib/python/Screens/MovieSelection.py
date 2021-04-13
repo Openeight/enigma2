@@ -2186,4 +2186,3 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 
 playlist = []
-

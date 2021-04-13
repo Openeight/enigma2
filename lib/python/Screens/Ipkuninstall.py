@@ -1,4 +1,4 @@
-from Components.ActionMap import ActionMap, NumberActionMap 
+from Components.ActionMap import ActionMap, NumberActionMap
 from Components.FileList import FileList
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -68,4 +68,3 @@ class Ipkuninstall(Screen):
 			self.close()
 		except:
 			self.close()
-
