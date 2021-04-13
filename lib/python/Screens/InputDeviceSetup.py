@@ -13,7 +13,7 @@ from Tools.LoadPixmap import LoadPixmap
 from boxbranding import getBoxType
 import os
 
-class InputDeviceSelection(Screen,HelpableScreen):
+class InputDeviceSelection(Screen, HelpableScreen):
 	skin = """
 	<screen name="InputDeviceSelection" position="center,center" size="560,400">
 		<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphatest="on"/>
@@ -54,8 +54,8 @@ class InputDeviceSelection(Screen,HelpableScreen):
 		self["key_blue"] = StaticText("")
 		self["introduction"] = StaticText(self.edittext)
 
-		self.devices = [(iInputDevices.getDeviceName(x),x) for x in iInputDevices.getDeviceList()]
-		print "[InputDeviceSelection] found devices :->", len(self.devices),self.devices
+		self.devices = [(iInputDevices.getDeviceName(x), x) for x in iInputDevices.getDeviceList()]
+		print "[InputDeviceSelection] found devices :->", len(self.devices), self.devices
 
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 			{
@@ -121,7 +121,7 @@ class InputDeviceSelection(Screen,HelpableScreen):
 
 		for x in self.devices:
 			dev_type = iInputDevices.getDeviceAttribute(x[1], 'type')
-			self.list.append(self.buildInterfaceList(x[1],_(x[0]), dev_type))
+			self.list.append(self.buildInterfaceList(x[1], _(x[0]), dev_type))
 
 		self["list"].setList(self.list)
 		self["list"].setIndex(self.currentIndex)

@@ -50,7 +50,7 @@ class ImageBackup(Screen):
 		self["description"] = StaticText(_("Use the cursor keys to select an installed image and then Start button."))
 		self["options"] = StaticText(_(" "))
 		self["key_green"] = StaticText(_("Start"))
-		self["config"] = ChoiceList(list=[ChoiceEntryComponent('',((_("Retrieving image slots - Please wait...")), "Queued"))])
+		self["config"] = ChoiceList(list=[ChoiceEntryComponent('', ((_("Retrieving image slots - Please wait...")), "Queued"))])
 		imagedict = []
 		self.getImageList = None
 
@@ -86,12 +86,12 @@ class ImageBackup(Screen):
 			for x in sorted(imagedict.keys()):
 				if imagedict[x]["imagename"] != _("Empty slot"):
 					if x == 1 and currentimageslot == 1 and SystemInfo["canRecovery"]:
-						list.append(ChoiceEntryComponent('',(_("slot%s - %s as USB Recovery") % (x, imagedict[x]["imagename"]), x, True)))
-					list.append(ChoiceEntryComponent('',((_("slot%s - %s (current image)") if x == currentimageslot else _("slot%s - %s")) % (x, imagedict[x]["imagename"]), x, False)))
+						list.append(ChoiceEntryComponent('', (_("slot%s - %s as USB Recovery") % (x, imagedict[x]["imagename"]), x, True)))
+					list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)") if x == currentimageslot else _("slot%s - %s")) % (x, imagedict[x]["imagename"]), x, False)))
 		else:
 			if SystemInfo["canRecovery"]:
-				list.append(ChoiceEntryComponent('',(_("internal flash: %s %s as USB Recovery") % (getImageDistro(), getImageVersion()),"x",True)))
-			list.append(ChoiceEntryComponent('',(_("internal flash:  %s %s ") % (getImageDistro(), getImageVersion()),"x",False)))
+				list.append(ChoiceEntryComponent('', (_("internal flash: %s %s as USB Recovery") % (getImageDistro(), getImageVersion()), "x", True)))
+			list.append(ChoiceEntryComponent('', (_("internal flash:  %s %s ") % (getImageDistro(), getImageVersion()), "x", False)))
 		self["config"].setList(list)
 
 	def start(self):
@@ -102,9 +102,9 @@ class ImageBackup(Screen):
 		if self.currentSelected[0][1] != "Queued":
 			for media in ['/media/%s' % x for x in os.listdir('/media')] + (['/media/net/%s' % x for x in os.listdir('/media/net')] if os.path.isdir('/media/net') else []):
 				if Harddisk.Freespace(media) > 300000:
-					choices.append((_("Backup to destination: %s") % (media),self.currentSelected[0][1], media, self.currentSelected[0][2]))
+					choices.append((_("Backup to destination: %s") % (media), self.currentSelected[0][1], media, self.currentSelected[0][2]))
 			choices.append((_("No, do not backup an image"), False))
-			self.session.openWithCallback(self.doFullBackup, ChoiceBox,title=title,list=choices)
+			self.session.openWithCallback(self.doFullBackup, ChoiceBox, title=title, list=choices)
 
 	def selectionChanged(self):
 		currentSelected = self["config"].l.getCurrentSelection()
@@ -321,17 +321,17 @@ class ImageBackup(Screen):
 					cmdlist.append("dd if=/dev/zero of=%s/rootfs.ext4 seek=%s count=60 bs=1024" % (self.WORKDIR, SEEK_CONT))
 					cmdlist.append("mkfs.ext4 -F -i 4096 %s/rootfs.ext4" % (self.WORKDIR))
 					cmdlist.append("mkdir -p %s/userdata" % self.WORKDIR)
-					cmdlist.append("mount %s/rootfs.ext4 %s/userdata" % (self.WORKDIR,self.WORKDIR))
+					cmdlist.append("mount %s/rootfs.ext4 %s/userdata" % (self.WORKDIR, self.WORKDIR))
 					cmdlist.append("mkdir -p %s/userdata/linuxrootfs1" % self.WORKDIR)
 					cmdlist.append("mkdir -p %s/userdata/linuxrootfs2" % self.WORKDIR)
 					cmdlist.append("mkdir -p %s/userdata/linuxrootfs3" % self.WORKDIR)
 					cmdlist.append("mkdir -p %s/userdata/linuxrootfs4" % self.WORKDIR)
-					cmdlist.append("rsync -aAX %s/ %s/userdata/linuxrootfs1/" % (self.backuproot,self.WORKDIR))
+					cmdlist.append("rsync -aAX %s/ %s/userdata/linuxrootfs1/" % (self.backuproot, self.WORKDIR))
 					cmdlist.append("umount %s/userdata" % (self.WORKDIR))
 
 				cmdlist.append('echo "' + _("Create:") + " kerneldump" + '"')
 				if SystemInfo["canMultiBoot"] or self.MTDKERNEL.startswith('mmcblk0'):
-					cmdlist.append("dd if=/dev/%s of=%s/%s" % (self.MTDKERNEL,self.WORKDIR, self.KERNELBIN))
+					cmdlist.append("dd if=/dev/%s of=%s/%s" % (self.MTDKERNEL, self.WORKDIR, self.KERNELBIN))
 				else:
 					cmdlist.append("nanddump -a -f %s/vmlinux.gz /dev/%s" % (self.WORKDIR, self.MTDKERNEL))
 
@@ -355,7 +355,7 @@ class ImageBackup(Screen):
 						f.write('<Part Sel="1" PartitionName="userdata" FlashType="emmc" FileSystem="ext3/4" Start="130M" Length="7000M" SelectFile="rootfs.ext4"/>\n')
 					f.write('</Partition_Info>\n')
 					f.close()
-					cmdlist.append('mkupdate -s 00000003-00000001-01010101 -f %s/emmc_partitions.xml -d %s/%s' % (self.WORKDIR,self.WORKDIR,self.EMMCIMG))
+					cmdlist.append('mkupdate -s 00000003-00000001-01010101 -f %s/emmc_partitions.xml -d %s/%s' % (self.WORKDIR, self.WORKDIR, self.EMMCIMG))
 
 				self.session.open(Console, title=self.TITLE, cmdlist=cmdlist, finishedCallback=self.doFullBackupCB, closeOnSuccess=True)
 
@@ -396,13 +396,13 @@ class ImageBackup(Screen):
 
 		if self.RECOVERY:
 			if self.EMMCIMG == "usb_update.bin":
-				os.system('mv %s/%s %s/%s' % (self.WORKDIR,self.EMMCIMG, self.MAINDESTROOT,self.EMMCIMG))
+				os.system('mv %s/%s %s/%s' % (self.WORKDIR, self.EMMCIMG, self.MAINDESTROOT, self.EMMCIMG))
 				cmdlist.append('cp -f /usr/share/fastboot.bin %s/fastboot.bin' % (self.MAINDESTROOT))
 				cmdlist.append('cp -f /usr/share/bootargs.bin %s/bootargs.bin' % (self.MAINDESTROOT))
 				cmdlist.append('cp -f /usr/share/apploader.bin %s/apploader.bin' % (self.MAINDESTROOT))
 			else:
-				os.system('mv %s/%s %s/%s' % (self.WORKDIR,self.EMMCIMG, self.MAINDEST,self.EMMCIMG))
-		elif self.MODEL in ('viperslim','evoslimse','evoslimt2c', "novaip", "zgemmai55", "sf98", "xpeedlxpro",'evoslim','vipert2c'):
+				os.system('mv %s/%s %s/%s' % (self.WORKDIR, self.EMMCIMG, self.MAINDEST, self.EMMCIMG))
+		elif self.MODEL in ('viperslim', 'evoslimse', 'evoslimt2c', "novaip", "zgemmai55", "sf98", "xpeedlxpro", 'evoslim', 'vipert2c'):
 			cmdlist.append('echo "This file forces the update." > %s/force' % self.MAINDEST)
 		elif SystemInfo["canMultiBoot"] and 'rootsubdir' in SystemInfo["canMultiBoot"][self.SLOT]:
 			cmdlist.append('echo "Rename the unforce_%s.txt to force_%s.txt and move it to the root of your usb-stick" > %s/force_%s_READ.ME' % (self.MACHINEBUILD, self.MACHINEBUILD, self.MAINDEST, self.MACHINEBUILD))
@@ -503,7 +503,7 @@ class ImageBackup(Screen):
 		AboutText += _("Backup Date: %s\n") % strftime("%Y-%m-%d", localtime(self.START))
 
 		if os.path.exists('/proc/stb/info/chipset'):
-			AboutText += _("Chipset: BCM%s") % about.getChipSetString().lower().replace('\n','').replace('bcm','') + "\n"
+			AboutText += _("Chipset: BCM%s") % about.getChipSetString().lower().replace('\n', '').replace('bcm', '') + "\n"
 
 		AboutText += _("CPU: %s") % about.getCPUInfoString() + "\n"
 		AboutText += _("Cores: %s") % about.getCpuCoresString() + "\n"
@@ -525,34 +525,34 @@ class ImageBackup(Screen):
 		AboutText += commands.getoutput("cat /etc/enigma2/settings")
 		AboutText += _("\n\n[User - bouquets (TV)]\n")
 		try:
-			f = open("/etc/enigma2/bouquets.tv","r")
+			f = open("/etc/enigma2/bouquets.tv", "r")
 			lines = f.readlines()
 			f.close()
 			for line in lines:
 				if line.startswith("#SERVICE:"):
 					bouqet = line.split()
 					if len(bouqet) > 3:
-						bouqet[3] = bouqet[3].replace('"','')
-						f = open("/etc/enigma2/" + bouqet[3],"r")
+						bouqet[3] = bouqet[3].replace('"', '')
+						f = open("/etc/enigma2/" + bouqet[3], "r")
 						userbouqet = f.readline()
-						AboutText += userbouqet.replace('#NAME ','')
+						AboutText += userbouqet.replace('#NAME ', '')
 						f.close()
 		except:
 			AboutText += _("Error reading bouquets.tv")
 			
 		AboutText += _("\n[User - bouquets (RADIO)]\n")
 		try:
-			f = open("/etc/enigma2/bouquets.radio","r")
+			f = open("/etc/enigma2/bouquets.radio", "r")
 			lines = f.readlines()
 			f.close()
 			for line in lines:
 				if line.startswith("#SERVICE:"):
 					bouqet = line.split()
 					if len(bouqet) > 3:
-						bouqet[3] = bouqet[3].replace('"','')
-						f = open("/etc/enigma2/" + bouqet[3],"r")
+						bouqet[3] = bouqet[3].replace('"', '')
+						f = open("/etc/enigma2/" + bouqet[3], "r")
 						userbouqet = f.readline()
-						AboutText += userbouqet.replace('#NAME ','')
+						AboutText += userbouqet.replace('#NAME ', '')
 						f.close()
 		except:
 			AboutText += _("Error reading bouquets.radio")

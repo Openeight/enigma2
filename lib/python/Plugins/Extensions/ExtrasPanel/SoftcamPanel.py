@@ -616,7 +616,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 			return False
 
 	def checkBinName(self, binname, start):
-		print "[CHECKBINNAME] bin=%s ,start=%s" % (binname,start)
+		print "[CHECKBINNAME] bin=%s ,start=%s" % (binname, start)
 		if start.find(binname + ' ') > -1:
 			print "[CHECKBINNAME] OK"
 			return False
@@ -676,7 +676,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 
 		self.container = eConsoleAppContainer()
 		# Set execute rights
-		os.chmod(Adir,0755)
+		os.chmod(Adir, 0755)
 		# Create symbolic link for startup
 		if not os.path.exists("/etc/rc2.d/S20softcam." + camname):
 			self.container.execute('update-rc.d -f softcam.' + camname + ' defaults')
@@ -791,21 +791,21 @@ class ShowSoftcamPackages(Screen):
 	def setWindowTitle(self):
 		self.setTitle(_("Install Softcams"))
 
-	def setStatus(self,status=None):
+	def setStatus(self, status=None):
 		if status:
 			self.statuslist = []
 			divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"))
 			if status == 'update':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/ExtrasPanel/pics/upgrade.png"))
-				self.statuslist.append((_("Package list update"), '', _("Trying to download a new updatelist. Please wait..."),'', statuspng, divpng))
+				self.statuslist.append((_("Package list update"), '', _("Trying to download a new updatelist. Please wait..."), '', statuspng, divpng))
 				self['list'].setList(self.statuslist)
 			if status == 'list':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/ExtrasPanel/pics/upgrade.png"))
-				self.statuslist.append((_("Package list"), '', _("Getting Softcam list. Please wait..."),'', statuspng, divpng))
+				self.statuslist.append((_("Package list"), '', _("Getting Softcam list. Please wait..."), '', statuspng, divpng))
 				self['list'].setList(self.statuslist)
 			elif status == 'error':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/ExtrasPanel/pics/remove.png"))
-				self.statuslist.append((_("Error"), '', _("There was an error downloading the updatelist. Please try again."),'', statuspng, divpng))
+				self.statuslist.append((_("Error"), '', _("There was an error downloading the updatelist. Please try again."), '', statuspng, divpng))
 				self['list'].setList(self.statuslist)				
 
 	def startupdateList(self):

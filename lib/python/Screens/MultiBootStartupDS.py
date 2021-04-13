@@ -70,7 +70,7 @@ class MultiBootStartup(ConfigListScreen, Screen):
 	def save(self):
 		print "[MultiBootStartup] select new startup: ", self.list[self.selection]
 		system("cp -f /boot/%s /boot/STARTUP" % self.list[self.selection])
-		restartbox = self.session.openWithCallback(self.restartBOX,MessageBox,_("Do you want to reboot now with selected image?"), MessageBox.TYPE_YESNO)
+		restartbox = self.session.openWithCallback(self.restartBOX, MessageBox, _("Do you want to reboot now with selected image?"), MessageBox.TYPE_YESNO)
 
 	def init(self):
 		if self.emmc:
@@ -124,7 +124,7 @@ class MultiBootStartup(ConfigListScreen, Screen):
 		self.path = PATH
 		for name in listdir(self.path):
 			if path.isfile(path.join(self.path, name)):
-				cmdline = self.read_startup("/boot/" + name).split("=",1)[1].split(" ",1)[0]
+				cmdline = self.read_startup("/boot/" + name).split("=", 1)[1].split(" ", 1)[0]
 				if cmdline in Harddisk.getextdevices("ext4") and not name == "STARTUP":
 					files.append(name)
 		return files

@@ -100,31 +100,31 @@ class LCD:
 		return eDBoxLCD.getInstance().isOled()
 
 	def setMode(self, value):
-		print 'setLCDMode',value
+		print 'setLCDMode', value
 		f = open("/proc/stb/lcd/show_symbols", "w")
 		f.write(value)
 		f.close()
 
 	def setPower(self, value):
-		print 'setLCDPower',value
+		print 'setLCDPower', value
 		f = open("/proc/stb/power/vfd", "w")
 		f.write(value)
 		f.close()
 
 	def setEt8500(self, value):
-		print 'setLCDet8500',value
+		print 'setLCDet8500', value
 		f = open("/proc/stb/fb/sd_detach", "w")
 		f.write(value)
 		f.close()
 
 	def setRepeat(self, value):
-		print 'setLCDRepeat',value
+		print 'setLCDRepeat', value
 		f = open("/proc/stb/lcd/scroll_repeats", "w")
 		f.write(value)
 		f.close()
 
 	def setScrollspeed(self, value):
-		print 'setLCDScrollspeed',value
+		print 'setLCDScrollspeed', value
 		f = open("/proc/stb/lcd/scroll_delay", "w")
 		f.write(str(value))
 		f.close()
@@ -259,15 +259,15 @@ def InitLcd():
 		config.lcd.flip.addNotifier(setLCDflipped)
 
 		if fileExists("/proc/stb/fp/ledpowercolor"):
-			config.lcd.ledpowercolor = ConfigSelection(default="1", choices=[("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			config.lcd.ledpowercolor = ConfigSelection(default="1", choices=[("0", _("off")), ("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
 			config.lcd.ledpowercolor.addNotifier(setLedPowerColor)
 
 		if fileExists("/proc/stb/fp/ledstandbycolor"):
-			config.lcd.ledstandbycolor = ConfigSelection(default="3", choices=[("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			config.lcd.ledstandbycolor = ConfigSelection(default="3", choices=[("0", _("off")), ("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
 			config.lcd.ledstandbycolor.addNotifier(setLedStandbyColor)
 
 		if fileExists("/proc/stb/fp/ledsuspendledcolor"):
-			config.lcd.ledsuspendcolor = ConfigSelection(default="2", choices=[("0", _("off")),("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			config.lcd.ledsuspendcolor = ConfigSelection(default="2", choices=[("0", _("off")), ("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
 			config.lcd.ledsuspendcolor.addNotifier(setLedSuspendColor)
 
 		if fileExists("/proc/stb/fp/power4x7on"):
@@ -307,16 +307,16 @@ def InitLcd():
 			config.lcd.et8500 = ConfigNothing()
 
 		if getBoxType() == 'vuultimo':
-			config.lcd.ledblinkingtime = ConfigSlider(default=5, increment=1, limits=(0,15))
+			config.lcd.ledblinkingtime = ConfigSlider(default=5, increment=1, limits=(0, 15))
 			config.lcd.ledblinkingtime.addNotifier(setLEDblinkingtime)
-			config.lcd.ledbrightnessdeepstandby = ConfigSlider(default=1, increment=1, limits=(0,15))
+			config.lcd.ledbrightnessdeepstandby = ConfigSlider(default=1, increment=1, limits=(0, 15))
 			config.lcd.ledbrightnessdeepstandby.addNotifier(setLEDnormalstate)
 			config.lcd.ledbrightnessdeepstandby.addNotifier(setLEDdeepstandby)
 			config.lcd.ledbrightnessdeepstandby.apply = lambda: setLEDdeepstandby(config.lcd.ledbrightnessdeepstandby)
-			config.lcd.ledbrightnessstandby = ConfigSlider(default=1, increment=1, limits=(0,15))
+			config.lcd.ledbrightnessstandby = ConfigSlider(default=1, increment=1, limits=(0, 15))
 			config.lcd.ledbrightnessstandby.addNotifier(setLEDnormalstate)
 			config.lcd.ledbrightnessstandby.apply = lambda: setLEDnormalstate(config.lcd.ledbrightnessstandby)
-			config.lcd.ledbrightness = ConfigSlider(default=3, increment=1, limits=(0,15))
+			config.lcd.ledbrightness = ConfigSlider(default=3, increment=1, limits=(0, 15))
 			config.lcd.ledbrightness.addNotifier(setLEDnormalstate)
 			config.lcd.ledbrightness.apply = lambda: setLEDnormalstate(config.lcd.ledbrightness)
 			config.lcd.ledbrightness.callNotifiersOnSaveAndCancel = True

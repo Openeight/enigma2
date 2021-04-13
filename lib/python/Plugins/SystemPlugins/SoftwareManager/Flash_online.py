@@ -84,9 +84,9 @@ class FlashOnline(Screen):
 			"cancel": self.quit,
 		}, -2)
 		if SystemInfo["HaveMultiBoot"]:
-			self.multi = self.read_startup("/boot/" + self.list[self.selection]).split(".",1)[1].split(" ",1)[0]
+			self.multi = self.read_startup("/boot/" + self.list[self.selection]).split(".", 1)[1].split(" ", 1)[0]
 			self.multi = self.multi[-1:]
-			print "[Flash Online] MULTI:",self.multi
+			print "[Flash Online] MULTI:", self.multi
 
 	def check_hdd(self):
 		if not os.path.exists("/media/hdd"):
@@ -140,16 +140,16 @@ class FlashOnline(Screen):
 			self.read_current_multiboot()
 
 	def read_current_multiboot(self):
-		if getMachineBuild() in ("cc1","sf8008","sf8008m"):
+		if getMachineBuild() in ("cc1", "sf8008", "sf8008m"):
 			if self.list[self.selection] == "Recovery":
-				cmdline = self.read_startup("/boot/STARTUP").split("=",1)[1].split(" ",1)[0]
+				cmdline = self.read_startup("/boot/STARTUP").split("=", 1)[1].split(" ", 1)[0]
 			else:
-				cmdline = self.read_startup("/boot/" + self.list[self.selection]).split("=",1)[1].split(" ",1)[0]
+				cmdline = self.read_startup("/boot/" + self.list[self.selection]).split("=", 1)[1].split(" ", 1)[0]
 		cmdline = cmdline.lstrip("/dev/")
 		self.MTDROOTFS = cmdline
 		self.MTDKERNEL = cmdline[:-1] + str(int(cmdline[-1:]) - 1)
-		print "[Flash Online] kernel device: ",self.MTDKERNEL
-		print "[Flash Online] rootfsdevice: ",self.MTDROOTFS
+		print "[Flash Online] kernel device: ", self.MTDKERNEL
+		print "[Flash Online] rootfsdevice: ", self.MTDROOTFS
 
 	def read_startup(self, FILE):
 		file = FILE
@@ -166,7 +166,7 @@ class FlashOnline(Screen):
 		files = []
 		if SystemInfo["HaveMultiBoot"]:
 			path = PATH
-			if getMachineBuild() in ("cc1","sf8008","sf8008m"):
+			if getMachineBuild() in ("cc1", "sf8008", "sf8008m"):
 				for name in os.listdir(path):
 					if name != 'bootname' and os.path.isfile(os.path.join(path, name)):
 						try:
@@ -176,7 +176,7 @@ class FlashOnline(Screen):
 						cmdline_startup = self.find_rootfs_dev("STARTUP")
 						if (cmdline != cmdline_startup) and (name != "STARTUP"):
 							files.append(name)
-				files.insert(0,"STARTUP")
+				files.insert(0, "STARTUP")
 		else:
 			files = "None"
 		return files
@@ -228,7 +228,7 @@ class doFlashImage(Screen):
 
 		
 	def quit(self):
-		if self.simulate or self.List not in ("STARTUP","cmdline.txt"):
+		if self.simulate or self.List not in ("STARTUP", "cmdline.txt"):
 			fbClass.getInstance().unlock()
 		self.close()
 
@@ -272,7 +272,7 @@ class doFlashImage(Screen):
 		if self.Online:
 			if ret:
 				from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen
-				self.session.openWithCallback(self.startInstallOnline,BackupScreen, runBackup=True)
+				self.session.openWithCallback(self.startInstallOnline, BackupScreen, runBackup=True)
 			else:
 				self.startInstallOnline()
 		else:
@@ -348,7 +348,7 @@ class doFlashImage(Screen):
 			(_("Flash and restore settings and selected plugins (ask user)"), "restoresettings"),
 			(_("Flash and restore settings and all saved plugins"), "restoresettingsandallplugins"),
 			(_("Do not flash image"), "abort"))
-			self.session.openWithCallback(self.postFlashActionCallback, ChoiceBox,title=title,list=list,selection=self.SelectPrevPostFashAction())
+			self.session.openWithCallback(self.postFlashActionCallback, ChoiceBox, title=title, list=list, selection=self.SelectPrevPostFashAction())
 		else:
 			self.show()
 
@@ -395,7 +395,7 @@ class doFlashImage(Screen):
 					try:
 						if not os.path.exists('/media/hdd/images/config'):
 							os.makedirs('/media/hdd/images/config')
-						open('/media/hdd/images/config/settings','w').close()
+						open('/media/hdd/images/config/settings', 'w').close()
 					except:
 						print "postFlashActionCallback: failed to create /media/hdd/images/config/settings"
 				else:
@@ -405,7 +405,7 @@ class doFlashImage(Screen):
 					try:
 						if not os.path.exists('/media/hdd/images/config'):
 							os.makedirs('/media/hdd/images/config')
-						open('/media/hdd/images/config/plugins','w').close()
+						open('/media/hdd/images/config/plugins', 'w').close()
 					except:
 						print "postFlashActionCallback: failed to create /media/hdd/images/config/plugins"
 				else:
@@ -415,7 +415,7 @@ class doFlashImage(Screen):
 					try:
 						if not os.path.exists('/media/hdd/images/config'):
 							os.makedirs('/media/hdd/images/config')
-						open('/media/hdd/images/config/noplugins','w').close()
+						open('/media/hdd/images/config/noplugins', 'w').close()
 					except:
 						print "postFlashActionCallback: failed to create /media/hdd/images/config/noplugins"
 				else:
@@ -431,7 +431,7 @@ class doFlashImage(Screen):
 			self.show()
 
 	def unzip_image(self, filename, path):
-		print "Unzip %s to %s" % (filename,path)
+		print "Unzip %s to %s" % (filename, path)
 		self.session.openWithCallback(self.cmdFinished, Console, title=_("Unzipping files, Please wait ..."), cmdlist=['unzip ' + filename + ' -o -d ' + path, "sleep 3"], closeOnSuccess=True)
 
 	def cmdFinished(self):
@@ -460,7 +460,7 @@ class doFlashImage(Screen):
 				else:
 					cmdlist.append("%s -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp))
 				message = "echo -e '\n"
-				if self.List not in ("STARTUP","cmdline.txt") and SystemInfo["HaveMultiBoot"]:
+				if self.List not in ("STARTUP", "cmdline.txt") and SystemInfo["HaveMultiBoot"]:
 					message += _('ofgwrite flashing ready.\n')
 					message += _('please press exit to go back to the menu.\n')
 				else:
@@ -473,7 +473,7 @@ class doFlashImage(Screen):
 			self.session.open(Console, title=text, cmdlist=cmdlist, finishedCallback=self.quit, closeOnSuccess=False)
 			if not self.simulate:
 				fbClass.getInstance().lock()
-			if self.List not in ("STARTUP","cmdline.txt"):
+			if self.List not in ("STARTUP", "cmdline.txt"):
 				self.close()
 
 	def prepair_flashtmp(self, tmpPath):
@@ -509,7 +509,7 @@ class doFlashImage(Screen):
 		if ret:
 			from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupScreen
 			self.flashWithPostFlashActionMode = 'local'
-			self.session.openWithCallback(self.flashWithPostFlashAction,BackupScreen, runBackup=True)
+			self.session.openWithCallback(self.flashWithPostFlashAction, BackupScreen, runBackup=True)
 		else:
 			self.flashWithPostFlashActionMode = 'local'
 			self.flashWithPostFlashAction()
@@ -555,12 +555,12 @@ class doFlashImage(Screen):
 			else:
 				self.feedurl = feedurl_atv
 				self["key_blue"].setText("Openeight")
-			url = '%s/index.php?open=%s' % (self.feedurl,box)
+			url = '%s/index.php?open=%s' % (self.feedurl, box)
 			try:
 				req = urllib2.Request(url)
 				response = urllib2.urlopen(req)
 			except urllib2.URLError as e:
-				print "URL ERROR: %s\n%s" % (e,url)
+				print "URL ERROR: %s\n%s" % (e, url)
 				self["imageList"].l.setList(self.imagelist)
 				return
 
@@ -630,7 +630,7 @@ class ImageDownloadTask(Task):
 
 	def run(self, callback):
 		self.callback = callback
-		self.download = downloadWithProgress(self.url,self.path)
+		self.download = downloadWithProgress(self.url, self.path)
 		self.download.addProgress(self.download_progress)
 		self.download.start().addCallback(self.download_finished).addErrback(self.download_failed)
 		print "[ImageDownloadTask] downloading", self.url, "to", self.path

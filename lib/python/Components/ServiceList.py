@@ -49,10 +49,10 @@ class ServiceList(GUIComponent):
 		self.root = None
 		self.mode = self.MODE_NORMAL
 		self.ItemHeight = 28
-		self.ServiceNameFont = parseFont("Regular;22", ((1,1),(1,1)))
-		self.ServiceInfoFont = parseFont("Regular;18", ((1,1),(1,1)))
-		self.ServicePercFont = parseFont("Regular;18", ((1,1),(1,1)))
-		self.ServiceNumberFont = parseFont("Regular;20", ((1,1),(1,1)))
+		self.ServiceNameFont = parseFont("Regular;22", ((1, 1), (1, 1)))
+		self.ServiceInfoFont = parseFont("Regular;18", ((1, 1), (1, 1)))
+		self.ServicePercFont = parseFont("Regular;18", ((1, 1), (1, 1)))
+		self.ServiceNumberFont = parseFont("Regular;20", ((1, 1), (1, 1)))
 		self.progressBarWidth = 52
 		self.progressPercentWidth = 0
 		self.fieldMargins = 10
@@ -106,11 +106,11 @@ class ServiceList(GUIComponent):
 		def serviceItemHeight(value):
 			self.ItemHeight = int(value)
 		def serviceNameFont(value):
-			self.ServiceNameFont = parseFont(value, ((1,1),(1,1)))
+			self.ServiceNameFont = parseFont(value, ((1, 1), (1, 1)))
 		def serviceInfoFont(value):
-			self.ServiceInfoFont = parseFont(value, ((1,1),(1,1)))
+			self.ServiceInfoFont = parseFont(value, ((1, 1), (1, 1)))
 		def serviceNumberFont(value):
-			self.ServiceNumberFont = parseFont(value, ((1,1),(1,1)))
+			self.ServiceNumberFont = parseFont(value, ((1, 1), (1, 1)))
 		def progressbarHeight(value):
 			self.l.setProgressbarHeight(int(value))
 		def progressbarBorderWidth(value):

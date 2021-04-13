@@ -54,7 +54,7 @@ def RSListEntry(download, state):
 	res = [(download)]
 	# skin.xml <parameter name="RSList" value="40,0,1200,50,10,3,50,50" />
 	try:
-		x, y, w, h, x1, y1, w1, h1 = skin.parameters.get("RSList",(40, 0, 1280, 25, 5, 6, 25, 25))
+		x, y, w, h, x1, y1, w1, h1 = skin.parameters.get("RSList", (40, 0, 1280, 25, 5, 6, 25, 25))
 	except:
 		x = 40
 		y = 0
@@ -66,9 +66,9 @@ def RSListEntry(download, state):
 		h1 = 25
 	res.append(MultiContentEntryText(pos=(x, y), size=(w, h), font=0, text=download))
 	if state == 0:
-		res.append(MultiContentEntryPixmapAlphaTest(pos=(x1, y1), size=(w1,h1), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_green.png"))))
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(x1, y1), size=(w1, h1), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_green.png"))))
 	else:
-		res.append(MultiContentEntryPixmapAlphaTest(pos=(x1, y1), size=(w1,h1), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_red.png"))))
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(x1, y1), size=(w1, h1), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_red.png"))))
 
 	print "res =", res
 	return res
@@ -358,7 +358,7 @@ class Getipk(Screen):
                 plug = self.ipk
                 title = _("Installing addon %s" % (plug))
                 cmd = self.cmd1 + " && " + self.cmd2 + " && " + self.cmd3
-                self.session.open(Console,_(title),[cmd])
+                self.session.open(Console, _(title), [cmd])
 #                self.endinstall()
  
     def LastJobView(self):
@@ -373,7 +373,7 @@ class Getipk(Screen):
                        cmd = "opkg install --force-overwrite /tmp/" + self.ipk + ">/tmp/ipk.log"
                        print "cmd =", cmd
                        title = _("Installing addon %s" % (plug))
-                       self.session.open(Console,_(title),[cmd])
+                       self.session.open(Console, _(title), [cmd])
 #                       self.viewLog()
                        self.endinstall()
 
@@ -477,7 +477,7 @@ class Getipk2(Screen):
                 print "xdest =", xdest
                 downloadPage(xurl2, xdest).addCallback(self.gotPage)
 
-    def gotPage(self,txt=""):
+    def gotPage(self, txt=""):
                        print "in gotPage"
                        self["info"].setText("")
                        cmd = "opkg install --force-overwrite /tmp/" + self.ipk + ">/tmp/ipk.log"

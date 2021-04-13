@@ -417,7 +417,7 @@ class Harddisk:
 			task.setTool("mkfs.ext4")
 			if size > 20000:
 				try:
-					version = map(int, open("/proc/version","r").read().split(' ', 4)[2].split('.',2)[:2])
+					version = map(int, open("/proc/version", "r").read().split(' ', 4)[2].split('.', 2)[:2])
 					if (version[0] > 3) or (version[0] > 2 and version[1] >= 2):
 						# Linux version 3.2 supports bigalloc and -C option, use 256k blocks
 						task.args += ["-C", "262144"]
@@ -490,8 +490,8 @@ class Harddisk:
 		try:
 			l = open("/sys/block/%s/stat" % self.device).read()
 		except IOError:
-			return -1,-1
-		data = l.split(None,5)
+			return -1, -1
+		data = l.split(None, 5)
 		return (int(data[0]), int(data[4]))
 
 	def startIdle(self):
@@ -553,7 +553,7 @@ class Partition:
 		self.is_hotplug = force_mounted # so far; this might change.
 		self.device = device
 	def __str__(self):
-		return "Partition(mountpoint=%s,description=%s,device=%s)" % (self.mountpoint,self.description,self.device)
+		return "Partition(mountpoint=%s,description=%s,device=%s)" % (self.mountpoint, self.description, self.device)
 
 	def stat(self):
 		if self.mountpoint:
@@ -639,7 +639,7 @@ class HarddiskManager:
 			("/", _("Internal flash"))
 		)
 		known = set([os.path.normpath(a.mountpoint) for a in self.partitions if a.mountpoint])
-		for m,d in p:
+		for m, d in p:
 			if (m not in known) and os.path.ismount(m):
 				self.partitions.append(Partition(mountpoint=m, description=d))
 
@@ -648,7 +648,7 @@ class HarddiskManager:
 		error = False
 		removable = False
 		BLACKLIST = []
-		if getMachineBuild() in ('u51','u52','u53','u5','u5pvr','vuzero4k','et1x000','vuuno4k','vuuno4kse','vuultimo4k','vusolo4k','hd51','hd52','sf4008','dm900','dm7080','dm820', 'gb7252', 'dags7252', 'vs1500','h7','8100s','et13000','sf5008','sf8008','sf8008m'):
+		if getMachineBuild() in ('u51', 'u52', 'u53', 'u5', 'u5pvr', 'vuzero4k', 'et1x000', 'vuuno4k', 'vuuno4kse', 'vuultimo4k', 'vusolo4k', 'hd51', 'hd52', 'sf4008', 'dm900', 'dm7080', 'dm820', 'gb7252', 'dags7252', 'vs1500', 'h7', '8100s', 'et13000', 'sf5008', 'sf8008', 'sf8008m'):
 			BLACKLIST = ["mmcblk0"]
 		elif getMachineBuild() in ('xc7439'):
 			BLACKLIST = ["mmcblk1"]
@@ -942,9 +942,9 @@ class MkfsTask(Task.LoggingTask):
 		elif self.fsck_state == 'inode':
 			if '/' in data:
 				try:
-					d = data.strip(' \x08\r\n').split('/',1)
+					d = data.strip(' \x08\r\n').split('/', 1)
 					if '\x08' in d[1]:
-						d[1] = d[1].split('\x08',1)[0]
+						d[1] = d[1].split('\x08', 1)[0]
 					self.setProgress(80 * int(d[0]) / int(d[1]))
 				except Exception, e:
 					print "[Mkfs] E:", e

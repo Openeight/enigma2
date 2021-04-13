@@ -22,7 +22,7 @@ def getMultibootStartupDevice():
 		os.rmdir(tmp.dir)
 
 def getparam(line, param):
-	for part in line.strip().replace("'","").replace('"','').split():
+	for part in line.strip().replace("'", "").replace('"', '').split():
 		p = part.split('=')
 		if len(p) == 2 and p[0] == param:
 			return p[1]
@@ -62,7 +62,7 @@ def getMultibootslots():
 			os.rmdir(tmp.dir)
 		if not mode12found and SystemInfo["canMode12"]:
 			#the boot device has ancient content and does not contain the correct STARTUP files
-			for slot in range(1,5):
+			for slot in range(1, 5):
 				bootslots[slot] = {'device': '/dev/mmcblk0p%s' % (slot * 2 + 1), 'startupfile': None}
 	print '[Multiboot] Bootslots found:', bootslots
 	return bootslots

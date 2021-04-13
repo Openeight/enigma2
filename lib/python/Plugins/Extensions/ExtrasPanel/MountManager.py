@@ -99,7 +99,7 @@ class DevicesMountPanel(Screen):
 		if self.sel:
 			try:
 				name = str(self.sel[0])
-				desc = str(self.sel[1].replace('\t','  '))
+				desc = str(self.sel[1].replace('\t', '  '))
 			except:
 				name = ""
 				desc = ""
@@ -136,7 +136,7 @@ class DevicesMountPanel(Screen):
 			mmc = False
 			if device and device == 'mmcblk0p1':
 				mmc = True
-			if not mmc and not search('sd[a-z][1-9]',device):
+			if not mmc and not search('sd[a-z][1-9]', device):
 				continue
 			if device in list2:
 				continue
@@ -243,7 +243,7 @@ class DevicesMountPanel(Screen):
 			swapdevices = ''
 		if path.exists('/tmp/devices.tmp'):
 			remove('/tmp/devices.tmp')
-		swapdevices = swapdevices.replace('\n','')
+		swapdevices = swapdevices.replace('\n', '')
 		swapdevices = swapdevices.split('/')
 		f = open('/proc/mounts', 'r')
 		for line in f.readlines():
@@ -274,7 +274,7 @@ class DevicesMountPanel(Screen):
 				parts = line.strip().split()
 				size = int(parts[2])
 				if (((float(size) / 1024) / 1024) / 1024) > 1:
-					des = _("Size: ") + str(round((((float(size) / 1024) / 1024) / 1024),2)) + " " + _("TB")
+					des = _("Size: ") + str(round((((float(size) / 1024) / 1024) / 1024), 2)) + " " + _("TB")
 				elif ((size / 1024) / 1024) > 1:
 					capacity = (size / 1024) / 1024
 					des = _("Size: ") + str(capacity) + " " + _("GB")
@@ -291,7 +291,7 @@ class DevicesMountPanel(Screen):
 				except:
 					size = 0
 				if ((((float(size) / 2) / 1024) / 1024) / 1024) > 1:
-					des = _("Size: ") + str(round(((((float(size) / 2) / 1024) / 1024) / 1024),2)) + _("TB")
+					des = _("Size: ") + str(round(((((float(size) / 2) / 1024) / 1024) / 1024), 2)) + _("TB")
 				elif (((size / 2) / 1024) / 1024) > 1:
 					capacity = ((size / 2) / 1024) / 1024
 					des = _("Size: ") + str(capacity) + " " + _("GB")
@@ -427,8 +427,8 @@ class DevicesMountPanel(Screen):
 		self.device_uuid_tmp = result.split('UUID=')
 		if str(self.device_uuid_tmp) != "['']":
 			try:
-				self.device_uuid_tmp = self.device_uuid_tmp[1].replace('TYPE="ext2"','').replace('TYPE="ext3"','').replace('TYPE="ext4"','').replace('TYPE="ntfs"','').replace('TYPE="exfat"','').replace('TYPE="vfat"','').replace('"','')
-				self.device_uuid_tmp = self.device_uuid_tmp.replace('\n',"")
+				self.device_uuid_tmp = self.device_uuid_tmp[1].replace('TYPE="ext2"', '').replace('TYPE="ext3"', '').replace('TYPE="ext4"', '').replace('TYPE="ntfs"', '').replace('TYPE="exfat"', '').replace('TYPE="vfat"', '').replace('"', '')
+				self.device_uuid_tmp = self.device_uuid_tmp.replace('\n', "")
 				self.device_uuid = 'UUID=' + self.device_uuid_tmp
 				system('mount ' + self.device_uuid)
 				mountok = False
@@ -547,8 +547,8 @@ class DevicesMountPanel(Screen):
 		self.mountp = extra_args[1]
 		self.device_uuid_tmp = result.split('UUID=')
 		if str(self.device_uuid_tmp) != "['']":
-			self.device_uuid_tmp = self.device_uuid_tmp[1].replace('TYPE="ext2"','').replace('TYPE="ext3"','').replace('TYPE="ext4"','').replace('TYPE="ntfs"','').replace('TYPE="exfat"','').replace('TYPE="vfat"','').replace('TYPE="xfs"','').replace('"','')
-			self.device_uuid_tmp = self.device_uuid_tmp.replace('\n',"")
+			self.device_uuid_tmp = self.device_uuid_tmp[1].replace('TYPE="ext2"', '').replace('TYPE="ext3"', '').replace('TYPE="ext4"', '').replace('TYPE="ntfs"', '').replace('TYPE="exfat"', '').replace('TYPE="vfat"', '').replace('TYPE="xfs"', '').replace('"', '')
+			self.device_uuid_tmp = self.device_uuid_tmp.replace('\n', "")
 			self.device_uuid = 'UUID=' + self.device_uuid_tmp
 			if not path.exists(self.mountp):
 				mkdir(self.mountp, 0755)
@@ -563,11 +563,11 @@ class DevicesMountPanel(Screen):
 				except:
 					pass
 			file('/etc/fstab.tmp', 'w').writelines([l for l in file('/etc/fstab').readlines() if '/media/hdd' not in l])
-			rename('/etc/fstab.tmp','/etc/fstab')
+			rename('/etc/fstab.tmp', '/etc/fstab')
 			file('/etc/fstab.tmp', 'w').writelines([l for l in file('/etc/fstab').readlines() if self.device not in l])
-			rename('/etc/fstab.tmp','/etc/fstab')
+			rename('/etc/fstab.tmp', '/etc/fstab')
 			file('/etc/fstab.tmp', 'w').writelines([l for l in file('/etc/fstab').readlines() if self.device_uuid not in l])
-			rename('/etc/fstab.tmp','/etc/fstab')
+			rename('/etc/fstab.tmp', '/etc/fstab')
 			out = open('/etc/fstab', 'a')
 			line = self.device_uuid + ' /media/hdd auto defaults 0 0\n'
 			if flashexpander is not None:
@@ -628,7 +628,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 			swapdevices = ''
 		if path.exists('/tmp/devices.tmp'):
 			remove('/tmp/devices.tmp')
-		swapdevices = swapdevices.replace('\n','')
+		swapdevices = swapdevices.replace('\n', '')
 		swapdevices = swapdevices.split('/')
 		f = open('/proc/partitions', 'r')
 		for line in f.readlines():
@@ -639,7 +639,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 			mmc = False
 			if device and device == 'mmcblk0p1':
 				mmc = True
-			if not mmc and not search('sd[a-z][1-9]',device):
+			if not mmc and not search('sd[a-z][1-9]', device):
 				continue
 			if device in list2:
 				continue
@@ -747,7 +747,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 				parts = line.strip().split()
 				size = int(parts[2])
 				if (((float(size) / 1024) / 1024) / 1024) > 1:
-					des = _("Size: ") + str(round((((float(size) / 1024) / 1024) / 1024),2)) + " " + _("TB")
+					des = _("Size: ") + str(round((((float(size) / 1024) / 1024) / 1024), 2)) + " " + _("TB")
 				elif ((size / 1024) / 1024) > 1:
 					des = _("Size: ") + str((size / 1024) / 1024) + " " + _("GB")
 				else:
@@ -760,7 +760,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 				except:
 					size = 0
 				if ((((float(size) / 2) / 1024) / 1024) / 1024) > 1:
-					des = _("Size: ") + str(round(((((float(size) / 2) / 1024) / 1024) / 1024),2)) + " " + _("TB")
+					des = _("Size: ") + str(round(((((float(size) / 2) / 1024) / 1024) / 1024), 2)) + " " + _("TB")
 				elif (((size / 2) / 1024) / 1024) > 1:
 					des = _("Size: ") + str(((size / 2) / 1024) / 1024) + " " + _("GB")
 				else:
@@ -828,8 +828,8 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 			return
 		self.device_uuid_tmp = result.split('UUID=')
 		if str(self.device_uuid_tmp) != "['']":
-			self.device_uuid_tmp = self.device_uuid_tmp[1].replace('TYPE="ext2"','').replace('TYPE="ext3"','').replace('TYPE="ext4"','').replace('TYPE="ntfs"','').replace('TYPE="exfat"','').replace('TYPE="vfat"','').replace('TYPE="xfs"','').replace('"','')
-			self.device_uuid_tmp = self.device_uuid_tmp.replace('\n',"")
+			self.device_uuid_tmp = self.device_uuid_tmp[1].replace('TYPE="ext2"', '').replace('TYPE="ext3"', '').replace('TYPE="ext4"', '').replace('TYPE="ntfs"', '').replace('TYPE="exfat"', '').replace('TYPE="vfat"', '').replace('TYPE="xfs"', '').replace('"', '')
+			self.device_uuid_tmp = self.device_uuid_tmp.replace('\n', "")
 			self.device_uuid = 'UUID=' + self.device_uuid_tmp
 			flashexpander = None
 			if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Flashexpander/plugin.pyo") and fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Flashexpander/flashexpander.pyo"):
@@ -842,9 +842,9 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 				except:
 					pass
 			file('/etc/fstab.tmp', 'w').writelines([l for l in file('/etc/fstab').readlines() if self.device not in l])
-			rename('/etc/fstab.tmp','/etc/fstab')
+			rename('/etc/fstab.tmp', '/etc/fstab')
 			file('/etc/fstab.tmp', 'w').writelines([l for l in file('/etc/fstab').readlines() if self.device_uuid not in l])
-			rename('/etc/fstab.tmp','/etc/fstab')
+			rename('/etc/fstab.tmp', '/etc/fstab')
 			if flashexpander is not None:
 				out = open('/etc/fstab', 'a')
 				line = flashexpander
@@ -873,43 +873,43 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 
 	def action1(self):
 		from Screens.Console import Console as myConsole
-		self.session.open(myConsole,_("*****mount*****"),["mount"])
+		self.session.open(myConsole, _("*****mount*****"), ["mount"])
 
 	def action2(self):
 		from Screens.Console import Console as myConsole
-		self.session.open(myConsole,_("*****df -h*****"),["df -h"])
+		self.session.open(myConsole, _("*****df -h*****"), ["df -h"])
 
 	def action3(self):
 		from Screens.Console import Console as myConsole
-		self.session.open(myConsole,_("*****sfdisk -l*****"),["sfdisk -l"])
+		self.session.open(myConsole, _("*****sfdisk -l*****"), ["sfdisk -l"])
 		
 	def action4(self):
 		from Screens.Console import Console as myConsole
-		self.session.open(myConsole,_("*****blkid*****"),["blkid"])
+		self.session.open(myConsole, _("*****blkid*****"), ["blkid"])
 
 	def action5(self):
 		from Screens.Console import Console as myConsole
-		self.session.open(myConsole,_("*****kernel-module-ext2*****"),["opkg install kernel-module-ext2"])
+		self.session.open(myConsole, _("*****kernel-module-ext2*****"), ["opkg install kernel-module-ext2"])
 
 	def action6(self):
 		from Screens.Console import Console as myConsole
-		self.session.open(myConsole,_("*****kernel-module-ext3*****"),["opkg install kernel-module-ext3"])
+		self.session.open(myConsole, _("*****kernel-module-ext3*****"), ["opkg install kernel-module-ext3"])
 
 	def action7(self):
 		from Screens.Console import Console as myConsole
-		self.session.open(myConsole,_("*****e2fsprogs*****"),["opkg install e2fsprogs"])
+		self.session.open(myConsole, _("*****e2fsprogs*****"), ["opkg install e2fsprogs"])
 
 	def action8(self):
 		from Screens.Console import Console as myConsole
-		self.session.open(myConsole,_("*****e2fsprogs-tune2fs*****"),["opkg install e2fsprogs-tune2fs"])
+		self.session.open(myConsole, _("*****e2fsprogs-tune2fs*****"), ["opkg install e2fsprogs-tune2fs"])
 
 	def action9(self):
 		from Screens.Console import Console as myConsole
-		self.session.open(myConsole,_("*****fdisk*****"),["opkg install util-linux-fdisk"])
+		self.session.open(myConsole, _("*****fdisk*****"), ["opkg install util-linux-fdisk"])
 
 	def action10(self):
 		from Screens.Console import Console as myConsole
-		self.session.open(myConsole,_("*****util-linux-blkid*****"),["opkg install util-linux-blkid"])
+		self.session.open(myConsole, _("*****util-linux-blkid*****"), ["opkg install util-linux-blkid"])
 
 	def saveMypoints(self):
 		if len(self['config'].list) < 1:
@@ -946,7 +946,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 		self.checkMount = False
 		file_mounts = '/proc/mounts'
 		if fileExists(file_mounts):
-			fd = open(file_mounts,'r')
+			fd = open(file_mounts, 'r')
 			lines_mount = fd.readlines()
 			fd.close()
 			for line in lines_mount:
@@ -992,8 +992,8 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 		self.mountp = extra_args[1]
 		self.device_uuid_tmp = result.split('UUID=')
 		if str(self.device_uuid_tmp) != "['']":
-			self.device_uuid_tmp = self.device_uuid_tmp[1].replace('TYPE="ext2"','').replace('TYPE="ext3"','').replace('TYPE="ext4"','').replace('TYPE="ntfs"','').replace('TYPE="exfat"','').replace('TYPE="vfat"','').replace('TYPE="xfs"','').replace('"','')
-			self.device_uuid_tmp = self.device_uuid_tmp.replace('\n',"")
+			self.device_uuid_tmp = self.device_uuid_tmp[1].replace('TYPE="ext2"', '').replace('TYPE="ext3"', '').replace('TYPE="ext4"', '').replace('TYPE="ntfs"', '').replace('TYPE="exfat"', '').replace('TYPE="vfat"', '').replace('TYPE="xfs"', '').replace('"', '')
+			self.device_uuid_tmp = self.device_uuid_tmp.replace('\n', "")
 			self.device_uuid = 'UUID=' + self.device_uuid_tmp
 			if not path.exists(self.mountp):
 				mkdir(self.mountp, 0755)
@@ -1008,9 +1008,9 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 				except:
 					pass
 			file('/etc/fstab.tmp', 'w').writelines([l for l in file('/etc/fstab').readlines() if self.device not in l])
-			rename('/etc/fstab.tmp','/etc/fstab')
+			rename('/etc/fstab.tmp', '/etc/fstab')
 			file('/etc/fstab.tmp', 'w').writelines([l for l in file('/etc/fstab').readlines() if self.device_uuid not in l])
-			rename('/etc/fstab.tmp','/etc/fstab')
+			rename('/etc/fstab.tmp', '/etc/fstab')
 			out = open('/etc/fstab', 'a')
 			line = self.device_uuid + '' + self.mountp + ' auto defaults 0 0\n'
 			if flashexpander is not None:

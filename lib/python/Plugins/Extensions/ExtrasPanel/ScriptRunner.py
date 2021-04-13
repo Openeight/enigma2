@@ -91,7 +91,7 @@ class ScriptRunner(Screen):
 		else:
 			self.session.open(MessageBox, _("You have no script to run."), MessageBox.TYPE_INFO, timeout=10)
 
-	def Run(self,answer):
+	def Run(self, answer):
 		if answer is True:
 			system("if awk '/\r$/{exit 0;} 1{exit 1;}' /usr/script/" + self.sel + " ; then dos2unix /usr/script/" + self.sel + "; fi")
 			if not access("/usr/script/" + self.sel, X_OK):

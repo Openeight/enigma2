@@ -283,7 +283,7 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Display Settings', _('Display Setup'), _('Setup your display.')))
 		if os.path.exists('/usr/share/enigma2/display'):
 			self.sublist.append(QuickSubMenuEntryComponent('LCD Skin Setup', _('Skin Setup'), _('Setup your LCD.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Skin Setup',_('Select Enigma2 Skin'),_('Setup your Skin.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Skin Setup', _('Select Enigma2 Skin'), _('Setup your Skin.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording and Playback settings', _('Recording/Playback Setup'), _('Setup your recording and playback config.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording paths', _('Recording paths Setup'), _('Setup your recording paths config.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Hotkey', _('Hotkey Setup'), _('Adjust the functions of your remote cotrol buttons.')))
@@ -322,28 +322,28 @@ class QuickMenu(Screen):
 	def Qmount(self):
 		self.sublist = []
 		self.sublist.append(QuickSubMenuEntryComponent('Network Mount Manager', _('Manage network mounts'), _('Setup your network mounts.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Mount again',_('Mount your network shares again'),_('Attempt to recover lost mounts (in background).')))
+		self.sublist.append(QuickSubMenuEntryComponent('Mount again', _('Mount your network shares again'), _('Attempt to recover lost mounts (in background).')))
 		self.sublist.append(QuickSubMenuEntryComponent('Network Browser', _('Search for network shares'), _('Search for network shares.'))) 
 		self.sublist.append(QuickSubMenuEntryComponent('Device Mount Manager', _('Mounts Devices'), _('Setup your Device mounts (USB, HDD, others...)')))
-		self.sublist.append(QuickSubMenuEntryComponent("fstab Editor",_("View or edit fstab"),_("View or Edit your device mounts in etc/fstab.")))
+		self.sublist.append(QuickSubMenuEntryComponent("fstab Editor", _("View or edit fstab"), _("View or Edit your device mounts in etc/fstab.")))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qsoftcam(self):
 		self.sublist = []
 		if Check_Softcam():
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam Panel', _('Control your Softcams'), _('Use the Softcam Panel to control your Cam. This let you start/stop/select a cam.')))
-			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Panel Setup',_('Softcam-Panel Setup'),_('Softcam-Panel Setup.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Panel Setup', _('Softcam-Panel Setup'), _('Softcam-Panel Setup.')))
 		if Softcam_Check():
 			if SC:
 				self.sublist.append(QuickSubMenuEntryComponent('Softcam Manager', _('Softcam Manager'), _('Select and control your Cam. This let you start/stop/select a cam.')))
-				self.sublist.append(QuickSubMenuEntryComponent('Softcam Manager Settings',_('Softcam Manager Settings'),_('Settings for the Softcam Manager.')))
+				self.sublist.append(QuickSubMenuEntryComponent('Softcam Manager Settings', _('Softcam Manager Settings'), _('Settings for the Softcam Manager.')))
 			elif SSC:
 				self.sublist.append(QuickSubMenuEntryComponent('Softcam-Setup', _('Softcam Setup'), _('Select and control your Softcam. Here you can start/stop/select a softcam, and see ecm info.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them.')))
 		if ECMINFOSETUP:
-			self.sublist.append(QuickSubMenuEntryComponent('Ecm Info',_('Ecm Info setup'),_('Setup Ecm Info of the CCcamInfo plugin.')))
-		self.sublist.append(QuickSubMenuEntryComponent("CCcam Info",_("Check your CCcam"),_("This plugin shows you the status of your CCcam.")))
-		self.sublist.append(QuickSubMenuEntryComponent("OScam Info",_("Check your OScam"),_("This plugin shows you the status of your OScam.")))
+			self.sublist.append(QuickSubMenuEntryComponent('Ecm Info', _('Ecm Info setup'), _('Setup Ecm Info of the CCcamInfo plugin.')))
+		self.sublist.append(QuickSubMenuEntryComponent("CCcam Info", _("Check your CCcam"), _("This plugin shows you the status of your CCcam.")))
+		self.sublist.append(QuickSubMenuEntryComponent("OScam Info", _("Check your OScam"), _("This plugin shows you the status of your OScam.")))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qavsetup(self):
@@ -357,10 +357,10 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Automatic Volume Adjustment', _('Automatic Volume Adjustment settings'), _('Setup for Automatic Volume Adjustment between MPEG and AC3/DTS.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Auto Language', _('Auto Language Selection'), _('Select your Language for Audio/Subtitles.')))
 		if VIDTUNE == True:
-			self.sublist.append(QuickSubMenuEntryComponent('Testscreens',_('Test screens for your TV'),_('Tune your TV for the best result.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Testscreens', _('Test screens for your TV'), _('Tune your TV for the best result.')))
 		if os.path.exists('/proc/stb/vmpeg/0/pep_apply') and VIDEOENH == True:
 			self.sublist.append(QuickSubMenuEntryComponent('VideoEnhancement', _('VideoEnhancement Setup'), _('VideoEnhancement Setup.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Hdmi CEC',_('HDMI-CEC setup'),_('Setup your HDMI communication and preferences.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Hdmi CEC', _('HDMI-CEC setup'), _('Setup your HDMI communication and preferences.')))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qtuner(self):
@@ -368,20 +368,20 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Tuner Configuration', _('Setup tuner(s)'), _('Setup each tuner for your satellite system.')))
 		if POSSETUP == True:
 			self.sublist.append(QuickSubMenuEntryComponent('Positioner Setup', _('Setup rotor'), _('Setup your positioner for your satellite system.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Sundtek Control Center',_('Sundtek tuner Setup'),_('Configure your Sundtek tuner(s) or check/update the drivers.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Sundtek Control Center', _('Sundtek tuner Setup'), _('Configure your Sundtek tuner(s) or check/update the drivers.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Automatic Scan', _('Service Searching Automatically'), _('Automatic scan for services.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Manual Scan', _('Service Searching Manually'), _('Manual scan for services.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Fallback remote receiver setup', _('Setup for fallback remote receiver(s)'), _('Enable and setup your fallback remote receiver(s).')))
 		if FASTSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent('Fast Scan',_('Fast Scan Service Searching'),_('Use Fast Scan to search for services.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Fast Scan', _('Fast Scan Service Searching'), _('Use Fast Scan to search for services.')))
 		if BLINDSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent('Blind Scan',_('Blindscan Service Searching'),_('Scan for satellite services.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Blind Scan', _('Blindscan Service Searching'), _('Scan for satellite services.')))
 		if CABLESCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent('Cable Scan',_('Cable Service Searching'),_('Scan for cable services.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Cable Scan', _('Cable Service Searching'), _('Scan for cable services.')))
 		if MISPLSLCNSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent('MIS/PLS LCN Scan',_('MIS/PLS LCN Service Searching'),_('Scan for MIS/PLS LCN services.')))
+			self.sublist.append(QuickSubMenuEntryComponent('MIS/PLS LCN Scan', _('MIS/PLS LCN Service Searching'), _('Scan for MIS/PLS LCN services.')))
 		if TERRESTSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent('Terrestrial Scan',_('Terrestrial Service Searching'),_('Scan for terrestrial services.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Terrestrial Scan', _('Terrestrial Service Searching'), _('Scan for terrestrial services.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Sat Finder', _('Search Sats'), _('Search Sats, check signal and lock.')))
 		self['sublist'].l.setList(self.sublist)
 

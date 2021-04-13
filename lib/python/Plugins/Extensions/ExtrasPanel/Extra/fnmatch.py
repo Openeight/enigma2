@@ -105,7 +105,7 @@ def translate(pat):
             if j >= n:
                 res = res + '\\['
             else:
-                stuff = pat[i:j].replace('\\','\\\\')
+                stuff = pat[i:j].replace('\\', '\\\\')
                 i = j + 1
                 if stuff[0] == '!':
                     stuff = '^' + stuff[1:]

@@ -42,7 +42,7 @@ def listConfigBackup():
 				if len(files):
 					for file in files:
 						if file.endswith('.tar.gz'):
-							list.append((path.join(devpath,file),path.join(devpath,file)))
+							list.append((path.join(devpath, file), path.join(devpath, file)))
 		if len(list):
 			list.sort()
 			list.reverse()
@@ -99,7 +99,7 @@ class RestoreWizard(WizardLanguage, Rc):
 		if self.NextStep is 'settingsrestore':
 			self.session.open(RestoreMenu, self.skin)
 
-	def buildListfinishedCB(self,data):
+	def buildListfinishedCB(self, data):
 		self.buildListRef = None
 		if data is True:
 			self.currStep = self.getStepWithID(self.NextStep)

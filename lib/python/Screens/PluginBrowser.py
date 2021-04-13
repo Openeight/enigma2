@@ -109,7 +109,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 		self["list"] = PluginList(self.list)
 		self["list"].list.sort()
 
-		self["actions"] = ActionMap(["SetupActions","WizardActions"],
+		self["actions"] = ActionMap(["SetupActions", "WizardActions"],
 		{
 			"ok": self.save,
 			"back": self.close,
@@ -325,7 +325,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 			try:
 				from Plugins.SystemPlugins.SoftwareManager.plugin import PluginManager
 			except ImportError:
-				self.session.open(MessageBox, _("The software management extension is not installed!\nPlease install it."), type=MessageBox.TYPE_INFO,timeout=10)
+				self.session.open(MessageBox, _("The software management extension is not installed!\nPlease install it."), type=MessageBox.TYPE_INFO, timeout=10)
 			else:
 				self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginManager)
 
@@ -467,7 +467,7 @@ class PluginDownloadBrowser(Screen):
 			if dest.startswith('/'):
 				# Custom install path, add it to the list too
 				dest = os.path.normpath(dest)
-				extra = '--add-dest %s:%s -d %s' % (dest,dest,dest)
+				extra = '--add-dest %s:%s -d %s' % (dest, dest, dest)
 				Opkg.opkgAddDestination(dest)
 			else:
 				extra = '-d ' + dest
@@ -700,7 +700,7 @@ class PluginDownloadBrowser(Screen):
 				for l in self.LanguageList:
 					if len(x[3]) > 2:
 						tmp = l[0].lower()
-						tmp = tmp.replace('_','-')
+						tmp = tmp.replace('_', '-')
 						if tmp == x[3]:
 							countryIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/" + l[0] + ".png"))
 							if countryIcon is None:

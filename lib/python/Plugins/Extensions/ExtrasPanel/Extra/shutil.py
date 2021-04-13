@@ -11,8 +11,8 @@ from os.path import abspath
 import fnmatch
 import errno
 
-__all__ = ["copyfileobj","copyfile","copymode","copystat","copy","copy2",
-           "copytree","move","rmtree","Error"]
+__all__ = ["copyfileobj", "copyfile", "copymode", "copystat", "copy", "copy2",
+           "copytree", "move", "rmtree", "Error"]
 
 class Error(EnvironmentError):
     pass
@@ -32,7 +32,7 @@ def copyfileobj(fsrc, fdst, length=16 * 1024):
 
 def _samefile(src, dst):
     # Macintosh, Unix.
-    if hasattr(os.path,'samefile'):
+    if hasattr(os.path, 'samefile'):
         try:
             return os.path.samefile(src, dst)
         except OSError:
