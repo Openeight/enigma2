@@ -54,7 +54,7 @@ def RSListEntry(download, state):
 	res = [(download)]
 	# skin.xml <parameter name="RSList" value="40,0,1200,50,10,3,50,50" />
 	try:
-		x, y, w, h , x1, y1, w1, h1 = skin.parameters.get("RSList",(40, 0, 1280, 25, 5, 6, 25, 25))
+		x, y, w, h, x1, y1, w1, h1 = skin.parameters.get("RSList",(40, 0, 1280, 25, 5, 6, 25, 25))
 	except:
 		x = 40
 		y = 0
@@ -380,7 +380,7 @@ class Getipk(Screen):
     def viewLog(self):
           self["info"].setText("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n       Press Exit to continue...")
 #          self["info"].setText(" ")
-          if os.path.isfile("/tmp/ipk.log")is not True :
+          if os.path.isfile("/tmp/ipk.log")is not True:
                 cmd = "touch /tmp/ipk.log"
                 os.system(cmd)
 	  else:     	
@@ -507,7 +507,7 @@ class Getipk2(Screen):
 
     def viewLog(self):
           self["info"].setText("Press OK to continue...")
-          if os.path.isfile("/tmp/ipk.log")is not True :
+          if os.path.isfile("/tmp/ipk.log")is not True:
                 cmd = "touch /tmp/ipk.log"
                 os.system(cmd)
 	  else:     	

@@ -124,7 +124,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 	framewidth = getDesktop(0).size().width()
 	if framewidth >= 1024:
 		if len(result) == 1:
-			if ( _("ATSC") in result[0]) or (_("DVB-C") in result[0]) or ( _("DVB-T2") in result[0]) or ( _("DVB-T2") in result[0]):
+			if (_("ATSC") in result[0]) or (_("DVB-C") in result[0]) or (_("DVB-T2") in result[0]) or (_("DVB-T2") in result[0]):
 				imageone="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek_dvbc.png"
 			else:
 				imageone="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek_dvbs.png"
@@ -152,11 +152,11 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 				<ePixmap position=\"625, 500\" size=\"100,40\" pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek.png\" transparent=\"1\" alphatest=\"on\"/>\
 			</screen>"
 		elif len(result) >= 2:
-			if ( _("ATSC") in result[0] ) or ( _("DVB-C") in result[0]) or ( _("DVB-T2") in result[0]) or ( _("DVB-T2") in result[0]):
+			if (_("ATSC") in result[0]) or (_("DVB-C") in result[0]) or (_("DVB-T2") in result[0]) or (_("DVB-T2") in result[0]):
 				imageone="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek_dvbc.png"
 			else:
 				imageone="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek_dvbs.png"
-			if ( _("ATSC") in result[0] ) or ( _("DVB-C") in result[1]) or ( _("DVB-T2") in result[1]) or ( _("DVB-T2") in result[1]):
+			if (_("ATSC") in result[0]) or (_("DVB-C") in result[1]) or (_("DVB-T2") in result[1]) or (_("DVB-T2") in result[1]):
 				imagetwo="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek_dvbc.png"
 			else:
 				imagetwo="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek_dvbs.png"

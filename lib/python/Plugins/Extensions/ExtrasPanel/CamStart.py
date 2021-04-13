@@ -168,7 +168,7 @@ class CamStart:
 							#// AND CAM IN LIST
 							if camfound2 == 1:
 								import time
-								time.sleep (int(config.softcam.waittime.getValue()))
+								time.sleep(int(config.softcam.waittime.getValue()))
 								start = self.emuStart[indexcam2]
 								print "[CAMSTARTER] no CAM active, starting " + start
 								os.system("echo Start attempts cam 2: " + str(self.count) + " cmd=" + start + " >> " + "/tmp/camstarter.txt")

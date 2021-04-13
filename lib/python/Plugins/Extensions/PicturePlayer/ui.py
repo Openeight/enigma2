@@ -362,7 +362,7 @@ class Pic_Thumb(Screen):
 			return
 
 		pos = self.positionlist[self.filelist[self.index][T_FRAME_POS]]
-		self["frame"].moveTo( pos[0], pos[1], 1)
+		self["frame"].moveTo(pos[0], pos[1], 1)
 		self["frame"].startMoving()
 
 		if self.currPage != self.filelist[self.index][T_PAGE]:
@@ -610,7 +610,7 @@ class Pic_Full_View(Screen):
 		self.ShowPicture()
 
 	def KeyMenu(self):
-		self.session.openWithCallback(self.setPicloadConf ,Pic_Setup)
+		self.session.openWithCallback(self.setPicloadConf,Pic_Setup)
 		
 	def StartExif(self):
 		if self.maxentry < 0:

@@ -52,8 +52,8 @@ class CIselectMainMenu(Screen):
 		print "[CI_Wizzard] FOUND %d CI Slots " % NUM_CI
 
 		self.dlg = None
-		self.state = { }
-		self.list = [ ]
+		self.state = {}
+		self.list = []
 		if  NUM_CI and NUM_CI > 0:
 			for slot in range(NUM_CI):
 				state = eDVBCI_UI.getInstance().getState(slot)
@@ -64,11 +64,11 @@ class CIselectMainMenu(Screen):
 						appname = _("Slot %d") %(slot+1) + " - " + _("init modules")
 					elif state == 2:
 						appname = _("Slot %d") %(slot+1) + " - " + eDVBCI_UI.getInstance().getAppName(slot)
-					self.list.append( (appname, ConfigNothing(), 0, slot) )
+					self.list.append((appname, ConfigNothing(), 0, slot))
 				else:
-					self.list.append( (_("Slot %d") %(slot+1) + " - " + _("no module found") , ConfigNothing(), 1, -1) )
+					self.list.append((_("Slot %d") %(slot+1) + " - " + _("no module found"), ConfigNothing(), 1, -1))
 		else:
-			self.list.append( (_("no CI slots found") , ConfigNothing(), 1, -1) )
+			self.list.append((_("no CI slots found"), ConfigNothing(), 1, -1))
 
 		menuList = ConfigList(self.list)
 		menuList.list = self.list
@@ -170,10 +170,10 @@ class CIconfigMenu(Screen):
 		self.delete()
 
 	def greenPressed(self):
-		self.session.openWithCallback( self.finishedChannelSelection, myChannelSelection, None)
+		self.session.openWithCallback(self.finishedChannelSelection, myChannelSelection, None)
 
 	def yellowPressed(self):
-		self.session.openWithCallback( self.finishedProviderSelection, myProviderSelection, None)
+		self.session.openWithCallback(self.finishedProviderSelection, myProviderSelection, None)
 
 	def bluePressed(self):
 		self.session.openWithCallback(self.finishedCAidSelection, CAidSelect, self.caidlist, self.selectedcaid)
@@ -333,7 +333,7 @@ class CIconfigMenu(Screen):
 				for service in  slot.findall("service"):
 					read_service_name = service.get("name").encode("UTF-8")
 					read_service_ref = service.get("ref").encode("UTF-8")
-					self.read_services.append (read_service_ref)
+					self.read_services.append(read_service_ref)
 
 				for provider in  slot.findall("provider"):
 					read_provider_name = provider.get("name").encode("UTF-8")
@@ -725,7 +725,7 @@ def main(session, **kwargs):
 def menu(menuid, **kwargs):
 	if menuid == "setup" and isModule():
 		return [(_("Common Interface Assignment"), main, "ci_assign", 11)]
-	return [ ]
+	return []
 
 def Plugins(**kwargs):
 	description = _("a gui to assign services/providers to common interface modules")

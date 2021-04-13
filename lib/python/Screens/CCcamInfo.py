@@ -36,7 +36,7 @@ DATE = "21.11.2014"
 sf = sz_w = getDesktop(0).size().height() /720.0
 
 def confPath():
-	search_dirs = [ "/usr", "/var", "/etc" ]
+	search_dirs = ["/usr", "/var", "/etc"]
 	sdirs = " ".join(search_dirs)
 	cmd = 'find %s -name "CCcam.cfg" | head -n 1' % sdirs
 	res = popen(cmd).read()

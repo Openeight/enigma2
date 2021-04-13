@@ -235,7 +235,7 @@ def sccmain(session, **kwargs):
 def SundtekControlCenterStart(menuid):
 	if (config.plugins.SundtekControlCenter.display.value == "2" or config.plugins.SundtekControlCenter.display.value == "3") and (menuid == "scan" or menuid == "services_recordings"):
 		return [(_("Sundtek Control Center"), sccmain, "sundtek_control_center", 55)]
-	return [ ]
+	return []
 
 def Plugins(**kwargs):
 	list = [
@@ -377,7 +377,7 @@ class Extraspanel(Screen, InfoBarPiP):
 		elif menu == 'BackupFiles':
 			self.session.openWithCallback(self.backupfiles_choosen, BackupSelection)
 		elif menu == 'BackupLocation':
-			parts = [ (r.description, r.mountpoint, self.session) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False) ]
+			parts = [(r.description, r.mountpoint, self.session) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False)]
 			for x in parts:
 				if not access(x[1], F_OK | R_OK | W_OK) or x[1] == '/':
 					parts.remove(x)

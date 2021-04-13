@@ -234,7 +234,7 @@ class FlashImage(Screen):
 			self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 		else:
 			choices = [(_("Yes, with backup"), "with backup"), (_("Yes, without backup"), "without backup"), (_("No, do not flash image"), False)]
-			self.session.openWithCallback(self.checkMedia, MessageBox, self.message , list=choices, default=False, simple=True)
+			self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=False, simple=True)
 
 	def checkMedia(self, retval):
 		if retval:

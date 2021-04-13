@@ -73,7 +73,7 @@ class MMIDialog(Screen):
 		self["title"] = Label("")
 		self["subtitle"] = Label("")
 		self["bottom"] = Label("")
-		self["entries"] = ConfigList([ ])
+		self["entries"] = ConfigList([])
 
 		self["actions"] = NumberActionMap(["SetupActions", "MenuActions"],
 			{
@@ -113,7 +113,7 @@ class MMIDialog(Screen):
 
 	def addEntry(self, list, entry):
 		if entry[0] == "TEXT":		#handle every item (text / pin only?)
-			list.append( (entry[1], ConfigNothing(), entry[2]) )
+			list.append((entry[1], ConfigNothing(), entry[2]))
 		if entry[0] == "PIN":
 			pinlength = entry[1]
 			if entry[3] == 1:
@@ -124,7 +124,7 @@ class MMIDialog(Screen):
 				x = ConfigPIN(0, len=pinlength)
 			x.addEndNotifier(self.pinEntered)
 			self["subtitle"].setText(entry[2])
-			list.append( getConfigListEntry("", x) )
+			list.append(getConfigListEntry("", x))
 			self["bottom"].setText(_("please press OK when ready"))
 
 	def pinEntered(self, value):
@@ -187,7 +187,7 @@ class MMIDialog(Screen):
 		elif self.tag == "WAIT":
 			self.handler.stopMMI(self.slotid)
 			self.closeMmi()
-		elif self.tag in ( "MENU", "LIST" ):
+		elif self.tag in ("MENU", "LIST"):
 			print "cancel list"
 			self.handler.answerMenu(self.slotid, 0)
 			self.showWait()
@@ -238,8 +238,8 @@ class MMIDialog(Screen):
 		self["title"].setText("")
 		self["subtitle"].setText("")
 		self["bottom"].setText("")
-		list = [ ]
-		list.append( (self.wait_text, ConfigNothing()) )
+		list = []
+		list.append((self.wait_text, ConfigNothing()))
 		self.updateList(list)
 
 	def showScreen(self):
@@ -249,7 +249,7 @@ class MMIDialog(Screen):
 		else:
 			screen = self.handler.getMMIScreen(self.slotid)
 
-		list = [ ]
+		list = []
 
 		self.timer.stop()
 		if len(screen) > 0 and screen[0][0] == "CLOSE":
@@ -313,8 +313,8 @@ class CiMessageHandler:
 	def __init__(self):
 		self.session = None
 		self.auto_close = False
-		self.ci = { }
-		self.dlgs = { }
+		self.ci = {}
+		self.dlgs = {}
 		eDVBCI_UI.getInstance().ciStateChanged.get().append(self.ciStateChanged)
 
 	def setSession(self, session):
@@ -381,8 +381,8 @@ class CiSelection(Screen):
 			},-1)
 
 		self.dlg = None
-		self.state = { }
-		self.list = [ ]
+		self.state = {}
+		self.list = []
 		self["key_blue"] = Label(_("CI assignment"))
 		self["key_blue"].hide()
 		self["pixmap_blue"] = Pixmap()
@@ -530,9 +530,9 @@ class CiSelection(Screen):
 class PermanentPinEntry(Screen, ConfigListScreen):
 	def __init__(self, session, pin, pin_slot):
 		Screen.__init__(self, session)
-		self.skinName = ["ParentalControlChangePin", "Setup" ]
+		self.skinName = ["ParentalControlChangePin", "Setup"]
 		self.setup_title = _("Enter pin code")
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 
 		self.slot = pin_slot
 		self.pin = pin
@@ -614,8 +614,8 @@ class CIselectMainMenu(Screen):
 		print "[CI_Wizzard] FOUND %d CI Slots " % NUM_CI
 
 		self.dlg = None
-		self.state = { }
-		self.list = [ ]
+		self.state = {}
+		self.list = []
 		if NUM_CI > 0:
 			for slot in range(NUM_CI):
 				state = eDVBCI_UI.getInstance().getState(slot)
@@ -624,9 +624,9 @@ class CIselectMainMenu(Screen):
 						appname = _("Slot %d") %(slot+1) + " - " + _("init modules")
 					elif state == 2:
 						appname = _("Slot %d") %(slot+1) + " - " + eDVBCI_UI.getInstance().getAppName(slot)
-					self.list.append( (appname, ConfigNothing(), 0, slot) )
+					self.list.append((appname, ConfigNothing(), 0, slot))
 		else:
-			self.list.append( (_("no CI slots found") , ConfigNothing(), 1, -1) )
+			self.list.append((_("no CI slots found"), ConfigNothing(), 1, -1))
 
 		menuList = ConfigList(self.list)
 		menuList.list = self.list
@@ -737,10 +737,10 @@ class CIconfigMenu(Screen):
 		self.delete()
 
 	def greenPressed(self):
-		self.session.openWithCallback( self.finishedChannelSelection, myChannelSelection, None)
+		self.session.openWithCallback(self.finishedChannelSelection, myChannelSelection, None)
 
 	def yellowPressed(self):
-		self.session.openWithCallback( self.finishedProviderSelection, myProviderSelection, None)
+		self.session.openWithCallback(self.finishedProviderSelection, myProviderSelection, None)
 
 	def bluePressed(self):
 		self.session.openWithCallback(self.finishedCAidSelection, CAidSelect, self.caidlist, self.selectedcaid)
@@ -771,7 +771,7 @@ class CIconfigMenu(Screen):
 			if find_in_list(self.servicelist, service_name, 0)==False:
 				split_ref=service_ref.ref.toString().split(":")
 				if split_ref[0] == "1":#== dvb service und nicht muell von None
-					self.servicelist.append( (service_name , ConfigNothing(), 0, service_ref.ref.toString()) )
+					self.servicelist.append((service_name, ConfigNothing(), 0, service_ref.ref.toString()))
 					self["ServiceList"].l.setList(self.servicelist)
 					self.setServiceListInfo()
 
@@ -780,7 +780,7 @@ class CIconfigMenu(Screen):
 			name=args[0]
 			dvbnamespace=args[1]
 			if find_in_list(self.servicelist, name, 0)==False:
-				self.servicelist.append( (name , ConfigNothing(), 1, dvbnamespace) )
+				self.servicelist.append((name, ConfigNothing(), 1, dvbnamespace))
 				self["ServiceList"].l.setList(self.servicelist)
 				self.setServiceListInfo()
 
@@ -857,7 +857,7 @@ class CIconfigMenu(Screen):
 				for service in  slot.findall("service"):
 					read_service_name = service.get("name").encode("UTF-8")
 					read_service_ref = service.get("ref").encode("UTF-8")
-					self.read_services.append (read_service_ref)
+					self.read_services.append(read_service_ref)
 
 				for provider in  slot.findall("provider"):
 					read_provider_name = provider.get("name").encode("UTF-8")
@@ -1163,7 +1163,7 @@ def activate_all(session):
 
 					for service in slot.findall("service"):
 						read_service_ref = service.get("ref").encode("UTF-8")
-						read_services.append (read_service_ref)
+						read_services.append(read_service_ref)
 
 					for provider in slot.findall("provider"):
 						read_provider_name = provider.get("name").encode("UTF-8")

@@ -435,7 +435,7 @@ class MemoryInfoSkinParams(GUIComponent):
 
 	def applySkin(self, desktop, screen):
 		if self.skinAttributes is not None:
-			attribs = [ ]
+			attribs = []
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "rowsincolumn":
 					self.rows_in_column = int(value)

@@ -17,7 +17,7 @@ class GUISkin:
 		self["Title"] = StaticText()
 		self["screen_path"] = StaticText()
 		self.skin_title = ""
-		self.onLayoutFinish = [ ]
+		self.onLayoutFinish = []
 		self.summaries = CList()
 		self.instance = None
 		self.desktop = None

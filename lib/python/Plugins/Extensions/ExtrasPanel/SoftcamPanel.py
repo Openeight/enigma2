@@ -157,7 +157,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 
 		self.maxcount = count
 		
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.ReadMenu()
@@ -315,7 +315,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				if self.first == 0:
 					self.cam1sel.setValue(actcam)		
 				self["key_green"].setText(_("Restart"))
-				self["actifcam"].setText(_("active CAM 1: ") + actcam )
+				self["actifcam"].setText(_("active CAM 1: ") + actcam)
 				print '[SOFTCAM] set active cam 1 to: ' + actcam
 			else:
 				actcam = _("no CAM 1 active")
@@ -326,7 +326,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				actcam = self.mlist[oldcam2Index]
 				if self.first == 0:
 					self.cam2sel.setValue(actcam)
-				self["actifcam2"].setText(_("active CAM 2: ") + actcam )
+				self["actifcam2"].setText(_("active CAM 2: ") + actcam)
 				print '[SOFTCAM] set active cam 2 to: ' + actcam
 			else:
 				actcam2 = _("no CAM 2 active")
@@ -399,7 +399,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				tmpprov = line.split(':')
 				Prov = tmpprov[1].strip()
 				#// search peer in share.info only if share.info exists
-				if Caid <> '' and Prov <> '' and len(self.shareinfo) > 0 :
+				if Caid <> '' and Prov <> '' and len(self.shareinfo) > 0:
 					for x in self.shareinfo:
 						cel = x.split(' ')
 						#// search Boxid and Caid
@@ -477,7 +477,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				time.sleep(1) # was 5sec
 				t = 0
 				while t < 5:
-					p = command('pidof %s |wc -w' % oldcam )
+					p = command('pidof %s |wc -w' % oldcam)
 					if not p.isdigit():
 						p=0
 					if int(p) > 0:
@@ -495,7 +495,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				time.sleep(1) # was 5sec
 				t = 0
 				while t < 5:
-					p = command('pidof %s |wc -w' % oldcam2 )
+					p = command('pidof %s |wc -w' % oldcam2)
 					if not p.isdigit():
 						p=0
 					if int(p) > 0:
@@ -669,7 +669,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 		softcamfile.append('')
 		softcamfile.append('exit 0')
 
-		f = open( Adir, "w" )
+		f = open(Adir, "w")
 		for x in softcamfile:
 			f.writelines(x + '\n')
 		f.close()
@@ -682,7 +682,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 			self.container.execute('update-rc.d -f softcam.' + camname + ' defaults')
 		# Wait a few seconds
 		import time
-		time.sleep (3) 
+		time.sleep(3) 
 
 		# Start cam
 		if self.isCamrunning(emubin):
@@ -797,15 +797,15 @@ class ShowSoftcamPackages(Screen):
 			divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"))
 			if status == 'update':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/ExtrasPanel/pics/upgrade.png"))
-				self.statuslist.append(( _("Package list update"), '', _("Trying to download a new updatelist. Please wait..." ),'', statuspng, divpng ))
+				self.statuslist.append((_("Package list update"), '', _("Trying to download a new updatelist. Please wait..."),'', statuspng, divpng))
 				self['list'].setList(self.statuslist)
 			if status == 'list':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/ExtrasPanel/pics/upgrade.png"))
-				self.statuslist.append(( _("Package list"), '', _("Getting Softcam list. Please wait..." ),'', statuspng, divpng ))
+				self.statuslist.append((_("Package list"), '', _("Getting Softcam list. Please wait..."),'', statuspng, divpng))
 				self['list'].setList(self.statuslist)
 			elif status == 'error':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/ExtrasPanel/pics/remove.png"))
-				self.statuslist.append(( _("Error"), '', _("There was an error downloading the updatelist. Please try again." ),'', statuspng, divpng ))
+				self.statuslist.append((_("Error"), '', _("There was an error downloading the updatelist. Please try again."),'', statuspng, divpng))
 				self['list'].setList(self.statuslist)				
 
 	def startupdateList(self):

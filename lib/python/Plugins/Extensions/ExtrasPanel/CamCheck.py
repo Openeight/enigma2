@@ -21,7 +21,7 @@ def CamCheckStop():
 		print"CamCheck not running, so no need to stop it !! "
 
 def confPath():
-	search_dirs = [ "/usr", "/var", "/etc" ]
+	search_dirs = ["/usr", "/var", "/etc"]
 	sdirs = " ".join(search_dirs)
 	cmd = 'find %s -name "CCcam.cfg" | head -n 1' % sdirs
 	res = popen(cmd).read()
@@ -237,7 +237,7 @@ class CamCheckPoller:
 							self.container.execute(stop)
 							
 							import time
-							time.sleep (int(config.softcam.waittime.getValue()))
+							time.sleep(int(config.softcam.waittime.getValue()))
 							start = self.emuStart[indexcam2]
 							print "[CAMSTARTER] no CAM 2 active, starting " + start
 							system("echo %s Started cam 2 at: %s >> /tmp/camcheck.txt" % (start, datetime.now()))

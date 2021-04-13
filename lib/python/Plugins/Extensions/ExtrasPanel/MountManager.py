@@ -63,7 +63,7 @@ class DevicesMountPanel(Screen):
 		self['key_blue'] = Label(_("Mount"))
 		self['key_menu'] = Label(_("Setup Mounts"))
 		self['lab1'] = Label()
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.list = []
 		self.mbox = None
 		self.Console = None
@@ -410,7 +410,7 @@ class DevicesMountPanel(Screen):
 				mountdir = '/media/%s' % (devicemount)
 				if not path.exists(mountdir):
 					mkdir(mountdir, 0755)
-				system ('mount ' + device + ' /media/%s' % (devicemount))
+				system('mount ' + device + ' /media/%s' % (devicemount))
 				mountok = False
 				f = open('/proc/mounts', 'r')
 				for line in f.readlines():
@@ -430,7 +430,7 @@ class DevicesMountPanel(Screen):
 				self.device_uuid_tmp = self.device_uuid_tmp[1].replace('TYPE="ext2"','').replace('TYPE="ext3"','').replace('TYPE="ext4"','').replace('TYPE="ntfs"','').replace('TYPE="exfat"','').replace('TYPE="vfat"','').replace('"','')
 				self.device_uuid_tmp = self.device_uuid_tmp.replace('\n',"")
 				self.device_uuid = 'UUID=' + self.device_uuid_tmp
-				system ('mount ' + self.device_uuid)
+				system('mount ' + self.device_uuid)
 				mountok = False
 				f = open('/proc/mounts', 'r')
 				for line in f.readlines():
@@ -938,7 +938,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 				self.mountp = x[1].value
 				self.type = x[3]
 				self.Console.ePopen('umount -f /dev/%s 2>&1' % (self.device))
-				self.Console.ePopen("/sbin/blkid | grep " + self.device, self.add_fstab, [self.device, self.mountp] )
+				self.Console.ePopen("/sbin/blkid | grep " + self.device, self.add_fstab, [self.device, self.mountp])
 				self.Checktimer.stop()
 				self.Checktimer.start(2500, True)
 

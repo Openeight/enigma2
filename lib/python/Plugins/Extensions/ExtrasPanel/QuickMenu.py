@@ -625,11 +625,11 @@ class QuickMenu(Screen):
 		pass
 
 	def GetNetworkInterfaces(self):
-		self.adapters = [ (iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getAdapterList() ]
+		self.adapters = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getAdapterList()]
 		if not self.adapters:
-			self.adapters = [ (iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getConfiguredAdapters() ]
+			self.adapters = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getConfiguredAdapters()]
 		if len(self.adapters) == 0:
-			self.adapters = [ (iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getInstalledAdapters() ]
+			self.adapters = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getInstalledAdapters()]
 		self.activeInterface = None
 		for x in self.adapters:
 			if iNetwork.getAdapterAttribute(x[1], 'up') is True:

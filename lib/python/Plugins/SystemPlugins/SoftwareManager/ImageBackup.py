@@ -81,7 +81,7 @@ class ImageBackup(Screen):
 		self.saveImageList = imagedict
 		list = []
 		currentimageslot = getCurrentImage() or 1
-		print "[Image Backup] Current Image Slot %s, Imagelist %s"% ( currentimageslot, imagedict)
+		print "[Image Backup] Current Image Slot %s, Imagelist %s"% (currentimageslot, imagedict)
 		if imagedict:
 			for x in sorted(imagedict.keys()):
 				if imagedict[x]["imagename"] != _("Empty slot"):
@@ -331,7 +331,7 @@ class ImageBackup(Screen):
 
 				cmdlist.append('echo "' + _("Create:") + " kerneldump" + '"')
 				if SystemInfo["canMultiBoot"] or self.MTDKERNEL.startswith('mmcblk0'):
-					cmdlist.append("dd if=/dev/%s of=%s/%s" % (self.MTDKERNEL ,self.WORKDIR, self.KERNELBIN))
+					cmdlist.append("dd if=/dev/%s of=%s/%s" % (self.MTDKERNEL,self.WORKDIR, self.KERNELBIN))
 				else:
 					cmdlist.append("nanddump -a -f %s/vmlinux.gz /dev/%s" % (self.WORKDIR, self.MTDKERNEL))
 
@@ -402,7 +402,7 @@ class ImageBackup(Screen):
 				cmdlist.append('cp -f /usr/share/apploader.bin %s/apploader.bin' %(self.MAINDESTROOT))
 			else:
 				os.system('mv %s/%s %s/%s' %(self.WORKDIR,self.EMMCIMG, self.MAINDEST,self.EMMCIMG))
-		elif self.MODEL in ('viperslim','evoslimse','evoslimt2c', "novaip" , "zgemmai55" , "sf98", "xpeedlxpro",'evoslim','vipert2c'):
+		elif self.MODEL in ('viperslim','evoslimse','evoslimt2c', "novaip", "zgemmai55", "sf98", "xpeedlxpro",'evoslim','vipert2c'):
 			cmdlist.append('echo "This file forces the update." > %s/force' %self.MAINDEST)
 		elif SystemInfo["canMultiBoot"] and 'rootsubdir' in SystemInfo["canMultiBoot"][self.SLOT]:
 			cmdlist.append('echo "Rename the unforce_%s.txt to force_%s.txt and move it to the root of your usb-stick" > %s/force_%s_READ.ME' %(self.MACHINEBUILD, self.MACHINEBUILD, self.MAINDEST, self.MACHINEBUILD))

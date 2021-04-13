@@ -195,7 +195,7 @@ class doFlashImage(Screen):
 		<widget name="imageList" position="10,10" zPosition="1" size="450,450" font="Regular;20" scrollbarMode="showOnDemand" transparent="1" />
 	</screen>"""
 		
-	def __init__(self, session, online, list=None, mtdkernel=None, mtdrootfs=None ):
+	def __init__(self, session, online, list=None, mtdkernel=None, mtdrootfs=None):
 		Screen.__init__(self, session)
 		self.session = session
 
@@ -592,7 +592,7 @@ class doFlashImage(Screen):
 			if os.path.exists(flashTmp):
 				for file in os.listdir(flashTmp):
 					if file.find(".bin") > -1:
-						self.imagelist.insert( 0, str(flashTmp))
+						self.imagelist.insert(0, str(flashTmp))
 						break
 
 		self["imageList"].l.setList(self.imagelist)
@@ -642,7 +642,7 @@ class ImageDownloadTask(Task):
 		self.aborted = True
 
 	def download_progress(self, recvbytes, totalbytes):
-		if ( recvbytes - self.last_recvbytes  ) > 10000: # anti-flicker
+		if (recvbytes - self.last_recvbytes) > 10000: # anti-flicker
 			self.progress = int(100*(float(recvbytes)/float(totalbytes)))
 			self.name = _("Downloading") + ' ' + _("%d of %d kBytes") % (recvbytes/1024, totalbytes/1024)
 			self.last_recvbytes = recvbytes
