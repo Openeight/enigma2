@@ -99,9 +99,9 @@ class SoftcamPanel(ConfigListScreen, Screen):
 		self["key_yellow"] = Label(_("Refresh"))
 		self.partyfeed = os.path.exists("/etc/opkg/3rdparty-feed.conf") or os.path.exists("/etc/opkg/3rd-party-feed.conf")
 		if self.partyfeed:
-			self["key_blue"]= Label(_("Install"))
+			self["key_blue"] = Label(_("Install"))
 		else:
-			self["key_blue"]= Label(_("Exit"))
+			self["key_blue"] = Label(_("Exit"))
 		self["ecminfo"] = Label(_("No ECM info"))
 		self["actifcam"] = Label(_("no CAM 1 active"))
 		self["actifcam2"] = Label(_("no CAM 2 active"))
@@ -374,7 +374,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 
 	def read_shareinfo(self):
 		#// read share.info and put in list
-		self.shareinfo =[]
+		self.shareinfo = []
 		if os.path.exists('/tmp/share.info') is True:
 			s = open('/tmp/share.info')
 			for x in s.readlines():
@@ -388,12 +388,12 @@ class SoftcamPanel(ConfigListScreen, Screen):
 		Prov = ''
 		f = open(ecmpath)
 		for line in f.readlines():
-			line= line.replace('=', '')
-			line= line.replace(' ', '', 1)
+			line = line.replace('=', '')
+			line = line.replace(' ', '', 1)
 			#// search CaID
 			if line.find('ECM on CaID') > -1:
 				k = line.find('ECM on CaID') + 14
-				Caid = line[k:k+4]
+				Caid = line[k:k + 4]
 			#// search Boxid
 			if line.find('prov:') > -1:
 				tmpprov = line.split(':')
@@ -479,7 +479,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				while t < 5:
 					p = command('pidof %s |wc -w' % oldcam)
 					if not p.isdigit():
-						p=0
+						p = 0
 					if int(p) > 0:
 						self.container = eConsoleAppContainer()
 						self.container.execute('killall -9 ' + oldcam)
@@ -497,7 +497,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				while t < 5:
 					p = command('pidof %s |wc -w' % oldcam2)
 					if not p.isdigit():
-						p=0
+						p = 0
 					if int(p) > 0:
 						self.container = eConsoleAppContainer()
 						self.container.execute('killall -9 ' + oldcam2)
@@ -531,7 +531,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				if config.softcam.camstartMode.getValue() == "0":
 					self.Stopcam()
 
-				self.camIndex = self.cam1sel.getIndex() -1
+				self.camIndex = self.cam1sel.getIndex() - 1
 				self.cam2Index = self.cam2sel.getIndex() - 1
 				if self.camIndex >= 0:
 					actcam = self.cam1sel.getValue()
@@ -609,19 +609,19 @@ class SoftcamPanel(ConfigListScreen, Screen):
 	def isCamrunning(self, cam):
 		p = command('pidof ' + cam + ' |wc -w')
 		if not p.isdigit():
-			p=0
+			p = 0
 		if int(p) > 0:
 			return True
 		else:
 			return False
 
 	def checkBinName(self, binname, start):
-		print "[CHECKBINNAME] bin=%s ,start=%s" %(binname,start)
+		print "[CHECKBINNAME] bin=%s ,start=%s" % (binname,start)
 		if start.find(binname + ' ') > -1:
 			print "[CHECKBINNAME] OK"
 			return False
 		else:
-			if start[start.rfind('/')+1:] == binname:
+			if start[start.rfind('/') + 1:] == binname:
 				print "[CHECKBINNAME] OK"
 				return False
 			else:

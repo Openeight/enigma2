@@ -128,7 +128,7 @@ class DevicesMountPanel(Screen):
 			self.selectionChanged()
 			return
 		for line in f.readlines():
-			mount_list =[]
+			mount_list = []
 			parts = line.strip().split()
 			if not parts:
 				continue
@@ -458,7 +458,7 @@ class DevicesMountPanel(Screen):
 			print mountp
 			if mountp == _("None"):
 				return
-			message = _('Really unmount ') + device + _(" from ") +  mountp + " ?"
+			message = _('Really unmount ') + device + _(" from ") + mountp + " ?"
 			self.session.openWithCallback(self.UnmountAnswer, MessageBox, message, MessageBox.TYPE_YESNO)
 
 	def UnmountAnswer(self, answer):
@@ -701,7 +701,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 		except:
 			device2 = ''
 		try:
-			if device =='mmcblk0p1':
+			if device == 'mmcblk0p1':
 				device2 = 'mmcblk0'
 		except:
 			device2 = ''
@@ -924,7 +924,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 			else:
 				self.session.open(MessageBox, _("Error!\nThe same mount point!"), MessageBox.TYPE_ERROR, timeout=5)
 				return
-			message += '/dev/' + device + _(" as ") +  mountp + "\n"
+			message += '/dev/' + device + _(" as ") + mountp + "\n"
 		self.session.openWithCallback(self.saveMypointsAnswer, MessageBox, message, MessageBox.TYPE_YESNO)
 
 	def saveMypointsAnswer(self, answer):

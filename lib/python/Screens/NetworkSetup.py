@@ -1102,13 +1102,13 @@ class NetworkAdapterTest(Screen):
 
 	def updownhandler(self,direction):
 		if direction == 'up':
-			if self.activebutton >=2:
+			if self.activebutton >= 2:
 				self.activebutton -= 1
 			else:
 				self.activebutton = 6
 			self.setActiveButton(self.activebutton)
 		if direction == 'down':
-			if self.activebutton <=5:
+			if self.activebutton <= 5:
 				self.activebutton += 1
 			else:
 				self.activebutton = 1
@@ -1672,13 +1672,13 @@ class NetworkAfp(Screen):
 			self['labactive'].show()
 			self['labrun'].show()
 			self['key_green'].setText(_("Stop"))
-			status_summary= self['lab2'].text + ' ' + self['labrun'].text
+			status_summary = self['lab2'].text + ' ' + self['labrun'].text
 		else:
 			self['labrun'].hide()
 			self['labstop'].show()
 			self['labactive'].show()
 			self['key_green'].setText(_("Start"))
-			status_summary= self['lab2'].text + ' ' + self['labstop'].text
+			status_summary = self['lab2'].text + ' ' + self['labstop'].text
 		title = _("AFP Setup")
 		autostartstatus_summary = self['lab1'].text + ' ' + self['labactive'].text
 
@@ -1817,13 +1817,13 @@ class NetworkSABnzbd(Screen):
 			self['labactive'].show()
 			self['labrun'].show()
 			self['key_green'].setText(_("Stop"))
-			status_summary= self['lab2'].text + ' ' + self['labrun'].text
+			status_summary = self['lab2'].text + ' ' + self['labrun'].text
 		else:
 			self['labrun'].hide()
 			self['labstop'].show()
 			self['labactive'].show()
 			self['key_green'].setText(_("Start"))
-			status_summary= self['lab2'].text + ' ' + self['labstop'].text
+			status_summary = self['lab2'].text + ' ' + self['labstop'].text
 		title = _("SABnzbd Setup")
 		autostartstatus_summary = self['lab1'].text + ' ' + self['labactive'].text
 
@@ -1896,12 +1896,12 @@ class NetworkFtp(Screen):
 			self['labstop'].hide()
 			self['labrun'].show()
 			self['key_green'].setText(_("Disable"))
-			status_summary= self['lab2'].text + ' ' + self['labrun'].text
+			status_summary = self['lab2'].text + ' ' + self['labrun'].text
 		else:
 			self['labstop'].show()
 			self['labrun'].hide()
 			self['key_green'].setText(_("Enable"))
-			status_summary= self['lab2'].text + ' ' + self['labstop'].text
+			status_summary = self['lab2'].text + ' ' + self['labstop'].text
 		title = _("FTP Setup")
 		autostartstatus_summary = ""
 
@@ -1951,7 +1951,7 @@ class NetworkNfs(Screen):
 		elif ('wget returned 1' or 'wget returned 255' or '404 Not Found') in result:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Sorry feeds are down for maintenance, please try again later."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		else:
-			self.session.openWithCallback(self.InstallPackage,MessageBox,_('Your %s %s will be restarted after the installation of service\nReady to install %s ?')  % (getMachineBrand(), getMachineName(), self.service_name), MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.InstallPackage,MessageBox,_('Your %s %s will be restarted after the installation of service\nReady to install %s ?') % (getMachineBrand(), getMachineName(), self.service_name), MessageBox.TYPE_YESNO)
 
 	def InstallPackage(self, val):
 		if val:
@@ -2032,12 +2032,12 @@ class NetworkNfs(Screen):
 			self['labstop'].hide()
 			self['labrun'].show()
 			self['key_green'].setText(_("Stop"))
-			status_summary= self['lab2'].text + ' ' + self['labrun'].text
+			status_summary = self['lab2'].text + ' ' + self['labrun'].text
 		else:
 			self['labstop'].show()
 			self['labrun'].hide()
 			self['key_green'].setText(_("Start"))
-			status_summary= self['lab2'].text + ' ' + self['labstop'].text
+			status_summary = self['lab2'].text + ' ' + self['labstop'].text
 		title = _("NFS Setup")
 		autostartstatus_summary = self['lab1'].text + ' ' + self['labactive'].text
 
@@ -2176,12 +2176,12 @@ class NetworkOpenvpn(Screen):
 			self['labstop'].hide()
 			self['labrun'].show()
 			self['key_green'].setText(_("Stop"))
-			status_summary= self['lab2'].text + ' ' + self['labrun'].text
+			status_summary = self['lab2'].text + ' ' + self['labrun'].text
 		else:
 			self['labstop'].show()
 			self['labrun'].hide()
 			self['key_green'].setText(_("Start"))
-			status_summary= self['lab2'].text + ' ' + self['labstop'].text
+			status_summary = self['lab2'].text + ' ' + self['labstop'].text
 		title = _("OpenVpn Setup")
 		autostartstatus_summary = self['lab1'].text + ' ' + self['labactive'].text
 
@@ -2451,12 +2451,12 @@ class NetworkTelnet(Screen):
 			self['labstop'].hide()
 			self['labrun'].show()
 			self['key_green'].setText(_("Disable"))
-			status_summary= self['lab2'].text + ' ' + self['labrun'].text
+			status_summary = self['lab2'].text + ' ' + self['labrun'].text
 		else:
 			self['labstop'].show()
 			self['labrun'].hide()
 			self['key_green'].setText(_("Enable"))
-			status_summary= self['lab2'].text + ' ' + self['labstop'].text
+			status_summary = self['lab2'].text + ' ' + self['labstop'].text
 		title = _("Telnet Setup")
 		autostartstatus_summary = ""
 
@@ -2958,12 +2958,12 @@ class NetworkuShare(Screen):
 			self['labstop'].hide()
 			self['labrun'].show()
 			self['key_green'].setText(_("Stop"))
-			status_summary= self['status'].text + ' ' + self['labstop'].text
+			status_summary = self['status'].text + ' ' + self['labstop'].text
 		else:
 			self['labstop'].show()
 			self['labrun'].hide()
 			self['key_green'].setText(_("Start"))
-			status_summary= self['status'].text + ' ' + self['labstop'].text
+			status_summary = self['status'].text + ' ' + self['labstop'].text
 
 		if fileExists('/etc/ushare.conf'):
 			f = open('/etc/ushare.conf', 'r')
@@ -3066,8 +3066,8 @@ class NetworkuShareSetup(Screen, ConfigListScreen):
 		self.ushare_telnetport = NoSave(ConfigNumber())
 		self.ushare_web = NoSave(ConfigYesNo(default='True'))
 		self.ushare_telnet = NoSave(ConfigYesNo(default='True'))
-		self.ushare_xbox= NoSave(ConfigYesNo(default='True'))
-		self.ushare_ps3= NoSave(ConfigYesNo(default='True'))
+		self.ushare_xbox = NoSave(ConfigYesNo(default='True'))
+		self.ushare_ps3 = NoSave(ConfigYesNo(default='True'))
 		self.ushare_system = NoSave(ConfigSelection(default="dyndns@dyndns.org", choices=[("dyndns@dyndns.org", "dyndns@dyndns.org"), ("statdns@dyndns.org", "statdns@dyndns.org"), ("custom@dyndns.org", "custom@dyndns.org")]))
 
 		if fileExists('/etc/ushare.conf'):
@@ -3543,8 +3543,8 @@ class NetworkMiniDLNASetup(Screen, ConfigListScreen):
 		self.minidlna_serialno = NoSave(ConfigNumber())
 		self.minidlna_web = NoSave(ConfigYesNo(default='True'))
 		self.minidlna_inotify = NoSave(ConfigYesNo(default='True'))
-		self.minidlna_tivo= NoSave(ConfigYesNo(default='True'))
-		self.minidlna_strictdlna= NoSave(ConfigYesNo(default='True'))
+		self.minidlna_tivo = NoSave(ConfigYesNo(default='True'))
+		self.minidlna_strictdlna = NoSave(ConfigYesNo(default='True'))
 
 		if fileExists('/etc/minidlna.conf'):
 			f = open('/etc/minidlna.conf', 'r')

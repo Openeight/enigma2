@@ -245,7 +245,7 @@ class Getipklist(Screen):
                             #   state = 0 not installed 1 installed
                                list.append(RSListEntry(remname, state))
                                
-                               icount = icount+1
+                               icount = icount + 1
 
 		       self["list"].setList(list)
 		       print 'self["list"] A =', self["list"] 
@@ -356,7 +356,7 @@ class Getipk(Screen):
 
     def okClicked(self):
                 plug = self.ipk
-                title = _("Installing addon %s" %(plug))
+                title = _("Installing addon %s" % (plug))
                 cmd = self.cmd1 + " && " + self.cmd2 + " && " + self.cmd3
                 self.session.open(Console,_(title),[cmd])
 #                self.endinstall()
@@ -372,7 +372,7 @@ class Getipk(Screen):
     def install(self):
                        cmd = "opkg install --force-overwrite /tmp/" + self.ipk + ">/tmp/ipk.log"
                        print "cmd =", cmd
-                       title = _("Installing addon %s" %(plug))
+                       title = _("Installing addon %s" % (plug))
                        self.session.open(Console,_(title),[cmd])
 #                       self.viewLog()
                        self.endinstall()
@@ -399,25 +399,25 @@ class Getipk(Screen):
                 self.endinstall()
 
     def endinstall(self):
-                path="/tmp"
+                path = "/tmp"
                 tmplist = []
                 ipkname = 0  
-                tmplist=os.listdir(path)
+                tmplist = os.listdir(path)
                 print "files in /tmp", tmplist
                 icount = 0
                 for name in tmplist:
                        nipk = tmplist[icount]
-                       if (nipk[-3:]=="ipk"):
+                       if (nipk[-3:] == "ipk"):
                               ipkname = nipk
-                       icount = icount+1       
+                       icount = icount + 1       
 
                 if ipkname != 0:               
                        print "endinstall ipk name =", ipkname 
                        ipos = ipkname.find("_")
                        remname = ipkname[:ipos]
                        print "endinstall remname =", remname
-                       f=open('/etc/ipklist_installed', 'a')
-                       f1= remname + "\n"
+                       f = open('/etc/ipklist_installed', 'a')
+                       f1 = remname + "\n"
                        f.write(f1)
                        cmd = "rm /tmp/*.ipk"
                        os.system(cmd)                 
@@ -526,25 +526,25 @@ class Getipk2(Screen):
                 self.endinstall()
 
     def endinstall(self):
-                path="/tmp"
+                path = "/tmp"
                 tmplist = []
                 ipkname = 0  
-                tmplist=os.listdir(path)
+                tmplist = os.listdir(path)
                 print "files in /tmp", tmplist
                 icount = 0
                 for name in tmplist:
                        nipk = tmplist[icount]
-                       if (nipk[-3:]=="ipk"):
+                       if (nipk[-3:] == "ipk"):
                               ipkname = nipk
-                       icount = icount+1       
+                       icount = icount + 1       
 
                 if ipkname != 0:               
                        print "ipk name =", ipkname 
                        ipos = ipkname.find("_")
                        remname = ipkname[:ipos]
                        print "remname =", remname
-                       f=open('/etc/ipklist_installed', 'a')
-                       f1= remname + "\n"
+                       f = open('/etc/ipklist_installed', 'a')
+                       f1 = remname + "\n"
                        f.write(f1)
                        cmd = "rm /tmp/*.ipk"
                        os.system(cmd)                 
@@ -576,13 +576,13 @@ class downloadTask(Task):
 	def processOutput(self, data):
 		try:
 			if data.endswith('%)'):
-				startpos = data.rfind("sec (")+5
+				startpos = data.rfind("sec (") + 5
 				if startpos and startpos != -1:
 					self.progress = int(float(data[startpos:-4]))
 			elif data.find('%') != -1:
 				tmpvalue = data[:data.find("%")]
 				tmpvalue = tmpvalue[tmpvalue.rfind(" "):].strip()
-				tmpvalue = tmpvalue[tmpvalue.rfind("(")+1:].strip()
+				tmpvalue = tmpvalue[tmpvalue.rfind("(") + 1:].strip()
 				self.progress = int(float(tmpvalue))
 			else:
 				Task.processOutput(self, data)

@@ -36,7 +36,7 @@ ofgwritePath = '/usr/bin/ofgwrite'
 def Freespace(dev):
 	statdev = os.statvfs(dev)
 	space = (statdev.f_bavail * statdev.f_frsize) / 1024
-	print "[Flash Online] Free space on %s = %i kilobytes" %(dev, space)
+	print "[Flash Online] Free space on %s = %i kilobytes" % (dev, space)
 	return space
 
 class FlashOnline(Screen):
@@ -147,20 +147,20 @@ class FlashOnline(Screen):
 				cmdline = self.read_startup("/boot/" + self.list[self.selection]).split("=",1)[1].split(" ",1)[0]
 		cmdline = cmdline.lstrip("/dev/")
 		self.MTDROOTFS = cmdline
-		self.MTDKERNEL = cmdline[:-1] + str(int(cmdline[-1:]) -1)
+		self.MTDKERNEL = cmdline[:-1] + str(int(cmdline[-1:]) - 1)
 		print "[Flash Online] kernel device: ",self.MTDKERNEL
 		print "[Flash Online] rootfsdevice: ",self.MTDROOTFS
 
 	def read_startup(self, FILE):
 		file = FILE
 		with open(file, 'r') as myfile:
-			data=myfile.read().replace('\n', '')
+			data = myfile.read().replace('\n', '')
 		myfile.close()
 		return data
 
 	def find_rootfs_dev(self, file):
 		startup_content = self.read_startup("/boot/" + file)
-		return startup_content[startup_content.find("root=")+5:].split()[0]
+		return startup_content[startup_content.find("root=") + 5:].split()[0]
 
 	def list_files(self, PATH):
 		files = []
@@ -302,7 +302,7 @@ class doFlashImage(Screen):
 				tmpStatus = _("yellow")
 			elif '2' in tmpStatus:
 				tmpStatus = _("red")
-			self.session.open(MessageBox, _("Traffic light state is '%s' - please use an another image.") %tmpStatus.upper(), type=MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Traffic light state is '%s' - please use an another image.") % tmpStatus.upper(), type=MessageBox.TYPE_ERROR)
 			return False
 
 	def startInstallOnline(self, ret=None):
@@ -342,7 +342,7 @@ class doFlashImage(Screen):
 	def flashWithPostFlashAction(self, ret=True):
 		if ret:
 			print "flashWithPostFlashAction"
-			title =_("Please select what to do after flashing the image:\n(In addition, if it exists, a local script will be executed as well at /media/hdd/images/config/myrestore.sh)")
+			title = _("Please select what to do after flashing the image:\n(In addition, if it exists, a local script will be executed as well at /media/hdd/images/config/myrestore.sh)")
 			list = ((_("Flash and start installation wizard"), "wizard"),
 			(_("Flash and restore settings and no plugins"), "restoresettingsnoplugin"),
 			(_("Flash and restore settings and selected plugins (ask user)"), "restoresettings"),
@@ -365,7 +365,7 @@ class doFlashImage(Screen):
 		if os.path.exists('/media/hdd/images/config/noplugins'):
 			noPlugins = True
 
-		if 	Settings and noPlugins:
+		if Settings and noPlugins:
 			index = 1
 		elif Settings and not AllPlugins and not noPlugins:
 			index = 2
@@ -376,17 +376,17 @@ class doFlashImage(Screen):
 
 	def postFlashActionCallback(self, answer):
 		print "postFlashActionCallback"
-		restoreSettings   = False
+		restoreSettings = False
 		restoreAllPlugins = False
 		restoreSettingsnoPlugin = False
 		if answer is not None:
 			if answer[1] == "restoresettings":
-				restoreSettings   = True
+				restoreSettings = True
 			if answer[1] == "restoresettingsnoplugin":
 				restoreSettings = True
 				restoreSettingsnoPlugin = True
 			if answer[1] == "restoresettingsandallplugins":
-				restoreSettings   = True
+				restoreSettings = True
 				restoreAllPlugins = True
 			if restoreSettings:
 				self.SaveEPG()
@@ -431,7 +431,7 @@ class doFlashImage(Screen):
 			self.show()
 
 	def unzip_image(self, filename, path):
-		print "Unzip %s to %s" %(filename,path)
+		print "Unzip %s to %s" % (filename,path)
 		self.session.openWithCallback(self.cmdFinished, Console, title=_("Unzipping files, Please wait ..."), cmdlist=['unzip ' + filename + ' -o -d ' + path, "sleep 3"], closeOnSuccess=True)
 
 	def cmdFinished(self):
@@ -479,8 +479,8 @@ class doFlashImage(Screen):
 	def prepair_flashtmp(self, tmpPath):
 		if os.path.exists(flashTmp):
 			flashTmpold = flashTmp + 'old'
-			os.system('mv %s %s' %(flashTmp, flashTmpold))
-			os.system('rm -rf %s' %flashTmpold)
+			os.system('mv %s %s' % (flashTmp, flashTmpold))
+			os.system('rm -rf %s' % flashTmpold)
 		if not os.path.exists(flashTmp):
 			os.mkdir(flashTmp)
 		kernel = True
@@ -490,12 +490,12 @@ class doFlashImage(Screen):
 			for name in files:
 				if name.find('kernel') > -1 and name.endswith('.bin') and kernel:
 					binfile = os.path.join(path, name)
-					dest = flashTmp + '/%s' %KERNELBIN
+					dest = flashTmp + '/%s' % KERNELBIN
 					shutil.copyfile(binfile, dest)
 					kernel = False
 				elif name.find('root') > -1 and (name.endswith('.bin') or name.endswith('.jffs2') or name.endswith('.bz2')) and rootfs:
 					binfile = os.path.join(path, name)
-					dest = flashTmp + '/%s' %ROOTFSBIN
+					dest = flashTmp + '/%s' % ROOTFSBIN
 					shutil.copyfile(binfile, dest)
 					rootfs = False
 					
@@ -577,11 +577,11 @@ class doFlashImage(Screen):
 				if self.feed == "openeight":
 					if line.find("/images/%s/" % box) > -1:
 						t = line.find("/images/%s/" % box)
-						self.imagelist.append(line[t+tt+9:t+tt+tt+40])
+						self.imagelist.append(line[t + tt + 9:t + tt + tt + 40])
 				else:
 					if line.find("<a href='%s/" % box) > -1:
 						t = line.find("<a href='%s/" % box)
-						self.imagelist.append(line[t+tt+10:t+tt+tt+39])
+						self.imagelist.append(line[t + tt + 10:t + tt + tt + 39])
 		else:
 			self["key_blue"].setText(_("Delete"))
 			self["key_yellow"].setText(_("Devices"))
@@ -605,7 +605,7 @@ class doFlashImage(Screen):
 
 class ImageDownloadJob(Job):
 	def __init__(self, url, filename, file):
-		Job.__init__(self, _("Downloading %s") %file)
+		Job.__init__(self, _("Downloading %s") % file)
 		ImageDownloadTask(self, url, filename)
 
 class DownloaderPostcondition(Condition):
@@ -643,8 +643,8 @@ class ImageDownloadTask(Task):
 
 	def download_progress(self, recvbytes, totalbytes):
 		if (recvbytes - self.last_recvbytes) > 10000: # anti-flicker
-			self.progress = int(100*(float(recvbytes)/float(totalbytes)))
-			self.name = _("Downloading") + ' ' + _("%d of %d kBytes") % (recvbytes/1024, totalbytes/1024)
+			self.progress = int(100 * (float(recvbytes) / float(totalbytes)))
+			self.name = _("Downloading") + ' ' + _("%d of %d kBytes") % (recvbytes / 1024, totalbytes / 1024)
 			self.last_recvbytes = recvbytes
 
 	def download_failed(self, failure_instance=None, error_message=""):

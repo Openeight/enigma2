@@ -46,14 +46,14 @@ def filter(names, pat):
     """Return the subset of the list NAMES that match PAT"""
     import os
     import posixpath
-    result=[]
-    pat=os.path.normcase(pat)
+    result = []
+    pat = os.path.normcase(pat)
     if not pat in _cache:
         res = translate(pat)
         if len(_cache) >= _MAXCACHE:
             _cache.clear()
         _cache[pat] = re.compile(res)
-    match=_cache[pat].match
+    match = _cache[pat].match
     if os.path is posixpath:
         # normcase on posix is NOP. Optimize it away from the loop.
         for name in names:
@@ -89,7 +89,7 @@ def translate(pat):
     res = ''
     while i < n:
         c = pat[i]
-        i = i+1
+        i = i + 1
         if c == '*':
             res = res + '.*'
         elif c == '?':
@@ -97,16 +97,16 @@ def translate(pat):
         elif c == '[':
             j = i
             if j < n and pat[j] == '!':
-                j = j+1
+                j = j + 1
             if j < n and pat[j] == ']':
-                j = j+1
+                j = j + 1
             while j < n and pat[j] != ']':
-                j = j+1
+                j = j + 1
             if j >= n:
                 res = res + '\\['
             else:
                 stuff = pat[i:j].replace('\\','\\\\')
-                i = j+1
+                i = j + 1
                 if stuff[0] == '!':
                     stuff = '^' + stuff[1:]
                 elif stuff[0] == '^':

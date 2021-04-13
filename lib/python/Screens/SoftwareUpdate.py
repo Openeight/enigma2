@@ -73,7 +73,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 
 	def isProtected(self):
 		return config.ParentalControl.setuppinactive.value and\
-			(not config.ParentalControl.config_sections.main_menu.value and not config.ParentalControl.config_sections.configuration.value  or hasattr(self.session, 'infobar') and self.session.infobar is None) and\
+			(not config.ParentalControl.config_sections.main_menu.value and not config.ParentalControl.config_sections.configuration.value or hasattr(self.session, 'infobar') and self.session.infobar is None) and\
 			config.ParentalControl.config_sections.software_update.value
 
 	def checkTraficLight(self):
@@ -123,11 +123,11 @@ class UpdatePlugin(Screen, ProtectedScreen):
 					elif 'en_EN' in message:
 						message = message['en_EN']
 					else:
-						message =  _("The current image might not be stable.\nFor more information see %s.") % ("openpli.org")
+						message = _("The current image might not be stable.\nFor more information see %s.") % ("openpli.org")
 
 			except Exception, e:
 				print "[SoftwareUpdate] status error: ", str(e)
-				message =  _("The current image might not be stable.\nFor more information see %s.") % ("openpli.org")
+				message = _("The current image might not be stable.\nFor more information see %s.") % ("openpli.org")
 
 		# or display a generic warning if fetching failed
 		else:
@@ -260,7 +260,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 					error = _("No updates available. Please try again later.")
 				if self.updating:
 					error = _("Update failed. Your receiver does not have a working internet connection.")
-				self.status.setText(_("Error") +  " - " + error)
+				self.status.setText(_("Error") + " - " + error)
 		elif event == OpkgComponent.EVENT_LISTITEM:
 			if 'enigma2-plugin-settings-' in param[0] and self.channellist_only > 0:
 				self.channellist_name = param[0]

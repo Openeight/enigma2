@@ -405,7 +405,7 @@ class RestoreScreen(Screen, ConfigListScreen):
 			self.restartGUI()
 
 	def restartGUI(self, ret=None):
-		self.session.open(Console, title=_("Your %s %s will Reboot...")% (getMachineBrand(), getMachineName()), cmdlist=["killall -9 enigma2"])
+		self.session.open(Console, title=_("Your %s %s will Reboot...") % (getMachineBrand(), getMachineName()), cmdlist=["killall -9 enigma2"])
 
 	def runAsync(self, finished_cb):
 		self.doRestore()

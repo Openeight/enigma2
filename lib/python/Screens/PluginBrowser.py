@@ -300,8 +300,8 @@ class PluginBrowser(Screen, ProtectedScreen):
 		if config.usage.menu_show_numbers.value in ("menu&plugins", "plugins") or showHelp:
 			for x in enumerate(self.list):
 				tmp = list(x[1][1])
-				tmp[7] = "%s %s" % (x[0]+1, tmp[7])
-				x[1][1]=tuple(tmp)
+				tmp[7] = "%s %s" % (x[0] + 1, tmp[7])
+				x[1][1] = tuple(tmp)
 		self["list"].l.setList(self.list)
 
 	def showHelp(self):
@@ -374,11 +374,11 @@ class PluginDownloadBrowser(Screen):
 		if os.path.isfile('/usr/bin/opkg'):
 			self.opkg = '/usr/bin/opkg'
 			self.opkg_install = self.opkg + ' install --force-overwrite'
-			self.opkg_remove =  self.opkg + ' remove --autoremove --force-depends'
+			self.opkg_remove = self.opkg + ' remove --autoremove --force-depends'
 		else:
 			self.opkg = 'opkg'
 			self.opkg_install = 'opkg install --force-overwrite -force-defaults'
-			self.opkg_remove =  self.opkg + ' remove'
+			self.opkg_remove = self.opkg + ' remove'
 
 	def createPluginFilter(self):
 		#Create Plugin Filter
@@ -431,10 +431,10 @@ class PluginDownloadBrowser(Screen):
 			self.updateList()
 		else:
 			if self.type == self.DOWNLOAD:
-				mbox=self.session.openWithCallback(self.runInstall, MessageBox, _("Do you really want to download the plugin \"%s\"?") % sel.name)
+				mbox = self.session.openWithCallback(self.runInstall, MessageBox, _("Do you really want to download the plugin \"%s\"?") % sel.name)
 				mbox.setTitle(_("Download plugins"))
 			elif self.type == self.REMOVE:
-				mbox=self.session.openWithCallback(self.runInstall, MessageBox, _("Do you really want to remove the plugin \"%s\"?") % sel.name, default=False)
+				mbox = self.session.openWithCallback(self.runInstall, MessageBox, _("Do you really want to remove the plugin \"%s\"?") % sel.name, default=False)
 				mbox.setTitle(_("Remove plugins"))
 
 	def requestClose(self):
@@ -739,7 +739,7 @@ class PluginFilter(ConfigListScreen, Screen):
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["status"] = StaticText()
-		self["labelExitsave"] = Label("[Exit] = " +_("Cancel") +"              [Ok] =" +_("Save"))
+		self["labelExitsave"] = Label("[Exit] = " + _("Cancel") + "              [Ok] =" + _("Save"))
 
 		self.onChangedEntry = []
 		self.list = []

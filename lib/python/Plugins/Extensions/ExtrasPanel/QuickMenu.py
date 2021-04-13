@@ -694,8 +694,8 @@ def QuickMenuEntryComponent(name, description, long_description=None, width=540)
 	if sz_w and sz_w == 1920:
 		width *= 1.5
 		return [_(name),
-		MultiContentEntryText(pos=(90, 2), size=(width-90, 40), font=0, text=_(name)),
-		MultiContentEntryText(pos=(90, 42), size=(width-90, 30), font=1, text=_(description)),
+		MultiContentEntryText(pos=(90, 2), size=(width - 90, 40), font=0, text=_(name)),
+		MultiContentEntryText(pos=(90, 42), size=(width - 90, 30), font=1, text=_(description)),
 		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), flags=BT_SCALE, png=png),
 		_(long_description)]
 	elif sz_w > 720:
@@ -706,8 +706,8 @@ def QuickMenuEntryComponent(name, description, long_description=None, width=540)
 		_(long_description)]
 	else:
 		return [_(name),
-		MultiContentEntryText(pos=(60, 3), size=(width-60, 25), font=0, text=_(name)),
-		MultiContentEntryText(pos=(60, 25), size=(width-60, 20), font=1, text=_(description)),
+		MultiContentEntryText(pos=(60, 3), size=(width - 60, 25), font=0, text=_(name)),
+		MultiContentEntryText(pos=(60, 25), size=(width - 60, 20), font=1, text=_(description)),
 		MultiContentEntryPixmapAlphaTest(pos=(10, 5), size=(40, 40), png=png),
 		_(long_description)]
 
@@ -717,8 +717,8 @@ def QuickSubMenuEntryComponent(name, description, long_description=None, width=5
 	if sz_w and sz_w == 1920:
 		width *= 1.5
 		return [_(name),
-		MultiContentEntryText(pos=(15, 2), size=(width-15, 40), font=0, text=_(name)),
-		MultiContentEntryText(pos=(15, 42), size=(width-15, 30), font=1, text=_(description)),
+		MultiContentEntryText(pos=(15, 2), size=(width - 15, 40), font=0, text=_(name)),
+		MultiContentEntryText(pos=(15, 42), size=(width - 15, 30), font=1, text=_(description)),
 		_(long_description)]
 	elif sz_w > 720:
 		return [_(name),
@@ -727,8 +727,8 @@ def QuickSubMenuEntryComponent(name, description, long_description=None, width=5
 		_(long_description)]
 	else:
 		return [_(name),
-		MultiContentEntryText(pos=(10, 3), size=(width-10, 25), font=0, text=_(name)),
-		MultiContentEntryText(pos=(10, 25), size=(width-10, 20), font=1, text=_(description)),
+		MultiContentEntryText(pos=(10, 3), size=(width - 10, 25), font=0, text=_(name)),
+		MultiContentEntryText(pos=(10, 25), size=(width - 10, 20), font=1, text=_(description)),
 		_(long_description)]
 
 

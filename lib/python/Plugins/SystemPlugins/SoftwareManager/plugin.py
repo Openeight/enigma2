@@ -147,7 +147,7 @@ class UpdatePluginMenu(Screen):
 			self.list.append(("backup-image", _("Backup Image"), _("Backup your running %s %s image to HDD or USB.") % (getMachineBrand(), getMachineName()) + self.oktext, None))
 			self.list.append(("system-backup", _("Backup system settings"), _("Backup your receiver settings.") + self.oktext + "\n\n" + self.infotext, None))
 			self.list.append(("system-restore",_("Restore system settings"), _("Restore your receiver settings.") + self.oktext, None))
-			self.list.append(("opkg-install", _("Install local extension"),  _("Scan for local extensions and install them.") + self.oktext, None))
+			self.list.append(("opkg-install", _("Install local extension"), _("Scan for local extensions and install them.") + self.oktext, None))
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_SOFTWAREMANAGER):
 				if "SoftwareSupported" in p.__call__:
 					callFnc = p.__call__["SoftwareSupported"](None)
@@ -165,8 +165,8 @@ class UpdatePluginMenu(Screen):
 				self.list.append(("advanced", _("Advanced options"), _("Advanced options and settings.") + self.oktext, None))
 		elif self.menu == 1:
 			self.list.append(("advancedrestore", _("Advanced restore"), _("Restore your backups by date.") + self.oktext, None))
-			self.list.append(("backuplocation", _("Select backup location"),  _("Select your backup device.\nCurrent device: ") + config.plugins.configurationbackup.backuplocation.getValue() + self.oktext, None))
-			self.list.append(("backupfiles", _("Select backup files"),  _("Select files for backup.") + self.oktext + "\n\n" + self.infotext, None))
+			self.list.append(("backuplocation", _("Select backup location"), _("Select your backup device.\nCurrent device: ") + config.plugins.configurationbackup.backuplocation.getValue() + self.oktext, None))
+			self.list.append(("backupfiles", _("Select backup files"), _("Select files for backup.") + self.oktext + "\n\n" + self.infotext, None))
 			if config.usage.setup_level.index >= 2: # expert+
 				self.list.append(("opkg-manager", _("Packet management"), _("View, install and remove available or installed packages.") + self.oktext, None))
 			self.list.append(("opkg-source",_("Select update source"), _("Edit the update source address.") + self.oktext, None))
@@ -302,7 +302,7 @@ class UpdatePluginMenu(Screen):
 				elif (currentEntry == "backuplocation"):
 					parts = [(r.description, r.mountpoint, self.session) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False)]
 					for x in parts:
-						if not os.access(x[1], os.F_OK|os.R_OK|os.W_OK) or x[1] == '/':
+						if not os.access(x[1], os.F_OK | os.R_OK | os.W_OK) or x[1] == '/':
 							parts.remove(x)
 					if len(parts):
 						self.session.openWithCallback(self.backuplocation_choosen, ChoiceBox, title=_("Please select medium to use as backup location"), list=parts)
@@ -968,7 +968,7 @@ class PluginManager(Screen, PackageInfoHandler):
 	def runExecuteFinished(self):
 		self.reloadPluginlist()
 		if plugins.restartRequired or self.restartRequired:
-			self.session.openWithCallback(self.ExecuteReboot, MessageBox, _("Installation or removal has completed.") + "\n" +_("Do you want to reboot your receiver?"), MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.ExecuteReboot, MessageBox, _("Installation or removal has completed.") + "\n" + _("Do you want to reboot your receiver?"), MessageBox.TYPE_YESNO)
 		else:
 			self.selectedFiles = []
 			self.restartRequired = False
@@ -1198,8 +1198,8 @@ class PluginDetails(Screen, PackageInfoHandler):
 			"red": self.exit,
 			"green": self.go,
 			"up": self.pageUp,
-			"down":	self.pageDown,
-			"left":	self.pageUp,
+			"down": self.pageDown,
+			"left": self.pageUp,
 			"right": self.pageDown,
 		}, -1)
 
@@ -1417,7 +1417,7 @@ class UpdatePlugin(Screen):
 		self.CheckDateDone = True
 		tmpdate = getEnigmaVersionString()
 		imageDate = date(int(tmpdate[0:4]), int(tmpdate[5:7]), int(tmpdate[8:10]))
-		datedelay = imageDate +  timedelta(days=180)
+		datedelay = imageDate + timedelta(days=180)
 		message = _("Your image is out of date!\n\n"
 				"After such a long time, there is a risk that your %s %s will not\n"
 				"boot after online-update, or will show disfunction in running Image.\n\n"
@@ -1430,7 +1430,7 @@ class UpdatePlugin(Screen):
 			self.activityTimer.start(100, False)
 			self.opkg.startCmd(OpkgComponent.CMD_UPGRADE_LIST)
 		else:
-			print"[SOFTWAREMANAGER] Your image is to old (%s), you need to flash new !!" %getEnigmaVersionString()
+			print"[SOFTWAREMANAGER] Your image is to old (%s), you need to flash new !!" % getEnigmaVersionString()
 			self.session.openWithCallback(self.checkDateCallback, MessageBox, message, default=False)
 			return
 
@@ -1519,7 +1519,7 @@ class UpdatePlugin(Screen):
 					error = _("No packages were upgraded yet. So you can check your network and try again.")
 				if self.updating:
 					error = _("Your %s %s isn't connected to the internet properly. Please check it and try again.") % (getMachineBrand(), getMachineName())
-				self.status.setText(_("Error") +  " - " + error)
+				self.status.setText(_("Error") + " - " + error)
 		#print event, "-", param
 		pass
 
@@ -1541,7 +1541,7 @@ class UpdatePlugin(Screen):
 	def exit(self):
 		if not self.opkg.isRunning():
 			if self.packages != 0 and self.error == 0:
-				self.session.openWithCallback(self.exitAnswer, MessageBox, _("Upgrade finished.") +" "+_("Do you want to reboot your %s %s?") % (getMachineBrand(), getMachineName()))
+				self.session.openWithCallback(self.exitAnswer, MessageBox, _("Upgrade finished.") + " " + _("Do you want to reboot your %s %s?") % (getMachineBrand(), getMachineName()))
 			else:
 				self.close()
 		else:
@@ -1652,13 +1652,13 @@ class OPKGSource(Screen):
 				pass
 
 		desk = getDesktop(0)
-		x= int(desk.size().width())
-		y= int(desk.size().height())
+		x = int(desk.size().width())
+		y = int(desk.size().height())
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
-		if (y>=720):
+		if (y >= 720):
 			self["text"] = Input(text, maxSize=False, type=Input.TEXT)
 		else:
 			self["text"] = Input(text, maxSize=False, visible_width=55, type=Input.TEXT)
@@ -1916,7 +1916,7 @@ class PacketManager(Screen, NumericalTextInput):
 			self.session.openWithCallback(self.runUpgradeFinished, Opkg, cmdList=self.cmdList)
 
 	def runUpgradeFinished(self):
-		self.session.openWithCallback(self.UpgradeReboot, MessageBox, _("Update has completed.") + "\n" +_("Do you want to reboot your receiver?"), MessageBox.TYPE_YESNO)
+		self.session.openWithCallback(self.UpgradeReboot, MessageBox, _("Update has completed.") + "\n" + _("Do you want to reboot your receiver?"), MessageBox.TYPE_YESNO)
 
 	def UpgradeReboot(self, result):
 		if result is None:
@@ -2073,7 +2073,7 @@ class OpkgInstaller(Screen):
 			self.title = ("%s %s %s") % (_("Install extensions"), _("from"), title)
 
 		for listindex in range(len(list)):
-			self.list.addSelection(list[listindex][p+1:], list[listindex], listindex, False)
+			self.list.addSelection(list[listindex][p + 1:], list[listindex], listindex, False)
 		self.list.sort()
 
 		self["key_red"] = StaticText(_("Close"))

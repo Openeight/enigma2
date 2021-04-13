@@ -70,7 +70,7 @@ class Ipkremove(Screen):
 			cmd2 = "rm /etc/ipkinst/" + ipk
 			cmd = cmd1 + " && " + cmd2
 			print cmd
-			title = _("Removing addon %s" %(remname))
+			title = _("Removing addon %s" % (remname))
 			self.session.open(Console,_(title),[cmd])
 		self.close()
 

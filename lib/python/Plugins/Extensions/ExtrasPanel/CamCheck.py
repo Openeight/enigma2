@@ -195,7 +195,7 @@ class CamCheckPoller:
 						camrunning = 1
 						if self.FrozenCCcam(actcam):
 							camfrozen = 1
-				tel +=1
+				tel += 1
 			elif x == cam_name2:
 				camfound2 = 1
 				indexcam2 = tel
@@ -209,9 +209,9 @@ class CamCheckPoller:
 						camrunning2 = 1
 						if self.FrozenCCcam(actcam):
 							camfrozen2 = 1
-				tel +=1
+				tel += 1
 			else:
-				tel +=1
+				tel += 1
 		try:
 
 			#// CAM IS NOT RUNNING SO START
