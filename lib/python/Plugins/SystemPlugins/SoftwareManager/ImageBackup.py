@@ -26,6 +26,7 @@ from boxbranding import getMachineBrand, getMachineName, getDriverDate, getImage
 
 VERSION = _('Version') + ' %s %s images' % (getImageVersion(), getImageDistro())
 
+
 class ImageBackup(Screen):
 	skin = """
 	<screen name="Image Backup" position="center,center" size="750,900" flags="wfNoBorder" backgroundColor="transparent">
@@ -124,7 +125,6 @@ class ImageBackup(Screen):
 	def keyDown(self):
 		self["config"].instance.moveSelection(self["config"].instance.moveDown)
 		self.selectionChanged()
-
 
 	def doFullBackup(self, answer):
 		if answer is not None:
@@ -475,7 +475,6 @@ class ImageBackup(Screen):
 			cmdlist.append('echo "' + _("     no space left on back-up device") + '"')
 			cmdlist.append('echo "' + _("     no writing permission on back-up device") + '"')
 			cmdlist.append('echo " "')
-
 
 		cmdlist.append("rm -rf %s/build_%s" % (self.DIRECTORY, self.MODEL))
 		if SystemInfo["canMultiBoot"] and 'rootsubdir' in SystemInfo["canMultiBoot"][self.SLOT]:

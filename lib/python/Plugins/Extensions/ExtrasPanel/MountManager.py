@@ -25,6 +25,7 @@ import fstabViewer
 
 device2 = ''
 
+
 class DevicesMountPanel(Screen):
 	skin = """
 	<screen position="center,center" size="680,462" title="Mount Manager">
@@ -108,6 +109,7 @@ class DevicesMountPanel(Screen):
 			desc = ""
 		for cb in self.onChangedEntry:
 			cb(name, desc)
+
 	def updateList(self, result=None, retval=None, extra_args=None):
 		scanning = _("Wait please while scanning for devices...")
 		self['lab1'].setText(scanning)
@@ -582,6 +584,7 @@ class DevicesMountPanel(Screen):
 		else:
 			self.updateList()
 
+
 class DeviceMountPanelConf(Screen, ConfigListScreen):
 	skin = """
 	<screen position="center,center" size="730,300" title="Setup Mounts">
@@ -1024,6 +1027,7 @@ class DeviceMountPanelConf(Screen, ConfigListScreen):
 		else:
 			self.close()
 
+
 class DevicesMountPanelSummary(Screen):
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent=parent)
@@ -1043,14 +1047,17 @@ class DevicesMountPanelSummary(Screen):
 		self["entry"].text = name
 		self["desc"].text = desc
 
+
 def StartSetup(menuid, **kwargs):
 	if menuid == "system":
 		return [(_("Mount Manager"), OpenSetup, "mountpoints_setup", None)]
 	else:
 		return []
 
+
 def OpenSetup(session, **kwargs):
 	session.open(DevicesMountPanel)
+
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="Mount Manager", description=_("Manage your device mountpoints"), where=PluginDescriptor.WHERE_MENU, fnc=StartSetup)]

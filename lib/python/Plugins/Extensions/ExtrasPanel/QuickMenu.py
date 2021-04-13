@@ -140,6 +140,7 @@ if path.exists('/usr/lib/enigma2/python/Plugins/Extensions/VpnChanger/plugin.pyo
 else:
 	VPNCHP = False
 
+
 def isFileSystemSupported(filesystem):
 	try:
 		for fs in open('/proc/filesystems', 'r'):
@@ -150,6 +151,7 @@ def isFileSystemSupported(filesystem):
 	except Exception as ex:
 		print '[Harddisk] Failed to read /proc/filesystems:', ex
 
+
 def Check_Softcam():
 	found = False
 	for x in listdir('/etc'):
@@ -159,6 +161,7 @@ def Check_Softcam():
 
 	return found
 
+
 def Softcam_Check():
 	found = False
 	for x in os.listdir('/etc/init.d'):
@@ -167,6 +170,7 @@ def Softcam_Check():
 			break
 
 	return found
+
 
 class QuickMenu(Screen):
 	skin = '\n\t\t<screen name="QuickMenu" position="center,center" size="1180,600" backgroundColor="black" flags="wfBorder">\n\t\t<widget name="list" position="21,32" size="370,420" backgroundColor="black" itemHeight="60" transparent="1" />\n\t\t<widget name="sublist" position="410,32" size="300,420" backgroundColor="black" itemHeight="60" />\n\t\t<eLabel position="400,30" size="2,420" backgroundColor="#666666" zPosition="3" />\n\t\t<widget source="session.VideoPicture" render="Pig" position="720,30" size="450,300" backgroundColor="transparent" zPosition="1" />\n\t\t<widget name="description" position="22,455" size="1150,100" zPosition="1" font="Regular;22" halign="center" valign="center" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_red" position="20,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_green" position="325,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_yellow" position="630,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" valign="center" />\n\t\t<widget name="key_blue" position="935,571" size="234,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<eLabel name="new eLabel" position="21,567" size="300,3" zPosition="3" backgroundColor="red" />\n\t\t<eLabel name="new eLabel" position="325,567" size="300,3" zPosition="3" backgroundColor="green" />\n\t\t<eLabel name="new eLabel" position="630,567" size="300,3" zPosition="3" backgroundColor="yellow" />\n\t\t<eLabel name="new eLabel" position="935,567" size="234,3" zPosition="3" backgroundColor="blue" />\n\t\t</screen> '

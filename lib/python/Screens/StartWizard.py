@@ -23,6 +23,7 @@ config.misc.firstrun = ConfigBoolean(default=True)
 config.misc.languageselected = ConfigBoolean(default=True)
 config.misc.do_overscanwizard = ConfigBoolean(default=OverscanWizard and config.skin.primary_skin.value == "SmartLiteFHD/skin.xml")
 
+
 class StartWizard(WizardLanguage, Rc):
 	def __init__(self, session, silent=True, showSteps=False, neededTag=None):
 		self.xmlfile = ["startwizard.xml"]
@@ -42,6 +43,7 @@ class StartWizard(WizardLanguage, Rc):
 		config.misc.firstrun.save()
 		configfile.save()
 
+
 def setLanguageFromBackup(backupfile):
 	try:
 		import tarfile
@@ -59,11 +61,13 @@ def setLanguageFromBackup(backupfile):
 	except:
 		pass
 
+
 def checkForAvailableAutoBackup():
 	for backupfile in ["/media/%s/backup/PLi-AutoBackup.tar.gz" % media for media in os.listdir("/media/") if os.path.isdir(os.path.join("/media/", media))]:
 		if os.path.isfile(backupfile):
 			setLanguageFromBackup(backupfile)
 			return True
+
 
 class AutoRestoreWizard(MessageBox):
 	def __init__(self, session):
@@ -74,6 +78,7 @@ class AutoRestoreWizard(MessageBox):
 			MessageBox.close(self, 43)
 		else:
 			MessageBox.close(self)
+
 
 class AutoInstallWizard(Screen):
 	skin = """<screen name="AutoInstall" position="fill" flags="wfNoBorder">
@@ -86,6 +91,7 @@ class AutoInstallWizard(Screen):
 		<eLabel position="top" size="*,2"/>
 		<widget name="AboutScrollLabel" font="Fixed;20" position="fill"/>
 	</screen>"""
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self["progress"] = ProgressBar()
@@ -164,6 +170,7 @@ class AutoInstallWizard(Screen):
 		self.logfile.close()
 		os.remove("/etc/.doAutoinstall")
 		self.close(3)
+
 
 if not os.path.isfile("/etc/installed"):
 	from Components.Console import Console

@@ -11,6 +11,7 @@ gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain("enigma2")
 gettext.bindtextdomain("MountManager", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "SystemPlugins/MountManager/locale/"))
 
+
 def _(txt):
 	t = gettext.dgettext("MountManager", txt)
 	if t == txt:

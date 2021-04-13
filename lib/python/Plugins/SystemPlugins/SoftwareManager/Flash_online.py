@@ -33,11 +33,13 @@ flashTmp = '/media/hdd/images/tmp'
 ofgwritePath = '/usr/bin/ofgwrite'
 #############################################################################################################
 
+
 def Freespace(dev):
 	statdev = os.statvfs(dev)
 	space = (statdev.f_bavail * statdev.f_frsize) / 1024
 	print "[Flash Online] Free space on %s = %i kilobytes" % (dev, space)
 	return space
+
 
 class FlashOnline(Screen):
 	skin = """
@@ -181,6 +183,7 @@ class FlashOnline(Screen):
 			files = "None"
 		return files
 
+
 class doFlashImage(Screen):
 	skin = """
 	<screen position="center,center" size="560,500" title="Flash On the fly (select an image)">
@@ -226,7 +229,6 @@ class doFlashImage(Screen):
 		}, -2)
 		self.onLayoutFinish.append(self.layoutFinished)
 
-		
 	def quit(self):
 		if self.simulate or self.List not in ("STARTUP", "cmdline.txt"):
 			fbClass.getInstance().unlock()
@@ -608,12 +610,14 @@ class ImageDownloadJob(Job):
 		Job.__init__(self, _("Downloading %s") % file)
 		ImageDownloadTask(self, url, filename)
 
+
 class DownloaderPostcondition(Condition):
 	def check(self, task):
 		return task.returncode == 0
 
 	def getErrorMessage(self, task):
 		return self.error_message
+
 
 class ImageDownloadTask(Task):
 	def __init__(self, job, url, path):
@@ -658,6 +662,7 @@ class ImageDownloadTask(Task):
 			self.finish(aborted=True)
 		else:
 			Task.processFinished(self, 0)
+
 
 class DeviceBrowser(Screen, HelpableScreen):
 	skin = """

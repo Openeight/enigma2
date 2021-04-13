@@ -4,11 +4,15 @@ from skin import applyAllAttributes
 from Tools.CList import CList
 from Sources.StaticText import StaticText
 
+
 class screenPath():
 	def __init__(self):
 		self.path = []
 		self.lastself = None
+
+
 screen = screenPath()
+
 
 class GUISkin:
 	__module__ = __name__

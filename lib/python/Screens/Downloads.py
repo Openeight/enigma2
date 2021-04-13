@@ -50,6 +50,7 @@ class RSList(MenuList):
 
 ##############################################################################
 
+
 def RSListEntry(download, state):
 	res = [(download)]
 	# skin.xml <parameter name="RSList" value="40,0,1200,50,10,3,50,50" />
@@ -76,11 +77,6 @@ def RSListEntry(download, state):
 ##############################################################################
 
 
-
-
-
-
-
 class Downloads(Screen):
 
     skin = """
@@ -91,8 +87,6 @@ class Downloads(Screen):
 			<!--eLabel position="70,100" zPosition="-1" size="100,69" backgroundColor="#222222" /-->
 			<widget name="info" position="80,80" zPosition="4" size="350,300" font="Regular;18" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
 		</screen>"""
-
-     
 
     def __init__(self, session):
 		self.skin = Downloads.skin
@@ -166,8 +160,8 @@ class Downloads(Screen):
 		print "pressed", number
 		self["text"].number(number)
 
-class Getipklist(Screen):
 
+class Getipklist(Screen):
 
     skin = """
 		<screen position="center,center" size="800,500" title=" " >
@@ -184,7 +178,6 @@ class Getipklist(Screen):
 			<eLabel position="70,100" zPosition="-1" size="100,69" backgroundColor="#222222" />
 			<widget name="info" position="100,230" zPosition="4" size="300,25" font="Regular;18" foregroundColor="#ffffff" transparent="1" halign="center" valign="center" />
 		</screen>"""
-
 
 
 #    def __init__(self, session, addon):
@@ -256,7 +249,6 @@ class Getipklist(Screen):
 		error = str(error)
 		print "Download error =", error
                 
-
     def getstate(self, ipkname):
                 item = "/etc/ipkinst/" + ipkname
                 if os.path.exists(item):
@@ -284,6 +276,7 @@ class Getipklist(Screen):
     def keyNumberGlobal(self, number):
 		print "pressed", number
 		self["text"].number(number)		
+
 
 class Getipk(Screen):
     skin = """
@@ -436,7 +429,6 @@ class Getipk(Screen):
 		self["text"].number(number)
 		
 		
-
 class Getipk2(Screen):
 
     skin = """
@@ -461,7 +453,6 @@ class Getipk2(Screen):
                  
                 self.onLayoutFinish.append(self.openTest)
    
-    
     def openTest(self):
                 self["info"].setText("Downloading and installing...")
                 device = open("/proc/stb/info/model", "r").readline().strip()
@@ -498,13 +489,10 @@ class Getipk2(Screen):
     def okClicked(self):
                 self.close()		
  
-	
     def keyNumberGlobal(self, number):
 		print "pressed", number
 		self["text"].number(number)		
 		
-
-
     def viewLog(self):
           self["info"].setText("Press OK to continue...")
           if os.path.isfile("/tmp/ipk.log")is not True:
@@ -549,6 +537,7 @@ class Getipk2(Screen):
                        cmd = "rm /tmp/*.ipk"
                        os.system(cmd)                 
  
+
 class downloadJob(Job):
 	def __init__(self, toolbox, cmdline, filename, filetitle):
 		Job.__init__(self, _("Downloading"))
@@ -562,8 +551,10 @@ class downloadJob(Job):
 		self.retrycount += 1
 		self.restart()
 	
+
 class downloadTask(Task):
 	ERROR_CORRUPT_FILE, ERROR_RTMP_ReadPacket, ERROR_SEGFAULT, ERROR_SERVER, ERROR_UNKNOWN = range(5)
+
 	def __init__(self, job, cmdline, filename, filetitle):
 		Task.__init__(self, job, filetitle)
 #		self.postconditions.append(downloadTaskPostcondition())
@@ -596,8 +587,10 @@ class downloadTask(Task):
 	def afterRun(self):
 		pass
 
+
 class downloadTaskPostcondition(Condition):
 	RECOVERABLE = True
+
 	def check(self, task):
 		if task.returncode == 0 or task.error is None:
 			return True
@@ -615,14 +608,10 @@ class downloadTaskPostcondition(Condition):
 		}[task.error]
 
 
-            
- 
-
 def main(session, **kwargs):
         session.open(Downloads)
         
 		
-
 def Plugins(**kwargs):
 	return PluginDescriptor(name="PluginDownload", description="Download/install plugins ", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
 

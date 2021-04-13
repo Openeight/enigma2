@@ -7,6 +7,7 @@ from datetime import datetime
 isBusy = None
 CFG = "/etc/CCcam.cfg"
 
+
 def CamCheck():
 	global campoller, POLLTIME
 	POLLTIME = int(config.plugins.infopanel_frozencheck.list.getValue()) * 60
@@ -14,11 +15,13 @@ def CamCheck():
 		campoller = CamCheckPoller()
 	campoller.start()
 
+
 def CamCheckStop():
 	try:
 		campoller.stop()
 	except:
 		print"CamCheck not running, so no need to stop it !! "
+
 
 def confPath():
 	search_dirs = ["/usr", "/var", "/etc"]
@@ -29,6 +32,7 @@ def confPath():
 		return None
 	else:
 		return res.replace("\n", "")
+
 
 def getConfigValue(l):
 	list = l.split(":")
@@ -45,6 +49,7 @@ def getConfigValue(l):
 			ret = ret[:-1]
 
 	return ret
+
 
 class CamCheckPoller:
 	def __init__(self):
@@ -76,7 +81,6 @@ class CamCheckPoller:
 	def JobTask(self):
 		self.doCheck()
 		self.timer.startLongTimer(POLLTIME)
-
 
 	def FrozenCCcam(self, cam):
 		if not cam.upper().startswith('CCCAM'):
@@ -138,7 +142,6 @@ class CamCheckPoller:
 			global isBusy
 			isBusy = None
 			return
-
 
 		for x in self.emuDirlist:
 			#// if file contains the string "emu" (then this is a emu config file)
@@ -252,5 +255,6 @@ class CamCheckPoller:
 
 		global isBusy
 		isBusy = None
+
 
 campoller = None

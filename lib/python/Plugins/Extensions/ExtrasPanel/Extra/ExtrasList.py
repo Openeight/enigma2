@@ -7,6 +7,7 @@ from Components.HTMLComponent import HTMLComponent
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 
+
 def SimpleEntry(name, picture):
 	res = [(name, picture)]
 	#res = []
@@ -21,6 +22,7 @@ def SimpleEntry(name, picture):
 		
 	return res
 	
+
 class ExtrasList(MenuList, HTMLComponent, GUIComponent):
 	def __init__(self, list, enableWrapAround=False):
 		GUIComponent.__init__(self)

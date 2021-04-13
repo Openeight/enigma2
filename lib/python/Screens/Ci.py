@@ -24,15 +24,19 @@ import Screens.Standby
 
 forceNotShowCiMessages = False
 
+
 def setCIBitrate(configElement):
 	eDVBCI_UI.getInstance().setClockRate(configElement.slotid, eDVBCI_UI.rateNormal if configElement.value == "no" else eDVBCI_UI.rateHigh)
+
 
 def setdvbCiDelay(configElement):
 	open(SystemInfo["CommonInterfaceCIDelay"], "w").write(configElement.value)
 	configElement.save()
 
+
 def setRelevantPidsRouting(configElement):
 	open(SystemInfo["CI%dRelevantPidsRoutingSupport" % configElement.slotid], "w").write("yes" if configElement.value else "no")
+
 
 def InitCiConfig():
 	config.ci = ConfigSubList()
@@ -55,6 +59,7 @@ def InitCiConfig():
 		if SystemInfo["CommonInterfaceCIDelay"]:
 			config.cimisc.dvbCiDelay = ConfigSelection(default="256", choices=[("16"), ("32"), ("64"), ("128"), ("256")])
 			config.cimisc.dvbCiDelay.addNotifier(setdvbCiDelay)
+
 
 class MMIDialog(Screen):
 	def __init__(self, session, slotid, action, handler=eDVBCI_UI.getInstance(), wait_text="", screen_data=None):
@@ -309,6 +314,7 @@ class MMIDialog(Screen):
 
 		#FIXME: check for mmi-session closed
 
+
 class CiMessageHandler:
 	def __init__(self):
 		self.session = None
@@ -366,7 +372,9 @@ class CiMessageHandler:
 		if slot in self.ci:
 			del self.ci[slot]
 
+
 CiHandler = CiMessageHandler()
+
 
 class CiSelection(Screen):
 	def __init__(self, session):
@@ -527,6 +535,7 @@ class CiSelection(Screen):
 				CiHandler.unregisterCIMessageHandler(slot)
 		self.close()
 
+
 class PermanentPinEntry(Screen, ConfigListScreen):
 	def __init__(self, session, pin, pin_slot):
 		Screen.__init__(self, session)
@@ -593,6 +602,7 @@ class PermanentPinEntry(Screen, ConfigListScreen):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 
+
 class CIselectMainMenu(Screen):
 	skin = """
 		<screen name="CIselectMainMenu" position="center,center" size="500,250" title="CI assignment" >
@@ -651,7 +661,6 @@ class CIselectMainMenu(Screen):
 				else:
 					self.session.open(easyCIconfigMenu, slot)
 
-				
         """def yellowPressed(self): # unused
 		NUM_CI=eDVBCIInterfaces.getInstance().getNumOfSlots()
 		print "[CI_Check] FOUND %d CI Slots " % NUM_CI
@@ -960,6 +969,7 @@ class CAidSelect(Screen):
 	def cancel(self):
 		self.close()
 
+
 class myProviderSelection(ChannelSelectionBase):
 	skin = """
 		<screen name="myProviderSelection" position="center,center" size="560,440" title="Select provider to add...">
@@ -1064,6 +1074,7 @@ class myProviderSelection(ChannelSelectionBase):
 	def cancel(self):
 		self.close(None)
 
+
 class myChannelSelection(ChannelSelectionBase):
 	skin = """
 		<screen name="myChannelSelection" position="center,center" size="560,440" title="Select service to add...">
@@ -1126,11 +1137,13 @@ class myChannelSelection(ChannelSelectionBase):
 	def cancel(self):
 		self.close(None)
 
+
 def activate_all(session):
 	NUM_CI = eDVBCIInterfaces.getInstance().getNumOfSlots()
 	print "[CI_Activate] FOUND %d CI Slots " % NUM_CI
 	if NUM_CI > 0:
 		ci_config = []
+
 		def getValue(definitions, default):
 			# Initialize Output
 			ret = ""
@@ -1182,6 +1195,7 @@ def activate_all(session):
 				eDVBCIInterfaces.getInstance().setDescrambleRules(item[0], item[1])
 			except:
 				print "[CI_Activate_Config_CI%d] error setting DescrambleRules..." % item[0]
+
 
 def find_in_list(list, search, listpos=0):
 	for item in list:

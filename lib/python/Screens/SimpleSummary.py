@@ -1,5 +1,6 @@
 from Screens.Screen import Screen
 
+
 class SimpleSummary(Screen):
 	skin = """
 	<screen position="0,0" size="132,64">

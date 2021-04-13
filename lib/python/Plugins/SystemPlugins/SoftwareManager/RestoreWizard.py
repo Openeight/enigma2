@@ -14,6 +14,7 @@ from boxbranding import getBoxType
 
 boxtype = getBoxType()
 
+
 def listConfigBackup():
 	try:
 		devices = [(r.description, r.mountpoint) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False)]
@@ -53,10 +54,12 @@ def listConfigBackup():
 		print "unable to use device (%s)..." % str(e)
 		return None
 
+
 if listConfigBackup() is None:
 	backupAvailable = 0
 else:
 	backupAvailable = 1
+
 
 class RestoreWizard(WizardLanguage, Rc):
 	def __init__(self, session):

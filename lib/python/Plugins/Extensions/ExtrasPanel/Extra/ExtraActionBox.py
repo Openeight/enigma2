@@ -11,12 +11,14 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Components.Pixmap import Pixmap
 from Tools.LoadPixmap import LoadPixmap
 
+
 class ExtraActionBox(Screen):
 	skin = """
 		<screen name="ExtraActionBox" position="360,325" size="560,70" title=" ">
 		<widget alphatest="on" name="logo" position="10,10" size="48,48" transparent="1" zPosition="2"/>
 		<widget font="Regular;20" halign="center" name="message" position="60,10" size="490,48" valign="center"/>
 	</screen>"""
+
 	def __init__(self, session, message, title, action):
 		Screen.__init__(self, session)
 		self.session = session

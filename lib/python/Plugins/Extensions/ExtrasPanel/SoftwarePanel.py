@@ -14,6 +14,7 @@ from enigma import ePixmap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN, SCOPE_METADIR
 import os
 
+
 class SoftwarePanel(Screen):
 
 	def __init__(self, session, *args):

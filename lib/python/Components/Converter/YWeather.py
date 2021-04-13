@@ -8,6 +8,7 @@ from Poll import Poll
 import time
 import os
 
+
 class YWeather(Poll, Converter, object):
         weather_city = '711665'
         time_update = 20

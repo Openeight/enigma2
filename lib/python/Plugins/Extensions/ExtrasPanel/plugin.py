@@ -94,6 +94,7 @@ from Plugins.Extensions.ExtrasPanel.sundtek import SundtekControlCenter
 from Plugins.Extensions.ExtrasPanel.SwapManager import Swap, SwapAutostart
 from Plugins.Extensions.ExtrasPanel.SoftwarePanel import SoftwarePanel
 
+
 def Check_Softcam():
 	found = False
 	for x in os.listdir('/etc/init.d'):
@@ -102,6 +103,7 @@ def Check_Softcam():
 			break
 
 	return found
+
 
 if not Check_Softcam() and (config.plugins.showextraspanelextensions.getValue() or config.plugins.extraspanel_redpanel.enabledlong.getValue()):
 	config.plugins.showextraspanelextensions.setValue(False)
@@ -118,10 +120,12 @@ if config.usage.keymap.getValue() != eEnv.resolve('${datadir}/enigma2/keymap.xml
 	if not os.path.isfile(eEnv.resolve('${datadir}/enigma2/keymap.u80')) and config.usage.keymap.getValue() == eEnv.resolve('${datadir}/enigma2/keymap.u80'):
 		setDefaultKeymap()
 
+
 def setDefaultKeymap():
 	print '[Extras-Panel] Set Keymap to Default'
 	config.usage.keymap.setValue(eEnv.resolve('${datadir}/enigma2/keymap.xml'))
 	config.save()
+
 
 def command(comandline, strip=1):
 	comandline = comandline + ' >/tmp/command.txt'
@@ -143,6 +147,7 @@ def command(comandline, strip=1):
 	comandline = text
 	os.system('rm /tmp/command.txt')
 	return comandline
+
 
 boxversion = getBoxType()
 machinename = getMachineName()
@@ -186,13 +191,16 @@ elif boxversion == 'xp1000' and machinename.lower() == 'sf8 hd':
 		ff.close()
 ExitSave = '[Exit] = ' + _('Cancel') + '              [Ok] =' + _('Save')
 
+
 class ConfigPORT(ConfigSequence):
 
 	def __init__(self, default):
 		ConfigSequence.__init__(self, seperator='.', limits=[(1, 65535)], default=default)
 
+
 def main(session, **kwargs):
 	session.open(Extraspanel)
+
 
 def Apanel(menuid, **kwargs):
 	if menuid == 'mainmenu':
@@ -202,6 +210,7 @@ def Apanel(menuid, **kwargs):
 		  11)]
 	else:
 		return []
+
 
 def camstart(reason, **kwargs):
 	global timerInstance
@@ -222,20 +231,25 @@ def camstart(reason, **kwargs):
 		print '[Extras-Panel] failed to run CamStart'
 	return
 
+
 def qmenu(session, **kwargs):
 	from Plugins.Extensions.ExtrasPanel.QuickMenu import QuickMenu
 	session.open(QuickMenu)
 
+
 def scriptrunner(session, **kwargs):
 	session.open(ScriptRunner)
 
+
 def sccmain(session, **kwargs):
 	session.open(SundtekControlCenter)
+
 
 def SundtekControlCenterStart(menuid):
 	if (config.plugins.SundtekControlCenter.display.value == "2" or config.plugins.SundtekControlCenter.display.value == "3") and (menuid == "scan" or menuid == "services_recordings"):
 		return [(_("Sundtek Control Center"), sccmain, "sundtek_control_center", 55)]
 	return []
+
 
 def Plugins(**kwargs):
 	list = [
@@ -250,12 +264,14 @@ def Plugins(**kwargs):
 		list.append(PluginDescriptor(name=_("Sundtek Control Center"), description=_("installs the sundtek driver and runs related shellscripts"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=sccmain))
 	return list
 
+
 MENU_SKIN = '<screen name="Extraspanel" position="center,center" size="500,370" title="Extra Panel" >\n\t<widget source="global.CurrentTime" render="Label" position="0, 340" size="500,24" font="Regular;20" foregroundColor="#FFFFFF" halign="right" transparent="1" zPosition="5">\n\t\t<convert type="ClockToText">>Format%H:%M:%S</convert>\n\t</widget>\n\t<eLabel backgroundColor="#56C856" position="0,330" size="500,1" zPosition="0" />\n\t<widget source="list" render="Listbox" position="10,25" size="500,280" scrollbarMode="showOnDemand" zPosition="1" transparent="1">\n                <convert type="TemplatedMultiContent">\n\t\t\t\t{"template": [\n\t\t\t\t\t\tMultiContentEntryText(pos = (0, 5), size = (520, 28), font=0, text = 0), # menu_entry\n\t\t\t\t\t\tMultiContentEntryText(pos = (0, 35), size = (520, 22), font=1, text = 2), # menu_entry_description\n\t\t\t\t\t],\n\t\t\t\t"fonts": [gFont("Regular",24),gFont("Regular",16)],\n\t\t\t\t"itemHeight": 70\n\t\t\t\t}\n\t \t</convert>\n        </widget>\n\t<widget name="label1" position="10,340" size="490,25" font="Regular;20" transparent="1" foregroundColor="#f2e000" halign="left" />\n</screen>'
 CONFIG_SKIN = '<screen position="center,center" size="600,440" title="PANEL Config" >\n\t<widget name="config" position="10,10" size="580,377" enableWrapAround="1" scrollbarMode="showOnDemand" />\n\t<widget name="labelExitsave" position="90,410" size="420,25" halign="center" font="Regular;20" transparent="1" foregroundColor="#f2e000" />\n</screen>'
 INFO_SKIN = '<screen name="Panel-Info"  position="center,center" size="730,400" title="PANEL-Info" >\n\t<widget name="label2" position="0,10" size="730,25" font="Regular;20" transparent="1" halign="center" foregroundColor="#f2e000" />\n\t<widget name="label1" position="10,45" size="710,350" font="Console;20" zPosition="1" backgroundColor="#251e1f20" transparent="1" />\n</screen>'
 INFO_SKIN2 = '<screen name="PANEL-Info2"  position="center,center" size="530,400" title="PANEL-Info" backgroundColor="#251e1f20">\n\t<widget name="label1" position="10,50" size="510,340" font="Regular;15" zPosition="1" backgroundColor="#251e1f20" transparent="1" />\n</screen>'
 from Screens.PiPSetup import PiPSetup
 from Screens.InfoBarGenerics import InfoBarPiP
+
 
 class Extraspanel(Screen, InfoBarPiP):
 	servicelist = None

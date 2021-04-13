@@ -35,6 +35,7 @@ DATE = "21.11.2014"
 
 sf = sz_w = getDesktop(0).size().height() / 720.0
 
+
 def confPath():
 	search_dirs = ["/usr", "/var", "/etc"]
 	sdirs = " ".join(search_dirs)
@@ -44,6 +45,7 @@ def confPath():
 		return None
 	else:
 		return res.replace("\n", "")
+
 
 def _parse(url):
 	url = url.strip()
@@ -72,6 +74,7 @@ def _parse(url):
 
 	return scheme, host, port, path, username, password
 
+
 def getPage(url, contextFactory=None, *args, **kwargs):
 	scheme, host, port, path, username, password = _parse(url)
 
@@ -91,6 +94,7 @@ def getPage(url, contextFactory=None, *args, **kwargs):
 
 	return factory.deferred
 
+
 def searchConfig():
 	global CFG, CFG_path
 	CFG = confPath()
@@ -99,6 +103,7 @@ def searchConfig():
 		CFG_path = path.dirname(CFG)
 
 #############################################################
+
 
 class HelpableNumberActionMap(NumberActionMap):
 	def __init__(self, parent, context, actions, prio):
@@ -111,6 +116,7 @@ class HelpableNumberActionMap(NumberActionMap):
 		parent.helpList.append((self, context, alist))
 
 #############################################################
+
 
 TranslationHelper = [
 	["Current time", _("Current time")],
@@ -138,6 +144,7 @@ TranslationHelper = [
 	["Cardserial", _("Cardserial")],
 	["ecm time:", _("ecm time:")]]
 
+
 def translateBlock(block):
 	for x in TranslationHelper:
 		if block.__contains__(x[0]):
@@ -145,6 +152,7 @@ def translateBlock(block):
 	return block
 
 #############################################################
+
 
 def getConfigValue(l):
 	list = l.split(":")
@@ -164,6 +172,7 @@ def getConfigValue(l):
 
 #############################################################
 
+
 def notBlackListed(entry):
 	try:
 		f = open(config.cccaminfo.blacklist.value, "r")
@@ -178,6 +187,7 @@ def notBlackListed(entry):
 	return ret
 
 #############################################################
+
 
 menu_list = [
 	_("General"),
@@ -209,6 +219,7 @@ if path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "icons/lock_off.png")):
 else:
 	lock_off = loadPNG("/usr/share/enigma2/skin_default/icons/lock_off.png")
 
+
 def getConfigNameAndContent(fileName):
 	try:
 		f = open(fileName, "r")
@@ -229,11 +240,13 @@ def getConfigNameAndContent(fileName):
 
 #############################################################
 
+
 class CCcamList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setItemHeight(int(30 * sf))
 		self.l.setFont(0, gFont("Regular", int(20 * sf)))
+
 
 class CCcamShareList(MenuList):
 	def __init__(self, list):
@@ -241,17 +254,20 @@ class CCcamShareList(MenuList):
 		self.l.setItemHeight(int(60 * sf))
 		self.l.setFont(0, gFont("Regular", int(18 * sf)))
 
+
 class CCcamConfigList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setItemHeight(int(30 * sf))
 		self.l.setFont(0, gFont("Regular", int(20 * sf)))
 
+
 class CCcamShareViewList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setItemHeight(int(30 * sf))
 		self.l.setFont(0, gFont("Regular", int(18 * sf)))
+
 
 def CCcamListEntry(name, idx):
 	res = [name]
@@ -278,6 +294,7 @@ def CCcamListEntry(name, idx):
 	res.append(MultiContentEntryText(pos=(x, y), size=(w, h), font=0, text=name))
 	return res
 
+
 def CCcamServerListEntry(name, color):
 	res = [name]
 	if path.exists(resolveFilename(SCOPE_ACTIVE_SKIN, "buttons/key_%s.png" % color)):
@@ -291,6 +308,7 @@ def CCcamServerListEntry(name, color):
 	res.append(MultiContentEntryText(pos=(x, y), size=(w, h), font=0, text=name))
 	return res
 
+
 def CCcamShareListEntry(hostname, type, caid, system, uphops, maxdown):
 	res = [(hostname, type, caid, system, uphops, maxdown),
 			MultiContentEntryText(pos=(0, 0), size=(300 * sf, 25 * sf), font=0, text=hostname),
@@ -301,12 +319,14 @@ def CCcamShareListEntry(hostname, type, caid, system, uphops, maxdown):
 			MultiContentEntryText(pos=(300 * sf, 40 * sf), size=(300 * sf, 25 * sf), font=0, text=_("Maxdown: ") + maxdown, flags=RT_HALIGN_RIGHT)]
 	return res
 
+
 def CCcamShareViewListEntry(caidprovider, providername, numberofcards, numberofreshare):
 	res = [(caidprovider, providername, numberofcards),
 			MultiContentEntryText(pos=(0, 0), size=(500 * sf, 25 * sf), font=0, text=providername),
 			MultiContentEntryText(pos=(500 * sf, 0), size=(50 * sf, 25 * sf), font=0, text=numberofcards, flags=RT_HALIGN_RIGHT),
 			MultiContentEntryText(pos=(550 * sf, 0), size=(50 * sf, 25 * sf), font=0, text=numberofreshare, flags=RT_HALIGN_RIGHT)]
 	return res
+
 
 def CCcamConfigListEntry(file):
 	res = [file]
@@ -332,6 +352,7 @@ def CCcamConfigListEntry(file):
 
 	return res
 
+
 def CCcamMenuConfigListEntry(name, blacklisted):
 	res = [name]
 
@@ -348,6 +369,7 @@ def CCcamMenuConfigListEntry(name, blacklisted):
 	return res
 
 #############################################################
+
 
 class CCcamInfoMain(Screen):
 	def __init__(self, session):
@@ -763,6 +785,7 @@ class CCcamInfoMain(Screen):
 
 #############################################################
 
+
 class CCcamInfoEcmInfoSelection(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -781,6 +804,7 @@ class CCcamInfoEcmInfoSelection(Screen):
 
 #############################################################
 
+
 class CCcamInfoInfoScreen(Screen):
 	def __init__(self, session, info, set_title):
 		Screen.__init__(self, session)
@@ -798,6 +822,7 @@ class CCcamInfoInfoScreen(Screen):
 			}, -1)
 
 #############################################################
+
 
 class CCcamShareViewMenu(Screen, HelpableScreen):
 	def __init__(self, session, url):
@@ -879,7 +904,6 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 								provider = list[5].replace(" ", "")
 
 								caidprovider = self.formatCaidProvider(caid, provider)
-
 
 								string = list[6]
 								while string.startswith(" "):
@@ -1120,6 +1144,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 
 #############################################################
 
+
 class CCcamInfoSubMenu(Screen):
 	def __init__(self, session, list, infoList, set_title):
 		Screen.__init__(self, session)
@@ -1157,6 +1182,7 @@ class CCcamInfoSubMenu(Screen):
 			return ""
 
 #############################################################
+
 
 class CCcamInfoServerMenu(Screen):
 	def __init__(self, session, infoList, url):
@@ -1206,6 +1232,7 @@ class CCcamInfoServerMenu(Screen):
 
 #############################################################
 
+
 class CCcamInfoRemoteBox:
 	def __init__(self, name, ip, username, password, port):
 		self.name = name
@@ -1215,6 +1242,7 @@ class CCcamInfoRemoteBox:
 		self.port = port
 
 #############################################################
+
 
 class CCcamInfoConfigMenu(ConfigListScreen, Screen):
 	def __init__(self, session, profile):
@@ -1242,6 +1270,7 @@ class CCcamInfoConfigMenu(ConfigListScreen, Screen):
 		self.close(None)
 
 #############################################################
+
 
 class CCcamInfoRemoteBoxMenu(Screen):
 	def __init__(self, session):
@@ -1363,6 +1392,7 @@ class CCcamInfoRemoteBoxMenu(Screen):
 			self["list"].setList(self.list)
 
 #############################################################
+
 
 class CCcamInfoShareInfo(Screen):
 	def __init__(self, session, hostname, url):
@@ -1514,6 +1544,7 @@ class CCcamInfoShareInfo(Screen):
 
 #############################################################
 
+
 class CCcamInfoConfigSwitcher(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -1627,6 +1658,7 @@ class CCcamInfoConfigSwitcher(Screen):
 			self.session.open(CCcamInfoInfoScreen, content, _("CCcam Config Switcher"))
 
 #############################################################
+
 
 class CCcamInfoMenuConfig(Screen):
 	def __init__(self, session):

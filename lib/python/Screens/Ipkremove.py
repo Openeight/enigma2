@@ -12,6 +12,7 @@ import os
 
 import gettext
 
+
 def _(txt):
 	t = gettext.dgettext("XTPanel", txt)
 	if t == txt:
@@ -22,12 +23,14 @@ def _(txt):
 # Coded by PCD, February 2008 #
 ###############################
 
+
 class Ipkremove(Screen):
 	skin = """
 		<screen position="100,100" size="550,400" title="Ipkremove" >
 			<widget name="list" position="10,0" size="190,250" scrollbarMode="showOnDemand" />
 			<widget name="pixmap" position="200,0" size="190,250" />
 		</screen>"""
+
 	def __init__(self, session, args=None):
 		self.skin = Ipkremove.skin
 		Screen.__init__(self, session)

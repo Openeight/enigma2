@@ -10,6 +10,7 @@ from Components.FileList import FileList
 from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
 
+
 class ExtraSetup(Screen):
     def __init__(self, session):
 		Screen.__init__(self, session)

@@ -10,6 +10,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Components.Renderer.Picon import getPiconName
 from Components.config import config
 
+
 def refreshServiceList(configElement=None):
 	from Screens.InfoBar import InfoBar
 	InfoBarInstance = InfoBar.instance
@@ -17,6 +18,7 @@ def refreshServiceList(configElement=None):
 		servicelist = InfoBarInstance.servicelist
 		if servicelist:
 			servicelist.setMode()
+
 
 class ServiceList(GUIComponent):
 	MODE_NORMAL = 0
@@ -62,67 +64,98 @@ class ServiceList(GUIComponent):
 	def applySkin(self, desktop, parent):
 		def foregroundColorMarked(value):
 			self.l.setColor(eListboxServiceContent.markedForeground, parseColor(value))
+
 		def foregroundColorMarkedSelected(value):
 			self.l.setColor(eListboxServiceContent.markedForegroundSelected, parseColor(value))
+
 		def backgroundColorMarked(value):
 			self.l.setColor(eListboxServiceContent.markedBackground, parseColor(value))
+
 		def backgroundColorMarkedSelected(value):
 			self.l.setColor(eListboxServiceContent.markedBackgroundSelected, parseColor(value))
+
 		def foregroundColorServiceNotAvail(value):
 			self.l.setColor(eListboxServiceContent.serviceNotAvail, parseColor(value))
+
 		def foregroundColorEvent(value):
 			self.l.setColor(eListboxServiceContent.eventForeground, parseColor(value))
+
 		def colorServiceDescription(value):
 			self.l.setColor(eListboxServiceContent.eventForeground, parseColor(value))
+
 		def foregroundColorEventSelected(value):
 			self.l.setColor(eListboxServiceContent.eventForegroundSelected, parseColor(value))
+
 		def colorServiceDescriptionSelected(value):
 			self.l.setColor(eListboxServiceContent.eventForegroundSelected, parseColor(value))
+
 		def foregroundColorEventborder(value):
 			self.l.setColor(eListboxServiceContent.eventborderForeground, parseColor(value))
+
 		def foregroundColorEventborderSelected(value):
 			self.l.setColor(eListboxServiceContent.eventborderForegroundSelected, parseColor(value))
+
 		def colorEventProgressbar(value):
 			self.l.setColor(eListboxServiceContent.serviceEventProgressbarColor, parseColor(value))
+
 		def colorEventProgressbarSelected(value):
 			self.l.setColor(eListboxServiceContent.serviceEventProgressbarColorSelected, parseColor(value))
+
 		def colorEventProgressbarBorder(value):
 			self.l.setColor(eListboxServiceContent.serviceEventProgressbarBorderColor, parseColor(value))
+
 		def colorEventProgressbarBorderSelected(value):
 			self.l.setColor(eListboxServiceContent.serviceEventProgressbarBorderColorSelected, parseColor(value))
+
 		def colorServiceRecorded(value):
 			self.l.setColor(eListboxServiceContent.serviceRecorded, parseColor(value))
+
 		def colorFallbackItem(value):
 			self.l.setColor(eListboxServiceContent.serviceItemFallback, parseColor(value))
+
 		def colorServiceSelectedFallback(value):
 			self.l.setColor(eListboxServiceContent.serviceSelectedFallback, parseColor(value))
+
 		def colorServiceDescriptionFallback(value):
 			self.l.setColor(eListboxServiceContent.eventForegroundFallback, parseColor(value))
+
 		def colorServiceDescriptionSelectedFallback(value):
 			self.l.setColor(eListboxServiceContent.eventForegroundSelectedFallback, parseColor(value))
+
 		def picServiceEventProgressbar(value):
 			pic = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, value))
 			pic and self.l.setPixmap(self.l.picServiceEventProgressbar, pic)
+
 		def serviceItemHeight(value):
 			self.ItemHeight = int(value)
+
 		def serviceNameFont(value):
 			self.ServiceNameFont = parseFont(value, ((1, 1), (1, 1)))
+
 		def serviceInfoFont(value):
 			self.ServiceInfoFont = parseFont(value, ((1, 1), (1, 1)))
+
 		def serviceNumberFont(value):
 			self.ServiceNumberFont = parseFont(value, ((1, 1), (1, 1)))
+
 		def progressbarHeight(value):
 			self.l.setProgressbarHeight(int(value))
+
 		def progressbarBorderWidth(value):
 			self.l.setProgressbarBorderWidth(int(value))
+
 		def progressBarWidth(value):
 			self.progressBarWidth = int(value)
+
 		def progressPercentWidth(value):
 			self.progressPercentWidth = int(value)
+
 		def fieldMargins(value):
 			self.fieldMargins = int(value)
+
 		def nonplayableMargins(value):
 			self.l.setNonplayableMargins(int(value))
+
 		def itemsDistances(value):
 			self.l.setItemsDistances(int(value))
 		for (attrib, value) in list(self.skinAttributes):

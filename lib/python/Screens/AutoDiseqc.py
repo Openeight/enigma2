@@ -288,7 +288,6 @@ class AutoDiseqc(Screen, ConfigListScreen):
 		elif sat_found:
 			self.sat_frequencies.remove(x)
 
-
 		if not self.openFrontend():
 			self.oldref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			self.session.nav.stopService()
@@ -377,7 +376,6 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			config.Nims[self.feid].configMode.value = "simple"
 			config.Nims[self.feid].simpleDiSEqCSetVoltageTone = self.simple_tone
 			config.Nims[self.feid].simpleDiSEqCOnlyOnSatChange = self.simple_sat_change
-
 
 			self.saveAndReloadNimConfig()
 			self.state += 1

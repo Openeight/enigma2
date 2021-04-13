@@ -29,6 +29,7 @@ config.softcam.camstartMode = ConfigSelection(
 					("1", _("Init.d")),
 					], "0")
 
+
 def command(comandline, strip=1):
 	comandline = comandline + " >/tmp/command.txt"
 	os.system(comandline)
@@ -50,6 +51,7 @@ def command(comandline, strip=1):
 	comandline = text
 	os.system("rm /tmp/command.txt")
 	return comandline
+
 
 class CamStart:
 
@@ -197,5 +199,6 @@ class CamStart:
 				self.startTimer()
 			else:
 				self.count = 0
+
 
 timerInstance = None

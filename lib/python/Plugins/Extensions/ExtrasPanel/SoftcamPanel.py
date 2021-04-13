@@ -16,6 +16,7 @@ import os
 from Screens.CCcamInfo import CCcamInfoMain
 from Screens.OScamInfo import OscamInfoMenu
 
+
 def Check_Softcam():
 	found = False
 	for x in os.listdir('/etc'):
@@ -23,6 +24,7 @@ def Check_Softcam():
 			found = True
 			break
 	return found
+
 
 def command(comandline, strip=1):
   comandline = comandline + " >/tmp/command.txt"
@@ -57,6 +59,7 @@ def command(comandline, strip=1):
 #		if self.instance is not None:
 #			self.instance.moveSelectionTo(idx)
 
+
 SOFTCAM_SKIN = """<screen name="SoftcamPanel" position="center,center" size="580,450" title="Softcam Panel">
 	<eLabel font="Regular;22" position="10,10" size="185,25" text="Softcam Selection:" />
 	<widget font="Regular;18" name="camcount" position="460,10" size="60,25" />
@@ -80,6 +83,7 @@ SOFTCAM_SKIN = """<screen name="SoftcamPanel" position="center,center" size="580
 REFRESH = 0
 CCCAMINFO = 1
 OSCAMINFO = 2
+
 
 class SoftcamPanel(ConfigListScreen, Screen):
 	def __init__(self, session):
@@ -706,6 +710,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 		if os.path.exists("/etc/init.d/softcam.cam2"):
 			print "Delete softcam init script cam2"
 			os.system("rm /etc/init.d/softcam.cam2")
+
 
 class ShowSoftcamPackages(Screen):
 	skin = """

@@ -112,6 +112,7 @@ testOK = None
 
 ###########################################################################
 
+
 class SundtekControlCenter(Screen, ConfigListScreen):
 	nims = nimmanager.nimList() # get nim_sockets
 	result = []

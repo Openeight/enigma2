@@ -14,6 +14,7 @@ from Screens.Standby import TryQuitMainloop
 from Screens.Downloads import Getipklist
 from Screens.Ipkremove import Ipkremove
 
+
 class SkinSetup(Screen):
     def __init__(self, session):
 		Screen.__init__(self, session)
@@ -55,7 +56,6 @@ class SkinSetup(Screen):
 		else:
                         self.close()
                         
-
     def xtaskin(self):                         
                 try:        
                         from Plugins.Extensions.TechniHDSetup.plugin import TechniHDSetup
@@ -63,6 +63,7 @@ class SkinSetup(Screen):
                 except:        
                         self.session.open(MessageBox, _("TechniHD is not installed on your Xtrend box !"), MessageBox.TYPE_ERROR, timeout=10)
                         self.close()
+
 
 class SettingsA(Screen):
     def __init__(self, session):
@@ -163,6 +164,7 @@ class SettingsB(Screen):
     	        config.usage.mainmenu_mode.save()
     	        self.session.open(TryQuitMainloop, 3) 
     
+
 class SettingsC(Screen):
     def __init__(self, session):
 		Screen.__init__(self, session)
@@ -215,6 +217,7 @@ class SettingsC(Screen):
                 config.usage.show_second_infobar.value = ""
     	        config.usage.show_second_infobar.save()
 #    	        self.session.open(TryQuitMainloop, 3)
+
 
 class SettingsD(Screen):
     def __init__(self, session):

@@ -11,6 +11,7 @@ from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from os import system
 
+
 class Ipkuninstall(Screen):
 	skin = """
 		<screen name="Ipkuninstall" position="center,center" size="900,600" title="" >

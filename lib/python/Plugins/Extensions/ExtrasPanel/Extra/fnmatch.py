@@ -17,9 +17,11 @@ __all__ = ["filter", "fnmatch", "fnmatchcase", "translate"]
 _cache = {}
 _MAXCACHE = 100
 
+
 def _purge():
     """Clear the pattern cache"""
     _cache.clear()
+
 
 def fnmatch(name, pat):
     """Test whether FILENAME matches PATTERN.
@@ -41,6 +43,7 @@ def fnmatch(name, pat):
     name = os.path.normcase(name)
     pat = os.path.normcase(pat)
     return fnmatchcase(name, pat)
+
 
 def filter(names, pat):
     """Return the subset of the list NAMES that match PAT"""
@@ -65,6 +68,7 @@ def filter(names, pat):
                 result.append(name)
     return result
 
+
 def fnmatchcase(name, pat):
     """Test whether FILENAME matches PATTERN, including case.
 
@@ -78,6 +82,7 @@ def fnmatchcase(name, pat):
             _cache.clear()
         _cache[pat] = re.compile(res)
     return _cache[pat].match(name) is not None
+
 
 def translate(pat):
     """Translate a shell PATTERN to a regular expression.

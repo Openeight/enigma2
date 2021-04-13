@@ -6,6 +6,7 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from Components.Label import Label
 
+
 def MessageBoxEntry(name, picture):
 	pixmap = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/ExtrasPanel/icons/" + picture))
 	if not pixmap:
@@ -13,6 +14,7 @@ def MessageBoxEntry(name, picture):
 		
 	return (pixmap, name)
 	
+
 class ExtraMessageBox(Screen):
 	skin = """
 	<screen position="center,center" size="560,120" title=" ">
@@ -29,6 +31,7 @@ class ExtraMessageBox(Screen):
 			</convert>
 		</widget>
 	</screen>"""
+
 	def __init__(self, session, message="", title="", menulist=[], type=0, exitid=-1, default=0, timeout=0):
 		# type exist for compability... will be ignored
 		Screen.__init__(self, session)
