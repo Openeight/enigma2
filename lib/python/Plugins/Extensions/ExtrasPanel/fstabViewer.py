@@ -23,6 +23,7 @@ lengthList = [0,
  0,
  0]
 
+
 class fstabMenuList(MenuList):
 
     def __init__(self, list):
@@ -73,7 +74,7 @@ def fstabMenuListEntry(devicename, mountpoint, fstype, options, dumpfreq, passnu
 class fstabViewerScreen(Screen, HelpableScreen):
     skin = '\n\t\t<screen position="center,center" size="600,430" title="fstab-Editor" >\n\t\t\t<widget name="entryinfo" position="0,10" size="580,20" halign="right" font="Regular;17" transparent="1" />\n\t\t\t<widget name="menulist" position="0,40" size="600,220" scrollbarMode="showNever" />\n\t\t\t<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/fstabEditor.png" position="70,304" size="100,40"/>\n\t\t\t<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/ok.png" position="230,300" size="35,25"/>\n\t\t\t<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/exit.png" position="230,325" size="35,25"/>\n\t\t\t<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/green.png" position="230,350" size="35,25"/>\n\t\t\t<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/blue.png" position="230,375" size="35,25"/>\n\t\t\t<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/yellow.png" position="230,400" size="35,25"/>\n\t\t\t<widget name="edit" font="Regular;18" position="270,303" size="200,25" transparent="1"/>\n\t\t\t<widget name="cancelist" font="Regular;18" position="270,328" size="225,20" transparent="1"/>\n\t\t\t<widget name="addentry" font="Regular;18" position="270,353" size="225,20" transparent="1"/>\n\t\t\t<widget name="run" font="Regular;18" position="270,378" size="225,20" transparent="1"/>\n\t\t\t<widget name="restore" font="Regular;18" position="270,403" size="320,20" transparent="1"/>\n\t\t</screen>'
 
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.skin = fstabViewerScreen.skin
         self.session = session
         Screen.__init__(self, session)
@@ -188,7 +189,7 @@ class fstabViewerScreen(Screen, HelpableScreen):
         if not self.builderror:
             os.system('mount -a')
 
-    def checkSoftwareEntry(self, entry = ''):
+    def checkSoftwareEntry(self, entry=''):
         if entry and ('proc' in entry or 'tmpfs' in entry or 'jffs2' in entry or 'usbfs' in entry or 'usbdevfs' in entry or 'devpts' in entry or 'rootfs' in entry):
             return True
         return False
@@ -254,7 +255,7 @@ class fstabViewerScreen(Screen, HelpableScreen):
 class fstabEditorScreen(Screen, ConfigListScreen, HelpableScreen):
     skin = '\n\t\t<screen position="center,center" size="600,380" title="fstab-Editor" >\n\t\t\t<widget itemHeight="28" name="config" position="0,40" size="600,224" scrollbarMode="showOnDemand"/>\n\t\t\t<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/fstabEditor.png" position="70,275" size="100,40"/>\n\t\t\t<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/green.png" position="230,300" size="35,25"/>\n\t\t\t<ePixmap alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/exit.png" position="230,325" size="35,25"/>\n\t\t\t<widget name="ButtonBlue" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/blue.png" position="230,350" zPosition="10" size="35,25" transparent="1" alphatest="on" />\n\t\t\t<widget name="save" font="Regular;18" position="270,303" size="200,25" transparent="1"/>\n\t\t\t<widget name="cansel" font="Regular;18" position="270,328" size="200,25" transparent="1"/>\n\t\t\t<widget name="ButtonBlueText" position="270,353" size="200,25" zPosition="10" font="Regular;18" foregroundColor="#f0f0f0" transparent="1" />\n\t\t\t<widget source="VKeyIcon" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/key_text.png" position="10,304" zPosition="10" size="35,25" transparent="1" alphatest="on" >\n\t\t\t\t<convert type="ConditionalShowHide" />\n\t\t\t</widget>\n\t\t\t<widget name="ButtonOK" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/ok.png" zPosition="10" position="230,275" size="35,25" transparent="1" alphatest="on"/>\n\t\t\t<widget name="HelpWindow" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/vkey_icon.png" position="10,350" zPosition="10" size="60,48" transparent="1" alphatest="on" />\n\t\t</screen>'
 
-    def __init__(self, session, selectedEntry = None, addEntry = False, cloneEntry = False):
+    def __init__(self, session, selectedEntry=None, addEntry=False, cloneEntry=False):
         self.skin = fstabEditorScreen.skin
         self.session = session
         self.selectedEntry = selectedEntry

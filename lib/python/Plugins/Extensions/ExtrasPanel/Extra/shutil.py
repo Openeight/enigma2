@@ -11,18 +11,21 @@ from os.path import abspath
 import fnmatch
 import errno
 
-__all__ = ["copyfileobj","copyfile","copymode","copystat","copy","copy2",
-           "copytree","move","rmtree","Error"]
+__all__ = ["copyfileobj", "copyfile", "copymode", "copystat", "copy", "copy2",
+           "copytree", "move", "rmtree", "Error"]
+
 
 class Error(EnvironmentError):
     pass
+
 
 try:
     WindowsError
 except NameError:
     WindowsError = None
 
-def copyfileobj(fsrc, fdst, length=16*1024):
+
+def copyfileobj(fsrc, fdst, length=16 * 1024):
     """copy data from file-like object fsrc to file-like object fdst"""
     while 1:
         buf = fsrc.read(length)
@@ -30,9 +33,10 @@ def copyfileobj(fsrc, fdst, length=16*1024):
             break
         fdst.write(buf)
 
+
 def _samefile(src, dst):
     # Macintosh, Unix.
-    if hasattr(os.path,'samefile'):
+    if hasattr(os.path, 'samefile'):
         try:
             return os.path.samefile(src, dst)
         except OSError:
@@ -41,6 +45,7 @@ def _samefile(src, dst):
     # All other platforms: check for same pathname.
     return (os.path.normcase(os.path.abspath(src)) ==
             os.path.normcase(os.path.abspath(dst)))
+
 
 def copyfile(src, dst):
     """Copy data from src to dst"""
@@ -51,12 +56,14 @@ def copyfile(src, dst):
         with open(dst, 'wb') as fdst:
             copyfileobj(fsrc, fdst)
 
+
 def copymode(src, dst):
     """Copy mode bits from src to dst"""
     if hasattr(os, 'chmod'):
         st = os.stat(src)
         mode = stat.S_IMODE(st.st_mode)
         os.chmod(dst, mode)
+
 
 def copystat(src, dst):
     """Copy all stat info (mode bits, atime, mtime, flags) from src to dst"""
@@ -73,6 +80,7 @@ def copystat(src, dst):
             if not hasattr(errno, 'EOPNOTSUPP') or why.errno != errno.EOPNOTSUPP:
                 raise
 
+
 def copy(src, dst):
     """Copy data and mode bits ("cp src dst").
 
@@ -83,6 +91,7 @@ def copy(src, dst):
         dst = os.path.join(dst, os.path.basename(src))
     copyfile(src, dst)
     copymode(src, dst)
+
 
 def copy2(src, dst):
     """Copy data and all stat info ("cp -p src dst").
@@ -95,6 +104,7 @@ def copy2(src, dst):
     copyfile(src, dst)
     copystat(src, dst)
 
+
 def ignore_patterns(*patterns):
     """Function that can be used as copytree() ignore parameter.
 
@@ -106,6 +116,7 @@ def ignore_patterns(*patterns):
             ignored_names.extend(fnmatch.filter(names, pattern))
         return set(ignored_names)
     return _ignore_patterns
+
 
 def copytree(src, dst, symlinks=False, ignore=None):
     """Recursively copy a directory tree using copy2().
@@ -172,6 +183,7 @@ def copytree(src, dst, symlinks=False, ignore=None):
     if errors:
         raise Error, errors
 
+
 def rmtree(path, ignore_errors=False, onerror=None):
     """Recursively delete a directory tree.
 
@@ -226,6 +238,7 @@ def _basename(path):
     # Thus we always get the last component of the path, even for directories.
     return os.path.basename(path.rstrip(os.path.sep))
 
+
 def move(src, dst):
     """Recursively move a file or directory to another location. This is
     similar to the Unix "mv" command.
@@ -259,6 +272,7 @@ def move(src, dst):
         else:
             copy2(src, real_dst)
             os.unlink(src)
+
 
 def destinsrc(src, dst):
     src = abspath(src)

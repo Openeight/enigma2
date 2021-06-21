@@ -24,15 +24,19 @@ import Screens.Standby
 
 forceNotShowCiMessages = False
 
+
 def setCIBitrate(configElement):
 	eDVBCI_UI.getInstance().setClockRate(configElement.slotid, eDVBCI_UI.rateNormal if configElement.value == "no" else eDVBCI_UI.rateHigh)
+
 
 def setdvbCiDelay(configElement):
 	open(SystemInfo["CommonInterfaceCIDelay"], "w").write(configElement.value)
 	configElement.save()
 
+
 def setRelevantPidsRouting(configElement):
 	open(SystemInfo["CI%dRelevantPidsRoutingSupport" % configElement.slotid], "w").write("yes" if configElement.value else "no")
+
 
 def InitCiConfig():
 	config.ci = ConfigSubList()
@@ -40,24 +44,25 @@ def InitCiConfig():
 	if SystemInfo["CommonInterface"]:
 		for slot in range(SystemInfo["CommonInterface"]):
 			config.ci.append(ConfigSubsection())
-			config.ci[slot].canDescrambleMultipleServices = ConfigSelection(choices = [("auto", _("auto")), ("no", _("no")), ("yes", _("yes"))], default = "auto")
-			config.ci[slot].use_static_pin = ConfigYesNo(default = True)
-			config.ci[slot].static_pin = ConfigPIN(default = 0)
-			config.ci[slot].show_ci_messages = ConfigYesNo(default = True)
+			config.ci[slot].canDescrambleMultipleServices = ConfigSelection(choices=[("auto", _("auto")), ("no", _("no")), ("yes", _("yes"))], default="auto")
+			config.ci[slot].use_static_pin = ConfigYesNo(default=True)
+			config.ci[slot].static_pin = ConfigPIN(default=0)
+			config.ci[slot].show_ci_messages = ConfigYesNo(default=True)
 			if SystemInfo["CI%dSupportsHighBitrates" % slot]:
-				config.ci[slot].canHandleHighBitrates = ConfigYesNo(default = True)
+				config.ci[slot].canHandleHighBitrates = ConfigYesNo(default=True)
 				config.ci[slot].canHandleHighBitrates.slotid = slot
 				config.ci[slot].canHandleHighBitrates.addNotifier(setCIBitrate)
 			if SystemInfo["CI%dRelevantPidsRoutingSupport" % slot]:
-				config.ci[slot].relevantPidsRouting = ConfigYesNo(default = False)
+				config.ci[slot].relevantPidsRouting = ConfigYesNo(default=False)
 				config.ci[slot].relevantPidsRouting.slotid = slot
 				config.ci[slot].relevantPidsRouting.addNotifier(setRelevantPidsRouting)
 		if SystemInfo["CommonInterfaceCIDelay"]:
-			config.cimisc.dvbCiDelay = ConfigSelection(default = "256", choices = [("16"), ("32"), ("64"), ("128"), ("256")])
+			config.cimisc.dvbCiDelay = ConfigSelection(default="256", choices=[("16"), ("32"), ("64"), ("128"), ("256")])
 			config.cimisc.dvbCiDelay.addNotifier(setdvbCiDelay)
 
+
 class MMIDialog(Screen):
-	def __init__(self, session, slotid, action, handler = eDVBCI_UI.getInstance(), wait_text = "", screen_data = None):
+	def __init__(self, session, slotid, action, handler=eDVBCI_UI.getInstance(), wait_text="", screen_data=None):
 		Screen.__init__(self, session)
 
 		print "MMIDialog with action" + str(action)
@@ -73,7 +78,7 @@ class MMIDialog(Screen):
 		self["title"] = Label("")
 		self["subtitle"] = Label("")
 		self["bottom"] = Label("")
-		self["entries"] = ConfigList([ ])
+		self["entries"] = ConfigList([])
 
 		self["actions"] = NumberActionMap(["SetupActions", "MenuActions"],
 			{
@@ -113,18 +118,18 @@ class MMIDialog(Screen):
 
 	def addEntry(self, list, entry):
 		if entry[0] == "TEXT":		#handle every item (text / pin only?)
-			list.append( (entry[1], ConfigNothing(), entry[2]) )
+			list.append((entry[1], ConfigNothing(), entry[2]))
 		if entry[0] == "PIN":
 			pinlength = entry[1]
 			if entry[3] == 1:
 				# masked pins:
-				x = ConfigPIN(0, len = pinlength, censor = "*")
+				x = ConfigPIN(0, len=pinlength, censor="*")
 			else:
 				# unmasked pins:
-				x = ConfigPIN(0, len = pinlength)
+				x = ConfigPIN(0, len=pinlength)
 			x.addEndNotifier(self.pinEntered)
 			self["subtitle"].setText(entry[2])
-			list.append( getConfigListEntry("", x) )
+			list.append(getConfigListEntry("", x))
 			self["bottom"].setText(_("please press OK when ready"))
 
 	def pinEntered(self, value):
@@ -161,7 +166,7 @@ class MMIDialog(Screen):
 			else:
 				self.save_PIN_CB(False)
 
-	def save_PIN_CB(self, ret = None):
+	def save_PIN_CB(self, ret=None):
 		if ret:
 			config.ci[self.slotid].static_pin.value = self.answer
 			config.ci[self.slotid].static_pin.save()
@@ -187,7 +192,7 @@ class MMIDialog(Screen):
 		elif self.tag == "WAIT":
 			self.handler.stopMMI(self.slotid)
 			self.closeMmi()
-		elif self.tag in ( "MENU", "LIST" ):
+		elif self.tag in ("MENU", "LIST"):
 			print "cancel list"
 			self.handler.answerMenu(self.slotid, 0)
 			self.showWait()
@@ -238,8 +243,8 @@ class MMIDialog(Screen):
 		self["title"].setText("")
 		self["subtitle"].setText("")
 		self["bottom"].setText("")
-		list = [ ]
-		list.append( (self.wait_text, ConfigNothing()) )
+		list = []
+		list.append((self.wait_text, ConfigNothing()))
 		self.updateList(list)
 
 	def showScreen(self):
@@ -249,14 +254,14 @@ class MMIDialog(Screen):
 		else:
 			screen = self.handler.getMMIScreen(self.slotid)
 
-		list = [ ]
+		list = []
 
 		self.timer.stop()
 		if len(screen) > 0 and screen[0][0] == "CLOSE":
 			timeout = screen[0][1]
 			self.mmiclosed = True
 			if timeout > 0:
-				self.timer.start(timeout*1000, True)
+				self.timer.start(timeout * 1000, True)
 			else:
 				self.keyCancel()
 		else:
@@ -309,12 +314,13 @@ class MMIDialog(Screen):
 
 		#FIXME: check for mmi-session closed
 
+
 class CiMessageHandler:
 	def __init__(self):
 		self.session = None
 		self.auto_close = False
-		self.ci = { }
-		self.dlgs = { }
+		self.ci = {}
+		self.dlgs = {}
 		eDVBCI_UI.getInstance().ciStateChanged.get().append(self.ciStateChanged)
 
 	def setSession(self, session):
@@ -352,7 +358,7 @@ class CiMessageHandler:
 								show_ui = False
 								self.auto_close = False
 					if show_ui and not forceNotShowCiMessages and not Screens.Standby.inStandby:
-						self.dlgs[slot] = self.session.openWithCallback(self.dlgClosed, MMIDialog, slot, 3, screen_data = screen_data)
+						self.dlgs[slot] = self.session.openWithCallback(self.dlgClosed, MMIDialog, slot, 3, screen_data=screen_data)
 
 	def dlgClosed(self, slot):
 		if slot in self.dlgs:
@@ -366,7 +372,9 @@ class CiMessageHandler:
 		if slot in self.ci:
 			del self.ci[slot]
 
+
 CiHandler = CiMessageHandler()
+
 
 class CiSelection(Screen):
 	def __init__(self, session):
@@ -378,11 +386,11 @@ class CiSelection(Screen):
 				"right": self.keyLeft,
 				"ok": self.okbuttonClick,
 				"cancel": self.cancel
-			},-1)
+			}, -1)
 
 		self.dlg = None
-		self.state = { }
-		self.list = [ ]
+		self.state = {}
+		self.list = []
 		self["key_blue"] = Label(_("CI assignment"))
 		self["key_blue"].hide()
 		self["pixmap_blue"] = Pixmap()
@@ -527,18 +535,19 @@ class CiSelection(Screen):
 				CiHandler.unregisterCIMessageHandler(slot)
 		self.close()
 
+
 class PermanentPinEntry(Screen, ConfigListScreen):
 	def __init__(self, session, pin, pin_slot):
 		Screen.__init__(self, session)
-		self.skinName = ["ParentalControlChangePin", "Setup" ]
+		self.skinName = ["ParentalControlChangePin", "Setup"]
 		self.setup_title = _("Enter pin code")
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 
 		self.slot = pin_slot
 		self.pin = pin
 		self.list = []
-		self.pin1 = ConfigPIN(default = 0, censor = "*")
-		self.pin2 = ConfigPIN(default = 0, censor = "*")
+		self.pin1 = ConfigPIN(default=0, censor="*")
+		self.pin2 = ConfigPIN(default=0, censor="*")
 		self.pin1.addEndNotifier(boundFunction(self.valueChanged, 1))
 		self.pin2.addEndNotifier(boundFunction(self.valueChanged, 2))
 		self.list.append(getConfigListEntry(_("Enter PIN"), NoSave(self.pin1)))
@@ -593,40 +602,41 @@ class PermanentPinEntry(Screen, ConfigListScreen):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 
+
 class CIselectMainMenu(Screen):
 	skin = """
 		<screen name="CIselectMainMenu" position="center,center" size="500,250" title="CI assignment" >
 			<widget name="CiList" position="5,0" size="490,200" scrollbarMode="showOnDemand" />
 		</screen>"""
 
-	def __init__(self, session, args = 0):
+	def __init__(self, session, args=0):
 
 		Screen.__init__(self, session)
 
-		self["actions"] = ActionMap(["ColorActions","SetupActions"],
+		self["actions"] = ActionMap(["ColorActions", "SetupActions"],
 			{
 				"ok": self.greenPressed,
 				"cancel": self.close
 			}, -1)
 
-		NUM_CI=eDVBCIInterfaces.getInstance().getNumOfSlots()
+		NUM_CI = eDVBCIInterfaces.getInstance().getNumOfSlots()
 
 		print "[CI_Wizzard] FOUND %d CI Slots " % NUM_CI
 
 		self.dlg = None
-		self.state = { }
-		self.list = [ ]
+		self.state = {}
+		self.list = []
 		if NUM_CI > 0:
 			for slot in range(NUM_CI):
 				state = eDVBCI_UI.getInstance().getState(slot)
 				if state != -1:
-					if  state == 1:
-						appname = _("Slot %d") %(slot+1) + " - " + _("init modules")
+					if state == 1:
+						appname = _("Slot %d") % (slot + 1) + " - " + _("init modules")
 					elif state == 2:
-						appname = _("Slot %d") %(slot+1) + " - " + eDVBCI_UI.getInstance().getAppName(slot)
-					self.list.append( (appname, ConfigNothing(), 0, slot) )
+						appname = _("Slot %d") % (slot + 1) + " - " + eDVBCI_UI.getInstance().getAppName(slot)
+					self.list.append((appname, ConfigNothing(), 0, slot))
 		else:
-			self.list.append( (_("no CI slots found") , ConfigNothing(), 1, -1) )
+			self.list.append((_("no CI slots found"), ConfigNothing(), 1, -1))
 
 		menuList = ConfigList(self.list)
 		menuList.list = self.list
@@ -643,7 +653,7 @@ class CIselectMainMenu(Screen):
 			action = cur[2]
 			slot = cur[3]
 			if action == 1:
-				print "[CI_Wizzard] there is no CI Slot in your %s" % slot 
+				print "[CI_Wizzard] there is no CI Slot in your %s" % slot
 			else:
 				print "[CI_Wizzard] selected CI Slot : %d" % slot
 				if config.usage.setup_level.index > 1: # advanced
@@ -651,7 +661,6 @@ class CIselectMainMenu(Screen):
 				else:
 					self.session.open(easyCIconfigMenu, slot)
 
-				
         """def yellowPressed(self): # unused
 		NUM_CI=eDVBCIInterfaces.getInstance().getNumOfSlots()
 		print "[CI_Check] FOUND %d CI Slots " % NUM_CI
@@ -682,7 +691,7 @@ class CIconfigMenu(Screen):
 	def __init__(self, session, ci_slot="9"):
 
 		Screen.__init__(self, session)
-		self.ci_slot=ci_slot
+		self.ci_slot = ci_slot
 		self.filename = eEnv.resolve("${sysconfdir}/enigma2/ci") + str(self.ci_slot) + ".xml"
 
 		self["key_red"] = StaticText(_("Delete"))
@@ -694,7 +703,7 @@ class CIconfigMenu(Screen):
 		self["ServiceList_desc"] = StaticText(_("Assigned services/provider:"))
 		self["ServiceList_info"] = StaticText()
 
-		self["actions"] = ActionMap(["ColorActions","SetupActions"],
+		self["actions"] = ActionMap(["ColorActions", "SetupActions"],
 			{
 				"green": self.greenPressed,
 				"red": self.redPressed,
@@ -705,14 +714,14 @@ class CIconfigMenu(Screen):
 
 		print "[CI_Wizzard_Config] Configuring CI Slots : %d  " % self.ci_slot
 
-		i=0
-		self.caidlist=[]
+		i = 0
+		self.caidlist = []
 		print eDVBCIInterfaces.getInstance().readCICaIds(self.ci_slot)
 		for caid in eDVBCIInterfaces.getInstance().readCICaIds(self.ci_slot):
-			i+=1
-			self.caidlist.append((str(hex(int(caid))),str(caid),i))
+			i += 1
+			self.caidlist.append((str(hex(int(caid))), str(caid), i))
 
-		print "[CI_Wizzard_Config_CI%d] read following CAIds from CI: %s" %(self.ci_slot, self.caidlist)
+		print "[CI_Wizzard_Config_CI%d] read following CAIds from CI: %s" % (self.ci_slot, self.caidlist)
 
 		self.selectedcaid = []
 		self.servicelist = []
@@ -726,7 +735,7 @@ class CIconfigMenu(Screen):
 		self.loadXML()
 		# if config mode !=advanced autoselect any caid
 		if config.usage.setup_level.index <= 1: # advanced
-			self.selectedcaid=self.caidlist
+			self.selectedcaid = self.caidlist
 			self.finishedCAidSelection(self.selectedcaid)
 		self.onShown.append(self.setWindowTitle)
 
@@ -737,10 +746,10 @@ class CIconfigMenu(Screen):
 		self.delete()
 
 	def greenPressed(self):
-		self.session.openWithCallback( self.finishedChannelSelection, myChannelSelection, None)
+		self.session.openWithCallback(self.finishedChannelSelection, myChannelSelection, None)
 
 	def yellowPressed(self):
-		self.session.openWithCallback( self.finishedProviderSelection, myProviderSelection, None)
+		self.session.openWithCallback(self.finishedProviderSelection, myProviderSelection, None)
 
 	def bluePressed(self):
 		self.session.openWithCallback(self.finishedCAidSelection, CAidSelect, self.caidlist, self.selectedcaid)
@@ -765,41 +774,41 @@ class CIconfigMenu(Screen):
 
 	def finishedChannelSelection(self, *args):
 		if len(args):
-			ref=args[0]
+			ref = args[0]
 			service_ref = ServiceReference(ref)
 			service_name = service_ref.getServiceName()
-			if find_in_list(self.servicelist, service_name, 0)==False:
-				split_ref=service_ref.ref.toString().split(":")
+			if find_in_list(self.servicelist, service_name, 0) == False:
+				split_ref = service_ref.ref.toString().split(":")
 				if split_ref[0] == "1":#== dvb service und nicht muell von None
-					self.servicelist.append( (service_name , ConfigNothing(), 0, service_ref.ref.toString()) )
+					self.servicelist.append((service_name, ConfigNothing(), 0, service_ref.ref.toString()))
 					self["ServiceList"].l.setList(self.servicelist)
 					self.setServiceListInfo()
 
 	def finishedProviderSelection(self, *args):
-		if len(args)>1: # bei nix selected kommt nur 1 arg zurueck (==None)
-			name=args[0]
-			dvbnamespace=args[1]
-			if find_in_list(self.servicelist, name, 0)==False:
-				self.servicelist.append( (name , ConfigNothing(), 1, dvbnamespace) )
+		if len(args) > 1: # bei nix selected kommt nur 1 arg zurueck (==None)
+			name = args[0]
+			dvbnamespace = args[1]
+			if find_in_list(self.servicelist, name, 0) == False:
+				self.servicelist.append((name, ConfigNothing(), 1, dvbnamespace))
 				self["ServiceList"].l.setList(self.servicelist)
 				self.setServiceListInfo()
 
 	def finishedCAidSelection(self, *args):
 		if len(args):
-			self.selectedcaid=args[0]
-			self.caids=""
+			self.selectedcaid = args[0]
+			self.caids = ""
 			if len(self.selectedcaid):
 				for item in self.selectedcaid:
 					if len(self.caids):
-						self.caids+= ", " + item[0]
+						self.caids += ", " + item[0]
 					else:
-						self.caids=item[0]
+						self.caids = item[0]
 			else:
-				self.selectedcaid=[]
-				self.caids=_("no CAId selected")
+				self.selectedcaid = []
+				self.caids = _("no CAId selected")
 		else:
-			self.selectedcaid=[]
-			self.caids=_("no CAId selected")
+			self.selectedcaid = []
+			self.caids = _("no CAId selected")
 		self["CAidList"].setText(self.caids)
 
 	def saveXML(self):
@@ -814,15 +823,15 @@ class CIconfigMenu(Screen):
 					fp.write("\t\t<caid id=\"%s\" />\n" % item[0])
 			for item in self.servicelist:
 				if len(self.servicelist):
-					if item[2]==1:
+					if item[2] == 1:
 						fp.write("\t\t<provider name=\"%s\" dvbnamespace=\"%s\" />\n" % (item[0], item[3]))
 					else:
-						fp.write("\t\t<service name=\"%s\" ref=\"%s\" />\n"  % (item[0], item[3]))
+						fp.write("\t\t<service name=\"%s\" ref=\"%s\" />\n" % (item[0], item[3]))
 			fp.write("\t</slot>\n")
 			fp.write("</ci>\n")
 			fp.close()
 		except:
-			print "[CI_Config_CI%d] xml not written" %self.ci_slot
+			print "[CI_Config_CI%d] xml not written" % self.ci_slot
 			os.unlink(self.filename)
 
 	def loadXML(self):
@@ -832,12 +841,12 @@ class CIconfigMenu(Screen):
 		def getValue(definitions, default):
 			ret = ""
 			Len = len(definitions)
-			return Len > 0 and definitions[Len-1].text or default
+			return Len > 0 and definitions[Len - 1].text or default
 
-		self.read_services=[]
-		self.read_providers=[]
-		self.usingcaid=[]
-		self.ci_config=[]
+		self.read_services = []
+		self.read_providers = []
+		self.usingcaid = []
+		self.ci_config = []
 
 		try:
 			fp = open(self.filename, 'r')
@@ -847,26 +856,26 @@ class CIconfigMenu(Screen):
 				read_slot = getValue(slot.findall("id"), False).encode("UTF-8")
 				print "ci " + read_slot
 
-				i=0
+				i = 0
 				for caid in slot.findall("caid"):
 					read_caid = caid.get("id").encode("UTF-8")
-					self.selectedcaid.append((str(read_caid),str(read_caid),i))
-					self.usingcaid.append(long(read_caid,16))
-					i+=1
+					self.selectedcaid.append((str(read_caid), str(read_caid), i))
+					self.usingcaid.append(long(read_caid, 16))
+					i += 1
 
-				for service in  slot.findall("service"):
+				for service in slot.findall("service"):
 					read_service_name = service.get("name").encode("UTF-8")
 					read_service_ref = service.get("ref").encode("UTF-8")
-					self.read_services.append (read_service_ref)
+					self.read_services.append(read_service_ref)
 
-				for provider in  slot.findall("provider"):
+				for provider in slot.findall("provider"):
 					read_provider_name = provider.get("name").encode("UTF-8")
 					read_provider_dvbname = provider.get("dvbnamespace").encode("UTF-8")
-					self.read_providers.append((read_provider_name,read_provider_dvbname))
+					self.read_providers.append((read_provider_name, read_provider_dvbname))
 
 				self.ci_config.append((int(read_slot), (self.read_services, self.read_providers, self.usingcaid)))
 		except:
-			print "[CI_Config_CI%d] error parsing xml..." %self.ci_slot
+			print "[CI_Config_CI%d] error parsing xml..." % self.ci_slot
 
 		for item in self.read_services:
 			if len(item):
@@ -874,7 +883,7 @@ class CIconfigMenu(Screen):
 
 		for item in self.read_providers:
 			if len(item):
-				self.finishedProviderSelection(item[0],item[1])
+				self.finishedProviderSelection(item[0], item[1])
 
 		print self.ci_config
 		self.finishedCAidSelection(self.selectedcaid)
@@ -899,10 +908,10 @@ class easyCIconfigMenu(CIconfigMenu):
 	def __init__(self, session, ci_slot="9"):
 		Screen.setTitle(self, _("CI assignment"))
 
-		ci=ci_slot
+		ci = ci_slot
 		CIconfigMenu.__init__(self, session, ci_slot)
 
-		self["actions"] = ActionMap(["ColorActions","SetupActions"],
+		self["actions"] = ActionMap(["ColorActions", "SetupActions"],
 		{
 			"green": self.greenPressed,
 			"red": self.redPressed,
@@ -931,7 +940,7 @@ class CAidSelect(Screen):
 		self["list"] = self.list
 
 		for listindex in range(len(list)):
-			if find_in_list(selected_caids,list[listindex][0],0):
+			if find_in_list(selected_caids, list[listindex][0], 0):
 				self.list.addSelection(list[listindex][0], list[listindex][1], listindex, True)
 			else:
 				self.list.addSelection(list[listindex][0], list[listindex][1], listindex, False)
@@ -940,7 +949,7 @@ class CAidSelect(Screen):
 		self["key_green"] = StaticText(_("Save"))
 		self["introduction"] = StaticText(_("Press OK to select/deselect a CAId."))
 
-		self["actions"] = ActionMap(["ColorActions","SetupActions"],
+		self["actions"] = ActionMap(["ColorActions", "SetupActions"],
 		{
 			"ok": self.list.toggleSelection,
 			"cancel": self.cancel,
@@ -959,6 +968,7 @@ class CAidSelect(Screen):
 
 	def cancel(self):
 		self.close()
+
 
 class myProviderSelection(ChannelSelectionBase):
 	skin = """
@@ -1001,29 +1011,29 @@ class myProviderSelection(ChannelSelectionBase):
 
 	def channelSelected(self): # just return selected service
 		ref = self.getCurrentSelection()
-		splited_ref=ref.toString().split(":")
+		splited_ref = ref.toString().split(":")
 		if ref.flags == 7 and splited_ref[6] != "0":
-			self.dvbnamespace=splited_ref[6]
+			self.dvbnamespace = splited_ref[6]
 			self.enterPath(ref)
 		else:
 			self.close(ref.getName(), self.dvbnamespace)
 
 	def showSatellites(self):
 		if not self.pathChangeDisabled:
-			refstr = '%s FROM SATELLITES ORDER BY satellitePosition'%(self.service_types)
+			refstr = '%s FROM SATELLITES ORDER BY satellitePosition' % (self.service_types)
 			if not self.preEnterPath(refstr):
 				ref = eServiceReference(refstr)
-				justSet=False
+				justSet = False
 				prev = None
 
 				if self.isBasePathEqual(ref):
 					if self.isPrevPathEqual(ref):
-						justSet=True
+						justSet = True
 					prev = self.pathUp(justSet)
 				else:
 					currentRoot = self.getRoot()
 					if currentRoot is None or currentRoot != ref:
-						justSet=True
+						justSet = True
 						self.clearPath()
 						self.enterPath(ref, True)
 				if justSet:
@@ -1063,6 +1073,7 @@ class myProviderSelection(ChannelSelectionBase):
 
 	def cancel(self):
 		self.close(None)
+
 
 class myChannelSelection(ChannelSelectionBase):
 	skin = """
@@ -1126,23 +1137,25 @@ class myChannelSelection(ChannelSelectionBase):
 	def cancel(self):
 		self.close(None)
 
+
 def activate_all(session):
-	NUM_CI=eDVBCIInterfaces.getInstance().getNumOfSlots()
+	NUM_CI = eDVBCIInterfaces.getInstance().getNumOfSlots()
 	print "[CI_Activate] FOUND %d CI Slots " % NUM_CI
 	if NUM_CI > 0:
-		ci_config=[]
+		ci_config = []
+
 		def getValue(definitions, default):
 			# Initialize Output
 			ret = ""
 			# How many definitions are present
 			Len = len(definitions)
-			return Len > 0 and definitions[Len-1].text or default
+			return Len > 0 and definitions[Len - 1].text or default
 
 		for ci in range(NUM_CI):
 			filename = eEnv.resolve("${sysconfdir}/enigma2/ci") + str(ci) + ".xml"
 
 			if not os_path.exists(filename):
-				print "[CI_Activate_Config_CI%d] no config file found" %ci
+				print "[CI_Activate_Config_CI%d] no config file found" % ci
 
 			try:
 				if not os_path.exists(self.filename):
@@ -1151,40 +1164,41 @@ def activate_all(session):
 				fp = open(filename, 'r')
 				tree = ci_parse(fp).getroot()
 				fp.close()
-				read_services=[]
-				read_providers=[]
-				usingcaid=[]
+				read_services = []
+				read_providers = []
+				usingcaid = []
 				for slot in tree.findall("slot"):
 					read_slot = getValue(slot.findall("id"), False).encode("UTF-8")
 
 					for caid in slot.findall("caid"):
 						read_caid = caid.get("id").encode("UTF-8")
-						usingcaid.append(long(read_caid,16))
+						usingcaid.append(long(read_caid, 16))
 
 					for service in slot.findall("service"):
 						read_service_ref = service.get("ref").encode("UTF-8")
-						read_services.append (read_service_ref)
+						read_services.append(read_service_ref)
 
 					for provider in slot.findall("provider"):
 						read_provider_name = provider.get("name").encode("UTF-8")
 						read_provider_dvbname = provider.get("dvbnamespace").encode("UTF-8")
-						read_providers.append((read_provider_name,long(read_provider_dvbname,16)))
+						read_providers.append((read_provider_name, long(read_provider_dvbname, 16)))
 
 					ci_config.append((int(read_slot), (read_services, read_providers, usingcaid)))
 			except:
-				print "[CI_Activate_Config_CI%d] error parsing xml..." %ci
+				print "[CI_Activate_Config_CI%d] error parsing xml..." % ci
 
 		for item in ci_config:
-			print "[CI_Activate] activate CI%d with following settings:" %item[0]
+			print "[CI_Activate] activate CI%d with following settings:" % item[0]
 			print item[0]
 			print item[1]
 			try:
-				eDVBCIInterfaces.getInstance().setDescrambleRules(item[0],item[1])
+				eDVBCIInterfaces.getInstance().setDescrambleRules(item[0], item[1])
 			except:
-				print "[CI_Activate_Config_CI%d] error setting DescrambleRules..." %item[0]
+				print "[CI_Activate_Config_CI%d] error setting DescrambleRules..." % item[0]
+
 
 def find_in_list(list, search, listpos=0):
 	for item in list:
-		if item[listpos]==search:
+		if item[listpos] == search:
 			return True
 	return False

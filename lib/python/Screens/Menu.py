@@ -21,6 +21,7 @@ from Screens.Setup import Setup, getSetupTitle
 # read the menu
 mdom = xml.etree.cElementTree.parse(resolveFilename(SCOPE_SKIN, 'menu.xml'))
 
+
 class MenuUpdater:
 	def __init__(self):
 		self.updatedMenuItems = {}
@@ -39,10 +40,13 @@ class MenuUpdater:
 	def getUpdatedMenu(self, id):
 		return self.updatedMenuItems[id]
 
+
 menuupdater = MenuUpdater()
+
 
 class MenuSummary(Screen):
 	pass
+
 
 class Menu(Screen, ProtectedScreen):
 	ALLOW_SUSPEND = True
@@ -169,7 +173,7 @@ class Menu(Screen, ProtectedScreen):
 		self.createMenuList()
 
 		# for the skin: first try a menu_<menuID>, then Menu
-		self.skinName = [ ]
+		self.skinName = []
 		if self.menuID:
 			self.skinName.append("menu_" + self.menuID)
 		self.skinName.append("Menu")
@@ -258,8 +262,8 @@ class Menu(Screen, ProtectedScreen):
 		if "user" in config.usage.menu_sort_mode.value and self.menuID == "mainmenu":
 			plugin_list = []
 			id_list = []
-			for l in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU ,PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_EVENTINFO]):
-				l.id = (l.name.lower()).replace(' ','_')
+			for l in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_EVENTINFO]):
+				l.id = (l.name.lower()).replace(' ', '_')
 				if l.id not in id_list:
 					id_list.append(l.id)
 					plugin_list.append((l.name, boundFunction(l.__call__, self.session), l.id, 200))
@@ -287,7 +291,7 @@ class Menu(Screen, ProtectedScreen):
 			self.list.sort(key=lambda x: int(x[3]))
 
 		if config.usage.menu_show_numbers.value in ("menu&plugins", "menu") or showNumericHelp:
-			self.list = [(str(x[0] + 1) + " " +x[1][0], x[1][1], x[1][2]) for x in enumerate(self.list)]
+			self.list = [(str(x[0] + 1) + " " + x[1][0], x[1][1], x[1][2]) for x in enumerate(self.list)]
 
 		self["menu"].updateList(self.list)
 
@@ -345,8 +349,9 @@ class Menu(Screen, ProtectedScreen):
 			if not self.sub_menu_sort.getConfigValue(entry[2], "hidden"):
 				self.list.append(entry)
 		if not self.list:
-			self.list.append(('',None,'dummy','10',10))
-		self.list.sort(key=lambda listweight : int(listweight[4]))
+			self.list.append(('', None, 'dummy', '10', 10))
+		self.list.sort(key=lambda listweight: int(listweight[4]))
+
 
 class MenuSort(Menu):
 	def __init__(self, session, parent):
@@ -377,16 +382,16 @@ class MenuSort(Menu):
 	def isProtected(self):
 		return config.ParentalControl.setuppinactive.value and config.ParentalControl.config_sections.menu_sort.value
 
-	def resetSortOrder(self, key = None):
-		config.usage.menu_sort_weight.value = { "mainmenu" : {"submenu" : {} }}
+	def resetSortOrder(self, key=None):
+		config.usage.menu_sort_weight.value = {"mainmenu": {"submenu": {}}}
 		config.usage.menu_sort_weight.save()
 		self.createMenuList()
 
 	def hide_show_entries(self):
 		self.list = list(self.full_list)
 		if not self.list:
-			self.list.append(('',None,'dummy','10',10))
-		self.list.sort(key=lambda listweight : int(listweight[4]))
+			self.list.append(('', None, 'dummy', '10', 10))
+		self.list.sort(key=lambda listweight: int(listweight[4]))
 
 	def selectionChanged(self):
 		selection = self["menu"].getCurrent() and len(self["menu"].getCurrent()) > 2 and self["menu"].getCurrent()[2] or ""
@@ -453,6 +458,7 @@ class MenuSort(Menu):
 			self["menu"].down()
 		else:
 			self["menu"].up()
+
 
 class MainMenu(Menu):
 	#add file load functions for the xml-file

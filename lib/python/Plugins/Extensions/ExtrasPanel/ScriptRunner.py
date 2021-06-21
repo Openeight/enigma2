@@ -14,7 +14,9 @@ from Components.Sources.List import List
 from Screens.Standby import TryQuitMainloop
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
 from os import listdir, remove, mkdir, path, access, X_OK, chmod, system
-import datetime, time
+import datetime
+import time
+
 
 class ScriptRunner(Screen):
 	skin = """<screen name="ScriptRunner" position="center,center" size="560,400" title="Script Runner" flags="wfBorder" >
@@ -67,7 +69,7 @@ class ScriptRunner(Screen):
 			pkg = parts[0]
 			if pkg.find('.sh') >= 0:
 				self.list.append(pkg)
-		self.list.sort()	
+		self.list.sort()
 
 	def green(self):
 		self.execute = "0"
@@ -88,9 +90,9 @@ class ScriptRunner(Screen):
 			ybox = self.session.openWithCallback(self.Run, MessageBox, message, MessageBox.TYPE_YESNO)
 			ybox.setTitle(_("Run Confirmation"))
 		else:
-			self.session.open(MessageBox, _("You have no script to run."), MessageBox.TYPE_INFO, timeout = 10)
+			self.session.open(MessageBox, _("You have no script to run."), MessageBox.TYPE_INFO, timeout=10)
 
-	def Run(self,answer):
+	def Run(self, answer):
 		if answer is True:
 			system("if awk '/\r$/{exit 0;} 1{exit 1;}' /usr/script/" + self.sel + " ; then dos2unix /usr/script/" + self.sel + "; fi")
 			if not access("/usr/script/" + self.sel, X_OK):
@@ -104,9 +106,9 @@ class ScriptRunner(Screen):
 				from enigma import eConsoleAppContainer
 				eConsoleAppContainer().execute(cmd1)
 			elif self.execute == "2":
-				self.session.open(Console, title=self.sel, cmdlist = [cmd1], closeOnSuccess = True)
+				self.session.open(Console, title=self.sel, cmdlist=[cmd1], closeOnSuccess=True)
 			else:
-				self.session.open(Console, title=self.sel, cmdlist = [cmd1])
+				self.session.open(Console, title=self.sel, cmdlist=[cmd1])
 
 	def myclose(self):
 		self.close()

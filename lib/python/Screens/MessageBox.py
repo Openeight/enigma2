@@ -6,6 +6,7 @@ from Components.Sources.StaticText import StaticText
 from Components.MenuList import MenuList
 from enigma import eTimer
 
+
 class MessageBox(Screen):
 	TYPE_YESNO = 0
 	TYPE_INFO = 1
@@ -18,7 +19,7 @@ class MessageBox(Screen):
 		Screen.__init__(self, session)
 		self.setScreenPathMode(None)
 		if simple:
-			self.skinName="MessageBoxSimple"
+			self.skinName = "MessageBoxSimple"
 
 		self.msgBoxID = msgBoxID
 
@@ -52,9 +53,9 @@ class MessageBox(Screen):
 			if list:
 				self.list = list
 			elif default:
-				self.list = [ (_("yes"), True), (_("no"), False) ]
+				self.list = [(_("yes"), True), (_("no"), False)]
 			else:
-				self.list = [ (_("no"), False), (_("yes"), True) ]
+				self.list = [(_("no"), False), (_("yes"), True)]
 		else:
 			self.list = []
 

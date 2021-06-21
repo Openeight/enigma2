@@ -23,7 +23,9 @@ from Components.AVSwitch import AVSwitch
 from os import path
 from Components.HTMLComponent import HTMLComponent
 from Components.GUIComponent import GUIComponent
-import skin, os
+import skin
+import os
+
 
 class About(Screen):
 	def __init__(self, session):
@@ -40,12 +42,12 @@ class About(Screen):
 		if SystemInfo["canMultiBoot"]:
 			slot = image = getCurrentImage()
 			bootmode = ""
-			part = _("eMMC slot %s") %slot
+			part = _("eMMC slot %s") % slot
 			if "sda" in SystemInfo["canMultiBoot"][slot]['device']:
 				if slot > 4:
-					image -=4
+					image -= 4
 				else:
-					image -=1
+					image -= 1
 				if getMachineBuild() in ("sf8008"):
 					part = _("SD-card slot %s") % image
 				else:
@@ -69,7 +71,7 @@ class About(Screen):
 
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
 
-		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString(cpu).replace("GStreamer","")
+		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString(cpu).replace("GStreamer", "")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
 		AboutText += GStreamerVersion + "\n"
 
@@ -86,7 +88,7 @@ class About(Screen):
 			AboutText += fp_version + "\n"
 
 		self["FPVersion"] = StaticText(fp_version)
-		
+
 		skinWidth = getDesktop(0).size().width()
 		skinHeight = getDesktop(0).size().height()
 		AboutText += _("Skin Name: %s") % config.skin.primary_skin.value[0:-9] + _("  (%s x %s)") % (skinWidth, skinHeight) + "\n"
@@ -130,7 +132,7 @@ class About(Screen):
 					hddinfo += "\n"
 				hdd = hddlist[count][1]
 				if int(hdd.free()) > 1024:
-					hddinfo += formatstring % (hdd.model(), hdd.capacity(), hdd.free()/1024.0, "G", _("free"))
+					hddinfo += formatstring % (hdd.model(), hdd.capacity(), hdd.free() / 1024.0, "G", _("free"))
 				else:
 					hddinfo += formatstring % (hdd.model(), hdd.capacity(), hdd.free(), "M", _("free"))
 		else:
@@ -168,18 +170,19 @@ class About(Screen):
 
 	def showMemoryInfo(self):
 		self.session.open(MemoryInfo)
-		
+
 	def showModelPic(self):
 		self.session.open(ModelPic)
 
 	def showTroubleshoot(self):
 		self.session.open(Troubleshoot)
 
+
 class ModelPic(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ["ModelPic", "About"]
-		
+
 		self["key_green"] = Button(_(" "))
 		self["key_red"] = Button(_(" "))
 		self["key_yellow"] = Button(_(" "))
@@ -195,7 +198,7 @@ class ModelPic(Screen):
 				"ok": self.close,
 				"blue": self.close
 			}, -2)
-		
+
 	def poster_resize(self):
 		if getBoxType() in ('sf108'):
 			model = "sf108.png"
@@ -238,6 +241,7 @@ class ModelPic(Screen):
 				self["boxpic"].instance.setPixmap(ptr)
 				self["boxpic"].show()
 
+
 class TranslationInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -274,6 +278,7 @@ class TranslationInfo(Screen):
 				"cancel": self.close,
 				"ok": self.close,
 			})
+
 
 class CommitInfo(Screen):
 	def __init__(self, session):
@@ -353,6 +358,7 @@ class CommitInfo(Screen):
 		self.project = self.project != len(self.projects) - 1 and self.project + 1 or 0
 		self.updateCommitLogs()
 
+
 class MemoryInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -393,7 +399,7 @@ class MemoryInfo(Screen):
 			mem = 1
 			free = 0
 			rows_in_column = self["params"].rows_in_column
-			for i, line in enumerate(open('/proc/meminfo','r')):
+			for i, line in enumerate(open('/proc/meminfo', 'r')):
 				s = line.strip().split(None, 2)
 				if len(s) == 3:
 					name, size, units = s
@@ -407,18 +413,18 @@ class MemoryInfo(Screen):
 				if name.startswith("MemFree") or name.startswith("Buffers") or name.startswith("Cached"):
 					free += int(size)
 				if i < rows_in_column:
-					ltext += "".join((name,"\n"))
-					lvalue += "".join((size," ",units,"\n"))
+					ltext += "".join((name, "\n"))
+					lvalue += "".join((size, " ", units, "\n"))
 				else:
-					rtext += "".join((name,"\n"))
-					rvalue += "".join((size," ",units,"\n"))
+					rtext += "".join((name, "\n"))
+					rvalue += "".join((size, " ", units, "\n"))
 			self['lmemtext'].setText(ltext)
 			self['lmemvalue'].setText(lvalue)
 			self['rmemtext'].setText(rtext)
 			self['rmemvalue'].setText(rvalue)
-			self["slide"].setValue(int(100.0*(mem-free)/mem+0.25))
-			self['pfree'].setText("%.1f %s" % (100.*free/mem,'%'))
-			self['pused'].setText("%.1f %s" % (100.*(mem-free)/mem,'%'))
+			self["slide"].setValue(int(100.0 * (mem - free) / mem + 0.25))
+			self['pfree'].setText("%.1f %s" % (100. * free / mem, '%'))
+			self['pused'].setText("%.1f %s" % (100. * (mem - free) / mem, '%'))
 		except Exception, e:
 			print "[About] getMemoryInfo FAIL:", e
 
@@ -427,6 +433,7 @@ class MemoryInfo(Screen):
 		open("/proc/sys/vm/drop_caches", "w").write("3")
 		self.getMemoryInfo()
 
+
 class MemoryInfoSkinParams(GUIComponent):
 	def __init__(self):
 		GUIComponent.__init__(self)
@@ -434,7 +441,7 @@ class MemoryInfoSkinParams(GUIComponent):
 
 	def applySkin(self, desktop, screen):
 		if self.skinAttributes is not None:
-			attribs = [ ]
+			attribs = []
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "rowsincolumn":
 					self.rows_in_column = int(value)
@@ -442,6 +449,7 @@ class MemoryInfoSkinParams(GUIComponent):
 		return GUIComponent.applySkin(self, desktop, screen)
 
 	GUI_WIDGET = eLabel
+
 
 class Troubleshoot(Screen):
 	def __init__(self, session):

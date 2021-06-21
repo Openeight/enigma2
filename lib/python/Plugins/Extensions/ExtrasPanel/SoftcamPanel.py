@@ -16,13 +16,15 @@ import os
 from Screens.CCcamInfo import CCcamInfoMain
 from Screens.OScamInfo import OscamInfoMenu
 
+
 def Check_Softcam():
 	found = False
 	for x in os.listdir('/etc'):
 		if x.find('.emu') > -1:
 			found = True
-			break;
+			break
 	return found
+
 
 def command(comandline, strip=1):
   comandline = comandline + " >/tmp/command.txt"
@@ -36,10 +38,12 @@ def command(comandline, strip=1):
     else:
       for line in file:
         text = text + line
-        if text[-1:] != '\n': text = text + "\n"
+        if text[-1:] != '\n':
+        	text = text + "\n"
     file.close()
   # if one or last line then remove linefeed
-  if text[-1:] == '\n': text = text[:-1]
+  if text[-1:] == '\n':
+  	text = text[:-1]
   comandline = text
   os.system("rm /tmp/command.txt")
   return comandline
@@ -54,6 +58,7 @@ def command(comandline, strip=1):
 #	def moveSelection(self,idx=0):
 #		if self.instance is not None:
 #			self.instance.moveSelectionTo(idx)
+
 
 SOFTCAM_SKIN = """<screen name="SoftcamPanel" position="center,center" size="580,450" title="Softcam Panel">
 	<eLabel font="Regular;22" position="10,10" size="185,25" text="Softcam Selection:" />
@@ -79,6 +84,7 @@ REFRESH = 0
 CCCAMINFO = 1
 OSCAMINFO = 2
 
+
 class SoftcamPanel(ConfigListScreen, Screen):
 	def __init__(self, session):
 		global emuDir
@@ -97,9 +103,9 @@ class SoftcamPanel(ConfigListScreen, Screen):
 		self["key_yellow"] = Label(_("Refresh"))
 		self.partyfeed = os.path.exists("/etc/opkg/3rdparty-feed.conf") or os.path.exists("/etc/opkg/3rd-party-feed.conf")
 		if self.partyfeed:
-			self["key_blue"]= Label(_("Install"))
+			self["key_blue"] = Label(_("Install"))
 		else:
-			self["key_blue"]= Label(_("Exit"))
+			self["key_blue"] = Label(_("Exit"))
 		self["ecminfo"] = Label(_("No ECM info"))
 		self["actifcam"] = Label(_("no CAM 1 active"))
 		self["actifcam2"] = Label(_("no CAM 2 active"))
@@ -149,15 +155,15 @@ class SoftcamPanel(ConfigListScreen, Screen):
 					if line.find("binname") > -1:
 						line = line.split("=")
 						self.emuBin.append(line[1].strip())
-					
+
 				em.close()
 				count += 1
 
 		self.maxcount = count
-		
-		self.onChangedEntry = [ ]
+
+		self.onChangedEntry = []
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 		self.ReadMenu()
 		self.createSetup()
 		self["ecminfo"].show()
@@ -184,7 +190,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 
 	def ReadMenu(self):
 		self.whichCam()
-		
+
 		for x in self.emuDirlist:
 			#// if file contains the string "emu" (then this is a emu config file)
 			if x.find("emu") > -1:
@@ -221,7 +227,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				self.curcam = x
 				self.curcamIndex = index
 
-		#// check for active cam 2		
+		#// check for active cam 2
 		cam = config.softcam.actCam2.getValue()
 		self.curcam2 = None
 		self.curcam2Index = None
@@ -311,20 +317,20 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				oldcamIndex = self.curcamIndex
 				actcam = self.mlist[oldcamIndex]
 				if self.first == 0:
-					self.cam1sel.setValue(actcam)		
+					self.cam1sel.setValue(actcam)
 				self["key_green"].setText(_("Restart"))
-				self["actifcam"].setText(_("active CAM 1: ") + actcam )
+				self["actifcam"].setText(_("active CAM 1: ") + actcam)
 				print '[SOFTCAM] set active cam 1 to: ' + actcam
 			else:
 				actcam = _("no CAM 1 active")
 				self["actifcam"].setText(actcam)
-		
+
 			if self.curcam2:
 				oldcam2Index = self.curcam2Index
 				actcam = self.mlist[oldcam2Index]
 				if self.first == 0:
 					self.cam2sel.setValue(actcam)
-				self["actifcam2"].setText(_("active CAM 2: ") + actcam )
+				self["actifcam2"].setText(_("active CAM 2: ") + actcam)
 				print '[SOFTCAM] set active cam 2 to: ' + actcam
 			else:
 				actcam2 = _("no CAM 2 active")
@@ -351,7 +357,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 			self.setYellowKey(self.curcam)
 		else:
 			self.setYellowKey(self.curcam2)
-		
+
 		#// read ecm.info
 		ecmi = ""
 		if os.path.exists('/tmp/ecm.info') is True:
@@ -372,7 +378,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 
 	def read_shareinfo(self):
 		#// read share.info and put in list
-		self.shareinfo =[]
+		self.shareinfo = []
 		if os.path.exists('/tmp/share.info') is True:
 			s = open('/tmp/share.info')
 			for x in s.readlines():
@@ -386,18 +392,18 @@ class SoftcamPanel(ConfigListScreen, Screen):
 		Prov = ''
 		f = open(ecmpath)
 		for line in f.readlines():
-			line= line.replace('=', '')
-			line= line.replace(' ', '', 1)
+			line = line.replace('=', '')
+			line = line.replace(' ', '', 1)
 			#// search CaID
 			if line.find('ECM on CaID') > -1:
 				k = line.find('ECM on CaID') + 14
-				Caid = line[k:k+4]
+				Caid = line[k:k + 4]
 			#// search Boxid
 			if line.find('prov:') > -1:
 				tmpprov = line.split(':')
 				Prov = tmpprov[1].strip()
 				#// search peer in share.info only if share.info exists
-				if Caid <> '' and Prov <> '' and len(self.shareinfo) > 0 :
+				if Caid <> '' and Prov <> '' and len(self.shareinfo) > 0:
 					for x in self.shareinfo:
 						cel = x.split(' ')
 						#// search Boxid and Caid
@@ -434,7 +440,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 	def Exit(self):
 		self.Timer.stop()
 		self.close()
-		
+
 	def Blue(self):
 		if not self.partyfeed:
 			self.Exit()
@@ -475,8 +481,9 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				time.sleep(1) # was 5sec
 				t = 0
 				while t < 5:
-					p = command('pidof %s |wc -w' % oldcam )
-					if not p.isdigit(): p=0
+					p = command('pidof %s |wc -w' % oldcam)
+					if not p.isdigit():
+						p = 0
 					if int(p) > 0:
 						self.container = eConsoleAppContainer()
 						self.container.execute('killall -9 ' + oldcam)
@@ -492,8 +499,9 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				time.sleep(1) # was 5sec
 				t = 0
 				while t < 5:
-					p = command('pidof %s |wc -w' % oldcam2 )
-					if not p.isdigit(): p=0
+					p = command('pidof %s |wc -w' % oldcam2)
+					if not p.isdigit():
+						p = 0
 					if int(p) > 0:
 						self.container = eConsoleAppContainer()
 						self.container.execute('killall -9 ' + oldcam2)
@@ -527,7 +535,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 				if config.softcam.camstartMode.getValue() == "0":
 					self.Stopcam()
 
-				self.camIndex = self.cam1sel.getIndex() -1
+				self.camIndex = self.cam1sel.getIndex() - 1
 				self.cam2Index = self.cam2sel.getIndex() - 1
 				if self.camIndex >= 0:
 					actcam = self.cam1sel.getValue()
@@ -552,12 +560,12 @@ class SoftcamPanel(ConfigListScreen, Screen):
 						self.deleteInit()
 						camname = "/usr/bin/" + camname1
 						startcmd = self.emuStart[self.camIndex]
-						stopcmd = self.emuStop[self.camIndex]							
+						stopcmd = self.emuStop[self.camIndex]
 						self.createInitdscript("cam1", camname, startcmd, stopcmd)
 						if self.cam2Index >= 0:
 							camname = "/usr/bin/" + camname2
 							startcmd = self.emuStart[self.cam2Index]
-							stopcmd = self.emuStop[self.cam2Index]							
+							stopcmd = self.emuStop[self.cam2Index]
 							self.createInitdscript("cam2", camname, startcmd, stopcmd, config.softcam.waittime.getValue())
 
 					self["key_green"].setText(_("Restart"))
@@ -604,19 +612,20 @@ class SoftcamPanel(ConfigListScreen, Screen):
 
 	def isCamrunning(self, cam):
 		p = command('pidof ' + cam + ' |wc -w')
-		if not p.isdigit(): p=0
+		if not p.isdigit():
+			p = 0
 		if int(p) > 0:
 			return True
 		else:
 			return False
 
 	def checkBinName(self, binname, start):
-		print "[CHECKBINNAME] bin=%s ,start=%s" %(binname,start)
+		print "[CHECKBINNAME] bin=%s ,start=%s" % (binname, start)
 		if start.find(binname + ' ') > -1:
 			print "[CHECKBINNAME] OK"
 			return False
 		else:
-			if start[start.rfind('/')+1:] == binname:
+			if start[start.rfind('/') + 1:] == binname:
 				print "[CHECKBINNAME] OK"
 				return False
 			else:
@@ -664,20 +673,20 @@ class SoftcamPanel(ConfigListScreen, Screen):
 		softcamfile.append('')
 		softcamfile.append('exit 0')
 
-		f = open( Adir, "w" )
+		f = open(Adir, "w")
 		for x in softcamfile:
 			f.writelines(x + '\n')
 		f.close()
 
 		self.container = eConsoleAppContainer()
 		# Set execute rights
-		os.chmod(Adir,0755)
+		os.chmod(Adir, 0755)
 		# Create symbolic link for startup
 		if not os.path.exists("/etc/rc2.d/S20softcam." + camname):
 			self.container.execute('update-rc.d -f softcam.' + camname + ' defaults')
 		# Wait a few seconds
 		import time
-		time.sleep (3) 
+		time.sleep(3)
 
 		# Start cam
 		if self.isCamrunning(emubin):
@@ -693,7 +702,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 		if os.path.exists("/etc/init.d/softcam.cam1"):
 			print "Delete softcam init script cam1"
 			os.system("rm /etc/init.d/softcam.cam1")
-			
+
 		if os.path.exists("/etc/rc2.d/S20softcam.cam2"):
 			print "Delete Symbolink link"
 			self.container = eConsoleAppContainer()
@@ -701,6 +710,7 @@ class SoftcamPanel(ConfigListScreen, Screen):
 		if os.path.exists("/etc/init.d/softcam.cam2"):
 			print "Delete softcam init script cam2"
 			os.system("rm /etc/init.d/softcam.cam2")
+
 
 class ShowSoftcamPackages(Screen):
 	skin = """
@@ -725,11 +735,11 @@ class ShowSoftcamPackages(Screen):
 				</convert>
 			</widget>
 		</screen>"""
-	
-	def __init__(self, session, args = None):
+
+	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.session = session
-		
+
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"],
 		{
 			"red": self.exit,
@@ -737,7 +747,7 @@ class ShowSoftcamPackages(Screen):
 			"cancel": self.exit,
 			"green": self.startupdateList,
 		}, -1)
-		
+
 		self.list = []
 		self.statuslist = []
 		self["list"] = List(self.list)
@@ -754,7 +764,7 @@ class ShowSoftcamPackages(Screen):
 		self.Timer2 = eTimer()
 		self.Timer2.callback.append(self.updateList)
 
-	def go(self, returnValue = None):
+	def go(self, returnValue=None):
 		cur = self["list"].getCurrent()
 		if cur:
 			status = cur[3]
@@ -764,44 +774,44 @@ class ShowSoftcamPackages(Screen):
 
 	def runInstall(self, result):
 		if result:
-			self.session.openWithCallback(self.runInstallCont, Console, cmdlist = ['opkg install ' + self.package], closeOnSuccess = True)
+			self.session.openWithCallback(self.runInstallCont, Console, cmdlist=['opkg install ' + self.package], closeOnSuccess=True)
 
 	def runInstallCont(self):
 			ret = command('opkg list-installed | grep ' + self.package + ' | cut -d " " -f1')
 
 			if ret != self.package:
-				self.session.open(MessageBox, _("Install Failed !!"), MessageBox.TYPE_ERROR, timeout = 10)
+				self.session.open(MessageBox, _("Install Failed !!"), MessageBox.TYPE_ERROR, timeout=10)
 			else:
-				self.session.open(MessageBox, _("Install Finished."), MessageBox.TYPE_INFO, timeout = 10)
+				self.session.open(MessageBox, _("Install Finished."), MessageBox.TYPE_INFO, timeout=10)
 				self.setStatus('list')
 				self.Timer1.start(1000, True)
 
 	def UpgradeReboot(self, result):
 		if result is None:
 			return
-		
+
 	def exit(self):
 		self.close()
-			
+
 	def setWindowTitle(self):
 		self.setTitle(_("Install Softcams"))
 
-	def setStatus(self,status = None):
+	def setStatus(self, status=None):
 		if status:
 			self.statuslist = []
 			divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"))
 			if status == 'update':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/ExtrasPanel/pics/upgrade.png"))
-				self.statuslist.append(( _("Package list update"), '', _("Trying to download a new updatelist. Please wait..." ),'', statuspng, divpng ))
+				self.statuslist.append((_("Package list update"), '', _("Trying to download a new updatelist. Please wait..."), '', statuspng, divpng))
 				self['list'].setList(self.statuslist)
 			if status == 'list':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/ExtrasPanel/pics/upgrade.png"))
-				self.statuslist.append(( _("Package list"), '', _("Getting Softcam list. Please wait..." ),'', statuspng, divpng ))
+				self.statuslist.append((_("Package list"), '', _("Getting Softcam list. Please wait..."), '', statuspng, divpng))
 				self['list'].setList(self.statuslist)
 			elif status == 'error':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/ExtrasPanel/pics/remove.png"))
-				self.statuslist.append(( _("Error"), '', _("There was an error downloading the updatelist. Please try again." ),'', statuspng, divpng ))
-				self['list'].setList(self.statuslist)				
+				self.statuslist.append((_("Error"), '', _("There was an error downloading the updatelist. Please try again."), '', statuspng, divpng))
+				self['list'].setList(self.statuslist)
 
 	def startupdateList(self):
 		self.setStatus('update')
@@ -818,7 +828,7 @@ class ShowSoftcamPackages(Screen):
 		self.Timer1.start(1000, True)
 
 	def rebuildList(self):
-		if os.path.exists("/etc/opkg/openeight-armv7-softcam-feed.conf"): 
+		if os.path.exists("/etc/opkg/openeight-armv7-softcam-feed.conf"):
 			OCTA = True
 		else:
 			OCTA = False
@@ -868,6 +878,6 @@ class ShowSoftcamPackages(Screen):
 					pass
 
 			self['list'].setList(self.list)
-	
+
 		else:
 			self.setStatus('error')

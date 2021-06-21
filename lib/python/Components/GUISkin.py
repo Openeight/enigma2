@@ -4,11 +4,15 @@ from skin import applyAllAttributes
 from Tools.CList import CList
 from Sources.StaticText import StaticText
 
+
 class screenPath():
 	def __init__(self):
 		self.path = []
 		self.lastself = None
+
+
 screen = screenPath()
+
 
 class GUISkin:
 	__module__ = __name__
@@ -17,13 +21,13 @@ class GUISkin:
 		self["Title"] = StaticText()
 		self["screen_path"] = StaticText()
 		self.skin_title = ""
-		self.onLayoutFinish = [ ]
+		self.onLayoutFinish = []
 		self.summaries = CList()
 		self.instance = None
 		self.desktop = None
 		self.screenPathMode = False
 
-	def createGUIScreen(self, parent, desktop, updateonly = False):
+	def createGUIScreen(self, parent, desktop, updateonly=False):
 		for val in self.renderer:
 			if isinstance(val, GUIComponent):
 				if not updateonly:

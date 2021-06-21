@@ -1,4 +1,4 @@
-from Components.ActionMap import ActionMap, NumberActionMap 
+from Components.ActionMap import ActionMap, NumberActionMap
 from Components.FileList import FileList
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -10,6 +10,7 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from os import system
+
 
 class Ipkuninstall(Screen):
 	skin = """
@@ -59,12 +60,11 @@ class Ipkuninstall(Screen):
 			title = " "
 			if answer[1] == "rem":
 				cmd = "opkg remove " + self.ipk
-				title = _("Removing ipk %s" %(self.ipk))
+				title = _("Removing ipk %s" % (self.ipk))
 			elif answer[1] == "force":
 				cmd = "opkg remove --force-depends " + self.ipk
-				title = _("Force Removing ipk %s" %(self.ipk))
-			self.session.open(Console,_(title),[cmd])
+				title = _("Force Removing ipk %s" % (self.ipk))
+			self.session.open(Console, _(title), [cmd])
 			self.close()
 		except:
 			self.close()
-

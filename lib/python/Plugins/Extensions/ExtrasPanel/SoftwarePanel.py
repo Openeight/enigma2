@@ -1,6 +1,6 @@
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
-from Screens.About import * 
+from Screens.About import *
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -13,6 +13,7 @@ from Tools.LoadPixmap import LoadPixmap
 from enigma import ePixmap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN, SCOPE_METADIR
 import os
+
 
 class SoftwarePanel(Screen):
 
@@ -77,7 +78,7 @@ class SoftwarePanel(Screen):
 		self.trafficLight = 0
 		self.opkg = OpkgComponent()
 		self.opkg.addCallback(self.opkgCallback)
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions", "SetupActions"],      
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions", "SetupActions"],
 		{
 			"cancel": self.Exit,
 			"green": self.Green,
@@ -98,13 +99,13 @@ class SoftwarePanel(Screen):
 			elif self.trafficLight == 2: # red
 				message = _("The current image is not stable.\nFor more information see %s.") % ("http://octagon-forum.eu")
 				picon = MessageBox.TYPE_ERROR
-				self.session.open(MessageBox, message, type=MessageBox.TYPE_ERROR, picon=picon, timeout = 15, close_on_any_key=True)
+				self.session.open(MessageBox, message, type=MessageBox.TYPE_ERROR, picon=picon, timeout=15, close_on_any_key=True)
 				return
 			elif self.trafficLight == 3: # unknown
 				message = _("The status of the current image could not be checked because %s can not be reached.") % ("http://octagon-forum.eu")
 				picon = MessageBox.TYPE_ERROR
 			message += "\n" + _("Do you want to update your receiver?")
-			self.session.openWithCallback(self.startActualUpdate, MessageBox, message, default = False, picon = picon)
+			self.session.openWithCallback(self.startActualUpdate, MessageBox, message, default=False, picon=picon)
 		elif self.packages > 0:
 				self.startActualUpdate(True)
 
@@ -166,19 +167,19 @@ class SoftwarePanel(Screen):
 			self['a_off'].show()
 		socket.setdefaulttimeout(currentTimeoutDefault)
 
-	def setStatus(self,status = None):
+	def setStatus(self, status=None):
 		if status:
 			self.statuslist = []
 			divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"))
 			if status == 'update':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/upgrade.png"))
-				self.statuslist.append(( _("Package list update"), '', _("Trying to download a new updatelist. Please wait..." ),'',statuspng, divpng ))
+				self.statuslist.append((_("Package list update"), '', _("Trying to download a new updatelist. Please wait..."), '', statuspng, divpng))
 			elif status == 'error':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/remove.png"))
-				self.statuslist.append(( _("Error"), '', _("There was an error downloading the updatelist. Please try again." ),'',statuspng, divpng ))
+				self.statuslist.append((_("Error"), '', _("There was an error downloading the updatelist. Please try again."), '', statuspng, divpng))
 			elif status == 'noupdate':
 				statuspng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/installed.png"))
-				self.statuslist.append(( _("Nothing to upgrade"), '', _("There are no updates available." ),'',statuspng, divpng ))
+				self.statuslist.append((_("Nothing to upgrade"), '', _("There are no updates available."), '', statuspng, divpng))
 
 			self['list'].setList(self.statuslist)
 
@@ -196,17 +197,17 @@ class SoftwarePanel(Screen):
 			else:
 				self.buildPacketList()
 		pass
-	
+
 	def buildEntryComponent(self, name, version, description, state):
 		divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/div-h.png"))
 		if not description:
 			description = "No description available."
 		if state == 'installed':
 			installedpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/installed.png"))
-			return((name, version, _(description), state, installedpng, divpng))	
+			return((name, version, _(description), state, installedpng, divpng))
 		elif state == 'upgradeable':
 			upgradeablepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/upgradeable.png"))
-			return((name, version, _(description), state, upgradeablepng, divpng))	
+			return((name, version, _(description), state, upgradeablepng, divpng))
 		else:
 			installablepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager/installable.png"))
 			return((name, version, _(description), state, installablepng, divpng))

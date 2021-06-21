@@ -7,6 +7,7 @@ from datetime import datetime
 isBusy = None
 CFG = "/etc/CCcam.cfg"
 
+
 def CamCheck():
 	global campoller, POLLTIME
 	POLLTIME = int(config.plugins.infopanel_frozencheck.list.getValue()) * 60
@@ -14,14 +15,16 @@ def CamCheck():
 		campoller = CamCheckPoller()
 	campoller.start()
 
+
 def CamCheckStop():
 	try:
 		campoller.stop()
 	except:
 		print"CamCheck not running, so no need to stop it !! "
 
+
 def confPath():
-	search_dirs = [ "/usr", "/var", "/etc" ]
+	search_dirs = ["/usr", "/var", "/etc"]
 	sdirs = " ".join(search_dirs)
 	cmd = 'find %s -name "CCcam.cfg" | head -n 1' % sdirs
 	res = popen(cmd).read()
@@ -29,6 +32,7 @@ def confPath():
 		return None
 	else:
 		return res.replace("\n", "")
+
 
 def getConfigValue(l):
 	list = l.split(":")
@@ -45,6 +49,7 @@ def getConfigValue(l):
 			ret = ret[:-1]
 
 	return ret
+
 
 class CamCheckPoller:
 	def __init__(self):
@@ -76,7 +81,6 @@ class CamCheckPoller:
 	def JobTask(self):
 		self.doCheck()
 		self.timer.startLongTimer(POLLTIME)
-
 
 	def FrozenCCcam(self, cam):
 		if not cam.upper().startswith('CCCAM'):
@@ -139,7 +143,6 @@ class CamCheckPoller:
 			isBusy = None
 			return
 
-
 		for x in self.emuDirlist:
 			#// if file contains the string "emu" (then this is a emu config file)
 			if x.find("emu") > -1:
@@ -195,7 +198,7 @@ class CamCheckPoller:
 						camrunning = 1
 						if self.FrozenCCcam(actcam):
 							camfrozen = 1
-				tel +=1
+				tel += 1
 			elif x == cam_name2:
 				camfound2 = 1
 				indexcam2 = tel
@@ -209,9 +212,9 @@ class CamCheckPoller:
 						camrunning2 = 1
 						if self.FrozenCCcam(actcam):
 							camfrozen2 = 1
-				tel +=1
+				tel += 1
 			else:
-				tel +=1
+				tel += 1
 		try:
 
 			#// CAM IS NOT RUNNING SO START
@@ -235,9 +238,9 @@ class CamCheckPoller:
 							print "[CAMSTARTER] CAM 2 not running, stop " + stop
 							self.container = eConsoleAppContainer()
 							self.container.execute(stop)
-							
+
 							import time
-							time.sleep (int(config.softcam.waittime.getValue()))
+							time.sleep(int(config.softcam.waittime.getValue()))
 							start = self.emuStart[indexcam2]
 							print "[CAMSTARTER] no CAM 2 active, starting " + start
 							system("echo %s Started cam 2 at: %s >> /tmp/camcheck.txt" % (start, datetime.now()))
@@ -252,5 +255,6 @@ class CamCheckPoller:
 
 		global isBusy
 		isBusy = None
+
 
 campoller = None

@@ -8,6 +8,7 @@ from Poll import Poll
 import time
 import os
 
+
 class YWeather(Poll, Converter, object):
         weather_city = '711665'
         time_update = 20
@@ -123,16 +124,16 @@ class YWeather(Poll, Converter, object):
                         self.type = self.picon5
                 self.poll_interval = self.time_update_ms
                 self.poll_enabled = True
-                
+
         @cached
         def getText(self):
-                xweather = {'ycity':"N/A", 'ycountry':"N/A", 'ydirection':"N/A", 'yspeed':"N/A", 'yhumidity':"N/A", 'yvisibility':"N/A", 'ypressure':"N/A", 'ytext':"N/A", 'ytemp':"N/A", 'ypicon':"3200",
-                            'yday2':"N/A", 'yday3':"N/A", 'yday4':"N/A", 'yday5':"N/A",
-                            'ypiconday2':"3200", 'ypiconday3':"3200", 'ypiconday4':"3200", 'ypiconday5':"3200",
-                            'ydate2':"N/A", 'ydate3':"N/A", 'ydate4':"N/A", 'ydate5':"N/A",
-                            'ytextday2':"N/A", 'ytextday3':"N/A", 'ytextday4':"N/A", 'ytextday5':"N/A",
-                            'ytemphighday2':"N/A", 'ytemphighday3':"N/A", 'ytemphighday4':"N/A", 'ytemphighday5':"N/A",
-                            'ytemplowday2':"N/A", 'ytemplowday3':"N/A", 'ytemplowday4':"N/A", 'ytemplowday5':"N/A"}
+                xweather = {'ycity': "N/A", 'ycountry': "N/A", 'ydirection': "N/A", 'yspeed': "N/A", 'yhumidity': "N/A", 'yvisibility': "N/A", 'ypressure': "N/A", 'ytext': "N/A", 'ytemp': "N/A", 'ypicon': "3200",
+                            'yday2': "N/A", 'yday3': "N/A", 'yday4': "N/A", 'yday5': "N/A",
+                            'ypiconday2': "3200", 'ypiconday3': "3200", 'ypiconday4': "3200", 'ypiconday5': "3200",
+                            'ydate2': "N/A", 'ydate3': "N/A", 'ydate4': "N/A", 'ydate5': "N/A",
+                            'ytextday2': "N/A", 'ytextday3': "N/A", 'ytextday4': "N/A", 'ytextday5': "N/A",
+                            'ytemphighday2': "N/A", 'ytemphighday3': "N/A", 'ytemphighday4': "N/A", 'ytemphighday5': "N/A",
+                            'ytemplowday2': "N/A", 'ytemplowday3': "N/A", 'ytemplowday4': "N/A", 'ytemplowday5': "N/A"}
                 direct = 0
                 info = ""
                 if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/iSkin/Weather/Config/Location_id"):
@@ -140,7 +141,7 @@ class YWeather(Poll, Converter, object):
                 elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/YahooWeather/Config/Location_id"):
                         self.weather_city = open("/usr/lib/enigma2/python/Plugins/Extensions/YahooWeather/Config/Location_id").read()
                 if fileExists("/tmp/yweather.xml"):
-                        if int((time.time() - os.stat("/tmp/yweather.xml").st_mtime)/60) >= self.time_update:
+                        if int((time.time() - os.stat("/tmp/yweather.xml").st_mtime) / 60) >= self.time_update:
                                 os.system("rm /tmp/yweather.xml")
                                 os.system("wget -P /tmp -T2 'https://query.yahooapis.com/v1/public/yql?q=select%20%2A%20from%20weather.forecast%20where%20woeid=%s%20AND%20u=%22c%22' -O /tmp/yweather.xml" % self.weather_city)
                 else:
@@ -169,35 +170,35 @@ class YWeather(Poll, Converter, object):
                                 xweather['ytemp'] = line.split('temp')[1].split('"')[1]
                         elif line.find('yweather:forecast') > -1:
                                 if wday == 2:
-                                        xweather['yday2'] =  line.split('day')[1].split('"')[1]
-                                        xweather['ydate2'] =  line.split('date')[1].split('"')[1]
+                                        xweather['yday2'] = line.split('day')[1].split('"')[1]
+                                        xweather['ydate2'] = line.split('date')[1].split('"')[1]
                                         xweather['ytextday2'] = line.split('text')[1].split('"')[1]
-                                        xweather['ypiconday2'] =  line.split('code')[1].split('"')[1]
+                                        xweather['ypiconday2'] = line.split('code')[1].split('"')[1]
                                         xweather['ytemphighday2'] = line.split('high')[1].split('"')[1]
                                         xweather['ytemplowday2'] = line.split('low')[1].split('"')[1]
                                 elif wday == 3:
-                                        xweather['yday3'] =  line.split('day')[1].split('"')[1]
-                                        xweather['ydate3'] =  line.split('date')[1].split('"')[1]
+                                        xweather['yday3'] = line.split('day')[1].split('"')[1]
+                                        xweather['ydate3'] = line.split('date')[1].split('"')[1]
                                         xweather['ytextday3'] = line.split('text')[1].split('"')[1]
-                                        xweather['ypiconday3'] =  line.split('code')[1].split('"')[1]
+                                        xweather['ypiconday3'] = line.split('code')[1].split('"')[1]
                                         xweather['ytemphighday3'] = line.split('high')[1].split('"')[1]
                                         xweather['ytemplowday3'] = line.split('low')[1].split('"')[1]
                                 elif wday == 4:
-                                        xweather['yday4'] =  line.split('day')[1].split('"')[1]
-                                        xweather['ydate4'] =  line.split('date')[1].split('"')[1]
+                                        xweather['yday4'] = line.split('day')[1].split('"')[1]
+                                        xweather['ydate4'] = line.split('date')[1].split('"')[1]
                                         xweather['ytextday4'] = line.split('text')[1].split('"')[1]
-                                        xweather['ypiconday4'] =  line.split('code')[1].split('"')[1]
+                                        xweather['ypiconday4'] = line.split('code')[1].split('"')[1]
                                         xweather['ytemphighday4'] = line.split('high')[1].split('"')[1]
                                         xweather['ytemplowday4'] = line.split('low')[1].split('"')[1]
                                 elif wday == 5:
-                                        xweather['yday5'] =  line.split('day')[1].split('"')[1]
-                                        xweather['ydate5'] =  line.split('date')[1].split('"')[1]
+                                        xweather['yday5'] = line.split('day')[1].split('"')[1]
+                                        xweather['ydate5'] = line.split('date')[1].split('"')[1]
                                         xweather['ytextday5'] = line.split('text')[1].split('"')[1]
-                                        xweather['ypiconday5'] =  line.split('code')[1].split('"')[1]
+                                        xweather['ypiconday5'] = line.split('code')[1].split('"')[1]
                                         xweather['ytemphighday5'] = line.split('high')[1].split('"')[1]
                                         xweather['ytemplowday5'] = line.split('low')[1].split('"')[1]
-                                wday = wday + 1                  
-                                
+                                wday = wday + 1
+
                 if self.type == self.city:
                         info = xweather['ycity']
                 elif self.type == self.country:
@@ -258,7 +259,7 @@ class YWeather(Poll, Converter, object):
                         info = xweather['ytext']
                 elif self.type == self.temp:
                         if info != "N/A":
-                                info = xweather['ytemp'] + '%s' % unichr(176).encode("latin-1") 
+                                info = xweather['ytemp'] + '%s' % unichr(176).encode("latin-1")
                         else:
                                 info = xweather['ytemp']
                 elif self.type == self.picon:

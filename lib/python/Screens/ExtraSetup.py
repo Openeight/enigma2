@@ -10,6 +10,7 @@ from Components.FileList import FileList
 from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
 
+
 class ExtraSetup(Screen):
     def __init__(self, session):
 		Screen.__init__(self, session)
@@ -20,12 +21,6 @@ class ExtraSetup(Screen):
                         from Plugins.Extensions.ExtrasPanel.plugin import Extraspanel
                         self.session.open(Extraspanel)
                         self.close()
-                except:        
-                        self.session.open(MessageBox, _("Plugin ExtrasPanel is not installed !"), MessageBox.TYPE_ERROR, timeout = 10)
+                except:
+                        self.session.open(MessageBox, _("Plugin ExtrasPanel is not installed !"), MessageBox.TYPE_ERROR, timeout=10)
                         self.close()
-
-
-
-
-
-

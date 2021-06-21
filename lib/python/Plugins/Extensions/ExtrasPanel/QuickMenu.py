@@ -140,6 +140,7 @@ if path.exists('/usr/lib/enigma2/python/Plugins/Extensions/VpnChanger/plugin.pyo
 else:
 	VPNCHP = False
 
+
 def isFileSystemSupported(filesystem):
 	try:
 		for fs in open('/proc/filesystems', 'r'):
@@ -150,6 +151,7 @@ def isFileSystemSupported(filesystem):
 	except Exception as ex:
 		print '[Harddisk] Failed to read /proc/filesystems:', ex
 
+
 def Check_Softcam():
 	found = False
 	for x in listdir('/etc'):
@@ -159,6 +161,7 @@ def Check_Softcam():
 
 	return found
 
+
 def Softcam_Check():
 	found = False
 	for x in os.listdir('/etc/init.d'):
@@ -167,6 +170,7 @@ def Softcam_Check():
 			break
 
 	return found
+
 
 class QuickMenu(Screen):
 	skin = '\n\t\t<screen name="QuickMenu" position="center,center" size="1180,600" backgroundColor="black" flags="wfBorder">\n\t\t<widget name="list" position="21,32" size="370,420" backgroundColor="black" itemHeight="60" transparent="1" />\n\t\t<widget name="sublist" position="410,32" size="300,420" backgroundColor="black" itemHeight="60" />\n\t\t<eLabel position="400,30" size="2,420" backgroundColor="#666666" zPosition="3" />\n\t\t<widget source="session.VideoPicture" render="Pig" position="720,30" size="450,300" backgroundColor="transparent" zPosition="1" />\n\t\t<widget name="description" position="22,455" size="1150,100" zPosition="1" font="Regular;22" halign="center" valign="center" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_red" position="20,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_green" position="325,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<widget name="key_yellow" position="630,571" size="300,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" valign="center" />\n\t\t<widget name="key_blue" position="935,571" size="234,30" zPosition="1" font="Regular;22" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" />\n\t\t<eLabel name="new eLabel" position="21,567" size="300,3" zPosition="3" backgroundColor="red" />\n\t\t<eLabel name="new eLabel" position="325,567" size="300,3" zPosition="3" backgroundColor="green" />\n\t\t<eLabel name="new eLabel" position="630,567" size="300,3" zPosition="3" backgroundColor="yellow" />\n\t\t<eLabel name="new eLabel" position="935,567" size="234,3" zPosition="3" backgroundColor="blue" />\n\t\t</screen> '
@@ -277,13 +281,13 @@ class QuickMenu(Screen):
 
 	def Qsystem(self):
 		self.sublist = []
-		self.sublist.append(QuickSubMenuEntryComponent('Customize', _('Setup Enigma2'), _('Customize enigma2 personal settings.'))) 
+		self.sublist.append(QuickSubMenuEntryComponent('Customize', _('Setup Enigma2'), _('Customize enigma2 personal settings.')))
 		self.sublist.append(QuickSubMenuEntryComponent('User interface', _('User interface Setup'), _('Setup your User interface.')))
 		if SystemInfo['FrontpanelDisplay'] and SystemInfo['Display']:
 			self.sublist.append(QuickSubMenuEntryComponent('Display Settings', _('Display Setup'), _('Setup your display.')))
 		if os.path.exists('/usr/share/enigma2/display'):
 			self.sublist.append(QuickSubMenuEntryComponent('LCD Skin Setup', _('Skin Setup'), _('Setup your LCD.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Skin Setup',_('Select Enigma2 Skin'),_('Setup your Skin.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Skin Setup', _('Select Enigma2 Skin'), _('Setup your Skin.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording and Playback settings', _('Recording/Playback Setup'), _('Setup your recording and playback config.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Recording paths', _('Recording paths Setup'), _('Setup your recording paths config.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Hotkey', _('Hotkey Setup'), _('Adjust the functions of your remote cotrol buttons.')))
@@ -322,28 +326,28 @@ class QuickMenu(Screen):
 	def Qmount(self):
 		self.sublist = []
 		self.sublist.append(QuickSubMenuEntryComponent('Network Mount Manager', _('Manage network mounts'), _('Setup your network mounts.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Mount again',_('Mount your network shares again'),_('Attempt to recover lost mounts (in background).')))
-		self.sublist.append(QuickSubMenuEntryComponent('Network Browser', _('Search for network shares'), _('Search for network shares.'))) 
+		self.sublist.append(QuickSubMenuEntryComponent('Mount again', _('Mount your network shares again'), _('Attempt to recover lost mounts (in background).')))
+		self.sublist.append(QuickSubMenuEntryComponent('Network Browser', _('Search for network shares'), _('Search for network shares.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Device Mount Manager', _('Mounts Devices'), _('Setup your Device mounts (USB, HDD, others...)')))
-		self.sublist.append(QuickSubMenuEntryComponent("fstab Editor",_("View or edit fstab"),_("View or Edit your device mounts in etc/fstab.")))
+		self.sublist.append(QuickSubMenuEntryComponent("fstab Editor", _("View or edit fstab"), _("View or Edit your device mounts in etc/fstab.")))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qsoftcam(self):
 		self.sublist = []
 		if Check_Softcam():
 			self.sublist.append(QuickSubMenuEntryComponent('Softcam Panel', _('Control your Softcams'), _('Use the Softcam Panel to control your Cam. This let you start/stop/select a cam.')))
-			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Panel Setup',_('Softcam-Panel Setup'),_('Softcam-Panel Setup.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Softcam-Panel Setup', _('Softcam-Panel Setup'), _('Softcam-Panel Setup.')))
 		if Softcam_Check():
 			if SC:
 				self.sublist.append(QuickSubMenuEntryComponent('Softcam Manager', _('Softcam Manager'), _('Select and control your Cam. This let you start/stop/select a cam.')))
-				self.sublist.append(QuickSubMenuEntryComponent('Softcam Manager Settings',_('Softcam Manager Settings'),_('Settings for the Softcam Manager.')))
+				self.sublist.append(QuickSubMenuEntryComponent('Softcam Manager Settings', _('Softcam Manager Settings'), _('Settings for the Softcam Manager.')))
 			elif SSC:
 				self.sublist.append(QuickSubMenuEntryComponent('Softcam-Setup', _('Softcam Setup'), _('Select and control your Softcam. Here you can start/stop/select a softcam, and see ecm info.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Download Softcams', _('Download and install cam'), _('Shows available softcams. Here you can download and install them.')))
 		if ECMINFOSETUP:
-			self.sublist.append(QuickSubMenuEntryComponent('Ecm Info',_('Ecm Info setup'),_('Setup Ecm Info of the CCcamInfo plugin.')))
-		self.sublist.append(QuickSubMenuEntryComponent("CCcam Info",_("Check your CCcam"),_("This plugin shows you the status of your CCcam.")))
-		self.sublist.append(QuickSubMenuEntryComponent("OScam Info",_("Check your OScam"),_("This plugin shows you the status of your OScam.")))
+			self.sublist.append(QuickSubMenuEntryComponent('Ecm Info', _('Ecm Info setup'), _('Setup Ecm Info of the CCcamInfo plugin.')))
+		self.sublist.append(QuickSubMenuEntryComponent("CCcam Info", _("Check your CCcam"), _("This plugin shows you the status of your CCcam.")))
+		self.sublist.append(QuickSubMenuEntryComponent("OScam Info", _("Check your OScam"), _("This plugin shows you the status of your OScam.")))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qavsetup(self):
@@ -357,10 +361,10 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Automatic Volume Adjustment', _('Automatic Volume Adjustment settings'), _('Setup for Automatic Volume Adjustment between MPEG and AC3/DTS.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Auto Language', _('Auto Language Selection'), _('Select your Language for Audio/Subtitles.')))
 		if VIDTUNE == True:
-			self.sublist.append(QuickSubMenuEntryComponent('Testscreens',_('Test screens for your TV'),_('Tune your TV for the best result.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Testscreens', _('Test screens for your TV'), _('Tune your TV for the best result.')))
 		if os.path.exists('/proc/stb/vmpeg/0/pep_apply') and VIDEOENH == True:
 			self.sublist.append(QuickSubMenuEntryComponent('VideoEnhancement', _('VideoEnhancement Setup'), _('VideoEnhancement Setup.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Hdmi CEC',_('HDMI-CEC setup'),_('Setup your HDMI communication and preferences.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Hdmi CEC', _('HDMI-CEC setup'), _('Setup your HDMI communication and preferences.')))
 		self['sublist'].l.setList(self.sublist)
 
 	def Qtuner(self):
@@ -368,20 +372,20 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Tuner Configuration', _('Setup tuner(s)'), _('Setup each tuner for your satellite system.')))
 		if POSSETUP == True:
 			self.sublist.append(QuickSubMenuEntryComponent('Positioner Setup', _('Setup rotor'), _('Setup your positioner for your satellite system.')))
-		self.sublist.append(QuickSubMenuEntryComponent('Sundtek Control Center',_('Sundtek tuner Setup'),_('Configure your Sundtek tuner(s) or check/update the drivers.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Sundtek Control Center', _('Sundtek tuner Setup'), _('Configure your Sundtek tuner(s) or check/update the drivers.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Automatic Scan', _('Service Searching Automatically'), _('Automatic scan for services.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Manual Scan', _('Service Searching Manually'), _('Manual scan for services.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Fallback remote receiver setup', _('Setup for fallback remote receiver(s)'), _('Enable and setup your fallback remote receiver(s).')))
 		if FASTSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent('Fast Scan',_('Fast Scan Service Searching'),_('Use Fast Scan to search for services.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Fast Scan', _('Fast Scan Service Searching'), _('Use Fast Scan to search for services.')))
 		if BLINDSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent('Blind Scan',_('Blindscan Service Searching'),_('Scan for satellite services.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Blind Scan', _('Blindscan Service Searching'), _('Scan for satellite services.')))
 		if CABLESCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent('Cable Scan',_('Cable Service Searching'),_('Scan for cable services.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Cable Scan', _('Cable Service Searching'), _('Scan for cable services.')))
 		if MISPLSLCNSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent('MIS/PLS LCN Scan',_('MIS/PLS LCN Service Searching'),_('Scan for MIS/PLS LCN services.')))
+			self.sublist.append(QuickSubMenuEntryComponent('MIS/PLS LCN Scan', _('MIS/PLS LCN Service Searching'), _('Scan for MIS/PLS LCN services.')))
 		if TERRESTSCAN == True:
-			self.sublist.append(QuickSubMenuEntryComponent('Terrestrial Scan',_('Terrestrial Service Searching'),_('Scan for terrestrial services.')))
+			self.sublist.append(QuickSubMenuEntryComponent('Terrestrial Scan', _('Terrestrial Service Searching'), _('Scan for terrestrial services.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Sat Finder', _('Search Sats'), _('Search Sats, check signal and lock.')))
 		self['sublist'].l.setList(self.sublist)
 
@@ -625,11 +629,11 @@ class QuickMenu(Screen):
 		pass
 
 	def GetNetworkInterfaces(self):
-		self.adapters = [ (iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getAdapterList() ]
+		self.adapters = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getAdapterList()]
 		if not self.adapters:
-			self.adapters = [ (iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getConfiguredAdapters() ]
+			self.adapters = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getConfiguredAdapters()]
 		if len(self.adapters) == 0:
-			self.adapters = [ (iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getInstalledAdapters() ]
+			self.adapters = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getInstalledAdapters()]
 		self.activeInterface = None
 		for x in self.adapters:
 			if iNetwork.getAdapterAttribute(x[1], 'up') is True:
@@ -673,19 +677,19 @@ class QuickMenu(Screen):
 		config.plugins.configurationbackup.save()
 		config.save()
 
-	def backupDone(self, retval = None):
+	def backupDone(self, retval=None):
 		if retval is True:
 			self.session.open(MessageBox, _('Backup done.'), MessageBox.TYPE_INFO, timeout=10)
 		else:
 			self.session.open(MessageBox, _('Backup failed.'), MessageBox.TYPE_INFO, timeout=10)
 
-	def startRestore(self, ret = False):
+	def startRestore(self, ret=False):
 		if ret == True:
 			self.exe = True
 			self.session.open(RestoreScreen, runRestore=True)
 
 
-def QuickMenuEntryComponent(name, description, long_description = None, width = 540):
+def QuickMenuEntryComponent(name, description, long_description=None, width=540):
 	pngname = name.replace(' ', '_')
 	png = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/' + pngname + '.png')
 	if png is None:
@@ -694,9 +698,9 @@ def QuickMenuEntryComponent(name, description, long_description = None, width = 
 	if sz_w and sz_w == 1920:
 		width *= 1.5
 		return [_(name),
-		MultiContentEntryText(pos=(90, 2), size=(width-90, 40), font=0, text = _(name)),
-		MultiContentEntryText(pos=(90, 42), size=(width-90, 30), font=1, text = _(description)),
-		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), flags = BT_SCALE, png = png),
+		MultiContentEntryText(pos=(90, 2), size=(width - 90, 40), font=0, text=_(name)),
+		MultiContentEntryText(pos=(90, 42), size=(width - 90, 30), font=1, text=_(description)),
+		MultiContentEntryPixmapAlphaTest(pos=(15, 8), size=(60, 60), flags=BT_SCALE, png=png),
 		_(long_description)]
 	elif sz_w > 720:
 		return [_(name),
@@ -706,19 +710,19 @@ def QuickMenuEntryComponent(name, description, long_description = None, width = 
 		_(long_description)]
 	else:
 		return [_(name),
-		MultiContentEntryText(pos=(60, 3), size=(width-60, 25), font=0, text = _(name)),
-		MultiContentEntryText(pos=(60, 25), size=(width-60, 20), font=1, text = _(description)),
-		MultiContentEntryPixmapAlphaTest(pos=(10, 5), size=(40, 40), png = png),
+		MultiContentEntryText(pos=(60, 3), size=(width - 60, 25), font=0, text=_(name)),
+		MultiContentEntryText(pos=(60, 25), size=(width - 60, 20), font=1, text=_(description)),
+		MultiContentEntryPixmapAlphaTest(pos=(10, 5), size=(40, 40), png=png),
 		_(long_description)]
 
 
-def QuickSubMenuEntryComponent(name, description, long_description = None, width = 540):
+def QuickSubMenuEntryComponent(name, description, long_description=None, width=540):
 	sz_w = getDesktop(0).size().width()
 	if sz_w and sz_w == 1920:
 		width *= 1.5
 		return [_(name),
-		MultiContentEntryText(pos=(15, 2), size=(width-15, 40), font=0, text = _(name)),
-		MultiContentEntryText(pos=(15, 42), size=(width-15, 30), font=1, text = _(description)),
+		MultiContentEntryText(pos=(15, 2), size=(width - 15, 40), font=0, text=_(name)),
+		MultiContentEntryText(pos=(15, 42), size=(width - 15, 30), font=1, text=_(description)),
 		_(long_description)]
 	elif sz_w > 720:
 		return [_(name),
@@ -727,14 +731,14 @@ def QuickSubMenuEntryComponent(name, description, long_description = None, width
 		_(long_description)]
 	else:
 		return [_(name),
-		MultiContentEntryText(pos=(10, 3), size=(width-10, 25), font=0, text = _(name)),
-		MultiContentEntryText(pos=(10, 25), size=(width-10, 20), font=1, text = _(description)),
+		MultiContentEntryText(pos=(10, 3), size=(width - 10, 25), font=0, text=_(name)),
+		MultiContentEntryText(pos=(10, 25), size=(width - 10, 20), font=1, text=_(description)),
 		_(long_description)]
 
 
 class QuickMenuList(MenuList):
 
-	def __init__(self, list, enableWrapAround = True):
+	def __init__(self, list, enableWrapAround=True):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
 		sz_w = getDesktop(0).size().width()
 		if sz_w and sz_w == 1920:
@@ -749,7 +753,7 @@ class QuickMenuList(MenuList):
 
 class QuickMenuSubList(MenuList):
 
-	def __init__(self, sublist, enableWrapAround = True):
+	def __init__(self, sublist, enableWrapAround=True):
 		MenuList.__init__(self, sublist, enableWrapAround, eListboxPythonMultiContent)
 		sz_w = getDesktop(0).size().width()
 		if sz_w and sz_w == 1920:
@@ -776,7 +780,7 @@ class QuickMenuDevices(Screen):
 		self.activityTimer.timeout.get().append(self.updateList2)
 		self.updateList()
 
-	def updateList(self, result = None, retval = None, extra_args = None):
+	def updateList(self, result=None, retval=None, extra_args=None):
 		scanning = _('Wait please while scanning for devices...')
 		self['lab1'].setText(scanning)
 		self.activityTimer.start(10)

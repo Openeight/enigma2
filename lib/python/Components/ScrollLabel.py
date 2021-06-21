@@ -2,11 +2,12 @@ import skin
 from GUIComponent import GUIComponent
 from enigma import eLabel, eWidget, eSlider, fontRenderClass, ePoint, eSize
 
+
 class ScrollLabel(GUIComponent):
 	def __init__(self, text="", showscrollbar=True):
 		GUIComponent.__init__(self)
 		self.message = text
-		self.showscrollbar=showscrollbar
+		self.showscrollbar = showscrollbar
 		self.instance = None
 		self.long_text = None
 		self.right_text = None
@@ -42,7 +43,7 @@ class ScrollLabel(GUIComponent):
 					self.split = int(value)
 					if self.split:
 						self.right_text = eLabel(self.instance)
-					self.skinAttributes.remove((attrib, value))	
+					self.skinAttributes.remove((attrib, value))
 				elif "colposition" in attrib:
 					self.column = int(value)
 				elif "dividechar" in attrib:
@@ -60,7 +61,7 @@ class ScrollLabel(GUIComponent):
 		lines = int(self.long_text.size().height() / lineheight)
 		self.pageHeight = int(lines * lineheight)
 		self.instance.move(self.long_text.position())
-		self.instance.resize(eSize(self.pageWidth, self.pageHeight + int(lineheight/6)))
+		self.instance.resize(eSize(self.pageWidth, self.pageHeight + int(lineheight / 6)))
 		self.scrollbar.move(ePoint(self.pageWidth - scrollbarWidth, 0))
 		self.scrollbar.resize(eSize(scrollbarWidth, self.pageHeight + int(lineheight / 6)))
 		self.scrollbar.setOrientation(eSlider.orVertical)
@@ -124,7 +125,7 @@ class ScrollLabel(GUIComponent):
 		self.updateScrollbar()
 
 	def lastPage(self):
-		self.setPos(self.TotalTextHeight-self.pageHeight)
+		self.setPos(self.TotalTextHeight - self.pageHeight)
 
 	def isAtLastPage(self):
 		return self.TotalTextHeight <= self.pageHeight or self.curPos == self.TotalTextHeight - self.pageHeight

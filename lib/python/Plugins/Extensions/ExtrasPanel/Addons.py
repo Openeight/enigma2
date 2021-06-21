@@ -24,6 +24,7 @@ from __init__ import _
 from Components.Opkg import OpkgComponent
 from Screens.Opkg import Opkg
 
+
 class AddonsFileBrowser(Screen):
 
     def __init__(self, session):

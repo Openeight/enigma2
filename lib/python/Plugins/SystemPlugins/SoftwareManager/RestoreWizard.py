@@ -14,9 +14,10 @@ from boxbranding import getBoxType
 
 boxtype = getBoxType()
 
+
 def listConfigBackup():
 	try:
-		devices = [(r.description, r.mountpoint) for r in harddiskmanager.getMountedPartitions(onlyhotplug = False)]
+		devices = [(r.description, r.mountpoint) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False)]
 		list = []
 		files = []
 		for x in devices:
@@ -42,7 +43,7 @@ def listConfigBackup():
 				if len(files):
 					for file in files:
 						if file.endswith('.tar.gz'):
-							list.append((path.join(devpath,file),path.join(devpath,file)))
+							list.append((path.join(devpath, file), path.join(devpath, file)))
 		if len(list):
 			list.sort()
 			list.reverse()
@@ -53,15 +54,17 @@ def listConfigBackup():
 		print "unable to use device (%s)..." % str(e)
 		return None
 
+
 if listConfigBackup() is None:
 	backupAvailable = 0
 else:
 	backupAvailable = 1
 
+
 class RestoreWizard(WizardLanguage, Rc):
 	def __init__(self, session):
 		self.xmlfile = resolveFilename(SCOPE_PLUGINS, "SystemPlugins/SoftwareManager/restorewizard.xml")
-		WizardLanguage.__init__(self, session, showSteps = False, showStepSlider = False)
+		WizardLanguage.__init__(self, session, showSteps=False, showStepSlider=False)
 		Rc.__init__(self)
 		self.session = session
 		self.skinName = "StartWizard"
@@ -99,7 +102,7 @@ class RestoreWizard(WizardLanguage, Rc):
 		if self.NextStep is 'settingsrestore':
 			self.session.open(RestoreMenu, self.skin)
 
-	def buildListfinishedCB(self,data):
+	def buildListfinishedCB(self, data):
 		self.buildListRef = None
 		if data is True:
 			self.currStep = self.getStepWithID(self.NextStep)
@@ -107,4 +110,3 @@ class RestoreWizard(WizardLanguage, Rc):
 		else:
 			self.currStep = self.getStepWithID(self.NextStep)
 			self.afterAsyncCode()
-

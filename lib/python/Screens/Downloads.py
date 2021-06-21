@@ -50,11 +50,12 @@ class RSList(MenuList):
 
 ##############################################################################
 
+
 def RSListEntry(download, state):
 	res = [(download)]
 	# skin.xml <parameter name="RSList" value="40,0,1200,50,10,3,50,50" />
 	try:
-		x, y, w, h , x1, y1, w1, h1 = skin.parameters.get("RSList",(40, 0, 1280, 25, 5, 6, 25, 25))
+		x, y, w, h, x1, y1, w1, h1 = skin.parameters.get("RSList", (40, 0, 1280, 25, 5, 6, 25, 25))
 	except:
 		x = 40
 		y = 0
@@ -66,19 +67,14 @@ def RSListEntry(download, state):
 		h1 = 25
 	res.append(MultiContentEntryText(pos=(x, y), size=(w, h), font=0, text=download))
 	if state == 0:
-		res.append(MultiContentEntryPixmapAlphaTest(pos=(x1, y1), size=(w1,h1), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_green.png"))))
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(x1, y1), size=(w1, h1), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_green.png"))))
 	else:
-		res.append(MultiContentEntryPixmapAlphaTest(pos=(x1, y1), size=(w1,h1), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_red.png"))))
+		res.append(MultiContentEntryPixmapAlphaTest(pos=(x1, y1), size=(w1, h1), png=LoadPixmap(cached=True, desktop=getDesktop(0), path=resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/buttons/button_red.png"))))
 
 	print "res =", res
 	return res
 
 ##############################################################################
-
-
-
-
-
 
 
 class Downloads(Screen):
@@ -92,15 +88,13 @@ class Downloads(Screen):
 			<widget name="info" position="80,80" zPosition="4" size="350,300" font="Regular;18" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
 		</screen>"""
 
-     
-
     def __init__(self, session):
 		self.skin = Downloads.skin
 		Screen.__init__(self, session)
 
         	self["list"] = MenuList([])
 		self["info"] = Label()
-                self["actions"] = NumberActionMap(["WizardActions", "InputActions", "ColorActions", "DirectionActions"], 
+                self["actions"] = NumberActionMap(["WizardActions", "InputActions", "ColorActions", "DirectionActions"],
 		{
 			"ok": self.okClicked,
 			"back": self.close,
@@ -120,7 +114,7 @@ class Downloads(Screen):
 	        self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Select"))
 		title = "Download Categories"
-		self["title"] = Button(title)		
+		self["title"] = Button(title)
                 self.icount = 0
                 self.errcount = 0
                 self.onLayoutFinish.append(self.openTest)
@@ -132,7 +126,7 @@ class Downloads(Screen):
 
     def gotPage(self, html):
 #	        try:
-        	       print "html = ", html 
+        	       print "html = ", html
                        self.data = []
                        icount = 0
                        self.data = html.splitlines()
@@ -151,23 +145,23 @@ class Downloads(Screen):
     def okClicked(self):
 	  if self.errcount == 1:
                 self.close()
-          else:      
+          else:
                 sel = self["list"].getSelectionIndex()
                 addon = self.data[sel]
                 self.session.open(Getipklist, addon)
-                
+
     def keyLeft(self):
 		self["text"].left()
-	
+
     def keyRight(self):
 		self["text"].right()
-	
+
     def keyNumberGlobal(self, number):
 		print "pressed", number
 		self["text"].number(number)
 
-class Getipklist(Screen):
 
+class Getipklist(Screen):
 
     skin = """
 		<screen position="center,center" size="800,500" title=" " >
@@ -178,13 +172,12 @@ class Getipklist(Screen):
                         <ePixmap name="red"    position="0,460"   zPosition="2" size="140,40" pixmap="skin_default/buttons/button_red.png" transparent="1" alphatest="on" />
 	                <ePixmap name="green"  position="140,460" zPosition="2" size="140,40" pixmap="skin_default/buttons/button_green.png" transparent="1" alphatest="on" />
 
-	                <widget name="key_red" position="0,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
-	                <widget name="key_green" position="140,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
+	                <widget name="key_red" position="0,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	                <widget name="key_green" position="140,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 
 			<eLabel position="70,100" zPosition="-1" size="100,69" backgroundColor="#222222" />
 			<widget name="info" position="100,230" zPosition="4" size="300,25" font="Regular;18" foregroundColor="#ffffff" transparent="1" halign="center" valign="center" />
 		</screen>"""
-
 
 
 #    def __init__(self, session, addon):
@@ -196,12 +189,12 @@ class Getipklist(Screen):
         	self.list = []
                 self["text"] = Label()
                 self["text"].setText(_("Already installed"))
-                
+
                 self["list"] = List(self.list)
                 self["list"] = RSList([])
 
 		self["info"] = Label()
-                self["actions"] = NumberActionMap(["WizardActions", "InputActions", "ColorActions", "DirectionActions"], 
+                self["actions"] = NumberActionMap(["WizardActions", "InputActions", "ColorActions", "DirectionActions"],
 		{
 			"ok": self.okClicked,
 			"back": self.close,
@@ -216,18 +209,18 @@ class Getipklist(Screen):
                 self.icount = 0
                 self.names = []
                 self.onLayoutFinish.append(self.openTest)
-                
+
     def openTest(self):
                 self["info"].setText("Downloading list...")
                 testno = 1
-                
+
                 xurl = "http://www.xtrend-alliance.com/skin/list.txt"
                 print "xurl =", xurl
                 getPage(xurl).addCallback(self.gotPage).addErrback(self.getfeedError)
 
     def gotPage(self, html):
 #	        try:
-        	       print "html = ", html 
+        	       print "html = ", html
                        self.data = []
                        icount = 0
                        self.data = html.splitlines()
@@ -235,8 +228,8 @@ class Getipklist(Screen):
 #                       print "self.data =", self.data
                        list = []
                        for line in self.data:
-                               ipkname = self.data[icount] 
-                               print "gotPage icount, ipk name =", icount, ipkname 
+                               ipkname = self.data[icount]
+                               print "gotPage icount, ipk name =", icount, ipkname
 #                               ipos = ipkname.find("_")
 #                               remname = ipkname[:ipos]
                                remname = ipkname
@@ -244,18 +237,17 @@ class Getipklist(Screen):
                                print "gotPage state, remname = ", state, remname
                             #   state = 0 not installed 1 installed
                                list.append(RSListEntry(remname, state))
-                               
-                               icount = icount+1
+
+                               icount = icount + 1
 
 		       self["list"].setList(list)
-		       print 'self["list"] A =', self["list"] 
-                       
+		       print 'self["list"] A =', self["list"]
+
                        self["info"].setText("")
-                       
+
     def getfeedError(self, error=""):
 		error = str(error)
 		print "Download error =", error
-                
 
     def getstate(self, ipkname):
                 item = "/etc/ipkinst/" + ipkname
@@ -271,19 +263,20 @@ class Getipklist(Screen):
 	        sel = self["list"].getSelectionIndex()
                 ipk = self.data[sel]
 #                addon = self.addon
-#                ipkinst = Getipk(self.session, ipk, addon) 
-                ipkinst = Getipk(self.session, ipk) 
+#                ipkinst = Getipk(self.session, ipk, addon)
+                ipkinst = Getipk(self.session, ipk)
                 ipkinst.openTest()
-                
+
     def keyLeft(self):
 		self["text"].left()
-	
+
     def keyRight(self):
 		self["text"].right()
-	
+
     def keyNumberGlobal(self, number):
 		print "pressed", number
-		self["text"].number(number)		
+		self["text"].number(number)
+
 
 class Getipk(Screen):
     skin = """
@@ -295,15 +288,15 @@ class Getipk(Screen):
 			<widget name="info" position="50,50" zPosition="4" size="500,400" font="Regular;22" foregroundColor="#ffffff" transparent="1" halign="left" valign="top" />
 		        <ePixmap name="red"    position="0,450"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 	                <ePixmap name="green"  position="140,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-	                <ePixmap name="yellow" position="280,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" /> 
-	                <!--ePixmap name="blue"   position="420,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" /--> 
+	                <ePixmap name="yellow" position="280,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+	                <!--ePixmap name="blue"   position="420,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" /-->
 
-	                <widget name="key_red" position="0,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
-	                <widget name="key_green" position="140,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
+	                <widget name="key_red" position="0,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+	                <widget name="key_green" position="140,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	                <!--widget name="key_yellow" position="280,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 	                <widget name="key_blue" position="420,450" size="140,50" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /-->
                 </screen>"""
- 
+
 #    def __init__(self, session, ipk, addon):
     def __init__(self, session, ipk):
 		Screen.__init__(self, session)
@@ -331,7 +324,7 @@ class Getipk(Screen):
                 self.icount = 0
                 self.ipk = ipk
 #                self.addon = addon
-                 
+
                 self.onLayoutFinish.append(self.openTest)
                 txt = "You have selected\n\n" + ipk + "\n\n\nPlease press Download"
                 self["info"].setText(txt)
@@ -340,10 +333,10 @@ class Getipk(Screen):
                 self.onLayoutFinish.append(self.openTest)
 
     def openTest(self):
-                if not os.path.exists("/etc/ipkinst"): 
+                if not os.path.exists("/etc/ipkinst"):
                         cmd = "mkdir -p /etc/ipkinst"
                         os.system(cmd)
-                xurl1 = "http://www.xtrend-alliance.com/skin/"      
+                xurl1 = "http://www.xtrend-alliance.com/skin/"
                 print "xurl1 =", xurl1
                 xurl2 = xurl1 + self.ipk
                 print "xurl2 =", xurl2
@@ -352,15 +345,15 @@ class Getipk(Screen):
                 self.cmd1 = 'wget -O "' + xdest + '" "' + xurl2 + '"'
                 self.cmd2 = "opkg install --force-overwrite /tmp/" + self.ipk
                 self.cmd3 = "touch /etc/ipkinst/" + self.ipk + " &"
-                self.okClicked()    
+                self.okClicked()
 
     def okClicked(self):
                 plug = self.ipk
-                title = _("Installing addon %s" %(plug))
+                title = _("Installing addon %s" % (plug))
                 cmd = self.cmd1 + " && " + self.cmd2 + " && " + self.cmd3
-                self.session.open(Console,_(title),[cmd])
+                self.session.open(Console, _(title), [cmd])
 #                self.endinstall()
- 
+
     def LastJobView(self):
 		currentjob = None
 		for job in JobManager.getPendingJobs():
@@ -368,22 +361,22 @@ class Getipk(Screen):
 
 		if currentjob is not None:
 			self.session.open(JobView, currentjob)
- 
+
     def install(self):
                        cmd = "opkg install --force-overwrite /tmp/" + self.ipk + ">/tmp/ipk.log"
                        print "cmd =", cmd
-                       title = _("Installing addon %s" %(plug))
-                       self.session.open(Console,_(title),[cmd])
+                       title = _("Installing addon %s" % (plug))
+                       self.session.open(Console, _(title), [cmd])
 #                       self.viewLog()
                        self.endinstall()
 
     def viewLog(self):
           self["info"].setText("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n       Press Exit to continue...")
 #          self["info"].setText(" ")
-          if os.path.isfile("/tmp/ipk.log")is not True :
+          if os.path.isfile("/tmp/ipk.log")is not True:
                 cmd = "touch /tmp/ipk.log"
                 os.system(cmd)
-	  else:     	
+	  else:
                 myfile = file(r"/tmp/ipk.log")
                 icount = 0
                 data = []
@@ -393,49 +386,48 @@ class Getipk(Screen):
                       num = len(line)
                       data[icount] = (line[:-1])
                       print data[icount]
-      
+
                       icount = icount + 1
                 self["list"].setList(data)
                 self.endinstall()
 
     def endinstall(self):
-                path="/tmp"
+                path = "/tmp"
                 tmplist = []
-                ipkname = 0  
-                tmplist=os.listdir(path)
+                ipkname = 0
+                tmplist = os.listdir(path)
                 print "files in /tmp", tmplist
                 icount = 0
                 for name in tmplist:
                        nipk = tmplist[icount]
-                       if (nipk[-3:]=="ipk"):
+                       if (nipk[-3:] == "ipk"):
                               ipkname = nipk
-                       icount = icount+1       
+                       icount = icount + 1
 
-                if ipkname != 0:               
-                       print "endinstall ipk name =", ipkname 
+                if ipkname != 0:
+                       print "endinstall ipk name =", ipkname
                        ipos = ipkname.find("_")
                        remname = ipkname[:ipos]
                        print "endinstall remname =", remname
-                       f=open('/etc/ipklist_installed', 'a')
-                       f1= remname + "\n"
+                       f = open('/etc/ipklist_installed', 'a')
+                       f1 = remname + "\n"
                        f.write(f1)
                        cmd = "rm /tmp/*.ipk"
-                       os.system(cmd)                 
-    
+                       os.system(cmd)
+
     def cancel(self):
                 self.close()
 
     def keyLeft(self):
 		self["text"].left()
-	
+
     def keyRight(self):
 		self["text"].right()
 
     def keyNumberGlobal(self, number):
 		print "pressed", number
 		self["text"].number(number)
-		
-		
+
 
 class Getipk2(Screen):
 
@@ -458,18 +450,17 @@ class Getipk2(Screen):
                 self.icount = 0
                 self.ipk = ipk
                 self.addon = addon
-                 
+
                 self.onLayoutFinish.append(self.openTest)
-   
-    
+
     def openTest(self):
                 self["info"].setText("Downloading and installing...")
                 device = open("/proc/stb/info/model", "r").readline().strip()
                 if device == "dm800":
                        xurl1 = "http://www.turk-dreamworld.com/bayraklar/Receiverler/Dreambox/TDW/e2/addons/oe2-dm800hd/" + self.addon + "/"
-                else:                
+                else:
                        xurl1 = "http://www.turk-dreamworld.com/bayraklar/Receiverler/Dreambox/TDW/e2/addons/oe2/" + self.addon + "/"
-        
+
                 print "xurl1 =", xurl1
                 xurl2 = xurl1 + self.ipk
                 print "xurl2 =", xurl2
@@ -477,40 +468,37 @@ class Getipk2(Screen):
                 print "xdest =", xdest
                 downloadPage(xurl2, xdest).addCallback(self.gotPage)
 
-    def gotPage(self,txt=""):
+    def gotPage(self, txt=""):
                        print "in gotPage"
                        self["info"].setText("")
                        cmd = "opkg install --force-overwrite /tmp/" + self.ipk + ">/tmp/ipk.log"
                        print "cmd =", cmd
                        os.system(cmd)
                        self.viewLog()
-                       
+
     def getfeedError(self, error=""):
 		error = str(error)
 		print "Download error =", error
 
     def keyLeft(self):
 		self["text"].left()
-	
+
     def keyRight(self):
 		self["text"].right()
-		
+
     def okClicked(self):
-                self.close()		
- 
-	
+                self.close()
+
     def keyNumberGlobal(self, number):
 		print "pressed", number
-		self["text"].number(number)		
-		
-
+		self["text"].number(number)
 
     def viewLog(self):
           self["info"].setText("Press OK to continue...")
-          if os.path.isfile("/tmp/ipk.log")is not True :
+          if os.path.isfile("/tmp/ipk.log")is not True:
                 cmd = "touch /tmp/ipk.log"
                 os.system(cmd)
-	  else:     	
+	  else:
                 myfile = file(r"/tmp/ipk.log")
                 icount = 0
                 data = []
@@ -520,50 +508,53 @@ class Getipk2(Screen):
                       num = len(line)
                       data[icount] = (line[:-1])
                       print data[icount]
-      
+
                       icount = icount + 1
                 self["list"].setList(data)
                 self.endinstall()
 
     def endinstall(self):
-                path="/tmp"
+                path = "/tmp"
                 tmplist = []
-                ipkname = 0  
-                tmplist=os.listdir(path)
+                ipkname = 0
+                tmplist = os.listdir(path)
                 print "files in /tmp", tmplist
                 icount = 0
                 for name in tmplist:
                        nipk = tmplist[icount]
-                       if (nipk[-3:]=="ipk"):
+                       if (nipk[-3:] == "ipk"):
                               ipkname = nipk
-                       icount = icount+1       
+                       icount = icount + 1
 
-                if ipkname != 0:               
-                       print "ipk name =", ipkname 
+                if ipkname != 0:
+                       print "ipk name =", ipkname
                        ipos = ipkname.find("_")
                        remname = ipkname[:ipos]
                        print "remname =", remname
-                       f=open('/etc/ipklist_installed', 'a')
-                       f1= remname + "\n"
+                       f = open('/etc/ipklist_installed', 'a')
+                       f1 = remname + "\n"
                        f.write(f1)
                        cmd = "rm /tmp/*.ipk"
-                       os.system(cmd)                 
- 
+                       os.system(cmd)
+
+
 class downloadJob(Job):
 	def __init__(self, toolbox, cmdline, filename, filetitle):
 		Job.__init__(self, _("Downloading"))
 		self.toolbox = toolbox
 		self.retrycount = 0
-		
+
                 downloadTask(self, cmdline, filename, filetitle)
 
 	def retry(self):
 		assert self.status == self.FAILED
 		self.retrycount += 1
 		self.restart()
-	
+
+
 class downloadTask(Task):
 	ERROR_CORRUPT_FILE, ERROR_RTMP_ReadPacket, ERROR_SEGFAULT, ERROR_SERVER, ERROR_UNKNOWN = range(5)
+
 	def __init__(self, job, cmdline, filename, filetitle):
 		Task.__init__(self, job, filetitle)
 #		self.postconditions.append(downloadTaskPostcondition())
@@ -572,17 +563,17 @@ class downloadTask(Task):
 		self.toolbox = job.toolbox
 		self.error = None
 		self.lasterrormsg = None
-		
+
 	def processOutput(self, data):
 		try:
 			if data.endswith('%)'):
-				startpos = data.rfind("sec (")+5
+				startpos = data.rfind("sec (") + 5
 				if startpos and startpos != -1:
 					self.progress = int(float(data[startpos:-4]))
 			elif data.find('%') != -1:
 				tmpvalue = data[:data.find("%")]
 				tmpvalue = tmpvalue[tmpvalue.rfind(" "):].strip()
-				tmpvalue = tmpvalue[tmpvalue.rfind("(")+1:].strip()
+				tmpvalue = tmpvalue[tmpvalue.rfind("(") + 1:].strip()
 				self.progress = int(float(tmpvalue))
 			else:
 				Task.processOutput(self, data)
@@ -592,12 +583,14 @@ class downloadTask(Task):
 
 	def processOutputLine(self, line):
 			self.error = self.ERROR_SERVER
-			
+
 	def afterRun(self):
 		pass
 
+
 class downloadTaskPostcondition(Condition):
 	RECOVERABLE = True
+
 	def check(self, task):
 		if task.returncode == 0 or task.error is None:
 			return True
@@ -615,67 +608,9 @@ class downloadTaskPostcondition(Condition):
 		}[task.error]
 
 
-            
- 
-
 def main(session, **kwargs):
         session.open(Downloads)
-        
-		
+
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="PluginDownload", description="Download/install plugins ", where = PluginDescriptor.WHERE_PLUGINMENU, fnc=main)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return PluginDescriptor(name="PluginDownload", description="Download/install plugins ", where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main)

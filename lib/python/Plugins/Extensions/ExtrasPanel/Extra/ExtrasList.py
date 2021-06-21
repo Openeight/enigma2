@@ -7,6 +7,7 @@ from Components.HTMLComponent import HTMLComponent
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 
+
 def SimpleEntry(name, picture):
 	res = [(name, picture)]
 	#res = []
@@ -18,11 +19,12 @@ def SimpleEntry(name, picture):
 		if fileExists(picture):
 			res.append(MultiContentEntryPixmapAlphaTest(pos=(0, 0), size=(48, 48), png=loadPNG(picture)))
 		res.append(MultiContentEntryText(pos=(60, 10), size=(420, 38), font=0, text=name))
-		
+
 	return res
-	
+
+
 class ExtrasList(MenuList, HTMLComponent, GUIComponent):
-	def __init__(self, list, enableWrapAround = False):
+	def __init__(self, list, enableWrapAround=False):
 		GUIComponent.__init__(self)
 		self.l = eListboxPythonMultiContent()
 		self.list = list
@@ -32,15 +34,15 @@ class ExtrasList(MenuList, HTMLComponent, GUIComponent):
 		self.onSelectionChanged = []
 		self.enableWrapAround = enableWrapAround
 		self.last = 0
-		
+
 	GUI_WIDGET = eListbox
-	
+
 	def postWidgetCreate(self, instance):
 		instance.setContent(self.l)
 		instance.selectionChanged.get().append(self.selectionChanged)
 		if self.enableWrapAround:
 			self.instance.setWrapAround(True)
-			
+
 	def selectionChanged(self):
 		isDiv = False
 		try:
@@ -53,7 +55,7 @@ class ExtrasList(MenuList, HTMLComponent, GUIComponent):
 						self.down()
 		except Exception, e:
 			pass
-	
+
 		self.last = self.getSelectionIndex()
 		if not isDiv:
 			for f in self.onSelectionChanged:

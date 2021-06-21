@@ -18,11 +18,13 @@ with open("/proc/cmdline", "r") as fd:
 	cmdline = fd.read()
 cmdline = {k: v.strip('"') for k, v in re.findall(r'(\S+)=(".*?"|\S+)', cmdline)}
 
+
 def getNumVideoDecoders():
 	numVideoDecoders = 0
 	while fileExists("/dev/dvb/adapter0/video%d" % numVideoDecoders, "f"):
 		numVideoDecoders += 1
 	return numVideoDecoders
+
 
 def countFrontpanelLEDs():
 	numLeds = fileExists("/proc/stb/fp/led_set_pattern") and 1 or 0
@@ -30,15 +32,18 @@ def countFrontpanelLEDs():
 		numLeds += 1
 	return numLeds
 
+
 def hassoftcaminstalled():
 	from Tools.camcontrol import CamControl
 	return len(CamControl("softcam").getList()) > 1
+
 
 def getBootdevice():
 	dev = ("root" in cmdline and cmdline["root"].startswith("/dev/")) and cmdline["root"][5:]
 	while dev and not fileExists("/sys/block/%s" % dev):
 		dev = dev[:-1]
 	return dev
+
 
 model = HardwareInfo().get_device_model()
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
@@ -106,7 +111,7 @@ SystemInfo["HasColorspaceSimple"] = SystemInfo["HasColorspace"] and model in "vu
 SystemInfo["HasMultichannelPCM"] = fileCheck("/proc/stb/audio/multichannel_pcm")
 SystemInfo["HasMMC"] = "root" in cmdline and cmdline["root"].startswith("/dev/mmcblk")
 SystemInfo["HaveMultiBoot"] = (fileCheck("/boot/STARTUP") or fileCheck("/boot/cmdline.txt"))
-SystemInfo["HaveMultiBootDS"] = fileCheck("/boot/STARTUP") and getMachineBuild() in ('cc1','sf8008') and fileCheck("/dev/sda") 
+SystemInfo["HaveMultiBootDS"] = fileCheck("/boot/STARTUP") and getMachineBuild() in ('cc1', 'sf8008') and fileCheck("/dev/sda")
 SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
 SystemInfo["HasTranscoding"] = pathExists("/proc/stb/encoder/0") or fileCheck("/dev/bcm_enc0")
 SystemInfo["HasH265Encoder"] = fileHas("/proc/stb/encoder/0/vcodec_choices", "h265")
@@ -132,7 +137,7 @@ SystemInfo["Has3DSurroundSoftLimiter"] = fileExists("/proc/stb/audio/3dsurround_
 SystemInfo["hasXcoreVFD"] = model in ("osmega", "spycat4k", "spycat4kmini", "spycat4kcombo") and fileCheck("/sys/module/brcmstb_%s/parameters/pt6302_cgram" % model)
 SystemInfo["HasOfflineDecoding"] = model not in ("osmini", "osminiplus", "et7000mini", "et11000", "mbmicro", "mbtwinplus", "mbmicrov2", "et7000", "et8500")
 SystemInfo["MultibootStartupDevice"] = getMultibootStartupDevice()
-SystemInfo["HaveMultiBootHD"] = fileCheck("/boot/STARTUP") and getMachineBuild() in ('hd51','vs1500','h7','ceryon7252')
+SystemInfo["HaveMultiBootHD"] = fileCheck("/boot/STARTUP") and getMachineBuild() in ('hd51', 'vs1500', 'h7', 'ceryon7252')
 SystemInfo["HaveMultiBootXC"] = fileCheck("/boot/cmdline.txt")
 SystemInfo["HaveMultiBootCY"] = fileCheck("/boot/STARTUP") and getMachineBuild() in ('8100s')
 SystemInfo["canMode12"] = "%s_4.boxmode" % model in cmdline and cmdline["%s_4.boxmode" % model] in ("1", "12") and "192M"
@@ -144,5 +149,5 @@ SystemInfo["CanDownmixDTS"] = fileHas("/proc/stb/audio/dts_choices", "downmix")
 SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices", "downmix")
 SystemInfo["HDMIAudioSource"] = fileCheck("/proc/stb/hdmi/audio_source")
 SystemInfo["BootDevice"] = getBootdevice()
-SystemInfo["canRecovery"] = getMachineBuild() in ('hd51','vs1500','h7','8100s') and ('disk.img', 'mmcblk0p1') or getMachineBuild() in ('xc7439','osmio4k','osmio4kplus','osmini4k') and ('emmc.img', 'mmcblk1p1') or getMachineBuild() in ('gbmv200','cc1','sf8008','sf8008m','ustym4kpro','beyonwizv2','viper4k') and ('usb_update.bin','none')
+SystemInfo["canRecovery"] = getMachineBuild() in ('hd51', 'vs1500', 'h7', '8100s') and ('disk.img', 'mmcblk0p1') or getMachineBuild() in ('xc7439', 'osmio4k', 'osmio4kplus', 'osmini4k') and ('emmc.img', 'mmcblk1p1') or getMachineBuild() in ('gbmv200', 'cc1', 'sf8008', 'sf8008m', 'ustym4kpro', 'beyonwizv2', 'viper4k') and ('usb_update.bin', 'none')
 SystemInfo["LnbPowerAlwaysOn"] = HardwareInfo().get_device_model() in ("vusolo4k", "vuduo4k", "vuultimo4k", "vuuno4k", "vuuno4kse")

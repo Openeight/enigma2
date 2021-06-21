@@ -18,6 +18,8 @@ SHAREPATH = '/etc/samba/shares'
 # Our "Better" ConfigParser, which supports comments and a
 # toplevel section that doesn't require an INI header
 #
+
+
 class BetterConfigParser(ConfigParser.ConfigParser):
 
 	# class globals
@@ -50,7 +52,7 @@ class BetterConfigParser(ConfigParser.ConfigParser):
 		"""Add a comment line"""
 		self.set(section, '# %s' % (comment,), None)
 
-	def add_section(self, section, items = None):
+	def add_section(self, section, items=None):
 		"""Create a new section in the configuration.
 		Raise DuplicateSectionError if a section by the specified name
 		already exists. Raise ValueError if name is DEFAULT or any of it's
@@ -121,7 +123,7 @@ class BetterConfigParser(ConfigParser.ConfigParser):
 										# ';' is a comment delimiter only if it follows
 										# a spacing character
 										pos = optval.find(';')
-										if pos != -1 and optval[pos-1].isspace():
+										if pos != -1 and optval[pos - 1].isspace():
 											optval = optval[:pos]
 									optval = optval.strip()
 									# allow empty values
@@ -152,11 +154,10 @@ class BetterConfigParser(ConfigParser.ConfigParser):
 				if isinstance(val, list):
 					options[name] = '\n'.join(val)
 
-
 	def write(self, filename):
 		"""Write an .ini-format representation of the configuration state."""
 
-		fp = open(filename,'w')
+		fp = open(filename, 'w')
 		self.writefp(fp)
 		fp.close()
 
@@ -177,7 +178,7 @@ class BetterConfigParser(ConfigParser.ConfigParser):
 					self._write_item(fp, key, value, 2)
 				fp.write("\n")
 
-	def _write_item(self, fp, key, value, indent = 0):
+	def _write_item(self, fp, key, value, indent=0):
 		"""Write a single option or comment line"""
 		if key != "__name__":
 			if key.startswith('_comment_') and value is not None:
@@ -186,6 +187,8 @@ class BetterConfigParser(ConfigParser.ConfigParser):
 				fp.write("%s%s = %s\n" % (" " * indent, key, str(value).replace('\n', '\n\t')))
 
 # cli help information
+
+
 def syntax():
 	"""
 	Show syntax and usage information
@@ -207,6 +210,8 @@ Syntax:
 #
 # main function
 #
+
+
 def main():
 	"""
 	CLI programme to convert smb.conf files into OpenPLi format
@@ -273,6 +278,7 @@ def main():
 				share = BetterConfigParser()
 				share.add_section(section, inputfile.items(section))
 				share.write('%s/%s.conf' % (SHAREPATH, section.lower()))
+
 
 # run me
 if __name__ == '__main__':

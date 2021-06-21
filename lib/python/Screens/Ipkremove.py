@@ -12,6 +12,7 @@ import os
 
 import gettext
 
+
 def _(txt):
 	t = gettext.dgettext("XTPanel", txt)
 	if t == txt:
@@ -22,21 +23,23 @@ def _(txt):
 # Coded by PCD, February 2008 #
 ###############################
 
+
 class Ipkremove(Screen):
 	skin = """
 		<screen position="100,100" size="550,400" title="Ipkremove" >
 			<widget name="list" position="10,0" size="190,250" scrollbarMode="showOnDemand" />
 			<widget name="pixmap" position="200,0" size="190,250" />
 		</screen>"""
-	def __init__(self, session, args = None):
+
+	def __init__(self, session, args=None):
 		self.skin = Ipkremove.skin
 		Screen.__init__(self, session)
 
-		self["list"] = FileList("/", matchingPattern = "^.*\.(ipk|png|avi|mp3|mpeg|ts)")
+		self["list"] = FileList("/", matchingPattern="^.*\.(ipk|png|avi|mp3|mpeg|ts)")
 		self["pixmap"] = Pixmap()
-		
+
 		self["text"] = Input("1234", maxSize=True, type=Input.NUMBER)
-				
+
 		self["actions"] = NumberActionMap(["WizardActions", "InputActions"],
 		{
 			"ok": self.close,
@@ -61,7 +64,7 @@ class Ipkremove(Screen):
 	def test2(self, returnValue):
 		if returnValue is None:
 			self.close()
-		else: 
+		else:
 			print "returnValue", returnValue
 			remname = returnValue[1]
 			ipk = returnValue[0]
@@ -70,8 +73,8 @@ class Ipkremove(Screen):
 			cmd2 = "rm /etc/ipkinst/" + ipk
 			cmd = cmd1 + " && " + cmd2
 			print cmd
-			title = _("Removing addon %s" %(remname))
-			self.session.open(Console,_(title),[cmd])
+			title = _("Removing addon %s" % (remname))
+			self.session.open(Console, _(title), [cmd])
 		self.close()
 
 	def keyLeft(self):
@@ -86,4 +89,3 @@ class Ipkremove(Screen):
 	def keyNumberGlobal(self, number):
 		print "pressed", number
 		self["text"].number(number)
-
