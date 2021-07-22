@@ -139,6 +139,11 @@ if path.exists('/usr/lib/enigma2/python/Plugins/Extensions/VpnChanger/plugin.pyo
 	VPNCHP = True
 else:
 	VPNCHP = False
+if path.exists('/usr/lib/enigma2/python/Plugins/Extensions/PureVPN/plugin.pyo'):
+	from Plugins.Extensions.PureVPN.plugin import PureVPNScreen
+	PVPN = True
+else:
+	PVPN = False
 
 
 def isFileSystemSupported(filesystem):
@@ -306,6 +311,9 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Network Services', _('Setup Network Services'), _('Setup Network Services (Samba, Ftp, NFS, ...)')))
 		if VPNCHP:
 			self.sublist.append(QuickSubMenuEntryComponent('VPN Changer', _('Setup VPN Changer'), _('Setup VPN Changer for more privacy.')))
+		if PVPN:
+			self.sublist.append(QuickSubMenuEntryComponent('PureVPN Manager', _('Setup PureVPN'), _('Setup PureVPN for more privacy.')))
+		self['sublist'].l.setList(self.sublist)
 		self['sublist'].l.setList(self.sublist)
 		return
 
@@ -482,6 +490,8 @@ class QuickMenu(Screen):
 			self.session.open(NetworkTelnet)
 		elif item[0] == _('VPN Changer'):
 			self.session.open(VpnScreen)
+		elif item[0] == _('PureVPN Manager'):
+			self.session.open(PureVPNScreen)
 		elif item[0] == _('Customize'):
 			self.openSetup('usage')
 		elif item[0] == _('Display Settings'):
