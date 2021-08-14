@@ -820,16 +820,12 @@ class QuickMenuDevices(Screen):
 			self['lab1'].hide()
 
 	def buildMy_rec(self, device):
-		device2 = device[:-1]	#strip device number
+		device2 = device[:-(len(device) - 3)]	#strip device number
 		devicetype = path.realpath('/sys/block/' + device2 + '/device')
 		d2 = device
 		name = 'USB: '
 		mypixmap = '/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/dev_usbstick.png'
-		try:
-			model = file('/sys/block/' + device2 + '/device/model').read()
-		except:
-			device2 = device[:-2] #strip (2 digit) device number
-			model = file('/sys/block/' + device2 + '/device/model').read()
+		model = file('/sys/block/' + device2 + '/device/model').read()
 		model = str(model).replace('\n', '')
 		des = ''
 		if devicetype.find('/devices/pci') != -1:
