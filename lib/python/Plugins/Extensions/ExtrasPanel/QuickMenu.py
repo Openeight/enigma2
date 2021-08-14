@@ -314,7 +314,6 @@ class QuickMenu(Screen):
 		if PVPN:
 			self.sublist.append(QuickSubMenuEntryComponent('PureVPN Manager', _('Setup PureVPN'), _('Setup PureVPN for more privacy.')))
 		self['sublist'].l.setList(self.sublist)
-		self['sublist'].l.setList(self.sublist)
 		return
 
 	def Qnetworkservices(self):
