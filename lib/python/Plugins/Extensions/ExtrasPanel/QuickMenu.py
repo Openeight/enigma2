@@ -309,6 +309,8 @@ class QuickMenu(Screen):
 			self.sublist.append(QuickSubMenuEntryComponent('Network Interface', _('Setup interface'), _('Setup network. Here you can setup DHCP, IP, DNS.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Network Restart', _('Restart network with current setup'), _('Restart network and remount connections.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Network Services', _('Setup Network Services'), _('Setup Network Services (Samba, Ftp, NFS, ...)')))
+		if path.exists('/var/lib/opkg/info/openvpn.control'):
+			self.sublist.append(QuickSubMenuEntryComponent('OpenVPN', _('Setup OpenVPN'), _('Setup OpenVPN')))
 		if VPNCHP:
 			self.sublist.append(QuickSubMenuEntryComponent('VPN Changer', _('Setup VPN Changer'), _('Setup VPN Changer for more privacy.')))
 		if PVPN:
