@@ -311,10 +311,10 @@ class QuickMenu(Screen):
 		self.sublist.append(QuickSubMenuEntryComponent('Network Services', _('Setup Network Services'), _('Setup Network Services (Samba, Ftp, NFS, ...)')))
 		if path.exists('/var/lib/opkg/info/openvpn.control'):
 			self.sublist.append(QuickSubMenuEntryComponent('OpenVPN', _('Setup OpenVPN'), _('Setup OpenVPN')))
-		if VPNCHP:
-			self.sublist.append(QuickSubMenuEntryComponent('VPN Changer', _('Setup VPN Changer'), _('Setup VPN Changer for more privacy.')))
-		if PVPN:
-			self.sublist.append(QuickSubMenuEntryComponent('PureVPN Manager', _('Setup PureVPN'), _('Setup PureVPN for more privacy.')))
+			if VPNCHP:
+				self.sublist.append(QuickSubMenuEntryComponent('VPN Changer', _('Setup VPN Changer'), _('Setup VPN Changer for more privacy.')))
+			if PVPN:
+				self.sublist.append(QuickSubMenuEntryComponent('PureVPN Manager', _('Setup PureVPN'), _('Setup PureVPN for more privacy.')))
 		self['sublist'].l.setList(self.sublist)
 		return
 
@@ -823,7 +823,6 @@ class QuickMenuDevices(Screen):
 	def buildMy_rec(self, device):
 		device2 = device[:-(len(device) - 3)]	#strip device number
 		devicetype = path.realpath('/sys/block/' + device2 + '/device')
-		d2 = device
 		name = 'USB: '
 		mypixmap = '/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/dev_usbstick.png'
 		model = file('/sys/block/' + device2 + '/device/model').read()
