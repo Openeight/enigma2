@@ -59,7 +59,7 @@ AC_DEFINE_UNQUOTED(BOXTYPE,"$BOXTYPE",[box type])
 AM_CONDITIONAL(ET8500, test "$BOXTYPE" == et8500)
 AM_CONDITIONAL(ET10000, test "$BOXTYPE" == et10000)
 
-AM_CONDITIONAL(ARM, test "$BOXTYPE" == sf4008 -o "$BOXTYPE" == sf8008 -o "$BOXTYPE" == sf8008m)
+AM_CONDITIONAL(ARM, test "$BOXTYPE" == sf4008 -o "$BOXTYPE" == sf8008 -o "$BOXTYPE" == sf8008m -o "$BOXTYPE" == sx988)
 
 AM_CONDITIONAL(DREAMBOX, test `echo "$BOXTYPE" | cut -b 1-2` == "dm")
 AM_CONDITIONAL(HAVE_TEMPFANCONTROL, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm500hd)
@@ -133,7 +133,7 @@ if test "$BOXTYPE" == "et7x00"; then
 	AC_DEFINE(KEY_F1_TO_KEY_F2, 1,[define when rc sends a KEY_F1 event for its KEY_F2 key])
 fi
 
-if test "$BOXTYPE" == "sf8008" -o "$BOXTYPE" == "sf8008m"; then
+if test "$BOXTYPE" == "sf8008" -o "$BOXTYPE" == "sf8008m" -o "$BOXTYPE" == "sx988"; then
 	AC_DEFINE(HAVE_HISILICON, 1,[define add HISILICON chip])
 	AC_DEFINE(CONFIG_HISILICON_FB, 1,[define add HISILICON framebuffer blit])
 fi

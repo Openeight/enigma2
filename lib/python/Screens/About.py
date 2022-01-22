@@ -206,6 +206,8 @@ class ModelPic(Screen):
 			model = "sf8008.png"
 		elif getMachineBuild() in ('sf8008m'):
 			model = "sf8008m.png"
+		elif getMachineBuild() in ('sx988'):
+			model = "sx988.png"
 		elif getBoxType() in ('sf4008'):
 			model = "sf4008.png"
 		elif getBoxType() in ('sf3038'):
