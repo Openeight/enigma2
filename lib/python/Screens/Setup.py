@@ -7,6 +7,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN
 from enigma import eEnv
 
 import xml.etree.cElementTree
@@ -70,14 +71,20 @@ class Setup(ConfigListScreen, Screen):
 
 	ALLOW_SUSPEND = True
 
-	def __init__(self, session, setup):
+	def __init__(self, session, setup, plugin=None, PluginLanguageDomain=None):
 		Screen.__init__(self, session)
 		# for the skin: first try a setup_<setupID>, then Setup
 		self.skinName = ["setup_" + setup, "Setup"]
 		self.list = []
 		self.force_update_list = False
 
-		xmldata = setupdom.getroot()
+		if plugin:
+			setupfile = file(resolveFilename(SCOPE_CURRENT_PLUGIN, plugin + '/setup.xml'), 'r')
+			xmldata = xml.etree.cElementTree.parse(setupfile)
+			setupfile.close()
+		else:
+			xmldata = setupdom.getroot()
+
 		for x in xmldata.findall("setup"):
 			if x.get("key") == setup:
 				self.setup = x
