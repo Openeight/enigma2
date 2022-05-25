@@ -304,7 +304,7 @@ class doFlashImage(Screen):
 				tmpStatus = _("yellow")
 			elif '2' in tmpStatus:
 				tmpStatus = _("red")
-			self.session.open(MessageBox, _("Traffic light state is '%s' - please use an another image.") % tmpStatus.upper(), type=MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Traffic light state is '%s' - please use another image.") % tmpStatus.upper(), type=MessageBox.TYPE_ERROR)
 			return False
 
 	def startInstallOnline(self, ret=None):
