@@ -200,36 +200,12 @@ class ModelPic(Screen):
 			}, -2)
 
 	def poster_resize(self):
-		if getBoxType() in ('sf108'):
-			model = "sf108.png"
-		elif getMachineBuild() in ('sf8008'):
-			model = "sf8008.png"
-		elif getMachineBuild() in ('sf8008m'):
-			model = "sf8008m.png"
-		elif getMachineBuild() in ('sx988'):
-			model = "sx988.png"
-		elif getBoxType() in ('sf4008'):
-			model = "sf4008.png"
-		elif getBoxType() in ('sf3038'):
-			model = "sf3038.png"
-		elif getBoxType() in ('sf128'):
-			model = "sf128.png"
-		elif getBoxType() in ('sf138'):
-			model = "sf138.png"
-		elif getBoxType() in ('sf208'):
-			model = "sf208.png"
-		elif getBoxType() in ('sf228'):
-			model = "sf228.png"
-		elif getBoxType() in ('sf98'):
-			model = "sf98.png"
-		elif getBoxType() in ('et8500', 'et8500s'):
+		if getBoxType() in ('et8500', 'et8500s'):
 			model = "et8500.jpg"
 		elif getBoxType() in ('et9000', 'et9x00', 'et9200', 'et9500'):
 			model = "et9x00.jpg"
-		elif getBoxType() in ('et10000'):
-			model = "et10000.jpg"
 		else:
-			model = None
+			model = getBoxType() + ".png"
 
 		poster_path = "/usr/share/enigma2/%s" % model
 		self["boxpic"].hide()
