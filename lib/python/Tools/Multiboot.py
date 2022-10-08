@@ -47,16 +47,16 @@ def getMultibootslots():
 				for line in open(file).readlines():
 					if 'root=' in line:
 						device = getparam(line, 'root')
-						if os.path.exists(device):
+						if os.path.exists(device) or device == 'ubi0:ubifs':
 							slot['device'] = device
 							slot['startupfile'] = os.path.basename(file)
-							if 'sda' in device:
-								slot['kernel'] = '/dev/sda%s' % line.split('sda', 1)[1].split(' ', 1)[0]
-							else:
-								slot['kernel'] = '%sp%s' % (device.split('p')[0], int(device.split('p')[1]) - 1)
 							if 'rootsubdir' in line:
 								slot['rootsubdir'] = getparam(line, 'rootsubdir')
 								slot['kernel'] = getparam(line, 'kernel')
+							elif 'sda' in device:
+								slot['kernel'] = '/dev/sda%s' % line.split('sda', 1)[1].split(' ', 1)[0]
+							else:
+								slot['kernel'] = '%sp%s' % (device.split('p')[0], int(device.split('p')[1]) - 1)
 
 						break
 				if slot:
@@ -97,6 +97,8 @@ def GetBoxName():
 		box = "sf8008m"
 	elif box.startswith('sf8008'):
 		box = "sf8008"
+	elif box.startswith('sfx60'):
+		box = "sfx6008"
 	return box
 
 
@@ -128,7 +130,10 @@ def getImagelist():
 	if SystemInfo["canMultiBoot"]:
 		tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
 		for slot in sorted(SystemInfo["canMultiBoot"].keys()):
-			Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
+			if SystemInfo["canMultiBoot"][slot]['device'] == 'ubi0:ubifs':
+				Console().ePopen('mount -t ubifs %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
+			else:
+				Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
 			imagedir = os.sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')]))
 			if os.path.isfile(os.path.join(imagedir, 'usr/bin/enigma2')):
 				try:
