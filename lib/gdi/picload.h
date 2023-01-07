@@ -104,7 +104,7 @@ public:
 	RESULT startDecode(const char *filename, int x=0, int y=0, bool async=true);
 	RESULT getThumbnail(const char *filename, int x=0, int y=0, bool async=true);
 	RESULT setPara(PyObject *val);
-	RESULT setPara(int width, int height, double aspectRatio, int as, bool useCache, int resizeType, const char *bg_str, bool auto_orientation);
+	RESULT setPara(int width, int height, double aspectRatio, int as, bool useCache, int resizeType, const char *bg_str, bool auto_orientation = false);
 	PyObject *getInfo(const char *filename);
 	SWIG_VOID(int) getData(ePtr<gPixmap> &SWIG_OUTPUT);
 };
