@@ -26,27 +26,24 @@
 from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry, ConfigNothing, ConfigSubsection, ConfigInteger, ConfigYesNo, ConfigText, ConfigSelection, configfile
 from Components.ConfigList import ConfigListScreen
-from Components.Input import Input
 from Components.Label import Label
-from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText
 from Components.NimManager import nimmanager
-from Components.Sources.StaticText import StaticText
-from enigma import eConsoleAppContainer, getEnigmaVersionString, getDesktop
-from Plugins.Plugin import PluginDescriptor
+from enigma import eConsoleAppContainer, getDesktop
 from Screens.ChoiceBox import ChoiceBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.Console import Console
-from Screens.InputBox import InputBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Screens.MessageBox import MessageBox
-from Tools.NumericalTextInput import NumericalTextInput
+import six
+if six.PY3:
+	from urllib.request import urlopen
+else: # Python 2
+	from urllib2 import urlopen
 import os
 import re
 import time
 import datetime
-import urllib
 import array
 import struct
 import fcntl
@@ -97,7 +94,7 @@ config.plugins.SundtekControlCenter.sunconf.vtuneracceleration = ConfigYesNo(def
 config.plugins.SundtekControlCenter.sunconf.searchversion = ConfigYesNo(default=False)
 
 orginal_dmm = False
-if not os.path.exists("/proc/stb/info/vumodel") and not os.path.exists("/proc/stb/info/boxtype") and os.path.exists("/proc/stb/info/model") and config.plugins.SundtekControlCenter.sunconf.searchversion.value:
+if not os.path.exists("/proc/stb/info/boxtype") and os.path.exists("/proc/stb/info/model") and config.plugins.SundtekControlCenter.sunconf.searchversion.value:
 	config.plugins.SundtekControlCenter.sunconf.searchversion.value = False
 	config.plugins.SundtekControlCenter.sunconf.searchversion.save()
 	orginal_dmm = True
@@ -107,7 +104,7 @@ config.plugins.SundtekControlCenter.sunconf.networkmode = ConfigSelection(defaul
 
 ## version string #########################################################
 
-sundtekcontrolcenter_version = "20180605-2"
+sundtekcontrolcenter_version = "20210624-2"
 testOK = None
 
 ###########################################################################
@@ -129,7 +126,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 				imageone = "/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek_dvbc.png"
 			else:
 				imageone = "/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek_dvbs.png"
-			skin = "<screen title=\"SundtekControlCenter\" position=\"center,100\" size=\"750,550\" name=\"SundtekControlCenter\">\
+			skin = "<screen title=\"SundtekControlCenter\" position=\"center,center\" size=\"750,550\" name=\"SundtekControlCenter\">\
 				<ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/pics/bg.png\" position=\"0,0\" size=\"750,124\" alphatest=\"on\"/>\
 				<ePixmap pixmap=\"skin_default/buttons/red.png\" position=\"75,385\" size=\"140,40\" alphatest=\"on\"/>\
 				<ePixmap pixmap=\"skin_default/buttons/green.png\" position=\"225,385\" size=\"140,40\" alphatest=\"on\"/>\
@@ -161,7 +158,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 				imagetwo = "/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek_dvbc.png"
 			else:
 				imagetwo = "/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/icons/sundtek_dvbs.png"
-			skin = "<screen title=\"SundtekControlCenter\" position=\"center,100\" size=\"750,550\" name=\"SundtekControlCenter\">\
+			skin = "<screen title=\"SundtekControlCenter\" position=\"center,center\" size=\"750,550\" name=\"SundtekControlCenter\">\
 				<ePixmap pixmap=\"/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/pics/bg.png\" position=\"0,0\" size=\"750,124\" alphatest=\"on\"/>\
 				<ePixmap pixmap=\"skin_default/buttons/red.png\" position=\"75,385\" size=\"140,40\" alphatest=\"on\"/>\
 				<ePixmap pixmap=\"skin_default/buttons/green.png\" position=\"225,385\" size=\"140,40\" alphatest=\"on\"/>\
@@ -188,7 +185,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			</screen>"
 		else:
 			skin = """
-			<screen title="SundtekControlCenter" position="100,100" size="750,550" name="SundtekControlCenter">
+			<screen title="SundtekControlCenter" position="center,center" size="750,550" name="SundtekControlCenter">
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ExtrasPanel/pics/bg.png" position="0,0" size="750,124" alphatest="on"/>
 				<ePixmap pixmap="skin_default/buttons/red.png" position="75,385" size="140,40" alphatest="on"/>
 				<ePixmap pixmap="skin_default/buttons/green.png" position="225,385" size="140,40" alphatest="on"/>
@@ -253,16 +250,20 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 				# if it's not the network section proceed
 				if i[0:8] != "NETWORK]":
 					serial = i[0:i.find("]")]
+					if "/1" in serial:
+						continue
 					nr = i.find("netrecoverymode=on")
 					if (nr > 0):
 						nr_enabled = True
 					else:
 						nr_enabled = False
+
 					dse = i.find("dreambox_support_fe1=on")
 					if (dse > 0):
 						fe_enabled = True
 					else:
 						fe_enabled = False
+
 					initial_mode = ""
 					idm = i.find("initial_dvb_mode=DVBT2")
 					if (idm > 0):
@@ -275,11 +276,15 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 							idm = i.find("initial_dvb_mode=DVBC")
 							if (idm > 0):
 								initial_mode = "DVB-C"
+
 					self.config_list[e] = {}
 					self.config_list[e]['serial'] = serial
+
 					self.config_list[e]['enabled'] = fe_enabled
+
 					self.config_list[e]['initial_mode'] = initial_mode
 					e = e + 1
+
 			d = d + 1
 
 	def updateDefaults(self):
@@ -288,12 +293,13 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			for i in range(0, vtuner_nifs):
 				config.plugins.SundtekControlCenter.__dict__["tuner_enabled_%d" % i].value = False
 				for b in sundtek_devices:
-					if i in self.config_list.keys():
+					if i in list(self.config_list.keys()):
 						if (sundtek_devices[b]['serial'] == self.config_list[i]['serial']):
 							idx = b
 							config.plugins.SundtekControlCenter.__dict__["devices_%d" % i] = ConfigSelection(default='%d' % idx, choices=list(device_choices))
+
 							config.plugins.SundtekControlCenter.__dict__["tuner_enabled_%d" % i].value = True
-							if 'initial_mode' in self.config_list[i].keys():
+							if 'initial_mode' in list(self.config_list[i].keys()):
 								n = 0
 								for c in sundtek_devices[b]['capabilities']:
 									if c[1] == self.config_list[i]['initial_mode']:
@@ -336,6 +342,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			self["driverupdateavail"] = Label("")
 		else:
 			self["driverupdateavail"] = Label("n/a")
+
 		### get tunerinformations
 		# just for fun, the tuner configuration
 		ntuners = len(sundtek_devices)
@@ -343,14 +350,17 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			tunertwo = ""
 			for i in sundtek_devices:
 				if i == 0:
-					self["tunerone"] = Label(str(sundtek_devices[0]['device'])[2:])
+					self["tunerone"] = Label(six.ensure_str(sundtek_devices[0]['device'])[2:])
 				elif i == 1:
-					tunertwo = str(sundtek_devices[1]['device'][2:])
+					tunertwo = six.ensure_str(sundtek_devices[1]['device'][2:])
 				else:
-					tunertwo += "\n" + str(sundtek_devices[i]['device'][2:])
+					tunertwo += "\n" + six.ensure_str(sundtek_devices[i]['device'][2:])
+
 			self["tunertwo"] = Label(tunertwo)
+
 		else:
 			self["tunerone"] = Label(_("No stick found"))
+
 		self["actions"] = ActionMap(["MenuActions", "OkCancelActions", "ChannelSelectBaseActions", "ColorActions", "ChannelSelectEPGActions"],
 		{
 			"menu": self.menu,
@@ -371,8 +381,9 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 	def afterNetworkTest(self, net=True):
 		### search for sundtekcontrolcenter updates
 		try:
-			version = urllib.urlopen('http://sundtek.de/media/latest.phtml?sccv=1').read()
-			version = version.replace('sundtekcontrolcenter-', '')
+			version = urlopen('http://sundtek.de/media/latest.phtml?sccv=1').read()
+			version = six.ensure_str(version)
+			version = version.replace('sundtekcontrolcenter_', '')
 		except:
 			version = "n/a"
 		if version == sundtekcontrolcenter_version:
@@ -391,7 +402,8 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 		s = r"(?P<year>\d{2})(?P<month>\d{2})(?P<day>\d{2}).(?P<hours>\d{2})(?P<minutes>\d{2})(?P<seconds>\d{2})"
 		pattern = re.compile(s)
 		try:
-			netdriver = urllib.urlopen('http://sundtek.de/media/latest.phtml?scc').read()
+			netdriver = urlopen('http://sundtek.de/media/latest.phtml?scc').read()
+			netdriver = six.ensure_str(netdriver)
 		except:
 			netdriver = "n/a"
 		match = pattern.search(netdriver)
@@ -421,35 +433,10 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
 		self.updateSettingList()
-		self.virtualKeyboard()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		self.updateSettingList()
-		self.virtualKeyboard()
-
-	def virtualKeyboard(self):
-		return
-		cur = self["config"].getCurrent()
-		if cur:
-			for i in config.plugins.SundtekControlCenter.usbnet1:
-				if cur[1] == config.plugins.SundtekControlCenter.usbnet1[i].networkip:
-					self.openVK(config.plugins.SundtekControlCenter.usbnet1[i].networkip.value)
-
-	def openVK(self, current_config=None):
-		if current_config is not None:
-			title_text = _("Please enter IP:")
-			old_text = current_config
-			self.session.openWithCallback(self.VKCallback, VirtualKeyBoard, title=title_text, text=old_text)
-
-	def VKCallback(self, answer):
-		return
-		if answer:
-			cur = self["config"].getCurrent()
-			if cur:
-				for i in config.plugins.SundtekControlCenter.usbnet1:
-					if cur[1] == config.plugins.SundtekControlCenter.usbnet1[i].networkip:
-						config.plugins.SundtekControlCenter.usbnet1[i].networkip.value = answer
 
 	def setDeviceCB(self, rv):
 		cur = self["config"].getCurrent()
@@ -466,7 +453,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 		self.sundtekconfigfile()
 		self.readConfig()
 		self.updateDefaults()
-		if self.setsettings(True):
+		if self.setsettings(exit=True):
 			self.close(True, self.session)
 
 	def save(self):
@@ -505,9 +492,11 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 				else:
 					self.session.open(MessageBox, _("%s is already connected") % config.plugins.SundtekControlCenter.networkIp.value, MessageBox.TYPE_INFO, 7)
 				return
+
 			if cur[1] == config.plugins.SundtekControlCenter.scanNetwork:
 				self.scannetwork()
 				return
+
 		self.save2()
 
 	def cancel(self):
@@ -528,6 +517,18 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 		]
 		if os.path.exists("/etc/sundtek.conf"):
 			options.append((_("Show /etc/sundtek.conf"), self.configinfo))
+		currentfile = "/usr/script/DVB_C_Tuner_starten.sh"
+		if os.path.exists(currentfile):
+			fix_vtuner = False
+			try:
+				f = open(currentfile).readlines()
+				for line in f:
+					if "[ ! -e /tmp/.sundtekholdstart ] && touch /tmp/.sundtekholdstart && sleep 5 && /usr/sundtek/sun_dvb.sh start_c" in line:
+						fix_vtuner = True
+			except:
+				fix_vtuner = None
+			if fix_vtuner:
+				options.append((_("Disable tuners type fix"), self.resetfixtunerstype))
 		self.session.openWithCallback(self.thismenuCallback, ChoiceBox, list=options)
 
 	def configinfo(self):
@@ -536,6 +537,9 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 	def thismenuCallback(self, ret):
 		ret and ret[1]()
 
+	def resetfixtunerstype(self):
+		os.system("echo '#!/bin/sh\nsource /usr/script/DriverCheck.sh\n/usr/sundtek/sun_dvb.sh start_c restart $0\n' > /usr/script/DVB_C_Tuner_starten.sh")
+
 	def updateDeviceList(self):
 		global sundtek_devices, vtuner_nifs
 		global device_choices, device_choices_whitelist
@@ -543,13 +547,14 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			devices = os.popen("/opt/bin/mediaclient -e").read()
 		else:
 			return
+
 		if (devices.find("currently not running") > 0):
 			return
+
 		networkpath_result = {}
 		devpos = devices.find("device ")
 		if (devpos > 0):
 			network = devices[devpos + 6:].split("device ")
-			print len(network)
 			i = 0
 			for i in range(0, len(network)):
 				b = 0
@@ -565,8 +570,10 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 					else:
 						break
 				networkpath_result[i] = network_path
+
 		i = 0
 		d = 0
+
 		s = r"\[SERIAL\]:\n.+ID: (\w+)"
 		pattern = re.compile(s)
 		serial_result = {}
@@ -578,6 +585,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 				d = d + 1
 			else:
 				break
+
 		s = r"device \d{1,}: \[(.*)\]"
 		pattern = re.compile(s)
 		i = 0
@@ -591,12 +599,15 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 				d = d + 1
 			else:
 				break
+
 		s = r"device \d{1,}: (.*)"
 		pattern = re.compile(s)
+
 		i = 0
 		d = 0
 		cap_result = {}
 		net_result = {}
+
 		while True:
 			match = pattern.search(devices, i)
 			if match:
@@ -615,12 +626,12 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 							c = c + 1
 						if (b[0:3] == "NET"):
 							net_result[d] = True
-					print cap
 				cap_result[d] = cap
 				i = match.end() + 1
 				d = d + 1
 			else:
 				break
+
 		device_choices = []
 		for i in range(0, d):
 			sundtek_devices[i] = {}
@@ -629,13 +640,15 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			sundtek_devices[i]['network_path'] = networkpath_result[i]
 			sundtek_devices[i]['network_device'] = net_result[i]
 			sundtek_devices[i]['capabilities'] = cap_result[i]
-			device_choices.append(('%d' % i, "%d %s" % (i, device_result[i][0:23])))
+			device_choices.append(('%d' % i, "%d %s" % (i + 1, device_result[i][0:23])))
+
 		device_choices_whitelist = device_choices
 		for i in range(0, vtuner_nifs):
 			if (len(device_choices) > 0) and len(device_choices) > i:
 				config.plugins.SundtekControlCenter.__dict__["devices_%d" % i] = ConfigSelection(default='%d' % i, choices=device_choices)
 			else:
 				config.plugins.SundtekControlCenter.__dict__["devices_%d" % i] = ConfigNothing()
+
 			if (len(device_choices) > i) and len(device_choices) > 0:
 				config.plugins.SundtekControlCenter.__dict__["dvbtransmission1_%d" % i] = ConfigSelection(choices=cap_result[i])
 			else:
@@ -659,8 +672,8 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 
 	def updateSettingList(self):
 		global orginal_dmm, vtuner_nifs
-		list = [] ### creating list
-		list.append(getConfigListEntry(_("* Configuration support"), config.plugins.SundtekControlCenter.sunconf.support))
+		optionlist = [] ### creating optionlist
+		optionlist.append(getConfigListEntry(_("* Configuration support"), config.plugins.SundtekControlCenter.sunconf.support))
 		if config.plugins.SundtekControlCenter.sunconf.support.value == "1":
 			sublist = [
 				getConfigListEntry(_("      Autostart"), config.plugins.SundtekControlCenter.sunconf.autostart),
@@ -670,19 +683,20 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 				getConfigListEntry(_("      Hardware PID Filter"), config.plugins.SundtekControlCenter.sunconf.dmhwpidfilter),
 				getConfigListEntry(_("      vTuner acceleration for DM800"), config.plugins.SundtekControlCenter.sunconf.vtuneracceleration),
 			]
-			list.extend(sublist)
+			optionlist.extend(sublist)
+
 		for i in range(0, vtuner_nifs):
-			list.append(getConfigListEntry(_("Enable Tuner %d") % int(i + 1), config.plugins.SundtekControlCenter.__dict__["tuner_enabled_%d" % i]))
+			optionlist.append(getConfigListEntry(_("Enable Tuner %d") % int(i + 1), config.plugins.SundtekControlCenter.__dict__["tuner_enabled_%d" % i]))
 			if config.plugins.SundtekControlCenter.__dict__["tuner_enabled_%d" % i].value:
-				list.append(getConfigListEntry(_("* Device"), config.plugins.SundtekControlCenter.__dict__["devices_%d" % i]))
-				list.append(getConfigListEntry(_("* DVB Mode"), config.plugins.SundtekControlCenter.__dict__["dvbtransmission1_%d" % i]))
-		list.append(getConfigListEntry(_("Scan and connect to a TV Server"), config.plugins.SundtekControlCenter.scanNetwork))
-		list.append(getConfigListEntry(_("Connect to TV Server IP"), config.plugins.SundtekControlCenter.networkIp))
+				optionlist.append(getConfigListEntry(_("* Device"), config.plugins.SundtekControlCenter.__dict__["devices_%d" % i]))
+				optionlist.append(getConfigListEntry(_("* DVB Mode"), config.plugins.SundtekControlCenter.__dict__["dvbtransmission1_%d" % i]))
+		optionlist.append(getConfigListEntry(_("Scan and connect to a TV Server"), config.plugins.SundtekControlCenter.scanNetwork))
+		optionlist.append(getConfigListEntry(_("Connect to TV Server IP"), config.plugins.SundtekControlCenter.networkIp))
 		if not orginal_dmm:
-			list.append(getConfigListEntry(_("Auto checking new version driver/plugin"), config.plugins.SundtekControlCenter.sunconf.searchversion))
-		list.append(getConfigListEntry(_("Add show plugin"), config.plugins.SundtekControlCenter.display))
-		self["config"].list = list
-		self["config"].l.setList(list)
+			optionlist.append(getConfigListEntry(_("Auto checking new version driver/plugin"), config.plugins.SundtekControlCenter.sunconf.searchversion))
+		optionlist.append(getConfigListEntry(_("Add show plugin"), config.plugins.SundtekControlCenter.display))
+		self["config"].list = optionlist
+		self["config"].l.setList(optionlist)
 
 	def layoutFinished(self):
 		self.setTitle(_("Sundtek Control Center"))
@@ -737,8 +751,9 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 		if not self.network:
 			return
 		try:
-			self.version = urllib.urlopen('http://sundtek.de/media/latest.phtml?sccv=1').read()
-			self.version = self.version.replace('sundtekcontrolcenter-', '')
+			self.version = urlopen('http://sundtek.de/media/latest.phtml?sccv=1').read()
+			self.version = six.ensure_str(self.version)
+			self.version = self.version.replace('sundtekcontrolcenter_', '')
 		except:
 			self.version = "n/a"
 		if self.version == sundtekcontrolcenter_version:
@@ -759,12 +774,6 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			if update:
 				self.session.open(MessageBox, _("A newer version of the sundtekcontrolcenter plugin is available.\nif you read this message, please notify the OpenEight Team at:\nhttps://octagon-forum.eu\nto update this embedded version."), MessageBox.TYPE_INFO, 10)
 
-	def finishedSelfUpdate(self, result):
-		self.session.openWithCallback(self.restartbox, MessageBox, _("SundtekControlCenter successfully updated! You need to restart Enigma2. Restart now?"), MessageBox.TYPE_YESNO)
-
-	def restartbox(self, result):
-		if result:
-			self.session.open(TryQuitMainloop, 3)
 
 	#### check sundtek driverversion
 	def checkdriverversion(self):
@@ -774,7 +783,8 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 		pattern = re.compile(s)
 		text = _("Build date :")
 		try:
-			netdriver = urllib.urlopen('http://sundtek.de/media/latest.phtml?scc').read()
+			netdriver = urlopen('http://sundtek.de/media/latest.phtml?scc').read()
+			netdriver = six.ensure_str(netdriver)
 		except:
 			netdriver = text + "n/a"
 		match = pattern.search(netdriver)
@@ -842,32 +852,11 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			if os.path.exists("/opt/bin/mediaclient"):
 				cmd = "/opt/bin/mediaclient --mount %s" % ret[0]
 				r = os.system(cmd)
-			self.updateDeviceList()
-			self.readConfig()
-			self.updateDefaults()
-			self.updateSettingList()
-			return
-
-	def storeSelectedDevice(self, ret):
-		print "selected device"
-		print ret
-		cur = self["config"].getCurrent()
-#		if cur:
-#			for i in config.plugins.SundtekControlCenter.devices:
-#				if cur[1] == config.plugins.SundtekControlCenter.devices[i]:
-#					print "storing to device %d" % i
-#					print ret
-		if ret:
-			print "storing"
-			print ret
-
-	def selectDevice(self):
-		global sundtek_devices
-		print "selectDevice"
-		options = []
-		for i in sundtek_devices:
-			options.append((sundtek_devices[i]['device'], i))
-		self.session.openWithCallback(self.storeSelectedDevice, ChoiceBox, list=options)
+		self.updateDeviceList()
+		self.readConfig()
+		self.updateDefaults()
+		self.updateSettingList()
+		return
 
 	def scannetwork(self):
 		selected = 0
@@ -881,14 +870,10 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			else:
 				self.session.open(MessageBox, _("No IPTV media server found"), MessageBox.TYPE_INFO, 7)
 
-	#### enable network
 	def enablenetwork(self):
 		if not os.path.exists("/opt/bin/mediaclient"):
 			return
-		options = [
-			(_("Enable the IP server"), self.startipserver),
-			(_("Disable the IP server"), self.stopipserver),
-		]
+		options = [(_("Enable the IP server"), self.startipserver), (_("Disable the IP server"), self.stopipserver)]
 		self.session.openWithCallback(self.thismenuCallback, ChoiceBox, list=options)
 
 	def startipserver(self):
@@ -899,7 +884,6 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 		os.popen("/opt/bin/mediaclient --enablenetwork=off")
 		self.session.open(MessageBox, _("IP server is disabled"), MessageBox.TYPE_INFO)
 
-	#### service mode
 	def enableservicemode(self):
 		if not os.path.exists("/opt/bin/mediaclient"):
 			return
@@ -910,7 +894,6 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			os.popen("/opt/bin/mediaclient --portforward 23")
 			self.prompt("/opt/bin/mediaclient --portforward 23")
 
-	#### backup
 	def driverbackup(self):
 		try:
 			mounts = open("/proc/mounts")
@@ -929,11 +912,10 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 		backuppath = "/media/hdd/backup/SundtekBackup"
 		now = datetime.datetime.now()
 		backupfile = "sundtek-" + now.strftime("%Y%m%d-%H%M") + ".tar"
-		if (not os.path.exists(backuppath)): # backup folder does not yet exist
+		if not os.path.exists(backuppath): # backup folder does not yet exist
 			os.makedirs(backuppath)
-		self.prompt("tar -czvf" + " " + backuppath + "/" + backupfile + " /usr/sundtek /opt/bin /etc/sundtek.conf /etc/sundtek.net")
+		self.prompt("echo 'Wait...create backup\n' && tar -czvf" + " " + backuppath + "/" + backupfile + " /usr/sundtek /opt/bin /etc/sundtek.conf /etc/sundtek.net > /dev/null 2>&1")
 
-	#### restore
 	def driverrestore(self):
 		restorepath = "/media/hdd/backup/SundtekBackup"
 		if (os.path.exists(restorepath)): # backup folder exists
@@ -958,11 +940,6 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 		else:
 			self.session.open(MessageBox, _("Restore was canceled"), MessageBox.TYPE_INFO, 7)
 
-	#### help
-	#def helper(self):
-		#self.prompt("cat /usr/lib/enigma2/python/Plugins/ExtrasPanel/sundtek_helpfile.txt")
-
-	#### yellow key - restart section
 	def restartwhat(self):
 		if self.session.nav.getRecordings():
 			self.session.open(MessageBox, _("Warning! Recording is currently running."), MessageBox.TYPE_INFO)
@@ -1002,25 +979,29 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 
 ####################################################################
 
-	#### config file section
+#### config file section
 	def parsefornetworkstickserial(self):
 		lines = os.popen("/opt/bin/mediaclient --scan-network").readlines()
+
 		sticks = []
 		if len(lines) == 6:
 			sticks = [0]
 		elif len(lines) >= 7:
 			sticks = [0, 0]
+
 		if len(sticks) == 1:
 			sticks[0] = lines[4].split("|")
 			sticks[0] = sticks[0][5].strip()
 		elif len(sticks) >= 2:
 			sticks[0] = lines[4].split("|")
 			sticks[1] = lines[5].split("|")
+
 			sticks[0] = sticks[0][5].strip()
 			sticks[1] = sticks[1][5].strip()
 		else:
 			### no info found
 			sticks = []
+
 		return sticks
 
 	def sundtekconfigfile(self):
@@ -1047,6 +1028,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 		header1 = ("# sundtek configuration file - /etc/sundtek.conf\n")
 		header2 = ("# created / modified: " + (now.strftime("%b %d %Y, %H:%Mh")) + " by sundtekcontrolcenter " + sundtekcontrolcenter_version + "\n\n")
 		header = header1 + header2
+
 		#### configuration (loglevel, autoupdate, vtuneracceleration, dmhwpidfilter, networkmode)
 		loglevel = ""
 		autoupdate = ""
@@ -1084,6 +1066,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			networkmode = "enablenetwork = on\n"
 		else:
 			networkmode = "enablenetwork = off\n"
+
 		#### sticks
 		netsection = ""
 		for i in range(0, len(sundtek_devices)):
@@ -1092,6 +1075,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			if (len(sundtek_devices[i]['network_path']) > 0):
 				netsection += "device=" + sundtek_devices[i]['network_path'] + "\n"
 		show_message = False
+
 		#stick 1 data
 		tunerconf = ""
 		devlist = []
@@ -1103,18 +1087,27 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 					if deviceid not in devlist:
 						devlist.append(deviceid)
 						tunerconf += "###### configuration stick %d\n" % i
+
 						serial = sundtek_devices[deviceid]['serial']
+						current_description = config.plugins.SundtekControlCenter.__dict__["devices_%d" % i].getText()
+						if current_description and _("Dual") in current_description:
+							tunerconf += ("[" + serial + "/1]\n")
+							tunerconf += "dreambox_support_fe1=on\n\n"
 						tunerconf += ("[" + serial + "]\n")
 						if len(sundtek_devices[deviceid]['network_path']):
 							tunerconf += "netrecoverymode=on\n"
 						dvbtransmission = str(config.plugins.SundtekControlCenter.__dict__["dvbtransmission1_%d" % i].value)
-						print dvbtransmission
-						mode = int(config.plugins.SundtekControlCenter.__dict__['dvbtransmission1_%d' % i].value)
-						print mode
-						mode = str(sundtek_devices[deviceid]['capabilities'][mode][1])
-						mode = mode.replace("-", "")
-						tunerconf += "initial_dvb_mode=" + mode + "\n"
-						tunerconf += "dreambox_support_fe1=on\n\n"
+						try:
+							mode = int(config.plugins.SundtekControlCenter.__dict__['dvbtransmission1_%d' % i].value)
+							mode = str(sundtek_devices[deviceid]['capabilities'][mode][1])
+							mode = mode.replace("-", "")
+						except:
+							mode = ""
+						if mode:
+							tunerconf += "initial_dvb_mode=" + mode + "\n"
+							tunerconf += "dreambox_support_fe1=on\n\n"
+						else:
+							tunerconf = ""
 
 		data = header + loglevel + autoupdate + dmhwpidfilter + vtuneracceleration + networkmode + "\n" + netsection + tunerconf
 		### (over)write file
@@ -1124,8 +1117,8 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 
 ####################################################################
 
-	#### settings
-	def setsettings(self, exit=False):
+#### settings
+	def setsettings(self, exit=False, use_os=False):
 		### check if driver is installed
 		if ((not os.path.exists("/opt/bin/mediasrv")) or (not os.path.exists("/opt/bin/mediaclient")) or (not os.path.exists("/usr/sundtek/sun_dvb.sh"))):
 			## maybe driver not installed
@@ -1147,13 +1140,21 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			### driver installed
 			### disable autostart
 			if config.plugins.SundtekControlCenter.sunconf.autostart.value == False:
-				self.prompt("/usr/sundtek/sun_dvb.sh noautostart")
+				cmd = "/usr/sundtek/sun_dvb.sh noautostart"
+				if use_os:
+					os.system(cmd)
+				else:
+					self.prompt(cmd)
 			else:
 				# as soon as the configuration file is written the driver will make use of the configuration file
 				# and ignore the command line configuration
 				if config.plugins.SundtekControlCenter.sunconf.autostart.value == True:
 					### enable autostart
-					self.prompt("/usr/sundtek/sun_dvb.sh autostart_c")
+					cmd = "/usr/sundtek/sun_dvb.sh autostart_c"
+					if use_os:
+						os.system(cmd)
+					else:
+						self.prompt(cmd)
 		return True
 
 	def tunerstart(self):
@@ -1161,7 +1162,7 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 			x[1].save()
 		configfile.save()
 		self.sundtekconfigfile()
-		self.setsettings()
+		self.setsettings(use_os=True)
 		if self.session.nav.getRecordings():
 			self.session.open(MessageBox, _("Warning! Recording is currently running."), MessageBox.TYPE_INFO)
 			return
@@ -1174,4 +1175,4 @@ class SundtekControlCenter(Screen, ConfigListScreen):
 				epgcache.save()
 			except:
 				pass
-			self.prompt("sleep 8 && /usr/sundtek/sun_dvb.sh start_c")
+			self.prompt("echo 'Wait...' && sleep 8 && /usr/sundtek/sun_dvb.sh start_c restart")
