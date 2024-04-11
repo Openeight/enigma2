@@ -376,6 +376,7 @@ class QuickMenu(Screen):
 		if AUTVOLADJ == True:
 			self.sublist.append(QuickSubMenuEntryComponent('Automatic Volume Adjustment', _('Automatic Volume Adjustment settings'), _('Setup for Automatic Volume Adjustment between MPEG and AC3/DTS.')))
 		self.sublist.append(QuickSubMenuEntryComponent('Auto Language', _('Auto Language Selection'), _('Select your Language for Audio/Subtitles.')))
+		self.sublist.append(QuickSubMenuEntryComponent('Subtitle settings', _('Extensive subtitle settings'), _('Select your preference for color, size, position, delay and subtitle type.')))
 		if VIDTUNE == True:
 			self.sublist.append(QuickSubMenuEntryComponent('Testscreens', _('Test screens for your TV'), _('Tune your TV for the best result.')))
 		if os.path.exists('/proc/stb/vmpeg/0/pep_apply') and VIDEOENH == True:
@@ -557,6 +558,8 @@ class QuickMenu(Screen):
 			autoresSetup(self.session)
 		elif item[0] == _('Auto Language'):
 			self.openSetup('autolanguagesetup')
+		elif item[0] == _('Subtitle settings'):
+			self.openSetup('subtitlesetup')
 		elif item[0] == _('Automatic Volume Adjustment'):
 			self.session.open(AutomaticVolumeAdjustmentConfigScreen)
 		elif item[0] == _('Audio Sync'):
