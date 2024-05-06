@@ -9,7 +9,6 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 from Screens.HelpMenu import HelpableScreen
-from Components.About import about, getVersionString
 from Components.Console import Console
 from Components.Network import iNetwork
 from Components.Sources.StaticText import StaticText
@@ -28,6 +27,7 @@ from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
+from boxbranding import getImageVersion
 import commands
 
 basegroup = "task-base"
@@ -1731,7 +1731,7 @@ class NetworkSABnzbd(Screen):
 			self.updateService()
 
 	def checkNetworkStateFinished(self, result, retval, extra_args=None):
-		if (float(getVersionString()) < 3.0 and result.find('mipsel/Packages.gz, wget returned 1') != -1) or (float(getVersionString()) >= 3.0 and result.find('mips32el/Packages.gz, wget returned 1') != -1):
+		if (float(getImageVersion()) < 3.0 and result.find('mipsel/Packages.gz, wget returned 1') != -1) or (float(getImageVersion()) >= 3.0 and result.find('mips32el/Packages.gz, wget returned 1') != -1):
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Sorry feeds are down for maintenance, please try again later."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif result.find('bad address') != -1:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your %s %s is not connected to the internet, please check your network settings and try again.") % (getMachineBrand(), getMachineName()), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
