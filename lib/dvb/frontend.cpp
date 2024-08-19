@@ -1121,6 +1121,10 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		if (!strcmp(m_description, "Vuplus DVB-S NIM(AVL6222)"))
 			sat_max = 1490;
 	}
+	else if (!strcmp(m_description, "AVL62X1")) // Octagon SF8008 Supreme
+	{
+		ret = snr;
+	}
 	else if (!strcmp(m_description, "BCM7346 (internal)")) // MaxDigital XP1000
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1880) + 0.1959) * 100);
