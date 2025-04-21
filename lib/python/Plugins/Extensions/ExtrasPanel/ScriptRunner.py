@@ -100,7 +100,7 @@ class ScriptRunner(Screen):
 			cmd1 = ". /usr/script/" + self.sel
 			if ".hidden." in self.sel:
 				self.execute = "1"
-			elif ".close." in self.sel:
+			elif ".close." in self.sel or self.sel.startswith("!"):
 				self.execute = "2"
 			if self.execute == "1":
 				from enigma import eConsoleAppContainer
