@@ -265,15 +265,24 @@ def InitLcd():
 		config.lcd.flip.addNotifier(setLCDflipped)
 
 		if fileExists("/proc/stb/fp/ledpowercolor"):
-			config.lcd.ledpowercolor = ConfigSelection(default="1", choices=[("0", _("off")), ("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			if getBoxType() == 'sf8008m':
+				config.lcd.ledpowercolor = ConfigSelection(default="1", choices=[("0", _("off")), ("1", _("green")), ("2", _("red")), ("3", _("green") + " + " + _("red"))])
+			else:
+				config.lcd.ledpowercolor = ConfigSelection(default="1", choices=[("0", _("off")), ("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
 			config.lcd.ledpowercolor.addNotifier(setLedPowerColor)
 
 		if fileExists("/proc/stb/fp/ledstandbycolor"):
-			config.lcd.ledstandbycolor = ConfigSelection(default="3", choices=[("0", _("off")), ("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			if getBoxType() == 'sf8008m':
+				config.lcd.ledstandbycolor = ConfigSelection(default="3", choices=[("0", _("off")), ("1", _("green")), ("2", _("red")), ("3", _("green") + " + " + _("red"))])
+			else:
+				config.lcd.ledstandbycolor = ConfigSelection(default="3", choices=[("0", _("off")), ("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
 			config.lcd.ledstandbycolor.addNotifier(setLedStandbyColor)
 
 		if fileExists("/proc/stb/fp/ledsuspendledcolor"):
-			config.lcd.ledsuspendcolor = ConfigSelection(default="2", choices=[("0", _("off")), ("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
+			if getBoxType() == 'sf8008m':
+				config.lcd.ledsuspendcolor = ConfigSelection(default="2", choices=[("0", _("off")), ("1", _("green")), ("2", _("red")), ("3", _("green") + " + " + _("red"))])
+			else:
+				config.lcd.ledsuspendcolor = ConfigSelection(default="2", choices=[("0", _("off")), ("1", _("blue")), ("2", _("red")), ("3", _("violet"))])
 			config.lcd.ledsuspendcolor.addNotifier(setLedSuspendColor)
 
 		if fileExists("/proc/stb/fp/power4x7on"):
